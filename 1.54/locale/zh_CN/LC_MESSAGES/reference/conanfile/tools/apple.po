@@ -1,0 +1,825 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.54\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/apple.rst:4
+msgid "conan.tools.apple"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:8
+msgid ""
+"These tools are still **experimental** (so subject to breaking changes) but "
+"with very stable syntax. We encourage the usage of it to be prepared for "
+"Conan 2.0."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:14
+msgid "XcodeDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:16
+msgid ""
+"Available since: `1.42.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.42.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:18
+msgid ""
+"The ``XcodeDeps`` tool is the dependency information generator for *Xcode*. "
+"It will generate multiple *.xcconfig* configuration files, the can be used "
+"by consumers using *xcodebuild* or *Xcode*. To use them just add the "
+"generated configuration files to the Xcode project or set the ``-xcconfig`` "
+"argument from the command line."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:23
+msgid "The ``XcodeDeps`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:25
+#: ../../../reference/conanfile/tools/apple.rst:39
+#: ../../../reference/conanfile/tools/apple.rst:171
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:25
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"XcodeDeps\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:31
+#: ../../../reference/conanfile/tools/apple.rst:177
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:31
+msgid ""
+"[generators]\n"
+"XcodeDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:37
+#: ../../../reference/conanfile/tools/apple.rst:183
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:39
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.apple import XcodeDeps\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    requires = \"libpng/1.6.37@\" # Note libpng has zlib as transitive "
+"dependency\n"
+"\n"
+"    def generate(self):\n"
+"        xcode = XcodeDeps(self)\n"
+"        xcode.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:53
+msgid ""
+"When the ``XcodeDeps`` generator is used, every invocation of ``conan "
+"install`` will generate several configuration files, per dependency and "
+"configuration. For the *conanfile.py* above, for example:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:57
+#: ../../../reference/conanfile/tools/apple.rst:203
+msgid ""
+"$ conan install conanfile.py # default is Release\n"
+"$ conan install conanfile.py -s build_type=Debug"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:62
+msgid ""
+"This generator is multi-configuration. It will generate different files for "
+"the different *Debug/Release* configurations for each requirement. It will "
+"also generate one single file (*conandeps.xcconfig*) aggregating all the "
+"files for the direct dependencies (just *libpng* in this case). The above "
+"commands generate the following files:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:67
+msgid ""
+".\n"
+"├── conan_config.xcconfig\n"
+"├── conan_libpng.xcconfig\n"
+"├── conan_libpng_libpng.xcconfig\n"
+"├── conan_libpng_libpng_debug_x86_64.xcconfig\n"
+"├── conan_libpng_libpng_release_x86_64.xcconfig\n"
+"├── conan_zlib.xcconfig\n"
+"├── conan_zlib_zlib.xcconfig\n"
+"├── conan_zlib_zlib_debug_x86_64.xcconfig\n"
+"├── conan_zlib_zlib_release_x86_64.xcconfig\n"
+"└── conandeps.xcconfig"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:82
+msgid ""
+"The first ``conan install`` with the default *Release* and *x86_64* "
+"configuration generates:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:84
+msgid ""
+"*conan_libpng_libpng_release_x86_64.xcconfig*: declares variables with "
+"conditional logic to be considered only for the active configuration in "
+"*Xcode* or the one passed by command line to *xcodebuild*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:85
+msgid ""
+"*conan_libpng_libpng.xcconfig*: includes *conan_libpng_libpng_release_x86_64."
+"xcconfig* and declares the following *Xcode* build settings: "
+"``HEADER_SEARCH_PATHS``, ``GCC_PREPROCESSOR_DEFINITIONS``, ``OTHER_CFLAGS``, "
+"``OTHER_CPLUSPLUSFLAGS``, ``FRAMEWORK_SEARCH_PATHS``, "
+"``LIBRARY_SEARCH_PATHS``, ``OTHER_LDFLAGS``. It also includes the generated "
+"*xcconfig* files for transitive dependencies (*conan_zlib_zlib.xcconfig* in "
+"this case)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:86
+msgid ""
+"*conan_libpng.xcconfig*: in this case it only includes *conan_libpng_libpng."
+"xcconfig*, but in the case that the required package has components, this "
+"file will include all of the components of the package."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:87
+msgid ""
+"Same 3 files will be generated for each dependency in the graph. In this "
+"case, as *zlib* is a dependency of *libpng* it will generate: "
+"*conan_zlib_zlib_release_x86_64.xcconfig*, *conan_zlib_zlib.xcconfig* and "
+"*conan_zlib.xcconfig*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:88
+#: ../../../reference/conanfile/tools/apple.rst:97
+msgid ""
+"*conandeps.xcconfig*: configuration files including all direct dependencies, "
+"in this case, it just includes ``conan_libpng.xcconfig``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:89
+#: ../../../reference/conanfile/tools/apple.rst:98
+msgid ""
+"The main *conan_config.xcconfig* file, to be added to the project. Includes "
+"both the files from this generator and the generated by the :ref:"
+"`XcodeToolchain<conan_tools_apple_xcodetoolchain>` in case it was also set."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:91
+msgid "The second ``conan install -s build_type=Debug`` generates:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:93
+msgid ""
+"*conan_libpng_libpng_debug_x86_64.xcconfig*: same variables as the one below "
+"for *Debug* configuration."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:94
+msgid ""
+"*conan_libpng_libpng.xcconfig*: this file has been already created by the "
+"previous command, now it's modified to add the include for "
+"*conan_libpng_debug_x86_64.xcconfig*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:95
+msgid "*conan_libpng.xcconfig*: this file will remain the same."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:96
+msgid ""
+"Like in the previous command the same 3 files will be generated for each "
+"dependency in the graph. In this case, as *zlib* is a dependency of *libpng* "
+"it will generate: *conan_zlib_zlib_debug_x86_64.xcconfig*, *conan_zlib_zlib."
+"xcconfig* and *conan_zlib.xcconfig*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:100
+msgid ""
+"If you want to add this dependencies to you Xcode project, you just have to "
+"add the *conan_config.xcconfig* configuration file for all of the "
+"configurations you want to use (usually *Debug* and *Release*)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:105
+msgid "Additional variables defined"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:107
+msgid ""
+"Besides the variables that define the *Xcode* build settings mentioned "
+"above, there are additional variables declared that may be useful to use in "
+"your *Xcode* project:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:110
+msgid ""
+"`PACKAGE_ROOT_<package_name>`: Set to the location of the :ref:"
+"`package_folder attribute <attribute_package_folder>`."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:114
+msgid "Components support"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:116
+msgid ""
+"Since Conan version `1.49.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.49.0>`_, this generator supports packages with components. That means "
+"that:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:119
+msgid ""
+"If a **dependency** ``package_info()`` declares ``cpp_info.requires`` on "
+"some components, the generated *.xcconfig* files will contain includes to "
+"only those components."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:123
+msgid ""
+"The current package ``requires`` will be fully dependent on and all "
+"components. Recall that the ``package_info()`` only applies for consumers, "
+"but not to the current package."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:128
+msgid "Custom configurations"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:130
+msgid ""
+"If your Xcode project defines custom configurations, like ``ReleaseShared``, "
+"or ``MyCustomConfig``, it is possible to define it into the ``XcodeDeps`` "
+"generator, so different project configurations can use different set of "
+"dependencies. Let's say that our current project can be built as a shared "
+"library, with the custom configuration ``ReleaseShared``, and the package "
+"also controls this with the ``shared`` option:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:136
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.apple import XcodeDeps\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    options = {\"shared\": [True, False]}\n"
+"    default_options = {\"shared\": False}\n"
+"    requires = \"zlib/1.2.11\"\n"
+"\n"
+"    def generate(self):\n"
+"        xcode = XcodeDeps(self)\n"
+"        # We assume that -o *:shared=True is used to install all shared deps "
+"too\n"
+"        if self.options.shared:\n"
+"            xcode.configuration = str(self.settings.build_type) + "
+"\"Shared\"\n"
+"        xcode.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:154
+msgid ""
+"This will manage to generate new *.xcconfig* files for this custom "
+"configuration, and when you switch to this configuration in the IDE, the "
+"build system will take the correct values depending wether we want to link "
+"with shared or static libraries."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:161
+msgid "XcodeToolchain"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:163
+#: ../../../reference/conanfile/tools/apple.rst:272
+msgid ""
+"Available since: `1.46.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.46.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:165
+msgid ""
+"The ``XcodeToolchain`` is the toolchain generator for Xcode. It will "
+"generate *.xcconfig* configuration files that can be added to Xcode "
+"projects. This generator translates the current package configuration, "
+"settings, and options, into Xcode *.xcconfig* files syntax."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:169
+msgid "The ``XcodeToolchain`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:171
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"XcodeToolchain\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:177
+msgid ""
+"[generators]\n"
+"XcodeToolchain"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:197
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.apple import XcodeToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = XcodeToolchain(self)\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:198
+msgid ""
+"The ``XcodeToolchain`` will generate three files after a ``conan install`` "
+"command. As explained above for the XcodeDeps generator, each different "
+"configuration will create a set of files with different names. For example, "
+"running ``conan install`` for *Release* first and then *Debug* configuration:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:208
+msgid "Will create these files:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:210
+msgid ""
+".\n"
+"├── conan_config.xcconfig\n"
+"├── conantoolchain_release_x86_64.xcconfig\n"
+"├── conantoolchain_debug_x86_64.xcconfig\n"
+"├── conantoolchain.xcconfig\n"
+"└── conan_global_flags.xcconfig"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:219
+msgid "Those files are:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:221
+msgid ""
+"The main *conan_config.xcconfig* file, to be added to the project. Includes "
+"both the files from this generator and the generated by the :ref:"
+"`XcodeDeps<conan_tools_apple_xcodedeps>` in case it was also set."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:224
+msgid ""
+"*conantoolchain_<debug/release>_x86_64.xcconfig*: declares "
+"``CLANG_CXX_LIBRARY``, ``CLANG_CXX_LANGUAGE_STANDARD`` and "
+"``MACOSX_DEPLOYMENT_TARGET`` variables with conditional logic depending on "
+"the build configuration, architecture and sdk set."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:227
+msgid ""
+"*conantoolchain.xcconfig*: aggregates all the "
+"*conantoolchain_<config>_<arch>.xcconfig* files for the different installed "
+"configurations."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:229
+msgid ""
+"*conan_global_flags.xcconfig*: this file will only be generated in case of "
+"any configuration variables related to compiler or linker flags are set. "
+"Check :ref:`the configuration section<xcodetoolchain_conf>` below for more "
+"details."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:234
+msgid ""
+"Every invocation to ``conan install`` with different configuration will "
+"create a new *conantoolchain_<config>_<arch>.xcconfig* file that is "
+"aggregated in the *conantoolchain.xcconfig*, so you can have different "
+"configurations included in your Xcode project."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:239
+msgid ""
+"The XcodeToolchain files can declare the following Xcode build settings "
+"based on Conan settings values:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:241
+msgid ""
+"``MACOSX_DEPLOYMENT_TARGET`` is based on the value of the ``os.version`` "
+"setting and will make the build system to pass the flag ``-mmacosx-version-"
+"min`` with that value (if set). It defines the operating system version the "
+"binary should run into."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:244
+msgid ""
+"``CLANG_CXX_LANGUAGE_STANDARD`` is based on the value of the ``compiler."
+"cppstd`` setting that sets the C++ language standard."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:246
+msgid ""
+"``CLANG_CXX_LIBRARY`` is based on the value of the compiler.libcxx setting "
+"and sets the version of the C++ standard library to use."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:249
+msgid ""
+"One of the advantages of using toolchains is that they can help to achieve "
+"the exact same build with local development flows, than when the package is "
+"created in the cache."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:255
+#: ../../../reference/conanfile/tools/apple.rst:329
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:257
+msgid ""
+"This toolchain is also affected by these :ref:`[conf]<global_conf>` "
+"variables:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:259
+msgid "``tools.build:cxxflags`` list of C++ flags."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:260
+msgid "``tools.build:cflags`` list of pure C flags."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:261
+msgid ""
+"``tools.build:sharedlinkflags`` list of flags that will be used by the "
+"linker when creating a shared library."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:262
+msgid ""
+"``tools.build:exelinkflags`` list of flags that will be used by the linker "
+"when creating an executable."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:263
+msgid "``tools.build:defines`` list of preprocessor definitions."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:265
+msgid ""
+"If you set any of these variables, the toolchain will use them to generate "
+"the ``conan_global_flags.xcconfig`` file that will be included from the "
+"``conan_config.xcconfig`` file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:270
+msgid "XcodeBuild"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:274
+msgid ""
+"The ``Xcode`` build helper is a wrapper around the command line invocation "
+"of Xcode. It will abstract the calls like ``xcodebuild -project app."
+"xcodeproj -configuration <config> -arch <arch> ...``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:278
+msgid "The ``Xcode`` helper can be used like:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:291
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.apple import XcodeBuild\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def build(self):\n"
+"        xcodebuild = XcodeBuild(self)\n"
+"        xcodebuild.build(\"app.xcodeproj\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:293
+msgid "Xcode.build() method"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:298
+msgid "def build(self, xcodeproj, target=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:299
+msgid "``xcodeproj``: the *xcodeproj* file to build."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:300
+msgid ""
+"``target``: the target to build, in case this argument is passed to the "
+"``build()`` method it will add the ``-target`` argument to the build system "
+"call. If not passed, it will build all the targets passing the ``-"
+"alltargets`` argument instead."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:305
+msgid ""
+"The ``Xcode.build()`` method internally implements a call to ``xcodebuild`` "
+"like:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:310
+msgid ""
+"$ xcodebuild -project app.xcodeproj -configuration <configuration> -arch "
+"<architecture> <sdk> <verbosity> -target <target>/-alltargets"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:311
+msgid "Where:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:313
+msgid ""
+"``configuration`` is the configuration, typically *Release* or *Debug*, "
+"which will be obtained from ``settings.build_type``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:315
+msgid ""
+"``architecture`` is the build architecture, a mapping from the ``settings."
+"arch`` to the common architectures defined by Apple 'i386', 'x86_64', "
+"'armv7', 'arm64', etc."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:317
+msgid ""
+"``sdk`` is set based on the values of the ``os.sdk`` and ``os.sdk_version`` "
+"defining the ``SDKROOT`` Xcode build setting according to them. For example, "
+"setting ``os.sdk=iOS`` and `os.sdk_version=8.3`` will pass "
+"``SDKROOT=iOS8.3`` to the build system. In case you defined the ``tools."
+"apple:sdk_path`` in your :ref:`[conf]<global_conf>` this value will take "
+"preference and will directly pass ``SDKROOT=<tools.apple:sdk_path>`` so "
+"**take into account** that for this case the skd located in that path should "
+"set your ``os.sdk`` and ``os.sdk_version`` settings values."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:324
+msgid ""
+"``verbosity`` is the verbosity level for the build and can take value "
+"'verbose' or 'quiet' if set by ``tools.apple.xcodebuild:verbosity`` in your :"
+"ref:`[conf]<global_conf>`"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:331
+msgid ""
+"``tools.apple.xcodebuild:verbosity`` verbosity value for the build, can be "
+"'verbose' or 'quiet'"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:332
+msgid ""
+"``tools.apple:sdk_path`` path for the sdk location, will set the ``SDKROOT`` "
+"value with preference over composing the value from the ``os.sdk`` and ``os."
+"sdk_version`` settings."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:338
+msgid "conan.tools.apple.fix_apple_shared_install_name()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:340
+msgid ""
+"Available since: `1.49.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.49.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:342
+msgid "def fix_apple_shared_install_name(conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:346
+#: ../../../reference/conanfile/tools/apple.rst:415
+#: ../../../reference/conanfile/tools/apple.rst:432
+#: ../../../reference/conanfile/tools/apple.rst:451
+msgid "Parameters:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:348
+#: ../../../reference/conanfile/tools/apple.rst:417
+#: ../../../reference/conanfile/tools/apple.rst:434
+#: ../../../reference/conanfile/tools/apple.rst:453
+msgid "**conanfile**: Conanfile instance."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:350
+msgid ""
+"This tool will search for all the *dylib* files in the conanfile's "
+"*package_folder* and fix the library *install names* (the ``LC_ID_DYLIB`` "
+"header). Libraries and executables inside the package folder will also have "
+"the ``LC_LOAD_DYLIB`` fields updated to reflect the patched install names. "
+"Executables inside the package will also get an ``LC_RPATH`` entry pointing "
+"to the relative location of the libraries inside the package folder. This is "
+"done using the *install_name_tool* utility available in macOS, as outlined "
+"below:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:357
+msgid ""
+"For ``LC_ID_DYLIB`` which is the field containing the install name of the "
+"library, it will change the install name to one that uses the ``@rpath``. "
+"For example, if the install name is ``/path/to/lib/libname.dylib``, the new "
+"install name will be ``@rpath/libname.dylib``. This is done by internally "
+"executing something like:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:362
+msgid "install_name_tool /path/to/lib/libname.dylib -id @rpath/libname.dylib"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:366
+msgid ""
+"For ``LC_LOAD_DYLIB`` which is the field containing the path to the library "
+"dependencies, it will change the path of the dependencies to one that uses "
+"the ``@rpath``. For example, if a binary has a dependency on ``/path/to/lib/"
+"dependency.dylib``, this will be updated to be ``@rpath/dependency.dylib``. "
+"This is done for both libraries and executables inside the package folder, "
+"invoking `install_name_tool` as below:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:372
+msgid ""
+"install_name_tool /path/to/lib/libname.dylib -change /path/to/lib/dependency."
+"dylib @rpath/dependency.dylib"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:376
+msgid ""
+"For ``LC_RPATH``, in those cases in which the packages also contain binary "
+"executables that depend on libraries within the same package, entries will "
+"be added to reflect the location of the libraries relative to the "
+"executable. If a package has executables in the `bin` subfolder and "
+"libraries in the `lib` subfolder, this can be performed with an invocation "
+"like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:382
+msgid ""
+"install_name_tool /path/to/bin/my_executable -add_rpath @executable_path/../"
+"lib"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:387
+msgid ""
+"This tool is typically needed by recipes that use Autotools as the build "
+"system and in the case that the correct install names are not fixed in the "
+"library being packaged. Use this tool, if needed, in the conanfile's "
+"``package()`` method like:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:391
+msgid ""
+"from conan.tools.apple import fix_apple_shared_install_name\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"\n"
+"  ...\n"
+"\n"
+"  def package(self):\n"
+"      autotools = Autotools(self)\n"
+"      autotools.install()\n"
+"      fix_apple_shared_install_name(self)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:407
+msgid "is_apple_os()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:409
+msgid ""
+"Available since: `1.51.3 <https://github.com/conan-io/conan/releases/"
+"tag/1.51.3>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:411
+msgid "def is_apple_os(conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:419
+msgid ""
+"This tool returns ``True`` if the OS is from Apple (Macos, iOS, watchOS or "
+"tvOS)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:424
+msgid "to_apple_arch()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:426
+msgid ""
+"Available since: `1.52.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.52.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:428
+msgid "def to_apple_arch(conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:436
+msgid ""
+"Converts the current Conan-style `arch` setting (in the _host_ context) to a "
+"value understood by different Apple build tools (e.g. `armv8` -> `arm64`)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:441
+msgid "XCRun()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:443
+msgid ""
+"Available since: `1.53.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.53.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:445
+msgid ""
+"class XCRun(object):\n"
+"\n"
+"    def __init__(self, conanfile, sdk=None, use_settings_target=False):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:454
+msgid ""
+"**sdk**: Will skip the flag when ``False`` is passed and will try to adjust "
+"the sdk it automatically if ``None`` is passed."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:456
+msgid ""
+"**use_settings_target**: If ``True`` it will try to use the settings from "
+"the target. When ``False`` it will use the settings from the active context. "
+"Read more about the ``settings_target`` in the :ref:`cross-building "
+"section<cross_building>`."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:460
+msgid ""
+"XCRun is a wrapper for the Apple **xcrun** tool used to get information for "
+"building. It has these properties:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:463
+msgid "**sdk_path**: Obtain SDK path (a.k.a. Apple sysroot or -isysroot)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:464
+msgid "**sdk_version**: Obtain SDK version."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:465
+msgid "**sdk_platform_path**: Obtain SDK platform path."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:466
+msgid "**sdk_platform_version**: Obtain SDK platform version."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:467
+msgid "**cc**: Path to C compiler (CC)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:468
+msgid "**cxx**: Path to C++ compiler (CXX)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:469
+msgid "**ar**: Path to archiver (AR)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:470
+msgid "**ranlib**: Path to archive indexer (RANLIB)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:471
+msgid "**strip**: Path to symbol removal utility (STRIP)."
+msgstr ""

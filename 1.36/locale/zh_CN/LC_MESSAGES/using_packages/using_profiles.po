@@ -1,0 +1,195 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.36\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../using_packages/using_profiles.rst:4
+msgid "Using profiles"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:6
+msgid ""
+"So far, we have used the default settings stored in ``~/.conan/profiles/"
+"default`` and defined custom values for some of them as command line "
+"arguments."
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:8
+msgid ""
+"However, in large projects, configurations can get complex, settings can be "
+"very different, and we need an easy way to switch between different "
+"configurations with different settings, options etc. An easy way to switch "
+"between configurations is by using profiles."
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:11
+msgid ""
+"A profile file contains a predefined set of ``settings``, ``options``, "
+"``environment variables``, and ``build_requires`` specified in the following "
+"structure:"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:13
+msgid ""
+"[settings]\n"
+"setting=value\n"
+"\n"
+"[options]\n"
+"MyLib:shared=True\n"
+"\n"
+"[env]\n"
+"env_var=value\n"
+"\n"
+"[build_requires]\n"
+"tool1/0.1@user/channel\n"
+"tool2/0.1@user/channel, tool3/0.1@user/channel\n"
+"*: tool4/0.1@user/channel"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:29
+msgid ""
+"Options allow the use of wildcards letting you apply the same option value "
+"to many packages. For example:"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:31
+msgid ""
+"[options]\n"
+"*:shared=True"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:36
+msgid "Here is an example of a configuration that a profile file may contain:"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:38
+msgid "*clang_3.5*"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:38
+msgid ""
+" [settings]\n"
+" os=Macos\n"
+" arch=x86_64\n"
+" compiler=clang\n"
+" compiler.version=3.5\n"
+" compiler.libcxx=libstdc++11\n"
+" build_type=Release\n"
+"\n"
+" [env]\n"
+" CC=/usr/bin/clang-3.5\n"
+" CXX=/usr/bin/clang++-3.5"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:53
+msgid ""
+"A profile file can be stored in the default profile folder, or anywhere else "
+"in your project file structure. To use the configuration specified in a "
+"profile file, pass in the file as a command line argument as shown in the "
+"example below:"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:55
+msgid "$ conan create . demo/testing -pr=clang_3.5"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:59
+msgid ""
+"Continuing with the example of Poco, instead of passing in a long list of "
+"command line arguments, we can define a handy profile that defines them all "
+"and pass that to the command line when installing the project dependencies."
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:61
+msgid ""
+"A profile to install dependencies as **shared** and in **debug** mode would "
+"look like this:"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:63
+msgid "*debug_shared*"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:63
+msgid ""
+" include(default)\n"
+"\n"
+" [settings]\n"
+" build_type=Debug\n"
+"\n"
+" [options]\n"
+" poco:shared=True\n"
+" poco:enable_apacheconnector=False\n"
+" openssl:shared=True"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:76
+msgid "To install dependencies using the profile file, we would use:"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:78
+msgid "$ conan install .. -pr=debug_shared"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:82
+msgid ""
+"We could also create a new profile to use a different compiler version and "
+"store that in our project directory. For example:"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:84
+msgid "*poco_clang_3.5*"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:84
+msgid ""
+" include(clang_3.5)\n"
+"\n"
+" [options]\n"
+" poco:shared=True\n"
+" poco:enable_apacheconnector=False\n"
+" openssl:shared=True"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:94
+msgid "To install dependencies using this new profile, we would use:"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:96
+msgid "$ conan install .. -pr=../poco_clang_3.5"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:100
+msgid ""
+"You can specify multiple profiles in the command line. The applied "
+"configuration will be the composition of all the profiles applied in the "
+"order they are specified:"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:103
+msgid ""
+"$ conan install .. -pr=../poco_clang_3.5 -pr=my_build_tool1 -"
+"pr=my_build_tool2"
+msgstr ""
+
+#: ../../../using_packages/using_profiles.rst:109
+msgid ""
+"Read more about :ref:`profiles` for full reference. There is a Conan "
+"command, :ref:`conan_profile`, that can help inspecting and managing "
+"profiles. Profiles can be also shared and installed with the :ref:"
+"`conan_config_install` command."
+msgstr ""

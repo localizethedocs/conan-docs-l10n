@@ -1,0 +1,517 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.36\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../developing_packages/editable_packages.rst:4
+msgid "Packages in editable mode"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:8
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:10
+msgid ""
+"When working in big projects with several functionalities interconnected it "
+"is recommended to avoid the one-and-only huge project approach in favor of "
+"several libraries, each one specialized in a set of common tasks, even "
+"maintained by dedicated teams. This approach helps to isolate and reusing "
+"code helps with compiling times and reduces the likelihood of including "
+"files that not correspond to the API of the required library."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:16
+msgid ""
+"Nevertheless, in some case, it is useful to work in several libraries at the "
+"same time and see how the changes in one of them are propagated to the "
+"others. Following the :ref:`local workflow<package_dev_flow>` an user can "
+"execute the commands :command:`conan source`, :command:`conan install`, :"
+"command:`conan build` and :command:`conan package`, but in order to get the "
+"changes ready for a consumer library, it is needed the :command:`conan "
+"create` that will actually trigger a build to generate the binaries in the "
+"cache or to run :command:`conan export-pkg` to copy locally built artifacts "
+"into the conan cache and make them available to consumers."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:24
+msgid ""
+"With the editable packages, you can tell Conan where to find the headers and "
+"the artifacts ready for consumption in your local working directory. There "
+"is no need to package."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:27
+msgid ""
+"Let's see this feature over an practical example; the code can be found in "
+"the conan examples repository:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:29
+msgid "$ git clone https://github.com/conan-io/examples.git"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:34
+msgid ""
+"In the project `examples/features/editable/cmake` a developer is creating "
+"the app ``hello`` but at the same time they want to work on ``say/0.1@user/"
+"channel`` library which is tightly coupled to the app."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:38
+msgid ""
+"The package ``say/0.1@user/channel`` is already working, the developer has "
+"the sources in a local folder and they are using whatever method to build "
+"and develop locally and can perform a :command:`conan create . say/0.1@user/"
+"channel` to create the package."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:42
+msgid ""
+"Also, there is a *conanfile.txt* (or a more complex recipe) for the "
+"application ``hello`` that has ``say/0.1@user/channel`` among its "
+"requirements. When building this application, the resources of ``say`` are "
+"used from the Conan local cache."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:47
+msgid "Put a package in editable mode"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:49
+msgid ""
+"To avoid creating the package ``say/0.1@user/channel`` in the cache for "
+"every change, we are going to put that package in editable mode, creating "
+"**a link from the reference in the cache to the local working directory**:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:53
+msgid ""
+"$ conan editable add examples/features/editable/cmake/say say/0.1@user/"
+"channel\n"
+"# you could do \"cd <examples/features/editable/cmake/say> && conan editable "
+"add . say/0.1@user/channel\""
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:59
+msgid ""
+"That is it. Now, every usage of ``say/0.1@user/channel``, by any other Conan "
+"package or project, will be redirected to the ``examples/features/editable/"
+"cmake/say`` user folder instead of using the package from the conan cache."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:63
+msgid ""
+"The Conan package recipes define a package \"layout\" in their "
+"``package_info()`` methods. The default one, if nothing is specified is "
+"equivalent to:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:66
+msgid ""
+"def package_info(self):\n"
+"    # default behavior, doesn't need to be explicitly defined in recipes\n"
+"    self.cpp_info.includedirs = [\"include\"]\n"
+"    self.cpp_info.libdirs = [\"lib\"]\n"
+"    self.cpp_info.bindirs = [\"bin\"]\n"
+"    self.cpp_info.resdirs = [\"res\"]"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:75
+msgid ""
+"That means that conan will use the path ``examples/features/editable/cmake/"
+"say/include`` for locating the headers of the ``say`` package, the "
+"``examples/features/editable/cmake/say/lib`` to locate the libraries of the "
+"package, and so on."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:78
+msgid ""
+"That might not be very useful, as typically while editing the source code "
+"and doing incremental builds, the development layout is different from that "
+"final \"package\" layout. While it is possible to run a :command:`conan "
+"package` local command to execute the packaging in the user folder and it "
+"will achieve that final layout, that is not very elegant as it should be run "
+"after every modification."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:83
+msgid ""
+"In order to populate ``cpp_info.libs``, the usage of ``tools."
+"collect_libs()`` is discouraged as it won't find any library when the "
+"package is in editable mode and it hasn't been compiled yet. This empty list "
+"will be written to files by generators and it won't be updated after working "
+"on the editable package."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:89
+msgid "Editable packages layouts"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:91
+msgid ""
+"The custom layout of a package while it is in editable mode can be defined "
+"in different ways:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:94
+msgid "Recipe defined layout"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:96
+msgid ""
+"A recipe can define a custom layout when it is not living in the local "
+"cache, in its ``package_info()`` method, something like:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:99
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"build_type\"\n"
+"    def package_info(self):\n"
+"        if not self.in_local_cache:\n"
+"            d = \"include_%s\" % self.settings.build_type\n"
+"            self.cpp_info.includedirs = [d.lower()]"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:110
+msgid ""
+"That will map the include directories to ``examples/features/editable/cmake/"
+"say/include_debug`` when working with ``build_type=Debug`` conan setting, "
+"and to ``examples/features/editable/cmake/say/include_release`` if "
+"``build_type=Release``. In the same way, other directories (libdirs, "
+"bindirs, etc) can be customized, with any logic, different for different OS, "
+"build systems, etc."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:114
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    def package_info(self):\n"
+"        if not self.in_local_cache:\n"
+"            if self.settings.compiler == \"Visual Studio\":\n"
+"                # NOTE: Use the real layout used in your VS projects, this "
+"is just an example\n"
+"                self.cpp_info.libdirs = [\"%s_%s\" % (self.settings."
+"build_type, self.settings.arch)]"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:126
+msgid ""
+"That will define the libraries directories to ``examples/features/editable/"
+"cmake/say/Release_x86_64``, for example. That is only an example, the real "
+"layout used by VS would be different."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:130
+msgid "Layout files"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:132
+msgid ""
+"Instead of changing the recipe file to match the local layout, it's possible "
+"to define the layout in a separate file. This is especially useful if you "
+"have a large number of libraries with the same structure so you can write it "
+"once and use it for several packages."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:136
+msgid ""
+"Layout files are *ini* files, but before parsing them Conan uses the Jinja2 "
+"template engine passing the ``settings``, ``options`` and current "
+"``reference`` objects, so you can add logic to the files:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:140
+msgid ""
+"[build_folder]\n"
+"build/{{settings.build_type}}\n"
+"\n"
+"[source_folder]\n"
+"src\n"
+"\n"
+"[includedirs]\n"
+"src\n"
+"\n"
+"[libdirs]\n"
+"build/{{settings.build_type}}/lib"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:155
+msgid ""
+"You can have a look at the `Jinja2 documentation <https://palletsprojects."
+"com/p/jinja/>`_ to know more about its powerful syntax."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:159
+msgid ""
+"This file can use the package reference to customize logic for a specific "
+"package:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:161
+msgid ""
+"[say/0.1@user/channel:build_folder]\n"
+"{% if settings.compiler == \"Visual Studio\" %}\n"
+"build\n"
+"{% else %}\n"
+"build/{{settings.build_type}}\n"
+"{% endif %}\n"
+"\n"
+"[build_folder]\n"
+"build/{{settings.arch}}/{{settings.build_type}}\n"
+"\n"
+"[source_folder]\n"
+"src\n"
+"\n"
+"[includedirs]\n"
+"src\n"
+"\n"
+"[libdirs]\n"
+"build/{{settings.build_type}}/lib\n"
+"\n"
+"[bindirs]\n"
+"build/{{settings.build_type}}/bin"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:185
+msgid ""
+"This layout will define the ``src`` include directory for the ``say`` and "
+"for other packages in editable mode. Also, the ``build_folder`` has a "
+"condition only for ``say/0.1@user/channel`` package. It will use a specific "
+"path, according the compiler."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:189
+msgid ""
+"In every case the directories that will be affected by the editable mode "
+"will be ``includedirs``, ``libdirs``, ``bindirs``, ``resdirs``, ``srcdirs`` "
+"and ``builddirs``, all of them declared in the :ref:"
+"`cpp_info_attributes_reference` dictionary; the rest of values in that "
+"dictionary won't be modified. So ``cflags``, ``defines``, library names in "
+"``libs`` defined in ``package_info()`` will still be used."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:195
+msgid ""
+"By default all folders paths are relative to the directory where the "
+"*conanfile.py* of the editable package is (which is the path used to create "
+"the link), though they also allow absolute paths."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:200
+msgid "Specifying layout files"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:202
+msgid ""
+"Layout files are specified in the :command:`conan editable add` command, as "
+"an extra argument:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:204
+msgid ""
+"$ cd examples/features/editable/cmake/say\n"
+"$ conan editable add . say/0.1@user/channel --layout=layout_vs"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:209
+msgid ""
+"That ``layout_vs`` file will be first looked for relative to the current "
+"directory (the path can be absolute too). If it is found, that will be used. "
+"It is possible to add those layouts in the source repositories, so they are "
+"always easy to find after a clone."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:213
+msgid ""
+"If the specified layout is not found relative to the current directory, it "
+"will be looked for in the conan cache, in the ``.conan/layouts`` folder. "
+"This is very convenient to have a single definition of layouts that can be "
+"shared with the team and installed with ``conan config install``."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:218
+msgid ""
+"If no argument is specified, the :command:`conan editable add` command will "
+"try to use a `.conan/layouts/default` layout from the local cache."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:221
+msgid ""
+"You can switch layout files by passing a different argument to new calls to :"
+"command:`conan editable add`."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:224
+msgid "Evaluation order and priority"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:226
+msgid ""
+"It is important to understand the evaluation order and priorities regarding "
+"the definitions of layouts:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:228
+msgid ""
+"The first thing that will always execute is the recipe ``package_info()``. "
+"That will define the flags, definitions, as well as some values for the "
+"layout folders: ``includedirs``, ``libdirs``, etc."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:230
+msgid ""
+"If a layout file is defined, either explicitly or using the implicit ``."
+"conan/layouts/default``, conan will look for matches, based on its package "
+"reference."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:232
+msgid ""
+"If a match is found, either because of global definitions like "
+"``[includedirs]`` or because a match like ``[pkg/version@user/channel:"
+"includedirs]``, then the layout folders (includedirs, libdirs, resdirs, "
+"builddirs, bindirs), will be invalidated and replaced by the ones defined in "
+"the file."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:236
+msgid ""
+"If a specific match like ``[pkg/version@user/channel:includedirs]`` is "
+"found, it is expected to have defined also its specific ``[pkg/version@user/"
+"channel:libdirs]``, etc. The global layout folders specified without package "
+"reference won't be applied once a match is found."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:239
+msgid ""
+"It no match is found, the original values for the layout folders defined in "
+"``package_info()`` will be respected."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:241
+msgid ""
+"The layout file to be used is defined at :command:`conan editable add` time. "
+"If a ``.conan/layouts/default`` file is added after the :command:`conan "
+"editable add`, it will not be used at all."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:246
+msgid "Using a package in editable mode"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:248
+msgid ""
+"Once a reference is in editable mode it is used **system wide** (for every "
+"set of ``settings`` and ``options``) by Conan (by every Conan client that "
+"uses the same cache), no changes are required in the consumers. Every :"
+"command:`conan install` command that requires our editable ``say/0.1@user/"
+"channel`` package will use the paths to the local directory and the changes "
+"made to this project will be taken into account by the packages using its "
+"headers or linking against it."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:255
+msgid ""
+"To summarize, consumption of packages in editable mode is transparent to "
+"their consumers. To try that it is working, the following flow should work:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:258
+msgid ""
+"Get sources of ``say/0.1@user/channel``: :command:`git/svn clone... && cd "
+"folder`"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:259
+msgid ""
+"Put package in editable mode: :command:`conan editable add . say/0.1@user/"
+"channel --layout=layout_gcc`"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:260
+msgid ""
+"Work with it and build using any tool. Check that your local layout is "
+"reflected in the layout file *layout_gcc* specified in the previous step."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:262
+msgid "Go to the consumer project: ``hello``"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:263
+msgid "Build it using any local flow: :command:`conan install` and build"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:264
+msgid ""
+"Go back to ``say/0.1@user/channel`` source folder, do some changes, and just "
+"build. No Conan commands necessary"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:265
+msgid ""
+"Go to the consumer project: ``hello`` and rebuild. It should get the changes "
+"from the ``say`` library."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:267
+msgid ""
+"In that way, it is possible to be developing both the ``say`` library and "
+"the ``hello`` application, at the same time, without any Conan command."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:272
+msgid ""
+"When a package is in editable mode, most of the commands will not work. It "
+"is not possible to :command:`conan upload`, :command:`conan export` or :"
+"command:`conan create` when a package is in editable mode."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:276
+msgid "Revert the editable mode"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:278
+msgid "In order to revert the editable mode just remove the link using:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:280
+msgid "$ conan editable remove say/0.1@user/channel"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:284
+msgid ""
+"It will remove the link (the local directory won't be affected) and all the "
+"packages consuming this requirement will get it from the cache again."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:289
+msgid ""
+"Packages that are built consuming an editable package in its graph upstreams "
+"can generate binaries and packages incompatible with the released version of "
+"the editable package. Avoid uploading these packages without re-creating "
+"them with the in-cache version of all the libraries."
+msgstr ""

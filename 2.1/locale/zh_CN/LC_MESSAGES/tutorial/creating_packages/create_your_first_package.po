@@ -1,0 +1,528 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:4
+msgid "Create your first Conan package"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:6
+msgid ""
+"In previous sections, we *consumed* Conan packages (like the *Zlib* one), "
+"first using a *conanfile.txt* and then with a *conanfile.py*. But a "
+"*conanfile.py* recipe file is not only meant to consume other packages, it "
+"can be used to create your own packages as well. In this section, we explain "
+"how to create a simple Conan package with a *conanfile.py* recipe and how to "
+"use Conan commands to build those packages from sources."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:15
+msgid ""
+"This is a **tutorial** section. You are encouraged to execute these "
+"commands. For this concrete example, you will need **CMake** installed  in "
+"your path. It is not strictly required by Conan to create packages, you can "
+"use other build systems (such as VS, Meson, Autotools, and even your own) to "
+"do that, without any dependency on CMake."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:21
+msgid ""
+"Use the :command:`conan new` command to create a \"Hello World\" C++ library "
+"example project:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:23
+msgid "$ conan new cmake_lib -d name=hello -d version=1.0"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:28
+msgid "This will create a Conan package project with the following structure."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:30
+msgid ""
+".\n"
+"├── CMakeLists.txt\n"
+"├── conanfile.py\n"
+"├── include\n"
+"│   └── hello.h\n"
+"├── src\n"
+"│   └── hello.cpp\n"
+"└── test_package\n"
+"    ├── CMakeLists.txt\n"
+"    ├── conanfile.py\n"
+"    └── src\n"
+"        └── example.cpp"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:45
+msgid "The generated files are:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:47
+msgid ""
+"**conanfile.py**: On the root folder, there is a *conanfile.py* which is the "
+"main recipe file, responsible for defining how the package is built and "
+"consumed."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:49
+msgid ""
+"**CMakeLists.txt**: A simple generic *CMakeLists.txt*, with nothing specific "
+"about Conan in it."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:51
+msgid ""
+"**src** and **include** folders: the folders that contains the simple C++ "
+"\"hello\" library."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:52
+msgid ""
+"**test_package** folder: contains an *example* application that will require "
+"and link with the created package. It is not mandatory, but it is useful to "
+"check that our package is correctly created."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:56
+msgid "Let's have a look at the package recipe *conanfile.py*:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:58
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, "
+"CMakeDeps\n"
+"\n"
+"\n"
+"class helloRecipe(ConanFile):\n"
+"    name = \"hello\"\n"
+"    version = \"1.0\"\n"
+"\n"
+"    # Optional metadata\n"
+"    license = \"<Put the package license here>\"\n"
+"    author = \"<Put your name here> <And your email here>\"\n"
+"    url = \"<Package recipe repository url here, for issues about the "
+"package>\"\n"
+"    description = \"<Description of hello package here>\"\n"
+"    topics = (\"<Put some tag here>\", \"<here>\", \"<and here>\")\n"
+"\n"
+"    # Binary configuration\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    options = {\"shared\": [True, False], \"fPIC\": [True, False]}\n"
+"    default_options = {\"shared\": False, \"fPIC\": True}\n"
+"\n"
+"    # Sources are located in the same place as this recipe, copy them to the "
+"recipe\n"
+"    exports_sources = \"CMakeLists.txt\", \"src/*\", \"include/*\"\n"
+"\n"
+"    def config_options(self):\n"
+"        if self.settings.os == \"Windows\":\n"
+"            del self.options.fPIC\n"
+"\n"
+"    def layout(self):\n"
+"        cmake_layout(self)\n"
+"\n"
+"    def generate(self):\n"
+"        deps = CMakeDeps(self)\n"
+"        deps.generate()\n"
+"        tc = CMakeToolchain(self)\n"
+"        tc.generate()\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure()\n"
+"        cmake.build()\n"
+"\n"
+"    def package(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.install()\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.libs = [\"hello\"]"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:109
+msgid "Let's explain the different sections of the recipe briefly:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:111
+msgid ""
+"First, you can see the **name and version** of the Conan package defined:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:113
+msgid ""
+"``name``: a string, with a minimum of 2 and a maximum of 100 **lowercase** "
+"characters that defines the package name. It should start with alphanumeric "
+"or underscore and can contain alphanumeric, underscore, +, ., - characters."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:116
+msgid ""
+"``version``: It is a string, and can take any value, matching the same "
+"constraints as the ``name`` attribute. In case the version follows semantic "
+"versioning in the form ``X.Y.Z-pre1+build2``, that value might be used for "
+"requiring this package through version ranges instead of exact versions."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:121
+msgid ""
+"Then you can see, some attributes defining **metadata**. These are optional "
+"but recommended and define things like a short ``description`` for the "
+"package, the ``author`` of the packaged library, the ``license``, the "
+"``url`` for the package repository, and the ``topics`` that the package is "
+"related to."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:126
+msgid ""
+"After that, there is a section related with the binary configuration. This "
+"section defines the valid settings and options for the package. As we "
+"explained in the :ref:`consuming packages "
+"section<settings_and_options_difference>`:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:130
+msgid ""
+"``settings`` are project-wide configuration that cannot be defaulted in "
+"recipes. Things like the operating system, compiler or build configuration "
+"that will be common to several Conan packages"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:134
+msgid ""
+"``options`` are package-specific configuration and can be defaulted in "
+"recipes, in this case, we have the option of creating the package as a "
+"shared or static library, being static the default."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:137
+msgid ""
+"After that, the ``exports_sources`` attribute is set to define which sources "
+"are part of the Conan package. These are the sources for the library you "
+"want to package. In this case the sources for our \"hello\" library."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:141
+msgid "Then, several methods are declared:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:143
+msgid ""
+"The ``config_options()`` method (together with the ``configure()`` one) "
+"allows fine-tuning the binary configuration model, for example, in Windows, "
+"there is no ``fPIC`` option, so it can be removed."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:146
+msgid ""
+"The ``layout()`` method declares the locations where we expect to find the "
+"source files and destinations for the files generated during the build "
+"process. Example destination folders are those for the generated binaries "
+"and all the files that the Conan generators create in the ``generate()`` "
+"method. In this case, as our project uses CMake as the build system, we call "
+"to ``cmake_layout()``. Calling this function will set the expected locations "
+"for a CMake project."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:152
+msgid ""
+"The ``generate()`` method prepares the build of the package from source. In "
+"this case, it could be simplified to an attribute ``generators = "
+"\"CMakeToolchain\"``, but it is left to show this important method. In this "
+"case, the execution of ``CMakeToolchain`` ``generate()`` method will create "
+"a *conan_toolchain.cmake* file that translates the Conan ``settings`` and "
+"``options`` to CMake syntax. The ``CMakeDeps`` generator is added for "
+"completitude, but it is not strictly necessary until ``requires`` are added "
+"to the recipe."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:158
+msgid ""
+"The ``build()`` method uses the ``CMake`` wrapper to call CMake commands, it "
+"is a thin layer that will manage to pass in this case the ``-"
+"DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake`` argument. It will configure "
+"the project and build it from source."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:162
+msgid ""
+"The ``package()`` method copies artifacts (headers, libs) from the build "
+"folder to the final package folder. It can be done with bare \"copy\" "
+"commands, but in this case, it is leveraging the already existing CMake "
+"install functionality (if the CMakeLists.txt didn't implement it, it is easy "
+"to write an equivalent using the :ref:`copy() tool<conan_tools_files_copy>` "
+"in the ``package()`` method."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:168
+msgid ""
+"Finally, the ``package_info()`` method defines that consumers must link with "
+"a \"hello\" library when using this package. Other information as include or "
+"lib paths can be defined as well. This information is used for files created "
+"by generators (as ``CMakeDeps``) to be used by consumers. This is generic "
+"information about the current package, and is available to the consumers "
+"irrespective of the build system they are using and irrespective of the "
+"build system we have used in the ``build()`` method"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:175
+msgid ""
+"The **test_package** folder is not critical now for understanding how "
+"packages are created. The important bits are:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:178
+msgid ""
+"**test_package** folder is different from unit or integration tests. These "
+"tests are \"package\" tests, and validate that the package is properly "
+"created and that the package consumers will be able to link against it and "
+"reuse it."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:182
+msgid ""
+"It is a small Conan project itself, it contains its ``conanfile.py``, and "
+"its source code including build scripts, that depends on the package being "
+"created, and builds and executes a small application that requires the "
+"library in the package."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:186
+msgid ""
+"It doesn't belong in the package. It only exists in the source repository, "
+"not in the package."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:190
+msgid ""
+"Let's build the package from sources with the current default configuration, "
+"and then let the ``test_package`` folder test the package:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:193
+msgid ""
+"$ conan create .\n"
+"\n"
+"======== Exporting recipe to the cache ========\n"
+"hello/1.0: Exporting package recipe\n"
+"...\n"
+"hello/1.0: Exported: hello/1.0#dcbfe21e5250264b26595d151796be70 (2024-03-04 "
+"17:52:39 UTC)\n"
+"\n"
+"======== Installing packages ========\n"
+"-------- Installing package hello/1.0 (1 of 1) --------\n"
+"hello/1.0: Building from source\n"
+"hello/1.0: Calling build()\n"
+"...\n"
+"hello/1.0: Package '9bdee485ef71c14ac5f8a657202632bdb8b4482b' built\n"
+"\n"
+"======== Testing the package: Building ========\n"
+"...\n"
+"[ 50%] Building CXX object CMakeFiles/example.dir/src/example.cpp.o\n"
+"[100%] Linking CXX executable example\n"
+"[100%] Built target example\n"
+"\n"
+"======== Testing the package: Executing test ========\n"
+"hello/1.0 (test package): Running test()\n"
+"hello/1.0 (test package): RUN: ./example\n"
+"hello/1.0: Hello World Release!\n"
+"  hello/1.0: __x86_64__ defined\n"
+"  hello/1.0: __cplusplus199711\n"
+"  hello/1.0: __GNUC__4\n"
+"  hello/1.0: __GNUC_MINOR__2\n"
+"  hello/1.0: __clang_major__13\n"
+"  hello/1.0: __clang_minor__1\n"
+"  hello/1.0: __apple_build_version__13160021\n"
+"..."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:228
+msgid ""
+"If \"Hello world Release!\" is displayed, it worked. This is what has "
+"happened:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:230
+msgid ""
+"The *conanfile.py* together with the contents of the *src* folder have been "
+"copied (**exported**, in Conan terms) to the local Conan cache."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:233
+msgid ""
+"A new build from source for the ``hello/1.0`` package starts, calling the "
+"``generate()``, ``build()`` and ``package()`` methods. This creates the "
+"binary package in the Conan cache."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:237
+msgid ""
+"Conan then moves to the *test_package* folder and executes a :command:`conan "
+"install` + :command:`conan build` + ``test()`` method, to check if the "
+"package was correctly created."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:241
+msgid ""
+"We can now validate that the recipe and the package binary are in the cache:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:243
+msgid ""
+"$ conan list hello\n"
+"Local Cache:\n"
+"  hello\n"
+"    hello/1.0"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:250
+msgid ""
+"The :command:`conan create` command receives the same parameters as :command:"
+"`conan install`, so you can pass to it the same settings and options. If we "
+"execute the following lines, we will create new package binaries for Debug "
+"configuration or to build the hello library as shared:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:254
+msgid ""
+"$ conan create . -s build_type=Debug\n"
+"...\n"
+"hello/1.0: Hello World Debug!\n"
+"\n"
+"$ conan create . -o hello/1.0:shared=True\n"
+"...\n"
+"hello/1.0: Hello World Release!"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:265
+msgid ""
+"These new package binaries will be also stored in the Conan cache, ready to "
+"be used by any project in this computer. We can see them with:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:269
+msgid ""
+"# list all the binaries built for the hello/1.0 package in the cache\n"
+"$ conan list hello/1.0:*\n"
+"Local Cache:\n"
+"  hello\n"
+"    hello/1.0\n"
+"      revisions\n"
+"        dcbfe21e5250264b26595d151796be70 (2024-03-04 17:52:39 UTC)\n"
+"          packages\n"
+"            6679492451b5d0750f14f9024fdbf84e19d2941b\n"
+"              info\n"
+"                settings\n"
+"                  arch: x86_64\n"
+"                  build_type: Release\n"
+"                  compiler: apple-clang\n"
+"                  compiler.cppstd: gnu11\n"
+"                  compiler.libcxx: libc++\n"
+"                  compiler.version: 14\n"
+"                  os: Macos\n"
+"                options\n"
+"                  fPIC: True\n"
+"                  shared: True\n"
+"            b1d267f77ddd5d10d06d2ecf5a6bc433fbb7eeed\n"
+"              info\n"
+"                settings\n"
+"                  arch: x86_64\n"
+"                  build_type: Release\n"
+"                  compiler: apple-clang\n"
+"                  compiler.cppstd: gnu11\n"
+"                  compiler.libcxx: libc++\n"
+"                  compiler.version: 14\n"
+"                  os: Macos\n"
+"                options\n"
+"                  fPIC: True\n"
+"                  shared: False\n"
+"            d15c4f81b5de757b13ca26b636246edff7bdbf24\n"
+"              info\n"
+"                settings:\n"
+"                  arch: x86_64\n"
+"                  build_type: Debug\n"
+"                  compiler: apple-clang\n"
+"                  compiler.cppstd: gnu11\n"
+"                  compiler.libcxx: libc++\n"
+"                  compiler.version: 14\n"
+"                  os: Macos\n"
+"                options:\n"
+"                  fPIC: True"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:319
+msgid ""
+"Now that we have created a simple Conan package, we will explain each of the "
+"methods of the Conanfile in more detail. You will learn how to modify those "
+"methods to achieve things like retrieving the sources from an external "
+"repository, adding dependencies to our package, customising our toolchain "
+"and much more."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:326
+msgid "A note about the Conan cache"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:328
+msgid ""
+"When you did the :command:`conan create` command, the build of your package "
+"did not take place in your local folder but in other folder inside the "
+"*Conan cache*. This cache is located in the user home folder under the ``."
+"conan2`` folder. Conan will use the ``~/.conan2`` folder to store the built "
+"packages and also different configuration files. You already used the :"
+"command:`conan list` command to list the recipes and binaries stored in the "
+"local cache."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:335
+msgid ""
+"An **important** note: the Conan cache is private to the Conan client - "
+"modifying, adding, removing or changing files inside the Conan cache is "
+"undefined behaviour likely to cause breakages."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:340
+msgid ""
+":ref:`Create your first Conan package with Visual Studio/"
+"MSBuild<examples_tools_microsoft_create_first_package>`."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:341
+msgid ""
+":ref:`Create your first Conan package with "
+"Meson<examples_tools_meson_create_first_package>`."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:342
+msgid ""
+":ref:`Create your first Conan package with Autotools (only "
+"Linux)<examples_tools_autotools_create_first_package>`."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:343
+msgid ":ref:`CMake built-in integrations reference<conan_tools_cmake>`."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:344
+msgid ""
+":ref:`conan create command reference<reference_commands_create>` and :ref:"
+"`Conan list command reference<reference_commands_list>`."
+msgstr ""

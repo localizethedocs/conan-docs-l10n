@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:4
+msgid "Local Recipes Index Repository"
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:6
+msgid ""
+"The `local_recipes_index` repository is a special type of repository to "
+"which you cannot upload packages or store binaries. The purpose of this "
+"remote is:"
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:9
+msgid ""
+"Enable contributors to share package recipes with the community, "
+"particularly for libraries that might not be suitable for ConanCenter."
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:12
+msgid ""
+"It also simplifies the process of building binaries from a private `conan-"
+"center-index` fork, allowing absolute control over recipes, customization, "
+"and maintaining a stable repository snapshot. This ensures robustness "
+"against upstream changes in ConanCenter. For detailed setup and usage "
+"instructions, see the dedicated section in the Conan DevOps Guide :ref:"
+"`devops_local_recipes_index`."
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:19
+msgid "Setup"
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:21
+msgid ""
+"To set up a local recipes index repository to share your own recipes, you "
+"need to organize your recipes in a folder structure that mimics that of "
+"`conan-center-index`. To start you can use the `local_recipes_index` "
+"template for the `conan new` command. For demonstration purposes, let's "
+"create a `local-recipes-index` repository for a hypothetical `hello` "
+"library, with a license incompatible with Conan Center, using the "
+"`local_recipes_index` template for the `conan new` command:"
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:28
+msgid ""
+"$ mkdir repo && cd repo\n"
+"$ conan new local_recipes_index -d name=hello -d version=0.1 \\\n"
+"    -d url=https://github.com/conan-io/libhello/archive/refs/tags/0.0.1.zip "
+"\\\n"
+"    -d "
+"sha256=1dfb66cfd1e2fb7640c88cc4798fe25853a51b628ed9372ffc0ca285fe5be16b\n"
+"$ cd .."
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:36
+msgid ""
+"The `conan new local_recipes_index` command creates a template that assumes "
+"CMake as the build system alongside other heavy assumptions. In practice, it "
+"will require customizing it, but for this demo, it works as-is. It will "
+"create a folder layout equal to the `conan-center-index` GitHub repository:"
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:41
+msgid ""
+".\n"
+"└── repo\n"
+"    └── recipes\n"
+"        └── hello\n"
+"            ├── all\n"
+"            │   ├── conandata.yml\n"
+"            │   ├── conanfile.py\n"
+"            │   └── test_package\n"
+"            │       ├── CMakeLists.txt\n"
+"            │       ├── conanfile.py\n"
+"            │       └── src\n"
+"            │           └── example.cpp\n"
+"            └── config.yml"
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:57
+msgid "After setting up the repository, we add it as a local remote to Conan:"
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:59
+msgid "$ conan remote add mylocalrepo ./repo --allowed-packages=\"hello/*\""
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:63
+msgid ""
+"Please pay special attention to the `--allowed-packages` argument. This "
+"argument ensures that all packages other than `hello` are discarded by "
+"Conan. This can be used to minimize the surface area for a potential supply "
+"chain attack."
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:67
+msgid "Now you can list and install packages from this new repository:"
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:69
+msgid ""
+"$ conan list \"*\" -r=mylocalrepo\n"
+"$ conan install --requires=hello/0.1 -r=mylocalrepo --build=missing"
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:74
+msgid ""
+"At this point, you could push this repository to your GitHub account and "
+"share it with the community. Now, users simply need to clone the GitHub "
+"repository and add the cloned folder as a local repository themselves."
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:80
+msgid ""
+"Please be aware that, as we commented earlier, this feature is specifically "
+"tailored for scenarios where certain libraries are not suitable for "
+"ConanCenter. Remember, a \"local-recipes-index\" repository has limitations: "
+"it is not fully reproducible as it models only versions and not revisions, "
+"and it does not provide binaries. Therefore, outside of these cases, it is "
+"advised to use a remote package server such as :ref:`Artifactory "
+"<artifactory_ce_cpp>`."
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:89
+msgid ":ref:`DevOps guide <devops>`"
+msgstr ""
+
+#: ../../../tutorial/conan_repositories/setup_local_recipes_index.rst:90
+msgid ""
+"`Introducing the Local-Recipes-Index Post <https://blog.conan.io/2024/04/23/"
+"Introducing-local-recipes-index-remote.html>`_"
+msgstr ""

@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/capture_version.rst:4
+msgid "How to capture package version from text or build files"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:6
+msgid ""
+"It is common that a library version number would be already encoded in a "
+"text file, in some build scripts, etc. Lets take as an example that we have "
+"the following library layout, that we want to create a package from it:"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:9
+msgid ""
+"conanfile.py\n"
+"CMakeLists.txt\n"
+"src\n"
+"   hello.cpp\n"
+"   ..."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:18
+msgid ""
+"The *CMakeLists.txt* will have some variables to define the library version "
+"number. Lets assume for simplicity that it has some line like:"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:21
+msgid ""
+"cmake_minimum_required(VERSION 2.8)\n"
+"set(MY_LIBRARY_VERSION 1.2.3) # This is the version we want\n"
+"add_library(hello src/hello.cpp)"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:28
+msgid "We will typically have in our *conanfile.py* package recipe:"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:31
+msgid ""
+"class HelloConan(ConanFile):\n"
+"    name = \"Hello\"\n"
+"    version = \"1.2.3\""
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:38
+msgid ""
+"Usually this takes very little maintenance, and when the CMakeLists version "
+"is bumped, the *conanfile.py* version is bumped too. But if you want to only "
+"have to update the *CMakeLists.txt* version, you can extract the version "
+"dynamically, with:"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:42
+msgid ""
+"from conans import ConanFile\n"
+"from conans.tools import load\n"
+"import re\n"
+"\n"
+"def get_version():\n"
+"    try:\n"
+"        content = load(\"CMakeLists.txt\")\n"
+"        version = re.search(b\"set\\(MY_LIBRARY_VERSION (.*)\\)\", content)."
+"group(1)\n"
+"        return version.strip()\n"
+"    except Exception as e:\n"
+"        return None\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    name = \"Hello\"\n"
+"    version = get_version()"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:61
+msgid ""
+"Even if the *CMakeLists.txt* file is not exported to the local cache, it "
+"will still work, as the ``get_version()`` function returns None when it is "
+"not found, then taking the version number from the package metadata (layout)."
+msgstr ""

@@ -1,0 +1,224 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/development/build.rst:5
+msgid "conan build"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:7
+msgid ""
+"$ conan build [-h] [-b] [-bf BUILD_FOLDER] [-c] [-i] [-if INSTALL_FOLDER]\n"
+"              [-pf PACKAGE_FOLDER] [-sf SOURCE_FOLDER]\n"
+"              path"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:13
+msgid ""
+"Calls your local conanfile.py 'build()' method. The recipe will be built in "
+"the local directory specified by --build-folder, reading the sources from --"
+"source-folder. If you are using a build helper, like CMake(), the --package- "
+"folder will be configured as destination folder for the install step."
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:18
+msgid ""
+"positional arguments:\n"
+"  path                  Path to a folder containing a conanfile.py or to a\n"
+"                        recipe file e.g., my_folder/conanfile.py\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  -b, --build           Execute the build step (variable "
+"should_build=True).\n"
+"                        When specified, configure/install won't run unless\n"
+"                        --configure/--install specified\n"
+"  -bf BUILD_FOLDER, --build-folder BUILD_FOLDER\n"
+"                        Directory for the build process. Defaulted to the\n"
+"                        current directory. A relative path to current\n"
+"                        directory can also be specified\n"
+"  -c, --configure       Execute the configuration step (variable\n"
+"                        should_configure=True). When specified, build/"
+"install\n"
+"                        won't run unless --build/--install specified\n"
+"  -i, --install         Execute the install step (variable\n"
+"                        should_install=True). When specified, configure/"
+"build\n"
+"                        won't run unless --configure/--build specified\n"
+"  -if INSTALL_FOLDER, --install-folder INSTALL_FOLDER\n"
+"                        Directory containing the conaninfo.txt and\n"
+"                        conanbuildinfo.txt files (from previous 'conan\n"
+"                        install'). Defaulted to --build-folder\n"
+"  -pf PACKAGE_FOLDER, --package-folder PACKAGE_FOLDER\n"
+"                        Directory to install the package (when the build\n"
+"                        system or build() method does it). Defaulted to the\n"
+"                        '{build_folder}/package' folder. A relative path "
+"can\n"
+"                        be specified, relative to the current folder. Also "
+"an\n"
+"                        absolute path is allowed.\n"
+"  -sf SOURCE_FOLDER, --source-folder SOURCE_FOLDER\n"
+"                        Directory containing the sources. Defaulted to the\n"
+"                        conanfile's directory. A relative path to current\n"
+"                        directory can also be specified"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:55
+msgid ""
+"The ``build()`` method might use `settings`, `options` and `environment "
+"variables` from the specified profile and dependencies information from the "
+"declared ``deps_XXX_info`` objects in the conanfile requirements. All that "
+"information is saved automatically in the *conaninfo.txt* and "
+"*conanbuildinfo.txt* files respectively, when you run the :command:`conan "
+"install` command. Those files have to be located in the specified :command:"
+"`--build-folder` or in the :command:`--install-folder` if specified."
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:61
+msgid ""
+"The :command:`--configure, --build, --install` arguments control which parts "
+"of the ``build()`` are actually executed. They have related conanfile "
+"boolean variables ``should_configure, should_build, should_install``, which "
+"are ``True`` by default, but that will change if some of these arguments are "
+"used in the command line. The ``CMake`` and ``Meson`` and "
+"``AutotoolsBuildEnvironment`` helpers already use these variables."
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:68
+msgid ""
+"**Example**: Building a conan package (for architecture x86) in a local "
+"directory."
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:70
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:70
+msgid ""
+" from conans import ConanFile, CMake, tools\n"
+"\n"
+" class LibConan(ConanFile):\n"
+"     ...\n"
+"\n"
+"     def source(self):\n"
+"         self.run(\"git clone https://github.com/memsharded/hello.git\")\n"
+"\n"
+"     def build(self):\n"
+"         cmake = CMake(self)\n"
+"         cmake.configure(source_folder=\"hello\")\n"
+"         cmake.build()"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:86
+msgid ""
+"First we will call :command:`conan source` to get our source code in the "
+"*src* directory, then :command:`conan install` to install the requirements "
+"and generate the info files, and finally :command:`conan build` to build the "
+"package:"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:89
+msgid ""
+" $ conan source . --source-folder src\n"
+" $ conan install . --install-folder build_x86 -s arch=x86\n"
+" $ conan build . --build-folder build_x86 --source-folder src"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:96
+msgid ""
+"Or if we want to create the ``conaninfo.txt`` and ``conanbuildinfo.txt`` "
+"files in a different folder:"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:98
+msgid ""
+" $ conan source . --source-folder src\n"
+" $ conan install . --install-folder install_x86 -s arch=x86\n"
+" $ conan build . --build-folder build_x86 --install-folder install_x86 --"
+"source-folder src"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:105
+msgid ""
+"However, we recommend the ``conaninfo.txt`` and ``conanbuildinfo.txt`` to be "
+"generated in the same --build-folder, otherwise, you will need to specify a "
+"different folder in your build system to include the files generators file. "
+"e.j ``conanbuildinfo.cmake``"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:110
+msgid "**Example**: Control the build stages"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:112
+msgid "Given a conanfile with this ``build()`` method:"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:114
+msgid ""
+"def build(self):\n"
+"    cmake = CMake(self)\n"
+"    cmake.configure()\n"
+"    cmake.build()\n"
+"    cmake.install()"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:122
+msgid ""
+"If nothing is specified, all three methods will be called. But using command "
+"line arguments, this can be changed:"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:125
+msgid ""
+"$ conan build . -c # only run cmake.configure(). Other methods will do "
+"nothing\n"
+"$ conan build . -b # only run cmake.build(). Other methods will do nothing\n"
+"$ conan build . -i # only run cmake.install(). Other methods will do "
+"nothing\n"
+"# They can be combined\n"
+"$ conan build . -c -b # run cmake.configure() + cmake.build(), but not cmake."
+"install()"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:134
+msgid ""
+"Autotools and Meson helpers already implement the same functionality. For "
+"other build systems, you can use the following variables in the ``build()`` "
+"method:"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:137
+msgid ""
+"def build(self):\n"
+"    if self.should_configure:\n"
+"        # Run my configure stage\n"
+"    if self.should_build:\n"
+"        # Run my build stage\n"
+"    if self.should_install: # If my build has install, otherwise use "
+"package()\n"
+"        # Run my install stage"
+msgstr ""
+
+#: ../../../reference/commands/development/build.rst:148
+msgid ""
+"Note these ``should_configure, should_build, should_install`` variables will "
+"always be ``True`` while building in the local cache. They can only be "
+"modified for the local flow with :command:`conan build`."
+msgstr ""

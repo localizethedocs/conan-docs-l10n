@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 18:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/misc/user.rst:5
+msgid "conan user"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:7
+msgid "$ conan user [-h] [-c] [-p [PASSWORD]] [-r REMOTE] [-j JSON] [name]"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:11
+msgid ""
+"Authenticates against a remote with user/pass, caching the auth token. "
+"Useful to avoid the user and password being requested later. e.g. while "
+"you're uploading a package. You can have one user for each remote. Changing "
+"the user, or introducing the password is only necessary to perform changes "
+"in remote packages."
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:17
+msgid ""
+"positional arguments:\n"
+"  name                  Username you want to use. If no name is provided it\n"
+"                        will show the current user\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  -c, --clean           Remove user and tokens for all remotes\n"
+"  -p [PASSWORD], --password [PASSWORD]\n"
+"                        User password. Use double quotes if password with\n"
+"                        spacing, and escape quotes if existing. If empty, "
+"the\n"
+"                        password is requested interactively (not exposed)\n"
+"  -r REMOTE, --remote REMOTE\n"
+"                        Use the specified remote server\n"
+"  -j JSON, --json JSON  json file path where the user list will be written to"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:35
+msgid "**Examples**:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:37
+msgid "List my user for each remote:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:39
+msgid ""
+"$ conan user\n"
+"Current user of remote 'conan-center' set to: 'danimtb' [Authenticated]\n"
+"Current user of remote 'bincrafters' set to: 'None' (anonymous)\n"
+"Current user of remote 'upload_repo' set to: 'danimtb' [Authenticated]\n"
+"Current user of remote 'conan-community' set to: 'danimtb' [Authenticated]\n"
+"Current user of remote 'the_remote' set to: 'None' (anonymous)"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:48
+msgid "Change **bar** remote user to **foo**:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:50
+msgid ""
+"$ conan user foo -r bar\n"
+"Changed user of remote 'bar' from 'None' (anonymous) to 'foo'"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:55
+msgid ""
+"Change **bar** remote user to **foo**, authenticating against the remote and "
+"storing the user and authentication token locally, so a later upload won't "
+"require entering credentials:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:58
+msgid "$ conan user foo -r bar -p mypassword"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:62
+msgid "Clean all local users and tokens:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:64
+msgid "$ conan user --clean"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:68
+msgid ""
+"Change **bar** remote user to **foo**, **asking user password** to "
+"authenticate against the remote and storing the user and authentication "
+"token locally, so a later upload won't require entering credentials:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:71
+msgid ""
+"$ conan user foo -r bar -p\n"
+"Please enter a password for \"foo\" account:\n"
+"Change 'bar' user from None (anonymous) to foo"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:79
+msgid ""
+"The password is not stored in the client computer at any moment. Conan uses "
+"`JWT <https://en.wikipedia.org/wiki/JSON_Web_Token>`_, so it gets a token "
+"(expirable by the server) checking the password against the remote "
+"credentials. If the password is correct, an authentication token will be "
+"obtained, and that token is the information cached locally. For any "
+"subsequent interaction with the remotes, the Conan client will only use that "
+"JWT token."
+msgstr ""

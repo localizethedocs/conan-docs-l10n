@@ -1,0 +1,582 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.56\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:5
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:16
+msgid "PkgConfigDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:9
+msgid ""
+"These tools are still **experimental** (so subject to breaking changes) but "
+"with very stable syntax. We encourage their usage to be prepared for Conan "
+"2.0."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:18
+msgid ""
+"Available since: `1.38.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.38.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:20
+msgid ""
+"The ``PkgConfigDeps`` is the dependencies generator for pkg-config. "
+"Generates pkg-config files named *<PKG-NAME>.pc* (where ``<PKG-NAME`` is the "
+"name declared by dependencies in ``cpp_info.names[\"pkg_config\"]`` if "
+"specified), containing a valid pkg-config file syntax. Indeed, it can also "
+"be defined using ``set_property`` and the property ``pkg_config_name`` "
+"(available since Conan 1.36), for instance:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:25
+msgid ""
+"self.cpp_info.components[\"mycomponent\"].set_property(\"pkg_config_name\", "
+"\"mypkg-config-name\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:31
+msgid ""
+"In Conan 2.0 that will be the default way of setting those properties and "
+"also passing custom properties to generators. Check the :ref:`cpp_info "
+"attributes reference <cpp_info_attributes_reference>` for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:35
+msgid ""
+"The ``prefix`` variable is automatically adjusted to the ``package_folder``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:38
+msgid "The ``PkgConfigDeps`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:40
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:40
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"PkgConfigDeps\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:46
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:46
+msgid ""
+"[generators]\n"
+"PkgConfigDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:52
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:66
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.gnu import PkgConfigDeps\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"zlib/1.2.11\"\n"
+"\n"
+"    def generate(self):\n"
+"        pc = PkgConfigDeps(self)\n"
+"        pc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:67
+msgid ""
+"The ``PkgConfigDeps`` will generate the ``*.pc`` file after a ``conan "
+"install`` command:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:69
+msgid ""
+"$ conan install .\n"
+"# Check the [PC_FILE_NAME].pc created in your current folder"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:74
+msgid ""
+"Now, running this command using the previous ``conanfile.py``, you can check "
+"the ``zlib.pc`` file created into your current folder:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:76
+msgid ""
+"prefix=/Users/YOUR_USER/.conan/data/zlib/1.2.11/_/_/"
+"package/647afeb69d3b0a2d3d316e80b24d38c714cc6900\n"
+"libdir=${prefix}/lib\n"
+"includedir=${prefix}/include\n"
+"\n"
+"Name: zlib\n"
+"Description: Conan package: zlib\n"
+"Version: 1.2.11\n"
+"Libs: -L\"${libdir}\" -lz -F Frameworks\n"
+"Cflags: -I\"${includedir}\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:90
+msgid "build_context_activated"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:92
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:117
+msgid ""
+"Available since: `1.52.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.52.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:95
+msgid ""
+"When you have a **build-require**, by default, the ``*.pc`` files are not "
+"generated. But you can activate it using the **build_context_activated** "
+"attribute:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:98
+msgid ""
+"tool_requires = [\"my_tool/0.0.1\"]\n"
+"\n"
+"def generate(self):\n"
+"    pc = PkgConfigDeps(self)\n"
+"    # generate the *.pc file for the tool require\n"
+"    pc.build_context_activated = [\"my_tool\"]\n"
+"    pc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:110
+msgid ""
+"The ``build_context_activated`` feature will fail if no \"build\" profile is "
+"used. This feature only work when using the two host and build profiles."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:115
+msgid "build_context_suffix"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:119
+msgid ""
+"When you have the same package as a **build-require** and as a **regular "
+"require** it will cause a conflict in the generator because the file names "
+"of the ``*.pc`` files will collide as well as the names, requires names, etc."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:122
+msgid ""
+"For example, this is a typical situation with some requirements (capnproto, "
+"protobuf...) that contain a tool used to generate source code at build time "
+"(so it is a **build_require**), but also providing a library to link to the "
+"final application, so you also have a **regular require**. Solving this "
+"conflict is specially important when we are cross-building because the tool "
+"(that will run in the building machine) belongs to a different binary "
+"package than the library, that will \"run\" in the host machine."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:129
+msgid ""
+"You can use the **build_context_suffix** attribute to specify a suffix for a "
+"requirement, so the files/requires/names of the requirement in the build "
+"context (tool require) will be renamed:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:132
+msgid ""
+"tool_requires = [\"my_tool/0.0.1\"]\n"
+"requires = [\"my_tool/0.0.1\"]\n"
+"\n"
+"def generate(self):\n"
+"    pc = PkgConfigDeps(self)\n"
+"    # generate the *.pc file for the tool require\n"
+"    pc.build_context_activated = [\"my_tool\"]\n"
+"    # disambiguate the files, requires, names, etc\n"
+"    pc.build_context_suffix = {\"my_tool\": \"_BUILD\"}\n"
+"    pc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:148
+msgid ""
+"The ``build_context_suffix`` feature will fail if no \"build\" profile is "
+"used. This feature only work when using the two host and build profiles."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:153
+msgid "Components"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:155
+msgid ""
+"If a recipe uses :ref:`components<package_information_components>`, the "
+"files generated will be *<[PKG-NAME]-[COMP-NAME]>.pc* with their "
+"corresponding flags and require relations."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:158
+msgid ""
+"Additionally, a *<PKG-NAME>.pc* is generated to maintain compatibility for "
+"consumers with recipes that start supporting components. This *<PKG-NAME>."
+"pc* file will declare all the components of the package as requires while "
+"the rest of the fields will be empty, relying on the propagation of flags "
+"coming from the components *<[PKG-NAME]-[COMP-NAME]>.pc* files."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:166
+msgid "Properties"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:168
+msgid "The following properties affect the ``PkgConfigDeps`` generator:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:170
+msgid ""
+"**pkg_config_name** property will define the name of the generated ``*.pc`` "
+"file (``xxxxx.pc``)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:171
+msgid ""
+"**pkg_config_aliases** property sets some aliases of any package/component "
+"name for *pkg_config* generator. This property only accepts list-like Python "
+"objects."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:172
+msgid ""
+"**pkg_config_custom_content** property will add user defined content to the "
+"*.pc* files created by this generator."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:173
+msgid ""
+"**component_version** property sets a custom version to be used in the "
+"``Version`` field belonging to the created ``*.pc`` file for that component."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:175
+msgid ""
+"These properties can be defined at global ``cpp_info`` level or at component "
+"level."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:177
+msgid "Example:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:179
+msgid ""
+"def package_info(self):\n"
+"    custom_content = \"datadir=${prefix}/share\"\n"
+"    self.cpp_info.set_property(\"pkg_config_custom_content\", "
+"custom_content)\n"
+"    self.cpp_info.set_property(\"pkg_config_name\", \"myname\")\n"
+"    self.cpp_info.components[\"mycomponent\"]."
+"set_property(\"pkg_config_name\", \"componentname\")\n"
+"    self.cpp_info.components[\"mycomponent\"]."
+"set_property(\"pkg_config_aliases\", [\"alias1\", \"alias2\"])\n"
+"    self.cpp_info.components[\"mycomponent\"]."
+"set_property(\"component_version\", \"1.14.12\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:191
+msgid "Names and aliases"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:193
+msgid ""
+"Aliases are available since: `1.43.0 <https://github.com/conan-io/conan/"
+"releases/tag/1.43.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:195
+msgid "By default, the ``*.pc`` files will be named following these rules:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:197
+msgid ""
+"For packages, it uses the package name, e.g., package ``zlib/1.2.11`` -> "
+"``zlib.pc``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:198
+msgid ""
+"For components, the package name + hyphen + component name, e.g., "
+"``openssl/3.0.0`` with ``self.cpp_info.components[\"crypto\"]``  -> "
+"``openssl-crypto.pc``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:200
+msgid ""
+"You can change that default behavior with the ``pkg_config_name`` and "
+"``pkg_config_aliases`` properties. For instance, ``openssl/3.0.0``` recipe "
+"has these ``pkg_config_name`` properties already declared:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:215
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class OpenSSLConan(ConanFile):\n"
+"    name = \"openssl\"\n"
+"\n"
+"    # any code here\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.set_property(\"pkg_config_name\", \"openssl\")\n"
+"        self.cpp_info.components[\"crypto\"]."
+"set_property(\"pkg_config_name\", \"libcrypto\")\n"
+"        self.cpp_info.components[\"ssl\"].set_property(\"pkg_config_name\", "
+"\"libssl\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:216
+msgid ""
+"Run :command:`conan install openssl/3.0.0@ -g PkgConfigDeps` and check the "
+"``*.pc`` files created:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:218
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:234
+msgid "libcrypto.pc"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:219
+msgid "libssl.pc"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:220
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:225
+msgid "openssl.pc"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:221
+msgid "zlib.pc *(openssl requires zlib)*"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:223
+msgid ""
+"Their ``pkg_config_name`` properties are used as the final ``*.pc`` file "
+"names:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:225
+msgid ""
+"Name: openssl\n"
+"Description: Conan package: openssl\n"
+"Version: 3.0.0\n"
+"Requires: libcrypto libssl"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:234
+msgid ""
+"prefix=/Users/conan_user/.conan/data/openssl/3.0.0/_/_/"
+"package/88955cec2844f731470e07bd44ce5a3a24ec88b7\n"
+"libdir1=${prefix}/lib\n"
+"includedir1=${prefix}/include\n"
+"\n"
+"Name: libcrypto\n"
+"Description: Conan component: libcrypto\n"
+"Version: 3.0.0\n"
+"Libs: -L\"${libdir1}\" -lcrypto -F Frameworks\n"
+"Cflags: -I\"${includedir1}\"\n"
+"Requires: zlib"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:249
+msgid ""
+"A special mention when a component shares the same ``*.pc`` file name as the "
+"root package one:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:262
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class OpenCLConan(ConanFile):\n"
+"\n"
+"    # ...\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.set_property(\"pkg_config_name\", \"OpenCL\")  # -> "
+"OpenCL.pc\n"
+"        self.cpp_info.components[\"_opencl-headers\"]."
+"set_property(\"pkg_config_name\", \"OpenCL\")  # -> OpenCL.pc"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:263
+msgid ""
+"The only ``*.pc`` file created will be the one belonging to the component:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:265
+msgid "OpenCL.pc (from component)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:268
+msgid "Now, let's see how ``pkg_config_aliases`` property works step by step."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:270
+msgid ""
+"Let's create our own ``myopenssl/1.0.0`` recipe and define several aliases "
+"like the following:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:285
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class MyOpenSSLConan(ConanFile):\n"
+"    name = \"myopenssl\"\n"
+"    version = \"1.0.0\"\n"
+"\n"
+"    def package_info(self):\n"
+"        # Aliases\n"
+"        self.cpp_info.set_property(\"pkg_config_aliases\", "
+"[\"myopenssl_alias\"])\n"
+"        self.cpp_info.components[\"mycrypto\"]."
+"set_property(\"pkg_config_aliases\", [\"mycrypto\", \"crp\"])\n"
+"        self.cpp_info.components[\"myssl\"]."
+"set_property(\"pkg_config_aliases\", [\"myssl\"])"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:286
+msgid ""
+"Then, after creating the package locally with :command:`conan create .` and "
+"consuming it :command:`conan install myopenssl/1.0.0@ -g PkgConfigDeps`, the "
+"files created will be:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:288
+msgid "myopenssl-mycrypto.pc"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:289
+msgid "myopenssl-myssl.pc"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:290
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:331
+msgid "myopenssl.pc"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:291
+msgid "crp.pc *(alias of myopenssl-mycrypto)*"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:292
+msgid "mycrypto.pc *(alias of myopenssl-mycrypto)*"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:293
+msgid "myssl.pc *(alias of myopenssl-myssl)*"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:294
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:335
+msgid "myopenssl_alias.pc *(alias of myopenssl)*"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:296
+msgid "Where any of those aliases files contains something like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:298
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:339
+msgid "mycrypto.pc"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:298
+msgid ""
+"Name: mycrypto\n"
+"Description: Alias mycrypto for myopenssl-mycrypto\n"
+"Version: 1.0.0\n"
+"Requires: myopenssl-mycrypto"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:306
+msgid "It's also possible to use both properties together:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:326
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class MyOpenSSLConan(ConanFile):\n"
+"    name = \"myopenssl\"\n"
+"    version = \"1.0.0\"\n"
+"\n"
+"    # any code here\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.set_property(\"pkg_config_name\", \"myopenssl\")\n"
+"        self.cpp_info.components[\"mycrypto\"]."
+"set_property(\"pkg_config_name\", \"libmycrypto\")\n"
+"        self.cpp_info.components[\"myssl\"]."
+"set_property(\"pkg_config_name\", \"libmyssl\")\n"
+"        # Aliases\n"
+"        self.cpp_info.set_property(\"pkg_config_aliases\", "
+"[\"myopenssl_alias\"])\n"
+"        self.cpp_info.components[\"mycrypto\"]."
+"set_property(\"pkg_config_aliases\", [\"mycrypto\", \"crp\"])\n"
+"        self.cpp_info.components[\"myssl\"]."
+"set_property(\"pkg_config_aliases\", [\"myssl\"])"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:327
+msgid "After executing the commands mentioned above, the files are:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:329
+msgid "libmycrypto.pc"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:330
+msgid "libmyssl.pc"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:332
+msgid "crp.pc *(alias of libmycrypto)*"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:333
+msgid "mycrypto.pc *(alias of libmycrypto)*"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:334
+msgid "myssl.pc *(alias of libmyssl)*"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:337
+msgid "The only change is which name the alias is pointing to:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:339
+msgid ""
+"Name: mycrypto\n"
+"Description: Alias mycrypto for libmycrypto\n"
+"Version: 1.0.0\n"
+"Requires: libmycrypto"
+msgstr ""

@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.56\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/manage_gcc_abi.rst:4
+msgid "How to manage the GCC >= 5 ABI"
+msgstr ""
+
+#: ../../../howtos/manage_gcc_abi.rst:6
+msgid ""
+"In version 5.1, GCC released libstdc++, which introduced a `new library ABI "
+"<https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dual_abi.html>`_ that "
+"includes new implementations of ``std::string`` and ``std::list``. These "
+"changes were necessary to conform to the 2011 C++ standard which forbids "
+"Copy-On-Write strings and requires lists to keep track of their size."
+msgstr ""
+
+#: ../../../howtos/manage_gcc_abi.rst:11
+msgid ""
+"You can choose which ABI to use in your Conan packages by adjusting the "
+"``compiler.libcxx``:"
+msgstr ""
+
+#: ../../../howtos/manage_gcc_abi.rst:13
+msgid "**libstdc++**: Old ABI."
+msgstr ""
+
+#: ../../../howtos/manage_gcc_abi.rst:14
+msgid "**libstdc++11**: New ABI."
+msgstr ""
+
+#: ../../../howtos/manage_gcc_abi.rst:16
+msgid ""
+"When Conan creates the default profile the first time it runs, it adjusts "
+"the ``compiler.libcxx`` setting to ``libstdc++`` for backwards "
+"compatibility. However, if you are using GCC >= 5 your compiler is likely to "
+"be using the new CXX11 ABI by default (libstdc++11). This can be checked "
+"with the following command:"
+msgstr ""
+
+#: ../../../howtos/manage_gcc_abi.rst:20
+msgid ""
+"$ gcc -v 2>&1 | sed -n 's/.*\\(--with-default-libstdcxx-abi=new\\).*/\\1/p'\n"
+"--with-default-libstdcxx-abi=new"
+msgstr ""
+
+#: ../../../howtos/manage_gcc_abi.rst:26
+msgid ""
+"If you want Conan to use the new ABI, edit the default profile at ``~/.conan/"
+"profiles/default`` adjusting ``compiler.libcxx=libstdc++11`` or override "
+"this setting in the profile you are using."
+msgstr ""
+
+#: ../../../howtos/manage_gcc_abi.rst:29
+msgid ""
+"If you are using the :ref:`CMake build helper <cmake_reference>` or the :ref:"
+"`AutotoolsBuildEnvironment build helper <autotools_reference>` Conan will "
+"automatically adjust the ``_GLIBCXX_USE_CXX11_ABI`` flag to manage the ABI."
+msgstr ""

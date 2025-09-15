@@ -1,0 +1,383 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.57\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/dependencies.rst:4
+msgid "Dependencies"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:8
+msgid "These tools are **experimental** and subject to breaking changes."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:10
+msgid ""
+"Available since: `1.38.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.38.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:14
+msgid ""
+"This is an advanced feature. Most users will not need to use it, it is "
+"intended for developing new build system integrations and similar purposes. "
+"For defining dependencies between packages, check the ``requires``, "
+"``tool_requires`` and other attributes"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:20
+msgid ""
+"Conan recipes provide access to their dependencies via the ``self."
+"dependencies`` attribute. This attribute is extensively used by generators "
+"like ``CMakeDeps`` or ``MSBuildDeps`` to generate the necessary files for "
+"the build."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:24
+msgid ""
+"This section documents the ``self.dependencies`` attribute, as it might be "
+"used by users both directly in recipe or indirectly to create custom build "
+"integrations and generators."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:28
+msgid "Dependencies interface"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:30
+msgid ""
+"It is possible to access each one of the individual dependencies of the "
+"current recipe, with the following syntax:"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:33
+msgid ""
+"class Pkg(ConanFile):\n"
+"    requires = \"openssl/0.1\"\n"
+"\n"
+"    def generate(self):\n"
+"        openssl = self.dependencies[\"openssl\"]\n"
+"        # access to members\n"
+"        openssl.ref.version\n"
+"        openssl.ref.revision # recipe revision\n"
+"        openssl.options\n"
+"        openssl.settings"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:47
+msgid "Some **important** points:"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:49
+msgid ""
+"All the information is **read only**. Any attempt to modify dependencies "
+"information is an error and can raise at any time, even if it doesn't raise "
+"yet."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:51
+msgid ""
+"It is not possible either to call any methods or any attempt to reuse code "
+"from the dependencies via this mechanism."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:53
+msgid ""
+"This information does not exist in some recipe methods, only in those "
+"methods that evaluate after the full dependency graph has been computed. It "
+"will not exist in ``configure()``, ``config_options``, ``export()``, "
+"``export_source()``, ``set_name()``, ``set_version()``, ``requirements()``, "
+"``build_requirements()``, ``system_requirements()``, ``source()``, "
+"``init()``, ``layout()``. Any attempt to use it in these methods can raise "
+"an error at any time."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:58
+msgid ""
+"At the moment, this information should only be used in ``generate()`` and "
+"``validate()`` methods. Any other use, please submit a Github issue."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:61
+msgid "The exposed fields of the dependency conanfile are:"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:63
+msgid "package_folder: The folder location of the dependency package binary"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:64
+msgid ""
+"recipe_folder: The folder containing the ``conanfile.py`` (and other "
+"exported files) of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:65
+msgid ""
+"ref: an object that contains ``name``, ``version``, ``user``, ``channel`` "
+"and ``revision`` (recipe revision)"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:66
+msgid ""
+"pref: an object that contains ``ref``, ``package_id`` and ``revision`` "
+"(package revision)"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:67
+msgid ""
+"buildenv_info: ``Environment`` object with the information of the "
+"environment necessary to build"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:68
+msgid ""
+"runenv_info: ``Environment`` object with the information of the environment "
+"necessary to run the app"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:69
+msgid "cpp_info: includedirs, libdirs, etc for the dependency."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:70
+msgid "settings: The actual settings values of this dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:71
+msgid "settings_build: The actual build settings values of this dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:72
+msgid "options: The actual options values of this dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:73
+msgid "context: The context (build, host) of this dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:74
+msgid ""
+"conf_info: Configuration information of this dependency, intended to be "
+"applied to consumers."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:75
+msgid "dependencies: The transitive dependencies of this dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:76
+msgid "is_build_context: Return ``True`` if ``context == \"build\"``."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:77
+msgid ""
+"conan_data: The ``conan_data`` attribute of the dependency that comes from "
+"its ``conandata.yml`` file"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:78
+msgid "license: The ``license`` attribute of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:79
+msgid "description: The ``description`` attribute of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:80
+msgid "homepage: The ``homepage`` attribute of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:81
+msgid "url: The ``url`` attribute of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:86
+msgid "Iterating dependencies"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:88
+msgid ""
+"It is possible to iterate in a dict-like fashion all dependencies of a "
+"recipe. Take into account that ``self.dependencies`` contains all the "
+"current dependencies, both direct and transitive. Every upstream dependency "
+"of the current one that has some effect on it, will have an entry in this "
+"``self.dependencies``."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:93
+msgid "Iterating the dependencies can be done as:"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:95
+msgid ""
+"requires = \"zlib/1.2.11\", \"poco/1.9.4\"\n"
+"\n"
+"def generate(self):\n"
+"    for require, dependency in self.dependencies.items():\n"
+"        self.output.info(\"Dependency is direct={}: {}\".format(require."
+"direct, dependency.ref))"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:103
+msgid "will output:"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:105
+msgid ""
+"conanfile.py (hello/0.1): Dependency is direct=True: zlib/1.2.11\n"
+"conanfile.py (hello/0.1): Dependency is direct=True: poco/1.9.4\n"
+"conanfile.py (hello/0.1): Dependency is direct=False: pcre/8.44\n"
+"conanfile.py (hello/0.1): Dependency is direct=False: expat/2.4.1\n"
+"conanfile.py (hello/0.1): Dependency is direct=False: sqlite3/3.35.5\n"
+"conanfile.py (hello/0.1): Dependency is direct=False: openssl/1.1.1k\n"
+"conanfile.py (hello/0.1): Dependency is direct=False: bzip2/1.0.8"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:116
+msgid ""
+"Where the ``require`` dictionary key is a \"requirement\", and can contain "
+"specifiers of the relation between the current recipe and the dependency. At "
+"the moment they can be:"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:119
+msgid ""
+"``require.direct``: boolean, ``True`` if it is direct dependency or "
+"``False`` if it is a transitive one."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:120
+msgid ""
+"``require.build``: boolean, ``True`` if it is a ``build_require`` in the "
+"build context, as ``cmake``."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:121
+msgid ""
+"``require.test``: boolean, ``True`` if its a ``build_require`` in the host "
+"context (defined with ``self.test_requires()``), as ``gtest``."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:123
+msgid ""
+"The ``dependency`` dictionary value is the read-only object described above "
+"that access the dependency attributes."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:125
+msgid ""
+"The ``self.dependencies`` contains some helpers to filter based on some "
+"criteria:"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:127
+msgid ""
+"``self.dependencies.host``: Will filter out requires with ``build=True``, "
+"leaving regular dependencies like ``zlib`` or ``poco``."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:128
+msgid ""
+"``self.dependencies.direct_host``: Will filter out requires with "
+"``build=True`` or ``direct=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:129
+msgid ""
+"``self.dependencies.build``: Will filter out requires with ``build=False``, "
+"leaving only ``tool_requires`` in the build context, as ``cmake``."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:130
+msgid ""
+"``self.dependencies.direct_build``: Will filter out requires with "
+"``build=False`` or ``direct=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:131
+msgid ""
+"``self.dependencies.test``: Will filter out requires with ``build=True`` or "
+"with ``test=False``, leaving only test requirements as ``gtest`` in the host "
+"context."
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:134
+msgid "They can be used in the same way:"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:136
+msgid ""
+"requires = \"zlib/1.2.11\", \"poco/1.9.4\"\n"
+"\n"
+"def generate(self):\n"
+"    cmake = self.dependencies.direct_build[\"cmake\"]\n"
+"    for require, dependency in self.dependencies.build.items():\n"
+"        # do something, only build deps here"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:147
+msgid "Dependencies ``cpp_info`` interface"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:149
+msgid ""
+"The ``cpp_info`` interface is heavily used by build systems to access the "
+"data. This object defines global and per-component attributes to access "
+"information like the include folders:"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:153
+msgid ""
+"def generate(self):\n"
+"    cpp_info = self.dependencies[\"mydep\"].cpp_info\n"
+"    cpp_info.includedirs\n"
+"    cpp_info.libdirs\n"
+"\n"
+"    cpp_info.components[\"mycomp\"].includedirs\n"
+"    cpp_info.components[\"mycomp\"].libdirs"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:163
+msgid ""
+"These are the defined attributes in ``cpp_info``. All the paths are "
+"typically relative paths to the root of the package folder that contains the "
+"dependency artifacts:"
+msgstr ""
+
+#: ../../../reference/conanfile/dependencies.rst:166
+msgid ""
+"# ###### DIRECTORIES\n"
+"self.includedirs = None  # Ordered list of include paths\n"
+"self.srcdirs = None  # Ordered list of source paths\n"
+"self.libdirs = None  # Directories to find libraries\n"
+"self.resdirs = None  # Directories to find resources, data, etc\n"
+"self.bindirs = None  # Directories to find executables and shared libs\n"
+"self.builddirs = None\n"
+"self.frameworkdirs = None\n"
+"\n"
+"# ##### FIELDS\n"
+"self.system_libs = None  # Ordered list of system libraries\n"
+"self.frameworks = None  # Macos .framework\n"
+"self.libs = None  # The libs to link against\n"
+"self.defines = None  # preprocessor definitions\n"
+"self.cflags = None  # pure C flags\n"
+"self.cxxflags = None  # C++ compilation flags\n"
+"self.sharedlinkflags = None  # linker flags\n"
+"self.exelinkflags = None  # linker flags\n"
+"self.objects = None  # objects to link"
+msgstr ""

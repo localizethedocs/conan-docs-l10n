@@ -1,0 +1,95 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../mastering/policies.rst:2
+msgid "Build policies"
+msgstr ""
+
+#: ../../../mastering/policies.rst:4
+msgid ""
+"By default, :command:`conan install` command will search for a binary "
+"package (corresponding to our settings and defined options) in a remote, if "
+"it's not present the install command will fail."
+msgstr ""
+
+#: ../../../mastering/policies.rst:7
+msgid ""
+"As previously demonstrated, we can use the **--build** option to change the "
+"default :command:`conan install` behaviour:"
+msgstr ""
+
+#: ../../../mastering/policies.rst:9
+msgid ":command:`--build some_package` will build only \"some_package\"."
+msgstr ""
+
+#: ../../../mastering/policies.rst:10
+msgid ":command:`--build missing` will build only the missing requires."
+msgstr ""
+
+#: ../../../mastering/policies.rst:11
+msgid ":command:`--build` will build all requirements from sources."
+msgstr ""
+
+#: ../../../mastering/policies.rst:12
+msgid ""
+":command:`--build outdated` will try to build from code if the binary is not "
+"built with the current recipe or when missing binary package."
+msgstr ""
+
+#: ../../../mastering/policies.rst:14
+msgid ""
+"With the ``build_policy`` attribute the package creator can change the "
+"default conan's build behavior. The allowed build_policy values are:"
+msgstr ""
+
+#: ../../../mastering/policies.rst:16
+msgid ""
+"``missing``: If no binary package is found, conan will build it without the "
+"need of invoke conan install with :command:`--build missing` option."
+msgstr ""
+
+#: ../../../mastering/policies.rst:18
+msgid ""
+"``always``: The package will be built always, **retrieving each time the "
+"source code** executing the \"source\" method."
+msgstr ""
+
+#: ../../../mastering/policies.rst:20
+msgid ""
+" class PocoTimerConan(ConanFile):\n"
+"     settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"     requires = \"Poco/1.7.8p3@pocoproject/stable\" # comma-separated list "
+"of requirements\n"
+"     generators = \"cmake\", \"gcc\", \"txt\"\n"
+"     default_options = \"Poco:shared=True\", \"OpenSSL:shared=True\"\n"
+"     build_policy = \"always\" # \"missing\""
+msgstr ""
+
+#: ../../../mastering/policies.rst:30
+msgid ""
+"These build policies are especially useful if the package creator doesn't "
+"want to provide binary package, for example, with header only libraries."
+msgstr ""
+
+#: ../../../mastering/policies.rst:33
+msgid ""
+"The ``always`` policy, will retrieve the sources each time the package is "
+"installed so it can be useful for providing a \"latest\" mechanism or "
+"ignoring the uploaded binary packages."
+msgstr ""

@@ -1,0 +1,214 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.55\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../mastering/conditional.rst:4
+msgid "Conditional settings, options and requirements"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:6
+msgid ""
+"Remember, in your ``conanfile.py`` you can use the value of your options to:"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:8
+msgid "Add requirements dynamically"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:9
+msgid "Change values of other options"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:10
+msgid "Assign values to options of your requirements"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:12
+msgid ""
+"The ``configure()`` method might be used to hardcoded values for options of "
+"the requirements. It is strongly discouraged to use it to change the "
+"settings values. Please remember that ``settings`` are a configuration "
+"*input*, so it doesn't make sense to modify it in the recipes."
+msgstr ""
+
+#: ../../../mastering/conditional.rst:16
+msgid ""
+"Also, for options, a more flexible solution is to define dependencies "
+"options values in the ``default_options``, not in the ``configure()`` "
+"method. Setting the values in ``configure()`` won't allow to override them "
+"and it will make really hard (even impossible) to resolve some conflicts. "
+"Use it only when it is absolutely necessary that the package dependencies "
+"use those options."
+msgstr ""
+
+#: ../../../mastering/conditional.rst:21
+msgid "Here is an example of what we could do in our **configure method**:"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:23
+msgid ""
+"class Recipe(ConanFile):\n"
+"  ...\n"
+"  requires = \"poco/1.9.4\" # We will add OpenSSL dynamically "
+"\"openssl/1.0.2t\"\n"
+"  ...\n"
+"\n"
+"  def configure(self):\n"
+"      # We can control the options of our dependencies based on current "
+"options\n"
+"      self.options[\"openssl\"].shared = self.options.shared\n"
+"\n"
+"      # Maybe in windows we know that OpenSSL works better as shared "
+"(false)\n"
+"      if self.settings.os == \"Windows\":\n"
+"         self.options[\"openssl\"].shared = True\n"
+"\n"
+"         # Or adjust any other available option\n"
+"         self.options[\"poco\"].other_option = \"foo\"\n"
+"\n"
+"      # We could check the presence of an option\n"
+"      if \"shared\" in self.options:\n"
+"          pass\n"
+"\n"
+"  def requirements(self):\n"
+"      # Or add a new requirement!\n"
+"      if self.options.testing:\n"
+"         self.requires(\"OpenSSL/2.1@memsharded/testing\")\n"
+"      else:\n"
+"         self.requires(\"openssl/1.0.2u\")\n"
+"\n"
+"  def build(self):\n"
+"      # We can check the final values of options of our requirements\n"
+"      if self.options['poco'].that_option != \"bar\":\n"
+"          raise ConanInvalidConfiguration(\"Who modified this option?!\")"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:59
+msgid "Constrain settings and options"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:61
+msgid ""
+"Sometimes there are libraries that are not compatible with specific settings "
+"like libraries that are not compatible with an architecture, or options that "
+"only make sense for an operating system. It can also be useful when there "
+"are settings under development."
+msgstr ""
+
+#: ../../../mastering/conditional.rst:65
+msgid "There are two approaches for this situation:"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:67
+msgid ""
+"**Use** ``validate()`` **to raise an error for non-supported "
+"configurations**:"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:69
+msgid ""
+"This approach is the first one evaluated when Conan loads the recipe so it "
+"is quite handy to perform checks of the input settings. It relies on the set "
+"of possible settings inside your *settings.yml* file, so it can be used to "
+"constrain any recipe."
+msgstr ""
+
+#: ../../../mastering/conditional.rst:72
+msgid ""
+"from conans.errors import ConanInvalidConfiguration\n"
+"...\n"
+"def validate(self):\n"
+"    if self.settings.os == \"Windows\":\n"
+"      raise ConanInvalidConfiguration(\"This library is not compatible with "
+"Windows\")"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:82
+msgid ""
+"Use the :ref:`invalid_configuration` exception to make Conan return with a "
+"special error code. This will indicate that the configuration used for "
+"settings or options is not supported."
+msgstr ""
+
+#: ../../../mastering/conditional.rst:85
+msgid ""
+"This same method is also valid for ``options`` and ``config_options()`` "
+"method and it is commonly used to remove options for one setting:"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:87
+msgid ""
+"def config_options(self):\n"
+"    if self.settings.os == \"Windows\":\n"
+"        del self.options.fPIC"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:95
+msgid ""
+"For managing invalid configurations, please check the new experimental "
+"``validate()`` method (:ref:`method_validate`)."
+msgstr ""
+
+#: ../../../mastering/conditional.rst:98
+msgid "**Constrain settings inside a recipe**:"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:100
+msgid ""
+"This approach constrains the settings inside a recipe to a subset of them, "
+"and it is normally used in recipes that are never supposed to work out of "
+"the restricted settings."
+msgstr ""
+
+#: ../../../mastering/conditional.rst:103
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class MyConan(ConanFile):\n"
+"    name = \"myconanlibrary\"\n"
+"    version = \"1.0.0\"\n"
+"    settings = {\"os\": None, \"build_type\": None, \"compiler\": None, "
+"\"arch\": [\"x86_64\"]}"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:112
+msgid ""
+"The disadvantage of this is that possible settings are hardcoded in the "
+"recipe, and in case new values are used in the future, it will require the "
+"recipe to be modified explicitly."
+msgstr ""
+
+#: ../../../mastering/conditional.rst:117
+msgid ""
+"Note: the use of the ``None`` value in the ``os``, ``compiler`` and "
+"``build_type`` settings described above will allow them to take the values "
+"from *settings.yml* file"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:120
+msgid ""
+"We strongly recommend the use of the first approach whenever it is possible, "
+"and use the second one only for those cases where a stronger constrain is "
+"needed for a particular recipe."
+msgstr ""
+
+#: ../../../mastering/conditional.rst:125
+msgid ""
+"Check the reference section :ref:`configure(), config_options() "
+"<method_configure_config_options>` to find out more."
+msgstr ""

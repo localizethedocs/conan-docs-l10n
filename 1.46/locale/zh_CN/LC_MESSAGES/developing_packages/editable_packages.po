@@ -1,0 +1,283 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.46\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:17+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../developing_packages/editable_packages.rst:4
+msgid "Packages in editable mode"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:8
+msgid ""
+"This is a **tutorial** section. You are encouraged to execute these "
+"commands. Some of the features used in this section are **experimental**, "
+"like ``layout()`` or ``CMakeToolchain``, and they might change in future "
+"releases. Check the :ref:`reference section<references>` for more "
+"information."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:12
+msgid ""
+"When working in big projects with several functionalities interconnected it "
+"is recommended to avoid the one-and-only huge project approach in favor of "
+"several libraries, each one specialized in a set of common tasks, even "
+"maintained by dedicated teams. This approach helps to isolate and reusing "
+"code helps with compiling times and reduces the likelihood of including "
+"files that not correspond to the API of the required library."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:18
+msgid ""
+"Nevertheless, in some case, it is useful to work in several libraries at the "
+"same time and see how the changes in one of them are propagated to the "
+"others. With the normal flow, for every source change, it is necessary to do "
+"``conan create`` or ``conan export-pkg`` to put the package in the cache and "
+"make it available to consumers."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:23
+msgid ""
+"With the editable packages, you can tell Conan where to find the headers and "
+"the artifacts ready for consumption in your local working directory. There "
+"is no need to package."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:26
+msgid ""
+"Let's see this feature over a practical example, the code can be found in "
+"the examples repository:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:28
+msgid ""
+"$ git clone https://github.com/conan-io/examples.git\n"
+"$ cd examples/features/editable/cmake"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:33
+msgid "There are 2 folders inside this project:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:35
+msgid ""
+"A \"say\" folder containing a fully fledge package, with its ``conanfile."
+"py``, its source code."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:36
+msgid ""
+"A \"hello\" folder containing a simple consumer project with a ``conanfile."
+"txt`` and its source code, which depends on the ``say/0.1@user/testing`` "
+"requirement."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:39
+msgid ""
+"The goal is to be able to build the \"hello\" project, without actually "
+"having the ``say/0.1@user/testing`` package in the cache, but directly in "
+"this project folder."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:43
+msgid "Put a package in editable mode"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:45
+msgid ""
+"To avoid creating the package ``say/0.1@user/channel`` in the cache for "
+"every change, we are going to put that package in editable mode, creating "
+"**a link from the reference in the cache to the local working directory**:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:49
+msgid ""
+"$ conan editable add say say/0.1@user/channel\n"
+"$ conan editable list\n"
+"say/0.1@user/channel\n"
+"    Path: ..."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:57
+msgid ""
+"That is it. Now, every usage of ``say/0.1@user/channel``, by any other Conan "
+"package or project, will be redirected to the ``examples/features/editable/"
+"cmake/say`` user folder instead of using the package from the conan cache."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:61
+msgid ""
+"Note that the key of editable packages is a correct definition of the "
+"``layout()`` of the package. In this example, the ``say`` ``conanfile.py`` "
+"recipe is using the predefined ``cmake_layout()`` which defines the typical "
+"CMake project layout, which can be different in the different platforms. "
+"Take also into account that only using the new build system integrations "
+"like ``CMakeDeps`` and ``CMakeToolchain`` will correctly follow the layout "
+"definition."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:67
+msgid ""
+"Now the ``say/0.1@user/channel`` package is in editable mode, lets build it "
+"locally:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:69
+msgid ""
+"$ cd say\n"
+"\n"
+"# windows, we will build 2 configurations to show multi-config\n"
+"$ conan install . -s build_type=Release\n"
+"$ conan install . -s build_type=Debug\n"
+"$ mkdir build && cd build\n"
+"$ cmake .. -DCMAKE_TOOLCHAIN_FILE=conan/conan_toolchain.cmake\n"
+"$ cmake --build . --config Release\n"
+"$ cmake --build . --config Debug\n"
+"\n"
+"# Linux, we will only build 1 configuration\n"
+"$ conan install .\n"
+"$ mkdir cmake-build-release && cd cmake-build-release\n"
+"$ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=conan/"
+"conan_toolchain.cmake\n"
+"$ cmake --build ."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:89
+msgid "Using a package in editable mode"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:91
+msgid ""
+"Consuming a package in editable mode is transparent from the consumer "
+"perspective. In this case we can build the ``hello`` application as usual:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:94
+msgid ""
+"$ cd ../../hello\n"
+"\n"
+"# windows, we will build 2 configurations to show multi-config\n"
+"$ conan install . -s build_type=Release\n"
+"$ conan install . -s build_type=Debug\n"
+"$ mkdir build && cd build\n"
+"$ cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake\n"
+"$ cmake --build . --config Release\n"
+"$ cmake --build . --config Debug\n"
+"$ Release\\hello.exe\n"
+"say/0.1: Hello World Release!\n"
+"$ Debug\\hello.exe\n"
+"say/0.1: Hello World Debug!\n"
+"\n"
+"# Linux, we will only build 1 configuration\n"
+"$ conan install .\n"
+"$ mkdir cmake-build-release && cd cmake-build-release\n"
+"$ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=conan_toolchain."
+"cmake\n"
+"$ cmake --build .\n"
+"$ ./hello\n"
+"say/0.1: Hello World Release!"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:120
+msgid "Working with editable packages"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:122
+msgid ""
+"Once the above steps have been done, we can basically work with our build "
+"system or IDE, no Conan involved, and do changes in the editable packages "
+"and have those changes used by the consumers directly. Lets see it, lets "
+"start by doing a change in the ``say`` source code:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:126
+msgid ""
+"$ cd ../../say\n"
+"# Edit src/say.cpp and change the error message from \"Hello\" to \"Bye\"\n"
+"\n"
+"# windows, we will build 2 configurations to show multi-config\n"
+"$ cd build\n"
+"$ cmake --build . --config Release\n"
+"$ cmake --build . --config Debug\n"
+"\n"
+"# Linux, we will only build 1 configuration\n"
+"$ cd cmake-build-release\n"
+"$ cmake --build ."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:141
+msgid "And build and run the \"hello\" project:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:143
+msgid ""
+"$ cd ../../hello\n"
+"\n"
+"# windows,\n"
+"$ cd build\n"
+"$ cmake --build . --config Release\n"
+"$ cmake --build . --config Debug\n"
+"$ Release\\hello.exe\n"
+"say/0.1: Bye World Release!\n"
+"$ Debug\\hello.exe\n"
+"say/0.1: Bye World Debug!\n"
+"\n"
+"# Linux\n"
+"$ cd cmake-build-release\n"
+"$ cmake --build .\n"
+"$ ./hello\n"
+"say/0.1: Bye World Release!"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:163
+msgid ""
+"In that way, it is possible to be developing both the ``say`` library and "
+"the ``hello`` application, at the same time, without any Conan command. If "
+"you had both open in the IDE, it would be just building one after the other."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:168
+msgid ""
+"When a package is in editable mode, most of the commands will not work. It "
+"is not possible to :command:`conan upload`, :command:`conan export` or :"
+"command:`conan create` when a package is in editable mode."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:173
+msgid "Revert the editable mode"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:175
+msgid "In order to revert the editable mode just remove the link using:"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:177
+msgid "$ conan editable remove say/0.1@user/channel"
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:181
+msgid ""
+"It will remove the link (the local directory won't be affected) and all the "
+"packages consuming this requirement will get it from the cache again."
+msgstr ""
+
+#: ../../../developing_packages/editable_packages.rst:186
+msgid ""
+"Packages that are built consuming an editable package in its graph upstreams "
+"can generate binaries and packages incompatible with the released version of "
+"the editable package. Avoid uploading these packages without re-creating "
+"them with the in-cache version of all the libraries."
+msgstr ""

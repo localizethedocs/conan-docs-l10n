@@ -1,0 +1,209 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.16\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:4
+msgid "Build a simple Meson project using Conan"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:6
+msgid ""
+"In this example, we are going to create a string compressor application that "
+"uses one of the most popular C++ libraries: `Zlib <https://zlib.net/>`__."
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:11
+msgid ""
+"This example is based on the main :ref:`Build a simple CMake project using "
+"Conan<consuming_packages_build_simple_cmake_project>` tutorial. So we highly "
+"recommend reading it before trying out this one."
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:14
+msgid ""
+"We'll use Meson as build system and pkg-config as helper tool in this case, "
+"so you should get them installed before going forward with this example."
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:17
+msgid ""
+"Please, first clone the sources to recreate this project. You can find them "
+"in the `examples2 repository <https://github.com/conan-io/examples2>`_ in "
+"GitHub:"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:20
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/examples/tools/meson/mesontoolchain/simple_meson_project"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:26
+msgid "We start from a very simple C language project with this structure:"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:28
+msgid ""
+".\n"
+"├── meson.build\n"
+"└── src\n"
+"    └── main.c"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:35
+msgid ""
+"This project contains a basic *meson.build* including the **zlib** "
+"dependency and the source code for the string compressor program in *main.c*."
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:38
+msgid "Let's have a look at the *main.c* file:"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:40
+msgid "**main.c**"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:40
+msgid ""
+"#include <stdlib.h>\n"
+"#include <stdio.h>\n"
+"#include <string.h>\n"
+"\n"
+"#include <zlib.h>\n"
+"\n"
+"int main(void) {\n"
+"    char buffer_in [256] = {\"Conan is a MIT-licensed, Open Source package "
+"manager for C and C++ development \"\n"
+"                            \"for C and C++ development, allowing "
+"development teams to easily and efficiently \"\n"
+"                            \"manage their packages and dependencies across "
+"platforms and build systems.\"};\n"
+"    char buffer_out [256] = {0};\n"
+"\n"
+"    z_stream defstream;\n"
+"    defstream.zalloc = Z_NULL;\n"
+"    defstream.zfree = Z_NULL;\n"
+"    defstream.opaque = Z_NULL;\n"
+"    defstream.avail_in = (uInt) strlen(buffer_in);\n"
+"    defstream.next_in = (Bytef *) buffer_in;\n"
+"    defstream.avail_out = (uInt) sizeof(buffer_out);\n"
+"    defstream.next_out = (Bytef *) buffer_out;\n"
+"\n"
+"    deflateInit(&defstream, Z_BEST_COMPRESSION);\n"
+"    deflate(&defstream, Z_FINISH);\n"
+"    deflateEnd(&defstream);\n"
+"\n"
+"    printf(\"Uncompressed size is: %lu\\n\", strlen(buffer_in));\n"
+"    printf(\"Compressed size is: %lu\\n\", strlen(buffer_out));\n"
+"\n"
+"    printf(\"ZLIB VERSION: %s\\n\", zlibVersion());\n"
+"\n"
+"    return EXIT_SUCCESS;\n"
+"}"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:76
+msgid "Also, the contents of *meson.build* are:"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:78
+msgid "**meson.build**"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:78
+msgid ""
+"project('tutorial', 'c')\n"
+"zlib = dependency('zlib', version : '1.2.11')\n"
+"executable('compressor', 'src/main.c', dependencies: zlib)"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:86
+msgid ""
+"Let's create a *conanfile.txt* with the following content to install "
+"**Zlib**:"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:88
+msgid "**conanfile.txt**"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:88
+msgid ""
+"[requires]\n"
+"zlib/1.2.11\n"
+"\n"
+"[generators]\n"
+"PkgConfigDeps\n"
+"MesonToolchain"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:98
+msgid ""
+"In this case, we will use :ref:`PkgConfigDeps<PkgConfigDeps>` to generate "
+"information about where the **Zlib** library files are installed thanks to "
+"the `*.pc` files and :ref:`MesonToolchain<MesonToolchain>` to pass build "
+"information to *Meson* using a `conan_meson_[native|cross].ini` file that "
+"describes the native/cross compilation environment, which in this case is a "
+"`conan_meson_native.ini` one."
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:103
+msgid ""
+"We will use Conan to install **Zlib** and generate the files that Meson "
+"needs to find this library and build our project. We will generate those "
+"files in the folder *build*. To do that, run:"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:106
+msgid "$ conan install . --output-folder=build --build=missing"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:110
+msgid "Now we are ready to build and run our **compressor** app:"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:112
+msgid "Windows"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:112
+msgid ""
+"$ cd build\n"
+"$ meson setup --native-file conan_meson_native.ini .. meson-src\n"
+"$ meson compile -C meson-src\n"
+"$ meson-src\\compressor.exe\n"
+"Uncompressed size is: 233\n"
+"Compressed size is: 147\n"
+"ZLIB VERSION: 1.2.11"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:123
+msgid "Linux, macOS"
+msgstr ""
+
+#: ../../../examples/tools/meson/build_simple_meson_project.rst:123
+msgid ""
+"$ cd build\n"
+"$ meson setup --native-file conan_meson_native.ini .. meson-src\n"
+"$ meson compile -C meson-src\n"
+"$ ./meson-src/compressor\n"
+"Uncompressed size is: 233\n"
+"Compressed size is: 147\n"
+"ZLIB VERSION: 1.2.11"
+msgstr ""

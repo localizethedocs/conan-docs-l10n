@@ -1,0 +1,554 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.38\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/build_helpers/visual_studio.rst:5
+msgid "MSBuild"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:7
+msgid ""
+"Calls Visual Studio :command:`MSBuild` command to build a *.sln* project:"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:9
+msgid ""
+"from conans import ConanFile, MSBuild\n"
+"\n"
+"class ExampleConan(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def build(self):\n"
+"        msbuild = MSBuild(self)\n"
+"        msbuild.build(\"MyProject.sln\")"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:20
+msgid ""
+"Internally the ``MSBuild`` build helper uses :ref:`visual_studio_build` to "
+"adjust the ``LIB`` and ``CL`` environment variables with all the information "
+"from the requirements: include directories, library names, flags etc. and "
+"then calls :command:`MSBuild`."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:23
+msgid ""
+":ref:`VisualStudioBuildEnvironment<visual_studio_build>` to adjust the "
+"``LIB`` and ``CL`` environment variables with all the information from the "
+"requirements: include directories, library names, flags etc."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:25
+msgid ":ref:`tools_msvc_build_command` to call :command:``MSBuild``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:27
+msgid ""
+"You can adjust all the information from the requirements accessing to the "
+"``build_env`` that it is a :ref:`visual_studio_build` object:"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:29
+msgid ""
+" from conans import ConanFile, MSBuild\n"
+"\n"
+" class ExampleConan(ConanFile):\n"
+"     ...\n"
+"\n"
+"     def build(self):\n"
+"         msbuild = MSBuild(self)\n"
+"         msbuild.build_env.include_paths.append(\"mycustom/directory/to/"
+"headers\")\n"
+"         msbuild.build_env.lib_paths.append(\"mycustom/directory/to/libs\")\n"
+"         msbuild.build_env.link_flags = []\n"
+"\n"
+"         msbuild.build(\"MyProject.sln\")"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:46
+msgid ""
+"To inject the flags corresponding to the ``compiler.runtime``, "
+"``build_type`` and ``compiler.cppstd`` settings, this build helper also "
+"generates a properties file (in the build folder) that is passed to :command:"
+"``MSBuild`` with :command:``/p:ForceImportBeforeCppTargets=\"conan_build."
+"props\"``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:52
+#: ../../../reference/build_helpers/visual_studio.rst:221
+msgid "Constructor"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:54
+msgid ""
+"class MSBuild(object):\n"
+"\n"
+"    def __init__(self, conanfile)"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:61
+#: ../../../reference/build_helpers/visual_studio.rst:139
+#: ../../../reference/build_helpers/visual_studio.rst:162
+#: ../../../reference/build_helpers/visual_studio.rst:177
+#: ../../../reference/build_helpers/visual_studio.rst:232
+msgid "Parameters:"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:61
+#: ../../../reference/build_helpers/visual_studio.rst:230
+msgid ""
+"**conanfile** (Required): ConanFile object. Usually ``self`` in a *conanfile."
+"py*."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:64
+#: ../../../reference/build_helpers/visual_studio.rst:246
+msgid "Attributes"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:67
+msgid "build_env"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:69
+msgid ""
+"A :ref:`visual_studio_build` object with the needed environment variables."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:72
+msgid "Methods"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:75
+msgid "build()"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:77
+msgid ""
+"def build(self, project_file, targets=None, upgrade_project=True, "
+"build_type=None, arch=None,\n"
+"          parallel=True, force_vcvars=False, toolset=None, platforms=None, "
+"use_env=True,\n"
+"          vcvars_ver=None, winsdk_version=None, properties=None, "
+"output_binary_log=None,\n"
+"          property_file_name=None, verbosity=None, definitions=None,\n"
+"          user_property_file_name=None)"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:85
+msgid "Builds Visual Studio project with the given parameters."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:88
+msgid "**project_file** (Required): Path to the *.sln* file."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:89
+msgid ""
+"**targets** (Optional, Defaulted to ``None``): Sets ``/target`` flag to the "
+"specified list of targets to build."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:90
+msgid ""
+"**upgrade_project** (Optional, Defaulted to ``True``): Will call :command:"
+"`devenv /upgrade` to upgrade the solution to your current Visual Studio."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:92
+msgid ""
+"**build_type** (Optional, Defaulted to ``None``): Sets ``/p:Configuration`` "
+"flag to the specified value. It will override the value from ``settings."
+"build_type``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:94
+msgid ""
+"**arch** (Optional, Defaulted to ``None``): Sets ``/p:Platform`` flag to the "
+"specified value. It will override the value from ``settings.arch``. This "
+"value (or the ``settings.arch`` one if not overridden) will be used as the "
+"key for the ``msvc_arch`` dictionary that returns the final string used for "
+"the ``/p:Platform`` flag (see **platforms** argument documentation below)."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:97
+msgid ""
+"**parallel** (Optional, Defaulted to ``True``): Will use the configured "
+"number of cores in the :ref:`conan_conf` file or :ref:`tools_cpu_count`:"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:100
+msgid ""
+"**In the solution**: Building the solution with the projects in parallel. "
+"(``/m:`` parameter)."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:101
+msgid ""
+"**CL compiler**: Building the sources in parallel. (``/MP:`` compiler flag)."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:102
+msgid ""
+"**force_vcvars** (Optional, Defaulted to ``False``): Will ignore if the "
+"environment is already set for a different Visual Studio version."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:104
+msgid ""
+"**toolset** (Optional, Defaulted to ``None``): Sets ``/p:PlatformToolset`` "
+"to the specified toolset. When ``None`` it will apply the setting ``compiler."
+"toolset`` if specified. When ``False`` it will skip adjusting the ``/p:"
+"PlatformToolset``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:106
+msgid ""
+"**platforms** (Optional, Defaulted to ``None``): This dictionary will update "
+"the default one (see ``msvc_arch`` below) and will be used to get the "
+"mapping of architectures to platforms from the Conan naming to another one. "
+"It is useful for Visual Studio solutions that have a different naming in "
+"architectures. Example: ``platforms={\"x86\":\"Win32\"}`` (Visual solution "
+"uses \"Win32\" instead of \"x86\")."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:110
+msgid ""
+"msvc_arch = {'x86': 'x86',\n"
+"             'x86_64': 'x64',\n"
+"             'armv7': 'ARM',\n"
+"             'armv8': 'ARM64'}"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:117
+msgid ""
+"**use_env** (Optional, Defaulted to ``True``: Sets ``/p:UseEnv=true`` flag. "
+"Note that this setting does not guarantee that environment variables from "
+"Conan will not be used by the compiler or linker. This is an MSBuild setting "
+"which simply specifies the behavior when environment variables conflict with "
+"equivalent properties from the project (via *.vcxproj*, *.props* or *."
+"targets* files).  Conan will still apply the relevant compiler and linker "
+"environment variables when spawning the MSBuild process. For example, if "
+"``use_env=False`` is specified **and** if there is no "
+"``AdditionalDependencies`` variable defined in the project, the ``LINK`` "
+"environment variable passed by Conan will still be used by the linker "
+"because it technically doesn't conflict with the project variable."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:124
+msgid ""
+"**vcvars_ver** (Optional, Defaulted to ``None``): Specifies the Visual "
+"Studio compiler toolset to use."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:125
+msgid ""
+"**winsdk_version** (Optional, Defaulted to ``None``): Specifies the version "
+"of the Windows SDK to use."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:126
+msgid ""
+"**properties** (Optional, Defaulted to ``None``): Dictionary with new "
+"properties, for each element in the dictionary ``{name: value}`` it will "
+"append a ``/p:name=\"value\"`` option."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:128
+msgid ""
+"**output_binary_log** (Optional, Defaulted to ``None``): Sets ``/bl`` flag. "
+"If set to ``True`` then MSBuild will output a binary log file called "
+"*msbuild.binlog* in the working directory. It can also be used to set the "
+"name of log file like this ``output_binary_log=\"my_log.binlog\"``. This "
+"parameter is only supported `starting from MSBuild version 15.3 and onwards "
+"<https://msbuildlog.com>`_."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:132
+msgid ""
+"**property_file_name** (Optional, Defaulted to ``None``): Sets ``p:"
+"ForceImportBeforeCppTargets``. When ``None`` it will generate a file named "
+"*conan_build.props*. You can specify a different name for the generated "
+"properties file."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:134
+msgid ""
+"**verbosity** (Optional, Defaulted to ``None``): Sets the ``/verbosity`` "
+"flag to the specified verbosity level. Possible values are ``\"quiet\"``, "
+"``\"minimal\"``, ``\"normal\"``, ``\"detailed\"`` and ``\"diagnostic\"``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:136
+msgid ""
+"**definitions** (Optional, Defaulted to ``None``): Dictionary with "
+"additional compiler definitions to be applied during the build. Use a "
+"dictionary with the desired key and its value set to ``None`` to set a "
+"compiler definition with no value."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:138
+msgid ""
+"**user_property_file_name** (Optional, Defaulted to ``None``): Filename or "
+"list of filenames of user properties files to be automatically passed to the "
+"build command. These files have priority over the *conan_build.props* file "
+"(user can override that file values), and if a list of file names is "
+"provided, later file names also have priority over the former ones. These "
+"filenames will be passed, together with *conan_build.props* files as ``/p:"
+"ForceImportBeforeCppTargets`` argument."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:143
+msgid ""
+"The ``MSBuild()`` build helper will, before calling to :command:`MSBuild`, "
+"call :ref:`tools_vcvars_command` to adjust the environment according to the "
+"settings. When cross-building from x64 to x86 the toolchain by default is "
+"``x86``. If you want to use ``amd64_x86`` instead, set the environment "
+"variable ``PreferredToolArchitecture=x64``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:148
+msgid "get_command()"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:150
+msgid "Returns a string command calling :command:`MSBuild`."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:152
+msgid ""
+"def get_command(self, project_file, props_file_path=None, targets=None, "
+"upgrade_project=True,\n"
+"                build_type=None, arch=None, parallel=True, toolset=None, "
+"platforms=None,\n"
+"                use_env=False, properties=None, output_binary_log=None, "
+"verbosity=None,\n"
+"                user_property_file_name=None)"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:160
+msgid ""
+"**props_file_path** (Optional, Defaulted to ``None``): Path to a property "
+"file to be included in the compilation command. This parameter is "
+"automatically set by the ``build()`` method to set the runtime from settings."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:162
+msgid "Same parameters as the ``build()`` method."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:165
+msgid "get_version()"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:167
+msgid ""
+"Static method that returns the version of MSBuild for the specified settings."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:169
+msgid "def get_version(settings)"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:173
+msgid ""
+"Result is returned in a ``conans.model.Version`` object as it is evaluated "
+"by the command line. It will raise an exception if it cannot resolve it to a "
+"valid result."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:177
+msgid "**settings** (Required): Conanfile settings. Use ``self.settings``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:182
+msgid "VisualStudioBuildEnvironment"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:184
+msgid ""
+"Prepares the needed environment variables to invoke the Visual Studio "
+"compiler. Use it together with :ref:`tools_vcvars_command`."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:187
+msgid ""
+" from conans import ConanFile, VisualStudioBuildEnvironment\n"
+"\n"
+" class ExampleConan(ConanFile):\n"
+"\n"
+"     ...\n"
+"\n"
+"     def build(self):\n"
+"         if self.settings.compiler == \"Visual Studio\":\n"
+"             env_build = VisualStudioBuildEnvironment(self)\n"
+"             with tools.environment_append(env_build.vars):\n"
+"                 vcvars = tools.vcvars_command(self.settings)\n"
+"                 self.run('%s && cl /c /EHsc hello.cpp' % vcvars)\n"
+"                 self.run('%s && lib hello.obj -OUT:hello.lib' % vcvars"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:204
+msgid "You can adjust the automatically filled attributes:"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:206
+msgid ""
+" def build(self):\n"
+"     if self.settings.compiler == \"Visual Studio\":\n"
+"     env_build = VisualStudioBuildEnvironment(self)\n"
+"     env_build.include_paths.append(\"mycustom/directory/to/headers\")\n"
+"     env_build.lib_paths.append(\"mycustom/directory/to/libs\")\n"
+"     env_build.link_flags = []\n"
+"     with tools.environment_append(env_build.vars):\n"
+"         vcvars = tools.vcvars_command(self.settings)\n"
+"         self.run('%s && cl /c /EHsc hello.cpp' % vcvars)\n"
+"         self.run('%s && lib hello.obj -OUT:hello.lib' % vcvars"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:223
+msgid ""
+"class VisualStudioBuildEnvironment(object):\n"
+"\n"
+"    def __init__(self, conanfile, with_build_type_flags=True)"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:231
+msgid ""
+"**with_build_type_flags** (Optional, Defaulted to ``True``): If ``True``, it "
+"adjusts the compiler flags according to the ``build_type`` setting. e.g: `-"
+"Zi`, `-Ob0`, `-Od`..."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:235
+msgid "Environment variables"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:238
+msgid "NAME"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:238
+msgid "DESCRIPTION"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:240
+msgid "LIB"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:240
+msgid "Library paths separated with \";\""
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:242
+msgid "CL"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:242
+msgid ""
+"\"/I\" flags with include directories, Runtime (/MT, /MD...), Definitions (/"
+"DXXX), and any other C and CXX flags."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:249
+msgid "include_paths"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:251
+msgid "List with directories of include paths."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:254
+msgid "lib_paths"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:256
+msgid "List with directories of libraries."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:259
+msgid "defines"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:261
+msgid "List with definitions from requirements' ``cpp_info.defines``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:264
+msgid "runtime"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:266
+msgid "List with directories from ``settings.compiler.runtime``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:269
+msgid "flags"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:271
+msgid "List with flags from requirements' ``cpp_info.cflags``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:274
+msgid "cxx_flags"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:276
+msgid "List with cxx flags from requirements' ``cpp_info.cxxflags``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:279
+msgid "link_flags"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:281
+msgid ""
+"List with linker flags from requirements' ``cpp_info.sharedlinkflags`` and "
+"``cpp_info.exelinkflags``"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:284
+msgid "std"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:286
+msgid ""
+"This property contains the flag corresponding to the C++ standard. If you "
+"are still using the deprecated setting ``cppstd`` (see :ref:"
+"`manage_cpp_standard`) and you are not providing any value for this setting, "
+"the property will be ``None``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:291
+msgid "parallel"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:293
+msgid "Defaulted to ``False``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:295
+msgid ""
+"Sets the flag ``/MP`` in order to compile the sources in parallel using "
+"cores found by :ref:`tools_cpu_count`."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:299
+msgid "Read more about :ref:`tools_environment_append`."
+msgstr ""

@@ -1,0 +1,244 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.38\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:4
+msgid "AutotoolsToolchain"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:8
+msgid "These tools are **experimental** and subject to breaking changes."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:11
+msgid ""
+"The ``AutotoolsToolchain`` is the toolchain generator for Autotools. It will "
+"generate shell scripts containing environment variable definitions that the "
+"autotools build system can understand."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:14
+msgid "The ``AutotoolsToolchain`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:16
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:16
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"AutotoolsToolchain\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:22
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:22
+msgid ""
+"[generators]\n"
+"AutotoolsToolchain"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:28
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:41
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.gnu import AutotoolsToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = AutotoolsToolchain(self)\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:42
+msgid ""
+"The ``AutotoolsToolchain`` will generate after a ``conan install`` command "
+"the *conanautotoolstoolchain.sh* or *conanautotoolstoolchain.bat* files:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:44
+msgid ""
+"$ conan install conanfile.py # default is Release\n"
+"$ source conanautotoolstoolchain.sh\n"
+"# or in Windows\n"
+"$ conanautotoolstoolchain.bat"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:51
+msgid ""
+"This generator will define aggregated variables ``CPPFLAGS``, ``LDFLAGS``, "
+"``CXXFLAGS``, ``CFLAGS`` that accumulate all dependencies information, "
+"including transitive dependencies, with flags like ``-stdlib=libstdc++``, ``-"
+"std=gnu14``, architecture flags, etc."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:54
+msgid ""
+"This generator will also generate a file called ``conanbuild.json`` "
+"containing two keys:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:56
+msgid "**configure_args**: Arguments to call the ``configure`` script."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:57
+msgid "**make_args**: Arguments to call the ``make`` script."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:59
+msgid ""
+"The :ref:`Autotools build helper<conan_tools_gnu_build_helper>` will use "
+"that ``conanbuild.json`` file to seamlessly call the configure and make "
+"script using these precalculated arguments."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:63
+msgid "Attributes"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:65
+msgid ""
+"You can change some attributes before calling the ``generate()`` method if "
+"you want to change some of the precalculated values:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:81
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.gnu import AutotoolsToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = AutotoolsToolchain(self)\n"
+"        tc.configure_args.append(\"--my_argument\")\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:82
+msgid ""
+"**configure_args** (Defaulted to ``[]``): Additional arguments to be passed "
+"to the configure script."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:83
+msgid ""
+"**make_args** (Defaulted to ``[]``): Additional arguments to be passed to he "
+"make script."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:84
+msgid "**defines** (Defaulted to ``[]``): Additional defines."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:85
+msgid "**cxxflags** (Defaulted to ``[]``): Additional cxxflags."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:86
+msgid "**cflags** (Defaulted to ``[]``): Additional cflags."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:87
+msgid "**ldflags** (Defaulted to ``[]``): Additional ldflags."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:88
+msgid ""
+"**default_configure_install_args** (Defaulted to ``False``): If True it will "
+"pass automatically the following flags to the configure script:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:90
+msgid "``--prefix``: With the self.package_folder value."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:91
+msgid "``--bindir=${prefix}/bin``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:92
+msgid "``--sbindir=${prefix}/bin``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:93
+msgid "``--libdir=${prefix}/lib``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:94
+msgid "``--includedir=${prefix}/include``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:95
+msgid "``--oldincludedir=${prefix}/includev``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:96
+msgid "``--datarootdir=${prefix}/share``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:98
+msgid "**ndebug**: \"NDEBUG\" if the ``settings.build_type`` != `Debug`."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:99
+msgid "**gcc_cxx11_abi**: \"_GLIBCXX_USE_CXX11_ABI\" if ``gcc/libstdc++``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:100
+msgid "**libcxx**: Flag calculated from ``settings.compiler.libcxx``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:101
+msgid "**fpic**: True/False from ``options.fpic`` if defined."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:102
+msgid "**cppstd**: Flag from ``settings.compiler.cppstd``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:103
+msgid "**arch_flag**: Flag from ``settings.arch``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:104
+msgid "**build_type_flags**: Flags from ``settings.build_type``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:105
+msgid ""
+"**apple_arch_flag**: Only when cross-building with Apple systems. Flags from "
+"``settings.arch``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:106
+msgid ""
+"**apple_isysroot_flag**: Only when cross-building with Apple systems. Path "
+"to the root sdk."
+msgstr ""

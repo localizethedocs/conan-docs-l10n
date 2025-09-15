@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.51\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/config_files/editable_layout.rst:4
+msgid "Editable layout files"
+msgstr ""
+
+#: ../../../reference/config_files/editable_layout.rst:6
+msgid ""
+"This file contain information consumed by :ref:`editable packages "
+"<editable_packages>`. It is an *.ini* file listing the directories that "
+"Conan should use for the packages that are opened in editable mode. Before "
+"parsing this file Conan runs Jinja2 template engine with the ``settings``, "
+"``options`` and ``reference`` objects, so you can add *any* logic to this "
+"files:"
+msgstr ""
+
+#: ../../../reference/config_files/editable_layout.rst:11
+msgid ""
+"# Affects to all packages but cool/version@user/dev\n"
+"[includedirs]\n"
+"src/include\n"
+"\n"
+"# using placeholders from conan settings and options\n"
+"[libdirs]\n"
+"build/{{settings.build_type}}/{{settings.arch}}\n"
+"\n"
+"[bindirs]\n"
+"{% if options.shared %}\n"
+"build/{{settings.build_type}}/shared\n"
+"{% else %}\n"
+"build/{{settings.build_type}}/static\n"
+"{% endif %}\n"
+"\n"
+"# Affects only to cool/version@user/dev\n"
+"[cool/version@user/dev:includedirs]\n"
+"src/core/include\n"
+"src/cmp_a/include\n"
+"\n"
+"# The source_folder, build_folder are useful for workspaces\n"
+"[source_folder]\n"
+"src\n"
+"\n"
+"[build_folder]\n"
+"build/{{settings.build_type}}/{{settings.arch}}"
+msgstr ""
+
+#: ../../../reference/config_files/editable_layout.rst:41
+msgid ""
+"The specific sections using a package reference will have higher priority "
+"than the general ones."
+msgstr ""
+
+#: ../../../reference/config_files/editable_layout.rst:44
+msgid ""
+"This file can live in the conan cache, in the ``.conan/layouts`` folder, or "
+"in a user folder, like inside the source repo."
+msgstr ""
+
+#: ../../../reference/config_files/editable_layout.rst:47
+msgid ""
+"If there exists a ``.conan/layouts/default`` layout file in the cache and no "
+"layout file is specified in the :command:`conan editable add <path> "
+"<reference>` command, that file will be used."
+msgstr ""
+
+#: ../../../reference/config_files/editable_layout.rst:50
+msgid ""
+"The ``[source_folder]`` and ``[build_folder]`` are useful for workspaces. "
+"For example, when using ``cmake`` workspace-generator, it will locate the "
+"``CMakeLists.txt`` of each package in editable mode in the "
+"``[source_folder]`` and it will use the ``[build_folder]`` as the base "
+"folder for the build temporary files."
+msgstr ""
+
+#: ../../../reference/config_files/editable_layout.rst:54
+msgid ""
+"It is possible to define out-of-source builds for workspaces, using relative "
+"paths and the ``reference`` argument. The following could be used to locate "
+"the build artifacts of an editable package in a sibling ``build/<package-"
+"name>`` folder:"
+msgstr ""
+
+#: ../../../reference/config_files/editable_layout.rst:57
+msgid ""
+"[build_folder]\n"
+"../build/{{reference.name}}/{{settings.build_type}}\n"
+"\n"
+"[includedirs]\n"
+"src\n"
+"\n"
+"[libdirs]\n"
+"../build/{{reference.name}}/{{settings.build_type}}/lib"
+msgstr ""
+
+#: ../../../reference/config_files/editable_layout.rst:71
+msgid ""
+"Check the section :ref:`editable_packages` and :ref:`workspaces` to learn "
+"more about this file."
+msgstr ""

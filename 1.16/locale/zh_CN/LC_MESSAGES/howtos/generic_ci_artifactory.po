@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.16\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/generic_ci_artifactory.rst:4
+msgid "Use a generic CI with Conan and Artifactory"
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:7
+msgid "Uploading the BuildInfo"
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:9
+msgid ""
+"If you are using :ref:`Jenkins with Conan and "
+"Artifactory<jenkins_integration>`, along with the `Jenkins Artifactory "
+"Plugin <https://www.jfrog.com/confluence/display/RTF/"
+"Jenkins+Artifactory+Plug-in>`_, any Conan package downloaded or uploaded "
+"during your build will be automatically recorded in the BuildInfo json file, "
+"that will be automatically uploaded to the specified Artifactory instance."
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:14
+msgid ""
+"However, you can gather and upload that information using other CI "
+"infrastructure with the following steps:"
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:17
+msgid ""
+"Before calling Conan the first time in your build, set the environment "
+"variable `CONAN_TRACE_FILE` to a file path. The generated file will contain "
+"the `BuildInfo json <https://www.jfrog.com/confluence/display/RTF/"
+"Build+Integration#BuildIntegration-BuildInfoJSON>`_."
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:20
+msgid ""
+"You also need to create the :ref:`artifacts.properties<artifacts."
+"properties>` file in your Conan home containing the build information. All "
+"this properties will be automatically associated to all the published "
+"artifacts."
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:23
+msgid ""
+"artifact_property_build.name=MyBuild\n"
+"artifact_property_build.number=23\n"
+"artifact_property_build.timestamp=1487676992"
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:30
+msgid ""
+"Call Conan as many times as you need.  For example, if you are testing a "
+"Conan package and uploading it at the end, you will run something similar to:"
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:34
+msgid ""
+"$ conan create . user/stable # Will retrieve the dependencies and create the "
+"package\n"
+"$ conan upload mypackage/1.0@user/stable -r artifactory"
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:39
+msgid ""
+"Call the command `conan_build_info` passing the path to the generated Conan "
+"traces file and a parameter ``--output`` to indicate the output file. You "
+"can also, delete the traces.log` file` otherwise while the "
+"`CONAN_TRACE_FILE` is present, any Conan command will keep appending actions."
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:43
+msgid ""
+"$ conan_build_info /tmp/traces.log --output /tmp/build_info.json\n"
+"$ rm /tmp/traces.log"
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:48
+msgid ""
+"Edit the `build_info.json` file to append ``name`` (build name), ``number`` "
+"(build number) and the ``started`` (started date) and any other field that "
+"you need according to the `Build Info json format <https://github.com/jfrog/"
+"build-info>`_."
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:51
+msgid ""
+"The ``started`` field has to be in the format: ``yyyy-MM-dd'T'HH:mm:ss.SSSZ``"
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:53
+msgid ""
+"To edit the file you can import the json file using the programming language "
+"you are using in your framework, groovy, java, python..."
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:56
+msgid "Push the json file to Artifactory, using the REST-API:"
+msgstr ""
+
+#: ../../../howtos/generic_ci_artifactory.rst:58
+msgid ""
+"curl -X PUT -u<username>:<password> -H \"Content-type: application/json\" -"
+"T /tmp/build_info.json \"http://host:8081/artifactory/api/build\""
+msgstr ""

@@ -1,0 +1,180 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.63\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/build_system/make.rst:4
+msgid "Make"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:8
+msgid ""
+"This integration is to be deprecated in Conan 2.0. Check :ref:`the conan."
+"tools.gnu Autotools<conan_tools_gnu>` integration."
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:10
+msgid ""
+"Conan provides the :ref:`Make generator<make_generator>` to integrate with "
+"plain Makefiles"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:12
+msgid ""
+"The ``make`` generator outputs all the variables related to package "
+"dependencies into a file which is named *conanbuildinfo.mak*. The ``make`` "
+"toolchain outputs all the variables related to settings, options, and "
+"platform into a file which is named ``conan_toolchain.mak``."
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:17
+msgid "To use the generator, indicate it in your ``conanfile`` like this:"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:19
+msgid "*conanfile.txt*"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:19
+msgid ""
+" [generators]\n"
+" make"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:25
+msgid "*conanfile.py*"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:25
+msgid ""
+" class MyConan(ConanFile):\n"
+"     ...\n"
+"     generators = \"make\""
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:34
+msgid "Example"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:36
+msgid ""
+"We are going to use the same example from :ref:`getting_started`, a MD5 hash "
+"calculator app."
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:38
+msgid "This is the main source file for it:"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:40
+msgid "main.cpp"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:40
+msgid ""
+" #include \"Poco/MD5Engine.h\"\n"
+" #include \"Poco/DigestStream.h\"\n"
+"\n"
+" #include <iostream>\n"
+"\n"
+"\n"
+" int main(int argc, char** argv)\n"
+" {\n"
+"     Poco::MD5Engine md5;\n"
+"     Poco::DigestOutputStream ds(md5);\n"
+"     ds << \"abcdefghijklmnopqrstuvwxyz\";\n"
+"     ds.close();\n"
+"     std::cout << Poco::DigestEngine::digestToHex(md5.digest()) << std::"
+"endl;\n"
+"     return 0;\n"
+" }"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:60
+msgid ""
+"In order to use this generator within your project, use the following "
+"Makefile as a reference:"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:62
+msgid "Makefile"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:62
+msgid ""
+" #----------------------------------------\n"
+" #     Prepare flags from make generator\n"
+" #----------------------------------------\n"
+"\n"
+" include conanbuildinfo.mak\n"
+"\n"
+" CFLAGS              += $(CONAN_CFLAGS)\n"
+" CXXFLAGS            += $(CONAN_CXXFLAGS)\n"
+" CPPFLAGS            += $(addprefix -I, $(CONAN_INCLUDE_DIRS))\n"
+" CPPFLAGS            += $(addprefix -D, $(CONAN_DEFINES))\n"
+" LDFLAGS             += $(addprefix -L, $(CONAN_LIB_DIRS))\n"
+" LDLIBS              += $(addprefix -l, $(CONAN_LIBS))\n"
+" EXELINKFLAGS        += $(CONAN_EXELINKFLAGS)\n"
+"\n"
+" #----------------------------------------\n"
+" #     Make variables for a sample App\n"
+" #----------------------------------------\n"
+"\n"
+" SRCS          = main.cpp\n"
+" OBJS          = main.o\n"
+" EXE_FILENAME  = main\n"
+"\n"
+" #----------------------------------------\n"
+" #     Make Rules\n"
+" #----------------------------------------\n"
+"\n"
+" .PHONY                  :   exe\n"
+" exe                     :   $(EXE_FILENAME)\n"
+"\n"
+" $(EXE_FILENAME)         :   $(OBJS)\n"
+"     g++ $(OBJS) $(CXXFLAGS) $(LDFLAGS) $(LDLIBS) -o $(EXE_FILENAME)\n"
+"\n"
+" %.o                     :   $(SRCS)\n"
+"     g++ -c $(CPPFLAGS) $(CXXFLAGS) $< -o $@"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:100
+msgid ""
+"Now we are going to let Conan retrieve the dependencies, generate the "
+"dependency information in the file ``conanbuildinfo.mak``, and generate the "
+"options and settings information in the file ``conan_toolchain.mak``:"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:104
+msgid "$ conan install ."
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:108
+msgid "Then let's call :command:`make` to generate our project:"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:110
+msgid "$ make exe"
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:114
+msgid "Now you can run your application with ``./main``."
+msgstr ""
+
+#: ../../../integrations/build_system/make.rst:0
+msgid "Complete reference for :ref:`Make generator<make_generator>`"
+msgstr ""

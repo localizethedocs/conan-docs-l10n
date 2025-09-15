@@ -1,0 +1,176 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.64\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:5
+msgid "Bazel"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:7
+msgid ""
+"Available since: `1.37.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.37.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:9
+msgid ""
+"The ``Bazel`` build helper is a wrapper around the command line invocation "
+"of bazel. It will abstract the calls like ``bazel <rcpaths> build <configs> "
+"<targets>`` into Python method calls."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:12
+msgid ""
+"The helper is intended to be used in the *conanfile.py* ``build()`` method, "
+"to call Bazel commands automatically when a package is being built directly "
+"by Conan (create, install)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:16
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.google import Bazel\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def build(self):\n"
+"        bz = Bazel(self)\n"
+"        bz.build(target=\"//main:hello-world\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:29
+msgid "It supports the following methods:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:32
+msgid "constructor"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:34
+msgid "def __init__(self, conanfile, namespace=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:38
+msgid "``conanfile``: the current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:39
+msgid ""
+"``namespace``: Deprecated since Conan 1.62. It only keeps backward "
+"compatibility."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:43
+msgid "build()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:45
+msgid "def build(self, args=None, label=None, target=\"//...\", clean=True):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:50
+msgid ""
+"Equivalent to run the :command:`bazel <rcpaths> build <configs> <args> "
+"<targets>` command in the build folder."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:52
+#: ../../../reference/conanfile/tools/google/bazel.rst:72
+msgid "The parameters are:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:54
+#: ../../../reference/conanfile/tools/google/bazel.rst:74
+msgid ""
+"``args`` (defaulted to ``None``): List of extra arguments to add to the "
+"Bazel build command."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:55
+msgid ""
+"``label`` (defaulted to ``None``): Deprecated since Conan 1.62, superseded "
+"by ``target`` one. The Bazel target name."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:56
+#: ../../../reference/conanfile/tools/google/bazel.rst:75
+msgid ""
+"``target`` (defaulted to ``//...``): The Bazel target name. By default, it "
+"runs all the targets under your WORKSPACE."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:57
+msgid ""
+"``clean`` (defaulted to ``True``): Runs a :command:`bazel clean` command "
+"before running every :command:`bazel build`. It helps to keep your Bazel "
+"cache up to date."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:61
+msgid "test()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:63
+#: ../../../reference/conanfile/tools/google/bazel.rst:81
+msgid ""
+"Available since: `1.62.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.62.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:65
+msgid "def test(self, target=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:70
+msgid "Equivalent to :command:`bazel test <target>` in the build folder."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:79
+msgid "Properties"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:83
+msgid "The following properties affect the ``Bazel`` build helper:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:85
+msgid ""
+"``tools.build:skip_test=<bool>`` (boolean) if ``True``, it runs the ``bazel "
+"test <target>``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:89
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:91
+msgid "``Bazel`` is affected by these :ref:`[conf]<global_conf>` variables:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:93
+msgid ""
+"``tools.google.bazel:bazelrc_path``: List of paths to other bazelrc files to "
+"be used as :command:`bazel --bazelrc=rcpath1 ... build`."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazel.rst:94
+msgid ""
+"``tools.google.bazel:configs``: List of Bazel configurations to be used as :"
+"command:`bazel build --config=config1 ...`."
+msgstr ""

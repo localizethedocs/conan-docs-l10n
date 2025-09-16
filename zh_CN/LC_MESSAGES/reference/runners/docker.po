@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/runners/docker.rst:4
+msgid "Docker runner"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:9
+msgid "How to use a docker runner"
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:11
+msgid ""
+"To run Conan inside a docker container you need to define a ``[runner]`` "
+"section in your host profile using the following fields:"
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:13
+msgid ""
+"``type`` **(mandatory)**: define the runner we want to use, in this case "
+"``docker``."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:14
+msgid ""
+"``dockerfile`` **(optional, default None)**: absolute path to a Dockerfile "
+"in case you want to build a docker image."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:15
+msgid ""
+"``image`` **(optional, default conan-runner-default)**: docker image name "
+"you want to download from a docker registry or the name of the built image "
+"in case you define a dockerfile path."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:16
+msgid ""
+"``cache`` **(optional, default clean)**: how docker container uses (or not) "
+"the host's Conan cache."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:18
+msgid "``clean``: use an empty cache."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:19
+msgid ""
+"``copy``: copy the host cache inside the container using the :ref:`conan "
+"cache save/restore<reference_commands_cache>` command."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:20
+msgid "``shared``: mount the host's Conan cache as a shared volume."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:22
+msgid ""
+"``remove`` **(optional, default false)**: ``true`` or ``false``. Remove the "
+"container after running the Conan command."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:23
+msgid ""
+"``configfile``  **(optional, default None)**: Absolute path to a "
+"configuration file with extra parameters (see **extra configuration** "
+"section for more info)."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:27
+msgid "You can only use profiles that are inside the conan profiles folder."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:28
+msgid ""
+"``Shared`` cache can cause permissions issues depending on the user inside "
+"and outside the container. We recommend using the ``copy`` cache even though "
+"it may be a bit slower to setup."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:29
+msgid "The runner profile section doesn't affect the package id."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:32
+msgid "Extra configuration"
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:34
+msgid ""
+"If you need more control over the build and execution of the container, you "
+"can define more parameters inside a ``configfile`` yaml."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:36
+msgid ""
+"image: image_name # The image to build or run.\n"
+"build:\n"
+"    dockerfile: /dockerfile/path # Dockerfile path.\n"
+"    build_context: /build/context/path # Path within the build context to "
+"the Dockerfile.\n"
+"    build_args: # A dictionary of build arguments\n"
+"        foo: bar\n"
+"    cacheFrom: # A list of images used for build cache resolution\n"
+"        - image_1\n"
+"run:\n"
+"    name: container_name # The name for this container.\n"
+"    containerEnv: # Environment variables to set inside the container.\n"
+"        env_var_1: env_value\n"
+"    containerUser: user_name # Username or UID to run commands as inside the "
+"container.\n"
+"    privileged: False # Run as privileged\n"
+"    capAdd: # Add kernel capabilities.\n"
+"        - SYS_ADMIN\n"
+"        - MKNOD\n"
+"    securityOpt: # A list of string values to customize labels for MLS "
+"systems, such as SELinux.\n"
+"        - opt_1\n"
+"    mount: # A dictionary to configure volumes mounted inside the "
+"container.\n"
+"        /home/user1/: # The host path or a volume name\n"
+"            bind: /mnt/vol2 # The path to mount the volume inside the "
+"container\n"
+"            mode: rw # rw to mount the volume read/write, or ro to mount it "
+"read-only.\n"
+"    network: my-network # Specifies the network for the container."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:64
+msgid "How to run a `conan create` in a runner"
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:68
+msgid ""
+"The docker runner feature is only supported by ``conan create`` command. The "
+"``conan install --build`` command is not supported."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:70
+msgid ""
+"In the following links you can find some examples about how to use a conan "
+"docker runner:"
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:72
+msgid ""
+":ref:`Creating a Conan package using a Docker "
+"runner<examples_runners_docker_basic>`"
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:73
+msgid ""
+":ref:`Using a docker runner configfile to parameterize the Dockerfile base "
+"image<examples_runners_docker_configfile_build_args>`"
+msgstr ""

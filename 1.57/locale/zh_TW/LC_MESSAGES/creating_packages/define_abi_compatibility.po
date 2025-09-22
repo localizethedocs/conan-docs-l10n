@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../../creating_packages/define_abi_compatibility.rst:4
 msgid "Defining Package ABI Compatibility"
-msgstr ""
+msgstr "定義軟體包 ABI 相容性"
 
 #: ../../../creating_packages/define_abi_compatibility.rst:6
 msgid ""
@@ -49,7 +49,7 @@ msgstr ""
 
 #: ../../../creating_packages/define_abi_compatibility.rst:21
 msgid "$ conan install mylib/1.0@user/channel -s arch=x86_64 -s ..."
-msgstr ""
+msgstr "$ conan install mylib/1.0@user/channel -s arch=x86_64 -s ..."
 
 #: ../../../creating_packages/define_abi_compatibility.rst:25
 msgid "The process is:"
@@ -242,6 +242,14 @@ msgid ""
 "    pkg/1.0@myuser/mychannel:af044f9619574eceb8e1cca737a64bdad88246ad\n"
 "..."
 msgstr ""
+"$ conan create . pkg/1.0@myuser/mychannel -s compiler=gcc -s compiler."
+"version=4.5 ...\n"
+"\n"
+"Requirements\n"
+"    pkg/1.0@myuser/mychannel from local\n"
+"Packages\n"
+"    pkg/1.0@myuser/mychannel:af044f9619574eceb8e1cca737a64bdad88246ad\n"
+"..."
 
 #: ../../../creating_packages/define_abi_compatibility.rst:123
 msgid ""
@@ -276,6 +284,13 @@ msgid ""
 "Packages\n"
 "    pkg/1.0@myuser/mychannel:7d02dc01581029782b59dcc8c9783a73ab3c22dd"
 msgstr ""
+"$ conan install pkg/1.0@myuser/mychannel -s compiler=gcc -s compiler."
+"version=4.4 ...\n"
+"\n"
+"Requirements\n"
+"    pkg/1.0@myuser/mychannel from local\n"
+"Packages\n"
+"    pkg/1.0@myuser/mychannel:7d02dc01581029782b59dcc8c9783a73ab3c22dd"
 
 #: ../../../creating_packages/define_abi_compatibility.rst:145
 msgid ""
@@ -302,6 +317,11 @@ msgid ""
 "        del self.info.settings.build_type\n"
 "        del self.info.settings.compiler.runtime"
 msgstr ""
+"def package_id(self):\n"
+"    if self.settings.os in [\"Windows\",\"WindowsStore\"] and self.settings."
+"compiler == \"Visual Studio\":\n"
+"        del self.info.settings.build_type\n"
+"        del self.info.settings.compiler.runtime"
 
 #: ../../../creating_packages/define_abi_compatibility.rst:160
 msgid ""
@@ -319,7 +339,7 @@ msgstr ""
 
 #: ../../../creating_packages/define_abi_compatibility.rst:170
 msgid "Compatible packages"
-msgstr ""
+msgstr "相容的軟體包"
 
 #: ../../../creating_packages/define_abi_compatibility.rst:174
 msgid ""
@@ -668,7 +688,7 @@ msgstr ""
 
 #: ../../../creating_packages/define_abi_compatibility.rst:365
 msgid " int addition (int a, int b) { return a - b; }"
-msgstr ""
+msgstr " int addition (int a, int b) { return a - b; }"
 
 #: ../../../creating_packages/define_abi_compatibility.rst:370
 msgid "*myadd.h* header file in version 2.1"
@@ -676,7 +696,7 @@ msgstr ""
 
 #: ../../../creating_packages/define_abi_compatibility.rst:370
 msgid " int addition (int a, int b) { return a + b; }"
-msgstr ""
+msgstr " int addition (int a, int b) { return a + b; }"
 
 #: ../../../creating_packages/define_abi_compatibility.rst:375
 msgid ""
@@ -1295,13 +1315,15 @@ msgstr ""
 
 #: ../../../creating_packages/define_abi_compatibility.rst:688
 msgid "*conan.conf* configuration file"
-msgstr ""
+msgstr "*conan.conf* 組態檔"
 
 #: ../../../creating_packages/define_abi_compatibility.rst:688
 msgid ""
 "[general]\n"
 "default_package_id_mode=full_package_mode"
 msgstr ""
+"[general]\n"
+"default_package_id_mode=full_package_mode"
 
 #: ../../../creating_packages/define_abi_compatibility.rst:694
 msgid ""
@@ -1422,7 +1444,7 @@ msgstr ""
 
 #: ../../../creating_packages/define_abi_compatibility.rst:763
 msgid "We are using ``full_version_mode``"
-msgstr ""
+msgstr "我們正在使用 ``full_version_mode``"
 
 #: ../../../creating_packages/define_abi_compatibility.rst:764
 msgid ""

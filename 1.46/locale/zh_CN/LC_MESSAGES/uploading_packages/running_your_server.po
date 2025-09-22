@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:4
 msgid "Running conan_server"
-msgstr ""
+msgstr "运行 conan_server"
 
 #: ../../../uploading_packages/running_your_server.rst:6
 msgid ""
@@ -233,6 +233,12 @@ msgid ""
 "public_port: 9999\n"
 "host_name: localhost"
 msgstr ""
+"[server]\n"
+"\n"
+"ssl_enabled: False\n"
+"port: 9300\n"
+"public_port: 9999\n"
+"host_name: localhost"
 
 #: ../../../uploading_packages/running_your_server.rst:151
 msgid ""
@@ -324,7 +330,7 @@ msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:206
 msgid "$ conan remote add myremote https://myservername.mydomain.com"
-msgstr ""
+msgstr "$ conan remote add myremote https://myservername.mydomain.com"
 
 #: ../../../uploading_packages/running_your_server.rst:211
 msgid "Running the Conan Server with SSL using Nginx in a Subdirectory"
@@ -345,6 +351,18 @@ msgid ""
 "       }\n"
 "  }"
 msgstr ""
+"server {\n"
+"\n"
+"       listen 443;\n"
+"       ssl on;\n"
+"       ssl_certificate /usr/local/etc/nginx/ssl/server.crt;\n"
+"       ssl_certificate_key /usr/local/etc/nginx/ssl/server.key;\n"
+"       server_name myservername.mydomain.com;\n"
+"\n"
+"       location /subdir/ {\n"
+"          proxy_pass http://0.0.0.0:9300/;\n"
+"       }\n"
+"  }"
 
 #: ../../../uploading_packages/running_your_server.rst:239
 msgid "$ conan remote add myremote https://myservername.mydomain.com/subdir/"

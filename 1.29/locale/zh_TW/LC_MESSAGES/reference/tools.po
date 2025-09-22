@@ -1731,7 +1731,7 @@ msgstr ""
 
 #: ../../../reference/tools.rst:1041
 msgid "def save(path, content, append=False, encoding=\"utf-8\")"
-msgstr ""
+msgstr "def save(path, content, append=False, encoding=\"utf-8\")"
 
 #: ../../../reference/tools.rst:1045
 msgid ""
@@ -2285,7 +2285,7 @@ msgstr ""
 
 #: ../../../reference/tools.rst:1392
 msgid "Wrapper of the ``pkg-config`` tool."
-msgstr ""
+msgstr "``pkg-config`` 工具的包裝器。"
 
 #: ../../../reference/tools.rst:1394
 msgid ""
@@ -2298,6 +2298,14 @@ msgid ""
 "    print(pkg_config.cflags_only_I)\n"
 "    print(pkg_config.variables)"
 msgstr ""
+"from conans import tools\n"
+"\n"
+"with tools.environment_append({'PKG_CONFIG_PATH': tmp_dir}):\n"
+"    pkg_config = PkgConfig(\"libastral\")\n"
+"    print(pkg_config.version)\n"
+"    print(pkg_config.cflags)\n"
+"    print(pkg_config.cflags_only_I)\n"
+"    print(pkg_config.variables)"
 
 #: ../../../reference/tools.rst:1414 ../../../reference/tools.rst:1470
 #: ../../../reference/tools.rst:1519

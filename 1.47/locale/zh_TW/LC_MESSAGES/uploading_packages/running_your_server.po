@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:16
 msgid "$ conan_server"
-msgstr ""
+msgstr "$ conan_server"
 
 #: ../../../uploading_packages/running_your_server.rst:19
 msgid ""
@@ -92,6 +92,7 @@ msgstr ""
 msgid ""
 "$ gunicorn -b 0.0.0.0:9300 -w 4 -t 300 conans.server.server_launcher:app"
 msgstr ""
+"$ gunicorn -b 0.0.0.0:9300 -w 4 -t 300 conans.server.server_launcher:app"
 
 #: ../../../uploading_packages/running_your_server.rst:55
 msgid ""
@@ -110,10 +111,12 @@ msgid ""
 "$ gunicorn -b 0.0.0.0:9300 -b [::1]:9300 -w 4 -t 300 conans.server."
 "server_launcher:app"
 msgstr ""
+"$ gunicorn -b 0.0.0.0:9300 -b [::1]:9300 -w 4 -t 300 conans.server."
+"server_launcher:app"
 
 #: ../../../uploading_packages/running_your_server.rst:65
 msgid "Server Configuration"
-msgstr ""
+msgstr "伺服端組態"
 
 #: ../../../uploading_packages/running_your_server.rst:66
 msgid ""
@@ -168,7 +171,7 @@ msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:104
 msgid "Server Parameters"
-msgstr ""
+msgstr "伺服端參數"
 
 #: ../../../uploading_packages/running_your_server.rst:112
 msgid "``port``: Port where **conan_server** will run."
@@ -296,6 +299,8 @@ msgid ""
 "[server]\n"
 "port: 9300"
 msgstr ""
+"[server]\n"
+"port: 9300"
 
 #: ../../../uploading_packages/running_your_server.rst:188
 #: ../../../uploading_packages/running_your_server.rst:220
@@ -324,7 +329,7 @@ msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:206
 msgid "$ conan remote add myremote https://myservername.mydomain.com"
-msgstr ""
+msgstr "$ conan remote add myremote https://myservername.mydomain.com"
 
 #: ../../../uploading_packages/running_your_server.rst:211
 msgid "Running the Conan Server with SSL using Nginx in a Subdirectory"
@@ -345,14 +350,26 @@ msgid ""
 "       }\n"
 "  }"
 msgstr ""
+"server {\n"
+"\n"
+"       listen 443;\n"
+"       ssl on;\n"
+"       ssl_certificate /usr/local/etc/nginx/ssl/server.crt;\n"
+"       ssl_certificate_key /usr/local/etc/nginx/ssl/server.key;\n"
+"       server_name myservername.mydomain.com;\n"
+"\n"
+"       location /subdir/ {\n"
+"          proxy_pass http://0.0.0.0:9300/;\n"
+"       }\n"
+"  }"
 
 #: ../../../uploading_packages/running_your_server.rst:239
 msgid "$ conan remote add myremote https://myservername.mydomain.com/subdir/"
-msgstr ""
+msgstr "$ conan remote add myremote https://myservername.mydomain.com/subdir/"
 
 #: ../../../uploading_packages/running_your_server.rst:244
 msgid "Running Conan Server using Apache"
-msgstr ""
+msgstr "使用 Apache 執行 Conan 伺服端"
 
 #: ../../../uploading_packages/running_your_server.rst:246
 msgid ""
@@ -364,6 +381,7 @@ msgstr ""
 #: ../../../uploading_packages/running_your_server.rst:265
 msgid "**Apache conf file** (e.g., /etc/apache2/sites-available/0_conan.conf)"
 msgstr ""
+"**Apache 組態檔**\\ （例如：/etc/apache2/sites-available/0_conan.conf）"
 
 #: ../../../uploading_packages/running_your_server.rst:250
 msgid ""
@@ -458,7 +476,7 @@ msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:313
 msgid "Authentication"
-msgstr ""
+msgstr "認證"
 
 #: ../../../uploading_packages/running_your_server.rst:315
 msgid ""
@@ -504,7 +522,7 @@ msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:329
 msgid "Create Your Own Custom Authenticator"
-msgstr ""
+msgstr "建立您自己的自訂認證器"
 
 #: ../../../uploading_packages/running_your_server.rst:331
 msgid ""

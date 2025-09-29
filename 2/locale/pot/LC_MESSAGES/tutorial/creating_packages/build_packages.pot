@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"POT-Creation-Date: 2025-09-23 08:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -93,7 +94,9 @@ msgid ""
 "    def requirements(self):\n"
 "        if self.options.with_fmt:\n"
 "            self.requires(\"fmt/8.1.1\")\n"
-"        self.test_requires(\"gtest/1.11.0\")\n"
+"\n"
+"    def build_requirements(self):\n"
+"        self.test_requires(\"gtest/1.17.0\")\n"
 "\n"
 "    ...\n"
 "\n"
@@ -117,21 +120,23 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:76
+#: ../../../tutorial/creating_packages/build_packages.rst:78
 msgid ""
-"We added the *gtest/1.11.0* requirement to the recipe as a "
+"We added the *gtest/1.17.0* requirement to the recipe as a "
 "``test_requires()``. It's a type of requirement intended for testing "
-"libraries like **Catch2** or **gtest**."
+"libraries like **Catch2** or **gtest**, and we declare it inside the "
+"``build_requirements()`` method, which is the recommended place for test "
+"dependencies."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:79
+#: ../../../tutorial/creating_packages/build_packages.rst:84
 msgid ""
 "We use the ``tools.build:skip_test`` configuration (``False`` by default), "
 "to tell CMake whether to build and run the tests or not. A couple of things "
 "to bear in mind:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:82
+#: ../../../tutorial/creating_packages/build_packages.rst:87
 msgid ""
 "If we set the ``tools.build:skip_test`` configuration to ``True``, Conan "
 "will automatically inject the ``BUILD_TESTING`` variable to CMake set to "
@@ -139,14 +144,14 @@ msgid ""
 "our *CMakeLists.txt* to decide whether to build the tests or not."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:87
+#: ../../../tutorial/creating_packages/build_packages.rst:92
 msgid ""
 "We use the ``tools.build:skip_test`` configuration in the ``build()`` "
 "method, after building the package and tests, to decide if we want to run "
 "the tests or not."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:90
+#: ../../../tutorial/creating_packages/build_packages.rst:95
 msgid ""
 "In this case we are using **gtest** for testing and we have to check if the "
 "build method is to run the tests or not. This configuration also affects the "
@@ -154,18 +159,18 @@ msgid ""
 "for Meson."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:96
+#: ../../../tutorial/creating_packages/build_packages.rst:101
 msgid "Changes introduced in the library sources"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:98
+#: ../../../tutorial/creating_packages/build_packages.rst:103
 msgid ""
 "First, please note that we are using `another branch <https://github.com/"
 "conan-io/libhello/tree/with_tests>`_ from the **libhello** library. This "
 "branch has two novelties on the library side:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:102
+#: ../../../tutorial/creating_packages/build_packages.rst:107
 msgid ""
 "We added a new function called ``compose_message()`` to the `library sources "
 "<https://github.com/conan-io/libhello/blob/with_tests/src/hello.cpp#L9-"
@@ -173,7 +178,7 @@ msgid ""
 "just creating an output message based on the arguments passed."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:107
+#: ../../../tutorial/creating_packages/build_packages.rst:112
 msgid ""
 "As we mentioned in the previous section, the `CMakeLists.txt for the library "
 "<https://github.com/conan-io/libhello/blob/with_tests/CMakeLists.txt#L15-"
@@ -181,11 +186,11 @@ msgid ""
 "*tests* directory."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:111
+#: ../../../tutorial/creating_packages/build_packages.rst:116
 msgid "*CMakeLists.txt*"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:111
+#: ../../../tutorial/creating_packages/build_packages.rst:116
 msgid ""
 "cmake_minimum_required(VERSION 3.15)\n"
 "project(hello CXX)\n"
@@ -199,7 +204,7 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:125
+#: ../../../tutorial/creating_packages/build_packages.rst:130
 msgid ""
 "The ``BUILD_TESTING`` `CMake variable <https://cmake.org/cmake/help/latest/"
 "module/CTest.html>`_ is declared and set to ``OFF`` by Conan (if not already "
@@ -209,18 +214,18 @@ msgid ""
 "in your *CMakeLists.txt* even if you are using another testing framework."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:132
+#: ../../../tutorial/creating_packages/build_packages.rst:137
 msgid ""
 "We have a `CMakeLists.txt <https://github.com/conan-io/libhello/blob/"
 "with_tests/tests/CMakeLists.txt>`_ in the *tests* folder using `googletest "
 "<https://github.com/google/googletest>`_ for testing:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:136
+#: ../../../tutorial/creating_packages/build_packages.rst:141
 msgid "*tests/CMakeLists.txt*"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:136
+#: ../../../tutorial/creating_packages/build_packages.rst:141
 msgid ""
 "cmake_minimum_required(VERSION 3.15)\n"
 "project(PackageTest CXX)\n"
@@ -231,16 +236,16 @@ msgid ""
 "target_link_libraries(test_hello GTest::gtest GTest::gtest_main hello)"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:148
+#: ../../../tutorial/creating_packages/build_packages.rst:153
 msgid ""
 "With basic tests on the functionality of the ``compose_message()`` function:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:151
+#: ../../../tutorial/creating_packages/build_packages.rst:156
 msgid "*tests/test.cpp*"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:151
+#: ../../../tutorial/creating_packages/build_packages.rst:156
 msgid ""
 "#include \"../include/hello.h\"\n"
 "#include \"gtest/gtest.h\"\n"
@@ -254,13 +259,13 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:164
+#: ../../../tutorial/creating_packages/build_packages.rst:169
 msgid ""
 "Now that we have gone through all the changes in the code, let's try them "
 "out:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:166
+#: ../../../tutorial/creating_packages/build_packages.rst:171
 msgid ""
 "$ conan create . --build=missing -tf=\"\"\n"
 "...\n"
@@ -290,14 +295,14 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:194
+#: ../../../tutorial/creating_packages/build_packages.rst:199
 msgid ""
 "As you can see, the tests were built and run. Let's use now the ``tools."
 "build:skip_test`` configuration in the command line to skip the test "
 "building and running:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:197
+#: ../../../tutorial/creating_packages/build_packages.rst:202
 msgid ""
 "$ conan create . -c tools.build:skip_test=True -tf=\"\"\n"
 "...\n"
@@ -308,17 +313,17 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:208
+#: ../../../tutorial/creating_packages/build_packages.rst:213
 msgid ""
 "You can see now that only the library target was built and that no tests "
 "were built or run."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:213
+#: ../../../tutorial/creating_packages/build_packages.rst:218
 msgid "Conditionally patching the source code"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:215
+#: ../../../tutorial/creating_packages/build_packages.rst:220
 msgid ""
 "If you need to patch the source code, the recommended approach is to do that "
 "in the ``source()`` method. Sometimes, if that patch depends on settings or "
@@ -328,7 +333,7 @@ msgid ""
 "the :ref:`replace_in_file <conan_tools_files_replace_in_file>` tool:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:222
+#: ../../../tutorial/creating_packages/build_packages.rst:227
 msgid ""
 "import os\n"
 "from conan import ConanFile\n"
@@ -352,7 +357,7 @@ msgid ""
 "options.shared else \"Static\"))"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:244
+#: ../../../tutorial/creating_packages/build_packages.rst:249
 msgid ""
 "Please note that patching in ``build()`` should be avoided if possible and "
 "only be done for very particular cases as it will make it more difficult to "
@@ -360,11 +365,11 @@ msgid ""
 "`local development flow section<local_package_development_flow>` later)."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:250
+#: ../../../tutorial/creating_packages/build_packages.rst:255
 msgid "Conditionally select your build system"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:252
+#: ../../../tutorial/creating_packages/build_packages.rst:257
 msgid ""
 "It's not uncommon that some packages need one build system or another "
 "depending on the platform we are building on. For example, the *hello* "
@@ -372,7 +377,7 @@ msgid ""
 "Autotools. This can be easily handled in the ``build()`` method like this:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:258
+#: ../../../tutorial/creating_packages/build_packages.rst:263
 msgid ""
 "...\n"
 "\n"
@@ -415,13 +420,13 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:303
+#: ../../../tutorial/creating_packages/build_packages.rst:308
 msgid ""
 "`JFrog Academy Conan 2 Essentials: Dependencies, Generators And Building "
 "<https://academy.jfrog.com/conan-2-essentials/2218962?"
 "utm_source=Conan+Docs>`__"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/build_packages.rst:304
+#: ../../../tutorial/creating_packages/build_packages.rst:309
 msgid ":ref:`Patching sources <examples_tools_files_patches>`"
 msgstr ""

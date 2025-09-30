@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -155,11 +155,28 @@ msgid ""
 "packages and artifacts must be immutable."
 msgstr ""
 
-#: ../../../knowledge/guidelines.rst:64
+#: ../../../knowledge/guidelines.rst:65
+msgid ""
+"Do not export packages with versions that have an alphanumeric major version "
+"when you want to use minor versions too. That is, do not use ``v1.3``, etc. "
+"(but ``system``, ``develop``, etc. are fine). The reason is that the checks "
+"for package binary compatibility that Conan performs special-case the major "
+"as alphanumeric cases, and will consider that ``v1.0`` and ``v1.3`` to be "
+"the same version regardless of the minor version, which might lead to "
+"unexpected results, such as a missing binary not being built when it should, "
+"and a package releasing without a critical bugfix. This can be mitigated by "
+"ensuring that both the ``package_id_non_embed_mode`` and "
+"``package_id_unknown_mode`` are explicitly set in the recipe to something "
+"other than ``major_mode``, ``minor_mode``, ``patch_mode`` or "
+"``semver_mode``, which are the affected modes. But it is simpler to just "
+"avoid alphanumeric major versions if you want to use minor versions too."
+msgstr ""
+
+#: ../../../knowledge/guidelines.rst:77
 msgid "Forbidden practices"
 msgstr ""
 
-#: ../../../knowledge/guidelines.rst:66
+#: ../../../knowledge/guidelines.rst:79
 msgid ""
 "**Conan is not re-entrant**: Calling the Conan process from Conan itself "
 "cannot be done. That includes calling Conan from recipe code, hooks, "
@@ -174,7 +191,7 @@ msgid ""
 "recipes, hooks, extensions, plugins, or any other code executed by Conan."
 msgstr ""
 
-#: ../../../knowledge/guidelines.rst:74
+#: ../../../knowledge/guidelines.rst:87
 msgid ""
 "**Settings and configuration (conf) are read-only in recipes**: The settings "
 "and configuration cannot be defined or assigned values in recipes. Something "
@@ -184,7 +201,7 @@ msgid ""
 "arguments or in the ``profile.py`` plugin."
 msgstr ""
 
-#: ../../../knowledge/guidelines.rst:75
+#: ../../../knowledge/guidelines.rst:88
 msgid ""
 "**Recipes reserved names**: Conan ``conanfile.py`` recipes user attributes "
 "and methods should always start with ``_``. Conan reserves the \"public\" "
@@ -194,7 +211,7 @@ msgid ""
 "is not documented in this documentation."
 msgstr ""
 
-#: ../../../knowledge/guidelines.rst:80
+#: ../../../knowledge/guidelines.rst:93
 msgid ""
 "**Conan artifacts are immutable**: Conan packages and artifacts, once they "
 "are in the Conan cache, they are assumed to be immutable. Any attempt to "
@@ -206,7 +223,7 @@ msgid ""
 "need to modify some package, you might use your own custom ``deployer``."
 msgstr ""
 
-#: ../../../knowledge/guidelines.rst:86
+#: ../../../knowledge/guidelines.rst:99
 msgid ""
 "**Conan cache paths are internal implementation detail**: The Conan cache "
 "paths are an internal implementation detail. Conan recipes provide "
@@ -218,7 +235,7 @@ msgid ""
 "command line or public API."
 msgstr ""
 
-#: ../../../knowledge/guidelines.rst:91
+#: ../../../knowledge/guidelines.rst:104
 msgid ""
 "**Sources used in recipes must be immutable**. Once a recipe is exported to "
 "the Conan cache, it is expected that the sources are immutable, that is, "

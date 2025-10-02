@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -372,29 +372,40 @@ msgid ""
 "``package_type`` of the dependency if not explicitly set by the recipe."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:232
+#: ../../../reference/conanfile/methods/requirements.rst:234
+msgid ""
+"The ``libs``, ``headers`` and ``visible`` traits are set to ``True`` by "
+"default unless otherwise stated in the lists shown below, or if they are "
+"manually set by the user to ``False``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:237
+msgid "The inferring rules are:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:239
 msgid "``application``: ``headers=False``, ``libs=False``, ``run=True``"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:233
+#: ../../../reference/conanfile/methods/requirements.rst:240
 msgid "``shared-library``: ``run=True``"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:234
+#: ../../../reference/conanfile/methods/requirements.rst:241
 msgid "``static-library``: ``run=False``"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:235
+#: ../../../reference/conanfile/methods/requirements.rst:242
 msgid "``header-library``: ``headers=True``, ``libs=False``, ``run=False``"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:236
+#: ../../../reference/conanfile/methods/requirements.rst:243
 msgid ""
 "``build-scripts``: ``headers=False``, ``libs=False``, ``run=True``, "
 "``visible=False``"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:238
+#: ../../../reference/conanfile/methods/requirements.rst:245
 msgid ""
 "This means that if in your recipe you have ``self.requires(\"mypkg/1.0\")``, "
 "and ``mypkg/1.0`` has ``package_type=\"application\"``, then the effective "
@@ -403,52 +414,76 @@ msgid ""
 "``requires``."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:243
+#: ../../../reference/conanfile/methods/requirements.rst:250
 msgid ""
 "Additionally, some additional traits are inferred on top of the above "
 "mentioned choices, based on the ``package_type`` of your recipe:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:246
+#: ../../../reference/conanfile/methods/requirements.rst:253
 msgid ""
 "``header-library``: ``transitive_headers=True``, ``transitive_libs=True``"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:248
+#: ../../../reference/conanfile/methods/requirements.rst:255
 msgid ""
 "This means that if your package is a ``header-library``, then all its "
 "requirements will have ``transitive_headers=True`` and "
 "``transitive_libs=True`` by default."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:252
+#: ../../../reference/conanfile/methods/requirements.rst:259
 msgid "Default traits for each kind of requires"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:254
+#: ../../../reference/conanfile/methods/requirements.rst:261
 msgid ""
 "Each kind of requires sets some additional traits by default on top of the "
 "ones stated in the last section. Those are:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:256
+#: ../../../reference/conanfile/methods/requirements.rst:263
 msgid "``requires``: ``build=False``"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:257
+#: ../../../reference/conanfile/methods/requirements.rst:264
 msgid ""
 "``build_requires``:  ``headers=False``, ``libs=False``, ``build=True``, "
 "``visible=False``"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:258
+#: ../../../reference/conanfile/methods/requirements.rst:265
 msgid ""
 "``tool_requires``: ``headers=False``, ``libs=False``, ``build=True``, "
 "``run=True``, ``visible=False``"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/requirements.rst:259
+#: ../../../reference/conanfile/methods/requirements.rst:266
 msgid ""
 "``test_requires``: ``headers=True``, ``libs=True``, ``build=False``, "
 "``visible=False``, ``test=True``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:268
+msgid ""
+"For example, taking all the logic shown into account, this means that if you "
+"have ``self.requires(\"mypkg/1.0\", visible=False)`` and ``mypkg/1.0`` has "
+"``package_type=\"shared-library\"``, the effective traits for that "
+"``requires`` will be:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:272
+msgid "Inferred from ``mypkg``'s ``package_type``: ``run=True``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:273
+msgid "By the ``requires`` kind: ``build=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:274
+msgid "Overridden by the user: ``visible=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:275
+msgid "By default: ``headers=True``, ``libs=True``"
 msgstr ""

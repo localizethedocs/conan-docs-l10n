@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,15 +77,46 @@ msgid ""
 "which one."
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:43
-msgid "Composition"
+#: ../../../reference/tools/env/environment.rst:42
+msgid "Generation of environment files"
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:45
-msgid "Environments can be composed:"
+#: ../../../reference/tools/env/environment.rst:44
+msgid ""
+"The generation of environment script files (like ``envfile.bat|.sh|.ps1|."
+"env``) can be done indirectly by the ``EnvVars`` class, which can be "
+"obtained with:"
 msgstr ""
 
 #: ../../../reference/tools/env/environment.rst:47
+msgid ""
+"from conan.tools.env import Environment\n"
+"\n"
+"env1 = Environment()\n"
+"...\n"
+"envvars = env1.vars(self)  # An EnvVars object\n"
+"# Generate a .bat|.sh|.ps1|.env file depending on current\n"
+"# settings and Conan configuration\n"
+"envars.save_script(\"mybuild\")\n"
+"# or decide to be explicit and generate some of the files:\n"
+"envvars.save_dotenv(\"myenv.env\")"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:60
+msgid ""
+"These files can be used also automatically by subsequent ``self.run()`` "
+"calls. For more information see the ``EnvVars`` class documentation."
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:65
+msgid "Composition"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:67
+msgid "Environments can be composed:"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:69
 msgid ""
 "from conan.tools.env import Environment\n"
 "\n"
@@ -98,16 +129,16 @@ msgid ""
 "prevail"
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:60
+#: ../../../reference/tools/env/environment.rst:82
 msgid "Obtaining environment variables"
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:62
+#: ../../../reference/tools/env/environment.rst:84
 msgid ""
 "You can obtain an ``EnvVars`` object with the ``vars()`` method like this:"
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:64
+#: ../../../reference/tools/env/environment.rst:86
 msgid ""
 "from conan.tools.env import Environment\n"
 "\n"
@@ -118,7 +149,7 @@ msgid ""
 "    # use the envvars object"
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:74
+#: ../../../reference/tools/env/environment.rst:96
 msgid ""
 "The default ``scope`` is equal ``\"build\"``, which means that if this "
 "``envvars`` generate a script to activate the variables, such script will be "
@@ -127,16 +158,16 @@ msgid ""
 "be possible to manage other scopes too."
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:81
+#: ../../../reference/tools/env/environment.rst:103
 msgid "Environment definition"
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:83
+#: ../../../reference/tools/env/environment.rst:105
 msgid ""
 "There are some other places where ``Environment`` can be defined and used:"
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:85
+#: ../../../reference/tools/env/environment.rst:107
 msgid ""
 "In recipes ``package_info()`` method, in new ``self.buildenv_info`` and "
 "``self.runenv_info``, this environment will be propagated via "
@@ -144,28 +175,28 @@ msgid ""
 "on this recipe."
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:88
+#: ../../../reference/tools/env/environment.rst:110
 msgid ""
 "In generators like ``AutootoolsDeps``, ``AutotoolsToolchain``, that need to "
 "define environment for the current recipe."
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:90
+#: ../../../reference/tools/env/environment.rst:112
 msgid "In profiles ``[buildenv]`` section."
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:91
+#: ../../../reference/tools/env/environment.rst:113
 msgid "In profiles ``[runenv]`` section."
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:94
+#: ../../../reference/tools/env/environment.rst:116
 msgid ""
 "The definition in ``package_info()`` is as follow, taking into account that "
 "both ``self.buildenv_info`` and ``self.runenv_info`` are objects of "
 "``Environment()`` class."
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:97
+#: ../../../reference/tools/env/environment.rst:119
 msgid ""
 "from conan import ConanFile\n"
 "\n"
@@ -188,7 +219,7 @@ msgid ""
 "                                                               \"datadir\"))"
 msgstr ""
 
-#: ../../../reference/tools/env/environment.rst:118
+#: ../../../reference/tools/env/environment.rst:140
 msgid "Reference"
 msgstr ""
 

@@ -1,0 +1,314 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/system/pipenv.rst:5
+msgid "PipEnv"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:11
+msgid ""
+"This is **only** for executable Python packages. This approach doesn't work "
+"for Python library packages that you would typically use via ``import``."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:14
+msgid ""
+"The ``PipEnv`` helper installs executable Python packages with **pip** "
+"inside a dedicated virtual environment (**venv**), keeping them isolated so "
+"they don't interfere with system packages or the Conan package itself."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/system/pip_manager.py:docstring of
+#: conan.tools.system.pip_manager.PipEnv.generate:1
+msgid ""
+"Create a conan environment to use the python venv in the next steps of the "
+"conanfile."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/system/pip_manager.py:docstring of
+#: conan.tools.system.pip_manager.PipEnv.install:1
+msgid "Will try to install the list of pip packages passed as a parameter."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/system/pip_manager.py:docstring of
+#: conan.tools.system.pip_manager.PipEnv.install:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/system/pip_manager.py:docstring of
+#: conan.tools.system.pip_manager.PipEnv.install:3
+msgid "try to install the list of pip packages passed as a parameter."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/system/pip_manager.py:docstring of
+#: conan.tools.system.pip_manager.PipEnv.install:4
+msgid ""
+"additional argument list to be passed to the 'pip install' command, for "
+"example: ['--no-cache-dir', '--index-url', 'https://my.pypi.org/simple']. "
+"Defaults to ``None``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/system/pip_manager.py:docstring of
+#: conan.tools.system.pip_manager.PipEnv.install:0
+msgid "Returns"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/system/pip_manager.py:docstring of
+#: conan.tools.system.pip_manager.PipEnv.install:7
+msgid "the return code of the executed pip command."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:23
+msgid "It is designed to be used in two different ways:"
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:25
+msgid "Using a Python CLI tool inside a recipe."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:26
+msgid ""
+"Use a tool installed as a Python package locally and reuse it in other "
+"recipes."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:29
+msgid "Using a Python package in a recipe"
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:31
+msgid ""
+"To use a tool installed with Python, we have to install it using the "
+"``PipEnv.install()`` method. We also have to call the ``PipEnv.generate()`` "
+"method to create a **Conan Environment** that adds the **Python virtualenv "
+"path** to the system path."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:34
+msgid ""
+"These two steps appear in the following recipe in the ``generate()`` method. "
+"Calling it in this method ensures that the **Python package** and the "
+"**Conan Environment** will be available in the following steps. In this "
+"case, in the build step, which is where we will use the installed tool."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:38
+#: ../../../reference/tools/system/pipenv.rst:106
+#: ../../../reference/tools/system/pipenv.rst:144
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:38
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.system import PipEnv\n"
+"from conan.tools.layout import basic_layout\n"
+"\n"
+"\n"
+"class PipPackage(ConanFile):\n"
+"    name = \"pip_install\"\n"
+"    version = \"0.1\"\n"
+"\n"
+"    def layout(self):\n"
+"        basic_layout(self)\n"
+"\n"
+"    def generate(self):\n"
+"        PipEnv(self).install([\"meson==1.9.1\"])\n"
+"        PipEnv(self).generate()\n"
+"\n"
+"    def build(self):\n"
+"        self.run(\"meson --version\")"
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:60
+msgid ""
+"If we run a ``conan build`` we can see how our Python package is installed "
+"when the generate step, and how it is called in the build step as if it were "
+"installed on the system."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:62
+msgid ""
+"$ conan build .\n"
+"\n"
+"...\n"
+"\n"
+"======== Finalizing install (deploy, generators) ========\n"
+"conanfile.py (pip_install/0.1): Calling generate()\n"
+"conanfile.py (pip_install/0.1): Generators folder: /Users/user/pip_install/"
+"build/conan\n"
+"conanfile.py (pip_install/0.1): RUN: /Users/user/pip_install/build/"
+"pip_venv_pip_install/bin/python -m pip install --disable-pip-version-check "
+"meson==1.9.1\n"
+"Collecting meson==1.9.1\n"
+"  Using cached meson-1.9.1-py3-none-any.whl.metadata (1.8 kB)\n"
+"Using cached meson-1.9.1-py3-none-any.whl (1.0 MB)\n"
+"Installing collected packages: meson\n"
+"Successfully installed meson-1.9.1\n"
+"\n"
+"conanfile.py (pip_install/0.1): Generating aggregated env files\n"
+"conanfile.py (pip_install/0.1): Generated aggregated env files: ['conanbuild."
+"sh', 'conanrun.sh']\n"
+"\n"
+"======== Calling build() ========\n"
+"conanfile.py (pip_install/0.1): Calling build()\n"
+"conanfile.py (pip_install/0.1): RUN: meson --version\n"
+"1.9.1"
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:88
+msgid "Use a tool installed as a Python package and reuse it in other recipes"
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:90
+msgid ""
+"In this case, we want to locally embed the installation of a tool using pip "
+"and reuse it as a conan recipe."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:92
+msgid ""
+"To do this, we need to install our tool using ``PipEnv.install()``, but in "
+"this case we will specify that we want it to create the virtualenv in the "
+"``package_folder``."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:95
+msgid ""
+"In this case, we don't need to call the ``PipEnv.generate()`` method because "
+"we're not going to use the tool within this recipe. We just want to make it "
+"reusable."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:98
+msgid ""
+"When creating a recipe to encapsulate a tool installed with Python, several "
+"things must be taken into account:"
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:100
+msgid ""
+"The packages are installed in the `finalize()` method. This ensures that the "
+"contents of the package folder do not change when the installed tools are "
+"run, because Python packages normally generate certain files when executed."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:102
+msgid ""
+"We will add the properties ``build_policy = \"missing\"`` and "
+"``upload_policy = \"skip\"`` to the recipe to ensure that it is only used "
+"locally and the resulting package will not be uploaded. This is important "
+"because **the generated package only works on the machine on which it was "
+"generated** due to how Python virtual environments work."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:106
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.system import PipEnv\n"
+"from conan.tools.layout import basic_layout\n"
+"\n"
+"\n"
+"class MesonPipPackage(ConanFile):\n"
+"    name = \"pip_meson\"\n"
+"    version = \"0.1\"\n"
+"    build_policy = \"missing\"\n"
+"    upload_policy = \"skip\"\n"
+"\n"
+"    def layout(self):\n"
+"        basic_layout(self)\n"
+"\n"
+"    def finalize(self):\n"
+"        PipEnv(self, self.package_folder).install([\"meson==1.9.1\"])\n"
+"\n"
+"    def package_info(self):\n"
+"        python_env_bin = PipEnv(self, self.package_folder).bin_dir\n"
+"        self.buildenv_info.prepend_path(\"PATH\", python_env_bin)"
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:130
+msgid ""
+"  $ conan create . --version 0.1\n"
+"\n"
+"-------- Installing package pip_meson/0.1 (1 of 1) --------\n"
+"...\n"
+"pip_meson/0.1: Calling finalize()\n"
+"pip_meson/0.1: RUN: /Users/user/.conan2/p/b/pip_m19e45e29ec612/f/"
+"pip_venv_pip_meson/bin/python -m pip install --disable-pip-version-check "
+"meson==1.9.1\n"
+"Collecting meson==1.9.1\n"
+"  Using cached meson-1.9.1-py3-none-any.whl.metadata (1.8 kB)\n"
+"Using cached meson-1.9.1-py3-none-any.whl (1.0 MB)\n"
+"Installing collected packages: meson\n"
+"Successfully installed meson-1.9.1"
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:144
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"\n"
+"class PipBuildPackage(ConanFile):\n"
+"    name = \"reuse_pip\"\n"
+"    version = \"0.1\"\n"
+"\n"
+"    def requirements(self):\n"
+"        self.tool_requires(\"pip_meson/0.1\")\n"
+"\n"
+"    def build(self):\n"
+"        self.run(\"meson --version\")"
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:160
+msgid ""
+"$ conan build .\n"
+"\n"
+"======== Computing dependency graph ========\n"
+"Graph root\n"
+"    conanfile.py (reuse_pip/0.1): /Users/user/reuse_pip/conanfile.py\n"
+"Build requirements\n"
+"    pip_meson/0.1#0f1f4d0fc28b2ef5951f42131ede4f99 - Cache\n"
+"\n"
+"======== Computing necessary packages ========\n"
+"Build requirements\n"
+"    pip_meson/0.1#0f1f4d0fc28b2ef5951f42131ede4f99:"
+"da39a3ee5e6b4b0d3255bfef95601890afd80709#0ba8627bd47edc3a501e8f0eb9a79e5e - "
+"Cache\n"
+"\n"
+"======== Installing packages ========\n"
+"pip_meson/0.1: Already installed! (1 of 1)\n"
+"pip_meson/0.1: Finalized folder /Users/user/.conan2/p/b/pip_m19e45e29ec612/"
+"f\n"
+"\n"
+"======== Finalizing install (deploy, generators) ========\n"
+"conanfile.py (reuse_pip/0.1): Generating aggregated env files\n"
+"conanfile.py (reuse_pip/0.1): Generated aggregated env files: ['conanbuild."
+"sh', 'conanrun.sh']\n"
+"\n"
+"======== Calling build() ========\n"
+"conanfile.py (reuse_pip/0.1): Calling build()\n"
+"conanfile.py (reuse_pip/0.1): RUN: meson --version\n"
+"1.9.1"
+msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../../incubating.rst:5
+#: ../../../incubating.rst:4
 msgid "Incubating features"
 msgstr "孵化中的功能"
 
-#: ../../../incubating.rst:7
+#: ../../../incubating.rst:6
 msgid ""
 "This section is dedicated to new features that are under development, "
 "looking for user testing and feedback. They are generally behind a flag to "
@@ -30,77 +30,77 @@ msgid ""
 "``develop2`` source branch), and explicitly setting those flags."
 msgstr ""
 
-#: ../../../incubating.rst:13
+#: ../../../incubating.rst:12
 msgid "New CMakeConfigDeps generator"
 msgstr "新的 CMakeConfigDeps 生成器"
 
-#: ../../../incubating.rst:15
+#: ../../../incubating.rst:14
 msgid ""
 "This generator is designed as a replacement of the current ``CMakeDeps`` "
 "generator, with multiple pending fixes and improvements that couldn't easily "
 "be done in the current one without breaking:"
 msgstr ""
 
-#: ../../../incubating.rst:17
+#: ../../../incubating.rst:16
 msgid ""
 "Creates real SHARED/STATIC/INTERFACE IMPORTED targets, no more artificial "
 "interface targets. The ``CONAN_LIB::`` and other similar targets do not "
 "exist anymore."
 msgstr ""
 
-#: ../../../incubating.rst:18
+#: ../../../incubating.rst:17
 msgid "Defines IMPORTED_CONFIGURATIONS for targets."
 msgstr "定義目標的 IMPORTED_CONFIGURATIONS。"
 
-#: ../../../incubating.rst:19
+#: ../../../incubating.rst:18
 msgid ""
 "CONFIG definition of dependencies matching the dependency ``Release/Debug/"
 "etc`` ``build_type``, no longer using the consumer one."
 msgstr ""
 
-#: ../../../incubating.rst:20
+#: ../../../incubating.rst:19
 msgid ""
 "Definition of IMPORTED_LOCATION and IMPORTED_IMPLIB for library targets."
 msgstr "程式庫目標的 IMPORTED_LOCATION 和 IMPORTED_IMPLIB 定義。"
 
-#: ../../../incubating.rst:21
+#: ../../../incubating.rst:20
 msgid ""
 "Definition of LINK_LANGUAGES based on the recipe ``languages`` and "
 "``cpp_info/component`` ``languages`` properties."
 msgstr ""
 
-#: ../../../incubating.rst:22
+#: ../../../incubating.rst:21
 msgid ""
 "All these allows better propagation of linkage requirement and visibility, "
 "avoiding some linkage error of transitive shared libraries in Linux."
 msgstr ""
 
-#: ../../../incubating.rst:23
+#: ../../../incubating.rst:22
 msgid ""
 "Better definition of ``requires`` relationships accross components inside "
 "the same package and with respect to other packages."
 msgstr ""
 
-#: ../../../incubating.rst:24
+#: ../../../incubating.rst:23
 msgid ""
 "It doesn't need any ``build_context_activated`` or ``build_context_suffix`` "
 "to use ``tool_requires`` dependencies."
 msgstr ""
 
-#: ../../../incubating.rst:25
+#: ../../../incubating.rst:24
 msgid ""
 "Definition of ``cpp_info/component.exe`` information (should include the ``."
 "location`` definition too), to define EXECUTABLE targets that can be run."
 msgstr ""
 
-#: ../../../incubating.rst:26
+#: ../../../incubating.rst:25
 msgid ""
 "Executables from ``requires`` can also be used in non cross-build scenarios. "
 "When a ``tool_requires`` to the same depependency exists, then those "
 "executables will have priority."
 msgstr ""
 
-#: ../../../incubating.rst:27
+#: ../../../incubating.rst:26
 msgid ""
 "Creation of a new ``conan_cmakedeps_paths.cmake`` that contains definitions "
 "of ``<pkg>_DIR`` paths for direct finding of the dependencies. This file is "
@@ -109,13 +109,13 @@ msgid ""
 "cannot inject a toolchain later."
 msgstr ""
 
-#: ../../../incubating.rst:28
+#: ../../../incubating.rst:27
 msgid ""
 "(new since Conan 2.14) Better management of the system OSX Frameworks "
 "through ``cpp_info.frameworks``."
 msgstr ""
 
-#: ../../../incubating.rst:29
+#: ../../../incubating.rst:28
 msgid ""
 "(new since Conan 2.14) Definition of ``cpp_info/component."
 "package_framework`` information (should include the ``.location`` definition "
@@ -124,21 +124,21 @@ msgid ""
 "against."
 msgstr ""
 
-#: ../../../incubating.rst:34
+#: ../../../incubating.rst:33
 msgid ""
 "This generator is only intended to generate ``config.cmake`` config files, "
 "it will not generate ``Find*.cmake`` find modules, and support for it is not "
 "planned. Use the ``CMakeDeps`` generator for that."
 msgstr ""
 
-#: ../../../incubating.rst:38
+#: ../../../incubating.rst:37
 msgid ""
 "The new fields that can be defined in the ``cpp_info`` or ``cpp_info."
 "components``, besides the already defined in :ref:"
 "`CppInfo<conan_conanfile_model_cppinfo>` are:"
 msgstr ""
 
-#: ../../../incubating.rst:40
+#: ../../../incubating.rst:39
 msgid ""
 "# EXPERIMENTAL FIELDS, used exclusively by new CMakeConfigDeps (-c tools."
 "cmake.cmakedeps:new)\n"
@@ -157,7 +157,7 @@ msgid ""
 "packages that provide source code to consumers)"
 msgstr ""
 
-#: ../../../incubating.rst:52
+#: ../../../incubating.rst:51
 msgid ""
 "These fields will be auto-deduced from the other ``cpp_info`` and "
 "``components`` definitions, like the ``libs`` or ``libdirs`` fields, but the "
@@ -165,15 +165,15 @@ msgid ""
 "inhibit the auto deduction and use the value as provided by the recipe."
 msgstr ""
 
-#: ../../../incubating.rst:54
+#: ../../../incubating.rst:53
 msgid "Declare sources for targets with:"
 msgstr ""
 
-#: ../../../incubating.rst:56
+#: ../../../incubating.rst:55
 msgid "self.cpp_info.sources = [\"src/mylib.cpp\", \"src/other.cpp\"]"
 msgstr ""
 
-#: ../../../incubating.rst:60
+#: ../../../incubating.rst:59
 msgid ""
 "This allows packages to provide source code as a dependency to consumers. "
 "The paths should be relative to the package folder. The source files will be "
@@ -182,7 +182,7 @@ msgid ""
 "when building their own targets."
 msgstr ""
 
-#: ../../../incubating.rst:64
+#: ../../../incubating.rst:63
 msgid ""
 "This feature is enabled with the ``-c tools.cmake.cmakedeps:"
 "new=will_break_next`` configuration. The value ``will_break_next`` will "
@@ -192,15 +192,15 @@ msgid ""
 "new generator."
 msgstr ""
 
-#: ../../../incubating.rst:66
+#: ../../../incubating.rst:65
 msgid "This new generator will also be usable in ``conanfile`` files with:"
 msgstr ""
 
-#: ../../../incubating.rst:68
+#: ../../../incubating.rst:67
 msgid "conanfile.txt"
 msgstr ""
 
-#: ../../../incubating.rst:68
+#: ../../../incubating.rst:67
 msgid ""
 "[generators]\n"
 "CMakeConfigDeps"
@@ -208,11 +208,11 @@ msgstr ""
 "[generators]\n"
 "CMakeConfigDeps"
 
-#: ../../../incubating.rst:74 ../../../incubating.rst:82
+#: ../../../incubating.rst:73 ../../../incubating.rst:81
 msgid "conanfile.py"
 msgstr "conanfile.py"
 
-#: ../../../incubating.rst:74
+#: ../../../incubating.rst:73
 msgid ""
 "class Pkg(ConanFile):\n"
 "   generators = \"CMakeConfigDeps\""
@@ -220,11 +220,11 @@ msgstr ""
 "class Pkg(ConanFile):\n"
 "   generators = \"CMakeConfigDeps\""
 
-#: ../../../incubating.rst:80
+#: ../../../incubating.rst:79
 msgid "Or:"
 msgstr ""
 
-#: ../../../incubating.rst:82
+#: ../../../incubating.rst:81
 msgid ""
 "from conan import ConanFile\n"
 "from conan.tools.cmake import CMakeConfigDeps\n"
@@ -236,7 +236,7 @@ msgid ""
 "      deps.generate()"
 msgstr ""
 
-#: ../../../incubating.rst:95
+#: ../../../incubating.rst:94
 msgid ""
 "The ``-c tools.cmake.cmakedeps:new=will_break_next`` is still necessary for "
 "this recipe ``CMakeConfigDeps`` usage, if the config is not enabled, those "
@@ -246,14 +246,14 @@ msgid ""
 "``CMakeDeps`` by the ``CMakeConfigDeps``."
 msgstr ""
 
-#: ../../../incubating.rst:99
+#: ../../../incubating.rst:98
 msgid ""
 "Note that the feature is still \"incubating\", even for the explicit "
 "``CMakeConfigDeps`` generator syntax, this recipe is subject to break or be "
 "removed at any time."
 msgstr ""
 
-#: ../../../incubating.rst:101
+#: ../../../incubating.rst:100
 msgid ""
 "For any feedback, please open new tickets in https://github.com/conan-io/"
 "conan/issues. This feedback is very important to stabilize the feature and "
@@ -261,39 +261,39 @@ msgid ""
 "having the positive feedback reported is very useful."
 msgstr ""
 
-#: ../../../incubating.rst:107
+#: ../../../incubating.rst:106
 msgid "Workspaces"
 msgstr ""
 
-#: ../../../incubating.rst:109
+#: ../../../incubating.rst:108
 msgid "Moved to :ref:`tutorial_workspaces`"
 msgstr ""
 
-#: ../../../incubating.rst:112
+#: ../../../incubating.rst:111
 msgid "Workspace files syntax"
 msgstr ""
 
-#: ../../../incubating.rst:114
+#: ../../../incubating.rst:113
 msgid "Moved to :ref:`reference_workspace_files`"
 msgstr ""
 
-#: ../../../incubating.rst:118
+#: ../../../incubating.rst:117
 msgid "Workspace commands"
 msgstr ""
 
-#: ../../../incubating.rst:119
+#: ../../../incubating.rst:118
 msgid "Moved to :ref:`reference_commands_workspace`"
 msgstr ""
 
-#: ../../../incubating.rst:123
+#: ../../../incubating.rst:122
 msgid "Workspace monolithic builds"
 msgstr ""
 
-#: ../../../incubating.rst:125
+#: ../../../incubating.rst:124
 msgid "Moved to :ref:`tutorial_workspaces_monolithic`"
 msgstr ""
 
-#: ../../../incubating.rst:128
+#: ../../../incubating.rst:127
 msgid ""
 "For any feedback, please open new tickets in https://github.com/conan-io/"
 "conan/issues."

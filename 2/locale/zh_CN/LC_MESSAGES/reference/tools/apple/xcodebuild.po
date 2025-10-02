@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,26 +74,41 @@ msgid ""
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/apple/xcodebuild.py:docstring of
+#: conan.tools.apple.xcodebuild.XcodeBuild.build:7
+msgid ""
+"Build configuration to use (e.g., ``Debug``, ``Release``). Defaults to the "
+"recipe's ``settings.build_type``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/xcodebuild.py:docstring of
+#: conan.tools.apple.xcodebuild.XcodeBuild.build:9
+msgid ""
+"Extra options to pass directly to ``xcodebuild`` (list of strings). "
+"Examples: ``[\"-xcconfig\", \"<path/to/file.xcconfig>\"]`` or custom Xcode "
+"build settings like ``[\"BUILD_LIBRARY_FOR_DISTRIBUTION=YES\"]``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/xcodebuild.py:docstring of
 #: conan.tools.apple.xcodebuild.XcodeBuild.build:0
 msgid "Returns"
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/apple/xcodebuild.py:docstring of
-#: conan.tools.apple.xcodebuild.XcodeBuild.build:7
+#: conan.tools.apple.xcodebuild.XcodeBuild.build:12
 msgid "the return code for the launched ``xcodebuild`` command."
 msgstr ""
 
 #: ../../../reference/tools/apple/xcodebuild.rst:36
 msgid ""
-"The ``Xcode.build()`` method internally implements a call to ``xcodebuild`` "
-"like:"
+"The ``XcodeBuild.build()`` method internally implements a call to "
+"``xcodebuild`` like:"
 msgstr ""
 
 #: ../../../reference/tools/apple/xcodebuild.rst:38
 msgid ""
 "$ xcodebuild -project app.xcodeproj -configuration <configuration> -arch "
 "<architecture> <sdk> <verbosity> -target <target>/-alltargets "
-"*_DEPLOYMENT_TARGET=settings.os.version"
+"*_DEPLOYMENT_TARGET=settings.os.version <cli_args>"
 msgstr ""
 
 #: ../../../reference/tools/apple/xcodebuild.rst:42
@@ -103,7 +118,8 @@ msgstr ""
 #: ../../../reference/tools/apple/xcodebuild.rst:44
 msgid ""
 "``configuration`` is the configuration, typically *Release* or *Debug*, "
-"which will be obtained from ``settings.build_type``."
+"which will be obtained from ``settings.build_type`` unless you pass it "
+"explicitly via the ``configuration`` parameter."
 msgstr ""
 
 #: ../../../reference/tools/apple/xcodebuild.rst:46
@@ -131,29 +147,50 @@ msgid ""
 "'verbose' or 'quiet' if set by ``tools.build:verbosity`` in your **[conf]**"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodebuild.rst:58
-msgid "Additional parameters that are passed to ``xcodebuild``:"
+#: ../../../reference/tools/apple/xcodebuild.rst:57
+msgid ""
+"``cli_args`` are the additional command line arguments passed via the "
+"``cli_args`` parameter. These can include custom build settings like "
+"``BUILD_LIBRARY_FOR_DISTRIBUTION=YES``. You can also redirect build "
+"artifacts to the Conan build folder by passing ``SYMROOT`` and ``OBJROOT`` "
+"settings:"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodebuild.rst:60
+#: ../../../reference/tools/apple/xcodebuild.rst:62
 msgid ""
-"deployment target setting according to the values of ``os`` and ``os."
+"def build(self):\n"
+"  xcodebuild = XcodeBuild(self)\n"
+"  xcodebuild.build(\"app.xcodeproj\", cli_args=[f\"SYMROOT={self."
+"build_folder}\",\n"
+"                                              f\"OBJROOT={self."
+"build_folder}\"])"
+msgstr ""
+
+#: ../../../reference/tools/apple/xcodebuild.rst:69
+msgid ""
+"Additional parameters that are passed to ``xcodebuild`` (but before "
+"``cli_args``):"
+msgstr ""
+
+#: ../../../reference/tools/apple/xcodebuild.rst:71
+msgid ""
+"Deployment target setting according to the values of ``os`` and ``os."
 "version`` from profile, e.g. ``MACOSX_DEPLOYMENT_TARGET=10.15`` or "
 "``IPHONEOS_DEPLOYMENT_TARGET=15.0``"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodebuild.rst:64
+#: ../../../reference/tools/apple/xcodebuild.rst:75
 msgid "conf"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodebuild.rst:66
+#: ../../../reference/tools/apple/xcodebuild.rst:77
 msgid ""
 "``tools.build:verbosity`` (or ``tools.compilation:verbosity`` as fallback) "
 "which accepts ``quiet`` or ``verbose``, and sets the ``-verbose`` or ``-"
 "quiet`` flags in ``XcodeBuild.install()``"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodebuild.rst:69
+#: ../../../reference/tools/apple/xcodebuild.rst:80
 msgid ""
 "``tools.apple:sdk_path`` path for the sdk location, will set the ``SDKROOT`` "
 "value with preference over composing the value from the ``os.sdk`` and ``os."

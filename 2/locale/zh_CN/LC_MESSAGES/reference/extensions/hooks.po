@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,21 +218,27 @@ msgid ""
 "\n"
 " def post_package_info(conanfile):\n"
 "     conanfile.output.info(\"Running after of executing package_info() "
-"method.\")"
+"method.\")\n"
+"\n"
+" # Note that pre_package_id() hook doesn't exist yet, so far there hasn't "
+"been\n"
+" # a use case\n"
+" def post_package_id(conanfile):\n"
+"     conanfile.output.info(\"Running after executing packge_id() method.\")"
 msgstr ""
 
-#: ../../../reference/extensions/hooks.rst:135
+#: ../../../reference/extensions/hooks.rst:140
 msgid ""
 "Functions of the hooks are intended to be self-descriptive regarding to the "
 "execution of them. For example, the ``pre_package()`` function is called "
 "just before the ``package()`` method of the recipe is executed."
 msgstr ""
 
-#: ../../../reference/extensions/hooks.rst:140
+#: ../../../reference/extensions/hooks.rst:145
 msgid "All hook methods are filled only with the same single object:"
 msgstr ""
 
-#: ../../../reference/extensions/hooks.rst:142
+#: ../../../reference/extensions/hooks.rst:147
 msgid ""
 "**conanfile**: It is a regular ``ConanFile`` object loaded from the recipe "
 "that received the Conan command. It has its normal attributes and dynamic "
@@ -240,36 +246,36 @@ msgid ""
 "``dependencies``,  ``options`` ..."
 msgstr ""
 
-#: ../../../reference/extensions/hooks.rst:146
+#: ../../../reference/extensions/hooks.rst:151
 msgid "Storage, activation and sharing"
 msgstr ""
 
-#: ../../../reference/extensions/hooks.rst:148
+#: ../../../reference/extensions/hooks.rst:153
 msgid ""
 "Hooks are Python files stored under *<conan_home>/extensions/hooks* folder "
 "and **their file name should start with hook_ and end with the .py "
 "extension**."
 msgstr ""
 
-#: ../../../reference/extensions/hooks.rst:151
+#: ../../../reference/extensions/hooks.rst:156
 msgid ""
 "The activation of the hooks is done automatically once the hook file is "
 "stored in the hook folder. In case storing in subfolders, it works "
 "automatically too."
 msgstr ""
 
-#: ../../../reference/extensions/hooks.rst:154
+#: ../../../reference/extensions/hooks.rst:159
 msgid ""
 "To deactivate a hook, its file should be removed from the hook folder. There "
 "is no configuration which can deactivate but keep the file stored in hooks "
 "folder."
 msgstr ""
 
-#: ../../../reference/extensions/hooks.rst:157
+#: ../../../reference/extensions/hooks.rst:162
 msgid "Official Hooks"
 msgstr ""
 
-#: ../../../reference/extensions/hooks.rst:159
+#: ../../../reference/extensions/hooks.rst:164
 msgid ""
 "There are some officially maintained hooks in its own repository in `Conan "
 "hooks GitHub <https://github.com/conan-io/hooks>`_, but mostly are only "

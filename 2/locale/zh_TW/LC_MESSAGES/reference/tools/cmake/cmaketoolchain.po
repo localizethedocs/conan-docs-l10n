@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1213,10 +1213,11 @@ msgstr ""
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:707
 msgid ""
 "It is important to note that this method is not applicable to build systems "
-"other than CMake."
+"other than CMake or Autotools via ``CMakeToolchain`` and "
+"``AutotoolsToolchain``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:710
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:711
 msgid ""
 "Be aware that this feature is primarily beneficial for building final "
 "univeral binaries for release purposes. The default Conan behavior of "
@@ -1225,7 +1226,7 @@ msgid ""
 "this feature for broader use cases."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:717
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:718
 msgid "Reference"
 msgstr ""
 
@@ -1235,31 +1236,31 @@ msgid ""
 "This method will save the generated files to the conanfile.generators_folder"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:727
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:728
 msgid "conf"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:729
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:730
 msgid "CMakeToolchain is affected by these ``[conf]`` variables:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:731
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:732
 msgid ""
 "**tools.cmake.cmaketoolchain:toolchain_file** user toolchain file to replace "
 "the ``conan_toolchain.cmake`` one."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:732
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:733
 msgid ""
 "**tools.cmake.cmaketoolchain:user_toolchain** list of user toolchains to be "
 "included from the ``conan_toolchain.cmake`` file."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:733
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:734
 msgid "**tools.android:ndk_path** value for ``ANDROID_NDK_PATH``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:734
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:735
 msgid ""
 "**tools.android:cmake_legacy_toolchain**: boolean value for "
 "``ANDROID_USE_LEGACY_TOOLCHAIN_FILE``. It will only be defined in "
@@ -1272,31 +1273,31 @@ msgid ""
 "using CMake 3.21 or above."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:738
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:739
 msgid ""
 "**tools.cmake.cmaketoolchain:system_name** is not necessary in most cases "
 "and is only used to force-define ``CMAKE_SYSTEM_NAME``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:739
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:740
 msgid ""
 "**tools.cmake.cmaketoolchain:system_version** is not necessary in most cases "
 "and is only used to force-define ``CMAKE_SYSTEM_VERSION``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:740
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:741
 msgid ""
 "**tools.cmake.cmaketoolchain:system_processor** is not necessary in most "
 "cases and is only used to force-define ``CMAKE_SYSTEM_PROCESSOR``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:741
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:742
 msgid ""
 "**tools.cmake.cmaketoolchain:enabled_blocks** define which blocks are "
 "enabled and discard the others."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:742
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:743
 msgid ""
 "**tools.cmake.cmaketoolchain:extra_variables**: dict-like python object "
 "which specifies the CMake variable name and value. The value can be a plain "
@@ -1307,31 +1308,31 @@ msgid ""
 "for which users are at their own risk. E.g."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:744
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:745
 msgid ""
 "[conf]\n"
 "tools.cmake.cmaketoolchain:extra_variables={'MY_CMAKE_VAR': 'MyValue'}"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:749
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:764
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:750
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:765
 msgid "Resulting in:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:751
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:752
 msgid "set(MY_CMAKE_VAR \"MyValue\")"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:755
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:756
 msgid ""
 "Which will be injected later so it can override default Conan variables."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:757
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:758
 msgid "Another advanced usage:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:759
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:760
 msgid ""
 "tools.cmake.cmaketoolchain:extra_variables={'MyIntegerVariable': 42, "
 "'CMAKE_GENERATOR_INSTANCE': '${ENV}/buildTools/'}\n"
@@ -1340,171 +1341,171 @@ msgid ""
 "True}}"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:766
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:767
 msgid ""
 "set(MyIntegerVariable 42)\n"
 "set(CMAKE_GENERATOR_INSTANCE \"${ENV}/buildTools/\")\n"
 "set(CACHED_VAR \"/var/run\" CACHE BOOL \"test cache var\" FORCE)"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:772
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:773
 msgid ""
 "This block injects ``$`` which will be expanded later. It also defines a "
 "cache variable of type ``PATH``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:776
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:777
 msgid ""
 "Use the :ref:`configuration data operator<configuration_data_operators>` "
 "``*=`` to **update** (instead of redefining) conf variables already set in "
 "profiles or the global configuration."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:778
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:779
 msgid ""
 "**tools.cmake.cmaketoolchain:toolset_arch**: Will add the ``,host=xxx`` "
 "specifier in the ``CMAKE_GENERATOR_TOOLSET`` variable of ``conan_toolchain."
 "cmake`` file."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:779
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:780
 msgid ""
 "**tools.cmake.cmaketoolchain:toolset_cuda**: (Experimental) Will add the ``,"
 "cuda=xxx`` specifier in the ``CMAKE_GENERATOR_TOOLSET`` variable of "
 "``conan_toolchain.cmake`` file."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:780
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:781
 msgid ""
 "**tools.cmake.cmake_layout:build_folder_vars**: Settings, Options, ``self."
 "name`` and ``self.version`` and constants ``const.uservalue`` that will "
 "produce a different build folder and different CMake presets names."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:781
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:782
 msgid ""
 "**tools.cmake.cmaketoolchain:presets_environment**: Set to ``'disabled'`` to "
 "prevent the addition of the environment section to the generated CMake "
 "presets."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:782
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:783
 msgid ""
 "**tools.cmake.cmaketoolchain:user_presets**: (Experimental) Allows setting a "
 "custom name or subfolder for the `CMakeUserPresets.json` file. An empty "
 "string disables file generation entirely."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:783
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:784
 msgid ""
 "**tools.build:cxxflags** list of extra C++ flags that will be appended to "
 "``CMAKE_CXX_FLAGS_INIT``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:784
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:785
 msgid ""
 "**tools.build:cflags** list of extra of pure C flags that will be appended "
 "to ``CMAKE_C_FLAGS_INIT``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:785
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:786
 msgid ""
 "**tools.build:sharedlinkflags** list of extra linker flags that will be "
 "appended to ``CMAKE_SHARED_LINKER_FLAGS_INIT``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:786
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:787
 msgid ""
 "**tools.build:exelinkflags** list of extra linker flags that will be "
 "appended to ``CMAKE_EXE_LINKER_FLAGS_INIT``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:787
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:788
 msgid ""
 "**tools.build:defines** list of preprocessor definitions that will be used "
 "by ``add_definitions()``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:788
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:789
 msgid ""
 "**tools.apple:sdk_path** value for ``CMAKE_OSX_SYSROOT``. In the general "
 "case it's not needed and will be passed to CMake by the settings values."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:789
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:790
 msgid ""
 "**tools.apple:enable_bitcode** boolean value to enable/disable Bitcode Apple "
 "Clang flags, e.g., ``CMAKE_XCODE_ATTRIBUTE_ENABLE_BITCODE``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:790
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:791
 msgid ""
 "**tools.apple:enable_arc** boolean value to enable/disable ARC Apple Clang "
 "flags, e.g., ``CMAKE_XCODE_ATTRIBUTE_CLANG_ENABLE_OBJC_ARC``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:791
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:792
 msgid ""
 "**tools.apple:enable_visibility** boolean value to enable/disable Visibility "
 "Apple Clang flags, e.g., "
 "``CMAKE_XCODE_ATTRIBUTE_GCC_SYMBOLS_PRIVATE_EXTERN``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:792
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:793
 msgid "**tools.build:sysroot** defines the value of ``CMAKE_SYSROOT``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:793
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:794
 msgid ""
 "**tools.microsoft:winsdk_version** Defines the ``CMAKE_SYSTEM_VERSION`` or "
 "the ``CMAKE_GENERATOR_PLATFORM`` according to CMake policy ``CMP0149``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:794
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:795
 msgid ""
 "**tools.build:compiler_executables** dict-like Python object which specifies "
 "the compiler as key and the compiler executable path as value. Those keys "
 "will be mapped as follows:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:798
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:799
 msgid "``c``: will set ``CMAKE_C_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:799
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:800
 msgid "``cpp``: will set ``CMAKE_CXX_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:800
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:801
 msgid "``RC``: will set ``CMAKE_RC_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:801
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:802
 msgid "``objc``: will set ``CMAKE_OBJC_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:802
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:803
 msgid ""
 "``objcpp``: will set ``CMAKE_OBJCXX_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:803
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:804
 msgid "``cuda``: will set ``CMAKE_CUDA_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:804
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:805
 msgid ""
 "``fortran``: will set ``CMAKE_Fortran_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:805
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:806
 msgid "``asm``: will set ``CMAKE_ASM_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:806
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:807
 msgid "``hip``: will set ``CMAKE_HIP_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:807
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:808
 msgid "``ispc``: will set ``CMAKE_ISPC_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""

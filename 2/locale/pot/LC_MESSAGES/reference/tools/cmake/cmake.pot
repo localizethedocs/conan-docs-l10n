@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,7 +62,39 @@ msgid ""
 "        cmake.build()"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmake.rst:41
+#: ../../../reference/tools/cmake/cmake.rst:38
+msgid ""
+"**Experimental** feature.  ``CMake.configure()``, ``CMake.build()`` and "
+"``CMake.install()`` methods have the **subfolder** parameter in case you "
+"have more than one ``CMakeLists.txt`` in different folders. This feature "
+"allows you to call the **configure** **build** and **install** method of "
+"each **CMakeLists.txt** separately and without mixing the generated files "
+"and artifacts, also creating these folders in the **build folder** and "
+"**package folder**."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake.rst:44
+msgid ""
+"In the following example, we can see what it would look like if we had two "
+"different **CMakeLists.txt** (**cmake_1/CMakeLists.txt** and **cmake_2/"
+"CMakeLists.txt**) in the **folder1** and **folder2** folders."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake.rst:47
+msgid ""
+"def build(self):\n"
+"    cmake = CMake(self)\n"
+"\n"
+"    # Configure and build source_folder/cmake_1/CMakeLists.txt in folder1\n"
+"    cmake.configure(build_script_folder=\"cmake_1\", subfolder=\"folder1\")\n"
+"    cmake.build(subfolder=\"folder1\")\n"
+"\n"
+"    # Configure and build source_folder/cmake_2/CMakeLists.txt in folder2\n"
+"    cmake.configure(build_script_folder=\"cmake_2\" subfolder=\"folder2\")\n"
+"    cmake.build(subfolder=\"folder2\")"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake.rst:61
 msgid "Reference"
 msgstr ""
 
@@ -268,15 +300,15 @@ msgstr ""
 msgid "the environment files to activate, by default conanbuild + conanrun"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmake.rst:50
+#: ../../../reference/tools/cmake/cmake.rst:70
 msgid "conf"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmake.rst:52
+#: ../../../reference/tools/cmake/cmake.rst:72
 msgid "The ``CMake()`` build helper is affected by these ``[conf]`` variables:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmake.rst:54
+#: ../../../reference/tools/cmake/cmake.rst:74
 msgid ""
 "``tools.build:verbosity`` will accept one of ``quiet`` or ``verbose`` to be "
 "passed to the ``CMake.build()`` command, when a Visual Studio generator "
@@ -285,39 +317,39 @@ msgid ""
 "Release -- /verbosity:Diagnostic``"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmake.rst:58
+#: ../../../reference/tools/cmake/cmake.rst:78
 msgid ""
 "``tools.compilation:verbosity`` will accept one of ``quiet`` or ``verbose`` "
 "to be passed to CMake, which sets ``-DCMAKE_VERBOSE_MAKEFILE`` if ``verbose``"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmake.rst:61
+#: ../../../reference/tools/cmake/cmake.rst:81
 msgid ""
 "``tools.build:jobs`` argument for the ``--jobs`` parameter when running "
 "Ninja generator."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmake.rst:63
+#: ../../../reference/tools/cmake/cmake.rst:83
 msgid ""
 "``tools.microsoft.msbuild:max_cpu_count`` argument for the ``/m`` (``/"
 "maxCpuCount``) when running ``MSBuild``. If ``max_cpu_count=0``, then it "
 "will use ``/m`` without arguments, which means use all available cpus."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmake.rst:66
+#: ../../../reference/tools/cmake/cmake.rst:86
 msgid ""
 "``tools.cmake:cmake_program`` specify the location of the CMake executable, "
 "instead of using the one found in the ``PATH``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmake.rst:68
+#: ../../../reference/tools/cmake/cmake.rst:88
 msgid ""
 "``tools.cmake:install_strip`` (**deprecated** use ``tools.build:"
 "install_strip``) will pass ``--strip`` to the ``cmake --install`` call if "
 "set to ``True``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmake.rst:70
+#: ../../../reference/tools/cmake/cmake.rst:90
 msgid ""
 "``tools.build:install_strip`` (Since Conan 2.18.0) will pass ``--strip`` to "
 "the ``cmake --install`` call if set to ``True``."

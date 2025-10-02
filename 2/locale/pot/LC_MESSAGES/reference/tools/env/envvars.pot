@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,11 +114,18 @@ msgstr ""
 
 #: ../../../reference/tools/env/envvars.rst:61
 msgid ""
+"From Conan 2.21, if the **experimental** ``tools.env:dotenv`` configuration "
+"is active, then ``.env`` files will also be generated. These files are not "
+"intended to be activated as scripts, but loaded by tools such as IDEs."
+msgstr ""
+
+#: ../../../reference/tools/env/envvars.rst:66
+msgid ""
 "You can also use ``scope=None`` argument to avoid appending the script to "
 "the aggregated ``conanbuild.bat|sh|ps1``:"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:63
+#: ../../../reference/tools/env/envvars.rst:68
 msgid ""
 "env1 = Environment()\n"
 "env1.define(\"foo\", \"var\")\n"
@@ -127,24 +134,24 @@ msgid ""
 "envvars.save_script(\"my_env_file\")"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:73
+#: ../../../reference/tools/env/envvars.rst:78
 msgid "Running with environment files"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:75
+#: ../../../reference/tools/env/envvars.rst:80
 msgid ""
 "The ``conanbuild.bat|sh|ps1`` launcher will be executed by default before "
 "calling every ``self.run()`` command. This would be typically done in the "
 "``build()`` method."
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:78
+#: ../../../reference/tools/env/envvars.rst:83
 msgid ""
 "You can change the default launcher with the ``env`` argument of ``self."
 "run()``:"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:80
+#: ../../../reference/tools/env/envvars.rst:85
 msgid ""
 "...\n"
 "def build(self):\n"
@@ -156,17 +163,17 @@ msgid ""
 "    self.run(\"foo\", env=[\"my_env_file\"])"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:92
+#: ../../../reference/tools/env/envvars.rst:97
 msgid "Applying the environment variables"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:94
+#: ../../../reference/tools/env/envvars.rst:99
 msgid ""
 "As an alternative to running a command, environments can be applied in the "
 "python environment:"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:96
+#: ../../../reference/tools/env/envvars.rst:101
 msgid ""
 "from conan.tools.env import Environment\n"
 "\n"
@@ -178,16 +185,16 @@ msgid ""
 "   ..."
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:108
+#: ../../../reference/tools/env/envvars.rst:113
 msgid "Iterating the variables"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:110
+#: ../../../reference/tools/env/envvars.rst:115
 msgid ""
 "You can iterate the environment variables of an ``EnvVars`` object like this:"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:112
+#: ../../../reference/tools/env/envvars.rst:117
 msgid ""
 "env1 = Environment()\n"
 "env1.append(\"foo\", \"var\")\n"
@@ -198,7 +205,7 @@ msgid ""
 "    assert value == \"var var2\""
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:123
+#: ../../../reference/tools/env/envvars.rst:128
 msgid ""
 "The current value of the environment variable in the system is replaced in "
 "the returned value. This happens when variables are appended or prepended. "
@@ -207,7 +214,7 @@ msgid ""
 "string with that resolved template will be returned instead:"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:129
+#: ../../../reference/tools/env/envvars.rst:134
 msgid ""
 "env1 = Environment()\n"
 "env1.append(\"foo\", \"var\")\n"
@@ -217,7 +224,7 @@ msgid ""
 "    assert value == \"$penv{{foo}} var\""
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:140
+#: ../../../reference/tools/env/envvars.rst:145
 msgid ""
 "In Windows, there is a limit to the size of environment variables, a total "
 "of 32K for the whole environment, but specifically the PATH variable has a "
@@ -226,26 +233,26 @@ msgid ""
 "to the PATH env-var."
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:144
+#: ../../../reference/tools/env/envvars.rst:149
 msgid "This can be mitigated by:"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:146
+#: ../../../reference/tools/env/envvars.rst:151
 msgid "Putting the Conan cache closer to C:/ for shorter paths"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:147
+#: ../../../reference/tools/env/envvars.rst:152
 msgid ""
 "Better definition of what dependencies can contribute to the PATH env-var"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:148
+#: ../../../reference/tools/env/envvars.rst:153
 msgid ""
 "Other mechanisms for things like running with many shared libraries "
 "dependencies with too many .dlls, like ``deployers``"
 msgstr ""
 
-#: ../../../reference/tools/env/envvars.rst:152
+#: ../../../reference/tools/env/envvars.rst:157
 msgid "Reference"
 msgstr ""
 

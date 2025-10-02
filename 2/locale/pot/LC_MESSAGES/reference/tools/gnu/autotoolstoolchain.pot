@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -270,7 +270,7 @@ msgstr ""
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:118
 msgid ""
 "**apple_arch_flag**: Only when cross-building with Apple systems. Flags from "
-"``settings.arch``."
+"``settings.arch``. For universal binaries, contains multiple ``-arch`` flags."
 msgstr ""
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:119
@@ -499,6 +499,58 @@ msgid ""
 msgstr ""
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:244
+msgid "Support for Universal Binaries in macOS"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:248
+msgid ""
+"Starting in Conan 2.21.0, there's support for building universal binaries on "
+"macOS using AutotoolsToolchain. To specify multiple architectures for a "
+"universal binary in Conan, use the `|` separator when defining the "
+"architecture in the settings. This approach enables passing a list of "
+"architectures. For example, running:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:254
+msgid "conan create . --name=mylibrary --version=1.0 -s=\"arch=armv8|x86_64\""
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:258
+msgid ""
+"will create a universal binary for *mylibrary* containing both ``armv8`` and "
+"``x86_64`` architectures, by setting multiple ``-arch`` flags in the "
+"generated toolchain script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:263
+msgid ""
+"It is important to note that this method is not applicable to build systems "
+"other than CMake or Autotools via ``CMakeToolchain`` and "
+"``AutotoolsToolchain``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:267
+msgid ""
+"Attempting to use universal architecture settings on non-Apple platforms "
+"will result in an error."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:270
+msgid ""
+"Be aware that this feature is primarily beneficial for building final "
+"universal binaries for release purposes. The default Conan behavior of "
+"managing one binary per architecture generally provides a more reliable and "
+"trouble-free experience. Users should be cautious and not overly rely on "
+"this feature for broader use cases."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:278
 msgid "Reference"
 msgstr ""
 
@@ -556,41 +608,41 @@ msgstr ""
 msgid "Helper to update/prune arguments from ``self.autoreconf_args``."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:255
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:289
 msgid "conf"
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:257
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:291
 msgid ""
 "``tools.build:cxxflags`` list of extra C++ flags that will be used by "
 "``CXXFLAGS``."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:258
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:292
 msgid ""
 "``tools.build:cflags`` list of extra of pure C flags that will be used by "
 "``CFLAGS``."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:259
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:293
 msgid ""
 "``tools.build:sharedlinkflags`` list of extra linker flags that will be used "
 "by ``LDFLAGS``."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:260
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:294
 msgid ""
 "``tools.build:exelinkflags`` list of extra linker flags that will be used by "
 "``LDFLAGS``."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:261
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:295
 msgid ""
 "``tools.build:defines`` list of preprocessor definitions that will be used "
 "by ``CPPFLAGS``."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:262
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:296
 msgid ""
 "``tools.build:linker_scripts`` list of linker scripts, each of which will be "
 "prefixed with ``-T`` and added to ``LDFLAGS``. Only use this flag with "
@@ -598,11 +650,11 @@ msgid ""
 "as ``ld``, ``gold``, and ``lld``."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:264
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:298
 msgid "``tools.build:sysroot`` defines the ``--sysroot`` flag to the compiler."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:265
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:299
 msgid ""
 "``tools.android:ndk_path`` (*new since Conan 2.5.0*) argument for NDK path "
 "in case of Android cross-compilation. It is used to set some environment "
@@ -615,45 +667,45 @@ msgid ""
 "definition to the ``VirtualBuildEnv`` generator."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:270
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:304
 msgid ""
 "``tools.build:compiler_executables`` dict-like Python object which specifies "
 "the compiler as key and the compiler executable path as value. Those keys "
 "will be mapped as follows:"
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:273
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:307
 msgid ""
 "``tools.gnu:extra_configure_args`` list of arguments to extend the "
 "``configure_args`` attribute of ``AutotoolsToolchain``."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:275
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:309
 msgid ""
 "``c``: will set ``CC`` (and ``CC_FOR_BUILD`` if cross-building) in "
 "*conanautotoolstoolchain.sh|bat* script."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:276
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:310
 msgid ""
 "``cpp``: will set ``CXX`` (and ``CXX_FOR_BUILD`` if cross-building) in "
 "*conanautotoolstoolchain.sh|bat* script."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:277
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:311
 msgid "``rc``: will set ``RC`` in *conanautotoolstoolchain.sh|bat* script."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:278
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:312
 msgid "``cuda``: will set ``NVCC`` in *conanautotoolstoolchain.sh|bat* script."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:279
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:313
 msgid ""
 "``fortran``: will set ``FC`` in *conanautotoolstoolchain.sh|bat* script."
 msgstr ""
 
-#: ../../../reference/tools/gnu/autotoolstoolchain.rst:284
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:318
 msgid ""
 "**flags order of preference**: Flags specified in the `tools.build` "
 "configuration, such as `cxxflags`, `cflags`, `sharedlinkflags`, "

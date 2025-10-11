@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 08:27+0000\n"
+"POT-Creation-Date: 2025-10-07 08:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -255,34 +255,44 @@ msgid ""
 msgstr ""
 
 #: ../../../reference/commands/config.rst:104
-msgid "Install from a URL skipping SSL verification:"
+msgid "Install the configuration from a specific Git branch:"
 msgstr ""
 
 #: ../../../reference/commands/config.rst:106
-msgid "$ conan config install http://url/to/some/config.zip --verify-ssl=False"
+msgid ""
+"$ conan config install http://github.com/user/conan_config/.git --args=\"--"
+"branch mybranch\""
 msgstr ""
 
 #: ../../../reference/commands/config.rst:110
-msgid "This will disable the SSL check of the certificate."
+msgid "Install from a URL skipping SSL verification:"
 msgstr ""
 
 #: ../../../reference/commands/config.rst:112
-msgid "Install a specific file from a local path:"
+msgid "$ conan config install http://url/to/some/config.zip --verify-ssl=False"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:114
-msgid "$ conan config install my_settings/settings.yml"
+#: ../../../reference/commands/config.rst:116
+msgid "This will disable the SSL check of the certificate."
 msgstr ""
 
 #: ../../../reference/commands/config.rst:118
-msgid "Install the configuration from a local path:"
+msgid "Install a specific file from a local path:"
 msgstr ""
 
 #: ../../../reference/commands/config.rst:120
+msgid "$ conan config install my_settings/settings.yml"
+msgstr ""
+
+#: ../../../reference/commands/config.rst:124
+msgid "Install the configuration from a local path:"
+msgstr ""
+
+#: ../../../reference/commands/config.rst:126
 msgid "$ conan config install /path/to/some/config.zip"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:128
+#: ../../../reference/commands/config.rst:134
 msgid "conan config install-pkg"
 msgstr ""
 
@@ -345,50 +355,51 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:137
+#: ../../../reference/commands/config.rst:143
 msgid ""
 "This command allows to install configuration from a Conan package stored in "
 "a Conan server."
 msgstr ""
 
-#: ../../../reference/commands/config.rst:139
+#: ../../../reference/commands/config.rst:145
 msgid "The packages containing configuration follow some special rules:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:141
+#: ../../../reference/commands/config.rst:147
 msgid "They must define the ``package_type = \"configuration\"``"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:142
+#: ../../../reference/commands/config.rst:148
 msgid ""
 "The configuration files must be packaged in the final \"binary\" package, "
 "following the same layout as they would for other ``conan config install`` "
 "cases."
 msgstr ""
 
-#: ../../../reference/commands/config.rst:143
+#: ../../../reference/commands/config.rst:149
 msgid ""
 "They cannot be used as ``requires`` of other packages, because that would "
 "result in a chicken-and-egg problem."
 msgstr ""
 
-#: ../../../reference/commands/config.rst:144
+#: ../../../reference/commands/config.rst:150
 msgid "They cannot contain ``requires`` to other packages"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:145
+#: ../../../reference/commands/config.rst:151
 msgid ""
 "The configuration packages are created with ``conan create`` and ``conan "
 "export-pkg`` as other packages, and uploaded to the servers with ``conan "
 "upload``"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:147
+#: ../../../reference/commands/config.rst:153
 msgid ""
-"To install configuration from a Conan configuration package, it is possible:"
+"To install a configuration from a Conan configuration package, it is "
+"possible:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:149
+#: ../../../reference/commands/config.rst:155
 msgid ""
 "To generate a lockfile file with ``--lockfile-out``. This lockfile file can "
 "be passed to ``conan config install-pkg --lockfile`` (it will automatically "
@@ -396,26 +407,26 @@ msgid ""
 "the future to guarantee the same exact version."
 msgstr ""
 
-#: ../../../reference/commands/config.rst:150
+#: ../../../reference/commands/config.rst:156
 msgid ""
 "Version ranges can be used ``conan config install-pkg \"myconf/[>=1.0 "
 "<2]\"`` is correct, and it will install the latest one in that range."
 msgstr ""
 
-#: ../../../reference/commands/config.rst:151
+#: ../../../reference/commands/config.rst:157
 msgid ""
 "``conan config install-pkg`` always look in the server for the latest "
 "version or revision."
 msgstr ""
 
-#: ../../../reference/commands/config.rst:152
+#: ../../../reference/commands/config.rst:158
 msgid ""
 "If the same version and revision was downloaded and installed from the "
 "server, ``conan config install-pkg`` will be a no-op unless ``--force`` is "
 "used, in this case the configuration will be overwritten."
 msgstr ""
 
-#: ../../../reference/commands/config.rst:154
+#: ../../../reference/commands/config.rst:160
 msgid ""
 "It is also possible to make the version of the configuration affect all "
 "packages ``package_id`` and be part of the binary model, by activating the "
@@ -423,18 +434,18 @@ msgid ""
 "available mode, like ``minor_mode``."
 msgstr ""
 
-#: ../../../reference/commands/config.rst:156
+#: ../../../reference/commands/config.rst:162
 msgid ""
 "As the ``conan config install-pkg`` command downloads the package from a "
 "Conan remote server, it can download from an already existing remote, or it "
 "can download from a Conan remote directly specifying the repository URL:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:159
+#: ../../../reference/commands/config.rst:165
 msgid "$ conan config install-pkg myconf/version --url=<url/conan/remote/repo>"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:164
+#: ../../../reference/commands/config.rst:170
 msgid ""
 "Conan configuration packages can also be parameterized depending on "
 "profiles, settings and options. For example, if some organization would like "
@@ -442,7 +453,7 @@ msgid ""
 "platforms they could do:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:167
+#: ../../../reference/commands/config.rst:173
 msgid ""
 "import os\n"
 "from conan import ConanFile\n"
@@ -459,46 +470,46 @@ msgid ""
 "dst=self.package_folder)"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:183
+#: ../../../reference/commands/config.rst:189
 msgid ""
 "And if they had a layout with different ``global.conf`` for the different "
 "platforms, like:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:185
+#: ../../../reference/commands/config.rst:191
 msgid ""
 "conanfile.py\n"
 "win/global.conf\n"
 "nix/global.conf"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:192
-msgid "They, they could create and upload their configuration package as:"
+#: ../../../reference/commands/config.rst:198
+msgid "They could create and upload their configuration package as:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:194
+#: ../../../reference/commands/config.rst:200
 msgid ""
 "$ conan export-pkg . -s os=Windows\n"
 "$ conan export-pkg . -s os=Linux\n"
 "$ conan upload \"*\" -r=remote -c"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:201
+#: ../../../reference/commands/config.rst:207
 msgid "Then, developers could do:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:203
+#: ../../../reference/commands/config.rst:209
 msgid ""
 "$ conan config install-pkg \"myconf/[*]\" -s os=Linux\n"
 "# or even implicitly, if they default build profile defines os=Linux\n"
 "$ conan config install-pkg \"myconf/[*]\""
 msgstr ""
 
-#: ../../../reference/commands/config.rst:210
+#: ../../../reference/commands/config.rst:216
 msgid "And they will get the correct configuration for their platform."
 msgstr ""
 
-#: ../../../reference/commands/config.rst:214
+#: ../../../reference/commands/config.rst:220
 msgid "conan config list"
 msgstr ""
 
@@ -535,17 +546,17 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:220
+#: ../../../reference/commands/config.rst:226
 msgid "Displays all the Conan built-in configurations. There are 2 groups:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:222
+#: ../../../reference/commands/config.rst:228
 msgid ""
 "``core.xxxx``: These can only be defined in ``global.conf`` and are used by "
 "Conan internally"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:223
+#: ../../../reference/commands/config.rst:229
 msgid ""
 "``tools.xxxx``: These can be defined both in ``global.conf`` and profiles, "
 "and will be used by recipes and tools used within recipes, like "
@@ -781,13 +792,13 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:230
+#: ../../../reference/commands/config.rst:236
 msgid ""
 "It is possible to list only the configurations that match a given pattern, "
 "like:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:232
+#: ../../../reference/commands/config.rst:238
 msgid ""
 "$  conan config list proxy\n"
 "core.net.http:clean_system_proxy: If defined, the proxies system env-vars "
@@ -797,13 +808,13 @@ msgid ""
 "core.net.http:proxies: Dictionary containing the proxy configuration"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:242
+#: ../../../reference/commands/config.rst:248
 msgid ""
 "These configurations can be defined in ``global.conf``, profile files and "
 "command line, see :ref:`Conan configuration files <reference_config_files>`"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:247
+#: ../../../reference/commands/config.rst:253
 msgid "conan config show"
 msgstr ""
 
@@ -839,15 +850,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:253
+#: ../../../reference/commands/config.rst:259
 msgid "Shows the values of the conf items that match the given pattern."
 msgstr ""
 
-#: ../../../reference/commands/config.rst:255
+#: ../../../reference/commands/config.rst:261
 msgid "For a *global.conf* consisting of"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:257
+#: ../../../reference/commands/config.rst:263
 msgid ""
 "tools.build:jobs=42\n"
 "tools.files.download:retry_wait=10\n"
@@ -858,11 +869,11 @@ msgid ""
 "zlib*/:tools.files.download:retry=5"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:267
+#: ../../../reference/commands/config.rst:273
 msgid "You can get all the values:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:269
+#: ../../../reference/commands/config.rst:275
 msgid ""
 "$ conan config show \"*\"\n"
 "\n"
@@ -875,11 +886,11 @@ msgid ""
 "zlib*/:tools.files.download:retry_wait: 100"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:281
+#: ../../../reference/commands/config.rst:287
 msgid "Or just those referring to the ``tools.files`` section:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:283
+#: ../../../reference/commands/config.rst:289
 msgid ""
 "$ conan config show \"*tools.files*\"\n"
 "\n"
@@ -889,13 +900,13 @@ msgid ""
 "zlib*/:tools.files.download:retry_wait: 100"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:292
+#: ../../../reference/commands/config.rst:298
 msgid ""
 "Notice the first ``*`` in the pattern. This will match all the package "
 "patterns. Removing it will make the command only show global confs:"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:295
+#: ../../../reference/commands/config.rst:301
 msgid ""
 "$ conan config show \"tools.files*\"\n"
 "\n"
@@ -903,7 +914,7 @@ msgid ""
 "tools.files.download:retry_wait: 10"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:304
+#: ../../../reference/commands/config.rst:310
 msgid "conan config clean"
 msgstr ""
 
@@ -935,7 +946,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/config.rst:309
+#: ../../../reference/commands/config.rst:315
 msgid ""
 "Removes all the custom configuration from the Conan home, such as ``remotes."
 "json``, profiles, settings, plugins, extensions, etc. This does not remove "

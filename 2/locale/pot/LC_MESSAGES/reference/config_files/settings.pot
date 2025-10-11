@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 08:27+0000\n"
+"POT-Creation-Date: 2025-10-07 08:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -637,74 +637,81 @@ msgstr ""
 msgid ""
 "**wasm**: The Web Assembly, not really a processor architecture, but byte-"
 "code format for Web, it's produced by Emscripten. Conan treats it as an "
-"architecture to align with build systems design (e.g. GNU auto tools and "
-"CMake)."
+"architecture to align with build systems design (e.g. GNU auto tools, CMake, "
+"etc)."
 msgstr ""
 
 #: ../../../reference/config_files/settings.rst:157
-msgid "**sh4le**: The Hitachi SH-4 SuperH architecture."
+msgid ""
+"**wasm64**: The Web Assembly 64 bit, same as **wasm** but for 64 bit. Conan "
+"will add the necessary flags to the compiler to produce 64 bit Web Assembly "
+"code."
 msgstr ""
 
 #: ../../../reference/config_files/settings.rst:158
+msgid "**sh4le**: The Hitachi SH-4 SuperH architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.rst:159
 msgid ""
 "**e2k-v2**: The Elbrus 2000 v2 512 bit VLIW (Very Long Instruction Word) "
 "architecture (Elbrus 2CM, Elbrus 2C+ CPUs) originally developed by MCST "
 "(Moscow Center of SPARC Technologies)."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:159
+#: ../../../reference/config_files/settings.rst:160
 msgid ""
 "**e2k-v3**: The Elbrus 2000 v3 512 bit VLIW (Very Long Instruction Word) "
 "architecture (Elbrus 2S, aka Elbrus 4C, CPU) originally developed by MCST "
 "(Moscow Center of SPARC Technologies)."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:160
+#: ../../../reference/config_files/settings.rst:161
 msgid ""
 "**e2k-v4**: The Elbrus 2000 v4 512 bit VLIW (Very Long Instruction Word) "
 "architecture (Elbrus 8C, Elbrus 8C1, Elbrus 1C+ and Elbrus 1CK CPUs) "
 "originally developed by MCST (Moscow Center of SPARC Technologies)."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:161
+#: ../../../reference/config_files/settings.rst:162
 msgid ""
 "**e2k-v5**: The Elbrus 2000 v5 512 bit VLIW (Very Long Instruction Word) "
 "architecture (Elbrus 8C2 ,aka Elbrus 8CB, CPU) originally developed by MCST "
 "(Moscow Center of SPARC Technologies)."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:162
+#: ../../../reference/config_files/settings.rst:163
 msgid ""
 "**e2k-v6**: The Elbrus 2000 v6 512 bit VLIW (Very Long Instruction Word) "
 "architecture (Elbrus 2C3, Elbrus 12C and Elbrus 16C CPUs) originally "
 "developed by MCST (Moscow Center of SPARC Technologies)."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:163
+#: ../../../reference/config_files/settings.rst:164
 msgid ""
 "**e2k-v7**: The Elbrus 2000 v7 512 bit VLIW (Very Long Instruction Word) "
 "architecture (Elbrus 32C CPU) originally developed by MCST (Moscow Center of "
 "SPARC Technologies)."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:164
+#: ../../../reference/config_files/settings.rst:165
 msgid "**xtensalx6**: Xtensa LX6 DPU for ESP32 microcontroller."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:165
+#: ../../../reference/config_files/settings.rst:166
 msgid "**xtensalx106**: Xtensa LX6 DPU for ESP8266 microcontroller."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:166
+#: ../../../reference/config_files/settings.rst:167
 msgid ""
 "**xtensalx7**: Xtensa LX7 DPU for ESP32-S2 and ESP32-S3 microcontrollers."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:170
+#: ../../../reference/config_files/settings.rst:171
 msgid "C++ standard libraries (aka compiler.libcxx)"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:172
+#: ../../../reference/config_files/settings.rst:173
 msgid ""
 "``compiler.libcxx`` sub-setting defines C++ standard libraries "
 "implementation to be used. The sub-setting applies only to certain "
@@ -712,67 +719,67 @@ msgid ""
 "apply to *Visual Studio*."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:175
+#: ../../../reference/config_files/settings.rst:176
 msgid ""
-"**libstdc++** (gcc, clang, apple-clang, sun-cc): `The GNU C++ Library "
+"**libstdc++** (gcc, clang, apple-clang, sun-cc, intel-cc, mcst-lcc, emcc): "
+"`The GNU C++ Library <https://gcc.gnu.org/onlinedocs/libstdc++/>`__. NOTE "
+"that this implicitly defines **_GLIBCXX_USE_CXX11_ABI=0** to use old ABI. "
+"Might be a wise choice for old systems, such as CentOS 6. On Linux systems, "
+"you may need to install `libstdc++-dev <https://packages.debian.org/sid/"
+"libstdc++-dev>`_ (package name could be different in various distros) in "
+"order to use the standard library. NOTE that on Apple systems usage of "
+"**libstdc++** has been deprecated."
+msgstr ""
+
+#: ../../../reference/config_files/settings.rst:181
+msgid ""
+"**libstdc++11** (gcc, clang, intel-cc, mcst-lcc, emcc): `The GNU C++ Library "
 "<https://gcc.gnu.org/onlinedocs/libstdc++/>`__. NOTE that this implicitly "
-"defines **_GLIBCXX_USE_CXX11_ABI=0** to use old ABI. Might be a wise choice "
-"for old systems, such as CentOS 6. On Linux systems, you may need to install "
-"`libstdc++-dev <https://packages.debian.org/sid/libstdc++-dev>`_ (package "
-"name could be different in various distros) in order to use the standard "
-"library. NOTE that on Apple systems usage of **libstdc++** has been "
+"defines **_GLIBCXX_USE_CXX11_ABI=1** to use new ABI. Might be a wise choice "
+"for newer systems, such as Ubuntu 20. On Linux systems, you may need to "
+"install `libstdc++-dev <https://packages.debian.org/sid/libstdc++-dev>`_ "
+"(package name could be different in various distros) in order to use the "
+"standard library. NOTE that on Apple systems usage of **libstdc++** has been "
 "deprecated."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:180
+#: ../../../reference/config_files/settings.rst:186
 msgid ""
-"**libstdc++11** (gcc, clang, apple-clang): `The GNU C++ Library <https://gcc."
-"gnu.org/onlinedocs/libstdc++/>`__. NOTE that this implicitly defines "
-"**_GLIBCXX_USE_CXX11_ABI=1** to use new ABI. Might be a wise choice for "
-"newer systems, such as Ubuntu 20. On Linux systems, you may need to install "
-"`libstdc++-dev <https://packages.debian.org/sid/libstdc++-dev>`_ (package "
-"name could be different in various distros) in order to use the standard "
-"library. NOTE that on Apple systems usage of **libstdc++** has been "
-"deprecated."
+"**libc++** (clang, apple-clang, intel-cc, emcc): `LLVM libc++ <https://"
+"libcxx.llvm.org/>`__. On Linux systems, you may need to install `libc++-dev "
+"<https://packages.debian.org/sid/libc++-dev>`_ (package name could be "
+"different in various distros) in order to use the standard library."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:185
-msgid ""
-"**libc++** (clang, apple-clang): `LLVM libc++ <https://libcxx.llvm.org/>`__. "
-"On Linux systems, you may need to install `libc++-dev <https://packages."
-"debian.org/sid/libc++-dev>`_ (package name could be different in various "
-"distros) in order to use the standard library."
-msgstr ""
-
-#: ../../../reference/config_files/settings.rst:188
+#: ../../../reference/config_files/settings.rst:189
 msgid ""
 "**c++_shared** (clang, Android only): use `LLVM libc++ <https://libcxx.llvm."
 "org/>`__ as a shared library. Refer to the `C++ Library Support <https://"
 "developer.android.com/ndk/guides/cpp-support>`__ for the additional details."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:191
+#: ../../../reference/config_files/settings.rst:192
 msgid ""
 "**c++_static** (clang, Android only): use `LLVM libc++ <https://libcxx.llvm."
 "org/>`__ as a static library. Refer to the `C++ Library Support <https://"
 "developer.android.com/ndk/guides/cpp-support>`__ for the additional details."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:194
+#: ../../../reference/config_files/settings.rst:195
 msgid ""
 "**libCstd** (sun-cc): Rogue Wave's stdlib. See `Comparing C++ Standard "
 "Libraries libCstd, libstlport, and libstdcxx <https://www.oracle.com/solaris/"
 "technologies/cmp-stlport-libcstd.html>`__."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:196
+#: ../../../reference/config_files/settings.rst:197
 msgid ""
 "**libstlport** (sun-cc): `STLport <http://www.stlport.org/>`__. See "
 "`Comparing C++ Standard Libraries libCstd, libstlport, and libstdcxx "
 "<https://www.oracle.com/solaris/technologies/cmp-stlport-libcstd.html>`__."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:198
+#: ../../../reference/config_files/settings.rst:199
 msgid ""
 "**libstdcxx** (sun-cc): `Apache C++ Standard Library <http://people.apache."
 "org/~gmcdonald/stdcxx/index.html>`__. See `Comparing C++ Standard Libraries "
@@ -780,81 +787,81 @@ msgid ""
 "technologies/cmp-stlport-libcstd.html>`__."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:200
+#: ../../../reference/config_files/settings.rst:201
 msgid ""
 "**gpp** (qcc): GNU C++ lib. See `QCC documentation <https://www.qnx.com/"
 "developers/docs/6.5.0SP1.update/com.qnx.doc.neutrino_utilities/q/qcc."
 "html>`__."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:202
+#: ../../../reference/config_files/settings.rst:203
 msgid ""
 "**cpp** (qcc): Dinkum C++ lib. See `QCC documentation <https://www.qnx.com/"
 "developers/docs/6.5.0SP1.update/com.qnx.doc.neutrino_utilities/q/qcc."
 "html>`__."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:204
+#: ../../../reference/config_files/settings.rst:205
 msgid ""
 "**cpp-ne** (qcc): Dinkum C++ lib (no exceptions). See `QCC documentation "
 "<https://www.qnx.com/developers/docs/6.5.0SP1.update/com.qnx.doc."
 "neutrino_utilities/q/qcc.html>`__."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:206
+#: ../../../reference/config_files/settings.rst:207
 msgid ""
 "**acpp** (qcc): Dinkum Abridged C++ lib. See `QCC documentation <https://www."
 "qnx.com/developers/docs/6.5.0SP1.update/com.qnx.doc.neutrino_utilities/q/qcc."
 "html>`__."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:208
+#: ../../../reference/config_files/settings.rst:209
 msgid ""
 "**acpp-ne** (qcc): Dinkum Abridged C++ lib (no exceptions). See `QCC "
 "documentation <https://www.qnx.com/developers/docs/6.5.0SP1.update/com.qnx."
 "doc.neutrino_utilities/q/qcc.html>`__."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:210
+#: ../../../reference/config_files/settings.rst:211
 msgid ""
 "**ecpp** (qcc): Embedded Dinkum C++ lib. See `QCC documentation <https://www."
 "qnx.com/developers/docs/6.5.0SP1.update/com.qnx.doc.neutrino_utilities/q/qcc."
 "html>`__."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:212
+#: ../../../reference/config_files/settings.rst:213
 msgid ""
 "**ecpp-ne** (qcc): Embedded Dinkum C++ lib (no exceptions). See `QCC "
 "documentation <https://www.qnx.com/developers/docs/6.5.0SP1.update/com.qnx."
 "doc.neutrino_utilities/q/qcc.html>`__."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:214
+#: ../../../reference/config_files/settings.rst:215
 msgid ""
 "**cxx** (qcc): LLVM C++. See `QCC documentation <https://www.qnx.com/"
 "developers/docs/6.5.0SP1.update/com.qnx.doc.neutrino_utilities/q/qcc."
 "html>`__."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:220
+#: ../../../reference/config_files/settings.rst:221
 msgid "Customizing settings"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:222
+#: ../../../reference/config_files/settings.rst:223
 msgid "Settings are also customizable to add your own ones:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:226
+#: ../../../reference/config_files/settings.rst:227
 msgid "Adding new settings"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:228
+#: ../../../reference/config_files/settings.rst:229
 msgid ""
 "It is possible to add new settings at the root of the *settings.yml* file, "
 "something like:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:230
+#: ../../../reference/config_files/settings.rst:231
 msgid ""
 "os:\n"
 "    Windows:\n"
@@ -862,26 +869,26 @@ msgid ""
 "distro: [null, RHEL6, CentOS, Debian]"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:238
+#: ../../../reference/config_files/settings.rst:239
 msgid ""
 "If we want to create different binaries from our recipes defining this new "
 "setting, we would need to add to our recipes that:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:241
+#: ../../../reference/config_files/settings.rst:242
 msgid ""
 "class Pkg(ConanFile):\n"
 "    settings = \"os\", \"compiler\", \"build_type\", \"arch\", \"distro\""
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:247
+#: ../../../reference/config_files/settings.rst:248
 msgid ""
 "The value ``null`` allows for not defining it (which would be a default "
 "value, valid for all the other distros). It is also possible to define "
 "values for it in the profiles:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:250
+#: ../../../reference/config_files/settings.rst:251
 msgid ""
 "[settings]\n"
 "os = \"Linux\"\n"
@@ -889,11 +896,11 @@ msgid ""
 "compiler = \"gcc\""
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:257
+#: ../../../reference/config_files/settings.rst:258
 msgid "And use their values to affect our build if desired:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:259
+#: ../../../reference/config_files/settings.rst:260
 msgid ""
 "class Pkg(ConanFile):\n"
 "    settings = \"os\", \"compiler\", \"build_type\", \"arch\", \"distro\"\n"
@@ -906,11 +913,11 @@ msgid ""
 "            ..."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:272
+#: ../../../reference/config_files/settings.rst:273
 msgid "Adding new sub-settings"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:274
+#: ../../../reference/config_files/settings.rst:275
 msgid ""
 "The above approach requires modification to all recipes to take it into "
 "account. It is also possible to define kind of incompatible settings, like "
@@ -919,7 +926,7 @@ msgid ""
 "``Linux`` OS:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:278
+#: ../../../reference/config_files/settings.rst:279
 msgid ""
 "os:\n"
 "    Windows:\n"
@@ -928,11 +935,11 @@ msgid ""
 "        distro: [null, RHEL6, CentOS, Debian]"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:286
+#: ../../../reference/config_files/settings.rst:287
 msgid "With this definition we could define our profiles as:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:288
+#: ../../../reference/config_files/settings.rst:289
 msgid ""
 "[settings]\n"
 "os = \"Linux\"\n"
@@ -940,13 +947,13 @@ msgid ""
 "compiler = \"gcc\""
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:296
+#: ../../../reference/config_files/settings.rst:297
 msgid ""
 "And any attempt to define ``os.distro`` for another ``os`` value rather than "
 "``Linux`` will raise an error."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:298
+#: ../../../reference/config_files/settings.rst:299
 msgid ""
 "As this is a sub-setting, it will be automatically taken into account in all "
 "recipes that declare an ``os`` setting. Note that having a value of "
@@ -956,11 +963,11 @@ msgid ""
 "anymore."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:303
+#: ../../../reference/config_files/settings.rst:304
 msgid "The sub-setting can also be accessed from recipes:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:305
+#: ../../../reference/config_files/settings.rst:306
 msgid ""
 "class Pkg(ConanFile):\n"
 "    settings = \"os\", \"compiler\", \"build_type\", \"arch\"  # Note, no "
@@ -973,13 +980,13 @@ msgid ""
 "            tc.cache_variables[\"SOME_CENTOS_FLAG\"] = \"Some CentOS Value\""
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:316
+#: ../../../reference/config_files/settings.rst:317
 msgid ""
 "It is possible to have ``ANY`` to define nested subsettings, being the "
 "``ANY`` the fallback for any value not matching the defined ones:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:318
+#: ../../../reference/config_files/settings.rst:319
 msgid ""
 "os:\n"
 "    ANY:\n"
@@ -988,7 +995,7 @@ msgid ""
 "        version: [\"18.04\", \"20.04\"]"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:326
+#: ../../../reference/config_files/settings.rst:327
 msgid ""
 "This will allow settings like ``-s os=MyOS -s os.version=1.2.3``, because "
 "the version can be ``ANY`` for ``os!=Ubuntu``, but if we try ``-s os=Ubuntu -"
@@ -996,11 +1003,11 @@ msgid ""
 "defined versions."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:331
+#: ../../../reference/config_files/settings.rst:332
 msgid "Add new values"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:333
+#: ../../../reference/config_files/settings.rst:334
 msgid ""
 "In the same way we have added a new ``distro`` sub-setting, it is possible "
 "to add new values to existing settings and sub-settings. For example, if "
@@ -1008,11 +1015,11 @@ msgid ""
 "can add those new values."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:336
+#: ../../../reference/config_files/settings.rst:337
 msgid "You can also add a completely new compiler:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:338
+#: ../../../reference/config_files/settings.rst:339
 msgid ""
 "os:\n"
 "    Windows:\n"
@@ -1026,7 +1033,7 @@ msgid ""
 "    msvc:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:352
+#: ../../../reference/config_files/settings.rst:353
 msgid ""
 "This works as the above regarding profiles, and the way they can be accessed "
 "from recipes. The main issue with custom compilers is that the builtin build "
@@ -1037,7 +1044,7 @@ msgid ""
 "recipes:"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:357
+#: ../../../reference/config_files/settings.rst:358
 msgid ""
 "class Pkg(ConanFile):\n"
 "    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
@@ -1049,7 +1056,7 @@ msgid ""
 "            self.run([\"mycompiler\", \".\"] + my_custom_compile)"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:370
+#: ../../../reference/config_files/settings.rst:371
 msgid ""
 "You can remove items from *settings.yml* file: compilers, OS, architectures, "
 "etc. Do that only in the case you really want to protect against creation of "
@@ -1059,18 +1066,18 @@ msgid ""
 "profiles, not by restricting the *settings.yml*"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:378
+#: ../../../reference/config_files/settings.rst:379
 msgid ""
 "If you customize your *settings.yml*, you can share, distribute and sync "
 "this configuration with your team and CI machines with the :ref:"
 "`reference_commands_conan_config_install` command."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:385
+#: ../../../reference/config_files/settings.rst:386
 msgid "settings_user.yml"
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:387
+#: ../../../reference/config_files/settings.rst:388
 msgid ""
 "The previous section explains how to customize the Conan *settings.yml*, but "
 "you could also create your *settings_user.yml*. This file will contain only "
@@ -1079,6 +1086,6 @@ msgid ""
 "*settings_user.yml*."
 msgstr ""
 
-#: ../../../reference/config_files/settings.rst:394
+#: ../../../reference/config_files/settings.rst:395
 msgid ":ref:`examples_config_files_settings_user`"
 msgstr ""

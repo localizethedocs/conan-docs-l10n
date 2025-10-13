@@ -1,0 +1,169 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.44\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/capture_version.rst:4
+msgid "How to dynamically define the name and version of a package"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:6
+msgid ""
+"The ``name`` and ``version`` fields are used to define constant values. The "
+"``set_name()`` and ``set_version()`` methods can be used to dynamically "
+"define those values, for example if we want to extract the version from a "
+"text file or from the git repository."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:10
+msgid ""
+"The version of a recipe is stored in the package metadata when it is "
+"exported (or created) and always taken from the metadata later on. This "
+"means that the ``set_name()`` and ``set_version()`` methods will not be "
+"executed once the recipe is in the cache, or when it is installed from a "
+"server. Both methods will use the current folder as the current working "
+"directory to resolve relative paths. To define paths relative to the "
+"location of the *conanfile.py* use the ``self.recipe_folder`` attribute."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:18
+msgid "How to capture package version from SCM: git"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:20
+msgid ""
+"The ``Git()`` helper from tools can be used to capture data from the Git "
+"repo in which the *conanfile.py* recipe resides, and use it to define the "
+"version of the Conan package."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:23
+msgid ""
+"from conans import ConanFile, tools\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    name = \"hello\"\n"
+"\n"
+"    def set_version(self):\n"
+"        git = tools.Git(folder=self.recipe_folder)\n"
+"        self.version = \"%s_%s\" % (git.get_branch(), git.get_revision())\n"
+"\n"
+"    def build(self):\n"
+"        ..."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:37
+msgid ""
+"In this example, the package created with :command:`conan create` will be "
+"called ``hello/branch_commit@user/channel``."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:41
+msgid "How to capture package version from SCM: svn"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:43
+msgid ""
+"The ``SVN()`` helper from tools can be used to capture data from the "
+"subversion repo in which the *conanfile.py* recipe resides, and use it to "
+"define the version of the Conan package."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:46
+msgid ""
+"from conans import ConanFile, tools\n"
+"\n"
+"class HelloLibrary(ConanFile):\n"
+"    name = \"hello\"\n"
+"    def set_version(self):\n"
+"        scm = tools.SVN(folder=self.recipe_folder)\n"
+"        revision = scm.get_revision()\n"
+"        branch = scm.get_branch() # Delivers e.g trunk, tags/v1.0.0, "
+"branches/my_branch\n"
+"        branch = branch.replace(\"/\",\"_\")\n"
+"        if scm.is_pristine():\n"
+"            dirty = \"\"\n"
+"        else:\n"
+"            dirty = \".dirty\"\n"
+"        self.version = \"%s-%s+%s%s\" % (version, revision, branch, dirty) # "
+"e.g. 1.2.0-1234+trunk.dirty\n"
+"\n"
+"    def build(self):\n"
+"        ..."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:66
+msgid ""
+"In this example, the package created with :command:`conan create` will be "
+"called ``hello/generated_version@user/channel``. Note: this function should "
+"never raise, see the section about when the version is computed and saved "
+"above."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:71
+msgid "How to capture package version from text or build files"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:73
+msgid ""
+"It is common that a library version number would be already encoded in a "
+"text file, build scripts, etc. As an example, let's assume we have the "
+"following library layout, and that we want to create a package from it:"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:76
+msgid ""
+"conanfile.py\n"
+"CMakeLists.txt\n"
+"src\n"
+"   hello.cpp\n"
+"   ..."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:84
+msgid ""
+"The *CMakeLists.txt* will have some variables to define the library version "
+"number. For simplicity, let's also assume that it includes a line such as "
+"the following:"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:87
+msgid ""
+"cmake_minimum_required(VERSION 2.8)\n"
+"set(MY_LIBRARY_VERSION 1.2.3) # This is the version we want\n"
+"add_library(hello src/hello.cpp)"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:93
+msgid "You can extract the version dynamically using:"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:95
+msgid ""
+"from conans import ConanFile\n"
+"from conans.tools import load\n"
+"import re, os\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    name = \"hello\"\n"
+"    def set_version(self):\n"
+"        content = load(os.path.join(self.recipe_folder, \"CMakeLists."
+"txt\"))\n"
+"        version = re.search(r\"set\\(MY_LIBRARY_VERSION (.*)\\)\", content)."
+"group(1)\n"
+"        self.version = version.strip()"
+msgstr ""

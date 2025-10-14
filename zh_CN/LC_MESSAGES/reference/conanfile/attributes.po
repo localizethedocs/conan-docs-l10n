@@ -1,0 +1,2550 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/attributes.rst:9
+msgid "Attributes"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:2
+msgid "Package reference"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:4
+msgid ""
+"Recipe attributes that can define the main ``pkg/version@user/channel`` "
+"package reference."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:8
+msgid "name"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:10
+msgid "The name of the package. A valid name is all lowercase and has:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:12
+msgid ""
+"A minimum of 2 and a maximum of 101 characters (though shorter names are "
+"recommended)."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:14
+msgid ""
+"Matches the following regex ``^[a-z0-9_][a-z0-9_+.-]{1,100}$``: so starts "
+"with alphanumeric or ``_``,"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:14
+msgid ""
+"then from 1 to 100 characters between alphanumeric, ``_``, ``+``, ``.`` or "
+"``-``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:18
+msgid ""
+"The name is only necessary for ``export``-ing the recipe into the local "
+"cache (``export``, ``export-pkg``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:17
+msgid ""
+"and ``create`` commands), if they are not defined in the command line with "
+"``--name=<pkgname>``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:21
+msgid "version"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:23
+msgid ""
+"The version of the package. A valid version follows the same rules than the "
+"``name`` attribute. In case the version follows semantic versioning in the "
+"form ``X.Y.Z-pre1+build2``, that value might be used for requiring this "
+"package through version ranges instead of exact versions."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:27
+msgid ""
+"The version is only strictly necessary for ``export``-ing the recipe into "
+"the local cache (``export``, ``export-pkg`` and ``create`` commands), if "
+"they are not defined in the command line with ``--version=<pkgversion>``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:30
+msgid ""
+"The ``version`` can be dynamically defined in the command line, and also "
+"programmatically in the recipe with the :ref:`set_version() "
+"method<reference_conanfile_methods_set_version>`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:35
+msgid "user"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:37
+msgid ""
+"A valid string for the ``user`` field follows the same rules than the "
+"``name`` attribute. This is an optional attribute. It can be used to "
+"identify your own packages with ``pkg/version@user/channel``, where ``user`` "
+"could be the name of your team, org or company. ConanCenter recipes don't "
+"have ``user/channel``, so they are in the form of ``pkg/version`` only. You "
+"can also name your packages without user and channel, or using only the user "
+"as ``pkg/version@user``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:43
+msgid "The user can be specified in the command line with ``--user=<myuser>``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:47
+msgid "channel"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:49
+msgid ""
+"A valid string for the ``channel`` field follows the same rules than the "
+"``name`` attribute. This is an optional attribute. It is sometimes used to "
+"identify a maturity of the package (\"stable\", \"testing\"...), but in "
+"general this is not necessary, and the maturity of packages is better "
+"managed by putting them in different server repositories."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/references.inc:54
+msgid ""
+"The channel can be specified in the command line with ``--"
+"channel=<mychannel>``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:2
+msgid "Metadata"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:4
+msgid ""
+"Optional metadata, like license, description, author, etc. Not necessary for "
+"most cases, but can be useful to have."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:8
+msgid "description"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:10
+msgid ""
+"This is an optional, but recommended text field, containing the description "
+"of the package, and any information that might be useful for the consumers. "
+"The first line might be used as a short description of the package."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:14
+msgid ""
+"class HelloConan(ConanFile):\n"
+"    name = \"hello\"\n"
+"    version = \"0.1\"\n"
+"    description = \"\"\"This is a Hello World library.\n"
+"                    A fully featured, portable, C++ library to say Hello "
+"World in the stdout,\n"
+"                    with incredible iostreams performance\"\"\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:25
+msgid "license"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:27
+msgid ""
+"License of the **target** source code and binaries, i.e. the code that is "
+"being packaged, not the ``conanfile.py`` itself. Can contain several, comma "
+"separated licenses. It is a text string, so it can contain any text, but it "
+"is strongly recommended that recipes of Open Source projects use `SPDX "
+"<https://spdx.dev>`_ identifiers from the `SPDX license list <https://spdx."
+"org/licenses/>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:34
+msgid ""
+"This will help people wanting to automate license compatibility checks, like "
+"consumers of your package, or you if your package has Open-Source "
+"dependencies."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:37
+msgid ""
+"class Pkg(ConanFile):\n"
+"    license = \"MIT\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:44
+msgid "author"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:45
+msgid ""
+"Main maintainer/responsible for the package, any format. This is an optional "
+"attribute."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:47
+msgid ""
+"class HelloConan(ConanFile):\n"
+"    author = \"John J. Smith (john.smith@company.com)\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:53
+msgid "topics"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:55
+msgid ""
+"Tags to group related packages together and describe what the code is about. "
+"Used as a search filter in ConanCenter. Optional attribute. It should be a "
+"tuple of strings."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:58
+msgid ""
+"class ProtocInstallerConan(ConanFile):\n"
+"    name = \"protoc_installer\"\n"
+"    version = \"0.1\"\n"
+"    topics = (\"protocol-buffers\", \"protocol-compiler\", "
+"\"serialization\", \"rpc\")"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:66
+msgid "homepage"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:68
+msgid "The home web page of the library being packaged."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:70
+msgid ""
+"Used to link the recipe to further explanations of the library itself like "
+"an overview of its features, documentation, FAQ as well as other related "
+"information."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:73
+msgid ""
+"class EigenConan(ConanFile):\n"
+"    name = \"eigen\"\n"
+"    version = \"3.3.4\"\n"
+"    homepage = \"http://eigen.tuxfamily.org\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:82
+msgid "url"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:84
+msgid ""
+"URL of the package repository, i.e. not necessarily of the original source "
+"code. Recommended, but not mandatory attribute."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/metadata.inc:87
+msgid ""
+"class HelloConan(ConanFile):\n"
+"    name = \"hello\"\n"
+"    version = \"0.1\"\n"
+"    url = \"https://github.com/conan-io/libhello.git\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:2
+msgid "Requirements"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:4
+msgid ""
+"Attribute form of the dependencies simple declarations, like ``requires``, "
+"``tool_requires``. For more advanced way to define requirements, use the "
+"``requirements()``, ``build_requirements()`` methods instead."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:8
+msgid "requires"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:10
+msgid ""
+"List or tuple of strings for regular dependencies in the host context, like "
+"a library."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:14
+msgid ""
+"class MyLibConan(ConanFile):\n"
+"    requires = \"hello/1.0\", \"otherlib/2.1@otheruser/testing\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:20
+msgid "You can specify version ranges, the syntax is using brackets:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:25
+msgid ""
+"class HelloConan(ConanFile):\n"
+"    requires = \"pkg/[>1.0 <1.8]\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:31
+msgid "Accepted expressions would be:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:37
+#: ../../../reference/conanfile/attributes/requirements.inc:57
+msgid "Expression"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:38
+#: ../../../reference/conanfile/attributes/requirements.inc:58
+msgid "Versions in range"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:39
+#: ../../../reference/conanfile/attributes/requirements.inc:59
+msgid "Versions outside of range"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:40
+#: ../../../reference/conanfile/attributes/requirements.inc:60
+msgid "[>=1.0 <2]"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:41
+msgid "1.0.0, 1.0.1, 1.1, 1.2.3"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:42
+msgid "0.2, 2.0, 2.1, 3.0"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:43
+#: ../../../reference/conanfile/attributes/requirements.inc:63
+msgid "[<3.2.1]"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:44
+msgid "0.1, 1.2, 2.4, 3.1.1"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:45
+msgid "3.2.2"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:46
+#: ../../../reference/conanfile/attributes/requirements.inc:66
+msgid "[>2.0]"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:47
+msgid "2.1, 2.2, 3.1, 14.2"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:48
+msgid "1.1, 1.2, 2.0"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:51
+msgid ""
+"If pre-releases are activated, like defining configuration ``core."
+"version_ranges:resolve_prereleases=True``:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:61
+msgid "1.0.0-pre.1, 1.0.0, 1.0.1, 1.1, 1.2.3"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:62
+msgid "0.2, 2.0-pre.1, 2.0, 2.1, 3.0"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:64
+msgid "0.1, 1.2, 1.8-beta.1, 2.0-alpha.2, 2.4, 3.1.1"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:65
+msgid "3.2.1-pre.1, 3.2.1, 3.2.2, 3.3"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:67
+msgid "2.1-pre.1, 2.1, 2.2, 3.1, 14.2"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:68
+msgid "1.1, 1.2, 2.0-pre.1, 2.0"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:72
+msgid ""
+"Check :ref:`tutorial_version_ranges_expressions` version_ranges tutorial "
+"section"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:76
+msgid "tool_requires"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:78
+msgid ""
+"List or tuple of strings for dependencies. Represents a build tool like "
+"\"cmake\". If there is an existing pre-compiled binary for the current "
+"package, the binaries for the tool_require won't be retrieved. They cannot "
+"conflict."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:82
+msgid ""
+"class MyPkg(ConanFile):\n"
+"    tool_requires = \"tool_a/0.2\", \"tool_b/0.2@user/testing\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:88
+msgid ""
+"This is the declarative way to add ``tool_requires``. Check the :ref:"
+"`tool_requires()<reference_conanfile_methods_build_requirements_tool_requires>` "
+"conanfile.py method to learn a more flexible way to add them."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:96
+msgid "build_requires"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:98
+msgid ""
+"`build_requires` are used in Conan 2 to provide compatibility with the Conan "
+"1.X syntax, but their use is discouraged in Conan 2 and will be deprecated "
+"in future 2.X releases. Please use `tool_requires` instead of "
+"`build_requires` in your Conan 2 recipes."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:104
+msgid "test_requires"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:106
+msgid ""
+"List or tuple of strings for dependencies in the host context only. "
+"Represents a test tool like \"gtest\". Used when the current package is "
+"built from sources. They don't propagate information to the downstream "
+"consumers. If there is an existing pre-compiled binary for the current "
+"package, the binaries for the test_require won't be retrieved. They cannot "
+"conflict."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:112
+msgid ""
+"class MyPkg(ConanFile):\n"
+"    test_requires = \"gtest/1.11.0\", \"other_test_tool/0.2@user/testing\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:118
+msgid ""
+"This is the declarative way to add ``test_requires``. Check the :ref:"
+"`test_requires() "
+"method<reference_conanfile_methods_build_requirements_test_requires>` to "
+"learn a more flexible way to add them."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:123
+msgid "python_requires"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:125
+msgid ""
+"This class attribute allows to define a dependency to another Conan recipe "
+"and reuse its code. Its basic syntax is:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:128
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    python_requires = \"pyreq/0.1@user/channel\"  # recipe to reuse code "
+"from\n"
+"\n"
+"    def build(self):\n"
+"        self.python_requires[\"pyreq\"].module # access to the whole "
+"conanfile.py module\n"
+"        self.python_requires[\"pyreq\"].module.myvar  # access to a "
+"variable\n"
+"        self.python_requires[\"pyreq\"].module.myfunct()  # access to a "
+"global function\n"
+"        self.python_requires[\"pyreq\"].path # access to the folder where "
+"the reused file is"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:142
+msgid ""
+"Read more about this attribute in :ref:`reference_extensions_python_requires`"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:146
+msgid "python_requires_extend"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:148
+msgid ""
+"This class attribute defines one or more classes that will be injected in "
+"runtime as base classes of the recipe class. Syntax for each of these "
+"classes should be a string like ``pyreq.MyConanfileBase`` where the "
+"``pyreq`` is the name of a ``python_requires`` and ``MyConanfileBase`` is "
+"the name of the class to use."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/requirements.inc:153
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    python_requires = \"pyreq/0.1@user/channel\", \"utils/0.1@user/"
+"channel\"\n"
+"    python_requires_extend = \"pyreq.MyConanfileBase\", \"utils.UtilsBase\"  "
+"# class/es to inject"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:2
+msgid "Sources"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:7
+msgid "exports"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:10
+msgid ""
+"List or tuple of strings with `file names` or `fnmatch <https://docs.python."
+"org/3/library/fnmatch.html>`_ patterns that should be exported and stored "
+"side by side with the *conanfile.py* file to make the recipe work: other "
+"python files that the recipe will import, some text file with data to "
+"read,..."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:16
+msgid ""
+"For example, if we have some python code that we want the recipe to use in a "
+"``helpers.py`` file, and have some text file *info.txt* we want to read and "
+"display during the recipe evaluation we would do something like:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:20
+msgid "exports = \"helpers.py\", \"info.txt\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:24
+#: ../../../reference/conanfile/attributes/sources.inc:55
+msgid "Exclude patterns are also possible, with the ``!`` prefix:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:26
+msgid "exports = \"*.py\", \"!*tmp.py\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:33
+msgid ""
+":ref:`Check the export() conanfile.py "
+"method<reference_conanfile_methods_export>`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:39
+msgid "exports_sources"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:41
+msgid ""
+"List or tuple of strings with file names or `fnmatch <https://docs.python."
+"org/3/library/fnmatch.html>`_ patterns that should be exported and will be "
+"available to generate the package. Unlike the ``exports`` attribute, these "
+"files shouldn't be used by the ``conanfile.py`` Python code, but to compile "
+"the library or generate the final package. And, due to its purpose, these "
+"files will only be retrieved if requested binaries are not available or the "
+"user forces Conan to compile from sources."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:48
+msgid ""
+"This is an alternative to getting the sources with the ``source()`` method. "
+"Used when we are not packaging a third party library and we have together "
+"the recipe and the C/C++ project:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:51
+msgid "exports_sources = \"include*\", \"src*\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:57
+msgid "exports_sources = \"include*\", \"src*\", \"!src/build/*\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:62
+msgid ""
+"Note, if the recipe defines the ``layout()`` method and specifies a ``self."
+"folders.source = \"src\"`` it won't affect where the files (from the "
+"``exports_sources``) are copied. They will be copied to the base source "
+"folder. So, if you want to replace some file that got into the ``source()`` "
+"method, you need to explicitly copy it from the parent folder or even "
+"better, from ``self.export_sources_folder``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:67
+msgid ""
+"import os, shutil\n"
+"from conan import ConanFile\n"
+"from conan.tools.files import save, load\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    ...\n"
+"    exports_sources = \"CMakeLists.txt\"\n"
+"\n"
+"    def layout(self):\n"
+"        self.folders.source = \"src\"\n"
+"        self.folders.build = \"build\"\n"
+"\n"
+"    def source(self):\n"
+"        # emulate a download from web site\n"
+"        save(self, \"CMakeLists.txt\", \"MISTAKE: Very old CMakeLists to be "
+"replaced\")\n"
+"        # Now I fix it with one of the exported files\n"
+"        shutil.copy(\"../CMakeLists.txt\", \".\")\n"
+"        shutil.copy(os.path.join(self.export_sources_folder, \"CMakeLists."
+"txt\", \".\"))"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:92
+msgid "conan_data"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:94
+msgid ""
+"Read only attribute with a dictionary with the keys and values provided in "
+"a :ref:`conandata."
+"yml<creating_packages_handle_sources_in_packages_conandata>` file format "
+"placed next to the *conanfile.py*. This YAML file is automatically exported "
+"with the recipe and automatically loaded with it too."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:98
+msgid ""
+"You can declare information in the *conandata.yml* file and then access it "
+"inside any of the methods of the recipe. For example, a *conandata.yml* with "
+"information about sources that looks like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:101
+msgid ""
+"sources:\n"
+"  \"1.1.0\":\n"
+"    url: \"https://www.url.org/source/mylib-1.0.0.tar.gz\"\n"
+"    sha256: "
+"\"8c48baf3babe0d505d16cfc0cf272589c66d3624264098213db0fb00034728e9\"\n"
+"  \"1.1.1\":\n"
+"    url: \"https://www.url.org/source/mylib-1.0.1.tar.gz\"\n"
+"    sha256: "
+"\"15b6393c20030aab02c8e2fe0243cb1d1d18062f6c095d67bca91871dc7f324a\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:111
+msgid ""
+"def source(self):\n"
+"    get(self, **self.conan_data[\"sources\"][self.version])"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:117
+msgid "source_buildenv"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:119
+msgid ""
+"Boolean attribute to opt-in injecting the :ref:"
+"`VirtualBuildEnv<conan_tools_env_virtualbuildenv>` generated environment "
+"while running the `source()` method."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:121
+msgid ""
+"Setting this attribute to `True` (default value `False`) will inject the "
+"``VirtualBuildEnv`` generated environment from tool requires when executing "
+"the `source()` method."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/sources.inc:124
+msgid ""
+" class MyConan:\n"
+"    name = \"mylib\"\n"
+"    version = \"1.0.0\"\n"
+"    source_buildenv = True\n"
+"    tool_requires = \"7zip/1.2.0\"\n"
+"\n"
+"    def source(self):\n"
+"        get(self, **self.conan_data[\"sources\"][self.version])\n"
+"        self.run(\"7z x *.zip -o*\")  ## Can run 7z in the source method"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:2
+msgid "Binary model"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:4
+msgid ""
+"Important attributes that define the package binaries model, which settings, "
+"options, package type, etc. affect the final packaged binaries."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:11
+msgid "package_type"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:13
+msgid "Optional. Declaring the ``package_type`` will help Conan:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:15
+msgid ""
+"To choose better the default ``package_id_mode`` for each dependency, that "
+"is, how a change in a dependency should affect the ``package_id`` to the "
+"current package."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:17
+msgid ""
+"Which information from the dependencies should be propagated to the "
+"consumers, like headers, libraries, runtime information. See :ref:`here "
+"<reference_conanfile_package_type_trait_inferring>` to see what traits are "
+"propagated based on the ``package_type`` information."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:21
+msgid "The valid values are:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:23
+msgid "**application**: The package is an application."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:24
+msgid ""
+"**library**: The package is a generic library. It will try to determine the "
+"type of library (from ``shared-library``, ``static-library``, ``header-"
+"library``) reading the ``self.options.shared`` (if declared) and the ``self."
+"options.header_only``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:27
+msgid "**shared-library**: The package is a shared library."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:28
+msgid "**static-library**: The package is a static library."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:29
+msgid "**header-library**: The package is a header only library."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:30
+msgid "**build-scripts**: The package only contains build scripts."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:31
+msgid "**python-require**: The package is a python require."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:32
+msgid "**unknown**: The type of the package is unknown."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:38
+msgid "settings"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:40
+msgid ""
+"List of strings with the first level settings (from :ref:"
+"`reference_config_files_settings_yml`) that the recipe needs, because: - "
+"They are read for building (e.g: `if self.settings.compiler == \"gcc\"`) - "
+"They affect the ``package_id``. If a value of the declared setting changes, "
+"the ``package_id`` has to be different."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:45
+msgid "The most common is to declare:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:47
+msgid "settings = \"os\", \"compiler\", \"build_type\", \"arch\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:51
+msgid ""
+"Once the recipe is loaded by Conan, the ``settings`` are processed and they "
+"can be read in the recipe, also the sub-settings:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:54
+msgid ""
+"settings = \"os\", \"arch\"\n"
+"\n"
+"def build(self):\n"
+"    if self.settings.compiler == \"gcc\":\n"
+"        if self.settings.compiler.cppstd == \"gnu20\":\n"
+"            # do some special build commands"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:63
+msgid ""
+"If you try to access some setting that doesn't exist, like ``self.settings."
+"compiler.libcxx`` for the ``msvc`` setting, Conan will fail telling that "
+"``libcxx`` does not exist for that compiler."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:66
+msgid ""
+"If you want to do a safe check of settings values, you could use the "
+"``get_safe()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:68
+msgid ""
+"def build(self):\n"
+"    # Will be None if doesn't exist (not declared)\n"
+"    arch = self.settings.get_safe(\"arch\")\n"
+"    # Will be None if doesn't exist (doesn't exist for the current "
+"compiler)\n"
+"    compiler_version = self.settings.get_safe(\"compiler.version\")\n"
+"    # Will be the default version if the return is None\n"
+"    build_type = self.settings.get_safe(\"build_type\", default=\"Release\")"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:78
+msgid ""
+"The ``get_safe()`` method returns ``None`` if that setting or sub-setting "
+"doesn't exist and there is no default value assigned."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:81
+msgid ""
+"It's also feasible to check the possible values defined in :ref:"
+"`reference_config_files_settings_yml` using the ``possible_values()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:84
+msgid ""
+"def generate(self):\n"
+"    # Print if Android exists as OS in the whole settings.yml\n"
+"    is_android = \"Android\" in self.settings.possible_values()[\"os\"]\n"
+"    self.output.info(f\"Android in settings.yml: {is_android}\")\n"
+"    # Print the available versions for the compiler used by the HOST "
+"profile\n"
+"    compiler_versions = self.settings.compiler.version.possible_values()\n"
+"    self.output.info(f\"[HOST] Versions for {str(self.settings.compiler)}:  "
+"{', '.join(compiler_versions)}\")\n"
+"    # Print the available versions for the compiler used by the BUILD "
+"profile\n"
+"    compiler_versions = self.settings_build.compiler.version."
+"possible_values()\n"
+"    self.output.info(f\"[BUILD] Versions for {str(self.settings.compiler)}:  "
+"{', '.join(compiler_versions)}\")"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:98
+msgid ""
+"As you can see above, doing ``self.settings.possible_values()`` returns the "
+"whole :ref:`reference_config_files_settings_yml` as a Python dict-like "
+"object, and doing ``self.settings.compiler.version.possible_values()`` for "
+"instance returns the available versions for the compiler used by the "
+"consumer."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:103
+msgid ""
+"If you want to do a safe deletion of settings, you could use the "
+"``rm_safe()`` method. For example, in the ``configure()`` method a typical "
+"pattern for a C library would be:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:106
+msgid ""
+"def configure(self):\n"
+"    self.settings.rm_safe(\"compiler.libcxx\")\n"
+"    self.settings.rm_safe(\"compiler.cppstd\")"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:115
+msgid ":ref:`reference_config_files_settings_yml`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:116
+msgid ""
+":ref:`Removing settings in the package_id() "
+"method<reference_conanfile_methods_package_id_clear>`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:117
+msgid ""
+":ref:`Creating universal binaries using "
+"CMakeToolchain<conan_tools_cmaketoolchain_universal_binaries>`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:123
+msgid "options"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:125
+msgid ""
+"Dictionary with traits that affects only the current recipe, where the key "
+"is the option name and the value is a list of different values that the "
+"option can take. By default any value change in an option, changes the "
+"``package_id``. Check the ``default_options`` and ``default_build_options`` "
+"fields to define default values for the options."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:130
+msgid ""
+"Values for each option can be typed or plain strings (``\"value\"``, "
+"``True``, ``42``,...)."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:132
+msgid "There are two special values:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:134
+msgid ""
+"``None``: Allow the option to have a ``None`` value (not specified) without "
+"erroring."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:135
+msgid ""
+"``\"ANY\"``:  For options that can take any value, not restricted to a set."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:137
+msgid ""
+"class MyPkg(ConanFile):\n"
+"    ...\n"
+"    options = {\n"
+"        \"shared\": [True, False],\n"
+"        \"option1\": [\"value1\", \"value2\"],\n"
+"        \"option2\": [\"ANY\"],\n"
+"        \"option3\": [None, \"value1\", \"value2\"],\n"
+"        \"option4\": [True, False, \"value\"],\n"
+"}"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:149
+msgid ""
+"Once the recipe is loaded by Conan, the ``options`` are processed and they "
+"can be read in the recipe. You can also use the method ``.get_safe()`` (see :"
+"ref:`settings attribute<conan_conanfile_properties_settings>`) to avoid "
+"Conan raising an Exception if the option doesn't exist:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:153
+msgid ""
+"class MyPkg(ConanFile):\n"
+"    options = {\"shared\": [True, False]}\n"
+"\n"
+"    def build(self):\n"
+"        if self.options.shared:\n"
+"            # build the shared library\n"
+"        if self.options.get_safe(\"foo\", True):\n"
+"            pass"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:164
+msgid "In boolean expressions, like ``if self.options.shared``:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:166
+msgid ""
+"equals ``True`` for the values ``True``, ``\"True\"`` and ``\"true\"``, and "
+"any other value that would be evaluated the same way in Python code."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:168
+msgid ""
+"equals ``False`` for the values ``False``, ``\"False\"`` and ``\"false\"``, "
+"also for the empty string and for ``0`` and ``\"0\"`` as expected."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:171
+msgid ""
+"Notice that a comparison using ``is`` is always ``False`` because the types "
+"would be different as it is encapsulated inside a Python class."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:174
+msgid ""
+"If you want to do a safe deletion of options, you could use the "
+"``rm_safe()`` method. For example, in the ``config_options()`` method a "
+"typical pattern for Windows library would be:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:178
+msgid ""
+"def config_options(self):\n"
+"    if self.settings.os == \"Windows\":\n"
+"        self.options.rm_safe(\"fPIC\")"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:186
+msgid ""
+"Read the :ref:`Getting started, creating "
+"packages<creating_packages_create_your_first_conan_package>` to know how to "
+"declare and how to define a value to an option."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:188
+msgid "Removing options in the ``package_id()`` method. <MISSING PAGE>"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:189
+msgid ""
+"About the package_type and how it plays when a ``shared`` option is "
+"declared. <MISSING PAGE>"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:195
+msgid "default_options"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:197
+msgid ""
+"The attribute ``default_options`` defines the default values for the "
+"options, both for the current recipe and for any requirement. This attribute "
+"should be defined as a python dictionary."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:202
+msgid ""
+"class MyPkg(ConanFile):\n"
+"    ...\n"
+"    requires = \"zlib/1.2.8\", \"zwave/2.0\"\n"
+"    options = {\"build_tests\": [True, False],\n"
+"                \"option2\": \"ANY\"}\n"
+"    default_options = {\"build_tests\": True,\n"
+"                        \"option1\": 42,\n"
+"                        \"z*:shared\": True}"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:214
+msgid ""
+"You can also assign default values for options of your requirements using "
+"\"<reference_pattern>: option_name\", being a valid ``reference_pattern`` a "
+"``name/version`` or any pattern with ``*`` like the example above."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:219
+msgid ""
+"Defining options values in recipes does not have strong guarantees, please "
+"check :ref:`this FAQ about options values for "
+"dependencies<faq_different_options_values>`. The recommended way to define "
+"options values is in profile files."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:223
+msgid ""
+"You can also set the options conditionally to a final value with "
+"``configure()`` instead of using ``default_options``:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:225
+msgid ""
+"class OtherPkg(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    options = {\"some_option\": [True, False]}\n"
+"    # Do NOT declare 'default_options', use 'config_options()'\n"
+"\n"
+"    def configure(self):\n"
+"        if self.options.some_option == None:\n"
+"            if self.settings.os == 'Android':\n"
+"                self.options.some_option = True\n"
+"            else:\n"
+"                self.options.some_option = False"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:239
+msgid ""
+"Take into account that if a value is assigned in the ``configure()`` method "
+"it cannot be overridden."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:243
+msgid ""
+":ref:`config_options() method<reference_conanfile_methods_config_options>`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:246
+msgid ""
+"There are 2 different ways that a recipe can try to define options values "
+"for its dependencies. Using ``default_options = {\"mypkg/*:myoption\", 123}"
+"`` the current recipe can define the ``123`` value to the dependency "
+"``mypkg`` ``myoption``. This way of defining options for dependencies has "
+"some limitations:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:251
+msgid ""
+"Any other downstream user of the current recipe that defines the same option "
+"for ``mypkg`` will have precedence, overwriting the current recipe ``123`` "
+"value. Also any definition in the profile or command line will also have "
+"precedence. The recipe ``default_options`` have the least precedence. If a "
+"recipe will not work at all with some dependencies options, then recipes can "
+"check and raise ``ConanInvalidConfiguration`` errors accordingly."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:257
+msgid ""
+"Any *sibling* package that depends on ``mypkg`` will also define its options "
+"and it will be the only one being taken into account. In other words, the "
+"first time ``mypkg`` is required by any other package will \"freeze\" its "
+"currently assigned options values. Any other package that depends later on "
+"``mypkg``, closing the diamond structures in the dependency graph will not "
+"have any influence on the ``mypkg`` options. Only the first one requiring it "
+"will."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:264
+msgid ""
+"The second way to define the options values is defining them as ``important!"
+"``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:268
+msgid ""
+"The ``important!`` syntax is experimental and can be changed or removed at "
+"any time."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:270
+msgid ""
+"A recipe can define its dependencies options as ``important!`` with the "
+"syntax ``default_options = {\"mypkg/*:myoption!\", 123}``. That means that "
+"the ``mypkg`` ``myoption`` will not be overriden by other downstream "
+"packages, profile or command line doing regular definition of options (like "
+"``-o *:myoption=234``)."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:275
+msgid ""
+"But there are 2 cases in which this will still not define the final value of "
+"the dependency:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:277
+msgid ""
+"If any downstream recipe, command line or profile also uses the ``myoption!"
+"`` syntax, that will also have precedence and override the value upstream"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:279
+msgid ""
+"If there is any other package that requires first ``mypkg``, the values "
+"defined at that moment will still have precedence."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:282
+msgid ""
+"In general the recommendation for defining options values is to do it in "
+"``profile`` files, not in recipes, as in-recipe definition can be more "
+"complicated specially for complex dependency graphs."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:288
+msgid "default_build_options"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:290
+msgid ""
+"The attribute ``default_build_options`` defines the default values for the "
+"options in the build context and is typically used for defining options for "
+"``tool_requires``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:294
+msgid ""
+"from conan import ConanFile\n"
+"class Consumer(ConanFile):\n"
+"    default_options = {\"protobuf/*:shared\": True}\n"
+"    default_build_options = {\"protobuf/*:shared\": False}\n"
+"    def requirements(self):\n"
+"        self.requires(\"protobuf/1.0\")\n"
+"    def build_requirements(self):\n"
+"        self.tool_requires(\"protobuf/1.0\")"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:307
+msgid "options_description"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:309
+msgid ""
+"The ``options_description`` attribute is an optional attribute that can be "
+"defined in the form of a dictionary where the key is the option name and the "
+"value is a description of the option in text format. This attribute is "
+"useful for providing additional information about the functionality and "
+"purpose of each option, particularly when the option is not self-explanatory "
+"or has complex or special behavior."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:315
+msgid "The format for each dictionary entry should be:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:317
+msgid ""
+"Key: Option name. Must be a string and must match one of the keys in the "
+"``options`` dictionary."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:318
+msgid ""
+"Value: Description of the option. Must be a string and can be as long as "
+"necessary."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:320
+msgid "For example:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:322
+msgid ""
+"class MyPkg(ConanFile):\n"
+"    ...\n"
+"    options = {\"option1\": [True, False],\n"
+"               \"option2\": \"ANY\"}\n"
+"\n"
+"    options_description = {\n"
+"        \"option1\": \"Describe the purpose and functionality of 'option1'. "
+"\",\n"
+"        \"option2\": \"Describe the purpose and functionality of 'option2'. "
+"\",\n"
+"    }"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:335
+msgid "languages"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:340
+msgid ""
+"From Conan 2.4, the ``conanfile.py`` recipe attribute ``languages`` can be "
+"used to define the programming languages involved in this package. At the "
+"moment the ``C`` and ``C++`` languages are the possible values. For example "
+"a pure C package would define something as:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:344
+msgid ""
+"class ZLib(ConanFile):\n"
+"    languages = \"C\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:350
+msgid ""
+"It is possible to define more than one language, for example ``languages = "
+"\"C\", \"C++\"`` is the correct definition when a package is built from both "
+"C and C++ sources."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:353
+msgid "Regarding ``languages`` definition, the following will happen:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:355
+msgid ""
+"If no ``languages`` is defined or ``C`` is not a declared language, "
+"``compiler.cstd`` subsetting will be automatically removed at package "
+"``configure()`` time (to achieve backward compatibility)."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:357
+msgid ""
+"If ``languages`` is defined, but it doesn't contain ``C++``, ``compiler."
+"cppstd`` and ``compiler.libcxx`` subsettings will be automatically removed "
+"at package ``configure()`` time."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:362
+msgid "info"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:364
+msgid "Object used exclusively in ``package_id()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:366
+msgid ""
+"The `:ref:package_id method<reference_conanfile_methods_package_id>` to "
+"control the unique ID for a package:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:368
+msgid ""
+"def package_id(self):\n"
+"    self.info.clear()"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:374
+msgid ""
+"The ``self.info.clear()`` method removes all the settings, options, "
+"requirements (``requires``, ``tool_requires``, ``python_requires``) and "
+"configuration (``conf``) from the ``package_id`` computation, so the "
+"``package_id`` will always result in the same binary, irrespective of all "
+"those things. This would be the typical case of a header-only library, in "
+"which the packaged artifacts (files) are always identical."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:382
+msgid "package_id_{embed,non_embed,python,unknown}_mode"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:384
+msgid ""
+"The ``package_id_embed_mode, package_id_non_embed_mode, "
+"package_id_python_mode, package_id_unknown_mode`` are class attributes that "
+"can be defined in recipes to define the effect they have on their consumers "
+"``package_id``. Can be declared as:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:386
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    name = \"pkg\"\n"
+"    version = \"1.0.0\"\n"
+"    # They are not mandatory, and it is not necessary to define all\n"
+"    package_id_embed_mode = \"full_mode\"\n"
+"    package_id_non_embed_mode = \"patch_mode\"\n"
+"    package_id_unknown_mode = \"minor_mode\"\n"
+"    package_id_python_mode = \"major_mode\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:399
+msgid ""
+"In general, the Conan defaults are good ones, and allow providing users good "
+"control over when the consumers need to be re-built from source or not. "
+"Also, the Conan defaults can be changed globally in the ``global.conf`` file "
+"(they should be changed globally for all users, CI, etc.) via the ``core."
+"package_id:xxxx`` configurations. The in-recipe attribute definition is "
+"useful to define behavior that deviates from the defaults."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:402
+msgid ""
+"Possible values are (following the semver definition of MAJOR.MINOR.PATCH):"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:404
+msgid ""
+"``patch_mode``: New patches, minors, and major releases of the package will "
+"require a new binary (new ``package_id``) of the consumers. New recipe "
+"revisions will not require new binaries of the consumers. For example if we "
+"create a new ``pkg/1.0.1`` version and some consumer has ``requires = \"pkg/"
+"[>=1.0 <2.0]\"``, such a consumer will build a new binary against this "
+"specific new ``1.0.1`` version. But if we just change the recipe, producing "
+"a new ``recipe_revision``, the consumers will not require building a new "
+"binary."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:405
+msgid ""
+"``minor_mode``: New minor and major releases of this package will require a "
+"new binary of the consumers. New patches and new revisions will not require "
+"new binaries of the consumers. This is the default for the \"non-embed-"
+"mode\", as it allows fine control by the users to decide when to rebuild "
+"things or not."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:406
+msgid ""
+"``major_mode``: Only new major releases will require new binaries. Any other "
+"modifications and new versions will not require new binaries from the "
+"consumers."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:407
+msgid ""
+"``full_mode``: The full identifier of this package, including ``pkgname/"
+"version@user/channel#recipe_revision:package_id`` will be used in the "
+"consumers ``package_id``, then requiring to build a new binary of the "
+"consumer for every change of this package (as any change either in source or "
+"configuration will produce a different ``recipe_revision`` or ``package_id`` "
+"respectively). This is the default for the \"embed-mode\"."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:408
+msgid ""
+"``unrelated_mode``: No change in this package will ever produce a new binary "
+"in the consumer."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:409
+msgid ""
+"``revision_mode``: Uses the ``pkgname/version@user/channel#recipe_revision`` "
+"in the consumers' ``package_id``, that is the full reference except the "
+"``package_id`` of the dependency."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:411
+msgid "The 4 different attributes are:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:413
+msgid ""
+"``package_id_embed_mode``: Define the mode for \"embedding\" cases, that is, "
+"a shared library linking a static library, an application linking a static "
+"library, an application or a library linking a header-only library. The "
+"default for this mode is ``full_mode``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:414
+msgid ""
+"``package_id_non_embed_mode``. Define the mode for \"non-embedding\" cases, "
+"that is, a shared library linking another shared library, a static library "
+"linking another static library, an application executable linking a shared "
+"library. The default for this mode is ``minor_mode``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:415
+msgid ""
+"``package_id_unknown_mode``: Define the mode when the relationship between "
+"packages is unknown. If it is not possible to deduce the package type, "
+"because there are no ``shared`` or ``header_only`` options defined, or "
+"because ``package_type`` is not defined, then, this mode will be used. The "
+"default for this mode is ``semver_mode`` (similar to Conan 1.X behavior)."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:416
+msgid ""
+"``package_id_python_mode``: Define the mode for consumers of "
+"``python_requires``. By default it will be ``minor_mode``, and it is "
+"strongly recommended to use this default, and not define the "
+"``package_id_python_mode``. This attribute is provided for completeness and "
+"exceptional cases like temporary migrations."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:420
+msgid ""
+"Read the :ref:`binary model reference<reference_binary_model>` for a full "
+"view of the Conan binary model."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:2
+msgid "Build"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:6
+msgid "generators"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:8
+msgid "List or tuple of strings with names of generators."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:10
+msgid ""
+"class MyLibConan(ConanFile):\n"
+"    generators = \"CMakeDeps\", \"CMakeToolchain\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:16
+msgid ""
+"The generators can also be instantiated explicitly in the :ref:`generate() "
+"method<reference_conanfile_methods_generate>`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:19
+msgid ""
+"from conan.tools.cmake import CMakeToolchain\n"
+"\n"
+"class MyLibConan(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def generate(self):\n"
+"        tc = CMakeToolchain(self)\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:32
+msgid "build_policy"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:34
+msgid ""
+"Controls when the current package is built during a ``conan install``. The "
+"allowed values are:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:37
+msgid ""
+"``\"missing\"``: Conan builds it from source if there is no binary available."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:38
+msgid ""
+"``\"never\"``: This package cannot be built from sources, it is always "
+"created with ``conan export-pkg``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:40
+msgid ""
+"``None`` (default value): This package won't be built unless the policy is "
+"specified in the command line (e.g ``--build=foo*``)"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:43
+msgid ""
+" class PocoTimerConan(ConanFile):\n"
+"     build_policy = \"missing\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:51
+msgid "win_bash"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:53
+msgid ""
+"When ``True`` it enables the new run in a subsystem bash in Windows "
+"mechanism."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:55
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class FooRecipe(ConanFile):\n"
+"    ...\n"
+"    win_bash = True"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:64
+msgid "It can also be declared as a ``property`` based on any condition:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:66
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class FooRecipe(ConanFile):\n"
+"    ...\n"
+"\n"
+"\n"
+"    @property\n"
+"    def win_bash(self):\n"
+"        return self.settings.arch == \"armv8\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:79
+msgid "win_bash_run"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:81
+msgid ""
+"When ``True`` it enables running commands in the ``\"run\"`` scope, to run "
+"them inside a bash shell."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/build.inc:83
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class FooRecipe(ConanFile):\n"
+"\n"
+"    ...\n"
+"\n"
+"    win_bash_run = True\n"
+"    def build(self):\n"
+"        self.run(cmd, scope=\"run\")  # will run <cmd> inside bash"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:2
+msgid "Folders and layout"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:9
+msgid "source_folder"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:11
+msgid ""
+"The folder in which the source code lives. The path is built joining the "
+"base directory (a cache directory when running in the cache or the ``output "
+"folder`` when running locally) with the value of ``folders.source`` if "
+"declared in the ``layout()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:15
+msgid ""
+"Note that the base directory for the ``source_folder`` when running in the "
+"cache will point to the base folder of the build unless :ref:"
+"`no_copy_source<conan_conanfile_properties_no_copy_source>` is set to "
+"``True``. But anyway it will always point to the correct folder where the "
+"source code is."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:21
+msgid "export_sources_folder"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:23
+msgid "The value depends on the method you access it:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:25
+msgid ""
+"At ``source(self)``: Points to the base source folder (that means self."
+"source_folder but without taking into account the ``folders.source`` "
+"declared in the ``layout()`` method). The declared `exports_sources` are "
+"copied to that base source folder always."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:28
+msgid ""
+"At ``exports_sources(self)``: Points to the folder in the cache where the "
+"export sources have to be copied."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:33
+msgid ""
+":ref:`Read about the export_sources() "
+"method<reference_conanfile_methods_export_sources>`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:34
+msgid ""
+":ref:`Read about the source() method<reference_conanfile_methods_source>`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:39
+msgid "build_folder"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:41
+msgid ""
+"The folder used to build the source code. The path is built joining the base "
+"directory (a cache directory when running in the cache or the ``output "
+"folder`` when running locally) with the value of ``folders.build`` if "
+"declared in the ``layout()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:48
+msgid "package_folder"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:50
+msgid ""
+"The folder to copy the final artifacts for the binary package. In the local "
+"cache a package folder is created for every different package ID."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:53
+msgid ""
+"The most common usage of ``self.package_folder`` is to ``copy`` the files at "
+"the :ref:`package() method<reference_conanfile_methods_package>`:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:56
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"from conan.tools.files import copy\n"
+"\n"
+"class MyRecipe(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def package(self):\n"
+"        copy(self, \"*.so\", self.build_folder, os.path.join(self."
+"package_folder, \"lib\"))\n"
+"        ..."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:71
+msgid "recipe_folder"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:73
+msgid ""
+"The folder where the recipe *conanfile.py* is stored, either in the local "
+"folder or in the cache. This is useful in order to access files that are "
+"exported along with the recipe, or the origin folder when exporting files in "
+"``export(self)`` and ``export_sources(self)`` methods."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:78
+msgid ""
+"The most common usage of ``self.recipe_folder`` is in the ``export(self)`` "
+"and ``export_sources(self)`` methods, as the folder from where we copy the "
+"files:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:81
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.files import copy\n"
+"\n"
+"class MethodConan(ConanFile):\n"
+"    exports = \"file.txt\"\n"
+"    def export(self):\n"
+"        copy(self, \"LICENSE.md\", self.recipe_folder, self.export_folder)"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:93
+msgid "recipe_metadata_folder"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:95
+msgid ""
+"The ``self.recipe_metadata_folder`` (**experimental**) can be used in the "
+"``export()`` and ``export_sources()`` and ``source()`` methods to save or "
+"copy **recipe** metadata files. See :ref:`metadata section<devops_metadata>` "
+"for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:100
+msgid "package_metadata_folder"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:102
+msgid ""
+"The ``self.package_metadata_folder`` (**experimental**)  can be used in the "
+"``generate()``, ``build()`` and ``package()`` methods to save or copy "
+"**package** metadata files. See :ref:`metadata section<devops_metadata>` for "
+"more information."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:110
+msgid "no_copy_source"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:112
+msgid ""
+"The attribute ``no_copy_source`` tells the recipe that the source code will "
+"not be copied from the ``source_folder`` to the ``build_folder``. This is "
+"mostly an optimization for packages with large source codebases or header-"
+"only, to avoid extra copies."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:117
+msgid ""
+"If you activate ``no_copy_source=True``, it is **mandatory** that the source "
+"code must not be modified at all by the configure or build scripts, as the "
+"source code will be shared among all builds."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:120
+msgid ""
+"The recipes should always use ``self.source_folder`` attribute, which will "
+"point to the ``build`` folder when ``no_copy_source=False`` and will point "
+"to the ``source`` folder when ``no_copy_source=True``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:125
+msgid ""
+"Read  :ref:`header-only packages section "
+"<creating_packages_other_header_only>` for an example using "
+"``no_copy_source`` attribute."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:132
+msgid "test_package_folder"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:134
+msgid ""
+"The ``test_package_folder`` class attribute allows defining in recipe a "
+"different default ``test_package`` folder for ``conan create`` commands. "
+"When a ``conan create`` runs, after the package is created in the cache, it "
+"will look for a ``test_package`` folder, or for the folder specified in the "
+"``--test-folder=xxx`` argument, and launch the package test."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:140
+msgid "This attribute allows to change that default name:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:142
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    test_package_folder = \"my/test/folder\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/folders.inc:151
+msgid ""
+"It allows to define any folder, always relative to the location of the "
+"``conanfile.py``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:2
+msgid "Layout"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:7
+msgid "folders"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:9
+msgid ""
+"The ``folders`` attribute has to be set only in the ``layout()`` method. "
+"Please check the :ref:`layout() method "
+"documentation<layout_folders_reference>` to learn more about this attribute."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:18
+msgid "cpp"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:20
+msgid ""
+"Object storing all the information needed by the consumers of a package: "
+"include directories, library names, library paths... Both for editable and "
+"regular packages in the cache. It is only available at the ``layout()`` "
+"method."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:24
+msgid ""
+"``self.cpp.package``: For a regular package being used from the Conan cache. "
+"Same as declaring ``self.cpp_info`` at the ``package_info()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:26
+msgid ""
+"``self.cpp.source``: For \"editable\" packages, to describe the artifacts "
+"under ``self.source_folder``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:28
+msgid ""
+"``self.cpp.build``: For \"editable\" packages, to describe the artifacts "
+"under ``self.build_folder``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:32
+msgid ""
+"The ``cpp`` attribute has to be set only in the ``layout()`` method. Please "
+"check the :ref:`layout() method documentation<layout_cpp_reference>` to "
+"learn more about this attribute."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:38
+msgid "layouts"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:40
+msgid ""
+"The ``layouts`` attribute has to be set only in the ``layout()`` method. "
+"Please check the :ref:`layout() method documentation<layout_cpp_reference>` "
+"to learn more about this attribute."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:44
+msgid ""
+"The ``layouts`` attribute contains information about environment variables "
+"and ``conf`` that would be path-dependent, and as a result it would contain "
+"a different value when the package is in editable mode, or when the package "
+"is in the cache. The ``layouts`` sub-attributes are:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:48
+msgid ""
+"``self.layouts.build``: information related to the relative ``self.folders."
+"build``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:49
+msgid ""
+"``self.layouts.source``: information related to the relative ``self.folders."
+"source``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:50
+msgid ""
+"``self.layouts.package``: information related to the final ``package_folder``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:52
+msgid "Each one of those will contain:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:54
+msgid ""
+"``buildenv_info``: environment variables build information for consumers "
+"(equivalent to ``self.buildenv_info`` in ``package_info()``)"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:55
+msgid ""
+"``runenv_info``: environment variables run information for consumers "
+"(equivalent to ``self.runenv_info`` in ``package_info()``)"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:56
+msgid ""
+"``conf_info``: configuration information for consumers (equivalent to ``self."
+"conf_info`` in ``package_info()``). Note this is only automatically "
+"propagated to ``self.conf`` of consumers when this package is a direct "
+"``tool_require``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:59
+msgid ""
+"For example, if we had an ``androidndk`` recipe that contains the "
+"AndroidNDK, and we want to have that recipe in \"editable\" mode, it is "
+"necessary where the androidndk will be locally, before being in the created "
+"package:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/layout.inc:62
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"from conan.tools.files import copy\n"
+"\n"
+"class AndroidNDK(ConanFile):\n"
+"\n"
+"    def layout(self):\n"
+"        # When developing in user space it is in a \"mybuild\" folder "
+"(relative to current dir)\n"
+"        self.layouts.build.conf_info.define_path(\"tools.android:ndk_path\", "
+"\"mybuild\")\n"
+"        # but when packaged it will be in a \"mypkg\" folder (inside the "
+"cache package folder)\n"
+"        self.layouts.package.conf_info.define_path(\"tools.android:"
+"ndk_path\", \"mypkg\")\n"
+"\n"
+"    def package(self):\n"
+"        copy(self, \"*\", src=os.path.join(self.build_folder, \"mybuild\"),\n"
+"             dst=os.path.join(self.package_folder, \"mypkg\"))"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:3
+msgid "Package information for consumers"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:7
+msgid "cpp_info"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:9
+msgid ""
+"Same as using ``self.cpp.package`` in the ``layout()`` method. Use it if you "
+"need to read the ``package_folder`` to locate the already located artifacts."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:14
+msgid ":ref:`CppInfo<conan_conanfile_model_cppinfo>` model."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:19
+#: ../../../reference/conanfile/attributes/consumers.inc:33
+#: ../../../reference/conanfile/attributes/consumers.inc:58
+msgid ""
+"This attribute is only defined inside ``package_info()`` method being `None` "
+"elsewhere."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:25
+msgid "buildenv_info"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:27
+msgid ""
+"For the dependant recipes, the declared environment variables will be "
+"present during the build process. Should be only filled in the "
+"``package_info()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:35
+msgid ""
+"def package_info(self):\n"
+"    self.buildenv_info.append_path(\"PATH\", self.package_folder)"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:43
+msgid ""
+"Check the reference of the :ref:"
+"`Environment<conan_tools_env_environment_model>` object to know how to fill "
+"the ``self.buildenv_info``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:50
+msgid "runenv_info"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:52
+msgid ""
+"For the dependant recipes, the declared environment variables will be "
+"present at runtime. Should be only filled in the ``package_info()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:60
+msgid ""
+"def package_info(self):\n"
+"    self.runenv_info.define_path(\"RUNTIME_VAR\", \"c:/path/to/exe\")"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:68
+msgid ""
+"Check the reference of the :ref:"
+"`Environment<conan_tools_env_environment_model>` object to know how to fill "
+"the ``self.runenv_info``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:75
+msgid "conf_info"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:77
+msgid ""
+"Configuration variables to be passed to the dependant recipes. Should be "
+"only filled in the ``package_info()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:80
+msgid ""
+"class Pkg(ConanFile):\n"
+"    name = \"pkg\"\n"
+"\n"
+"    def package_info(self):\n"
+"        self.conf_info.define(\"tools.build:verbosity\", \"debug\")\n"
+"        self.conf_info.get(\"tools.build:verbosity\")  # == \"debug\"\n"
+"        self.conf_info.append(\"user.myconf.build:ldflags\", \"--flag3\")  # "
+"== [\"--flag1\", \"--flag2\", \"--flag3\"]\n"
+"        self.conf_info.update(\"tools.microsoft.msbuildtoolchain:"
+"compile_options\", {\"ExpandAttributedSource\": \"false\"})\n"
+"        self.conf_info.unset(\"tools.microsoft.msbuildtoolchain:"
+"compile_options\")\n"
+"        self.conf_info.remove(\"user.myconf.build:ldflags\", \"--flag1\")  # "
+"== [\"--flag0\", \"--flag2\", \"--flag3\"]\n"
+"        self.conf_info.pop(\"tools.system.package_manager:sudo\")"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:96
+msgid ""
+"Read here :ref:`the complete reference of self.conf_info "
+"<conan_conanfile_model_conf_info>`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:100
+msgid "generator_info"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:104
+msgid ""
+"Generators to be passed to the dependant recipes. Should be only filled in "
+"the ``package_info()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:109
+msgid ""
+"See :ref:`an example usage here "
+"<reference_commands_custom_generators_tool_requires>` and :ref:`the complete "
+"reference of self.generator_info <conan_conanfile_model_generator_info>`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:113
+msgid "deprecated"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:115
+msgid ""
+"This attribute declares that the recipe is deprecated, causing a user-"
+"friendly warning message to be emitted whenever it is used"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:118
+msgid "For example, the following code:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:120
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    name = \"cpp-taskflow\"\n"
+"    version = \"1.0\"\n"
+"    deprecated = True"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:129
+msgid "may emit a warning like:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:131
+msgid ""
+"cpp-taskflow/1.0: WARN: Recipe 'cpp-taskflow/1.0' is deprecated. Please, "
+"consider changing your requirements."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:135
+msgid ""
+"Optionally, the attribute may specify the name of the suggested replacement:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:137
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    name = \"cpp-taskflow\"\n"
+"    version = \"1.0\"\n"
+"    deprecated = \"taskflow\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:146
+msgid "This will emit a warning like:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:148
+msgid ""
+"cpp-taskflow/1.0: WARN: Recipe 'cpp-taskflow/1.0' is deprecated in favor of "
+"'taskflow'. Please, consider changing your requirements."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:152
+msgid ""
+"If the value of the attribute evaluates to ``False``, no warning is printed."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:156
+msgid "provides"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:158
+msgid ""
+"This attribute declares that the recipe provides the same functionality as "
+"other recipe(s). The attribute is usually needed if two or more libraries "
+"implement the same API to prevent link-time and run-time conflicts (ODR "
+"violations). One typical situation is forked libraries. Some examples are:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:163
+msgid ""
+"`LibreSSL <https://www.libressl.org/>`__, `BoringSSL <https://boringssl."
+"googlesource.com/boringssl/>`__ and `OpenSSL <https://www.openssl.org/>`__"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:164
+msgid ""
+"`libav <https://en.wikipedia.org/wiki/Libav>`__ and `ffmpeg <https://ffmpeg."
+"org/>`__"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:165
+msgid ""
+"`MariaDB client <https://downloads.mariadb.org/client-native>`__ and `MySQL "
+"client <https://dev.mysql.com/downloads/c-api/>`__"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:169
+msgid ""
+"If Conan encounters two or more libraries providing the same functionality "
+"within a single graph, it raises an error:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:171
+msgid ""
+"At least two recipes provides the same functionality:\n"
+"- 'libjpeg' provided by 'libjpeg/9d', 'libjpeg-turbo/2.0.5'"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:176
+msgid ""
+"The attribute value should be a string with a recipe name or a tuple of such "
+"recipe names."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:178
+msgid ""
+"For example, to declare that ``libjpeg-turbo`` recipe offers the same "
+"functionality as ``libjpeg`` recipe, the following code could be used:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:180
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class LibJpegTurbo(ConanFile):\n"
+"    name = \"libjpeg-turbo\"\n"
+"    version = \"1.0\"\n"
+"    provides = \"libjpeg\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:190
+msgid ""
+"To declare that a recipe provides the functionality of several different "
+"recipes at the same time, the following code could be used:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:192
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class OpenBLAS(ConanFile):\n"
+"    name = \"openblas\"\n"
+"    version = \"1.0\"\n"
+"    provides = \"cblas\", \"lapack\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/consumers.inc:201
+msgid ""
+"If the attribute is omitted, the value of the attribute is assumed to be "
+"equal to the current package name. Thus, it's redundant for ``libjpeg`` "
+"recipe to declare that it provides ``libjpeg``, it's already implicitly "
+"assumed by Conan."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:27
+msgid "Other"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:30
+msgid "dependencies"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:32
+msgid ""
+"Conan recipes provide access to their dependencies via the ``self."
+"dependencies`` attribute."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:35
+msgid ""
+"class Pkg(ConanFile):\n"
+"    requires = \"openssl/0.1\"\n"
+"\n"
+"    def generate(self):\n"
+"        openssl = self.dependencies[\"openssl\"]\n"
+"        # access to members\n"
+"        openssl.ref.version\n"
+"        openssl.ref.revision # recipe revision\n"
+"        openssl.options\n"
+"        openssl.settings"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:50
+msgid ""
+"Read here :ref:`the complete reference of self.dependencies "
+"<conan_conanfile_model_dependencies>`."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:54
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:56
+msgid ""
+"In the ``self.conf`` attribute we can find all the conf entries declared in "
+"the :ref:`[conf]<reference_config_files_profiles_conf>`  section of the "
+"profiles. in addition of the declared :ref:`self."
+"conf_info<conan_conanfile_model_conf_info>` entries from the first level "
+"tool requirements. The profile entries have priority."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:61
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class MyConsumer(ConanFile):\n"
+"\n"
+"  tool_requires = \"my_android_ndk/1.0\"\n"
+"\n"
+"  def generate(self):\n"
+"      # This is declared in the tool_requires\n"
+"      self.output.info(\"NDK host: %s\" % self.conf.get(\"tools.android:"
+"ndk_path\"))\n"
+"      # This is declared in the profile at [conf] section\n"
+"      self.output.info(\"Custom var1: %s\" % self.conf.get(\"user.custom."
+"var1\"))"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:78
+msgid ""
+"The ``conf`` attribute is a **read-only** attribute. It can only be defined "
+"in profiles and command lines, but it should never be set by recipes. "
+"Recipes can only read its value via ``self.conf.get()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:83
+msgid "Output"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:88
+msgid "Output contents"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:90
+msgid "Use the ``self.output`` to print contents to the output."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:92
+msgid ""
+"self.output.success(\"This is good, should be green\")\n"
+"self.output.info(\"This is neutral, should be white\")\n"
+"self.output.warning(\"This is a warning, should be yellow\")\n"
+"self.output.error(\"Error, should be red\")"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:99
+msgid ""
+"Additional output methods are available and you can produce different "
+"outputs with different colors. See :ref:`the output "
+"documentation<reference_conanfile_output>` for the list of available output "
+"methods."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:106
+msgid "revision_mode"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:108
+msgid ""
+"This attribute allow each recipe to declare how the revision for the recipe "
+"itself should be computed. It can take three different values:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:111
+msgid ""
+"``\"hash\"`` (by default): Conan will use the checksum hash of the recipe "
+"manifest to compute the revision for the recipe."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:113
+msgid ""
+"``\"scm\"``: if the project is inside a Git repository the commit ID will be "
+"used as the recipe revision. If there is no repository it will raise an "
+"error."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:115
+msgid ""
+"``\"scm_folder\"``: This configuration applies when you have a mono-"
+"repository project, but still want to use *scm* revisions. In this scenario, "
+"the revision of the exported `conanfile.py` will correspond to the commit ID "
+"of the folder where it's located. This approach allows multiple `conanfile."
+"py` files to exist within the same Git repository, with each file exported "
+"under its distinct revision."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:121
+msgid ""
+"When ``scm`` or ``scm_folder`` is selected, the Git commit will be used, but "
+"by default the repository must be clean, otherwise it would be very likely "
+"that there are uncommitted changes and the build wouldn't be reproducible. "
+"So if there are dirty files, Conan will raise an error. If there are files "
+"that can be dirty in the repo, but do not belong at all to the recipe or the "
+"package, then it is possible to exclude them from the check with the ``core."
+"scm:excluded`` configuration, which is a list of patterns (fnmatch) to "
+"exclude."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:131
+msgid "upload_policy"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:133
+msgid "Controls when the current package built binaries are uploaded or not"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:135
+msgid ""
+"``\"skip\"``: The precompiled binaries are not uploaded. This is useful for "
+"\"installer\" packages that just download and unzip something heavy (e.g. "
+"android-ndk), and is useful together with the ``build_policy = \"missing\"``"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:139
+msgid ""
+"class Pkg(ConanFile):\n"
+"    upload_policy = \"skip\""
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:147
+msgid "required_conan_version"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:149
+msgid ""
+"Recipes can define a module level ``required_conan_version`` that defines a "
+"valid version range of Conan versions that can load and understand the "
+"current ``conanfile.py``. The syntax is:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:152
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"required_conan_version = \">=2.0\"\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    pass"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:161
+msgid ""
+"Version ranges as in ``requires`` are allowed. Also there is a ``global."
+"conf`` file ``core:required_conan_version`` configuration that can define a "
+"global minimum, maximum or exact Conan version to run, which can be very "
+"convenient to maintain teams of developers and CI machines to use the "
+"desired range of versions."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:169
+msgid "implements"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:171
+msgid ""
+"A list is used to define a series of option configurations that Conan will "
+"handle automatically. This is especially handy for avoiding boilerplate code "
+"that tends to repeat in most of the recipes. The syntax is as follows:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:175
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    implements = [\"auto_shared_fpic\", \"auto_header_only\", ...]"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:183
+msgid "Currently these are the automatic implementations provided by Conan:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:185
+msgid ""
+"``\"auto_shared_fpic\"``: automatically manages ``fPIC`` and ``shared`` "
+"options. Adding this implementation will have both effect in the :ref:"
+"`configure<reference_conanfile_methods_configure_implementations>` and :ref:"
+"`config_options<reference_conanfile_methods_config_options_implementations>` "
+"steps when those methods are not explicitly defined in the recipe."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:191
+msgid ""
+"``\"auto_header_only\"``: automatically manages the package ID clearing "
+"settings. Adding this implementation will have effect in the :ref:"
+"`package_id<reference_conanfile_methods_package_id_implementations>` step "
+"when the method is not explicitly defined in the recipe."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:198
+msgid "This is a 2.0-only feature, and it will not work in 1.X"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:202
+msgid "alias"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:206
+msgid ""
+"While aliases can technically still be used in Conan 2, their usage is not "
+"recommended and they may be fully removed in future releases. Users are "
+"encouraged to adapt to the :ref:`newer versioning "
+"features<devops_versioning>` for a more standardized and efficient package "
+"management experience."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:211
+msgid ""
+"In Conan 2, the `alias` attribute remains a part of the recipe, allowing "
+"users to define an alias for a package version. Normally, you would create "
+"one using the ``conan new`` command with the ``alias`` template and the "
+"exporting the recipe with conan export:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:215
+msgid ""
+"$ conan new alias -d name=mypkg -d version=latest -d target=1.0\n"
+"$ conan export ."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:220
+msgid ""
+"Note that when requiring the alias, you must place the version in "
+"parentheses ``()`` to explicitly declare the use of an alias as a "
+"requirement:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:223
+msgid ""
+"class Consumer(ConanFile):\n"
+"\n"
+"    ...\n"
+"    requires = \"mypkg/(latest)\"\n"
+"    ..."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:235
+msgid "extension_properties"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:237
+msgid ""
+"The ``extensions_properties`` attribute is a dictionary intended to define "
+"and pass information from the recipes to the Conan extensions."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:240
+msgid ""
+"At the moment, the only defined properties are ``compatibility_cppstd`` and "
+"``compatibility_cstd``, that allows disabling the behavior of :ref:`the "
+"default compatibility.py extension "
+"<reference_extensions_binary_compatibility>`, that considers binaries built "
+"with different ``compiler.cppstd`` and ``compiler.cstd`` values ABI-"
+"compatible among them. To disable this behavior for the current package, it "
+"is possible to do it with:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:245
+msgid ""
+"class Pkg(ConanFile):\n"
+"    extension_properties = {\"compatibility_cppstd\": False}"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:250
+msgid ""
+"If it is necessary to do it conditionally, it is also possible to define its "
+"value inside recipe ``compatibility()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:253
+msgid ""
+"class Pkg(ConanFile):\n"
+"\n"
+"    def compatibility(self):\n"
+"        self.extension_properties = {\"compatibility_cppstd\": False}"
+msgstr ""

@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/compatibility.rst:4
+msgid "compatibility()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/compatibility.rst:8
+msgid "This is a **preview** feature"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/compatibility.rst:11
+msgid ""
+"The ``compatibility()`` method implements the same binary compatibility "
+"mechanism than the :ref:`compatibility "
+"plugin<reference_extensions_binary_compatibility>`, but at the recipe level. "
+"In general, the global compatibility plugin should be good for most cases, "
+"and only require the recipe method for exceptional cases."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/compatibility.rst:16
+msgid ""
+"This method can be used in a *conanfile.py* to define packages that are "
+"compatible between each other. If there are no binaries available for the "
+"requested settings and options, this mechanism will retrieve the compatible "
+"package's binaries if they exist. This method should return a list of "
+"compatible configurations."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/compatibility.rst:21
+msgid ""
+"For example, if we want that binaries built with gcc versions 4.8, 4.7 and "
+"4.6 to be considered compatible with the ones compiled with 4.9 we could "
+"declare a ``compatibility()`` method like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/compatibility.rst:25
+msgid ""
+"def compatibility(self):\n"
+"    if self.settings.compiler == \"gcc\" and self.settings.compiler.version "
+"== \"4.9\":\n"
+"        return [{\"settings\": [(\"compiler.version\", v)]}\n"
+"                for v in (\"4.8\", \"4.7\", \"4.6\")]"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/compatibility.rst:32
+msgid "The format of the list returned is as shown below:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/compatibility.rst:34
+msgid ""
+"[\n"
+"    {\n"
+"        \"settings\": [(<setting>, <value>), (<setting>, <value>), ...],\n"
+"        \"options\": [(<option>, <value>), (<option>, <value>), ...]\n"
+"    },\n"
+"    {\n"
+"        \"settings\": [(<setting>, <value>), (<setting>, <value>), ...],\n"
+"        \"options\": [(<option>, <value>), (<option>, <value>), ...]\n"
+"    },\n"
+"    ...\n"
+"]"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/compatibility.rst:51
+msgid ""
+"Read the :ref:`binary model reference<reference_binary_model>` for a full "
+"view of the Conan binary model."
+msgstr ""

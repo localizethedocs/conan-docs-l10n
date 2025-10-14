@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.16\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:4
+msgid "build_requirements()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:6
+msgid ""
+"The ``build_requirements()`` method is functionally equivalent to the "
+"``requirements()`` one, it is executed just after it. It is not strictly "
+"necessary, in theory everything that is inside this method, could be done in "
+"the end of the ``requirements()`` one. Still, ``build_requirements()`` is "
+"good for having a dedicated place to define ``tool_requires`` and "
+"``test_requires``:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:8
+msgid ""
+"def build_requirements(self):\n"
+"   self.tool_requires(\"cmake/3.23.5\")\n"
+"   self.test_requires(\"gtest/1.13.0\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:15
+msgid ""
+"For simple cases the attribute syntax can be enough, like ``tool_requires = "
+"\"cmake/3.23.5\"`` and ``test_requires = \"gtest/1.13.0\"``. The method form "
+"can be necessary for conditional or parameterized requirements."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:17
+msgid ""
+"The ``tool_requires`` and ``test_requires`` methods are just a specialized "
+"instance of ``requires`` with some predefined trait values. See the :ref:"
+"`requires() reference<reference_conanfile_methods_requirements>` for more "
+"information about traits."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:19
+msgid ""
+"There are 2 **experimental** ``confs`` that can be used to avoid the "
+"expansion of these types of requirements:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:21
+msgid ""
+"``tools.graph:skip_build`` allows to skip ``tool_requires`` dependencies "
+"completely. This can be done if two conditions are met: the packages "
+"requiring these tools do not need to be built from sources, and the tool "
+"requirements do not affect the consumers ``package_id``. If this happens, "
+"Conan will raise an error."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:22
+msgid ""
+"``tools.graph:skip_test`` allows to skip ``test_requires`` dependencies "
+"completely. If these dependencies are skipped, but then some package needs "
+"to be built from source and ``tools.build:skip_test`` was not activated, it "
+"will fail to locate the ``test_requires``. So in most cases, the ``tools."
+"build:skip_test`` should also be defined."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:24
+msgid ""
+"Note that if tool and/or test requirements are skipped they will not be part "
+"of the dependency graph, and they will not become part of possible generated "
+"lockfiles or package lists, with a potential impact on future "
+"reproducibility. Also, in most cases, Conan is able to mark tool and test "
+"requirements as unnecessary (``Skip``), avoiding the download of the heavy "
+"binaries, just downloading the recipe which is usually very fast. That means "
+"that in most cases these ``confs`` are not necessary and the Conan defaults "
+"are good, please use them being aware of the tradeoffs."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:30
+msgid "tool_requires()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:32
+msgid ""
+"The ``tool_requires`` is equivalent to ``requires()`` with the following "
+"traits:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:34
+msgid ""
+"``build=True``. This dependency is in the \"build\" context, being necessary "
+"at build time, but not at application runtime, and will receive the "
+"\"build\" profile and configuration."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:35
+msgid ""
+"``visible=False``. The dependency to a tool requirement is not propagated "
+"downstream. For example, one package can call "
+"``tool_requires(\"cmake/3.23.5\")``, but that doesn't mean that the consumer "
+"packages also use ``cmake``, they could even use a different build system, "
+"or a different version, without causing conflicts."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:36
+msgid ""
+"``run=True``. This dependency has some executables or runtime that needs to "
+"be ran at build time."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:37
+msgid "``headers=False`` A tool requirement does not have headers."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:38
+msgid ""
+"``libs=False``: A tool requirement does not have libraries to be linked by "
+"the consumer (if it had libraries they would be in the \"build\" context and "
+"could be incompatible with the \"host\" context of the consumer package)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:41
+msgid ""
+"Recall that ``tool_requires`` are intended exclusively for depending on "
+"tools like ``cmake`` or ``ninja``, which run in the \"build\" context, but "
+"not for library-like dependencies that would be linked into binaries. For "
+"libraries or library-like dependencies, use ``requires`` or "
+"``test_requires``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:47
+msgid "<host_version>"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:51
+msgid ""
+"This syntax is useful when you're using the same package recipe as a "
+"*requires* and as a *tool_requires* and you want to avoid conflicting "
+"downstream if any user decides to override the original *requires* version "
+"in the *host* context, i.e., the user could end up with two different "
+"versions in the host and build contexts of the same dependency."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:55
+msgid ""
+"In a nutshell, the ``<host_version>`` specifier allows us to ensure that the "
+"version resolved for the *tool_requires* always matches the one for the host "
+"requirement."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:58
+msgid "For instance, let's show a simple recipe using *protobuf*:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:60
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class mylibRecipe(ConanFile):\n"
+"    name = \"mylib\"\n"
+"    version = \"0.1\"\n"
+"    def requirements(self):\n"
+"        self.requires(\"protobuf/3.18.1\")\n"
+"    def build_requirements(self):\n"
+"        self.tool_requires(\"protobuf/<host_version>\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:72
+msgid ""
+"Then, if any user wants to use *mylib/0.1*, but another version of "
+"*protobuf*, there shouldn't be any problems overriding it:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:74
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class myappRecipe(ConanFile):\n"
+"    name = \"myapp\"\n"
+"    version = \"0.1\"\n"
+"    def requirements(self):\n"
+"        self.requires(\"mylib/0.1\")\n"
+"        self.requires(\"protobuf/3.21.9\", override=True)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:85
+msgid ""
+"The ``<host_version>`` defined upstream is ensuring that the host and build "
+"contexts are using the same version of that requirement."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:87
+msgid ""
+"Additionally, the syntax ``<host_version:mylib>`` can be used to specify the "
+"name of the package to be tracked, should the *requires* and *tool_requires* "
+"have different names. For instance:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:90
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class mylibRecipe(ConanFile):\n"
+"    name = \"mylib\"\n"
+"    version = \"0.1\"\n"
+"    def requirements(self):\n"
+"        self.requires(\"gettext/2.31\")\n"
+"    def build_requirements(self):\n"
+"        self.tool_requires(\"libgettext/<host_version:gettext>\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:105
+#: ../../../reference/conanfile/methods/build_requirements.rst:140
+msgid ":ref:`examples_graph_tool_requires_protobuf`"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:110
+msgid "test_requires"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:112
+msgid ""
+"The ``test_requires`` is equivalent to ``requires()`` with the following "
+"traits:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:114
+msgid ""
+"``test=True``. This dependency is a \"test\" dependency, existing in the "
+"\"host\" context, but not aiming to be part of the final product."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:115
+msgid ""
+"``visible=False``. The dependency to a test requirement is not propagated "
+"downstream. For example, one package can call ``self."
+"test_requires(\"gtest/1.13.0\")``, but that doesn't mean that the consumer "
+"packages also use ``gtest``, they could even use a different test framework, "
+"or the same ``gtest`` with a different version, without causing conflicts."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:118
+msgid ""
+"It is possible to further modify individual traits of ``tool_requires()`` "
+"and ``test_requires()`` if necessary, for example:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:120
+msgid ""
+"def build_requirements(self):\n"
+"   self.tool_requires(\"cmake/3.23.5\", options={\"shared\": False})"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:126
+msgid ""
+"The ``test_requires()`` allows the ``force=True`` trait in case there are "
+"transitive test requirements with conflicting versions, and likewise "
+"``tool_requires()`` support the ``override=True`` trait, for overriding "
+"possible transitive dependencies of the direct tool requirements."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:130
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:132
+msgid ""
+"``tool_requires`` are exclusively for build time **tools**, not for "
+"libraries that would be included and linked into the consumer package. For "
+"libraries with some special characteristics, use a ``requires()`` with "
+"custom trait values."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:133
+msgid ""
+"The ``self.test_requires()`` and ``self.tool_requires()`` methods should "
+"exclusively be used in the ``build_requirements()`` method, with the only "
+"possible exception being the ``requirements()`` method. Using them in any "
+"other method is forbidden. To access information about dependencies when "
+"necessary in some methods, the :ref:`self."
+"dependencies<conan_conanfile_model_dependencies>` attribute should be used."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:138
+msgid ""
+"Follow the :ref:`tutorial about consuming Conan packages as "
+"tools<consuming_packages_tool_requires>`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:139
+msgid ""
+"Read the :ref:`tutorial about creating tool_requires "
+"packages<tutorial_other_tool_requires_packages>`."
+msgstr ""

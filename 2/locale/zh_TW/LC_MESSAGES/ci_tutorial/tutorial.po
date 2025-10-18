@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-10-14 08:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,15 @@ msgid ""
 "you can skip this section."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:13
+#: ../../../ci_tutorial/tutorial.rst:11
+msgid ""
+"There is a conference talk :ref:`Continuous Integration for Large Scale C/C+"
+"+ Projects With Conan2 at ACCU-2025<accu2025>` that is based in this "
+"tutorial, that might provide some extra information and some implementation "
+"details."
+msgstr ""
+
+#: ../../../ci_tutorial/tutorial.rst:15
 msgid ""
 "Continuous Integration has different meanings for different users and "
 "organizations. In this tutorial we will cover the scenarios when users are "
@@ -43,7 +51,7 @@ msgid ""
 "changes integrate cleanly or break the organization main products."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:16
+#: ../../../ci_tutorial/tutorial.rst:18
 msgid ""
 "In this tutorial we will use this small project that uses several packages "
 "(static libraries by default) to build a couple of applications, a video "
@@ -51,7 +59,7 @@ msgid ""
 "\"**products**\", what we distribute to our users:"
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:38
+#: ../../../ci_tutorial/tutorial.rst:40
 msgid ""
 "All of the packages in the dependency graph have a ``requires`` to its "
 "direct dependencies using version ranges, for example, ``game`` contains a "
@@ -60,17 +68,17 @@ msgid ""
 "recipes."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:42
+#: ../../../ci_tutorial/tutorial.rst:44
 msgid "**Important notes**"
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:44
+#: ../../../ci_tutorial/tutorial.rst:46
 msgid ""
 "This section is written as a hands-on tutorial. It is intended to be "
 "reproduced by copying the commands in your machine."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:45
+#: ../../../ci_tutorial/tutorial.rst:47
 msgid ""
 "The tutorial presents some of the tools, good practices and common "
 "approaches to the CI problem. But there are no silver bullets. This tutorial "
@@ -80,13 +88,13 @@ msgid ""
 "the tutorial might need to be adapted."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:49
+#: ../../../ci_tutorial/tutorial.rst:51
 msgid ""
 "If you have any questions or feedback, please submit a new issue in https://"
 "github.com/conan-io/conan/issues"
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:50
+#: ../../../ci_tutorial/tutorial.rst:52
 msgid ""
 "However some of the principles and best practices would be general for all "
 "approaches. Things like package immutability, using promotions between "
@@ -94,24 +102,24 @@ msgid ""
 "practices that should be followed."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:55
+#: ../../../ci_tutorial/tutorial.rst:57
 msgid "Packages and products pipelines"
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:57
+#: ../../../ci_tutorial/tutorial.rst:59
 msgid ""
 "When a developer is doing some changes to a package source code, we will "
 "consider 2 different parts or pipelines of the overall system CI: the "
 "**packages pipeline** and the **products pipeline**"
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:60
+#: ../../../ci_tutorial/tutorial.rst:62
 msgid ""
 "The **packages pipeline** takes care of building one single package when its "
 "code is changed. If necessary it will build it for different configurations."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:61
+#: ../../../ci_tutorial/tutorial.rst:63
 msgid ""
 "The **products pipeline** takes care of building the main organization "
 "\"products\" (the packages that implement the final applications or "
@@ -120,7 +128,7 @@ msgid ""
 "necessary."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:64
+#: ../../../ci_tutorial/tutorial.rst:66
 msgid ""
 "The idea is that if some developer does changes to the ``ai`` package, "
 "producing a new ``ai/1.1.0`` version, the packages pipeline will first build "
@@ -131,17 +139,17 @@ msgid ""
 "they are affected by the change."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:71
+#: ../../../ci_tutorial/tutorial.rst:73
 msgid "Repositories and promotions"
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:73
+#: ../../../ci_tutorial/tutorial.rst:75
 msgid ""
 "The concept of multiple server side repositories is very important for CI. "
 "In this tutorial we will use 3 repositories:"
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:75
+#: ../../../ci_tutorial/tutorial.rst:77
 msgid ""
 "``develop``: This repository is the main one that developers have configured "
 "in their machines to be able to ``conan install`` dependencies and work. As "
@@ -151,7 +159,7 @@ msgid ""
 "do ``--build=missing`` and build again and again from source."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:79
+#: ../../../ci_tutorial/tutorial.rst:81
 msgid ""
 "``packages``: This repository will be used to temporarily upload the "
 "packages built by the \"packages pipeline\", to not upload them directly to "
@@ -159,21 +167,21 @@ msgid ""
 "validated."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:81
+#: ../../../ci_tutorial/tutorial.rst:83
 msgid ""
 "``products``: This repository will be used to temporarily upload the "
 "packages built by the \"products pipeline\", while building and testing that "
 "new dependencies changes do not break the main \"products\"."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:100
+#: ../../../ci_tutorial/tutorial.rst:102
 msgid ""
 "Promotions are the mechanism used to make packages available from one "
 "pipeline to the other. Connecting the above packages and product pipelines "
 "with the repositories, there will be 2 promotions:"
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:103
+#: ../../../ci_tutorial/tutorial.rst:105
 msgid ""
 "When all the different binaries for the different configurations have been "
 "built for a single package with the ``packages pipeline``, and uploaded to "
@@ -182,7 +190,7 @@ msgid ""
 "repository."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:106
+#: ../../../ci_tutorial/tutorial.rst:108
 msgid ""
 "When the ``products pipeline`` has built from source all the necessary "
 "packages that need a re-build because of the new package versions in the "
@@ -192,21 +200,21 @@ msgid ""
 "``develop`` repo, to make them available for all other developers and CI."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:113
+#: ../../../ci_tutorial/tutorial.rst:115
 msgid ""
 "The concept of **immutability** is important in package management and "
 "devops. Modifying ``channel`` is strongly discouraged, see :ref:`Package "
 "promotions<devops_package_promotions>`."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:114
+#: ../../../ci_tutorial/tutorial.rst:116
 msgid ""
 "The versioning approach is important. This tutorial will be following :ref:"
 "`the default Conan versioning approach, see details "
 "here<devops_versioning_default>`"
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:116
+#: ../../../ci_tutorial/tutorial.rst:118
 msgid ""
 "This tutorial is just modeling the **development** flow. In production "
 "systems, there will be other repositories and promotions, like a ``testing`` "
@@ -216,7 +224,7 @@ msgid ""
 "`Package promotions<devops_package_promotions>`."
 msgstr ""
 
-#: ../../../ci_tutorial/tutorial.rst:121
+#: ../../../ci_tutorial/tutorial.rst:123
 msgid ""
 "Let's start with the tutorial, move to the next section to do the project "
 "setup:"

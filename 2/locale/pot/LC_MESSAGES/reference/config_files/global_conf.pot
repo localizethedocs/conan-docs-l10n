@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 08:27+0000\n"
+"POT-Creation-Date: 2025-10-21 08:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -255,6 +255,9 @@ msgid ""
 "tools.gnu:build_triplet: Custom build triplet to pass to Autotools scripts\n"
 "tools.gnu:define_libcxx11_abi: Force definition of GLIBCXX_USE_CXX11_ABI=1 "
 "for libstdc++11\n"
+"tools.gnu:disable_flags: Disable the automatic addition of flags to some "
+"build systems. List of possible values: ['arch', 'arch_link', 'libcxx', "
+"'build_type', 'build_type_link', 'threads','cppstd', 'cstd']\n"
 "tools.gnu:extra_configure_args: List of extra arguments to pass to configure "
 "when using AutotoolsToolchain and GnuToolchain\n"
 "tools.gnu:host_triplet: Custom host triplet to pass to Autotools scripts\n"
@@ -330,8 +333,8 @@ msgstr ""
 
 #: ../../../reference/config_files/global_conf.rst:43
 #: ../../../reference/config_files/global_conf.rst:129
-#: ../../../reference/config_files/global_conf.rst:256
-#: ../../../reference/config_files/global_conf.rst:269
+#: ../../../reference/config_files/global_conf.rst:264
+#: ../../../reference/config_files/global_conf.rst:277
 msgid "*global.conf*"
 msgstr ""
 
@@ -593,10 +596,30 @@ msgid ""
 msgstr ""
 
 #: ../../../reference/config_files/global_conf.rst:194
-msgid "``core.net.http:cacert_path``: Path containing a custom Cacert file."
+msgid ""
+"``core.net.http:cacert_path``: Path containing a custom Cacert file. When "
+"multiple certificates are necessary for different remotes, it is possible to "
+"aggregate them, for example adding your own ``my-ca.crt`` certificate:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:195
+#: ../../../reference/config_files/global_conf.rst:198
+msgid ""
+"sudo cp my-ca.crt /usr/local/share/ca-certificates/my-ca.crt\n"
+"sudo update-ca-certificates"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:204
+msgid ""
+"Then, the certificate storage can be defined with ``core.net.http:"
+"cacert_path=/etc/ssl/certs/ca-certificates.crt``. The ``cacert_path`` Conan "
+"configuration is forwarded to the ``python-requests`` ``verify`` argument, "
+"see `Python-requests SSL certificates <https://requests.readthedocs.io/en/"
+"latest/user/advanced/#ssl-cert-verification>`_. That means that if the "
+"``REQUESTS_CA_BUNDLE`` environment variable is defined, it might be taken "
+"into account too."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:209
 msgid ""
 "``core.net.http:client_cert``: Path or tuple of files containing a client "
 "certificate (and the key). See more details in `Python requests and Client "
@@ -604,27 +627,19 @@ msgid ""
 "#client-side-certificates>`_"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:198
+#: ../../../reference/config_files/global_conf.rst:212
 msgid "For instance:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:200
+#: ../../../reference/config_files/global_conf.rst:214
 msgid "**[CONAN_HOME]/global.conf**"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:200
-msgid ""
-"core.net.http:cacert_path=/path/to/cacert.pem\n"
-"core.net.http:client_cert=('/path/client.cert', '/path/client.key')"
+#: ../../../reference/config_files/global_conf.rst:214
+msgid "core.net.http:client_cert=('/path/client.cert', '/path/client.key')"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:209
-msgid ""
-":ref:`Managing configuration in your recipes (self.conf_info) "
-"<conan_conanfile_model_conf_info>`"
-msgstr ""
-
-#: ../../../reference/config_files/global_conf.rst:212
+#: ../../../reference/config_files/global_conf.rst:219
 msgid ""
 "``tools.files.download:verify``: Setting ``tools.files.download:"
 "verify=False`` constitutes a security risk if enabled, as it disables "
@@ -633,15 +648,15 @@ msgid ""
 "good idea) or if you are using it for development purposes"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:218
+#: ../../../reference/config_files/global_conf.rst:226
 msgid "Proxies"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:220
+#: ../../../reference/config_files/global_conf.rst:228
 msgid "There are 3 ``confs`` that can define proxies information:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:222
+#: ../../../reference/config_files/global_conf.rst:230
 msgid ""
 "$ conan config list proxies\n"
 "core.net.http:clean_system_proxy: If defined, the proxies system env-vars "
@@ -651,7 +666,7 @@ msgid ""
 "core.net.http:proxies: Dictionary containing the proxy configuration"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:229
+#: ../../../reference/config_files/global_conf.rst:237
 msgid ""
 "The ``core.net.http:proxies`` dictionary is passed to the underlying "
 "``python-requests`` library, to the \"proxies\" argument as described in the "
@@ -659,15 +674,15 @@ msgid ""
 "user/advanced/#proxies>`_"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:232
+#: ../../../reference/config_files/global_conf.rst:240
 msgid "The ``core.net:no_proxy_match`` is a list of URL patterns, like:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:234
+#: ../../../reference/config_files/global_conf.rst:242
 msgid "core.net.http:no_proxy_match = [\"http://someurl.com/*\"]"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:239
+#: ../../../reference/config_files/global_conf.rst:247
 msgid ""
 "for URLs to be excluded from the ``proxies`` configuration. That means that "
 "all URLs that are referenced that matches any of those patterns will not "
@@ -675,7 +690,7 @@ msgid ""
 "necessary for the match."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:242
+#: ../../../reference/config_files/global_conf.rst:250
 msgid ""
 "If ``core.net.http:clean_system_proxy`` is ``True``, then the environment "
 "variables ``\"http_proxy\", \"https_proxy\", \"ftp_proxy\", \"all_proxy\", "
@@ -683,72 +698,72 @@ msgid ""
 "not taken into account when resolving proxies."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:248
+#: ../../../reference/config_files/global_conf.rst:256
 msgid "Storage configurations"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:251
+#: ../../../reference/config_files/global_conf.rst:259
 msgid "core.cache:storage_path"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:253
+#: ../../../reference/config_files/global_conf.rst:261
 msgid ""
 "Absolute path to a folder where the Conan packages and the database of the "
 "packages will be stored. This folder will be the heaviest Conan storage "
 "folder, as it stores the binary packages downloaded or created."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:256
+#: ../../../reference/config_files/global_conf.rst:264
 msgid "core.cache:storage_path = C:\\Users\\danielm\\my_conan_storage_folder"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:261
+#: ../../../reference/config_files/global_conf.rst:269
 msgid "**Default value:** ``<CONAN_HOME>/p``"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:264
+#: ../../../reference/config_files/global_conf.rst:272
 msgid "core.download:download_cache"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:266
+#: ../../../reference/config_files/global_conf.rst:274
 msgid ""
 "Absolute path to a folder where the Conan packages will be stored "
 "*compressed*. This is useful to avoid recurrent downloads of the same "
 "packages, especially in CI."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:269
+#: ../../../reference/config_files/global_conf.rst:277
 msgid "core.download:download_cache = C:\\Users\\danielm\\my_download_cache"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:274
+#: ../../../reference/config_files/global_conf.rst:282
 msgid "**Default value:** Not defined."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:278
+#: ../../../reference/config_files/global_conf.rst:286
 msgid "UX confs"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:283
+#: ../../../reference/config_files/global_conf.rst:291
 msgid "Skip warnings"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:285
+#: ../../../reference/config_files/global_conf.rst:293
 msgid ""
 "There are several warnings that Conan outputs in certain cases which can be "
 "omitted via the ``core:skip_warnings`` conf, by adding the warning tag to "
 "its value."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:288
+#: ../../../reference/config_files/global_conf.rst:296
 msgid "Those warnings are:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:290
+#: ../../../reference/config_files/global_conf.rst:298
 msgid ""
 "``deprecated``: Messages for deprecated features such as legacy generators"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:291
+#: ../../../reference/config_files/global_conf.rst:299
 msgid "``network``: Messages related to network issues, such as retries"
 msgstr ""

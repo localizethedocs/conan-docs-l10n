@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.40\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:4
+msgid "VirtualBuildEnv"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:8
+msgid ""
+"This is a **very experimental** feature and it will have breaking changes in "
+"future releases."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:11
+msgid "The ``VirtualBuildEnv`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:13
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:27
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:13
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"VirtualBuildEnv\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:19
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:19
+msgid ""
+"[generators]\n"
+"VirtualBuildEnv"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:25
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:27
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.env import VirtualBuildEnv\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    requires = \"zlib/1.2.11\", \"bzip2/1.0.8\"\n"
+"\n"
+"    def generate(self):\n"
+"        ms = VirtualBuildEnv(self)\n"
+"        ms.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:41
+msgid ""
+"When the ``VirtualBuildEnv`` generator is used, calling :command:`conan "
+"install` will generate a *conanbuildenv* .bat or .sh script containing "
+"environment variables of the build time environment."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:44
+msgid ""
+"That information is collected from the direct ``build_requires`` in "
+"\"build\" context recipes from the ``self.buildenv_info`` definition plus "
+"the ``self.runenv_info`` of the transitive dependencies of those "
+"``build_requires``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:49
+msgid "Constructor"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:54
+msgid "def __init__(self, conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:55
+msgid "``conanfile``: the current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:59
+msgid "generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:65
+msgid "def generate(self, auto_activate=True):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:66
+msgid "Parameters:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualbuildenv.rst:68
+msgid ""
+"**auto_activate** (Defaulted to ``True``): Add the launcher automatically to "
+"the ``conanenv`` launcher. Read more in the :ref:`Environment documentation "
+"<conan_tools_env_environment_model>`."
+msgstr ""

@@ -1,0 +1,176 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.44\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/generators/visualstudio.rst:4
+msgid "visual_studio"
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:8
+msgid ""
+"This is the reference page for ``visual_studio`` generator. Go to :ref:"
+"`Integrations/Visual Studio<visual_studio>` if you want to learn how to "
+"integrate your project or recipes with Visual Studio."
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:11
+msgid ""
+"Generates a file named *conanbuildinfo.props* containing an XML that can be "
+"imported to your Visual Studio project."
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:13
+msgid "Generated xml structure:"
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:15
+msgid ""
+"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+"<Project ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/"
+"msbuild/2003\">\n"
+"  <ImportGroup Label=\"PropertySheets\" />\n"
+"  <PropertyGroup Label=\"UserMacros\" />\n"
+"  <PropertyGroup Label=\"Conan-RootDirs\">\n"
+"    <Conan-Lib1-Root>{PACKAGE LIB1 FOLDER}</Conan-Poco-Root>\n"
+"    <Conan-Lib2-Root>{PACKAGE LIB2 FOLDER}</Conan-Poco-Root>\n"
+"    ...\n"
+"  </PropertyGroup>\n"
+"  <PropertyGroup Label=\"ConanVariables\">\n"
+"    <ConanCompilerFlags>{compiler_flags}</ConanCompilerFlags>\n"
+"    <ConanLinkerFlags>{linker_flags}</ConanLinkerFlags>\n"
+"    <ConanPreprocessorDefinitions>{definitions}</"
+"ConanPreprocessorDefinitions>\n"
+"    <ConanIncludeDirectories>{include_dirs}</ConanIncludeDirectories>\n"
+"    <ConanResourceDirectories>{res_dirs}</ConanResourceDirectories>\n"
+"    <ConanLibraryDirectories>{lib_dirs}</ConanLibraryDirectories>\n"
+"    <ConanBinaryDirectories>{bin_dirs}</ConanBinaryDirectories>\n"
+"    <ConanLibraries>{libs}</ConanLibraries>\n"
+"    <ConanSystemDeps>{system_libs}</ConanSystemDeps>\n"
+"  </PropertyGroup>\n"
+"  <PropertyGroup>\n"
+"    <LocalDebuggerEnvironment>PATH=%PATH%;{CONAN BINARY DIRECTORIES LIST}</"
+"LocalDebuggerEnvironment>\n"
+"    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>\n"
+"  </PropertyGroup>\n"
+"  <ItemDefinitionGroup>\n"
+"    <ClCompile>\n"
+"      <AdditionalIncludeDirectories>$(ConanIncludeDirectories)%(AdditionalIncludeDirectories)</"
+"AdditionalIncludeDirectories>\n"
+"      <PreprocessorDefinitions>$(ConanPreprocessorDefinitions)%(PreprocessorDefinitions)</"
+"PreprocessorDefinitions>\n"
+"      <AdditionalOptions>$(ConanCompilerFlags) %(AdditionalOptions)</"
+"AdditionalOptions>\n"
+"    </ClCompile>\n"
+"    <Link>\n"
+"      <AdditionalLibraryDirectories>$(ConanLibraryDirectories)%(AdditionalLibraryDirectories)</"
+"AdditionalLibraryDirectories>\n"
+"      <AdditionalDependencies>$(ConanLibraries)%(AdditionalDependencies)</"
+"AdditionalDependencies>\n"
+"      <AdditionalDependencies>$(ConanSystemDeps)%(AdditionalDependencies)</"
+"AdditionalDependencies>\n"
+"      <AdditionalOptions>$(ConanLinkerFlags) %(AdditionalOptions)</"
+"AdditionalOptions>\n"
+"    </Link>\n"
+"    <Midl>\n"
+"      <AdditionalIncludeDirectories>$(ConanIncludeDirectories)%(AdditionalIncludeDirectories)</"
+"AdditionalIncludeDirectories>\n"
+"    </Midl>\n"
+"    <ResourceCompile>\n"
+"      <AdditionalIncludeDirectories>$(ConanIncludeDirectories)%(AdditionalIncludeDirectories)</"
+"AdditionalIncludeDirectories>\n"
+"      <PreprocessorDefinitions>$(ConanPreprocessorDefinitions)%(PreprocessorDefinitions)</"
+"PreprocessorDefinitions>\n"
+"      <AdditionalOptions>$(ConanCompilerFlags) %(AdditionalOptions)</"
+"AdditionalOptions>\n"
+"    </ResourceCompile>\n"
+"  </ItemDefinitionGroup>\n"
+"  <ItemGroup />\n"
+"</Project>"
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:65
+msgid ""
+"There are ``ConanVariables`` containing the information of the dependencies. "
+"Those variables are used later in the file, like in the ``<Link>`` task."
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:67
+msgid ""
+"Note that for single-configuration packages, which is the most typical, "
+"Conan installs Debug/Release, 32/64bits, packages separately. So a different "
+"property sheet will be generated for each configuration. The process could "
+"be:"
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:69
+msgid "Given for example a ``conanfile.txt`` like:"
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:71
+msgid "*conanfile.txt*"
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:71
+msgid ""
+" [requires]\n"
+" pkg/0.1@user/channel\n"
+"\n"
+" [generators]\n"
+" visual_studio"
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:80
+msgid ""
+"And assuming that binary packages exist for ``pkg/0.1@user/channel``, we "
+"could do:"
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:82
+msgid ""
+"$ mkdir debug32 && cd debug32\n"
+"$ conan install .. -s compiler=\"Visual Studio\" -s compiler.version=15 -s "
+"arch=x86 -s build_type=Debug\n"
+"$ cd ..\n"
+"$ mkdir debug64 && cd debug64\n"
+"$ conan install .. -s compiler=\"Visual Studio\" -s compiler.version=15 -s "
+"arch=x86_64 -s build_type=Debug\n"
+"$ cd ..\n"
+"$ mkdir release32 && cd release32\n"
+"$ conan install .. -s compiler=\"Visual Studio\" -s compiler.version=15 -s "
+"arch=x86 -s build_type=Release\n"
+"$ cd ..\n"
+"$ mkdir release64 && cd release64\n"
+"$ conan install .. -s compiler=\"Visual Studio\" -s compiler.version=15 -s "
+"arch=x86_64 -s build_type=Release\n"
+"...\n"
+"# Now go to VS 2017 Property Manager, load the respective sheet into each "
+"configuration"
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:98
+msgid ""
+"The above process can be simplified using profiles (assuming you have "
+"created the respective profiles), and you can also specify the generators in "
+"the command line:"
+msgstr ""
+
+#: ../../../reference/generators/visualstudio.rst:101
+msgid ""
+"$ conan install .. -pr=vs15release64 -g visual_studio\n"
+"..."
+msgstr ""

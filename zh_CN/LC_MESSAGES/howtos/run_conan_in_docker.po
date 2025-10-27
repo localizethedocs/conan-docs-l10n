@@ -1,0 +1,398 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.28\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/run_conan_in_docker.rst:4
+msgid "How to use Docker to create and cross-build C and C++ Conan packages"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:6
+msgid ""
+"With Docker, you can run different virtual Linux operating systems in a "
+"Linux, Mac OSX or Windows machine. It is useful to reproduce build "
+"environments, for example to automate CI processes. You can have different "
+"images with different compilers or toolchains and run containers every time "
+"is needed."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:10
+msgid ""
+"In this section you will find a :ref:`list of pre-built "
+"images<available_docker_images>` with common build tools and compilers as "
+"well as Conan installed."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:15
+msgid "Using Conan inside a container"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:17
+msgid "$ docker run -it --rm conanio/gcc7 /bin/bash"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:24
+msgid "Use ``sudo`` when needed to run ``docker``."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:26
+msgid "The previous code will run a shell in container. We have specified:"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:28
+msgid ""
+":command:`-it`: Keep STDIN open and allocate a pseudo-tty, in other words, "
+"we want to type in the container because we are opening a bash."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:29
+msgid ""
+":command:`--rm`: Once the container exits, remove the container. Helps to "
+"keep clean or hard drive."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:30
+msgid ""
+":command:`conanio/gcc7`: Image name, check the :ref:`available Docker "
+"images<available_docker_images>`."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:31
+msgid ":command:`/bin/bash`: The command to run"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:34
+msgid ""
+"Now we are running on the conangcc7 container we can use Conan normally. In "
+"the following example we are creating a package from the recipe by cloning "
+"the repository, for OpenSSL. It is always recommended to upgrade Conan from "
+"pip first:"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:38
+msgid ""
+"$ sudo pip install conan --upgrade # We make sure we are running the latest "
+"Conan version\n"
+"$ git clone https://github.com/conan-community/conan-openssl\n"
+"$ cd conan-openssl\n"
+"$ conan create . user/channel"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:47
+msgid "Sharing a local folder with a Docker container"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:49
+msgid ""
+"You can share a local folder with your container, for example a project:"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:51
+msgid ""
+"$ git clone https://github.com/conan-community/conan-openssl\n"
+"$ cd conan-openssl\n"
+"$ docker run -it -v$(pwd):/home/conan/project --rm conanio/gcc7 /bin/bash"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:58
+msgid ""
+"``v$(pwd):/home/conan/project``: We are mapping the current directory (conan-"
+"openssl) to the container ``/home/conan/project`` directory, so anything we "
+"change in this shared folder, will be reflected in our host machine."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:62
+msgid ""
+"# Now we are running on the conangcc7 container\n"
+"$ sudo pip install conan --upgrade # We make sure we are running the latest "
+"Conan version\n"
+"$ cd project\n"
+"$ conan create . user/channel --build missing\n"
+"$ conan remote add myremote http://some.remote.url\n"
+"$ conan upload \"*\" -r myremote --all"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:75
+msgid "Using the images to *cross build* packages"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:77
+msgid ""
+"You can use the :ref:`available docker images <available_docker_images>` "
+"(with the suffix ``-i386``, ``-armv7`` and ``-armv7gh``) to generate "
+"packages for those platforms."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:80
+msgid ""
+"For example, the ``armv7`` images have a toolchain for linux ARM installed, "
+"and declared as main compiler with the environment variables ``CC`` and "
+"``CXX``. Also, the default Conan profile (``~/.conan/profiles/default``) is "
+"adjusted to declare the correct arch (``armv7`` / ``armv7hf``)."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:84
+msgid ""
+"This process will run a native compilation inside docker, so we cannot say "
+"it is actual cross building, but if we were talking in terms of cross "
+"compiling: the docker service is running in your machine (the ``build`` "
+"platform) a docker image (which is the ``host`` platform) to generate the "
+"binaries. To read about actual cross compiling with Conan we have a "
+"dedicated section in the docs: :ref:`cross_building`."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:89
+msgid ""
+"Building and uploading a package along with all its missing dependencies for "
+"``Linux/armv7hf`` is done in few steps:"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:91
+msgid ""
+"$ git clone https://github.com/conan-community/conan-openssl\n"
+"$ cd conan-openssl\n"
+"$ docker run -it -v$(pwd):/home/conan/project --rm conanio/gcc49-armv7hf /"
+"bin/bash\n"
+"\n"
+"# Now we are running on the conangcc49-armv7hf container\n"
+"# The default profile is automatically adjusted to armv7hf\n"
+"$ cat ~/.conan/profiles/default\n"
+"\n"
+"[settings]\n"
+"os=Linux\n"
+"arch=armv7hf\n"
+"compiler=gcc\n"
+"compiler.version=4.9\n"
+"compiler.libcxx=libstdc++\n"
+"build_type=Release\n"
+"[options]\n"
+"[build_requires]\n"
+"[env]\n"
+"\n"
+"$ sudo pip install conan --upgrade # We make sure we are running the latest "
+"Conan version\n"
+"$ cd project\n"
+"\n"
+"$ conan create . user/channel --build missing\n"
+"$ conan remote add myremoteARMV7 http://some.remote.url\n"
+"$ conan upload \"*\" -r myremoteARMV7 --all"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:123
+msgid "Available Docker images"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:125
+msgid ""
+"We provide a set of images with the most common compilers installed that can "
+"be used to generate Conan packages for different profiles. Their dockerfiles "
+"can be found in the `Conan Docker Tools <https://github.com/conan-io/conan-"
+"docker-tools>`_ repository."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:130
+msgid ""
+"The images listed below are intended for generating open-source library "
+"packages and we cannot guarantee any kind of stability. We strongly "
+"recommend using your own generated images for production environments taking "
+"these dockerfiles as a reference."
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:133
+msgid "**GCC** images"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:136
+msgid "**Version**"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:136
+#: ../../../howtos/run_conan_in_docker.rst:179
+msgid "**Target Arch**"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:138
+msgid "`conanio/gcc49 (GCC 4.9) <https://hub.docker.com/r/conanio/gcc49/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:138
+#: ../../../howtos/run_conan_in_docker.rst:150
+#: ../../../howtos/run_conan_in_docker.rst:158
+#: ../../../howtos/run_conan_in_docker.rst:168
+#: ../../../howtos/run_conan_in_docker.rst:181
+#: ../../../howtos/run_conan_in_docker.rst:185
+#: ../../../howtos/run_conan_in_docker.rst:189
+#: ../../../howtos/run_conan_in_docker.rst:193
+msgid "x86_64"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:140
+msgid ""
+"`conanio/gcc49-i386 (GCC 4.9) <https://hub.docker.com/r/conanio/gcc49-i386/"
+">`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:140
+#: ../../../howtos/run_conan_in_docker.rst:152
+#: ../../../howtos/run_conan_in_docker.rst:160
+#: ../../../howtos/run_conan_in_docker.rst:166
+#: ../../../howtos/run_conan_in_docker.rst:183
+#: ../../../howtos/run_conan_in_docker.rst:187
+#: ../../../howtos/run_conan_in_docker.rst:191
+msgid "x86"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:142
+msgid ""
+"`conanio/gcc49-armv7 (GCC 4.9) <https://hub.docker.com/r/conanio/gcc49-armv7/"
+">`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:142
+#: ../../../howtos/run_conan_in_docker.rst:146
+#: ../../../howtos/run_conan_in_docker.rst:154
+#: ../../../howtos/run_conan_in_docker.rst:162
+#: ../../../howtos/run_conan_in_docker.rst:170
+msgid "armv7"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:144
+msgid ""
+"`conanio/gcc49-armv7hf (GCC 4.9) <https://hub.docker.com/r/conanio/gcc49-"
+"armv7hf/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:144
+#: ../../../howtos/run_conan_in_docker.rst:148
+#: ../../../howtos/run_conan_in_docker.rst:156
+#: ../../../howtos/run_conan_in_docker.rst:164
+#: ../../../howtos/run_conan_in_docker.rst:172
+msgid "armv7hf"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:146
+#: ../../../howtos/run_conan_in_docker.rst:154
+msgid ""
+"`conanio/gcc5-armv7 (GCC 5) <https://hub.docker.com/r/conanio/gcc5-armv7/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:148
+msgid ""
+"`conanio/gcc5-armv7hf (GCC 5) <https://hub.docker.com/r/conanio/gcc5-armv7hf/"
+">`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:150
+msgid "`conanio/gcc5 (GCC 5) <https://hub.docker.com/r/conanio/gcc5/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:152
+msgid ""
+"`conanio/gcc5-i386 (GCC 5)  <https://hub.docker.com/r/conanio/gcc5-i386/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:156
+msgid ""
+"`conanio/gcc5-armv7hf (GCC 5)  <https://hub.docker.com/r/conanio/gcc5-"
+"armv7hf/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:158
+msgid "`conanio/gcc6 (GCC 6) <https://hub.docker.com/r/conanio/gcc6/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:160
+msgid ""
+"`conanio/gcc6-i386 (GCC 6)  <https://hub.docker.com/r/conanio/gcc6-i386/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:162
+msgid ""
+"`conanio/gcc6-armv7 (GCC 6)  <https://hub.docker.com/r/conanio/gcc6-armv7/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:164
+msgid ""
+"`conanio/gcc6-armv7hf: (GCC 6)  <https://hub.docker.com/r/conanio/gcc6-"
+"armv7hf/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:166
+msgid ""
+"`conanio/gcc7-i386 (GCC 7) <https://hub.docker.com/r/conanio/gcc7-i386/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:168
+msgid "`conanio/gcc7 (GCC 7) <https://hub.docker.com/r/conanio/gcc7/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:170
+msgid ""
+"`conanio/gcc7-armv7 (GCC 7) <https://hub.docker.com/r/conanio/gcc7-armv7/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:172
+msgid ""
+"`conanio/gcc7-armv7hf (GCC 7) <https://hub.docker.com/r/conanio/gcc7-armv7hf/"
+">`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:176
+msgid "**Clang** images"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:179
+msgid "Version"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:181
+msgid ""
+"`conanio/clang38 (Clang 3.8) <https://hub.docker.com/r/conanio/clang38/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:183
+msgid ""
+"`conanio/clang39-i386 (Clang 3.9) <https://hub.docker.com/r/conanio/clang39-"
+"i386/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:185
+msgid ""
+"`conanio/clang39 (Clang 3.9) <https://hub.docker.com/r/conanio/clang39/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:187
+msgid ""
+"`conanio/clang40-i386 (Clang 4) <https://hub.docker.com/r/conanio/clang40/-"
+"i386>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:189
+msgid ""
+"`conanio/clang40 (Clang 4) <https://hub.docker.com/r/conanio/clang40/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:191
+msgid ""
+"`conanio/clang50-i386 (Clang 5) <https://hub.docker.com/r/conanio/clang50-"
+"i386/>`_"
+msgstr ""
+
+#: ../../../howtos/run_conan_in_docker.rst:193
+msgid ""
+"`conanio/clang50 (Clang 5) <https://hub.docker.com/r/conanio/clang50/>`_"
+msgstr ""

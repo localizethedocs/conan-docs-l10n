@@ -1,0 +1,310 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.37\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../extending/custom_settings.rst:4
+msgid "Customizing settings"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:6
+msgid ""
+"There is a file in *<userhome>/.conan/settings.yml* that contains a default "
+"definition of the allowed ``settings`` values for Conan package recipes. It "
+"looks like:"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:9
+msgid ""
+"os:\n"
+"    Windows:\n"
+"        subsystem: [None, cygwin, msys, msys2, wsl]\n"
+"    Linux:\n"
+"    Macos:\n"
+"        version: [None, \"10.6\", \"10.7\", \"10.8\", \"10.9\", \"10.10\", "
+"\"10.11\", \"10.12\", \"10.13\", \"10.14\"]\n"
+"    Android:\n"
+"        api_level: ANY\n"
+"    iOS:\n"
+"        version: [\"7.0\", \"7.1\", \"8.0\", \"8.1\", \"8.2\", \"8.3\", "
+"\"9.0\", \"9.1\", \"9.2\", \"9.3\", \"10.0\", \"10.1\", \"10.2\", \"10.3\", "
+"\"11.0\", \"11.1\", \"11.2\", \"11.3\", \"11.4\", \"12.0\", \"12.1\"]\n"
+"    watchOS:\n"
+"        version: [\"4.0\", \"4.1\", \"4.2\", \"4.3\", \"5.0\", \"5.1\"]\n"
+"    FreeBSD:\n"
+"    SunOS:\n"
+"    Emscripten:\n"
+"arch: [x86, x86_64, ppc32, ppc64le, ppc64, armv4, armv4i, armv5el, armv5hf, "
+"armv6, armv7, armv7hf, armv7s, armv7k, armv8, armv8_32, armv8.3, sparc, "
+"sparcv9, mips, mips64, avr, s390, s390x, asm.js, wasm]\n"
+"compiler:\n"
+"    gcc:\n"
+"        version: [\"4.1\", \"4.4\", \"4.5\", \"4.6\", \"4.7\", \"4.8\", "
+"\"4.9\",\n"
+"                \"5\", \"5.1\", \"5.2\", \"5.3\", \"5.4\", \"5.5\",\n"
+"                \"6\", \"6.1\", \"6.2\", \"6.3\", \"6.4\",\n"
+"                \"7\", \"7.1\", \"7.2\", \"7.3\",\n"
+"                \"8\", \"8.1\", \"8.2\",\n"
+"                \"9\"]\n"
+"        libcxx: [libstdc++, libstdc++11]\n"
+"        threads: [None, posix, win32] #  Windows MinGW\n"
+"        exception: [None, dwarf2, sjlj, seh] # Windows MinGW\n"
+"        cppstd: [None, 98, gnu98, 11, gnu11, 14, gnu14, 17, gnu17, 20, "
+"gnu20]\n"
+"    Visual Studio:\n"
+"        runtime: [MD, MT, MTd, MDd]\n"
+"        version: [\"8\", \"9\", \"10\", \"11\", \"12\", \"14\", \"15\", "
+"\"16\"]\n"
+"        toolset: [None, v90, v100, v110, v110_xp, v120, v120_xp,\n"
+"                v140, v140_xp, v140_clang_c2, LLVM-vs2012, LLVM-vs2012_xp,\n"
+"                LLVM-vs2013, LLVM-vs2013_xp, LLVM-vs2014, LLVM-vs2014_xp,\n"
+"                LLVM-vs2017, LLVM-vs2017_xp, v141, v141_xp, v141_clang_c2, "
+"v142,\n"
+"                llvm, ClangCL]\n"
+"        cppstd: [None, 14, 17, 20]"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:49
+msgid ""
+"This are the **default** settings and values. They are a common syntax and "
+"notation for having package binary IDs that are common to all developers. "
+"They are also used for validation, for example if you write in a profile "
+"``[settings]`` something like ``os=Windos`` (note the typo), then it will "
+"raise an error, telling you it is not a recognized ``os`` and offering a "
+"list of available ``os``. Also, note how the sub-settings are different for "
+"different platforms, for example the standard C++ library (``compiler."
+"libcxx``) exists for the ``gcc`` compiler, but not for ``Visual Studio`` "
+"compiler. And in the same way, ``Visual Studio`` has a ``runtime`` sub-"
+"setting that is missing in ``gcc``. Trying to incorrectly use or define "
+"these sub-settings in the wrong compiler will also raise an error."
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:58
+msgid ""
+"These settings are good for defining a base for Open Source packages, and "
+"for a large number of mainstream configurations. But it is likely that you "
+"might need finer detail of definition of the binaries that are being created."
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:62
+msgid ""
+"For example, it is possible that you are managing binaries for older Linux "
+"distros, like RHEL 6, or old Centos, besides other modern distributions. The "
+"problem is that the binaries compiled for modern distributions will not work "
+"(will not be binary compatible, or ABI incompatible) in those older "
+"distributions, mainly because of different versions of glibc. We would need "
+"a way to model the differences of the binaries for those platforms. Check "
+"out the section :ref:`deployment_challenges` which explains mentioned "
+"situation in detail."
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:71
+msgid "Adding new settings"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:73
+msgid ""
+"It is possible to add new settings at the root of the *settings.yml* file, "
+"something like:"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:75
+msgid ""
+"os:\n"
+"    Windows:\n"
+"        subsystem: [None, cygwin, msys, msys2, wsl]\n"
+"distro: [None, RHEL6, CentOS, Debian]"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:82
+msgid ""
+"If we want to create different binaries from our recipes defining this new "
+"setting, we would need to add to our recipes that:"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:85
+msgid ""
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\", \"distro\""
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:90
+msgid ""
+"The value ``None`` allows for not defining it (which would be a default "
+"value, valid for all other distros). It is possible to define values for it "
+"in the profiles:"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:93
+msgid ""
+"[settings]\n"
+"os = \"Linux\"\n"
+"distro = \"CentOS\"\n"
+"compiler = \"gcc\""
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:100
+msgid "And use their values to affect our build if desired:"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:102
+msgid ""
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\", \"distro\"\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        if self.settings.distro == \"CentOS\":\n"
+"            cmake.definitions[\"SOME_CENTOS_FLAG\"] = \"Some CentOS Value\"\n"
+"            ..."
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:116
+msgid "Adding new sub-settings"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:117
+msgid ""
+"The above approach requires modification to all recipes to take it into "
+"account. It is also possible to define kind of incompatible settings, like "
+"``os=Windows`` and ``distro=CentOS``. While adding new settings is totally "
+"possible, it might make more sense for other cases, but for this example it "
+"is more adequate to add it as above subsetting of the ``Linux`` OS:"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:122
+msgid ""
+"os:\n"
+"    Windows:\n"
+"        subsystem: [None, cygwin, msys, msys2, wsl]\n"
+"    Linux:\n"
+"        distro: [None, RHEL6, CentOS, Debian]"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:130
+msgid "With this definition we could define our profiles as:"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:132
+msgid ""
+"[settings]\n"
+"os = \"Linux\"\n"
+"os.distro = \"CentOS\"\n"
+"compiler = \"gcc\""
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:139
+msgid ""
+"And any attempt to define ``os.distro`` for another ``os`` value rather than "
+"``Linux`` will raise an error."
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:141
+msgid ""
+"As this is a subsetting, it will be automatically taken into account in all "
+"recipes that declare an ``os`` setting. Note that having a value of "
+"``distro=None`` possible is important if you want to keep previously created "
+"binaries, otherwise you would be forcing to always define a specific distro "
+"value, and binaries created without this subsetting, won't be usable anymore."
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:146
+msgid "The sub-setting can also be accessed from recipes:"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:148
+msgid ""
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"  # Note, no "
+"\"distro\" defined here\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        if self.settings.os == \"Linux\" and self.settings.os.distro == "
+"\"CentOS\":\n"
+"            cmake.definitions[\"SOME_CENTOS_FLAG\"] = \"Some CentOS Value\""
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:160
+msgid "Add new values"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:162
+msgid ""
+"In the same way we have added a new ``distro`` subsetting, it is possible to "
+"add new values to existing settings and subsettings. For example, if some "
+"compiler version is not present in the range of accepted values, you can add "
+"those new values."
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:165
+msgid "You can also add a completely new compiler:"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:167
+msgid ""
+"os:\n"
+"    Windows:\n"
+"        subsystem: [None, cygwin, msys, msys2, wsl]\n"
+"   ...\n"
+"compiler:\n"
+"    gcc:\n"
+"        ...\n"
+"    mycompiler:\n"
+"        version: [1.1, 1.2]\n"
+"    Visual Studio:"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:180
+msgid ""
+"This works as the above regarding profiles, and the way they can be accessed "
+"from recipes. The main issue with custom compilers is that the builtin build "
+"helpers, like ``CMake``, ``MSBuild``, etc, internally contains code that "
+"will check for those values. For example, the ``MSBuild`` build helper will "
+"only know how to manage the ``Visual Studio`` setting and sub-settings, but "
+"not the new compiler. For those cases, custom logic can be implemented in "
+"the recipes:"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:185
+msgid ""
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"    def build(self):\n"
+"        if self.settings.compiler == \"mycompiler\":\n"
+"            my_custom_compile = [\"some\", \"--flags\", \"for\", \"--"
+"my=compiler\"]\n"
+"            self.run([\"mycompiler\", \".\"] + my_custom_compile)"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:198
+msgid ""
+"You can also remove items from *settings.yml* file. You can remove "
+"compilers, OS, architectures, etc. Do that only in the case you really want "
+"to protect against creation of binaries for other platforms other than your "
+"main supported ones. In the general case, you can leave them, the binary "
+"configurations are managed in **profiles**, and you want to define your "
+"supported configurations in profiles, not by restricting the *settings.yml*"
+msgstr ""
+
+#: ../../../extending/custom_settings.rst:207
+msgid ""
+"If you customize your *settings.yml*, you can share, distribute and sync "
+"this configuration with your team and CI machines with the :ref:"
+"`conan_config_install` command."
+msgstr ""

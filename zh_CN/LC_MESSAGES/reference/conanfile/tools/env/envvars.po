@@ -1,0 +1,241 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.63\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:2
+msgid "EnvVars"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:6
+msgid ""
+"Some of the features used in this section are still **under development**, "
+"while they are recommended and usable and we will try not to break them in "
+"future releases, some breaking changes might still happen if necessary to "
+"prepare for the *Conan 2.0 release*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:11
+msgid ""
+"``EnvVars`` is a class that represents an instance of environment variables "
+"for a given system. It is obtained from the generic ``Environment`` class."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:14
+msgid ""
+"This class is used by other tools like the :ref:`conan.tools."
+"gnu<conan_tools_gnu>` autotools helpers and the :ref:"
+"`VirtualBuildEnv<conan_tools_env_virtualbuildenv>` and :ref:"
+"`VirtualRunEnv<conan_tools_env_virtualrunenv>` generator."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:20
+msgid "Creating environment files"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:22
+msgid ""
+"``EnvVars`` object can generate environment (shell, bat or powershell "
+"scripts) files:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:24
+msgid ""
+"def generate(self):\n"
+"    env1 = Environment()\n"
+"    env1.define(\"foo\", \"var\")\n"
+"    envvars = env1.vars(self)\n"
+"    envvars.save_script(\"my_env_file\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:33
+msgid ""
+"Although it potentially could be used in other methods, this functionality "
+"is intended to work in the ``generate()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:36
+msgid ""
+"It will generate automatically a ``my_env_file.bat`` for Windows systems or "
+"``my_env_file.sh`` otherwise."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:38
+msgid ""
+"In Windows, it is possible to opt-in to generate Powershell ``.ps1`` scripts "
+"instead of ``.bat`` ones, using the conf ``tools.env.virtualenv:"
+"powershell=True``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:41
+msgid ""
+"Also, by default, Conan will automatically append that launcher file path to "
+"a list that will be used to create a ``conanbuild.bat|sh|ps1`` file "
+"aggregating all the launchers in order. The ``conanbuild.sh|bat|ps1`` "
+"launcher will be created after the execution of the ``generate()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:45
+msgid ""
+"The ``scope`` argument (``\"build\"`` by default) can be used to define "
+"different scope of environment files, to aggregate them separately. For "
+"example, using a ``scope=\"run\"``, like the ``VirtualRunEnv`` generator "
+"does, will aggregate and create a ``conanrun.bat|sh|ps1`` script:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:49
+msgid ""
+"def generate(self):\n"
+"    env1 = Environment(self)\n"
+"    env1.define(\"foo\", \"var\")\n"
+"    envvars = env1.vars(self, scope=\"run\")\n"
+"    # Will append \"my_env_file\" to \"conanrun.bat|sh|ps1\"\n"
+"    envvars.save_script(\"my_env_file\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:59
+msgid ""
+"You can also use ``scope=None`` argument to avoid appending the script to "
+"the aggregated ``conanbuild.bat|sh|ps1``:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:61
+msgid ""
+"env1 = Environment(self)\n"
+"env1.define(\"foo\", \"var\")\n"
+"# Will not append \"my_env_file\" to \"conanbuild.bat|sh|ps1\"\n"
+"envvars = env1.vars(self, scope=None)\n"
+"envvars.save_script(\"my_env_file\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:71
+msgid "Running with environment files"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:73
+msgid ""
+"The ``conanbuild.bat|sh|ps1`` launcher will be executed by default before "
+"calling every ``self.run()`` command. This would be typically done in the "
+"``build()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:76
+msgid ""
+"You can change the default launcher with the ``env`` argument of ``self."
+"run()``:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:78
+msgid ""
+"...\n"
+"def build(self):\n"
+"    # This will automatically wrap the \"foo\" command with the correct "
+"environment:\n"
+"    # source my_env_file.sh && foo\n"
+"    # my_env_file.bat && foo\n"
+"    # powershell my_env_file.ps1 ; cmd c/ foo\n"
+"    self.run(\"foo\", env=[\"my_env_file\"])"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:90
+msgid "Applying the environment variables"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:92
+msgid ""
+"As an alternative to running a command, environments can be applied in the "
+"python environment:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:94
+msgid ""
+"from conan.tools.env import Environment\n"
+"\n"
+"env1 = Environment(self)\n"
+"env1.define(\"foo\", \"var\")\n"
+"envvars = env1.vars(self)\n"
+"with envvars.apply():\n"
+"   # Here os.getenv(\"foo\") == \"var\"\n"
+"   ..."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:106
+msgid "Iterating the variables"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:108
+msgid ""
+"You can iterate the environment variables of an ``EnvVars`` object like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:110
+msgid ""
+"env1 = Environment()\n"
+"env1.append(\"foo\", \"var\")\n"
+"env1.append(\"foo\", \"var2\")\n"
+"envvars = env1.vars(self)\n"
+"for name, value in envvars.items():\n"
+"    assert name == \"foo\":\n"
+"    assert value == \"var var2\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:121
+msgid ""
+"The current value of the environment variable in the system is replaced in "
+"the returned value. This happens when variables are appended or prepended. "
+"If a placeholder is desired instead of the actual value, it is possible to "
+"use the ``variable_reference`` argument with a jinja template syntax, so a "
+"string with that resolved template will be returned instead:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:126
+msgid ""
+"env1 = Environment()\n"
+"env1.append(\"foo\", \"var\")\n"
+"envvars = env1.vars(self)\n"
+"for name, value in envvars.items(variable_reference=\"$penv{{{name}}}\"\"):\n"
+"    assert name == \"foo\":\n"
+"    assert value == \"$penv{{foo}} var\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:138
+msgid ""
+"In Windows, there is a limit to the size of environment variables, a total "
+"of 32K for the whole environment, but spcifically the PATH variable has a "
+"limit of 2048 characters. That means that the above utils could hit that "
+"limit, for example for large dependency graphs where all packages contribute "
+"to the PATH env-var."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:142
+msgid "This can be mitigated by:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:144
+msgid "Putting the Conan cache closer to C:/ for shorter paths"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:145
+msgid ""
+"Better definition of what dependencies can contribute to the PATH env-var"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/envvars.rst:146
+msgid ""
+"Other mechanisms for things like running with many shared libraries "
+"dependencies with too many .dlls, like ``imports``"
+msgstr ""

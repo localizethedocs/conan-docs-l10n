@@ -1,0 +1,195 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.22\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/misc/graph.rst:4
+msgid "conan graph"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:6
+msgid "$ conan graph [-h] {update-lock,build-order,lock} ..."
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:10
+msgid "Generates and manipulates lock files."
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:12
+msgid ""
+"positional arguments:\n"
+"  {update-lock,build-order,lock}\n"
+"                        sub-command help\n"
+"    update-lock         merge two lockfiles\n"
+"    build-order         Returns build-order\n"
+"    lock                create a lockfile\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:27
+msgid "conan graph update-lock"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:29
+msgid "$ conan graph update-lock [-h] old_lockfile new_lockfile"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:33
+msgid ""
+"Updates the *old_lockfile* file with the contents of the *new_lockfiles*."
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:35
+msgid ""
+"positional arguments:\n"
+"  old_lockfile  path to previous lockfile\n"
+"  new_lockfile  path to modified lockfile\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help    show this help message and exit"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:45
+msgid ""
+"Only the packages in *new_lockfile* marked as \"modified\" will be "
+"processed. If a node in *old_lockfile* is already modified and an "
+"incompatible (different binary ID, different revision) updated is attempted, "
+"it will raise an error. The updated nodes will keep the \"modified\" flag "
+"when updated in *old_lockfile*"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:50
+msgid ""
+"This command is useful for distributed or concurrent builds of different "
+"packages in the same dependency graph locked by the same lockfile. When one "
+"package is rebuilt it will modify the package reference, and will be marked "
+"as \"modified\". The way of integrating the information of package builds "
+"into the main lockfile is this command."
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:55
+msgid "Example:"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:57
+msgid ""
+"Integrate the information of building a \"pkgb\" package using a lockfile "
+"(and modified in the folder pkgb_temp) in the main lockfile:"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:60
+msgid ""
+"$ conan graph update-lock release/conan.lock pkgb_temp/release/conan.lock"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:68
+msgid "conan graph build-order"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:70
+msgid "$ conan graph build-order [-h] [-b [BUILD]] [--json JSON] lockfile"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:75
+msgid ""
+"Given a lockfile, compute which packages and in which order they should be "
+"built, as mandated by the binary ID (``package_id()``) definitions and the "
+"``--build`` argument, which is the same as :command:`conan create|install`"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:79
+msgid ""
+"positional arguments:\n"
+"  lockfile              lockfile folder\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  -b [BUILD], --build [BUILD]\n"
+"                        nodes to build\n"
+"  --json JSON           generate output file in json format"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:91
+msgid ""
+"The result is a list of lists, containing tuples. Each tuple contains 2 "
+"elements, the first is a UUID of the node of the graph. It is unique and "
+"ensures a way to address exactly one node, even if there are nodes with the "
+"same reference (it is possible for example to have different build_requires "
+"with the same name and version, but different configuration)"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:99
+msgid "conan graph lock"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:101
+msgid ""
+"conan graph lock [-h] [-l LOCKFILE] [-b [BUILD]] [-e ENV] [-o OPTIONS]\n"
+"                        [-pr PROFILE] [-r REMOTE] [-s SETTINGS] [-u]\n"
+"                        path_or_reference"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:107
+msgid ""
+"positional arguments:\n"
+"  path_or_reference     Path to a folder containing a recipe (conanfile.py "
+"or\n"
+"                        conanfile.txt) or to a recipe file. e.g.,\n"
+"                        ./my_project/conanfile.txt. It could also be a\n"
+"                        reference\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  -l LOCKFILE, --lockfile LOCKFILE\n"
+"                        Path to lockfile to be created. If not specified\n"
+"                        'conan.lock' will be created in current folder\n"
+"  -b [BUILD], --build [BUILD]\n"
+"                        Packages to build from source\n"
+"  -e ENV, --env ENV     Environment variables that will be set during the\n"
+"                        package build, -e CXX=/usr/bin/clang++\n"
+"  -o OPTIONS, --options OPTIONS\n"
+"                        Define options values, e.g., -o Pkg:with_qt=true\n"
+"  -pr PROFILE, --profile PROFILE\n"
+"                        Apply the specified profile to the install command\n"
+"  -r REMOTE, --remote REMOTE\n"
+"                        Look in the specified remote server\n"
+"  -s SETTINGS, --settings SETTINGS\n"
+"                        Settings to build the package, overwriting the\n"
+"                        defaults. e.g., -s compiler=gcc\n"
+"  -u, --update          Check updates exist from upstream remotes"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:136
+msgid ""
+"This command is similar to :command:`conan install` or :command:`conan "
+"info`, but with a few differences:"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:139
+msgid ""
+"It doesn't need to retrieve binaries, it will only compute what is necessary "
+"to do, according to the ``--build`` argument and rules"
+msgstr ""
+
+#: ../../../reference/commands/misc/graph.rst:140
+msgid ""
+"Even when ``--build`` values are specified, packages will not be built from "
+"sources. It will just compute, as a \"dry-run\" what would happen in an "
+"equivalent :command:`conan install`"
+msgstr ""

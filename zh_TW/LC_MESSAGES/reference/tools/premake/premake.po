@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.19\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/premake/premake.rst:4
+msgid "Premake"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:9
+msgid ""
+"The ``Premake`` build helper is a wrapper around the command line invocation "
+"of Premake. It will abstract the project configuration and build command."
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:12
+msgid ""
+"The helper is intended to be used in the *conanfile.py* ``build()`` method, "
+"to call Premake commands automatically when a package is being built "
+"directly by Conan (create, install)"
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:15
+msgid "**Usage Example:**"
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:17
+msgid ""
+"from conan.tools.premake import Premake\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"    # The PremakeToolchain generator is always needed to use premake helper\n"
+"    generators = \"PremakeToolchain\"\n"
+"\n"
+"    def build(self):\n"
+"        p = Premake(self)\n"
+"\n"
+"        # Set the main Lua configuration file (default: premake5.lua)\n"
+"        p.luafile = \"myproject.lua\"\n"
+"\n"
+"        # Pass custom arguments to Premake (translates to --{key}={value})\n"
+"        p.arguments[\"myarg\"] = \"myvalue\"\n"
+"\n"
+"        # Automatically determines the correct action:\n"
+"        # - For MSVC, selects vs<version> based on the compiler version\n"
+"        # - Defaults to \"gmake\" for other compilers\n"
+"        # p.configure() will run: premake5 --file=myproject.lua <action> --"
+"{key}={value} ...\n"
+"        p.configure()\n"
+"        # p.build() will invoke proper compiler depending on action "
+"(automatically detected by profile)\n"
+"        p.build(\"HelloWorld.sln\")"
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:45
+msgid "Reference"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/premake/premake.py:docstring of
+#: conan.tools.premake.premake.Premake:1
+msgid ""
+"This class calls Premake commands when a package is being built. Notice that "
+"this one should be used together with the ``PremakeToolchain`` generator."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/premake/premake.py:docstring of
+#: conan.tools.premake.premake.Premake:4
+msgid "This premake generator is only compatible with ``premake5``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/premake/premake.py:docstring of
+#: conan.tools.premake.premake.Premake:0
+#: conan.tools.premake.premake.Premake.build:0
+msgid "Parameters"
+msgstr "參數"
+
+#: ../../../conan_sources/conan/tools/premake/premake.py:docstring of
+#: conan.tools.premake.premake.Premake:6
+msgid ""
+"``< ConanFile object >`` The current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../docstring of conan.tools.premake.Premake.luafile:1
+msgid "Path to the root premake5 lua file (default is ``premake5.lua``)"
+msgstr ""
+
+#: ../../../docstring of conan.tools.premake.Premake.arguments:1
+msgid "Key value pairs. Will translate to \"--{key}={value}\""
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/premake/premake.py:docstring of
+#: conan.tools.premake.premake.Premake.configure:1
+msgid ""
+"Runs ``premake5 <action> [FILE]`` which will generate respective build "
+"scripts depending on the ``action``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/premake/premake.py:docstring of
+#: conan.tools.premake.premake.Premake.build:1
+msgid ""
+"Depending on the action, this method will run either ``msbuild`` or ``make`` "
+"with ``N_JOBS``. You can specify ``N_JOBS`` through the configuration line "
+"``tools.build:jobs=N_JOBS`` in your profile ``[conf]`` section."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/premake/premake.py:docstring of
+#: conan.tools.premake.premake.Premake.build:5
+msgid ""
+"``str`` Specifies the solution to be compiled (only used by ``MSBuild``)."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/premake/premake.py:docstring of
+#: conan.tools.premake.premake.Premake.build:6
+msgid ""
+"``List[str]`` Declare the projects to be built (None to build all projects)."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/premake/premake.py:docstring of
+#: conan.tools.premake.premake.Premake.build:7
+msgid ""
+"``str`` Specify the platform for the internal MSBuild generator (only used "
+"by ``MSBuild``)."
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:53
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:55
+msgid "The ``Premake`` build helper is affected by these ``[conf]`` variables:"
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:57
+msgid ""
+"``tools.build:verbosity`` which accepts one of ``quiet`` or ``verbose`` and "
+"sets the ``--quiet`` flag in ``Premake.configure()``"
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:59
+msgid ""
+"``tools.compilation:verbosity`` which accepts one of ``quiet`` or "
+"``verbose`` and sets the ``--verbose`` flag in ``Premake.build()``"
+msgstr ""

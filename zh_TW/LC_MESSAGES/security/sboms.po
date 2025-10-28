@@ -1,0 +1,224 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.19\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../security/sboms.rst:5
+msgid "Software Bills of Materials (SBOM)"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../security/sboms.rst:9
+msgid ""
+"A Software Bill of Materials (SBOM) is a document that lists all the "
+"components, libraries, dependencies, and other elements that make up a "
+"specific piece of software. Similar to a bill of materials in manufacturing, "
+"which details the parts and materials used to build a product, an SBOM "
+"provides transparency about what is contained \"inside\" an application or "
+"software system."
+msgstr ""
+
+#: ../../../security/sboms.rst:14
+msgid ""
+"Conan allows you to generate SBOMs natively by using a resolved dependency "
+"graph. This way, you can create the SBOM for your program at the same time "
+"you build it."
+msgstr ""
+
+#: ../../../security/sboms.rst:17
+msgid ""
+"This feature only supports CycloneDX version 1.4 and 1.6. If you need a "
+"different standard, another version, or if you encounter any potential "
+"improvements, please feel free to open an issue on our `GitHub <https://"
+"github.com/conan-io/conan/issues>`_ . We would be delighted to hear your "
+"feedback!"
+msgstr ""
+
+#: ../../../security/sboms.rst:24
+msgid "CycloneDX"
+msgstr ""
+
+#: ../../../security/sboms.rst:26
+msgid ""
+"Conan supports `CycloneDX <https://cyclonedx.org/>`_ out-of-the-box, which "
+"is one of the **most widely used standards** for SBOMs."
+msgstr ""
+
+#: ../../../security/sboms.rst:29
+msgid ""
+"The CycloneDX tool is available in the ``conan.tools.sbom.cyclonedx`` "
+"module. It provides the ``cyclonedx_1_4`` and ``cyclonedx_1_6`` functions "
+"which receives a ``conanfile`` and returns a dictionary with the SBOM data "
+"in the CycloneDX JSON format."
+msgstr ""
+
+#: ../../../security/sboms.rst:33
+msgid ""
+"Using this feature is as simple as implementing a :ref:`hook "
+"<reference_extensions_hooks>` in your client which uses this tool to create "
+"the SBOM and stores it in the appropriate location."
+msgstr ""
+
+#: ../../../security/sboms.rst:37
+msgid "Usage examples"
+msgstr ""
+
+#: ../../../security/sboms.rst:39
+msgid "Let's look at two examples:"
+msgstr ""
+
+#: ../../../security/sboms.rst:41
+msgid ""
+"In the first one, we want to generate the SBOM at the moment we create our "
+"app, after the package method. This is very **useful for keeping track of "
+"the components and dependencies** of that went into building our software. "
+"In the example, we save the generated sbom in the package metadata folder to "
+"keep our project organized"
+msgstr ""
+
+#: ../../../security/sboms.rst:46
+msgid ""
+"import json\n"
+"import os\n"
+"from conan.api.output import ConanOutput\n"
+"from conan.tools.sbom.cyclonedx import cyclonedx_1_6\n"
+"\n"
+"def post_package(conanfile, **kwargs):\n"
+"    sbom_cyclonedx_1_6 = cyclonedx_1_6(conanfile)\n"
+"    metadata_folder = conanfile.package_metadata_folder\n"
+"    file_name = \"sbom.cdx.json\"\n"
+"    with open(os.path.join(metadata_folder, file_name), 'w') as f:\n"
+"        json.dump(sbom_cyclonedx_1_6, f, indent=4)\n"
+"    ConanOutput().success(f\"CYCLONEDX CREATED - {conanfile."
+"package_metadata_folder}\")"
+msgstr ""
+
+#: ../../../security/sboms.rst:63
+msgid ""
+":ref:`See here for more information on the metadata feature "
+"<devops_metadata>`."
+msgstr ""
+
+#: ../../../security/sboms.rst:66
+msgid ""
+"In the second example, we generate our SBOM after the generate method. This "
+"allows us to create the SBOMs when we install the dependencies from Conan. "
+"This can be very useful for generating SBOMs for different versions of our "
+"dependencies. Note that this time we're saving the SBOM in the generators "
+"folder, so that the user installing the dependencies has easy access to the "
+"SBOM."
+msgstr ""
+
+#: ../../../security/sboms.rst:71
+msgid ""
+"import json\n"
+"import os\n"
+"from conan.api.output import ConanOutput\n"
+"from conan.tools.sbom.cyclonedx import cyclonedx_1_6\n"
+"\n"
+"def post_generate(conanfile, **kwargs):\n"
+"    sbom_cyclonedx_1_6 = cyclonedx_1_6(conanfile)\n"
+"    generators_folder = conanfile.generators_folder\n"
+"    file_name = \"sbom.cdx.json\"\n"
+"    os.mkdir(os.path.join(generators_folder, \"sbom\"))\n"
+"    with open(os.path.join(generators_folder, \"sbom\", file_name), 'w') as "
+"f:\n"
+"        json.dump(sbom_cyclonedx_1_6, f, indent=4)\n"
+"    ConanOutput().success(f\"CYCLONEDX CREATED - {conanfile."
+"generators_folder}\")"
+msgstr ""
+
+#: ../../../security/sboms.rst:88
+msgid ""
+"Both hooks can coexist in such a way that we can generate the SBOMs for our "
+"application and our dependencies separately. This can greatly assist us in "
+"conducting continuous analysis of our development process and ensuring "
+"software quality."
+msgstr ""
+
+#: ../../../security/sboms.rst:93
+msgid ":ref:`SBOM tools <conan_tools_sbom>`."
+msgstr ":ref:`SBOM 工具 <conan_tools_sbom>`。"
+
+#: ../../../security/sboms.rst:96
+msgid "Generating a Conan-based SBOM"
+msgstr ""
+
+#: ../../../security/sboms.rst:98
+msgid ""
+"Instead of using a standard, we can take a \"Conan-based approach\". Thanks "
+"to the ``conanfile.subgraph.serialize()`` function, we can directly obtain "
+"information about the dependencies of our package. In the following example, "
+"we can see a hook that generates a simplified SBOM consisting of the "
+"serialization of the subgraph, which includes all data Conan has about the "
+"specific dependencies. Note that this serialization is **not a standard SBOM "
+"format**, and is not standardized in any way. The information is similar to "
+"the one provided by the :command:`conan graph info ... --format=json` "
+"command."
+msgstr ""
+
+#: ../../../security/sboms.rst:106
+msgid ""
+"import json\n"
+"import os\n"
+"from conan.api.output import ConanOutput\n"
+"\n"
+"def post_package(conanfile, **kwargs):\n"
+"    metadata_folder = conanfile.package_metadata_folder\n"
+"    file_name = \"sbom.conan.json\"\n"
+"    with open(os.path.join(metadata_folder, file_name), 'w') as f:\n"
+"        json.dump(conanfile.subgraph.serialize(), f, indent=2)\n"
+"    ConanOutput().success(f\"CONAN SBOM CREATED - {conanfile."
+"package_metadata_folder}\")"
+msgstr ""
+
+#: ../../../security/sboms.rst:121
+msgid "Artifactory Build Info"
+msgstr ""
+
+#: ../../../security/sboms.rst:122
+msgid ""
+"With Conan, you also have the option to create a **\"build info\"**, which "
+"provides detailed information about the build generated in your "
+"**Artifactory**. It allows you to see, among other things, the history of "
+"versions, artifacts, modules, and dependencies that were necessary to create "
+"your build."
+msgstr ""
+
+#: ../../../security/sboms.rst:126
+msgid ""
+"It is an SBOM focused on the process within Artifactory itself, making it "
+"perfect for maintaining traceability in the lifecycle of your binaries."
+msgstr ""
+
+#: ../../../security/sboms.rst:129
+msgid ""
+"Unfortunately, it is not available natively in Conan, so it will be "
+"necessary to install the command from ``conan-extensions``. You can find "
+"more information at the link below."
+msgstr ""
+
+#: ../../../security/sboms.rst:134
+msgid ""
+":ref:`How to install the build info extension and how to generate your build "
+"info <integrations_jfrog>`."
+msgstr ""

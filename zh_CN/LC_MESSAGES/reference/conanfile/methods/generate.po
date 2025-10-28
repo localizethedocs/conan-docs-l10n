@@ -1,0 +1,591 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/generate.rst:4
+msgid "generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:6
+msgid ""
+"This method will run after the computation and installation of the "
+"dependency graph. This means that it will run after a :command:`conan "
+"install` command, or when a package is being built in the cache, it will be "
+"run before calling the ``build()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:10
+msgid ""
+"The purpose of ``generate()`` is to prepare the build, generating the "
+"necessary files. These files would typically be:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:12
+msgid ""
+"Files containing information to locate the dependencies, as ``xxxx-config."
+"cmake`` CMake config scripts, or ``xxxx.props`` Visual Studio property files."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:14
+msgid ""
+"Environment activation scripts, like ``conanbuild.bat`` or ``conanbuild."
+"sh``, that define all the necessary environment variables necessary for the "
+"build."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:16
+msgid ""
+"Toolchain files, like ``conan_toolchain.cmake``, that contains a mapping "
+"between the current Conan settings and options, and the build system "
+"specific syntax. ``CMakePresets.json`` for CMake users using modern versions."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:18
+msgid ""
+"General purpose build information, as a ``conanbuild.conf`` file that could "
+"contain information for some toolchains like autotools to be used in the "
+"``build()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:19
+msgid ""
+"Specific build system files, like ``conanvcvars.bat``, that contains the "
+"necessary Visual Studio *vcvars.bat* call for certain build systems like "
+"Ninja when compiling with the Microsoft compiler."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:23
+msgid ""
+"The idea is that the ``generate()`` method implements all the necessary "
+"logic, making both the user manual builds after a :command:`conan install` "
+"very straightforward, and also the ``build()`` method logic simpler. The "
+"build produced by a user in their local flow should result in exactly the "
+"same one as the build done in the cache with a ``conan create`` without "
+"effort."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:27
+msgid ""
+"Generation of files happens in the ``generators_folder`` as defined by the "
+"current layout."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:29
+msgid ""
+"In many cases, the ``generate()`` method might not be necessary, and "
+"declaring the ``generators`` attribute could be enough:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:31
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    generators = \"CMakeDeps\", \"CMakeToolchain\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:39
+msgid ""
+"But the ``generate()`` method can explicitly instantiate those generators, "
+"use them conditionally (like using one build system in Windows, and another "
+"build system integration in other platforms), customize them, or provide a "
+"complete custom generation."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:43
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMakeToolchain\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"\n"
+"    def generate(self):\n"
+"        tc = CMakeToolchain(self)\n"
+"        # customize toolchain \"tc\"\n"
+"        tc.generate()\n"
+"        # Or provide your own custom logic"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:57
+msgid ""
+"The current working directory for the ``generate()`` method will be the "
+"``self.generators_folder`` defined in the current layout."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:59
+msgid ""
+"For custom integrations, putting code in a common ``python_require`` would "
+"be a good way to avoid repetition in multiple recipes:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:62
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMakeToolchain\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"\n"
+"    python_requires = \"mygenerator/1.0\"\n"
+"\n"
+"    def generate(self):\n"
+"        mygen = self.python_requires[\"mygenerator\"].module."
+"MyGenerator(self)\n"
+"        # customize mygen behavior, like mygen.something= True\n"
+"        mygen.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:77
+msgid ""
+"In case it is necessary to collect or copy some files from the dependencies, "
+"it is also possible to do it in the ``generate()`` method, accessing ``self."
+"dependencies``. Listing the different include directories, lib directories "
+"from a dependency \"mydep\" would be possible like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:80
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"\n"
+"    def generate(self):\n"
+"        info = self.dependencies[\"mydep\"].cpp_info\n"
+"        self.output.info(\"**includedirs:{}**\".format(info.includedirs))\n"
+"        self.output.info(\"**libdirs:{}**\".format(info.libdirs))\n"
+"        self.output.info(\"**libs:{}**\".format(info.libs))"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:92
+msgid ""
+"And copying the shared libraries in Windows and OSX to the current build "
+"folder, could be done like:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:94
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"\n"
+"    def generate(self):\n"
+"        # NOTE: In most cases it is not necessary to copy the shared "
+"libraries\n"
+"        # of dependencies to use them. Conan environment generators that "
+"create\n"
+"        # environment scripts allow to use the shared dependencies without "
+"copying\n"
+"        # them to the current location\n"
+"        for dep in self.dependencies.values():\n"
+"            # This code assumes dependencies will only have 1 libdir/bindir, "
+"if for some\n"
+"            # reason they have more than one, it will fail. Use ``dep."
+"cpp_info.libdirs``\n"
+"            # and ``dep.cpp_info.bindirs`` lists for those cases.\n"
+"            copy(self, \"*.dylib\", dep.cpp_info.libdir, self.build_folder)\n"
+"            # In Windows, dlls are in the \"bindir\", not \"libdir\"\n"
+"            copy(self, \"*.dll\", dep.cpp_info.bindir, self.build_folder)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:116
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:118
+msgid ""
+"Copying shared libraries to the current project in ``generate()`` is not a "
+"necessary in most cases, and shouldn't be done as a general approach. "
+"Instead, the Conan environment generators, which are enabled by default, "
+"will automatically generate environment scripts like ``conanbuild.bat|.sh`` "
+"or ``conanrun.bat|.sh`` with the necessary environment variables (``PATH``, "
+"``LD_LIBRARY_PATH``, etc), to correctly locate and use the shared libraries "
+"of dependencies at runtime."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:119
+msgid ""
+"Accessing dependencies ``self.dependencies[\"mydep\"].package_folder`` is "
+"possible, but it will be ``None`` when the dependency \"mydep\" is in "
+"\"editable\" mode. If you plan to use editable packages, make sure to always "
+"reference the ``cpp_info.xxxdirs`` instead."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:124
+msgid ""
+"Follow the :ref:`tutorial about preparing build from source in "
+"recipes<creating_packages_preparing_the_build>`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:130
+msgid "self.dependencies"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:132
+msgid ""
+"Conan recipes provide access to their dependencies via the ``self."
+"dependencies`` attribute. This attribute is generally used by generators "
+"like ``CMakeDeps`` or ``MSBuildDeps`` to generate the necessary files for "
+"the build."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:136
+msgid ""
+"This section documents the ``self.dependencies`` attribute, as it might be "
+"used by users both directly in recipe or indirectly to create custom build "
+"integrations and generators."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:140
+msgid "Dependencies interface"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:142
+msgid ""
+"It is possible to access each one of the individual dependencies of the "
+"current recipe, with the following syntax:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:145
+msgid ""
+"class Pkg(ConanFile):\n"
+"    requires = \"openssl/0.1\"\n"
+"\n"
+"    def generate(self):\n"
+"        openssl = self.dependencies[\"openssl\"]\n"
+"        # access to members\n"
+"        openssl.ref.version\n"
+"        openssl.ref.revision # recipe revision\n"
+"        openssl.options\n"
+"        openssl.settings\n"
+"\n"
+"        if \"zlib\" in self.dependencies:\n"
+"            # do something"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:162
+msgid "Some **important** points:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:164
+msgid ""
+"All the information is **read only**. Any attempt to modify dependencies "
+"information is an error and can raise at any time, even if it doesn't raise "
+"yet."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:166
+msgid ""
+"It is not possible either to call any methods or any attempt to reuse code "
+"from the dependencies via this mechanism."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:168
+msgid ""
+"This information does not exist in some recipe methods, only in those "
+"methods that evaluate after the full dependency graph has been computed. It "
+"will not exist in ``configure()``, ``config_options``, ``export()``, "
+"``export_source()``, ``set_name()``, ``set_version()``, ``requirements()``, "
+"``build_requirements()``, ``system_requirements()``, ``source()``, "
+"``init()``, ``layout()``. Any attempt to use it in these methods can raise "
+"an error at any time."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:173
+msgid ""
+"At the moment, this information should only be used in ``generate()`` and "
+"``validate()`` methods. For any other use, please submit a Github issue."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:176
+msgid ""
+"Not all fields of the dependency conanfile are exposed, the current fields "
+"are:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:178
+msgid ""
+"**package_folder**: The folder location of the dependency package binary"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:179
+msgid ""
+"**recipe_folder**: The folder containing the ``conanfile.py`` (and other "
+"exported files) of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:180
+msgid ""
+"**recipe_metadata_folder**: The folder containing optional recipe metadata "
+"files of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:181
+msgid ""
+"**package_metadata_folder**: The folder containing optional package metadata "
+"files of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:182
+msgid ""
+"**immutable_package_folder**: The folder containing the immutable artifacts "
+"when ``finalize()`` method exists"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:183
+msgid ""
+"**ref**: An object that contains ``name``, ``version``, ``user``, "
+"``channel`` and ``revision`` (recipe revision)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:184
+msgid ""
+"**pref**: An object that contains ``ref``, ``package_id`` and ``revision`` "
+"(package revision)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:185
+msgid ""
+"**buildenv_info**: ``Environment`` object with the information of the "
+"environment necessary to build"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:186
+msgid ""
+"**runenv_info**: ``Environment`` object with the information of the "
+"environment necessary to run the app"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:187
+msgid "**cpp_info**: includedirs, libdirs, etc for the dependency."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:188
+msgid "**settings**: The actual settings values of this dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:189
+msgid "**settings_build**: The actual build settings values of this dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:190
+msgid "**options**: The actual options values of this dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:191
+msgid "**context**: The context (build, host) of this dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:192
+msgid ""
+"**conf_info**: Configuration information of this dependency, intended to be "
+"applied to consumers."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:193
+msgid "**dependencies**: The transitive dependencies of this dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:194
+msgid "**is_build_context**: Return ``True`` if ``context == \"build\"``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:195
+msgid ""
+"**conan_data**: The ``conan_data`` attribute of the dependency that comes "
+"from its ``conandata.yml`` file"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:196
+msgid "**license**: The ``license`` attribute of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:197
+msgid "**description**: The ``description`` attribute of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:198
+msgid "**homepage**: The ``homepage`` attribute of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:199
+msgid "**url**: The ``url`` attribute of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:200
+msgid "**package_type**: The ``package_type`` of the dependency"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:201
+msgid "**languages**: The ``languages`` of the dependency."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:205
+msgid "Iterating dependencies"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:207
+msgid ""
+"It is possible to iterate in a dict-like fashion all dependencies of a "
+"recipe. Take into account that ``self.dependencies`` contains all the "
+"current dependencies, both direct and transitive. Every upstream dependency "
+"of the current one that has some effect on it, will have an entry in this "
+"``self.dependencies``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:212
+msgid "Iterating the dependencies can be done as:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:214
+msgid ""
+"requires = \"zlib/1.2.11\", \"poco/1.9.4\"\n"
+"\n"
+"def generate(self):\n"
+"    for require, dependency in self.dependencies.items():\n"
+"        self.output.info(\"Dependency is direct={}: {}\".format(require."
+"direct, dependency.ref))"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:222
+msgid "will output:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:224
+msgid ""
+"conanfile.py (hello/0.1): Dependency is direct=True: zlib/1.2.11\n"
+"conanfile.py (hello/0.1): Dependency is direct=True: poco/1.9.4\n"
+"conanfile.py (hello/0.1): Dependency is direct=False: pcre/8.44\n"
+"conanfile.py (hello/0.1): Dependency is direct=False: expat/2.4.1\n"
+"conanfile.py (hello/0.1): Dependency is direct=False: sqlite3/3.35.5\n"
+"conanfile.py (hello/0.1): Dependency is direct=False: openssl/1.1.1k\n"
+"conanfile.py (hello/0.1): Dependency is direct=False: bzip2/1.0.8"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:235
+msgid ""
+"Where the ``require`` dictionary key is a \"requirement\", and can contain "
+"specifiers of the relation between the current recipe and the dependency. At "
+"the moment they can be:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:238
+msgid ""
+"``require.direct``: boolean, ``True`` if it is direct dependency or "
+"``False`` if it is a transitive one."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:239
+msgid ""
+"``require.build``: boolean, ``True`` if it is a ``build_require`` in the "
+"build context, as ``cmake``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:240
+msgid ""
+"``require.test``: boolean, ``True`` if its a ``build_require`` in the host "
+"context (defined with ``self.test_requires()``), as ``gtest``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:242
+msgid ""
+"The ``dependency`` dictionary value is the read-only object described above "
+"that access the dependency attributes."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:244
+msgid ""
+"The ``self.dependencies`` contains some helpers to filter based on some "
+"criteria:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:246
+msgid ""
+"``self.dependencies.host``: Will filter out requires with ``build=True``, "
+"leaving regular dependencies like ``zlib`` or ``poco``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:247
+msgid ""
+"``self.dependencies.direct_host``: Will filter out requires with "
+"``build=True`` or ``direct=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:248
+msgid ""
+"``self.dependencies.build``: Will filter out requires with ``build=False``, "
+"leaving only ``tool_requires`` in the build context, as ``cmake``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:249
+msgid ""
+"``self.dependencies.direct_build``: Will filter out requires with "
+"``build=False`` or ``direct=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:250
+msgid ""
+"``self.dependencies.test``: Will filter out requires with ``build=True`` or "
+"with ``test=False``, leaving only test requirements as ``gtest`` in the host "
+"context."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:253
+msgid "They can be used in the same way:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:255
+msgid ""
+"requires = \"zlib/1.2.11\", \"poco/1.9.4\"\n"
+"\n"
+"def generate(self):\n"
+"    cmake = self.dependencies.direct_build[\"cmake\"]\n"
+"    for require, dependency in self.dependencies.build.items():\n"
+"        # do something, only build deps here"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:266
+msgid "Dependencies ``cpp_info`` interface"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:268
+msgid ""
+"The ``cpp_info`` interface is heavily used by build systems to access the "
+"data. This object defines global and per-component attributes to access "
+"information like the include folders:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:272
+msgid ""
+"def generate(self):\n"
+"    cpp_info = self.dependencies[\"mydep\"].cpp_info\n"
+"    cpp_info.includedirs\n"
+"    cpp_info.libdirs\n"
+"\n"
+"    cpp_info.components[\"mycomp\"].includedirs\n"
+"    cpp_info.components[\"mycomp\"].libdirs"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:283
+msgid ""
+"All the paths declared in the ``cppinfo`` object (like ``cpp_info."
+"includedirs``) are absolute paths and works whether the dependency is in the "
+"cache or is an :ref:`editable package<editable_packages>`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:288
+msgid ":ref:`CppInfo<conan_conanfile_model_cppinfo>` model."
+msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-10-29 13:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,10 +46,7 @@ msgstr ""
 #: ../../../devops/conancenter/hosting_binaries.rst:11
 msgid ""
 "Create a script that first ``conan export`` all the packages in your list, "
-"then ``conan create --build=missing`` them. Do not add ``user/channel`` to "
-"these packages, it is way simpler to use them as ``zlib/1.2.13`` without "
-"user-channel. The ``user/channel`` part would be mostly recommended for your "
-"own proprietary packages, but not for open source ConanCenter packages."
+"then ``conan create --build=missing`` them."
 msgstr ""
 
 #: ../../../devops/conancenter/hosting_binaries.rst:12
@@ -58,81 +55,107 @@ msgid ""
 "instead of ConanCenter."
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:14
+#: ../../../devops/conancenter/hosting_binaries.rst:16
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:18
+msgid ""
+"Do not add ``user/channel`` to packages created from ConanCenter forks, it "
+"is way simpler to create and use them as ``zlib/1.2.13`` without user-"
+"channel. The ``user/channel`` part would be mostly recommended for your own "
+"proprietary packages, but not for open source ConanCenter packages. It adds "
+"more divergence from the upstream and consequently more maintenance with "
+"little added value."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:19
+msgid ""
+"Do not mix packages and recipes created from your fork of ``conan-center-"
+"index`` Github repo with the ones from ConanCenter central server. Once you "
+"create some binaries for third parties from your fork, it is strongly "
+"recommended to fully disconnect from ConanCenter (you can remove the "
+"``remote``, and you can add the ``remotes.json`` file with your own remotes "
+"to the configuration you can distribute and install with ``conan config "
+"install/install-pkg``), and create all your third-party packages from your "
+"fork."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:22
 msgid ""
 "This is the basic flow idea. We will be adding examples and tools to further "
 "automate this flow as soon as possible."
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:17
+#: ../../../devops/conancenter/hosting_binaries.rst:25
 msgid ""
 "This flow is relatively straightforward, and has many advantages that "
 "mitigate the risks described before:"
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:19
+#: ../../../devops/conancenter/hosting_binaries.rst:27
 msgid "No central repository outage can affect your builds."
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:20
+#: ../../../devops/conancenter/hosting_binaries.rst:28
 msgid ""
 "No changes in the central repository can break your projects, you are in "
 "full control when and how those changes are updated in your packages (as "
 "explained below)."
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:21
+#: ../../../devops/conancenter/hosting_binaries.rst:29
 msgid ""
 "You can customize, adapt, fix and perfectly control what versions are used, "
 "and release fixes in minutes, not weeks. You can apply customizations that "
 "wouldn't be accepted in the central repository."
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:22
+#: ../../../devops/conancenter/hosting_binaries.rst:30
 msgid ""
 "You fully control the binaries supply chain, from the source (recipes) to "
 "the binaries, eliminating in practice the majority of potential supply chain "
 "attacks of central repositories."
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:26
+#: ../../../devops/conancenter/hosting_binaries.rst:34
 msgid "Updating from upstream"
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:28
+#: ../../../devops/conancenter/hosting_binaries.rst:36
 msgid ""
 "Updating from the upstream ``conan-center-index`` Github repo is still "
 "possible, and it can be done in a fully controlled way:"
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:30
+#: ../../../devops/conancenter/hosting_binaries.rst:38
 msgid ""
 "Merge the latest changes in the upstream main fork of ``conan-center-index`` "
 "into your fork."
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:31
+#: ../../../devops/conancenter/hosting_binaries.rst:39
 msgid ""
 "You can check and audit those changes if you want to, analyzing the diffs "
 "(some automation that trims the diffs of recipes that you don't use could be "
 "useful)"
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:32
+#: ../../../devops/conancenter/hosting_binaries.rst:40
 msgid ""
 "Firing the above process will efficiently rebuild the new binaries that are "
 "needed. If your recipes are not affected by changes, the process will avoid "
 "rebuilding binaries (thanks to ``--build=missing``)."
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:33
+#: ../../../devops/conancenter/hosting_binaries.rst:41
 msgid ""
 "You can upload the packages to a secondary \"test\" server repository. Then "
 "test your project against that test server, to check that your project is "
 "not broken by the new ConanCenter packages."
 msgstr ""
 
-#: ../../../devops/conancenter/hosting_binaries.rst:34
+#: ../../../devops/conancenter/hosting_binaries.rst:42
 msgid ""
 "Once you verify that everything is good with the new packages, you can copy "
 "them from the secondary \"test\" repository to your main production "

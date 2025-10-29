@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-21 08:54+0000\n"
+"POT-Creation-Date: 2025-10-29 13:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,6 +40,14 @@ msgid ""
 "inside a dedicated virtual environment (**venv**), keeping them isolated so "
 "they don't interfere with system packages or the Conan package itself. It is "
 "designed to use a Python CLI tool inside a recipe during the build step."
+msgstr ""
+
+#: ../../../reference/tools/system/pipenv.rst:18
+msgid ""
+"By default, it attempts to create the virtualenv using the Python you have "
+"set on your system Path. To use a different one, you can set a Python path "
+"in the ``tools.system.pipenv:python_interpreter`` :ref:"
+"`configuration<reference_config_files_global_conf>`."
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/system/pip_manager.py:docstring of
@@ -82,11 +90,11 @@ msgstr ""
 msgid "the return code of the executed pip command."
 msgstr ""
 
-#: ../../../reference/tools/system/pipenv.rst:25
+#: ../../../reference/tools/system/pipenv.rst:29
 msgid "Using a Python package in a recipe"
 msgstr ""
 
-#: ../../../reference/tools/system/pipenv.rst:27
+#: ../../../reference/tools/system/pipenv.rst:31
 msgid ""
 "To use a tool installed with Python, we have to install it using the "
 "``PipEnv.install()`` method. We also have to call the ``PipEnv.generate()`` "
@@ -94,7 +102,7 @@ msgid ""
 "path** to the system path."
 msgstr ""
 
-#: ../../../reference/tools/system/pipenv.rst:30
+#: ../../../reference/tools/system/pipenv.rst:34
 msgid ""
 "These two steps appear in the following recipe in the ``generate()`` method. "
 "Calling it in this method ensures that the **Python package** and the "
@@ -102,11 +110,11 @@ msgid ""
 "case, in the build step, which is where we will use the installed tool."
 msgstr ""
 
-#: ../../../reference/tools/system/pipenv.rst:34
+#: ../../../reference/tools/system/pipenv.rst:38
 msgid "conanfile.py"
 msgstr "conanfile.py"
 
-#: ../../../reference/tools/system/pipenv.rst:34
+#: ../../../reference/tools/system/pipenv.rst:38
 msgid ""
 "from conan import ConanFile\n"
 "from conan.tools.system import PipEnv\n"
@@ -128,14 +136,14 @@ msgid ""
 "        self.run(\"meson --version\")"
 msgstr ""
 
-#: ../../../reference/tools/system/pipenv.rst:56
+#: ../../../reference/tools/system/pipenv.rst:60
 msgid ""
 "If we run a ``conan build`` we can see how our Python package is installed "
 "when the generate step, and how it is called in the build step as if it were "
 "installed on the system."
 msgstr ""
 
-#: ../../../reference/tools/system/pipenv.rst:58
+#: ../../../reference/tools/system/pipenv.rst:62
 msgid ""
 "$ conan build .\n"
 "\n"

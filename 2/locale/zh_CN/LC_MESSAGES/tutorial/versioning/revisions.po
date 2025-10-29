@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-10-28 08:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -263,33 +263,39 @@ msgid ""
 "chat/1.0: Hello World Release!"
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:180
+#: ../../../tutorial/versioning/revisions.rst:181
+msgid ""
+"Note that pinning a revision when using version ranges has not effect and "
+"Conan will warn about it."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:186
 msgid "Uploading revisions"
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:182
+#: ../../../tutorial/versioning/revisions.rst:188
 msgid "The upload command will upload only the latest revision by default:"
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:184
+#: ../../../tutorial/versioning/revisions.rst:190
 msgid ""
 "# upload latest revision only, all package binaries\n"
 "$ conan upload hello/1.0 -c -r=myremote"
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:189
+#: ../../../tutorial/versioning/revisions.rst:195
 msgid ""
 "If for some reason we want to upload all existing revisions, it is possible "
 "with:"
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:191
+#: ../../../tutorial/versioning/revisions.rst:197
 msgid ""
 "# upload all revisions, all binaries for each revision\n"
 "$ conan upload hello/1.0#* -c -r=myremote"
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:196
+#: ../../../tutorial/versioning/revisions.rst:202
 msgid ""
 "In the server side, the latest uploaded revision becomes the latest one, and "
 "the one that will be resolved by default. For this reason, the above command "
@@ -298,18 +304,18 @@ msgid ""
 "side."
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:201
+#: ../../../tutorial/versioning/revisions.rst:207
 msgid ""
 "Note that if another machine decides to upload a revision that was created "
 "some time ago, it will still become the latest in the server side, because "
 "it is created in the server side with that time."
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:207
+#: ../../../tutorial/versioning/revisions.rst:213
 msgid "Package revisions"
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:208
+#: ../../../tutorial/versioning/revisions.rst:214
 msgid ""
 "Package binaries when created also compute the hash of their contents, "
 "forming the **package revision**.  But they are very different in nature to "
@@ -323,28 +329,28 @@ msgid ""
 "only once."
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:217
+#: ../../../tutorial/versioning/revisions.rst:223
 msgid ""
 "As C and C++ build are not deterministic, it is possible that subsequents "
 "builds of the same package, without modifying anything will be creating new "
 "package revisions:"
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:220
+#: ../../../tutorial/versioning/revisions.rst:226
 msgid ""
 "# Build again 2 times the latest\n"
 "$ conan create .\n"
 "$ conan create ."
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:226
+#: ../../../tutorial/versioning/revisions.rst:232
 msgid ""
 "In some OSs like Windows, this build will not be reproducible, and the "
 "resulting artifacts will have different checksums, resulting in new package "
 "revisions:"
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:230
+#: ../../../tutorial/versioning/revisions.rst:236
 msgid ""
 "$ conan list \"hello/1.0:*#*\"\n"
 "Local Cache\n"
@@ -365,18 +371,18 @@ msgid ""
 "                ..."
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:250
+#: ../../../tutorial/versioning/revisions.rst:256
 msgid ""
 "By default, the package revision will also be resolved to the latest one. "
 "However, it is not possible to pin a package revision explicitly in recipes, "
 "recipes can only require down to the recipe revision as we defined above."
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:257
+#: ../../../tutorial/versioning/revisions.rst:263
 msgid "**Best practices**"
 msgstr ""
 
-#: ../../../tutorial/versioning/revisions.rst:259
+#: ../../../tutorial/versioning/revisions.rst:265
 msgid ""
 "Having more than 1 package revision for any given recipe revision + "
 "``package_id`` is a smell or a potential bad practice. It means that "

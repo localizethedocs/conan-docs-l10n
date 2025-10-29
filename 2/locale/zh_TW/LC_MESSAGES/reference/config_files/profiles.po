@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-14 08:38+0000\n"
+"POT-Creation-Date: 2025-10-28 08:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -290,7 +290,7 @@ msgstr ""
 #: ../../../reference/config_files/profiles.rst:868
 #: ../../../reference/config_files/profiles.rst:879
 #: ../../../reference/config_files/profiles.rst:895
-#: ../../../reference/config_files/profiles.rst:927
+#: ../../../reference/config_files/profiles.rst:943
 msgid "*myprofile*"
 msgstr ""
 
@@ -1387,26 +1387,52 @@ msgid ""
 "runtime_type``."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:912
-msgid "Profile includes"
+#: ../../../reference/config_files/profiles.rst:911
+msgid ""
+"In some circumstances it might be desired to undefine some specific package "
+"settings, assuming that such a setting allows to be undefined. For this "
+"case, the syntax ``~`` can be used as:"
 msgstr ""
 
 #: ../../../reference/config_files/profiles.rst:914
+msgid "myprofile"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:914
+msgid ""
+"[settings]\n"
+"build_type=Release\n"
+"mypkg/*:build_type=~"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:922
+msgid ""
+"This syntax will define ``build_type=Release`` for all packages, except for "
+"``mypkg`` (any version), that will leave ``build_type`` undefined, as it was "
+"never assigned a value. In recipe code that means that ``self.settings."
+"build_type`` will be ``None``."
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:928
+msgid "Profile includes"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:930
 msgid ""
 "You can include other profile files using the ``include()`` statement. The "
 "path can be relative to the current profile, absolute, or a profile name "
 "from the default profile location in the local cache."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:917
+#: ../../../reference/config_files/profiles.rst:933
 msgid "The ``include()`` statement has to be at the top of the profile file:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:919
+#: ../../../reference/config_files/profiles.rst:935
 msgid "*gcc_49*"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:919
+#: ../../../reference/config_files/profiles.rst:935
 msgid ""
 "[settings]\n"
 "compiler=gcc\n"
@@ -1414,7 +1440,7 @@ msgid ""
 "compiler.libcxx=libstdc++11"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:927
+#: ../../../reference/config_files/profiles.rst:943
 msgid ""
 "include(gcc_49)\n"
 "\n"
@@ -1424,34 +1450,34 @@ msgid ""
 "zlib/*:compiler.libcxx=libstdc++11"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:940
+#: ../../../reference/config_files/profiles.rst:956
 msgid ""
 "Cache profiles have more priority than the ones in the current working "
 "directory, so if you have a profile named ``myprofile`` in the cache, it "
 "will be used instead of the one in the current working directory."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:944
+#: ../../../reference/config_files/profiles.rst:960
 msgid "To use the profile in the current working directory, you can use:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:946
+#: ../../../reference/config_files/profiles.rst:962
 msgid "``-pr ./myprofile`` option in the command line or"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:947
+#: ../../../reference/config_files/profiles.rst:963
 msgid "``include(./myprofile)`` in the profile file itself."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:950
+#: ../../../reference/config_files/profiles.rst:966
 msgid "The final result of using *myprofile* is:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:952
+#: ../../../reference/config_files/profiles.rst:968
 msgid "*myprofile (virtual result)*"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:952
+#: ../../../reference/config_files/profiles.rst:968
 msgid ""
 "[settings]\n"
 "compiler=gcc\n"
@@ -1462,7 +1488,7 @@ msgid ""
 "zlib/*:compiler.version=3.5"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:966
+#: ../../../reference/config_files/profiles.rst:982
 msgid ""
 ":ref:`How to compose two or more profiles "
 "<reference_commands_install_composition>`"

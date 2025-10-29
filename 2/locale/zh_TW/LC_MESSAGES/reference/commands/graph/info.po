@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 08:27+0000\n"
+"POT-Creation-Date: 2025-10-28 08:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,13 +24,11 @@ msgstr ""
 #: ../../../reference/commands/graph/info.rst:-1
 msgid ""
 "$ conan graph info -h\n"
-"usage: conan graph info [-h] [-f FORMAT] [--out-file OUT_FILE] [-v [V]]\n"
-"                        [-cc CORE_CONF] [--name NAME] [--version VERSION]\n"
-"                        [--user USER] [--channel CHANNEL]\n"
-"                        [--requires REQUIRES] [--tool-requires "
-"TOOL_REQUIRES]\n"
-"                        [-b BUILD] [-r REMOTE | -nr] [-u [UPDATE]]\n"
-"                        [-pr PROFILE] [-pr:b PROFILE_BUILD]\n"
+"usage: conan graph info [-h] [-f FORMAT] [--out-file OUT_FILE]\n"
+"                        [-v [{quiet,error,warning,notice,status,,verbose,"
+"debug,v,trace,vv}]]\n"
+"                        [-cc CORE_CONF] [-b BUILD] [-r REMOTE | -nr]\n"
+"                        [-u [UPDATE]] [-pr PROFILE] [-pr:b PROFILE_BUILD]\n"
 "                        [-pr:h PROFILE_HOST] [-pr:a PROFILE_ALL] [-o "
 "OPTIONS]\n"
 "                        [-o:b OPTIONS_BUILD] [-o:h OPTIONS_HOST]\n"
@@ -38,7 +36,11 @@ msgid ""
 "SETTINGS_BUILD]\n"
 "                        [-s:h SETTINGS_HOST] [-s:a SETTINGS_ALL] [-c CONF]\n"
 "                        [-c:b CONF_BUILD] [-c:h CONF_HOST] [-c:a CONF_ALL]\n"
-"                        [-l LOCKFILE] [--lockfile-partial]\n"
+"                        [--requires REQUIRES] [--tool-requires "
+"TOOL_REQUIRES]\n"
+"                        [--name NAME] [--version VERSION] [--user USER]\n"
+"                        [--channel CHANNEL] [-l LOCKFILE] [--lockfile-"
+"partial]\n"
 "                        [--lockfile-out LOCKFILE_OUT] [--lockfile-clean]\n"
 "                        [--lockfile-overrides LOCKFILE_OVERRIDES]\n"
 "                        [--check-updates] [--filter FILTER]\n"
@@ -63,7 +65,8 @@ msgid ""
 "  --out-file OUT_FILE   Write the output of the command to the specified "
 "file\n"
 "                        instead of stdout.\n"
-"  -v [V]                Level of detail of the output. Valid options from "
+"  -v [{quiet,error,warning,notice,status,,verbose,debug,v,trace,vv}]\n"
+"                        Level of detail of the output. Valid options from "
 "less\n"
 "                        verbose to more verbose: -vquiet, -verror, -"
 "vwarning,\n"
@@ -73,16 +76,6 @@ msgid ""
 "  -cc CORE_CONF, --core-conf CORE_CONF\n"
 "                        Define core configuration, overwriting global.conf\n"
 "                        values. E.g.: -cc core:non_interactive=True\n"
-"  --name NAME           Provide a package name if not specified in "
-"conanfile\n"
-"  --version VERSION     Provide a package version if not specified in\n"
-"                        conanfile\n"
-"  --user USER           Provide a user if not specified in conanfile\n"
-"  --channel CHANNEL     Provide a channel if not specified in conanfile\n"
-"  --requires REQUIRES   Directly provide requires instead of a conanfile\n"
-"  --tool-requires TOOL_REQUIRES\n"
-"                        Directly provide tool-requires instead of a "
-"conanfile\n"
 "  -b BUILD, --build BUILD\n"
 "                        Optional, specify which packages to build from "
 "source.\n"
@@ -117,6 +110,28 @@ msgid ""
 "                        invalid, the closest package binary following the\n"
 "                        defined compatibility policies (method and\n"
 "                        compatibility.py)\n"
+"  --requires REQUIRES   Directly provide requires instead of a conanfile\n"
+"  --tool-requires TOOL_REQUIRES\n"
+"                        Directly provide tool-requires instead of a "
+"conanfile\n"
+"  --check-updates       Check if there are recipe updates\n"
+"  --filter FILTER       Show only the specified fields\n"
+"  --package-filter PACKAGE_FILTER\n"
+"                        Print information only for packages that match the\n"
+"                        patterns\n"
+"  -d DEPLOYER, --deployer DEPLOYER\n"
+"                        Deploy using the provided deployer to the output\n"
+"                        folder. Built-in deployers: 'full_deploy',\n"
+"                        'direct_deploy'. Deployers will only deploy "
+"recipes,\n"
+"                        as 'conan graph info' do not retrieve binaries\n"
+"  -df DEPLOYER_FOLDER, --deployer-folder DEPLOYER_FOLDER\n"
+"                        Deployer output folder, base build folder by "
+"default\n"
+"                        if not set\n"
+"  --build-require       Whether the provided reference is a build-require\n"
+"\n"
+"remote arguments:\n"
 "  -r REMOTE, --remote REMOTE\n"
 "                        Look in the specified remote or remotes server\n"
 "  -nr, --no-remote      Do not use remote, resolve exclusively in the cache\n"
@@ -128,6 +143,8 @@ msgid ""
 "latest\n"
 "                        version that satisfies the range. It will update to\n"
 "                        the latest revision for the resolved version range.\n"
+"\n"
+"profile arguments:\n"
 "  -pr PROFILE, --profile PROFILE\n"
 "                        Apply the specified profile. By default, or if\n"
 "                        specifying -pr:h (--profile:host), it applies to "
@@ -175,6 +192,16 @@ msgid ""
 "  -c:b CONF_BUILD, --conf:build CONF_BUILD\n"
 "  -c:h CONF_HOST, --conf:host CONF_HOST\n"
 "  -c:a CONF_ALL, --conf:all CONF_ALL\n"
+"\n"
+"reference arguments:\n"
+"  --name NAME           Provide a package name if not specified in "
+"conanfile\n"
+"  --version VERSION     Provide a package version if not specified in\n"
+"                        conanfile\n"
+"  --user USER           Provide a user if not specified in conanfile\n"
+"  --channel CHANNEL     Provide a channel if not specified in conanfile\n"
+"\n"
+"lockfile arguments:\n"
 "  -l LOCKFILE, --lockfile LOCKFILE\n"
 "                        Path to a lockfile. Use --lockfile=\"\" to avoid\n"
 "                        automatic use of existing 'conan.lock' file\n"
@@ -186,22 +213,6 @@ msgid ""
 "  --lockfile-clean      Remove unused entries from the lockfile\n"
 "  --lockfile-overrides LOCKFILE_OVERRIDES\n"
 "                        Overwrite lockfile overrides\n"
-"  --check-updates       Check if there are recipe updates\n"
-"  --filter FILTER       Show only the specified fields\n"
-"  --package-filter PACKAGE_FILTER\n"
-"                        Print information only for packages that match the\n"
-"                        patterns\n"
-"  -d DEPLOYER, --deployer DEPLOYER\n"
-"                        Deploy using the provided deployer to the output\n"
-"                        folder. Built-in deployers: 'full_deploy',\n"
-"                        'direct_deploy'. Deployers will only deploy "
-"recipes,\n"
-"                        as 'conan graph info' do not retrieve binaries\n"
-"  -df DEPLOYER_FOLDER, --deployer-folder DEPLOYER_FOLDER\n"
-"                        Deployer output folder, base build folder by "
-"default\n"
-"                        if not set\n"
-"  --build-require       Whether the provided reference is a build-require\n"
 "\n"
 msgstr ""
 
@@ -451,47 +462,54 @@ msgid ""
 "    shared: False"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:234
+#: ../../../reference/commands/graph/info.rst:233
+msgid ""
+"The ``--package-filter`` accepts the ``&`` placeholder as ``--package-"
+"filter=\"&\"\"`` to refer to the current \"consumer\" recipes, without "
+"needing to explictly type its package name."
+msgstr ""
+
+#: ../../../reference/commands/graph/info.rst:238
 msgid "Available formatters"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:237
+#: ../../../reference/commands/graph/info.rst:241
 msgid "json formatter"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:239
+#: ../../../reference/commands/graph/info.rst:243
 msgid ""
 "For the documentation about the JSON formatter, please check the :ref:"
 "`dedicated section <reference_commands_graph_info_json_format>`."
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:242
+#: ../../../reference/commands/graph/info.rst:246
 msgid "dot formatter"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:244
+#: ../../../reference/commands/graph/info.rst:248
 msgid "To use the DOT format, execute the following command:"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:246
+#: ../../../reference/commands/graph/info.rst:250
 msgid "binutils/2.38 graph info DOT representation"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:246
+#: ../../../reference/commands/graph/info.rst:250
 msgid ""
 "$ conan graph info --require=binutils/2.38 -r=conancenter --format=dot > "
 "graph.dot"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:251
+#: ../../../reference/commands/graph/info.rst:255
 msgid "This command generates a DOT file with the following content:"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:253
+#: ../../../reference/commands/graph/info.rst:257
 msgid "Contents of graph.dot"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:253
+#: ../../../reference/commands/graph/info.rst:257
 msgid ""
 "digraph {\n"
 "    \"cli\" -> \"binutils/2.38\"\n"
@@ -499,29 +517,29 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:261
+#: ../../../reference/commands/graph/info.rst:265
 msgid ""
 "To visualize this graph, you can render it using Graphviz or any compatible "
 "tool."
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:273
+#: ../../../reference/commands/graph/info.rst:277
 msgid "html formatter"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:275
+#: ../../../reference/commands/graph/info.rst:279
 msgid ""
 "The HTML formatter provides a visual representation of the dependency graph "
 "that is both interactive and user-friendly."
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:278
+#: ../../../reference/commands/graph/info.rst:282
 msgid ""
 "$ conan graph info --require=tensorflow-lite/2.12.0 -r=conancenter --"
 "format=html > graph.html"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:283
+#: ../../../reference/commands/graph/info.rst:287
 msgid ""
 "The HTML output displays an interactive graph of your project's "
 "dependencies, featuring nodes for packages with versions, directional arrows "
@@ -530,7 +548,7 @@ msgid ""
 "package details and status."
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:294
+#: ../../../reference/commands/graph/info.rst:298
 msgid ""
 "When using ``format=html``, the generated HTML contains links to a third-"
 "party resource: the `vis-network <https://github.com/visjs/vis-network>`_ "
@@ -542,13 +560,13 @@ msgid ""
 "network/9.1.9/standalone/umd/vis-network.min.js>`_"
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:301
+#: ../../../reference/commands/graph/info.rst:305
 msgid ""
 "Use the template located in ``<conan_sources>/conan/cli/formatters/graph/"
 "info_graph_html.py`` as a starting point for your own."
 msgstr ""
 
-#: ../../../reference/commands/graph/info.rst:308
+#: ../../../reference/commands/graph/info.rst:312
 msgid ""
 "Check the :ref:`JSON format output "
 "<reference_commands_graph_info_json_format>` for this command."

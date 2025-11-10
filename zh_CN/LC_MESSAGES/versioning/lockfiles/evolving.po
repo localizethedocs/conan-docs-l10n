@@ -1,0 +1,231 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2021, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.42\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../versioning/lockfiles/evolving.rst:4
+msgid "Evolving lockfiles"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:8
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:10
+msgid ""
+"As described before, lockfiles are immutable, they cannot change the "
+"information they contain. If some install or create command tries to change "
+"some data in a lockfile, it will error. This doesn't mean that operations on "
+"lockfiles cannot be done, as it is possible to create a new lockfile from an "
+"existing one. We have already done this, obtaining a full lockfile for a "
+"specific configuration from an initial \"base\" lockfile."
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:17
+msgid ""
+"There are several scenarios you might want to create a new lockfile from an "
+"existing one."
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:21
+msgid "Deriving a partial lockfile"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:23
+msgid ""
+"Lets say that we have an application ``app/1.0`` that depends on "
+"``libc/1.0`` that depends on ``libb/1.0`` that finally depends on "
+"``liba/1.0``. We could capture a \"base\" lockfile from it, and then several "
+"full lockfiles, one per configuration:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:33
+msgid ""
+"$ conan lock create --reference=app/1.0@ --base --lockfile-out=app_base."
+"lock\n"
+"$ conan lock create --reference=app/1.0@ --lockfile=app_base.lock -s "
+"build_type=Release --lockfile-out=app_release.lock\n"
+"$ conan lock create --reference=app/1.0@ --lockfile=app_base.lock -s "
+"build_type=Debug --lockfile-out=app_debug.lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:34
+msgid ""
+"Now a developer wants to start testing some changes in ``libb``, using the "
+"same dependencies versions defined in the lockfile. As ``libb`` is locked, "
+"it will not be possible to create a new version ``libb/1.1`` or build a new "
+"binary for it with the existing lockfiles. But we can create a new lockfile "
+"for it in different ways. For example, we could derive directly from the "
+"*app_release.lock* and *app_debug.lock* lockfiles:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:44
+msgid ""
+"$ git clone <libb-repo> && cd libb\n"
+"$ conan lock create conanfile.py --lockfile=app_release.lock --lockfile-"
+"out=libb_deps_release.lock\n"
+"$ conan lock create conanfile.py --lockfile=app_debug.lock --lockfile-"
+"out=libb_deps_debug.lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:45
+msgid ""
+"This will create partial lockfiles, only for ``libb`` dependencies, i.e. "
+"locking ``liba/1.0``, that can be used while installing, building and "
+"testing ``libb``."
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:48
+msgid ""
+"But it is also possible to derive a new \"base\" profile from *app_base."
+"lock* only for libb dependencies, and then compute from it the configuration "
+"specific profiles."
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:51
+msgid ""
+"These partial lockfiles will be smaller than the original app lockfiles, not "
+"containing information at all about ``app`` and ``libc``."
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:55
+msgid "Unlocking packages with --build"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:57
+msgid ""
+"It is also possible to derive a partial lockfile for ``libb/1.0`` without "
+"cloning the ``libb`` repository, directly with:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:63
+msgid ""
+"$ conan lock create --reference=libb/1.0 --lockfile=app_release.lock --"
+"lockfile-out=libb_release.lock\n"
+"$ conan lock create --reference=libb/1.0 --lockfile=app_debug.lock --"
+"lockfile-out=libb_debug.lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:64
+msgid ""
+"These new lockfiles could be used to install the ``libb/1.0`` package, "
+"without building it, but if we tried to build it from sources, it will fail:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:71
+msgid ""
+"$ conan install libb/1.0@ --lockfile=libb_release.lock # Works\n"
+"$ conan install libb/1.0@ --build=libb --lockfile=libb_release.lock # Fails, "
+"libb is locked"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:72
+msgid ""
+"The second scenario fails. This is because when the *app_release.lock* "
+"lockfile was captured, it completely locked all the information (including "
+"``libb/1.0``'s package revision). If we try to build a new binary, the lock "
+"protection will raise. If we want to \"unlock\" the binary package revision, "
+"we need to tell the lockfile when we are capturing such lockfile, that we "
+"plan to build it, with the :command:`--build` argument:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:83
+msgid ""
+"# Note the --build=libb argument\n"
+"$ conan lock create --reference=libb/1.0 --build=libb --lockfile=app_release."
+"lock --lockfile-out=libb_release.lock\n"
+"# This will work, building a new binary\n"
+"$ conan install libb/1.0@ --build=libb --lockfile=libb_release.lock --"
+"lockfile-out=libb_release2.lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:84
+msgid ""
+"As usual, if you are building a new binary, it is desired to provide a :"
+"command:`--lockfile-out=libb_release2.lock` to capture such a new binary "
+"package revision in the new lockfile."
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:89
+msgid "Integrating a partial lockfile"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:91
+msgid ""
+"This would be the opposite flow. Lets take the previous *libb_deps_release."
+"lock* and *libb_deps_debug.lock* lockfiles and create new ``libb/1.1`` "
+"packages with it, and obtaining new lockfiles:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:99
+msgid ""
+"# in the libb source folder\n"
+"$ conan  create . --lockfile=libb_deps_release.lock --lockfile-"
+"out=libb_release.lock\n"
+"$ conan  create . --lockfile=libb_deps_debug.lock --lockfile-out=libb_debug."
+"lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:100
+msgid ""
+"These lockfiles will be containing locked information to ``liba/1.0`` and a "
+"new ``libb/1.1`` version. Now we would like to check if ``app/1.0`` will "
+"pick this new version, and in case it is used, we would like to rebuild "
+"whatever is necessary (that is part of the next CI section)."
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:106
+msgid ""
+"It is not possible to pick the old *app_base.lock*, *app_release.lock* or "
+"*app_debug.lock* lockfiles and inject the new ``libb/1.1`` version, as this "
+"would be violating the integrity of the lockfile. Nothing guarantees that "
+"the downstream packages will effectively use the new version, as it might "
+"fall outside the valid range defined in ``libc/1.0``, for example. Also, "
+"downstream consumers ``app/1.0`` and ``libc/1.0`` could result in different "
+"package-ids as a result of having a new dependency, and this goes against "
+"the immutability of the lockfile data, as the package-ids for them would be "
+"already locked."
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:113
+msgid ""
+"Let's create new lockfiles that will use the existing ``libb_debug.lock`` "
+"and ``libb_release.lock`` information if possible:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:119
+msgid ""
+"$ conan lock create --reference=app/1.0@ --lockfile=libb_release.lock --"
+"lockfile-out=app_release.lock\n"
+"$ conan lock create --reference=app/1.0@ --lockfile=libb_debug.lock --"
+"lockfile-out=app_debug.lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/evolving.rst:120
+msgid ""
+"This will create new *app_release.lock* and *app_debug.lock* that will have "
+"both ``libb/1.1`` and ``liba/1.0`` locked. If for some reason, ``libc/1.0`` "
+"had fixed a ``requires = \"libb/1.0\"``, then the resulting lockfile would "
+"resolve and lock ``libb/1.0`` instead. The ``build-order`` command (see next "
+"section) will tell us that there is nothing to build, as it is effectively "
+"computing the same lockfile that existed before. It is also possible, and a "
+"CI pipeline could do it, to directly check that ``libb/1.1`` is defined "
+"inside the new lockfiles. If it is not there, it means that it didn't "
+"integrate, and nothing needs to be done downstream."
+msgstr ""

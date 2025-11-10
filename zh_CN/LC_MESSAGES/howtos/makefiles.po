@@ -1,0 +1,225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.36\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/makefiles.rst:5
+msgid "Creating and reusing packages based on Makefiles"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:7
+msgid ""
+"Conan can create packages and reuse them with Makefiles. The "
+"``AutoToolsBuildEnvironment`` build helper helps with most of the necessary "
+"tasks."
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:10
+msgid ""
+"This how-to has been tested in Windows with MinGW and Linux with gcc. It "
+"uses static libraries but could be extended to shared libraries too. The "
+"Makefiles surely can be improved. They are just an example."
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:15
+msgid "Creating packages"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:17
+msgid ""
+"Sources for this example can be found in our `examples repository <https://"
+"github.com/conan-io/examples>`_ in the *features/makefiles* folder:"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:20
+msgid ""
+"$ git clone https://github.com/conan-io/examples.git\n"
+"$ cd examples/features/makefiles\n"
+"$ cd hellolib"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:27
+msgid ""
+"It contains a *src* folder with the source code and a *conanfile.py* file "
+"for creating a package."
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:29
+msgid ""
+"Inside the *src* folder, there is *Makefile* to build the static library. "
+"This *Makefile* uses standard variables like ``$(CPPFLAGS)`` or ``$(CXX)`` "
+"to build it:"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:32
+msgid ""
+"SRC = hello.cpp\n"
+"OBJ = $(SRC:.cpp=.o)\n"
+"OUT = libhello.a\n"
+"INCLUDES = -I.\n"
+"\n"
+".SUFFIXES: .cpp\n"
+"\n"
+"default: $(OUT)\n"
+"\n"
+".cpp.o:\n"
+"    $(CXX) $(INCLUDES) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@\n"
+"\n"
+"$(OUT): $(OBJ)\n"
+"    ar rcs $(OUT) $(OBJ)"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:50
+msgid ""
+"The *conanfile.py* file uses the ``AutoToolsBuildEnvironment`` build helper. "
+"This helper defines the necessary environment variables with information "
+"from dependencies, as well as other variables to match the current Conan "
+"settings (like ``-m32`` or ``-m64`` based on the Conan ``arch`` setting)"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:54
+msgid ""
+"from conans import ConanFile, AutoToolsBuildEnvironment\n"
+"from conans import tools\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    name = \"hello\"\n"
+"    version = \"0.1\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    generators = \"cmake\"\n"
+"    exports_sources = \"src/*\"\n"
+"\n"
+"    def build(self):\n"
+"        with tools.chdir(\"src\"):\n"
+"            atools = AutoToolsBuildEnvironment(self)\n"
+"            # atools.configure() # use it to run \"./configure\" if using "
+"autotools\n"
+"            atools.make()\n"
+"\n"
+"    def package(self):\n"
+"        self.copy(\"*.h\", dst=\"include\", src=\"src\")\n"
+"        self.copy(\"*.lib\", dst=\"lib\", keep_path=False)\n"
+"        self.copy(\"*.a\", dst=\"lib\", keep_path=False)\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.libs = [\"hello\"]"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:81
+msgid "With this *conanfile.py* you can create the package:"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:83 ../../../howtos/makefiles.rst:152
+msgid ""
+"$ conan create . user/testing -s compiler=gcc -s compiler.version=4.9 -s "
+"compiler.libcxx=libstdc++"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:89
+msgid "Using packages"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:91
+msgid "Now let's move to the application folder:"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:93
+msgid "$ cd ../helloapp"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:98
+msgid ""
+"There you can also see a *src* folder with a *Makefile* creating an "
+"executable:"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:100
+msgid ""
+"SRC = app.cpp\n"
+"OBJ = $(SRC:.cpp=.o)\n"
+"OUT = app\n"
+"INCLUDES = -I.\n"
+"\n"
+".SUFFIXES: .cpp\n"
+"\n"
+"default: $(OUT)\n"
+"\n"
+".cpp.o:\n"
+"    $(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@\n"
+"\n"
+"$(OUT): $(OBJ)\n"
+"    $(CXX) -o $(OUT)  $(OBJ)  $(LDFLAGS)  $(LIBS)"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:118
+msgid ""
+"And also a *conanfile.py* very similar to the previous one. In this case "
+"adding a ``requires`` and a ``deploy()`` method:"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:120
+msgid ""
+" from conans import ConanFile, AutoToolsBuildEnvironment\n"
+" from conans import tools\n"
+"\n"
+" class AppConan(ConanFile):\n"
+"     name = \"app\"\n"
+"     version = \"0.1\"\n"
+"     settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"     exports_sources = \"src/*\"\n"
+"     requires = \"hello/0.1@user/testing\"\n"
+"\n"
+"     def build(self):\n"
+"         with tools.chdir(\"src\"):\n"
+"             atools = AutoToolsBuildEnvironment(self)\n"
+"             atools.make()\n"
+"\n"
+"     def package(self):\n"
+"         self.copy(\"*app\", dst=\"bin\", keep_path=False)\n"
+"         self.copy(\"*app.exe\", dst=\"bin\", keep_path=False)\n"
+"\n"
+"     def deploy(self):\n"
+"         self.copy(\"*\", src=\"bin\", dst=\"bin\")"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:146
+msgid ""
+"Note that in this case, the ``AutoToolsBuildEnvironment`` will automatically "
+"set values to ``CPPFLAGS``, ``LDFLAGS``, ``LIBS``, etc. existing in the "
+"*Makefile* with the correct include directories, library names, etc. to "
+"properly build and link with the ``hello`` library contained in the "
+"\"hello\" package."
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:150
+msgid "As above, we can create the package with:"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:157
+msgid ""
+"There are different ways to run executables contained in packages, like "
+"using ``virtualrunenv`` generators. In this case, since the package has a "
+"``deploy()`` method, we can use it:"
+msgstr ""
+
+#: ../../../howtos/makefiles.rst:160
+msgid ""
+"$ conan install hello/0.1user/testing -s compiler=gcc -s compiler."
+"version=4.9 -s compiler.libcxx=libstdc++\n"
+"$ ./bin/app\n"
+"$ Hello World Release!"
+msgstr ""

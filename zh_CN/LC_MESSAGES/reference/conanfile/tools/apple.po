@@ -1,0 +1,253 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.45\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/apple.rst:4
+msgid "conan.tools.apple"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:8
+msgid "These tools are **experimental** and subject to breaking changes."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:12
+msgid "XcodeDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:14
+msgid "Available since: `1.42.0 <https://github.com/conan-io/conan/releases>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:16
+msgid ""
+"The ``XcodeDeps`` tool is the dependency information generator for *Xcode*. "
+"It will generate multiple *.xcconfig* configuration files, the can be used "
+"by consumers using *xcodebuild* or *Xcode*. To use them just add the "
+"generated configuration files to the Xcode project or set the ``-xcconfig`` "
+"argument from the command line."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:21
+msgid "The ``XcodeDeps`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:23
+#: ../../../reference/conanfile/tools/apple.rst:37
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:23
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"XcodeDeps\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:29
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:29
+msgid ""
+"[generators]\n"
+"XcodeDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:35
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:37
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.apple import XcodeDeps\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    requires = \"libpng/1.6.37@\" # Note libpng has zlib as transitive "
+"dependency\n"
+"\n"
+"    def generate(self):\n"
+"        xcode = XcodeDeps(self)\n"
+"        xcode.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:51
+msgid ""
+"When the ``XcodeDeps`` generator is used, every invocation of ``conan "
+"install`` will generate several configuration files, per dependency and "
+"configuration. For the *conanfile.py* above, for example:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:55
+msgid ""
+"$ conan install conanfile.py # default is Release\n"
+"$ conan install conanfile.py -s build_type=Debug"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:60
+msgid ""
+"This generator is multi-configuration. It will generate different files for "
+"the different *Debug/Release* configurations for each requirement. It will "
+"also generate one single file (*conandeps.xcconfig*) aggregating all the "
+"files for the direct dependencies (just *libpng* in this case). The above "
+"commands generate the following files:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:65
+msgid ""
+".\n"
+"├── conan_libpng.xcconfig\n"
+"├── conan_libpng_debug_x86_64.xcconfig\n"
+"├── conan_libpng_release_x86_64.xcconfig\n"
+"├── conan_libpng_vars_debug_x86_64.xcconfig\n"
+"├── conan_libpng_vars_release_x86_64.xcconfig\n"
+"├── conan_zlib.xcconfig\n"
+"├── conan_zlib_debug_x86_64.xcconfig\n"
+"├── conan_zlib_release_x86_64.xcconfig\n"
+"├── conan_zlib_vars_debug_x86_64.xcconfig\n"
+"├── conan_zlib_vars_release_x86_64.xcconfig\n"
+"└── conandeps.xcconfig"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:81
+msgid ""
+"The first ``conan install`` with the default *Release* and *x86_64* "
+"configuration generates:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:83
+msgid ""
+"*conan_libpng_vars_release_x86_64.xcconfig*: declares some intermediate "
+"variables that are included in *conan_libpng_release_x86_64.xcconfig*"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:84
+msgid ""
+"*conan_libpng_release_x86_64.xcconfig*: includes "
+"*conan_libpng_vars_release_x86_64.xcconfig* and declares variables with "
+"conditional logic to be considered only for the active configuration in "
+"*Xcode* or the one passed by command line to *xcodebuild*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:85
+msgid ""
+"*conan_libpng.xcconfig*: includes *conan_libpng_release_x86_64.xcconfig* and "
+"declares the following *Xcode* build settings: ``HEADER_SEARCH_PATHS``, "
+"``GCC_PREPROCESSOR_DEFINITIONS``, ``OTHER_CFLAGS``, "
+"``OTHER_CPLUSPLUSFLAGS``, ``FRAMEWORK_SEARCH_PATHS``, "
+"``LIBRARY_SEARCH_PATHS``, ``OTHER_LDFLAGS``. It also includes the generated "
+"*xcconfig* files for transitive dependencies (*conan_zlib.xcconfig* in this "
+"case)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:86
+msgid ""
+"Same 3 files will be generated for each dependency in the graph. In this "
+"case, as *zlib* is a dependency of *libpng* it will generate: "
+"*conan_zlib_vars_release_x86_64.xcconfig*, *conan_zlib_release_x86_64."
+"xcconfig* and *conan_zlib.xcconfig*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:87
+#: ../../../reference/conanfile/tools/apple.rst:95
+msgid ""
+"*conandeps.xcconfig*: configuration files including all direct dependencies, "
+"in this case, it just includes ``conan_libpng.xcconfig``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:89
+msgid "The second ``conan install -s build_type=Debug`` generates:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:91
+msgid ""
+"*conan_libpng_vars_debug_x86_64.xcconfig*: same variables as the one below "
+"for *Debug* configuration."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:92
+msgid ""
+"*conan_libpng_debug_x86_64.xcconfig*: same variables as the one below for "
+"*Debug* configuration."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:93
+msgid ""
+"*conan_libpng.xcconfig*: this file has been already creted by the previous "
+"command, now it's modified to add the include for *conan_libpng_debug_x86_64."
+"xcconfig*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:94
+msgid ""
+"Like in the previous command the same 3 files will be generated for each "
+"dependency in the graph. In this case, as *zlib* is a dependency of *libpng* "
+"it will generate: *conan_zlib_vars_debug_x86_64.xcconfig*, "
+"*conan_zlib_debug_x86_64.xcconfig* and *conan_zlib.xcconfig*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:97
+msgid ""
+"If you want to add this dependencies to you Xcode project, you just have to "
+"add the *conandeps.xcconfig* configuration file for all of the "
+"configurations you want to use (usually *Debug* and *Release*)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:102
+msgid "Custom configurations"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:104
+msgid ""
+"If your Xcode project defines custom configurations, like ``ReleaseShared``, "
+"or ``MyCustomConfig``, it is possible to define it into the ``XcodeDeps`` "
+"generator, so different project configurations can use different set of "
+"dependencies. Let's say that our current project can be built as a shared "
+"library, with the custom configuration ``ReleaseShared``, and the package "
+"also controls this with the ``shared`` option:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:110
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.apple import XcodeDeps\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    options = {\"shared\": [True, False]}\n"
+"    default_options = {\"shared\": False}\n"
+"    requires = \"zlib/1.2.11\"\n"
+"\n"
+"    def generate(self):\n"
+"        xcode = XcodeDeps(self)\n"
+"        # We assume that -o *:shared=True is used to install all shared deps "
+"too\n"
+"        if self.options.shared:\n"
+"            xcode.configuration = str(self.settings.build_type) + "
+"\"Shared\"\n"
+"        xcode.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/apple.rst:128
+msgid ""
+"This will manage to generate new *.xcconfig* files for this custom "
+"configuration, and when you switch to this configuration in the IDE, the "
+"build system will take the correct values depending wether we want to link "
+"with shared or static libraries."
+msgstr ""

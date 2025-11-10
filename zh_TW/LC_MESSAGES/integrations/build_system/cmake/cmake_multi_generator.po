@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.18\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:4
+msgid "``cmake_multi`` generator"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:7
+msgid ""
+"``cmake_multi`` generator is intended for CMake multi-configuration "
+"environments, like Visual Studio and Xcode IDEs that do not configure for a "
+"specific ``build_type``, like Debug or Release, but rather can be used for "
+"both and switch among Debug and Release configurations with a combo box or "
+"similar control. The project configuration for cmake is different, in multi-"
+"configuration environments, the flow would be:"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:11
+msgid ""
+"$ cmake .. -G \"Visual Studio 14 Win64\"\n"
+"# Now open the IDE (.sln file) or\n"
+"$ cmake --build . --config Release"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:17
+msgid "While in single-configuration environments (Unix Makefiles, etc):"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:19
+msgid ""
+"$ cmake .. -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Release\n"
+"# Build from your IDE, launching make, or\n"
+"$ cmake --build ."
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:25
+msgid "The ``CMAKE_BUILD_TYPE`` default, if not specified is ``Debug``."
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:27
+msgid ""
+"With the regular conan ``cmake`` generator, only 1 configuration at a time "
+"can be managed. Then, it is a universal, homogeneous solution for all "
+"environments. This is the recommended way, using the regular ``cmake`` "
+"generator, and just go to the command line and switch among configurations:"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:32
+msgid ""
+"$ conan install . -s build_type=Release ...\n"
+"# Work in release, then, to switch to Debug dependencies\n"
+"$ conan install . -s build_type=Debug ..."
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:39
+msgid ""
+"However, end consumers with heavy usage of the IDE, might want a multi-"
+"configuration build. The ``cmake_multi`` **experimental** generator is able "
+"to do that. First, both Debug and Release dependencies have to be installed:"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:43
+msgid ""
+"$ conan install . -g cmake_multi -s build_type=Release ...\n"
+"$ conan install . -g cmake_multi -s build_type=Debug  ..."
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:48
+msgid ""
+"These commands will generate 3 files: ``conanbuildinfo_release.cmake``, "
+"``conanbuildinfo_debug.cmake``, and ``conanbuildinfo_multi.cmake``, which "
+"includes the other two, and enables its use."
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:53
+msgid ""
+"The ``cmake_multi`` generator is designed as a helper for consumers, but not "
+"for creating packages. If you also want to create a package, see :ref:"
+"`Creating packages<cmake_multi_creating_packages>` section."
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:58
+msgid "Global variables approach"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:60
+msgid "The consumer project might write a ``CMakeLists.txt`` like:"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:62
+msgid ""
+"project(MyHello)\n"
+"cmake_minimum_required(VERSION 2.8.12)\n"
+"\n"
+"include(${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)\n"
+"conan_basic_setup()\n"
+"\n"
+"add_executable(say_hello main.cpp)\n"
+"foreach(_LIB ${CONAN_LIBS_RELEASE})\n"
+"    target_link_libraries(say_hello optimized ${_LIB})\n"
+"endforeach()\n"
+"foreach(_LIB ${CONAN_LIBS_DEBUG})\n"
+"    target_link_libraries(say_hello debug ${_LIB})\n"
+"endforeach()"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:80
+msgid "Targets approach"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:82
+msgid ""
+"Or, if using the modern cmake syntax with targets (where ``Hello1`` is an "
+"example package name that the executable ``say_hello`` depends on):"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:84
+msgid ""
+"project(MyHello)\n"
+"cmake_minimum_required(VERSION 2.8.12)\n"
+"\n"
+"include(${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)\n"
+"conan_basic_setup(TARGETS)\n"
+"\n"
+"add_executable(say_hello main.cpp)\n"
+"target_link_libraries(say_hello CONAN_PKG::Hello1)"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:95
+msgid "There's also a convenient macro for linking to all libraries:"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:97
+msgid ""
+"project(MyHello)\n"
+"cmake_minimum_required(VERSION 2.8.12)\n"
+"\n"
+"include(${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)\n"
+"conan_basic_setup()\n"
+"\n"
+"add_executable(say_hello main.cpp)\n"
+"conan_target_link_libraries(say_hello)"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:109
+msgid ""
+"With this approach, the end user can open the generated IDE project and "
+"switch among both configurations, building the project, or from the command "
+"line:"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:112
+msgid ""
+"$ cmake --build . --config Release\n"
+"# And without having to conan install again, or do anything else\n"
+"$ cmake --build . --config Debug"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:122
+msgid "Creating packages"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:124
+msgid ""
+"The ``cmake_multi`` generator is just for consumption. It cannot be used to "
+"create packages. If you want to be able to both use the ``cmake_multi`` "
+"generator to install dependencies and build your project but also to create "
+"packages from that code, you need to specify the regular ``cmake`` generator "
+"for package creation, and prepare the *CMakeLists.txt* accordingly, "
+"something like:"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:130
+msgid ""
+"project(MyHello)\n"
+"cmake_minimum_required(VERSION 2.8.12)\n"
+"\n"
+"if(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)\n"
+"    include(${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)\n"
+"else()\n"
+"    include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+"endif()\n"
+"\n"
+"conan_basic_setup()\n"
+"\n"
+"add_executable(say_hello main.cpp)\n"
+"conan_target_link_libraries(say_hello)"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:147
+msgid ""
+"Then, make sure that the generator ``cmake_multi`` is **not** specified in "
+"the conanfiles, but the users specify it in the command line while "
+"installing dependencies:"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:150
+msgid "$ conan install . -g cmake_multi"
+msgstr ""
+
+#: ../../../integrations/build_system/cmake/cmake_multi_generator.rst:155
+msgid ""
+"Check the section :ref:`Reference/Generators/cmake <cmakemulti_generator>` "
+"to read more about this generator."
+msgstr ""

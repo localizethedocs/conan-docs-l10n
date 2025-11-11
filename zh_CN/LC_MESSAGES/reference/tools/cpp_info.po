@@ -1,0 +1,130 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/cpp_info.rst:4
+msgid "conan.tools.CppInfo"
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:6
+msgid ""
+"The ``CppInfo`` class represents the basic C++ usage information of a given "
+"package, like the ``includedirs``, ``libdirs``, library names, etc. It is "
+"the information that the consumers of the package need in order to be able "
+"to find the headers and link correctly with the libraries."
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:8
+msgid ""
+"The ``self.cpp_info`` object in the ``package_info()`` is a ``CppInfo`` "
+"object, so in most cases it will not be necessary to explicitly instantiate "
+"it, and using it as explained in :ref:`the "
+"package_info()<reference_conanfile_methods_package_info>` section would be "
+"enough."
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:11
+msgid ""
+"This section describes the other, advanced uses cases of the ``CppInfo``."
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:14
+msgid "Aggregating information in custom generators"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:18
+msgid ""
+"Some generators, like the built-in ``NMakeDeps``, contains the equivalent to "
+"this code, that collapses all information from all dependencies into one "
+"single ``CppInfo`` object that aggregates all the information"
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:20
+msgid ""
+"from conan.tools import CppInfo\n"
+"\n"
+"...\n"
+"\n"
+"def generate(self):\n"
+"    aggregated_cpp_info = CppInfo(self)\n"
+"    deps = self.dependencies.host.topological_sort\n"
+"    deps = [dep for dep in reversed(deps.values())]\n"
+"    for dep in deps:\n"
+"        # We don't want independent components management, so we collapse\n"
+"        # the \"dep\" components into one CppInfo called \"dep_cppinfo\"\n"
+"        dep_cppinfo = dep.cpp_info.aggregated_components()\n"
+"        # Then we merge and aggregate this dependency \"dep\" into the final "
+"result\n"
+"        aggregated_cpp_info.merge(dep_cppinfo)\n"
+"\n"
+"    aggregated_cpp_info.includedirs  # All include dirs from all deps, all "
+"components\n"
+"    aggregated_cpp_info.libs  # All library names from all deps, all "
+"components\n"
+"    aggregated_cpp_info.system_libs # All system-libs from all deps\n"
+"    ....\n"
+"    # Creates a file with this information that the build system will use"
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:44
+msgid ""
+"This aggregation could be useful in cases where the build system cannot "
+"easily use independent dependencies or components. For example ``NMake`` or "
+"``Autotools`` mechanism to provide dependencies information would be via "
+"``LIBS``, ``CXXFLAGS`` and similar variables. These variables are global, so "
+"passing all the information from all dependencies is the only possibility."
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:46
+msgid ""
+"The public documented interface (besides the defined one in :ref:`the "
+"package_info()<reference_conanfile_methods_package_info>`) is:"
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:48
+msgid ""
+"``CppInfo(conanfile)``: Constructor. Receives a ``conanfile`` as argument, "
+"typically ``self``"
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:49
+msgid ""
+"``aggregated_components()``: return a new ``CppInfo`` object resulting from "
+"the aggregation of all the components"
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:50
+msgid ""
+"``get_sorted_components()``: Get the ordered components of a package, "
+"prioritizing those with fewer dependencies within the same package. Returns "
+"an ``OrderedDict`` of sorted components in the format ``{component_name: "
+"component}``."
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:53
+msgid ""
+"``merge(other_cppinfo: CppInfo)``: modifies the current ``CppInfo`` object, "
+"updating it with the information of the parameter ``other_cppinfo``, "
+"allowing to aggregate information from multiple dependencies."
+msgstr ""

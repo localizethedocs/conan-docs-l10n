@@ -1,0 +1,370 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:5
+msgid "Tool requires packages"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:7
+msgid ""
+"In the \":ref:`Using build tools as Conan packages "
+"<consuming_packages_tool_requires>`\" section we learned how to use a tool "
+"require to build (or help building) our project or Conan package. In this "
+"section we are going to learn how to create a recipe for a tool require."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:13
+msgid "**Best practice**"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:15
+msgid ""
+"``tool_requires`` and tool packages are intended for executable "
+"applications, like ``cmake`` or ``ninja`` that can be used as "
+"``tool_requires(\"cmake/[>=3.25]\")`` by other packages to put those "
+"executables in their path. They are not intended for library-like "
+"dependencies (use ``requires`` for them), for test frameworks (use "
+"``test_requires``) or in general for anything that belongs to the \"host\" "
+"context of the final application. Do not abuse ``tool_requires`` for other "
+"purposes."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:22
+msgid ""
+"Please, first clone the sources to recreate this project. You can find them "
+"in the `examples2 repository <https://github.com/conan-io/examples2>`_ on "
+"GitHub:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:25
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/tutorial/creating_packages/other_packages/tool_requires/tool"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:32
+msgid "A simple tool require recipe"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:34
+msgid ""
+"This is a recipe for a (fake) application that receiving a path returns 0 if "
+"the path is secure. We can check how the following simple recipe covers most "
+"of the ``tool-require`` use-cases:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:37
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:130
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:198
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:37
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout\n"
+"from conan.tools.files import copy\n"
+"\n"
+"\n"
+"class secure_scannerRecipe(ConanFile):\n"
+"    name = \"secure_scanner\"\n"
+"    version = \"1.0\"\n"
+"    package_type = \"application\"\n"
+"\n"
+"    # Binary configuration\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"    # Sources are located in the same place as this recipe, copy them to the "
+"recipe\n"
+"    exports_sources = \"CMakeLists.txt\", \"src/*\"\n"
+"\n"
+"    def layout(self):\n"
+"        cmake_layout(self)\n"
+"\n"
+"    def generate(self):\n"
+"        tc = CMakeToolchain(self)\n"
+"        tc.generate()\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure()\n"
+"        cmake.build()\n"
+"\n"
+"    def package(self):\n"
+"        extension = \".exe\" if self.settings_build.os == \"Windows\" else "
+"\"\"\n"
+"        copy(self, \"*secure_scanner{}\".format(extension),\n"
+"             self.build_folder, os.path.join(self.package_folder, \"bin\"), "
+"keep_path=False)\n"
+"\n"
+"    def package_info(self):\n"
+"        self.buildenv_info.define(\"MY_VAR\", \"23\")"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:78
+msgid "There are few relevant things in this recipe:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:80
+msgid ""
+"It declares ``package_type = \"application\"``, this is optional but "
+"convenient, it will indicate conan that the current package doesn't contain "
+"headers or libraries to be linked. The consumers will know that this package "
+"is an application."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:83
+msgid ""
+"The ``package()`` method is packaging the executable into the ``bin/`` "
+"folder, that is declared by default as a bindir: ``self.cpp_info.bindirs = "
+"[\"bin\"]``."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:86
+msgid ""
+"In the ``package_info()`` method, we are using ``self.buildenv_info`` to "
+"define a environment variable ``MY_VAR`` that will also be available in the "
+"consumer."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:90
+msgid "Let's create a binary package for the tool_require:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:92
+msgid ""
+"$ conan create .\n"
+"...\n"
+"secure_scanner/1.0: Calling package()\n"
+"secure_scanner/1.0: Copied 1 file: secure_scanner\n"
+"secure_scanner/1.0 package(): Packaged 1 file: secure_scanner\n"
+"...\n"
+"Security Scanner: The path 'mypath' is secure!"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:103
+msgid "Let's review the ``test_package/conanfile.py``:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:105
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"\n"
+"class secure_scannerTestConan(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"    def build_requirements(self):\n"
+"        self.tool_requires(self.tested_reference_str)\n"
+"\n"
+"    def test(self):\n"
+"        extension = \".exe\" if self.settings_build.os == \"Windows\" else "
+"\"\"\n"
+"        self.run(\"secure_scanner{} mypath\".format(extension))"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:121
+msgid ""
+"We are requiring the ``secure_scanner`` package as ``tool_require`` doing "
+"``self.tool_requires(self.tested_reference_str)``. In the ``test()`` method "
+"we are running the application, because it is available in the PATH. In the "
+"next example we are going to see why the executables from a ``tool_require`` "
+"are available in the consumers."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:125
+msgid ""
+"So, let's create a consumer recipe to test if we can run the "
+"``secure_scanner`` application of the ``tool_require`` and read the "
+"environment variable. Go to the `examples2/tutorial/creating_packages/"
+"other_packages/tool_requires/consumer` folder:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:130
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class MyConsumer(ConanFile):\n"
+"    name = \"my_consumer\"\n"
+"    version = \"1.0\"\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    tool_requires = \"secure_scanner/1.0\"\n"
+"\n"
+"    def build(self):\n"
+"        extension = \".exe\" if self.settings_build.os == \"Windows\" else "
+"\"\"\n"
+"        self.run(\"secure_scanner{} {}\".format(extension, self."
+"build_folder))\n"
+"        if self.settings_build.os != \"Windows\":\n"
+"            self.run(\"echo MY_VAR=$MY_VAR\")\n"
+"        else:\n"
+"            self.run(\"set MY_VAR\")"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:150
+msgid ""
+"In this simple recipe we are declaring a ``tool_require`` to "
+"``secure_scanner/1.0`` and we are calling directly the packaged application "
+"``secure_scanner`` in the ``build()`` method, also printing the value of the "
+"``MY_VAR`` env variable."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:153
+msgid "If we build the consumer:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:156
+msgid ""
+"$ conan build .\n"
+"\n"
+"-------- Installing (downloading, building) binaries... --------\n"
+"secure_scanner/1.0: Already installed!\n"
+"\n"
+"-------- Finalizing install (deploy, generators) --------\n"
+"...\n"
+"conanfile.py (my_consumer/1.0): RUN: secure_scanner /Users/luism/workspace/"
+"examples2/tutorial/creating_packages/other_packages/tool_requires/consumer\n"
+"...\n"
+"Security Scanner: The path '/Users/luism/workspace/examples2/tutorial/"
+"creating_packages/other_packages/tool_requires/consumer' is secure!\n"
+"...\n"
+"MY_VAR=23"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:173
+msgid ""
+"We can see that the executable returned 0 (because our folder is secure) and "
+"it printed ``Security Scanner: The path is secure!`` message. It also "
+"printed the \"23\" value assigned to ``MY_VAR`` but, why are these "
+"automatically available?"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:176
+msgid ""
+"The generators ``VirtualBuildEnv`` and ``VirtualRunEnv`` are automatically "
+"used."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:177
+msgid ""
+"The ``VirtualRunEnv`` is reading the ``tool-requires`` and is creating a "
+"launcher like ``conanbuildenv-release-x86_64.sh`` appending all ``cpp_info."
+"bindirs`` to the ``PATH``, all the ``cpp_info.libdirs`` to the "
+"``LD_LIBRARY_PATH`` environment variable and declaring each variable of "
+"``self.buildenv_info``."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:180
+msgid ""
+"Every time conan executes the ``self.run``, by default, activates the "
+"``conanbuild.sh`` file before calling any command. The ``conanbuild.sh`` is "
+"including the ``conanbuildenv-release-x86_64.sh``, so the application is in "
+"the PATH and the enviornment variable \"MYVAR\" has the value declared in "
+"the tool-require."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:186
+msgid "Removing settings in package_id()"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:188
+msgid ""
+"With the previous recipe, if we call :command:`conan create` with different "
+"setting like different compiler versions, we will get different binary "
+"packages with a different ``package ID``. This might be convenient to, for "
+"example, keep better traceability of our tools. In this case, the :ref:"
+"`compatibility.py<reference_extensions_binary_compatibility>` plugin can "
+"help to locate the best matching binary in case Conan doesn't find the "
+"binary for our specific compiler version."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:193
+msgid ""
+"But in some cases we might want to just generate a binary taking into "
+"account only the ``os``, ``arch`` or at most adding the ``build_type`` to "
+"know if the application is built for Debug or Release. We can add a "
+"``package_id()`` method to remove them:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:198
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout\n"
+"from conan.tools.files import copy\n"
+"\n"
+"\n"
+"class secure_scannerRecipe(ConanFile):\n"
+"    name = \"secure_scanner\"\n"
+"    version = \"1.0\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    ...\n"
+"\n"
+"    def package_id(self):\n"
+"        del self.info.settings.compiler\n"
+"        del self.info.settings.build_type"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:218
+msgid ""
+"So, if we call :command:`conan create` with different ``build_type`` we will "
+"get exactly the same ``package_id``."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:221
+msgid ""
+"$ conan create .\n"
+"...\n"
+"Package '82339cc4d6db7990c1830d274cd12e7c91ab18a1' created\n"
+"\n"
+"$ conan create . -s build_type=Debug\n"
+"...\n"
+"Package '82339cc4d6db7990c1830d274cd12e7c91ab18a1' created"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:231
+msgid ""
+"We got the same binary ``package_id``. The second ``conan create . -s "
+"build_type=Debug`` created and overwrote (created a newer package revision) "
+"of the previous Release binary, because they have the same ``package_id`` "
+"identifier. It is typical to create only the ``Release`` one, and if for any "
+"reason managing both Debug and Release binaries is intended, then the "
+"approach would be not removing the ``del self.info.settings.build_type``"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:236
+msgid ":ref:`examples_graph_tool_requires_protobuf`"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:237
+msgid "Toolchains (compilers)"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:238
+msgid ""
+":ref:`Usage of "
+"runenv_info<reference_conanfile_methods_package_info_runenv_info>`"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.rst:239
+msgid ""
+":ref:`More info on "
+"settings_target<binary_model_extending_cross_build_target_settings>`"
+msgstr ""

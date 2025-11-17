@@ -1,0 +1,321 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 18:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/clion.rst:5
+msgid "|clion_logo| CLion"
+msgstr ""
+
+#: ../../../integrations/clion.rst:7
+msgid ""
+"CLion uses **CMake** as the build system of projects, so you can use the :"
+"ref:`CMake generator<cmake>` to manage your requirements in your CLion "
+"project."
+msgstr ""
+
+#: ../../../integrations/clion.rst:9
+msgid "Just include the ``conanbuildinfo.cmake`` this way:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:11 ../../../integrations/clion.rst:35
+#: ../../../integrations/clion.rst:111
+msgid ""
+"if(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+"    include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+"    conan_basic_setup()\n"
+"else()\n"
+"    message(WARNING \"The file conanbuildinfo.cmake doesn't exist, you have "
+"to run conan install first\")\n"
+"endif()"
+msgstr ""
+
+#: ../../../integrations/clion.rst:20
+msgid ""
+"If the ``conanbuildinfo.cmake`` file is not found, it will print a warning "
+"message in the ``Messages`` console of your CLion IDE."
+msgstr ""
+
+#: ../../../integrations/clion.rst:24
+msgid "Using packages in a CLion project"
+msgstr ""
+
+#: ../../../integrations/clion.rst:26
+msgid ""
+"Let see an example of how to consume Conan packages in a CLion project. We "
+"are going to require and use the ``zlib`` conan package."
+msgstr ""
+
+#: ../../../integrations/clion.rst:29 ../../../integrations/clion.rst:105
+msgid "Create a new CLion project"
+msgstr ""
+
+#: ../../../integrations/clion.rst:31 ../../../integrations/clion.rst:107
+msgid "|wizard_new|"
+msgstr ""
+
+#: ../../../integrations/clion.rst:33 ../../../integrations/clion.rst:109
+msgid "Edit the ``CMakeLists.txt`` file and add the following lines:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:44 ../../../integrations/clion.rst:120
+msgid "|cmakelists|"
+msgstr ""
+
+#: ../../../integrations/clion.rst:46
+msgid ""
+"3. CLion will reload your CMake project and you will be able to see a "
+"Warning in the console, because the ``conanbuildinfo.cmake`` file still "
+"doesn't exists:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:49
+msgid "|configure_warning_info|"
+msgstr ""
+
+#: ../../../integrations/clion.rst:51
+msgid ""
+"4. Create a ``conanfile.txt`` with all your requirements and use the "
+"``cmake`` generator. In this case we are only requiring zlib library from a "
+"conan package:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:54
+msgid ""
+"[requires]\n"
+"zlib/1.2.11@conan/stable\n"
+"\n"
+"[generators]\n"
+"cmake"
+msgstr ""
+
+#: ../../../integrations/clion.rst:63
+msgid "|conanfile_txt|"
+msgstr ""
+
+#: ../../../integrations/clion.rst:67
+msgid ""
+"5. Now you can :command:`conan install` for debug in the ``cmake-build-"
+"debug`` folder to install your requirements and generate the "
+"``conanbuildinfo.cmake`` file there:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:71
+msgid ""
+"$ conan install . -s build_type=Debug --install-folder=cmake-build-debug"
+msgstr ""
+
+#: ../../../integrations/clion.rst:75
+msgid ""
+"6. Repeat the last step if you have the release build types configured in "
+"your CLion IDE, but changing the build_type setting accordingly:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:78
+msgid ""
+"$ conan install . -s build_type=Release --install-folder=cmake-build-release"
+msgstr ""
+
+#: ../../../integrations/clion.rst:82
+msgid ""
+"Now reconfigure your CLion project, the Warning message is not shown anymore:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:84
+msgid "|configure_ok|"
+msgstr ""
+
+#: ../../../integrations/clion.rst:87
+msgid ""
+"8. Open the ``library.cpp`` file and include the ``zlib.h``, if you follow "
+"the link you can see that CLion automatically detect the ``zlib.h`` header "
+"file from the local conan cache."
+msgstr ""
+
+#: ../../../integrations/clion.rst:90
+msgid "|library_cpp|"
+msgstr ""
+
+#: ../../../integrations/clion.rst:92
+msgid "Build your project normally using your CLion IDE:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:94
+msgid "|built_ok|"
+msgstr ""
+
+#: ../../../integrations/clion.rst:97
+msgid ""
+"You can check a full example of a CLion project reusing conan packages in "
+"this github repository: `lasote/clion-conan-consumer <https://github.com/"
+"lasote/clion-conan-consumer>`_."
+msgstr ""
+
+#: ../../../integrations/clion.rst:101
+msgid "Creating conan packages in a CLion project"
+msgstr ""
+
+#: ../../../integrations/clion.rst:103
+msgid ""
+"Now we are going to see how to create a conan package from the previous "
+"library."
+msgstr ""
+
+#: ../../../integrations/clion.rst:123
+msgid ""
+"Create a ``conanfile.py`` file. It's recommended to use the :command:`conan "
+"new` command."
+msgstr ""
+
+#: ../../../integrations/clion.rst:125
+msgid "$ conan new mylibrary/1.0@myuser/channel"
+msgstr ""
+
+#: ../../../integrations/clion.rst:129
+msgid "And edit the ``conanfile.py``:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:131
+msgid ""
+"We are removing the ``source`` method because we have the sources in the "
+"same project, so we can use the ``exports_sources``."
+msgstr ""
+
+#: ../../../integrations/clion.rst:134
+msgid ""
+"In the ``package_info`` method adjust the library name, in this case our "
+"``CMakeLists.txt`` is creating a target library called ``mylibrary``."
+msgstr ""
+
+#: ../../../integrations/clion.rst:137
+msgid ""
+"Adjust the CMake helper in the ``build()`` method, the ``cmake.configure()`` "
+"doesn't need to specify the ``source_folder``, because we have the ``library."
+"*`` files in the root directory."
+msgstr ""
+
+#: ../../../integrations/clion.rst:140
+msgid ""
+"Adjust the ``copy`` function calls in the ``package`` method to ensure that "
+"all your headers and libraries are copied to the conan package."
+msgstr ""
+
+#: ../../../integrations/clion.rst:142
+msgid ""
+"from conans import ConanFile, CMake, tools\n"
+"\n"
+"\n"
+"class MylibraryConan(ConanFile):\n"
+"    name = \"mylibrary\"\n"
+"    version = \"1.0\"\n"
+"    license = \"<Put the package license here>\"\n"
+"    url = \"<Package recipe repository url here, for issues about the "
+"package>\"\n"
+"    description = \"<Description of Mylibrary here>\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    options = {\"shared\": [True, False]}\n"
+"    default_options = {\"shared\": False}\n"
+"    generators = \"cmake\"\n"
+"    requires = \"zlib/1.2.11@conan/stable\"\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure()\n"
+"        cmake.build()\n"
+"\n"
+"        # Explicit way:\n"
+"        # self.run('cmake \"%s\" %s' % (self.source_folder, cmake."
+"command_line))\n"
+"        # self.run(\"cmake --build . %s\" % cmake.build_config)\n"
+"\n"
+"    def package(self):\n"
+"        self.copy(\"*.h\", dst=\"include\", src=\"hello\")\n"
+"        self.copy(\"*.lib\", dst=\"lib\", keep_path=False)\n"
+"        self.copy(\"*.dll\", dst=\"bin\", keep_path=False)\n"
+"        self.copy(\"*.so\", dst=\"lib\", keep_path=False)\n"
+"        self.copy(\"*.dylib\", dst=\"lib\", keep_path=False)\n"
+"        self.copy(\"*.a\", dst=\"lib\", keep_path=False)\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.libs = [\"mylibrary\"]"
+msgstr ""
+
+#: ../../../integrations/clion.rst:182
+msgid ""
+"To build your library with CLion follow the guide of :ref:`Using packages "
+"from the step 5<step_five>`."
+msgstr ""
+
+#: ../../../integrations/clion.rst:184
+msgid ""
+"5. To package your library use the :command:`conan export-pkg` command "
+"passing the used build-folder. It will call your ``package()`` method to "
+"extract the artifacts and push the conan package to the local cache:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:188
+msgid ""
+"$ conan export-pkg . mylibrary/1.0@myuser/channel --build-folder cmake-build-"
+"debug"
+msgstr ""
+
+#: ../../../integrations/clion.rst:192
+msgid "Now you can upload it to a conan server if needed:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:194
+msgid ""
+"$ conan upload mylibrary/1.0@myuser/channel # This will upload only the "
+"recipe, use --all to upload all the generated binary packages."
+msgstr ""
+
+#: ../../../integrations/clion.rst:198
+msgid ""
+"8. If you would like to see how the package looks like before exporting it "
+"to the local cache (conan export-pkg) you can use the :command:`conan "
+"package` command to create the package in a local directory:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:202
+msgid ""
+"$ conan package . --build-folder cmake-build-debug --package-folder=mypackage"
+msgstr ""
+
+#: ../../../integrations/clion.rst:207
+msgid "If we list the ``mypackage`` folder we can see:"
+msgstr ""
+
+#: ../../../integrations/clion.rst:209
+msgid "A ``lib`` folder containing our library"
+msgstr ""
+
+#: ../../../integrations/clion.rst:210
+msgid "A ``include`` folder containing our header files"
+msgstr ""
+
+#: ../../../integrations/clion.rst:211
+msgid ""
+"A ``conaninfo.txt`` and ``conanmanifest.txt`` conan files, always present in "
+"all packages."
+msgstr ""
+
+#: ../../../integrations/clion.rst:214
+msgid ""
+"You can check a full example of a CLion project for creating a conan package "
+"in this github repository: `lasote/clion-conan-package <https://github.com/"
+"lasote/clion-conan-package>`_."
+msgstr ""

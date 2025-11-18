@@ -1,0 +1,369 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>cmake_find_package &mdash; conan 1.6.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="conan 1.6.1 documentation" href="../../index.html"/>
+        <link rel="up" title="Generators" href="../generators.html"/>
+        <link rel="next" title="visual_studio" href="visualstudio.html"/>
+        <link rel="prev" title="cmake_paths" href="cmake_paths.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../ltd-flyout.js"></script>
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../../_static/conan_logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using_packages.html">Using packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../creating_packages.html">Creating packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uploading_packages.html">Uploading packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howtos.html">Howtos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../commands.html">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conanfile.html">conanfile.py</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../generators.html">Generators</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cmake.html"><cite>cmake</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmakemulti.html"><cite>cmake_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html"><cite>cmake_paths</cite></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><cite>cmake_find_package</cite></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#variables-in-find-name-cmake">Variables in Find{name}.cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#target-in-find-package-name-cmake">Target in Find&lt;package_name&gt;.cmake</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="visualstudio.html">visual_studio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html"><cite>visual_studio_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualstudiolegacy.html">visual_studio_legacy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xcode.html">xcode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compiler_args.html">compiler_args</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gcc.html">gcc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="boost_build.html">Boost Build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qbs.html">qbs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qmake.html">qmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pkg_config.html">pkg_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">txt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="json.html">json</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_helpers.html">Build helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config_files.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../env_vars.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../reference.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../generators.html">Generators</a> &raquo;</li>
+        
+      <li><cite>cmake_find_package</cite></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/generators/cmake_find_package.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="cmake-find-package">
+<span id="cmake-cmake-find-package-generator-reference"></span><h1><cite>cmake_find_package</cite><a class="headerlink" href="#cmake-find-package" title="Permalink to this heading">¶</a></h1>
+<div class="out-reference-box docutils container">
+<p>This is the reference page for <code class="docutils literal notranslate"><span class="pre">cmake_find_package</span></code> generator.
+Go to <a class="reference internal" href="../../integrations/cmake.html#cmake"><span class="std std-ref">Integrations/CMake</span></a> if you want to learn how to integrate your project or recipes with CMake.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">cmake_find_package</span></code> generator creates a file for each requirement specified in the conanfile.</p>
+<p>The name of the files follow the pattern <code class="docutils literal notranslate"><span class="pre">Find&lt;package_name&gt;.cmake</span></code>. So for the <code class="docutils literal notranslate"><span class="pre">zlib/1.2.11&#64;conan/stable</span></code> package,
+a <code class="docutils literal notranslate"><span class="pre">Findzlib.cmake</span></code> file will be generated.</p>
+<section id="variables-in-find-name-cmake">
+<h2>Variables in Find{name}.cmake<a class="headerlink" href="#variables-in-find-name-cmake" title="Permalink to this heading">¶</a></h2>
+<p>Being {name} the package name:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>NAME</p></th>
+<th class="head"><p>VALUE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{name}_FOUND</p></td>
+<td><p>Set to 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>{name}_INCLUDE_DIRS</p></td>
+<td><p>Containing all the include directories of the package</p></td>
+</tr>
+<tr class="row-even"><td><p>{name}_INCLUDES</p></td>
+<td><p>Same as the XXX_INCLUDE_DIRS</p></td>
+</tr>
+<tr class="row-odd"><td><p>{name}_DEFINITIONS</p></td>
+<td><p>Definitions of the library</p></td>
+</tr>
+<tr class="row-even"><td><p>{name}_LIBRARIES</p></td>
+<td><p>Library paths to link</p></td>
+</tr>
+<tr class="row-odd"><td><p>{name}_LIBS</p></td>
+<td><p>Same as XXX_LIBRARIES</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="target-in-find-package-name-cmake">
+<h2>Target in Find&lt;package_name&gt;.cmake<a class="headerlink" href="#target-in-find-package-name-cmake" title="Permalink to this heading">¶</a></h2>
+<p>A target named <code class="docutils literal notranslate"><span class="pre">{name}:{name}</span></code> target is generated with the following properties adjusted:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">INTERFACE_INCLUDE_DIRECTORIES</span></code>: Containing all the include directories of the package.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">INTERFACE_LINK_LIBRARIES</span></code>: Library paths to link.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">INTERFACE_COMPILE_DEFINITIONS</span></code>: Definitions of the library.</p></li>
+</ul>
+<p>The targets are transitive. So, if your project depends on a packages <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>, and at the same time
+<code class="docutils literal notranslate"><span class="pre">A</span></code> depends on <code class="docutils literal notranslate"><span class="pre">C</span></code>, the <code class="docutils literal notranslate"><span class="pre">A</span></code> target will contain automatically the properties of the <code class="docutils literal notranslate"><span class="pre">C</span></code> dependency, so
+in your <cite>CMakeLists.txt</cite> file you only need to <code class="docutils literal notranslate"><span class="pre">find_package(A)</span></code> and <code class="docutils literal notranslate"><span class="pre">find_package(B)</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="visualstudio.html" class="btn btn-neutral float-right" title="visual_studio" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cmake_paths.html" class="btn btn-neutral" title="cmake_paths" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2018, JFrog.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.6.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/sphinx_highlight.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+ 
+
+
+</body>
+</html>

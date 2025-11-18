@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 08:27+0000\n"
+"POT-Creation-Date: 2025-11-18 08:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2460,46 +2460,61 @@ msgid ""
 "When ``scm`` or ``scm_folder`` is selected, the Git commit will be used, but "
 "by default the repository must be clean, otherwise it would be very likely "
 "that there are uncommitted changes and the build wouldn't be reproducible. "
-"So if there are dirty files, Conan will raise an error. If there are files "
-"that can be dirty in the repo, but do not belong at all to the recipe or the "
-"package, then it is possible to exclude them from the check with the ``core."
-"scm:excluded`` configuration, which is a list of patterns (fnmatch) to "
-"exclude."
+"So if there are dirty files, Conan will raise an error."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:130
+msgid ""
+"If there are files that can be dirty in the repo, but do not belong at all "
+"to the recipe or the package, then it is possible to exclude them from the "
+"check with the ``revision_mode_excluded`` recipe attribute or the ``core.scm:"
+"excluded`` configuration, which is a list of patterns (fnmatch) to exclude."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:135
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class MyConsumer(ConanFile):\n"
+"\n"
+"  revision_mode = \"scm\"\n"
+"  # the .tmp files are excluded from revision and dirty check\n"
+"  revision_mode_excluded = [\"*.tmp\"]"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes.rst:147
 msgid "upload_policy"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:137
+#: ../../../reference/conanfile/attributes.rst:149
 msgid "Controls when the current package built binaries are uploaded or not"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:139
+#: ../../../reference/conanfile/attributes.rst:151
 msgid ""
 "``\"skip\"``: The precompiled binaries are not uploaded. This is useful for "
 "\"installer\" packages that just download and unzip something heavy (e.g. "
 "android-ndk), and is useful together with the ``build_policy = \"missing\"``"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:143
+#: ../../../reference/conanfile/attributes.rst:155
 msgid ""
 "class Pkg(ConanFile):\n"
 "    upload_policy = \"skip\""
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:151
+#: ../../../reference/conanfile/attributes.rst:163
 msgid "required_conan_version"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:153
+#: ../../../reference/conanfile/attributes.rst:165
 msgid ""
 "Recipes can define a module level ``required_conan_version`` that defines a "
 "valid version range of Conan versions that can load and understand the "
 "current ``conanfile.py``. The syntax is:"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:156
+#: ../../../reference/conanfile/attributes.rst:168
 msgid ""
 "from conan import ConanFile\n"
 "\n"
@@ -2509,7 +2524,7 @@ msgid ""
 "    pass"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:165
+#: ../../../reference/conanfile/attributes.rst:177
 msgid ""
 "Version ranges as in ``requires`` are allowed. Also there is a ``global."
 "conf`` file ``core:required_conan_version`` configuration that can define a "
@@ -2518,18 +2533,18 @@ msgid ""
 "desired range of versions."
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:173
+#: ../../../reference/conanfile/attributes.rst:185
 msgid "implements"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:175
+#: ../../../reference/conanfile/attributes.rst:187
 msgid ""
 "A list is used to define a series of option configurations that Conan will "
 "handle automatically. This is especially handy for avoiding boilerplate code "
 "that tends to repeat in most of the recipes. The syntax is as follows:"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:179
+#: ../../../reference/conanfile/attributes.rst:191
 msgid ""
 "from conan import ConanFile\n"
 "\n"
@@ -2537,11 +2552,11 @@ msgid ""
 "    implements = [\"auto_shared_fpic\", \"auto_header_only\", ...]"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:187
+#: ../../../reference/conanfile/attributes.rst:199
 msgid "Currently these are the automatic implementations provided by Conan:"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:189
+#: ../../../reference/conanfile/attributes.rst:201
 msgid ""
 "``\"auto_shared_fpic\"``: automatically manages ``fPIC`` and ``shared`` "
 "options. Adding this implementation will have both effect in the :ref:"
@@ -2550,7 +2565,7 @@ msgid ""
 "steps when those methods are not explicitly defined in the recipe."
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:195
+#: ../../../reference/conanfile/attributes.rst:207
 msgid ""
 "``\"auto_header_only\"``: automatically manages the package ID clearing "
 "settings. Adding this implementation will have effect in the :ref:"
@@ -2558,15 +2573,15 @@ msgid ""
 "when the method is not explicitly defined in the recipe."
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:202
+#: ../../../reference/conanfile/attributes.rst:214
 msgid "This is a 2.0-only feature, and it will not work in 1.X"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:206
+#: ../../../reference/conanfile/attributes.rst:218
 msgid "alias"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:210
+#: ../../../reference/conanfile/attributes.rst:222
 msgid ""
 "While aliases can technically still be used in Conan 2, their usage is not "
 "recommended and they may be fully removed in future releases. Users are "
@@ -2575,7 +2590,7 @@ msgid ""
 "management experience."
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:215
+#: ../../../reference/conanfile/attributes.rst:227
 msgid ""
 "In Conan 2, the ``alias`` attribute remains a part of the recipe, allowing "
 "users to define an alias for a package version. Normally, you would create "
@@ -2583,20 +2598,20 @@ msgid ""
 "exporting the recipe with conan export:"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:219
+#: ../../../reference/conanfile/attributes.rst:231
 msgid ""
 "$ conan new alias -d name=mypkg -d version=latest -d target=1.0\n"
 "$ conan export ."
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:224
+#: ../../../reference/conanfile/attributes.rst:236
 msgid ""
 "Note that when requiring the alias, you must place the version in "
 "parentheses ``()`` to explicitly declare the use of an alias as a "
 "requirement:"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:227
+#: ../../../reference/conanfile/attributes.rst:239
 msgid ""
 "class Consumer(ConanFile):\n"
 "\n"
@@ -2605,17 +2620,17 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:239
+#: ../../../reference/conanfile/attributes.rst:251
 msgid "extension_properties"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:241
+#: ../../../reference/conanfile/attributes.rst:253
 msgid ""
 "The ``extensions_properties`` attribute is a dictionary intended to define "
 "and pass information from the recipes to the Conan extensions."
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:244
+#: ../../../reference/conanfile/attributes.rst:256
 msgid ""
 "At the moment, the only defined properties are ``compatibility_cppstd`` and "
 "``compatibility_cstd``, that allows disabling the behavior of :ref:`the "
@@ -2626,19 +2641,19 @@ msgid ""
 "is possible to do it with:"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:249
+#: ../../../reference/conanfile/attributes.rst:261
 msgid ""
 "class Pkg(ConanFile):\n"
 "    extension_properties = {\"compatibility_cppstd\": False}"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:254
+#: ../../../reference/conanfile/attributes.rst:266
 msgid ""
 "If it is necessary to do it conditionally, it is also possible to define its "
 "value inside recipe ``compatibility()`` method:"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:257
+#: ../../../reference/conanfile/attributes.rst:269
 msgid ""
 "class Pkg(ConanFile):\n"
 "\n"
@@ -2646,7 +2661,7 @@ msgid ""
 "        self.extension_properties = {\"compatibility_cppstd\": False}"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes.rst:267
+#: ../../../reference/conanfile/attributes.rst:279
 msgid ""
 "The value of ``extension_properties`` is not transitive from the "
 "dependencies to the consumers by default, but can be propagated manually by "

@@ -1,0 +1,4679 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:17+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../changelog.rst:4
+msgid "Changelog"
+msgstr ""
+
+#: ../../../changelog.rst:6
+msgid ""
+"Check https://github.com/conan-io/conan for issues and more details about "
+"development, contributors, etc."
+msgstr ""
+
+#: ../../../changelog.rst:11
+msgid ""
+"Conan 1.3 shouldn't break any existing 1.0 recipe, or command line "
+"invocation. If it does, please report in github. Please read more :ref:"
+"`about conan stability here<stability>`."
+msgstr ""
+
+#: ../../../changelog.rst:16
+msgid "1.3.3 (10-May-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:18
+msgid ""
+"Bugfix: Fixed encoding issues writing to files and calculating md5 sums."
+msgstr ""
+
+#: ../../../changelog.rst:22
+msgid "1.3.2 (7-May-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:24
+msgid ""
+"Bugfix: Fixed md5 computation of conan .tgz files for the recipe, exported "
+"sources and packages due to file ordering and flags."
+msgstr ""
+
+#: ../../../changelog.rst:25
+msgid "Bugfix: Fixed broken ``run_in_windows_bash`` due to the wrong argument."
+msgstr ""
+
+#: ../../../changelog.rst:26
+msgid ""
+"Bugfix: Fixed ``VisualStudioBuildEnvironment`` when toolset was not defined."
+msgstr ""
+
+#: ../../../changelog.rst:27
+msgid "Bugfix: Fixed ``conan download -p=wrong_id`` command"
+msgstr ""
+
+#: ../../../changelog.rst:28
+msgid "Fix: Added apple-clang 9.1"
+msgstr ""
+
+#: ../../../changelog.rst:32
+msgid "1.3.1 (3-May-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:34
+msgid ""
+"Bugfix: Fixed regression with ``AutoToolsBuildEnvironment`` build helper "
+"that raised exception with not supported architectures during the "
+"calculation of the GNU triplet."
+msgstr ""
+
+#: ../../../changelog.rst:35
+msgid ""
+"Bugfix: Fixed ``pkg_config`` generator, previously crashing when there was "
+"no library directories in the requirements."
+msgstr ""
+
+#: ../../../changelog.rst:36
+msgid ""
+"Bugfix: Fixed ``conanfile.run()`` with ``win_bash=True``  quoting the paths "
+"correctly."
+msgstr ""
+
+#: ../../../changelog.rst:37
+msgid "Bugfix: Recovered parameter \"append\" to the ``tools.save`` function."
+msgstr ""
+
+#: ../../../changelog.rst:38
+msgid ""
+"Bugfix: Added support (documented but missing) to delete options in "
+"``package_id()`` method using ``del self.info.options.<option>``"
+msgstr ""
+
+#: ../../../changelog.rst:42
+msgid "1.3.0 (30-April-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:43
+msgid ""
+"Feature: Added new build types to default ``settings.yml``: "
+"**RelWithDebInfo** and **MinSizeRel**. Compiler flags will be automatically "
+"defined in build helpers that do not understand them (``MSBuild``, "
+"``AutotoolsBuildEnvironment``)"
+msgstr ""
+
+#: ../../../changelog.rst:45
+msgid ""
+"Feature: Improved package integrity. Interrupted downloads or builds "
+"shouldn't leave corrupted packages."
+msgstr ""
+
+#: ../../../changelog.rst:46
+msgid "Feature: Added ``conan upload --json`` json output to the command."
+msgstr ""
+
+#: ../../../changelog.rst:47
+msgid ""
+"Feature: new :command:`conan remove --locks` to clear cache locks. Useful "
+"when killing conan."
+msgstr ""
+
+#: ../../../changelog.rst:48
+msgid ""
+"Feature: New **CircleCI** template scripts can be generated with the :"
+"command:`conan new` command."
+msgstr ""
+
+#: ../../../changelog.rst:49
+msgid ""
+"Feature: The CMake() build helper manages the fPIC flag automatically based "
+"on the options ``fPIC`` and ``shared`` when present."
+msgstr ""
+
+#: ../../../changelog.rst:50
+msgid ""
+"Feature: Allowing requiring color output with ``CONAN_COLOR_DISPLAY=1`` "
+"environment variable. If ``CONAN_COLOR_DISPLAY`` is not set rely on tty "
+"detection for colored output"
+msgstr ""
+
+#: ../../../changelog.rst:52
+msgid ""
+"Feature: New :command:`conan remote rename` and :command:`conan add --force` "
+"commands to handle remotes."
+msgstr ""
+
+#: ../../../changelog.rst:53
+msgid ""
+"Feature: Added parameter ``use_env`` to the ``MSBuild().build()`` build "
+"helper method to control the ``/p:UseEnv`` msbuild argument."
+msgstr ""
+
+#: ../../../changelog.rst:54
+msgid ""
+"Feature: Timeout for downloading files from remotes is now configurable "
+"(defaulted to 60 seconds)"
+msgstr ""
+
+#: ../../../changelog.rst:55
+msgid ""
+"Fix: Use International Units for download/upload transfer sizes (Mb, Kb, "
+"etc)."
+msgstr ""
+
+#: ../../../changelog.rst:56
+msgid "Fix: Removed duplicated paths in ``cmake_multi`` generated files."
+msgstr ""
+
+#: ../../../changelog.rst:57
+msgid "Fix: Removed false positive linter warning for local imports."
+msgstr ""
+
+#: ../../../changelog.rst:58
+msgid "Fix: Improved command line help for positional arguments"
+msgstr ""
+
+#: ../../../changelog.rst:59
+msgid ""
+"Fix :command:`-ks` alias for :command:`--keep-source` argument in :command:"
+"`conan create` and :command:`conan export`."
+msgstr ""
+
+#: ../../../changelog.rst:60
+msgid ""
+"Fix: removed confusing warnings when ``self.copy()`` doesn't copy files in "
+"the ``package()`` method."
+msgstr ""
+
+#: ../../../changelog.rst:61
+msgid ""
+"Fix: ``None`` is now a possible value for settings with nested subsettings "
+"in ``settings.yml``."
+msgstr ""
+
+#: ../../../changelog.rst:62
+msgid ""
+"Fix: if ``vcvars_command`` is called and Visual is not found, raise an error "
+"instead of warning."
+msgstr ""
+
+#: ../../../changelog.rst:63
+msgid ""
+"Bugfix: ``self.env_info.paths`` and ``self.env_info.PATHS`` both map now to "
+"PATHS env-var."
+msgstr ""
+
+#: ../../../changelog.rst:64
+msgid ""
+"Bugfix: Local flow was not correctly recovering state for option values."
+msgstr ""
+
+#: ../../../changelog.rst:65
+msgid ""
+"Bugfix: Windows NTFS permissions failed in case USERDOMAIN env-var was not "
+"defined."
+msgstr ""
+
+#: ../../../changelog.rst:66
+msgid ""
+"Bugfix: Fixed generator ``pkg_config`` when there are absolute paths (not "
+"use prefix)"
+msgstr ""
+
+#: ../../../changelog.rst:67
+msgid ""
+"Bugfix: Fixed parsing of settings values with ``\"=\"`` character in "
+"conaninfo.txt files."
+msgstr ""
+
+#: ../../../changelog.rst:68
+msgid ""
+"Bugfix: Fixed misdetection of MSYS environments (generation of default "
+"profile)"
+msgstr ""
+
+#: ../../../changelog.rst:69
+msgid ""
+"Bugfix: Fixed string scaping in CMake files for preprocessor definitions."
+msgstr ""
+
+#: ../../../changelog.rst:70
+msgid ""
+"Bugfix: ``upload --no-overwrite`` failed when the remote package didn't "
+"exist."
+msgstr ""
+
+#: ../../../changelog.rst:71
+msgid ""
+"Bugfix: Don't raise an error if ``detect_windows_subsystem`` doesn't detect "
+"a subsystem."
+msgstr ""
+
+#: ../../../changelog.rst:74
+msgid "1.2.3 (10-Apr-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:76
+msgid "Bugfix: Removed invalid version field from scons generator."
+msgstr ""
+
+#: ../../../changelog.rst:79
+msgid "1.2.1 (3-Apr-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:81
+msgid "Feature: Support for `apple-clang 9.1`"
+msgstr ""
+
+#: ../../../changelog.rst:82
+msgid ""
+"Bugfix: `compiler_args` generator manage correctly the flag for the `cppstd` "
+"setting."
+msgstr ""
+
+#: ../../../changelog.rst:83
+msgid ""
+"Bugfix: Replaced exception with a warning message (recommending the `six` "
+"module) when using `StringIO` class from the `io` module."
+msgstr ""
+
+#: ../../../changelog.rst:87
+msgid "1.2.0 (28-Mar-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:89
+msgid ""
+"Feature: The command :command:`conan build` has new ``--configure, --build, "
+"--install`` arguments to control the different stages of the ``build()`` "
+"method."
+msgstr ""
+
+#: ../../../changelog.rst:91
+msgid ""
+"Feature: The command :command:`conan export-pkg` now has a :command:`--"
+"package-folder` that can be used to export an exact copy of the provided "
+"folder, irrespective of the ``package()`` method. It assumes the package has "
+"been locally created with a previous :command:`conan package` or with a :"
+"command:`conan build` using a ``cmake.install()`` or equivalent feature."
+msgstr ""
+
+#: ../../../changelog.rst:94
+msgid ""
+"Feature: New ``json`` generator, generates a json file with machine readable "
+"information from dependencies."
+msgstr ""
+
+#: ../../../changelog.rst:95
+msgid ""
+"Feature: Improved proxies configuration with ``no_proxy_match`` "
+"configuration variable."
+msgstr ""
+
+#: ../../../changelog.rst:96
+msgid ""
+"Feature: New :command:`conan upload` parameter :command:`--no-overwrite` to "
+"forbid the overwriting of recipe/packages if they have changed."
+msgstr ""
+
+#: ../../../changelog.rst:98
+msgid ""
+"Feature: Exports are now copied to ``source_folder`` when doing :command:"
+"`conan source`."
+msgstr ""
+
+#: ../../../changelog.rst:99
+msgid ""
+"Feature: ``tools.vcvars()`` context manager has no effect if platform is "
+"different from Windows."
+msgstr ""
+
+#: ../../../changelog.rst:100
+msgid ""
+"Feature: :command:`conan download` has new optional argument :command:`--"
+"recipe` to download only the recipe of a package."
+msgstr ""
+
+#: ../../../changelog.rst:101
+msgid ""
+"Feature: Added ``CONAN_NON_INTERACTIVE`` environment variable to disable "
+"interactive prompts."
+msgstr ""
+
+#: ../../../changelog.rst:102
+msgid ""
+"Feature: Improved ``MSbuild()`` build helper using ``vcvars()`` and "
+"generating property file to adjust the runtime automatically. New method "
+"``get_command()`` with the call to ``msbuild`` tool. Deprecates ``tools."
+"build_sln_command()`` and ``tools.msvc_build_command()``."
+msgstr ""
+
+#: ../../../changelog.rst:104
+msgid "Feature: Support for clang 6.0 correctly managing cppstd flags."
+msgstr ""
+
+#: ../../../changelog.rst:105
+msgid ""
+"Feature: Added configuration to specify a client certificate to connect to "
+"SSL server."
+msgstr ""
+
+#: ../../../changelog.rst:106
+msgid "Feature: Improved ``ycm`` generator to show json dependencies."
+msgstr ""
+
+#: ../../../changelog.rst:107
+msgid ""
+"Feature: Experimental ``--json`` parameter for :command:`conan install` and :"
+"command:`conan create` to generate a JSON file with install information."
+msgstr ""
+
+#: ../../../changelog.rst:108
+msgid ""
+"Fix: :command:`conan install --build` does not absorb more than one "
+"parameter."
+msgstr ""
+
+#: ../../../changelog.rst:109
+msgid ""
+"Fix: Made conanfile templates generated with :command:`conan new` PEP8 "
+"compliant."
+msgstr ""
+
+#: ../../../changelog.rst:110
+msgid ""
+"Fix: :command:`conan search` output improved when there are no packages for "
+"the given reference."
+msgstr ""
+
+#: ../../../changelog.rst:111
+msgid "Fix: Made :command:`conan download` also retrieve sources."
+msgstr ""
+
+#: ../../../changelog.rst:112
+msgid "Fix: Pylint now runs as an external process."
+msgstr ""
+
+#: ../../../changelog.rst:113
+msgid "Fix: Made ``self.user`` and ``self.channel`` available in test_package."
+msgstr ""
+
+#: ../../../changelog.rst:114
+msgid ""
+"Fix: Made files writable after a ``deploy()`` or ``imports()`` when "
+"``CONAN_READ_ONLY_CACHE```/``general.read_only_cache`` environment/config "
+"variable is ``True``."
+msgstr ""
+
+#: ../../../changelog.rst:116
+msgid ""
+"Fix: Linter showing warnings with ``cpp_info`` object in ``deploy()`` method."
+msgstr ""
+
+#: ../../../changelog.rst:117
+msgid ""
+"Fix: Disabled linter for Conan pyinstaller as it was not able to find the "
+"python modules."
+msgstr ""
+
+#: ../../../changelog.rst:118
+msgid ""
+"Fix: :command:`conan user -r=remote_name` showed all users for all remotes, "
+"not the one given."
+msgstr ""
+
+#: ../../../changelog.rst:119
+msgid ""
+"BugFix: Python reuse code failing to import module in ``package_info()``."
+msgstr ""
+
+#: ../../../changelog.rst:120
+msgid "BugFix: Added escapes for backslashes in ``cmake`` generator."
+msgstr ""
+
+#: ../../../changelog.rst:121
+msgid ""
+"BugFix: :command:`conan config install` now raises error if :command:`git "
+"clone` fails."
+msgstr ""
+
+#: ../../../changelog.rst:122
+msgid ""
+"BugFix: Alias resolution not working in diamond shaped dependency trees."
+msgstr ""
+
+#: ../../../changelog.rst:123
+msgid ""
+"BugFix: Fixed builds with Cygwin/MSYS2 failing in Windows with `self."
+"short_paths=True` and NTFS file systems due to ACL permissions."
+msgstr ""
+
+#: ../../../changelog.rst:124
+msgid ""
+"BugFix: Failed to adjust architecture when running Conan platform detection "
+"in ARM devices."
+msgstr ""
+
+#: ../../../changelog.rst:125
+msgid "BugFix: Output to StringIO failing in Python 2."
+msgstr ""
+
+#: ../../../changelog.rst:126
+msgid ""
+"BugFix: :command:`conan profile update` not working to update ``[env]`` "
+"section."
+msgstr ""
+
+#: ../../../changelog.rst:127
+msgid ""
+"BugFix: :command:`conan search` not creating default remotes when running it "
+"as the very first command after Conan installation."
+msgstr ""
+
+#: ../../../changelog.rst:128
+msgid ""
+"BugFix: Package folder was not cleaned after the installation and download "
+"of a package had failed."
+msgstr ""
+
+#: ../../../changelog.rst:131
+msgid "1.1.1 (5-Mar-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:133
+msgid ""
+"Feature: ``build_sln_command()`` and ``msvc_build_command()`` receive a new "
+"optional parameter ``platforms`` to match the definition of the *.sln* "
+"Visual Studio project architecture. (Typically Win32 vs x86 problem)."
+msgstr ""
+
+#: ../../../changelog.rst:134
+msgid ""
+"Bufix:  Flags for Visual Studio command (cl.exe) using \"-\" instead of \"/"
+"\" to avoid problems in builds using AutoTools scripts with Visual Studio "
+"compiler."
+msgstr ""
+
+#: ../../../changelog.rst:135
+msgid ""
+"Bugfix: Visual Studio runtime flags adjusted correctly in "
+"``AutoToolsBuildEnvironment()`` build helper"
+msgstr ""
+
+#: ../../../changelog.rst:136
+msgid ""
+"Bugfix: ``AutoToolsBuildEnvironment()`` build helper now adjust the correct "
+"build flag, not using eabi suffix, for architecture x86."
+msgstr ""
+
+#: ../../../changelog.rst:140
+msgid "1.1.0 (27-Feb-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:142
+msgid ""
+"Feature: New :command:`conan create --keep-build` option that allows re-"
+"packaging from conan local cache, without re-building."
+msgstr ""
+
+#: ../../../changelog.rst:143
+msgid ""
+"Feature: :command:`conan search <pattern> -r=all` now searches in all "
+"defined remotes."
+msgstr ""
+
+#: ../../../changelog.rst:144
+msgid ""
+"Feature: Added setting ``cppstd`` to manage the C++ standard. Also improved "
+"build helpers to adjust the standard automatically when the user activates "
+"the setting. ``AutoToolsBuildEnvironment()``, ``CMake()``, ``MSBuild()`` and "
+"``VisualStudioBuildEnvironment()``."
+msgstr ""
+
+#: ../../../changelog.rst:145
+msgid ""
+"Feature: New ``compiler_args`` generator, for directly calling the compiler "
+"from command line, for multiple compilers: VS, gcc, clang."
+msgstr ""
+
+#: ../../../changelog.rst:146
+msgid ""
+"Feature: Defined ``sysrequires_mode`` variable (``CONAN_SYSREQUIRES_MODE`` "
+"env-var) with values ``enabled, verify, disabled`` to control the "
+"installation of system dependencies via ``SystemPackageTool`` typically used "
+"in :ref:`method_system_requirements`."
+msgstr ""
+
+#: ../../../changelog.rst:147
+msgid ""
+"Feature: automatically apply ``pythonpath`` environment variable for "
+"dependencies containing python code to be reused to recipe ``source()``, "
+"``build()``, ``package()`` methods."
+msgstr ""
+
+#: ../../../changelog.rst:148
+msgid ""
+"Feature: ``CMake`` new ``patch_config_paths()`` methods that will replace "
+"absolute paths to conan package path variables, so cmake find scripts are "
+"relocatable."
+msgstr ""
+
+#: ../../../changelog.rst:149
+msgid ""
+"Feature: new :command:`--test-build-folder` command line argument to define "
+"the location of the *test_package* build folder, and new conan.conf "
+"``temp_test_folder`` and environment variable ``CONAN_TEMP_TEST_FOLDER``, "
+"that if set to True will automatically clean the test_package build folder "
+"after running."
+msgstr ""
+
+#: ../../../changelog.rst:150
+msgid ""
+"Feature: Conan manages relative urls for upload/download to allow access the "
+"server from different configured networks or in domain subdirectories."
+msgstr ""
+
+#: ../../../changelog.rst:151
+msgid ""
+"Feature: Added ``CONAN_SKIP_VS_PROJECTS_UPGRADE`` environment variable to "
+"skip the upgrade of Visual Studio project when using :ref:"
+"`build_sln_commmand<build_sln_commmand>`, the :ref:"
+"`msvc_build_command<msvc_build_command>` and the :ref:`MSBuild()<msbuild>` "
+"build helper."
+msgstr ""
+
+#: ../../../changelog.rst:152
+msgid ""
+"Feature: Improved detection of Visual Studio installations, possible to "
+"prioritize between multiple installed Visual tools with the "
+"``CONAN_VS_INSTALLATION_PREFERENCE`` env-var and "
+"``vs_installation_preference`` conan.conf variable."
+msgstr ""
+
+#: ../../../changelog.rst:153
+msgid ""
+"Feature: Added ``keep_path`` parameter to ``self.copy()`` within the "
+"``imports()`` method."
+msgstr ""
+
+#: ../../../changelog.rst:154
+msgid "Feature: Added ``[build_requires]`` section to *conanfile.txt*."
+msgstr ""
+
+#: ../../../changelog.rst:155
+msgid ""
+"Feature: Added new :command:`conan help <command>` command, as an "
+"alternative to :command:`--help`."
+msgstr ""
+
+#: ../../../changelog.rst:156
+msgid ""
+"Feature: Added ``target`` parameter to ``AutoToolsBuildEnvironment.make`` "
+"method, allowing to select build target on running make"
+msgstr ""
+
+#: ../../../changelog.rst:157
+msgid ""
+"Feature: The ``CONAN_MAKE_PROGRAM`` environment variable now it is used by "
+"the ``CMake()`` build helper to set a custom make program."
+msgstr ""
+
+#: ../../../changelog.rst:158
+msgid ""
+"Feature: Added :command:`--verify-ssl` optional parameter to :command:`conan "
+"config install` to allow self-signed SSL certificates in download."
+msgstr ""
+
+#: ../../../changelog.rst:159
+msgid ""
+"Feature: ``tools.get_env()`` helper method to automatically convert "
+"environment variables to python types."
+msgstr ""
+
+#: ../../../changelog.rst:160
+msgid ""
+"Fix: Added a visible warning about ``libcxx`` compatibility and the detected "
+"one for the default profile."
+msgstr ""
+
+#: ../../../changelog.rst:161
+msgid "Fix: Wrong detection of compiler in OSX for gcc frontend to clang."
+msgstr ""
+
+#: ../../../changelog.rst:162
+msgid ""
+"Fix: Disabled *conanbuildinfo.cmake* compiler checks for unknown compilers."
+msgstr ""
+
+#: ../../../changelog.rst:163
+msgid ""
+"Fix: ``visual_studio`` generator added missing *ResourceCompile* information."
+msgstr ""
+
+#: ../../../changelog.rst:164
+msgid ""
+"Fix: Don't output password from URL for :command:`conan config install` "
+"command."
+msgstr ""
+
+#: ../../../changelog.rst:165
+msgid "Fix: Signals exit with error code instead of 0."
+msgstr ""
+
+#: ../../../changelog.rst:166
+msgid "Fix: Added package versions to generated SCons file."
+msgstr ""
+
+#: ../../../changelog.rst:167
+msgid ""
+"Fix: Error message when package was not found in remotes has been improved."
+msgstr ""
+
+#: ../../../changelog.rst:168
+msgid "Fix: :command:`conan profile` help message."
+msgstr ""
+
+#: ../../../changelog.rst:169
+msgid "Fix: Use gcc architecture flags -m32, -m64 for MinGW as well."
+msgstr ""
+
+#: ../../../changelog.rst:170
+msgid ""
+"Fix: ``CMake()`` helper do not require settins if ``CONAN_CMAKE_GENERATOR`` "
+"is defined."
+msgstr ""
+
+#: ../../../changelog.rst:171
+msgid "Fix: improved output of package remote origins."
+msgstr ""
+
+#: ../../../changelog.rst:172
+msgid ""
+"Fix: Profiles files use same structure as :command:`conan profile show` "
+"command."
+msgstr ""
+
+#: ../../../changelog.rst:173
+msgid ""
+"Fix: *conanpath.bat* file is removed after conan Windows installer uninstall."
+msgstr ""
+
+#: ../../../changelog.rst:174
+msgid ""
+"Fix: Do not add GCC-style flags -m32, -m64, -g, -s to MSVC when using "
+"``AutoToolsBuildEnvironment``"
+msgstr ""
+
+#: ../../../changelog.rst:175
+msgid ""
+"Fix: \"Can't find a binary package\" message now includes the Package ID."
+msgstr ""
+
+#: ../../../changelog.rst:176
+msgid "Fix: added clang 5.0 and gcc 7.3 to default *settings.yml*."
+msgstr ""
+
+#: ../../../changelog.rst:177
+msgid ""
+"Bugfix:  ``build_id()`` logic does not apply unless the ``build_id`` is "
+"effectively changed."
+msgstr ""
+
+#: ../../../changelog.rst:178
+msgid ""
+"Bugfix: ``self.install_folder`` was not correctly set in all necessary cases."
+msgstr ""
+
+#: ../../../changelog.rst:179
+msgid ""
+"Bugfix: :command:`--update` option does not ignore local packages for "
+"version-ranges."
+msgstr ""
+
+#: ../../../changelog.rst:180
+msgid "Bugfix: Set ``self.develop=True`` for ``export-pkg`` command."
+msgstr ""
+
+#: ../../../changelog.rst:181
+msgid ""
+"Bugfix: Server HTTP responses were incorrectly captured, not showing errors "
+"for some server errors."
+msgstr ""
+
+#: ../../../changelog.rst:182
+msgid ""
+"Bugfix: Fixed ``config`` section update for sequential calls over the python "
+"API."
+msgstr ""
+
+#: ../../../changelog.rst:183
+msgid ""
+"Bugfix: Fixed wrong ``self.develop`` set to ``False`` for :command:`conan "
+"create` with *test_package*."
+msgstr ""
+
+#: ../../../changelog.rst:184
+msgid "Deprecation: Removed **conan-transit** from default remotes registry."
+msgstr ""
+
+#: ../../../changelog.rst:188
+msgid "1.0.4 (30-January-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:190
+msgid ""
+"Bugfix: Fixed default profile defined in *conan.conf* that includes another "
+"profile"
+msgstr ""
+
+#: ../../../changelog.rst:191
+msgid ""
+"Bugfix: added missing management of ``sysroot`` in *conanbuildinfo.txt* "
+"affecting :command:`conan build` and *test_package*."
+msgstr ""
+
+#: ../../../changelog.rst:192
+msgid ""
+"Bugfix: Fixed warning in :command:`conan source` because of incorrect "
+"management of settings."
+msgstr ""
+
+#: ../../../changelog.rst:193
+msgid ""
+"Bugfix: Fixed priority order of environment variables defined in included "
+"profiles"
+msgstr ""
+
+#: ../../../changelog.rst:194
+msgid ""
+"Bugfix: NMake error for parallel builds from the ``CMake`` build helper have "
+"been fixed"
+msgstr ""
+
+#: ../../../changelog.rst:195
+msgid ""
+"Bugfix: Fixed options pattern not applied to root node (``-o *:shared=True`` "
+"not working for consuming package)"
+msgstr ""
+
+#: ../../../changelog.rst:196
+msgid ""
+"Bugfix: Fixed shadowed options by package name (``-o *:shared=True -o Pkg:"
+"other=False`` was not applying ``shared`` value to Pkg)"
+msgstr ""
+
+#: ../../../changelog.rst:197
+msgid ""
+"Fix: Using ``filter_known_paths=False`` as default to ``vcvars_dict()`` "
+"helper."
+msgstr ""
+
+#: ../../../changelog.rst:198
+msgid ""
+"Fix: Fixed wrong package name for output messages regarding build-requires"
+msgstr ""
+
+#: ../../../changelog.rst:199
+msgid "Fix: Added correct metadata to conan.exe when generated via pyinstaller"
+msgstr ""
+
+#: ../../../changelog.rst:203
+msgid "1.0.3 (22-January-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:205
+msgid ""
+"Bugfix: Correct load of stored settings in conaninfo.txt (for :command:"
+"`conan build`) when ``configure()`` remove some setting."
+msgstr ""
+
+#: ../../../changelog.rst:206
+msgid ""
+"Bugfix: Correct use of unix paths in Windows subsystems (msys, cygwing) when "
+"needed."
+msgstr ""
+
+#: ../../../changelog.rst:207
+msgid "Fix: fixed wrong message for :command:`conan alias --help`."
+msgstr ""
+
+#: ../../../changelog.rst:208
+msgid ""
+"Fix: Normalized all arguments to :command:`--xxx-folder` in command line "
+"help."
+msgstr ""
+
+#: ../../../changelog.rst:213
+msgid "1.0.2 (16-January-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:215
+msgid ""
+"Fix: Adding a warning message for simultaneous use of ``os`` and "
+"``os_build`` settings."
+msgstr ""
+
+#: ../../../changelog.rst:216
+msgid ""
+"Fix: Do not raise error from *conanbuildinfo.cmake* for Intel MSVC toolsets."
+msgstr ""
+
+#: ../../../changelog.rst:217
+msgid ""
+"Fix: Added more architectures to default *settings.yml* ``arch_build`` "
+"setting."
+msgstr ""
+
+#: ../../../changelog.rst:218
+msgid "Fix: using :command:`--xxx-folder` in command line help messages."
+msgstr ""
+
+#: ../../../changelog.rst:219
+msgid "Bugfix: using quotes for Windows bash path with spaces."
+msgstr ""
+
+#: ../../../changelog.rst:220
+msgid ""
+"Bugfix: vcvars/vcvars_dict not including windows and windows/system32 "
+"directories in the path."
+msgstr ""
+
+#: ../../../changelog.rst:224
+msgid "1.0.1 (12-January-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:226
+msgid ""
+"Fix: :command:`conan new` does not generate cross-building (like "
+"``os_build``) settings by default. They make only sense for dev-tools used "
+"as ``build_requires``"
+msgstr ""
+
+#: ../../../changelog.rst:227
+msgid "Fix: *conaninfo.txt* file does not dump settings with None values"
+msgstr ""
+
+#: ../../../changelog.rst:231
+msgid "1.0.0 (10-January-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:233
+msgid ""
+"Bugfix: Fixed bug from ``remove_from_path`` due to Windows path backslash"
+msgstr ""
+
+#: ../../../changelog.rst:234
+msgid ""
+"Bugfix: Compiler detection in *conanbuildinfo.cmake* for Visual Studio using "
+"toolchains like LLVM (Clang)"
+msgstr ""
+
+#: ../../../changelog.rst:235
+msgid "Bugfix: Added quotes to bash path."
+msgstr ""
+
+#: ../../../changelog.rst:239
+msgid "1.0.0-beta5 (8-January-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:241
+msgid ""
+"Fix: Errors from remotes different to a 404 will raise an error. "
+"Disconnected remotes have to be removed from remotes or use explicit remote "
+"with ``-r myremote``"
+msgstr ""
+
+#: ../../../changelog.rst:242
+msgid ""
+"Fix: cross-building message when building different architecture in same OS"
+msgstr ""
+
+#: ../../../changelog.rst:243
+msgid ""
+"Fix: :command:`conan profile show` now shows profile with same syntax as "
+"profile files"
+msgstr ""
+
+#: ../../../changelog.rst:244
+msgid ""
+"Fix: generated test code in :command:`conan new` templates will not run "
+"example app if cross building."
+msgstr ""
+
+#: ../../../changelog.rst:245
+msgid ""
+"Fix: :command:`conan export-pkg` uses the *conanfile.py* folder as the "
+"default :command:`--source-folder`."
+msgstr ""
+
+#: ../../../changelog.rst:246
+msgid ""
+"Bugfix: :command:`conan download` didn't download recipe if there are no "
+"binaries. Force recipe download."
+msgstr ""
+
+#: ../../../changelog.rst:247
+msgid ""
+"Bugfix: Fixed blocked ``self.run()`` when stderr outputs large tests, due to "
+"full pipe."
+msgstr ""
+
+#: ../../../changelog.rst:251
+msgid "1.0.0-beta4 (4-January-2018)"
+msgstr ""
+
+#: ../../../changelog.rst:253
+msgid ""
+"Feature: ``run_in_windows_bash`` accepts a dict of environment variables to "
+"be prioritised inside the bash shell, mainly intended to control the "
+"priority of the tools in the path. Use with ``vcvars`` context manager and "
+"``vcvars_dict``, that returns the PATH environment variable only with the "
+"Visual Studio related directories"
+msgstr ""
+
+#: ../../../changelog.rst:254
+msgid "Fix: Adding all values to ``arch_target``"
+msgstr ""
+
+#: ../../../changelog.rst:255
+msgid ""
+"Fix: :command:`conan new` templates now use new ``os_build`` and "
+"``arch_build`` settings"
+msgstr ""
+
+#: ../../../changelog.rst:256
+msgid ""
+"Fix: Updated ``CMake`` helper to account for ``os_build`` and ``arch_build`` "
+"new settings"
+msgstr ""
+
+#: ../../../changelog.rst:257
+msgid ""
+"Fix: Automatic creation of *default* profile when it is needed by another "
+"one (like ``include(default)``)"
+msgstr ""
+
+#: ../../../changelog.rst:258
+msgid ""
+"BugFix: Failed installation (non existing package) was leaving lock files in "
+"the cache, reporting a package for :command:`conan search`."
+msgstr ""
+
+#: ../../../changelog.rst:259
+msgid ""
+"BugFix: Environment variables are now applied to ``build_requirements()`` "
+"for :command:`conan install .`."
+msgstr ""
+
+#: ../../../changelog.rst:260
+msgid ""
+"BugFix: Dependency graph was raising conflicts for diamonds with **alias** "
+"packages."
+msgstr ""
+
+#: ../../../changelog.rst:261
+msgid ""
+"BugFix: Fixed :command:`conan export-pkg` after a :command:`conan install` "
+"when recipe has options."
+msgstr ""
+
+#: ../../../changelog.rst:265
+msgid "1.0.0-beta3 (28-December-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:267
+msgid "Fix: Upgraded pylint and astroid to latest"
+msgstr ""
+
+#: ../../../changelog.rst:268
+msgid ""
+"Fix: Fixed ``build_requires`` with transitive dependencies to other "
+"build_requires"
+msgstr ""
+
+#: ../../../changelog.rst:269
+msgid ""
+"Fix: Improved pyinstaller creation of executable, to allow for py3-64 bits "
+"(windows)"
+msgstr ""
+
+#: ../../../changelog.rst:270
+msgid ""
+"Deprecation: removed all :command:`--some_argument`, use instead :command:`--"
+"some-argument` in command line."
+msgstr ""
+
+#: ../../../changelog.rst:274
+msgid "1.0.0-beta2 (23-December-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:276
+msgid ""
+"Feature: New command line UI. Most commands use now the path to the package "
+"recipe, like :command:`conan export . user/testing` or :command:`conan "
+"create folder/myconanfile.py user/channel`."
+msgstr ""
+
+#: ../../../changelog.rst:278
+msgid ""
+"Feature: Better cross-compiling. New settings model for ``os_build``, "
+"``arch_build``, ``os_target``, ``arch_target``."
+msgstr ""
+
+#: ../../../changelog.rst:279
+msgid ""
+"Feature: Better Windows OSS ecosystem, with utilities and settings model for "
+"MSYS, Cygwin, Mingw, WSL"
+msgstr ""
+
+#: ../../../changelog.rst:280
+msgid ""
+"Feature: ``package()`` will not warn of not copied files for known use cases."
+msgstr ""
+
+#: ../../../changelog.rst:281
+msgid ""
+"Feature: reduce the scope of definition of ``cpp_info``, ``env_info``, "
+"``user_info`` attributes to ``package_info()`` method, to avoid unexpected "
+"errors."
+msgstr ""
+
+#: ../../../changelog.rst:283
+msgid ""
+"Feature: extended the use of addressing folder and conanfiles with different "
+"names for ``source``, ``package`` and ``export-pkg`` commands"
+msgstr ""
+
+#: ../../../changelog.rst:285
+msgid "Feature: added support for Zypper system package tool"
+msgstr ""
+
+#: ../../../changelog.rst:286
+msgid ""
+"Fix: Fixed application of build requires from profiles that didn't apply to "
+"requires in recipes"
+msgstr ""
+
+#: ../../../changelog.rst:287
+msgid "Fix: Improved \"test package\" message in output log"
+msgstr ""
+
+#: ../../../changelog.rst:288
+msgid "Fix: updated CI templates generated with :command:`conan new`"
+msgstr ""
+
+#: ../../../changelog.rst:289
+msgid ""
+"Deprecation: Removed ``self.copy_headers`` and family for the ``package()`` "
+"method"
+msgstr ""
+
+#: ../../../changelog.rst:290
+msgid "Deprecation: Removed ``self.conanfile_directory`` attribute."
+msgstr ""
+
+#: ../../../changelog.rst:294
+msgid ""
+"This is a beta release, shouldn't be installed unless you do it explicitly"
+msgstr ""
+
+#: ../../../changelog.rst:296
+msgid "$ pip install conan==1.0.0b2 --upgrade"
+msgstr ""
+
+#: ../../../changelog.rst:298 ../../../changelog.rst:349
+#: ../../../changelog.rst:405 ../../../changelog.rst:475
+msgid "**Breaking changes**"
+msgstr ""
+
+#: ../../../changelog.rst:300
+msgid ""
+"The new command line UI breaks command line tools and integration. Most "
+"cases, just add a :command:`.` to the command."
+msgstr ""
+
+#: ../../../changelog.rst:301
+msgid ""
+"Removed ``self.copy_headers``, ``self.copy_libs``, methods for "
+"``package()``. Use ``self.copy()`` instead."
+msgstr ""
+
+#: ../../../changelog.rst:302
+msgid ""
+"Removed ``self.conanfile_directory`` attribute. Use ``self.source_folder``, "
+"``self.build_folder``, etc. instead"
+msgstr ""
+
+#: ../../../changelog.rst:307
+msgid "0.30.3 (15-December-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:309
+msgid ""
+"Reverted ``CMake()`` and ``Meson()`` build helpers to keep old behavior."
+msgstr ""
+
+#: ../../../changelog.rst:310
+msgid "Forced Astroid dependency to < 1.6 because of py3 issues."
+msgstr ""
+
+#: ../../../changelog.rst:314
+msgid "0.30.2 (14-December-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:316
+msgid ""
+"Fix: ``CMake()`` and ``Meson()`` build helpers and relative directories "
+"regression."
+msgstr ""
+
+#: ../../../changelog.rst:317
+msgid ""
+"Fix: ``ycm`` generator, removed the access of ``cpp_info`` to generators, "
+"keeping the access to ``deps_cpp_info``."
+msgstr ""
+
+#: ../../../changelog.rst:321
+msgid "0.30.1 (12-December-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:323
+msgid ""
+"Feature: Introduced major versions for gcc (5, 6, 7) as defaults settings "
+"for OSS packages, as minors are compatible by default"
+msgstr ""
+
+#: ../../../changelog.rst:324
+msgid ""
+"Feature: ``VisualStudioBuildEnvironment`` has added more compilation and "
+"link flags."
+msgstr ""
+
+#: ../../../changelog.rst:325
+msgid ""
+"Feature: new ``MSBuild()`` build helper that wraps the call to "
+"``msvc_build_command()`` with the correct application of environment "
+"variables with the improved ``VisualStudioBuildEnvironment``"
+msgstr ""
+
+#: ../../../changelog.rst:327
+msgid ""
+"Feature: ``CMake`` and ``Meson`` build helpers got a new ``cache_build_dir`` "
+"argument for ``configure(cache_build_dir=None)`` that will be used to define "
+"a build directory while the package is being built in local cache, but not "
+"when built locally"
+msgstr ""
+
+#: ../../../changelog.rst:329
+msgid ""
+"Feature: ``conanfiles`` got a new ``apply_env`` attribute, defaulted to "
+"``True``. If false, the environment variables from dependencies will not be "
+"automatically applied. Useful if you don't want some dependency adding "
+"itself to the PATH by default, for example"
+msgstr ""
+
+#: ../../../changelog.rst:332
+msgid ""
+"Feature: allow recipes to use and run python code installed with :command:"
+"`conan config install`."
+msgstr ""
+
+#: ../../../changelog.rst:333
+msgid ""
+"Feature: ``conanbuildinfo.cmake`` now has ``KEEP_RPATHS`` as argument to "
+"keep the RPATHS, as opposed to old SKIP_RPATH which was confusing. Also, it "
+"uses set(CMAKE_INSTALL_NAME_DIR \"\") to keep the old behavior even for "
+"CMake >= 3.9"
+msgstr ""
+
+#: ../../../changelog.rst:335
+msgid ""
+"Feature: :command:`conan info` is able to get profile information from the "
+"previous install, instead of requiring it as input again"
+msgstr ""
+
+#: ../../../changelog.rst:336
+msgid "Feature: ``tools.unix_path`` support MSYS, Cygwin, WSL path flavors"
+msgstr ""
+
+#: ../../../changelog.rst:337
+msgid ""
+"Feature: added ``destination`` folder argument to ``tools.get()`` function"
+msgstr ""
+
+#: ../../../changelog.rst:338
+msgid ""
+"Feature: ``SystemPackageTool`` for apt-get now uses :command:`--no-install-"
+"recommends` automatically."
+msgstr ""
+
+#: ../../../changelog.rst:339
+msgid ""
+"Feature: ``visual_studio_multi`` generator now uses toolsets instead of IDE "
+"version to identify files."
+msgstr ""
+
+#: ../../../changelog.rst:340
+msgid "Fix: generators failures print traces to help debugging"
+msgstr ""
+
+#: ../../../changelog.rst:341
+msgid ""
+"Fix: typos in generator names, or non-existing generator now raise an Error "
+"instead of a warning"
+msgstr ""
+
+#: ../../../changelog.rst:342
+msgid ""
+"Fix: ``short_paths`` feature is active by default in Windows. If you want to "
+"opt-out, you can use ``CONAN_USER_HOME_SHORT=None``"
+msgstr ""
+
+#: ../../../changelog.rst:343
+msgid "Fix: ``SystemPackageTool`` doesn't use sudo in Windows"
+msgstr ""
+
+#: ../../../changelog.rst:344
+msgid "BugFix: Not using parallel builds for Visual<10 in CMake build helper."
+msgstr ""
+
+#: ../../../changelog.rst:345
+msgid ""
+"Deprecation: ``conanfile_directory` shouldn't be used anymore in recipes. "
+"Use ``source_folder``, ``build_folder``, etc."
+msgstr ""
+
+#: ../../../changelog.rst:351
+msgid ""
+"``scopes`` have been completely removed. You can use environment variables, "
+"or the ``conanfile.develop`` or ``conanfile.in_local_cache`` attributes "
+"instead."
+msgstr ""
+
+#: ../../../changelog.rst:353
+msgid ""
+"Command *test_package* has been removed. Use :command:`conan create`` "
+"instead, and :command:`conan test`` for just running package tests."
+msgstr ""
+
+#: ../../../changelog.rst:354
+msgid ""
+"``werror`` behavior is now by default. Dependencies conflicts will now "
+"error, and have to be fixed."
+msgstr ""
+
+#: ../../../changelog.rst:355
+msgid ""
+"``short_paths`` feature is again active by default in Windows, even with "
+"Py3.6 and system LongPathsEnabled."
+msgstr ""
+
+#: ../../../changelog.rst:356
+msgid ""
+"``ConfigureEnvironment`` and ``GCC`` build helpers have been completely "
+"removed"
+msgstr ""
+
+#: ../../../changelog.rst:360
+msgid "0.29.2 (2-December-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:362
+msgid ""
+"Updated python cryptography requirement for OSX due the pyOpenSSL upgrade. "
+"See more: https://pypi.org/project/pyOpenSSL/"
+msgstr ""
+
+#: ../../../changelog.rst:366
+msgid "0.29.1 (23-November-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:368
+msgid "Support for OSX High Sierra"
+msgstr ""
+
+#: ../../../changelog.rst:369
+msgid "Reverted concurrency locks to counters, removed ``psutil`` dependency"
+msgstr ""
+
+#: ../../../changelog.rst:370
+msgid "Implemented migration for settings.yml (for new VS toolsets)"
+msgstr ""
+
+#: ../../../changelog.rst:371
+msgid "Fixed encoding issues in conan_server"
+msgstr ""
+
+#: ../../../changelog.rst:375
+msgid "0.29.0 (21-November-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:377
+msgid "Feature: Support for WindowsStore (WinRT, UWP)"
+msgstr ""
+
+#: ../../../changelog.rst:378
+msgid "Feature: Support for Visual Studio Toolsets."
+msgstr ""
+
+#: ../../../changelog.rst:379
+msgid ""
+"Feature: New ``boost-build`` generator for generic bjam (not only Boost)"
+msgstr ""
+
+#: ../../../changelog.rst:380
+msgid ""
+"Feature: new ``tools.PkgConfig`` helper to parse pkg-config (.pc) files."
+msgstr ""
+
+#: ../../../changelog.rst:381
+msgid ""
+"Feature: Added ``self.develop`` conanfile variable. It is true for :command:"
+"`conan create` packages and for local development."
+msgstr ""
+
+#: ../../../changelog.rst:382
+msgid ""
+"Feature: Added ``self.keep_imports`` to avoid removal of imported files in "
+"the ``build()`` method. Convenient for re-packaging."
+msgstr ""
+
+#: ../../../changelog.rst:383
+msgid "Feature: Autodected MSYS2 for ``SystemPackageTool``"
+msgstr ""
+
+#: ../../../changelog.rst:384
+msgid ""
+"Feature: ``AutoToolsBuildEnvironment`` now auto-loads ``pkg_config_path`` "
+"(to use with ``pkg_config`` generator)"
+msgstr ""
+
+#: ../../../changelog.rst:385
+msgid ""
+"Feature: Changed search for profiles. Profiles not found in the default "
+"``profiles`` folder, will be searched for locally. Use ``./myprofile`` to "
+"force local search only."
+msgstr ""
+
+#: ../../../changelog.rst:386
+msgid ""
+"Feature: Parallel builds for Visual Studio (previously it was only parallel "
+"compilation within builds)"
+msgstr ""
+
+#: ../../../changelog.rst:387
+msgid ""
+"Feature: implemented syntax to check options with ``if \"something\" in self."
+"options.myoption``"
+msgstr ""
+
+#: ../../../changelog.rst:388
+msgid ""
+"Fix: Fixed CMake dependency graph when using TARGETS, that produced wrong "
+"link order for transitive dependencies."
+msgstr ""
+
+#: ../../../changelog.rst:389
+msgid ""
+"Fix: Trying to download the ``exports_sources`` is not longer done if such "
+"attribute is not defined"
+msgstr ""
+
+#: ../../../changelog.rst:390
+msgid ""
+"Fix: Added output directories in ``cmake`` generator for RelWithDebInfo and "
+"MinSizeRel configs"
+msgstr ""
+
+#: ../../../changelog.rst:391
+msgid ""
+"Fix: Locks for concurrent access to local cache now use process IDs (PIDs) "
+"to handle interruptions and inconsistent states. Also, adding messages when "
+"locking."
+msgstr ""
+
+#: ../../../changelog.rst:392
+msgid ""
+"Fix: Not remove the .zip file after a :command:`conan config install` if "
+"such file is local"
+msgstr ""
+
+#: ../../../changelog.rst:393
+msgid "Fix: Fixed ``CMake.test()`` for the Ninja generator"
+msgstr ""
+
+#: ../../../changelog.rst:394
+msgid ""
+"Fix: Do not crete local conaninfo.txt file for :command:`conan install <pkg-"
+"ref>` commands."
+msgstr ""
+
+#: ../../../changelog.rst:395
+msgid ""
+"Fix: Solved issue with multiple repetitions of the same command line argument"
+msgstr ""
+
+#: ../../../changelog.rst:396
+msgid ""
+"BugFix: Don't rebuild conan created (with conan-create) packages when "
+"``build_policy=\"always\"``"
+msgstr ""
+
+#: ../../../changelog.rst:397
+msgid ""
+"BugFix: :command:`conan copy` was always copying binaries, now can copy only "
+"recipes"
+msgstr ""
+
+#: ../../../changelog.rst:398
+msgid ""
+"BugFix: A bug in download was causing appends insteads of overwriting for "
+"repeated downloads."
+msgstr ""
+
+#: ../../../changelog.rst:399
+msgid "Development: Large restructuring of files (new cmd and build folders)"
+msgstr ""
+
+#: ../../../changelog.rst:400
+msgid ""
+"Deprecation: Removed old CMake helper methods (only valid constructor is "
+"``CMake(self)``)"
+msgstr ""
+
+#: ../../../changelog.rst:401
+msgid ""
+"Deprecation: Removed old ``conan_info()`` method, that was superseded by "
+"``package_id()``"
+msgstr ""
+
+#: ../../../changelog.rst:407
+msgid ""
+"CMAKE_LIBRARY_OUTPUT_DIRECTORY definition has been introduced in "
+"``conan_basic_setup()``, it will send shared libraries .so to the ``lib`` "
+"folder in Linux systems. Right now it was undefined."
+msgstr ""
+
+#: ../../../changelog.rst:409
+msgid ""
+"Profile search logic has slightly changed. For ``-pr=myprofile``, such "
+"profile will be searched both in the default folder and in the local one if "
+"not existing. Use ``-pr=./myprofile`` to force local search only."
+msgstr ""
+
+#: ../../../changelog.rst:411
+msgid ""
+"The :command:`conan copy` command has been fixed. To copy all binaries, it "
+"is necessary to explicit :command:`--all`, as other commands do."
+msgstr ""
+
+#: ../../../changelog.rst:412
+msgid "The only valid use of CMake helper is ``CMake(self)`` syntax."
+msgstr ""
+
+#: ../../../changelog.rst:413
+msgid "If using ``conan_info()``, replace it with ``package_id()``."
+msgstr ""
+
+#: ../../../changelog.rst:414
+msgid ""
+"Removed environment variable ``CONAN_CMAKE_TOOLSET``, now the toolset can be "
+"specified as a subsetting of Visual Studio compiler or specified in the "
+"build helpers."
+msgstr ""
+
+#: ../../../changelog.rst:418
+msgid "0.28.1 (31-October-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:420
+msgid ""
+"BugFix: Downloading (``tools.download``) of files with ``content-"
+"encoding=gzip`` were raising an exception because the downloaded content "
+"length didn't match the http header ``content-length``"
+msgstr ""
+
+#: ../../../changelog.rst:425
+msgid "0.28.0 (26-October-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:427
+msgid ""
+"This is a big release, with many important and core changes. Also with a "
+"huge number of community contributions, thanks very much!"
+msgstr ""
+
+#: ../../../changelog.rst:430
+msgid ""
+"Feature: Major revamp of most conan commands, making command line arguments "
+"homogeneous. Much better development flow adapting to user layouts, with "
+"``install-folder``, ``source-folder``, ``build-folder``, ``package-folder``."
+msgstr ""
+
+#: ../../../changelog.rst:433
+msgid ""
+"Feature: new ``deploy()`` method, useful for installing binaries from conan "
+"packages"
+msgstr ""
+
+#: ../../../changelog.rst:434
+msgid ""
+"Feature: Implemented some **concurrency** support for the conan local cache. "
+"Parallel :command:`conan install` and :command:`conan create` for different "
+"configurations should be possible."
+msgstr ""
+
+#: ../../../changelog.rst:436
+msgid ""
+"Feature: options now allow patterns in command line: ``-o *:"
+"myoption=myvalue`` applies to all packages"
+msgstr ""
+
+#: ../../../changelog.rst:437
+msgid ""
+"Feature: new ``pc`` generator that generates files from dependencies for "
+"``pkg-config``"
+msgstr ""
+
+#: ../../../changelog.rst:438
+msgid ""
+"Feature: new ``Meson`` helper, similar to ``CMake`` for Meson build system. "
+"Works well with ``pc`` generator."
+msgstr ""
+
+#: ../../../changelog.rst:439
+msgid ""
+"Feature: Support for read-only cache with ``CONAN_READ_ONLY_CACHE`` "
+"environment variable"
+msgstr ""
+
+#: ../../../changelog.rst:440
+msgid ""
+"Feature: new ``visual_studio_multi`` generator to load Debug/Release, 32/64 "
+"configs at once"
+msgstr ""
+
+#: ../../../changelog.rst:441
+msgid "Feature: new ``tools.which`` helper to locate executables"
+msgstr ""
+
+#: ../../../changelog.rst:442
+msgid "Feature: new :command:`conan --help` layout"
+msgstr ""
+
+#: ../../../changelog.rst:443
+msgid "Feature: allow to override compiler version in ``vcvars_command``"
+msgstr ""
+
+#: ../../../changelog.rst:444
+msgid ""
+"Feature: :command:`conan user` interactive (and not exposed) password input "
+"for empty ``-p`` argument"
+msgstr ""
+
+#: ../../../changelog.rst:445
+msgid ""
+"Feature: Support for ``PacManTool`` for ``system_requirements()`` for "
+"ArchLinux"
+msgstr ""
+
+#: ../../../changelog.rst:446
+msgid ""
+"Feature: Define VS toolset in ``CMake`` constructor and from environment "
+"variable CONAN_CMAKE_TOOLSET"
+msgstr ""
+
+#: ../../../changelog.rst:447
+msgid "Feature: :command:`conan create` now accepts ``werror`` argument"
+msgstr ""
+
+#: ../../../changelog.rst:448
+msgid ""
+"Feature: ``AutoToolsBuildEnvironment`` can use ``CONAN_MAKE_PROGRAM`` env-"
+"var to define make program"
+msgstr ""
+
+#: ../../../changelog.rst:449
+msgid ""
+"Feature: added xcode9 for apple-clang 9.0, clang 5 to default settings.yml"
+msgstr ""
+
+#: ../../../changelog.rst:450
+msgid ""
+"Feature: deactivation of ``short_paths`` in Windows 10 with Py3.6 and long "
+"path support is automatic"
+msgstr ""
+
+#: ../../../changelog.rst:451
+msgid ""
+"Feature: show unzip progress by percentage, not by file (do not clutters "
+"output)"
+msgstr ""
+
+#: ../../../changelog.rst:452
+msgid ""
+"Feature: do not use ``sudo`` for system requirements if already running as "
+"root"
+msgstr ""
+
+#: ../../../changelog.rst:453
+msgid "Feature: ``tools.download`` able to use headers/auth"
+msgstr ""
+
+#: ../../../changelog.rst:454
+msgid ""
+"Feature: conan does not longer generate bytecode from recipes (no more .pyc, "
+"and more efficient)"
+msgstr ""
+
+#: ../../../changelog.rst:455
+msgid "Feature: add parallel argument to ``build_sln_command`` for VS"
+msgstr ""
+
+#: ../../../changelog.rst:456
+msgid "Feature: Show warning if vs150comntools is an invalid path"
+msgstr ""
+
+#: ../../../changelog.rst:457
+msgid "Feature: ``tools.get()`` now has arguments for hash checking"
+msgstr ""
+
+#: ../../../changelog.rst:458
+msgid "Fix: upload pattern now accepts ``Pkg/*``"
+msgstr ""
+
+#: ../../../changelog.rst:459
+msgid "Fix: improved downloader, make more robust, better streaming"
+msgstr ""
+
+#: ../../../changelog.rst:460
+msgid "Fix: ``tools.patch`` now support adding/removal of files"
+msgstr ""
+
+#: ../../../changelog.rst:461
+msgid ""
+"Fix: The ``default`` profile is no longer taken as a base and merged with "
+"user profile. Use explicit ``include(default)`` instead."
+msgstr ""
+
+#: ../../../changelog.rst:463
+msgid "Fix: properly manage x86 as cross building with autotools"
+msgstr ""
+
+#: ../../../changelog.rst:464
+msgid "Fix: ``tools.unzip`` removed unnecessary long-paths check in Windows"
+msgstr ""
+
+#: ../../../changelog.rst:465
+msgid ""
+"Fix: ``package_info()`` is no longer executed at install for the consumer "
+"conanfile.py"
+msgstr ""
+
+#: ../../../changelog.rst:466
+msgid ""
+"BugFix: source folder was not being correctly removed when recipe was updated"
+msgstr ""
+
+#: ../../../changelog.rst:467
+msgid "BugFix: fixed ``CMAKE_C_FLAGS_DEBUG`` definition in ``cmake`` generator"
+msgstr ""
+
+#: ../../../changelog.rst:468
+msgid "BugFix: ``CMAKE_SYSTEM_NAME`` is now Darwin for iOS, watchOS and tvOS"
+msgstr ""
+
+#: ../../../changelog.rst:469
+msgid "BugFix: ``xcode`` generator fixed handling of compiler flags"
+msgstr ""
+
+#: ../../../changelog.rst:470
+msgid "BugFix: pyinstaller hidden import that broke .deb installer"
+msgstr ""
+
+#: ../../../changelog.rst:471
+msgid ""
+"BugFix: :command:`conan profile list` when local files matched profile names"
+msgstr ""
+
+#: ../../../changelog.rst:477
+msgid ""
+"This is an important release towards stabilizing conan and moving out of "
+"beta. Some breaking changes have been done, but mostly to command line "
+"arguments, so they should be easy to fix. Package recipes or existing "
+"packages shouldn't break. Please **update**, it is very important to ease "
+"the transition of future stable releases. Do not hesitate to ask questions, "
+"or for help if you need it. This is a possibly not complete list of things "
+"to take into account:"
+msgstr ""
+
+#: ../../../changelog.rst:482
+msgid ""
+"The command :command:`conan install` doesn't accept ``cwd`` anymore, to "
+"change the directory where the generator files are written, use the :command:"
+"`--install-folder` parameter."
+msgstr ""
+
+#: ../../../changelog.rst:484
+msgid ""
+"The command :command:`conan install` doesn't accept :command:`--all` "
+"anymore. Use :command:`conan download <ref>` instead."
+msgstr ""
+
+#: ../../../changelog.rst:485
+msgid ""
+"The command :command:`conan build` now requires the path to the ``conanfile."
+"py`` (optional before)"
+msgstr ""
+
+#: ../../../changelog.rst:486
+msgid ""
+"The command :command:`conan package` not longer re-package a package in the "
+"local cache, now it only operates in a user local folder. The recommended "
+"way to re-package a package is using :command:`conan build` and then :"
+"command:`conan export-pkg`."
+msgstr ""
+
+#: ../../../changelog.rst:489
+msgid ""
+"Removed :command:`conan package_files` in favor of a new command :command:"
+"`conan export-pkg`. It requires a local recipe with a ``package()`` method."
+msgstr ""
+
+#: ../../../changelog.rst:491
+msgid ""
+"The command :command:`conan source` no longer operates in the local cache. "
+"now it only operates in a user local folder. If you used :command:`conan "
+"source` with a reference to workaround the concurrency, now it natively "
+"supported, you can remove the command call and trust concurrent install "
+"processes."
+msgstr ""
+
+#: ../../../changelog.rst:494
+msgid ""
+"The command :command:`conan imports` doesn't accept ``-d, --dest`` anymore, "
+"use :command:`--imports-folder` parameter instead."
+msgstr ""
+
+#: ../../../changelog.rst:495
+msgid ""
+"If you specify a profile in a conan command, like conan create or conan "
+"install the base profile *~/.conan/profiles/default* won't be applied. Use "
+"explicit ``include`` to keep the old behavior."
+msgstr ""
+
+#: ../../../changelog.rst:499
+msgid "0.27.0 (20-September-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:501
+msgid ""
+"Feature: :command:`conan config install <url>` new command. Will install "
+"remotes, profiles, settings, conan.conf and other files into the local conan "
+"installation. Perfect to synchronize configuration among teams"
+msgstr ""
+
+#: ../../../changelog.rst:502
+msgid ""
+"Feature: improved traceback printing when errors are raised for more "
+"context. Configurable via env"
+msgstr ""
+
+#: ../../../changelog.rst:503
+msgid ""
+"Feature: filtering out non existing directories in ``cpp_info`` (include, "
+"lib, etc), so some build systems don't complain about them."
+msgstr ""
+
+#: ../../../changelog.rst:504
+msgid ""
+"Feature: Added include directories to ResourceCompiler and to MIDL compiler "
+"in ``visual_studio`` generator"
+msgstr ""
+
+#: ../../../changelog.rst:505
+msgid "Feature: new ``visual_studio_legacy`` generator for Visual Studio 2008"
+msgstr ""
+
+#: ../../../changelog.rst:506
+msgid "Feature: show path where manifests are locally stored"
+msgstr ""
+
+#: ../../../changelog.rst:507
+msgid ""
+"Feature: ``replace_in_file`` now raises error if replacement is not done "
+"(opt-out parameter)"
+msgstr ""
+
+#: ../../../changelog.rst:508
+msgid ""
+"Feature: enabled in conan.conf ``[proxies]`` section ``no_proxy=url1,url2`` "
+"configuration (to skip proxying for those URLs), as well as ``http=None`` "
+"and ``https=None`` to explicitly disable them."
+msgstr ""
+
+#: ../../../changelog.rst:509
+msgid ""
+"Feature: new conanfile ``self.in_local_cache`` attribute for conditional "
+"logic to apply in user folders local commands"
+msgstr ""
+
+#: ../../../changelog.rst:510
+msgid ""
+"Feature: ``CONAN_USER_HOME_SHORT=None`` can disable the usage of "
+"``short_paths`` in Windows, for modern Windows that enable long paths at the "
+"system level"
+msgstr ""
+
+#: ../../../changelog.rst:511
+msgid ""
+"Feature: ``if \"arm\" in self.settings.arch`` is now a valid check (without "
+"casting to str(self.settings.arch))"
+msgstr ""
+
+#: ../../../changelog.rst:512
+msgid "Feature: added cwd`` argument to :command:`conan source` local method."
+msgstr ""
+
+#: ../../../changelog.rst:513
+msgid "Fix: unzip crashed for 0 Bytes zip files"
+msgstr ""
+
+#: ../../../changelog.rst:514
+msgid "Fix: ``collect_libs`` moved to the ``tools`` module"
+msgstr ""
+
+#: ../../../changelog.rst:515
+msgid ""
+"Bugfix: fixed wrong regex in ``deps_cpp_info`` causing issues with dots and "
+"dashes in package names"
+msgstr ""
+
+#: ../../../changelog.rst:516
+msgid ""
+"Development: Several internal refactors (tools module, installer), testing "
+"(using VS2015 as default, removing VS 12 in testing). Conditional CI in "
+"travis for faster builds in developers, downgrading to CMake 3.7 in appveyor"
+msgstr ""
+
+#: ../../../changelog.rst:517
+msgid ""
+"Deprecation: ``dev_requires`` have been removed (it was not documented, but "
+"accessible via the ``requires(dev=True)`` parameter. Superseded by "
+"``build_requires``."
+msgstr ""
+
+#: ../../../changelog.rst:518
+msgid ""
+"Deprecation: sources tgz files for exported sources no longer contain \"."
+"c_src\" subfolder. Packages created with 0.27 will be incompatible with "
+"conan < 0.25"
+msgstr ""
+
+#: ../../../changelog.rst:522
+msgid "0.26.1 (05-September-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:524
+msgid "Feature: added apple-clang 9.0 to default settings."
+msgstr ""
+
+#: ../../../changelog.rst:525
+msgid "Fix: :command:`conan copy` command now supports symlinks."
+msgstr ""
+
+#: ../../../changelog.rst:526
+msgid ""
+"Fix: fixed removal of \"export_source\" folder when files have no permissions"
+msgstr ""
+
+#: ../../../changelog.rst:527
+msgid ""
+"Bugfix: fixed parsing of *conanbuildinfo.txt* with package names containing "
+"dots."
+msgstr ""
+
+#: ../../../changelog.rst:531
+msgid "0.26.0 (31-August-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:533
+msgid ""
+"Feature: :command:`conan profile` command has implemented ``update``, "
+"``new``, ``remove`` subcommands, with detect``, to allow creation, edition "
+"and management of profiles."
+msgstr ""
+
+#: ../../../changelog.rst:534
+msgid ""
+"Feature: :command:`conan package_files` command now can call recipe "
+"``package()`` method if build_folder`` or source_folder`` arguments are "
+"defined"
+msgstr ""
+
+#: ../../../changelog.rst:535
+msgid ""
+"Feature: graph loading algorithm improved to avoid repeating nodes. Results "
+"in much faster times for dense graphs, and avoids duplications of private "
+"requirements."
+msgstr ""
+
+#: ../../../changelog.rst:536
+msgid ""
+"Feature: authentication based on environment variables. Allows very long "
+"processes without tokens being expired."
+msgstr ""
+
+#: ../../../changelog.rst:537
+msgid ""
+"Feature: Definition of Visual Studio runtime setting ``MD`` or ``MDd`` is "
+"now automatic based on build type, not necessary to default in profile."
+msgstr ""
+
+#: ../../../changelog.rst:538
+msgid ""
+"Feature: Capturing ``SystemExit`` to return user error codes to the system "
+"with ``sys.exit(code)``"
+msgstr ""
+
+#: ../../../changelog.rst:539
+msgid ""
+"Feature: Added SKIP_RPATH argument to cmake ``conan_basic_setup()`` function"
+msgstr ""
+
+#: ../../../changelog.rst:540
+msgid ""
+"Feature: Optimized uploads, now uploads will be skipped if there are no "
+"changes, irrespective of timestamp"
+msgstr ""
+
+#: ../../../changelog.rst:541
+msgid ""
+"Feature: Automatic detection of VS 15-2017, via both a ``vs150comntools`` "
+"variable, and using ``vswhere.exe``"
+msgstr ""
+
+#: ../../../changelog.rst:542
+msgid ""
+"Feature: Added NO_OUTPUT_DIRS argument to cmake ``conan_basic_setup()`` "
+"function"
+msgstr ""
+
+#: ../../../changelog.rst:543
+msgid "Feature: Add support for Chocolatey system package manager for Windows."
+msgstr ""
+
+#: ../../../changelog.rst:544
+msgid ""
+"Feature: Improved in conan user home and path storage configuration, better "
+"error checks."
+msgstr ""
+
+#: ../../../changelog.rst:545
+msgid ""
+"Feature: ``export`` command is now able to export recipes without name or "
+"version, specifying the full reference."
+msgstr ""
+
+#: ../../../changelog.rst:546
+msgid "Feature: Added new default settings, Arduino, gcc-7.2"
+msgstr ""
+
+#: ../../../changelog.rst:547
+msgid "Feature: Add conan settings to cmake generated file"
+msgstr ""
+
+#: ../../../changelog.rst:548
+msgid ""
+"Feature: new ``tools.replace_prefix_in_pc_file()`` function to help with .pc "
+"files."
+msgstr ""
+
+#: ../../../changelog.rst:549
+msgid "Feature: Adding support for system package tool ``pkgutil`` on Solaris"
+msgstr ""
+
+#: ../../../changelog.rst:550
+msgid ""
+"Feature: :command:`conan remote update` now allows :command:`--insert` "
+"argument to change remote order"
+msgstr ""
+
+#: ../../../changelog.rst:551
+msgid "Feature: Add ``verbose`` definition to ``CMake`` helper."
+msgstr ""
+
+#: ../../../changelog.rst:552
+msgid ""
+"Fix: :command:`conan package` working locally failed if not specified "
+"build_folder"
+msgstr ""
+
+#: ../../../changelog.rst:553
+msgid ""
+"Fix: Search when using wildcards for version like ``Pkg/*@user/channel``"
+msgstr ""
+
+#: ../../../changelog.rst:554
+msgid ""
+"Fix: Change current working directory to the conanfile.py one before loading "
+"it, so relative python imports or code work."
+msgstr ""
+
+#: ../../../changelog.rst:555
+msgid "Fix: ``package_files`` command now works with ``short_paths`` too."
+msgstr ""
+
+#: ../../../changelog.rst:556
+msgid ""
+"Fix: adding missing require of tested package in test_package/conanfile "
+"build() method"
+msgstr ""
+
+#: ../../../changelog.rst:557
+msgid ""
+"Fix: path joining in ``vcvars_command`` for custom VS paths defined via env-"
+"vars"
+msgstr ""
+
+#: ../../../changelog.rst:558
+msgid "Fix: better managing string escaping in CMake variables"
+msgstr ""
+
+#: ../../../changelog.rst:559
+msgid ""
+"Fix: ``ExecutablePath`` assignment has been removed from the "
+"``visual_studio`` generator."
+msgstr ""
+
+#: ../../../changelog.rst:560
+msgid ""
+"Fix: removing ``export_source`` folder containing exported code, fix issues "
+"with read-only files and keeps cache consistency better."
+msgstr ""
+
+#: ../../../changelog.rst:561
+msgid "Fix: Accept 100 return code from yum check-update"
+msgstr ""
+
+#: ../../../changelog.rst:562
+msgid ""
+"Fix: importing \\*.so files from the :command:`conan new` generated test "
+"templates"
+msgstr ""
+
+#: ../../../changelog.rst:563
+msgid ""
+"Fix: progress bars display when download/uploads are not multipart (reported "
+"size 0)"
+msgstr ""
+
+#: ../../../changelog.rst:564
+msgid ""
+"Bugfix: fixed wrong OSX ``DYLD_LIBRARY_PATH`` variable for virtual "
+"environments"
+msgstr ""
+
+#: ../../../changelog.rst:565
+msgid ""
+"Bugfix: ``FileCopier`` had a bug that affected ``self.copy()`` commands, "
+"changing base reference directory."
+msgstr ""
+
+#: ../../../changelog.rst:569
+msgid "0.25.1 (20-July-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:571
+msgid ""
+"Bugfix: Build requires are now applied correctly to test_package projects."
+msgstr ""
+
+#: ../../../changelog.rst:572
+msgid ""
+"Fix: Fixed search command to print an error when --table parameter is used "
+"without a reference."
+msgstr ""
+
+#: ../../../changelog.rst:573
+msgid ""
+"Fix: install() method of the CMake() helper, allows parallel building, "
+"change build folder and custom parameters."
+msgstr ""
+
+#: ../../../changelog.rst:574
+msgid ""
+"Fix: Controlled errors in migration, print warning if conan is not able to "
+"remove a package directory."
+msgstr ""
+
+#: ../../../changelog.rst:577
+msgid "0.25.0 (19-July-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:581
+msgid ""
+"This release introduces a new layout for the local cache, with dedicated "
+"``export_source`` folder to store the source code exported with "
+"``exports_sources`` feature, which is much cleaner than the old ``.c_src`` "
+"subfolder. A migration is included to remove from the local cache packages "
+"with the old layout."
+msgstr ""
+
+#: ../../../changelog.rst:583
+msgid ""
+"Feature: new :command:`conan create` command that supersedes *test_package* "
+"for creating and testing package. It works even without the test_package "
+"folder, and have improved management for user, channel. The test_package "
+"recipe no longer defines ``requires``"
+msgstr ""
+
+#: ../../../changelog.rst:584
+msgid ""
+"Feature: new :command:`conan get` command that display (with syntax "
+"highlight) package recipes, and any other file from conan: recipes, "
+"conaninfo.txt, manifests, etc."
+msgstr ""
+
+#: ../../../changelog.rst:585
+msgid ""
+"Feature: new :command:`conan alias` command that creates a special package "
+"recipe, that works like an **alias** or a **proxy** to other package, "
+"allowing easy definition and transparent management of \"using the latest "
+"minor\" and similar policies. Those special alias packages do not appear in "
+"the dependency graph."
+msgstr ""
+
+#: ../../../changelog.rst:586
+msgid ""
+"Feature: new :command:`conan search --table=file.html` command that will "
+"output an html file with a graphical representation of available binaries"
+msgstr ""
+
+#: ../../../changelog.rst:587
+msgid ""
+"Feature: created **default profile**, that replace the "
+"``[settings_default]`` in **conan.conf** and augments it, allowing to define "
+"more things like env-vars, options, build_requires, etc."
+msgstr ""
+
+#: ../../../changelog.rst:588
+msgid ""
+"Feature: new ``self.user_info`` member that can be used in "
+"``package_info()`` to define custom user variables, that will be translated "
+"to general purpose variables by generators."
+msgstr ""
+
+#: ../../../changelog.rst:589
+msgid ""
+"Feature: :command:`conan remove` learned the :command:`--outdated` argument, "
+"to remove those binary packages that are outdated from the recipe, both from "
+"local cache and remotes"
+msgstr ""
+
+#: ../../../changelog.rst:590
+msgid ""
+"Feature: :command:`conan search` learned the :command:`--outdated` argument, "
+"to show only those binary packages that are outdated from the recipe, both "
+"from local cache and remotes"
+msgstr ""
+
+#: ../../../changelog.rst:591
+msgid ""
+"Feature: Automatic management ``CMAKE_TOOLCHAIN_FILE`` in ``CMake`` helper "
+"for cross-building."
+msgstr ""
+
+#: ../../../changelog.rst:592
+msgid ""
+"Feature: created ``conan_api``, a python API interface to conan "
+"functionality."
+msgstr ""
+
+#: ../../../changelog.rst:593
+msgid "Feature: new ``cmake.install()`` method of ``CMake`` helper."
+msgstr ""
+
+#: ../../../changelog.rst:594
+msgid ""
+"Feature: ``short_paths`` feature now applies also to ``exports_sources``"
+msgstr ""
+
+#: ../../../changelog.rst:595
+msgid "Feature: ``SystemPackageTool`` now supports **FreeBSD** system packages"
+msgstr ""
+
+#: ../../../changelog.rst:596
+msgid ""
+"Feature: ``build_requires`` now manage options too, also default options in "
+"package recipes"
+msgstr ""
+
+#: ../../../changelog.rst:597
+msgid ""
+"Feature: :command:`conan build` learned new :command:`--package_folder` "
+"argument, useful if the build system perform the packaging"
+msgstr ""
+
+#: ../../../changelog.rst:598
+msgid ""
+"Feature: ``CMake`` helper now defines by default ``CMAKE_INSTALL_PREFIX`` "
+"pointing to the current package_folder, so ``cmake.install()`` can "
+"transparently execute the packaging."
+msgstr ""
+
+#: ../../../changelog.rst:599
+msgid ""
+"Feature: improved command UX with cwd`` arguments to allow define the "
+"current directory for the command"
+msgstr ""
+
+#: ../../../changelog.rst:600
+msgid "Feature: improved ``VisualStudioBuildEnvironment``"
+msgstr ""
+
+#: ../../../changelog.rst:601
+msgid ""
+"Feature: transfers now show size (MB, KB) of download/uploaded files, and "
+"current status of transfer."
+msgstr ""
+
+#: ../../../changelog.rst:602
+msgid ""
+"Feature: :command:`conan new` now has arguments to generate CI scripts for "
+"Gitlab CI."
+msgstr ""
+
+#: ../../../changelog.rst:603
+msgid ""
+"Feature: Added ``MinRelSize`` and ``RelWithDebInfo`` management in ``CMake`` "
+"helper."
+msgstr ""
+
+#: ../../../changelog.rst:604
+msgid ""
+"Fix: make ``mkdir``, ``rmdir``, ``relative_dirs`` available for import from :"
+"command:`conans` module."
+msgstr ""
+
+#: ../../../changelog.rst:605
+msgid ""
+"Fix: improved detection of Visual Studio default under cygwin environment."
+msgstr ""
+
+#: ../../../changelog.rst:606
+msgid "Fix: ``package_files`` now allows symlinks"
+msgstr ""
+
+#: ../../../changelog.rst:607
+msgid "Fix: Windows installer now includes conan_build_info tool."
+msgstr ""
+
+#: ../../../changelog.rst:608
+msgid ""
+"Fix: appending environment variables instead of overwriting them when they "
+"come from different origins: upstream dependencies and profiles."
+msgstr ""
+
+#: ../../../changelog.rst:609
+msgid ""
+"Fix: made opt-in the check of package integrity before uploads, it was "
+"taking too much time, and provide little value for most users."
+msgstr ""
+
+#: ../../../changelog.rst:610
+msgid "Fix: Package recipe linter removed some false positives"
+msgstr ""
+
+#: ../../../changelog.rst:611
+msgid ""
+"Fix: default settings from conan.conf do not fail for constrained settings "
+"in recipes."
+msgstr ""
+
+#: ../../../changelog.rst:612
+msgid ""
+"Fix: Allowing to define package remote with :command:`conan remote add_ref` "
+"before download/upload."
+msgstr ""
+
+#: ../../../changelog.rst:613
+msgid "Fix: removed duplicated BUILD_SHARED_LIBS in test_package"
+msgstr ""
+
+#: ../../../changelog.rst:614
+msgid "Fix: add \"rhel\" to list of distros using yum."
+msgstr ""
+
+#: ../../../changelog.rst:615
+msgid ""
+"Bugfix: allowing relative paths in ``exports`` and ``exports_sources`` fields"
+msgstr ""
+
+#: ../../../changelog.rst:616
+msgid "Bugfix: allow custom user generators with underscore"
+msgstr ""
+
+#: ../../../changelog.rst:620
+msgid "0.24.0 (15-June-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:622
+msgid ""
+"Feature: :command:`conan new` new arguments to generate **Travis-CI** and "
+"**Appveyor** files for Continuous Integration"
+msgstr ""
+
+#: ../../../changelog.rst:623
+msgid "Feature: Profile files with ``include()`` and variable declaration"
+msgstr ""
+
+#: ../../../changelog.rst:624
+msgid "Feature: Added ``RelWithDebInfo/MinRelSize`` to cmake generators"
+msgstr ""
+
+#: ../../../changelog.rst:625
+msgid ""
+"Feature: Improved linter, removing false positives due to dynamic conanfile "
+"attributes"
+msgstr ""
+
+#: ../../../changelog.rst:626
+msgid "Feature: Added ``tools.ftp_download()`` function for FTP retrieval"
+msgstr ""
+
+#: ../../../changelog.rst:627
+msgid "Feature: Managing symlinks between folders."
+msgstr ""
+
+#: ../../../changelog.rst:628
+msgid ""
+"Feature: :command:`conan remote add` command learned new insert`` option to "
+"add remotes in specific order."
+msgstr ""
+
+#: ../../../changelog.rst:629
+msgid "Feature: support multi-config in the ``SCons`` generator"
+msgstr ""
+
+#: ../../../changelog.rst:630
+msgid "Feature: support for gcc 7.1+ detection"
+msgstr ""
+
+#: ../../../changelog.rst:631
+msgid ""
+"Feature: ``tools`` now are using global ``requests`` and ``output`` "
+"instances. Proxies will work for ``tools.download()``"
+msgstr ""
+
+#: ../../../changelog.rst:632
+msgid ""
+"Feature: json`` parameter added to :command:`conan info`` command to create "
+"a JSON with the ``build_order``."
+msgstr ""
+
+#: ../../../changelog.rst:633
+msgid "Fix: update default repos, now pointing to Bintray."
+msgstr ""
+
+#: ../../../changelog.rst:634
+msgid "Fix: printing ``outdated from recipe`` also for remotes"
+msgstr ""
+
+#: ../../../changelog.rst:635
+msgid ""
+"Fix: Fix required slash in ``configure_dir`` of ``AutoToolsBuildEnvironment``"
+msgstr ""
+
+#: ../../../changelog.rst:636
+msgid "Fix: command ``new`` with very short names, now errors earlier."
+msgstr ""
+
+#: ../../../changelog.rst:637
+msgid "Fix: better error detection for incorrect ``Conanfile.py`` letter case."
+msgstr ""
+
+#: ../../../changelog.rst:638
+msgid "Fix: Improved some cmake robustness using quotes to avoid cmake errors"
+msgstr ""
+
+#: ../../../changelog.rst:639
+msgid ""
+"BugFix: Fixed incorrect firing of building due to build`` patterns error"
+msgstr ""
+
+#: ../../../changelog.rst:640
+msgid ""
+"BugFix: Fixed bug with options incorrectly applied to ``build_requires`` and "
+"crashing"
+msgstr ""
+
+#: ../../../changelog.rst:641
+msgid ""
+"Refactor: internal refactors toward having a python api to conan "
+"functionality"
+msgstr ""
+
+#: ../../../changelog.rst:645
+msgid "0.23.1 (05-June-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:647
+msgid ""
+"BugFix: Fixed bug while packaging symlinked folders in build folder, and "
+"target not being packaged."
+msgstr ""
+
+#: ../../../changelog.rst:648
+msgid "Relaxed OSX requirement of pyopenssl to <18"
+msgstr ""
+
+#: ../../../changelog.rst:652
+msgid "0.23.0 (01-June-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:654
+msgid ""
+"Feature: new ``build_requires`` field and ``build_requirements()`` in "
+"package recipes"
+msgstr ""
+
+#: ../../../changelog.rst:655
+msgid ""
+"Feature: improved commands (source, build, package, package_files) and "
+"workflows for local development of packages in user folders."
+msgstr ""
+
+#: ../../../changelog.rst:656
+msgid ""
+"Feature: implemented ``no_copy_source`` attribute in recipes to avoid the "
+"copy of source code from \"source\" to \"build folder\". Created new ``self."
+"source_folder``, ``self.build_folder``, ``self.package_folder`` for recipes "
+"to use."
+msgstr ""
+
+#: ../../../changelog.rst:657
+msgid ""
+"Feature: improved ``qmake`` generator with multi-config support, resource "
+"directories"
+msgstr ""
+
+#: ../../../changelog.rst:658
+msgid ""
+"Feature: improved exception capture and formatting for all recipe user "
+"methods exceptions"
+msgstr ""
+
+#: ../../../changelog.rst:659
+msgid "Feature: new ``tools.sha256()`` method"
+msgstr ""
+
+#: ../../../changelog.rst:660
+msgid "Feature: folder symlinks working now for packages and upload/download"
+msgstr ""
+
+#: ../../../changelog.rst:661
+msgid ""
+"Feature: added ``set_find_paths()`` to ``cmake-multi``, to set CMake FindXXX."
+"cmake paths. This will work only for single-config build-systems."
+msgstr ""
+
+#: ../../../changelog.rst:662
+msgid ""
+"Feature: using environment variables for ``configure()``, ``requirements()`` "
+"and ``test()`` methods"
+msgstr ""
+
+#: ../../../changelog.rst:663
+msgid ""
+"Feature: added a ``pylintrc`` environment variable in ``conan.conf`` to "
+"define a PYLINTRC file with custom style definitions (like indents)."
+msgstr ""
+
+#: ../../../changelog.rst:664
+msgid "Feature: fixed ``vcvars`` architecture setting"
+msgstr ""
+
+#: ../../../changelog.rst:665
+msgid "Fix: Make ``cacert.pem`` folder use CONAN_USER_HOME if existing"
+msgstr ""
+
+#: ../../../changelog.rst:666
+msgid "Fix: fixed ``options=a=b`` option definition"
+msgstr ""
+
+#: ../../../changelog.rst:667
+msgid ""
+"Fix: ``package_files`` command allows force`` argument to overwrite existing "
+"instead of failing"
+msgstr ""
+
+#: ../../../changelog.rst:668
+msgid ""
+"BugFix: Package names with underscore when parsing ``conanbuildinfo.txt``"
+msgstr ""
+
+#: ../../../changelog.rst:672
+msgid "0.22.3 (03-May-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:674
+msgid ""
+"Fix: Fixed CMake generator (in targets mode) with linker/exe flags like --"
+"framework XXX containing spaces."
+msgstr ""
+
+#: ../../../changelog.rst:678
+msgid "0.22.2 (20-April-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:680
+msgid ""
+"Fix: Fixed regression with usernames starting with non-alphabetical "
+"characters, introduced by 0.22.0"
+msgstr ""
+
+#: ../../../changelog.rst:684
+msgid "0.22.1 (18-April-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:686
+msgid "Fix: \"-\" symbol available again in usernames."
+msgstr ""
+
+#: ../../../changelog.rst:687
+msgid ""
+"Fix: Added ``future`` requirement to solve an error with pyinstaller "
+"generating the Windows installer."
+msgstr ""
+
+#: ../../../changelog.rst:691
+msgid "0.22.0 (18-April-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:693
+msgid ""
+"Feature: ``[build_requires]`` can now be declared in ``profiles`` and apply "
+"them to build packages. Those requirements are only installed if the package "
+"is required to build from sources, and do not affect its package ID hash, "
+"and it is not necessary to define them in the package recipe. Ideal for "
+"testing libraries, cross compiling toolchains (like Android), development "
+"tools, etc."
+msgstr ""
+
+#: ../../../changelog.rst:694
+msgid ""
+"Feature: Much improved support for cross-building. Support for cross-"
+"building to **Android** provided, with toolchains installable via "
+"``build_requires``."
+msgstr ""
+
+#: ../../../changelog.rst:695
+msgid ""
+"Feature: New ``package_files`` command, that is able to create binary "
+"packages directly from user files, without needing to define ``build()`` or "
+"``package()`` methods in the the recipes."
+msgstr ""
+
+#: ../../../changelog.rst:696
+msgid ""
+"Feature: command :command:`conan new` with a new bare`` option that will "
+"create a minimal package recipe, usable with the ``package_files`` command."
+msgstr ""
+
+#: ../../../changelog.rst:697
+msgid ""
+"Feature: Improved ``CMake`` helper, with ``test()`` method, automatic "
+"setting of BUILD_SHARED_LIBS, better management of variables, support for "
+"parallel compilation in MSVC (via /MP)"
+msgstr ""
+
+#: ../../../changelog.rst:698
+msgid ""
+"Feature: new ``tools.msvc_build_command()`` helper that both sets the Visual "
+"vcvars and calls Visual to build the solution. Also ``vcvars_command`` is "
+"improved to return non-empty string even if vcvars is set, for easier "
+"concatenation."
+msgstr ""
+
+#: ../../../changelog.rst:699
+msgid ""
+"Feature: Added package recipe linter, warning for potential errors and also "
+"about Python 3 incompatibilities when running from Python 2. Enabled by "
+"default can be opt-out."
+msgstr ""
+
+#: ../../../changelog.rst:700
+msgid "Feature: Improvements in HTML output of :command:`conan info --graph`."
+msgstr ""
+
+#: ../../../changelog.rst:701
+msgid ""
+"Feature: allow custom path to bash, as configuration and environment "
+"variable."
+msgstr ""
+
+#: ../../../changelog.rst:702
+msgid ""
+"Fix: Not issuing an unused variable warning in CMake for the CONAN_EXPORTED "
+"variable"
+msgstr ""
+
+#: ../../../changelog.rst:703
+msgid ""
+"Fix: added new ``mips`` architectures and latest compiler versions to "
+"default settings.yml"
+msgstr ""
+
+#: ../../../changelog.rst:704
+msgid ""
+"Fix: Unified username allowed patterns to those used in package references."
+msgstr ""
+
+#: ../../../changelog.rst:705
+msgid "Fix: hardcoded vs15 version in tools.vcvars"
+msgstr ""
+
+#: ../../../changelog.rst:706
+msgid ""
+"BugFix: Clean crash and improved error messages when manifests mistmatch "
+"exists in conan upload."
+msgstr ""
+
+#: ../../../changelog.rst:710
+msgid "0.21.2 (04-April-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:712
+msgid "Bugfix: virtualenv generator quoting environment variables in Windows."
+msgstr ""
+
+#: ../../../changelog.rst:716
+msgid "0.21.1 (23-March-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:718
+msgid "BugFix: Fixed missing dependencies in ``AutoToolsBuildEnvironment``"
+msgstr ""
+
+#: ../../../changelog.rst:719
+msgid ""
+"BugFix: Escaping single quotes in html graph of :command:`conan info --"
+"graph=file.html`."
+msgstr ""
+
+#: ../../../changelog.rst:720
+msgid "BugFix: Fixed loading of auth plugins in conan_server"
+msgstr ""
+
+#: ../../../changelog.rst:721
+msgid "BugFix: Fixed ``visual_studio`` generator creating XML with dots."
+msgstr ""
+
+#: ../../../changelog.rst:725
+msgid "0.21.0 (21-March-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:727
+msgid ""
+"Feature: :command:`conan info --graph` or graph=file.html`` will generate a "
+"dependency graph representation in dot or html formats."
+msgstr ""
+
+#: ../../../changelog.rst:728
+msgid "Feature: Added better support and tests for Solaris Sparc."
+msgstr ""
+
+#: ../../../changelog.rst:729
+msgid ""
+"Feature: custom authenticators are now possible in :command:`conan_server`` "
+"with plugins."
+msgstr ""
+
+#: ../../../changelog.rst:730
+msgid ""
+"Feature: extended :command:`conan info` command with path information and "
+"filter by packages."
+msgstr ""
+
+#: ../../../changelog.rst:731
+msgid ""
+"Feature: enabled conditional binary packages removal with :command:`conan "
+"remove` with query syntax"
+msgstr ""
+
+#: ../../../changelog.rst:732
+msgid ""
+"Feature: enabled generation and validation of manifests from *test_package*."
+msgstr ""
+
+#: ../../../changelog.rst:733
+msgid "Feature: allowing ``options`` definitions in profiles"
+msgstr ""
+
+#: ../../../changelog.rst:734
+msgid ""
+"Feature: new ``RunEnvironment`` helper, that makes easier to run binaries "
+"from dependent packages"
+msgstr ""
+
+#: ../../../changelog.rst:735
+msgid ""
+"Feature: new ``virtualrunenv`` generator that activates environment variable "
+"for execution of binaries from installed packages, without requiring "
+"``imports`` of shared libraries."
+msgstr ""
+
+#: ../../../changelog.rst:736
+msgid ""
+"Feature: adding new version modes for ABI compatibility definition in "
+"``package_id()``."
+msgstr ""
+
+#: ../../../changelog.rst:737
+msgid ""
+"Feature: Extended :command:`conan new` command with new option for "
+"``exports_sources`` example recipe."
+msgstr ""
+
+#: ../../../changelog.rst:738
+msgid ""
+"Feature: ``CMake`` helper defining parallel builds for gcc-like compilers "
+"via jN``, allowing user definition with environment variable and in conan."
+"conf."
+msgstr ""
+
+#: ../../../changelog.rst:739
+msgid ""
+"Feature: :command:`conan profile`` command now show profiles in alphabetical "
+"order."
+msgstr ""
+
+#: ../../../changelog.rst:740
+msgid ""
+"Feature: extended ``visual_studio`` generator with more information and "
+"binary paths for execution with DLLs paths."
+msgstr ""
+
+#: ../../../changelog.rst:741
+msgid ""
+"Feature: Allowing relative paths with $PROFILE_DIR place holder in "
+"``profiles``"
+msgstr ""
+
+#: ../../../changelog.rst:742
+msgid ""
+"Fix: using only file checksums to decide for modified recipe in remote, for "
+"possible concurrent builds & uploads."
+msgstr ""
+
+#: ../../../changelog.rst:743
+msgid ""
+"Fix: Improved build`` modes management, with better checks and allowing "
+"multiple definitions and mixtures of conditions"
+msgstr ""
+
+#: ../../../changelog.rst:744
+msgid ""
+"Fix: Replaced warning for non-matching OS to one message stating the cross-"
+"build"
+msgstr ""
+
+#: ../../../changelog.rst:745
+msgid ""
+"Fix: local :command:`conan source`` command (working in user folder) now "
+"properly executes the equivalent of ``exports`` functionality"
+msgstr ""
+
+#: ../../../changelog.rst:746
+msgid ""
+"Fix: Setting command line arguments to cmake command as CMake flags, while "
+"using the TARGETS approach. Otherwise, arch flags like -m32 -m64 for gcc "
+"were not applied."
+msgstr ""
+
+#: ../../../changelog.rst:747
+msgid "BugFix: fixed :command:`conan imports` destination folder issue."
+msgstr ""
+
+#: ../../../changelog.rst:748
+msgid "BugFix: Allowing environment variables with spaces"
+msgstr ""
+
+#: ../../../changelog.rst:749
+msgid "BugFix: fix for CMake with targets usage of multiple flags."
+msgstr ""
+
+#: ../../../changelog.rst:750
+msgid ""
+"BugFix: Fixed crash of ``cmake_multi`` generator for \"multi-config\" "
+"packages."
+msgstr ""
+
+#: ../../../changelog.rst:754
+msgid "0.20.3 (06-March-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:756
+msgid ""
+"Fix: Added opt-out for ``CMAKE_SYSTEM_NAME`` automatically added when cross-"
+"building, causing users providing their own cross-build to fail"
+msgstr ""
+
+#: ../../../changelog.rst:758
+msgid ""
+"BugFix: Corrected usage of ``CONAN_CFLAGS`` instead of ``CONAN_C_FLAGS`` in "
+"cmake targets"
+msgstr ""
+
+#: ../../../changelog.rst:762
+msgid "0.20.2 (02-March-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:764
+msgid ""
+"Fix: Regression of ``visual_studio``generator using ``%(ExecutablePath)`` "
+"instead of ``$(ExecutablePath)``"
+msgstr ""
+
+#: ../../../changelog.rst:765
+msgid "Fix: Regression for build=outdated --build=Pkg`` install pattern"
+msgstr ""
+
+#: ../../../changelog.rst:769
+msgid "0.20.1 (01-March-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:771
+msgid ""
+"Fix: Disabled the use of cached settings and options from installed "
+"``conaninfo.txt``"
+msgstr ""
+
+#: ../../../changelog.rst:772
+msgid "Fix: Revert the use of quotes in ``cmake`` generator for flags."
+msgstr ""
+
+#: ../../../changelog.rst:773
+msgid "Fix: Allow comments in artifacts.properties"
+msgstr ""
+
+#: ../../../changelog.rst:774
+msgid "Fix: Added missing commit for CMake new helpers"
+msgstr ""
+
+#: ../../../changelog.rst:778
+msgid "0.20.0 (27-February-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:780
+msgid ""
+"**NOTE:** It is important that if you upgrade to this version, all the "
+"clients connected to the same remote, should upgrade too. Packages created "
+"with conan>=0.20.0 might not be usable with conan older conan clients."
+msgstr ""
+
+#: ../../../changelog.rst:783
+msgid ""
+"Feature: Largely improved management of **environment variables**, "
+"declaration in ``package_info()``, definition in profiles, in command line, "
+"per package, propagation to consumers."
+msgstr ""
+
+#: ../../../changelog.rst:785
+msgid ""
+"Feature: New build helpers ``AutotoolsBuildEnvironment``, "
+"``VisualStudioBuildEnvironment``, which deprecate ``ConfigureEnvironment``, "
+"with much better usage of environment variables"
+msgstr ""
+
+#: ../../../changelog.rst:787
+msgid ""
+"Feature: New ``virtualbuildenv`` generator that will generate a composable "
+"environment with build information from installed dependencies."
+msgstr ""
+
+#: ../../../changelog.rst:789
+msgid ""
+"Feature: New ``build_id()`` recipe method that allows to define logic to "
+"build once, and package multiple times without building. E.g.: build once "
+"both debug and release artifacts, then package separately."
+msgstr ""
+
+#: ../../../changelog.rst:792
+msgid ""
+"Feature: **Multi-config packages**. Now packages can provide multi-"
+"configuration packages, like both debug/release artifacts in the same "
+"package, with ``self.cpp_info.debug.libs = [...]`` syntax. Not restricted to "
+"debug/release, can be used for other purposes."
+msgstr ""
+
+#: ../../../changelog.rst:795
+msgid ""
+"Feature: new :command:`conan config` command to manage, edit, display "
+"``conan.conf`` entries"
+msgstr ""
+
+#: ../../../changelog.rst:796
+msgid ""
+"Feature: :ref:`Improvements<cmake_reference>` to ``CMake`` build helper, now "
+"it has ``configure()`` and ``build()`` methods for common operations."
+msgstr ""
+
+#: ../../../changelog.rst:798
+msgid ""
+"Feature: Improvements to ``SystemPackageTool`` with detection of installed "
+"packages, improved implementation, installation of multi-name packages."
+msgstr ""
+
+#: ../../../changelog.rst:800
+msgid ""
+"Feature: Unzip with ``tools.unzip`` maintaining permissions (Linux, OSX)"
+msgstr ""
+
+#: ../../../changelog.rst:801
+msgid "Feature: :command:`conan info` command now allows profiles too"
+msgstr ""
+
+#: ../../../changelog.rst:802
+msgid ""
+"Feature: new tools ``unix_path()``, ``escape_windows_cmd()``, "
+"``run_in_windows_bash()``, useful for autotools projects in Win/MinGW/Msys"
+msgstr ""
+
+#: ../../../changelog.rst:804
+msgid ""
+"Feature: new context manager ``tools.chdir``, to temporarily change "
+"directory."
+msgstr ""
+
+#: ../../../changelog.rst:805
+msgid "Feature: CMake using ``CMAKE_SYSTEM_NAME`` for cross-compiling."
+msgstr ""
+
+#: ../../../changelog.rst:806
+msgid "Feature: Artifactory build-info extraction from traces"
+msgstr ""
+
+#: ../../../changelog.rst:807
+msgid ""
+"Feature: Attach custom headers to artifacts uploads with an `artifacts."
+"properties` file."
+msgstr ""
+
+#: ../../../changelog.rst:808
+msgid "Feature: allow and copy symlinks while :command:`conan export`"
+msgstr ""
+
+#: ../../../changelog.rst:809
+msgid ""
+"Fix: removing quotes in some cmake variables that were generating incorrect "
+"builds"
+msgstr ""
+
+#: ../../../changelog.rst:810
+msgid ""
+"Fix: providing better error messages for non existing binaries, with links "
+"to the docs"
+msgstr ""
+
+#: ../../../changelog.rst:811
+msgid "Fix: improved error messages if ``tools.patch`` failed"
+msgstr ""
+
+#: ../../../changelog.rst:812
+msgid ""
+"Fix: adding ``resdirs`` to ``cpp_info`` propagated information, and cmake "
+"variables, for directories containing resources and other data."
+msgstr ""
+
+#: ../../../changelog.rst:814
+msgid ""
+"Fix: printing error messages if a build`` policy doesn't match any package"
+msgstr ""
+
+#: ../../../changelog.rst:815
+msgid ""
+"Fix: managing VS2017 by ``tools``. Still the manual definition of "
+"``vs150comntools`` required."
+msgstr ""
+
+#: ../../../changelog.rst:816
+msgid ""
+"Bug fix: crashes when not supported characters were dumped to terminal by "
+"logger"
+msgstr ""
+
+#: ../../../changelog.rst:817
+msgid "Bug fix: wrong executable path in Visual Studio generator"
+msgstr ""
+
+#: ../../../changelog.rst:821
+msgid "0.19.3 (27-February-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:823
+msgid ""
+"Fix: backward compatibility for new environment variables. New features to "
+"be introduced in 0.20 will produce that ``conaninfo.txt`` will not be "
+"correctly parsed, and then package would be \"missing\". This will happen "
+"for packages created with 0.20, and consumed with older than 0.19.3"
+msgstr ""
+
+#: ../../../changelog.rst:827
+msgid ""
+"NOTE: It is important that you upgrade at least to this version if you are "
+"using remotes with packages that might be created with latest conan releases "
+"(like conan.io)."
+msgstr ""
+
+#: ../../../changelog.rst:832
+msgid "0.19.2 (15-February-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:834
+msgid "Bug fix: Fixed bug with remotes behind proxies"
+msgstr ""
+
+#: ../../../changelog.rst:835
+msgid "Bug fix: Fixed bug with ``exports_sources`` feature and nested folders"
+msgstr ""
+
+#: ../../../changelog.rst:839
+msgid "0.19.1 (02-February-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:841
+msgid ""
+"Bug fix: Fixed issue with :command:`conan copy`` followed by :command:`conan "
+"upload`` due to the new ``exports_sources`` feature."
+msgstr ""
+
+#: ../../../changelog.rst:846
+msgid "0.19.0 (31-January-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:848
+msgid ""
+"Feature: ``exports_sources`` allows to snapshot sources (like ``exports``) "
+"but retrieve them strictly when necessary, to build from sources. This can "
+"largely improve install times for package recipes containing sources"
+msgstr ""
+
+#: ../../../changelog.rst:851
+msgid ""
+"Feature: new configurable **tracer** able to create structured logs of conan "
+"actions: commands, API calls, etc"
+msgstr ""
+
+#: ../../../changelog.rst:852
+msgid ""
+"Feature: new logger for ``self.run`` actions, able to log information from "
+"builds and other commands to files, that can afterwards be packaged together "
+"with the binaries."
+msgstr ""
+
+#: ../../../changelog.rst:854
+msgid "Feature: support for **Solaris SunOS**"
+msgstr ""
+
+#: ../../../changelog.rst:855
+msgid ""
+"Feature: ``Version`` helper improved with ``patch, pre, build`` capabilities "
+"to handle ``1.3.4-alpha2+build1`` versions"
+msgstr ""
+
+#: ../../../changelog.rst:856
+msgid ""
+"Feature: compress level of tgz is now configurable via "
+"``CONAN_COMPRESSION_LEVEL`` environment variable, default 9. Reducing it can "
+"lead to faster compression times, at the expense of slightly bigger archives"
+msgstr ""
+
+#: ../../../changelog.rst:858
+msgid "Feature: Add **powershell** support for virtualenv generator in Windows"
+msgstr ""
+
+#: ../../../changelog.rst:859
+msgid ""
+"Feature: Improved ``system_requirements()`` raising errors when failing, "
+"retrying if not successful, being able to execute in user space for local "
+"recipes"
+msgstr ""
+
+#: ../../../changelog.rst:861
+msgid "Feature: new cmake helper macro ``conan_target_link_libraries()``."
+msgstr ""
+
+#: ../../../changelog.rst:862
+msgid ""
+"Feature: new cmake ``CONAN_EXPORTED`` variable, can be used in CMakeLists."
+"txt to differentiate building in the local conan cache as package and "
+"building in user space"
+msgstr ""
+
+#: ../../../changelog.rst:864
+msgid ""
+"Fix: improving the caching of options from :command:`conan install` in "
+"conaninfo.txt and precedence."
+msgstr ""
+
+#: ../../../changelog.rst:865
+msgid ""
+"Fix: conan definition of cmake output dirs has been disabled for "
+"``cmake_multi`` generator"
+msgstr ""
+
+#: ../../../changelog.rst:866
+msgid ""
+"Fix: ``imports()`` now uses environment variables at \"conan install\" (but "
+"not at \"conan imports\" yet)"
+msgstr ""
+
+#: ../../../changelog.rst:867
+msgid ""
+"Fix: ``conan_info()`` method has been renamed to ``package_id()``. Backward "
+"compatibility is maintained, but it is strongly encouraged to use the new "
+"name."
+msgstr ""
+
+#: ../../../changelog.rst:869
+msgid ""
+"Fix: ``conan_find_libraries`` now use the NO_CMAKE_FIND_ROOT_PATH parameter "
+"for avoiding issue while cross-compiling"
+msgstr ""
+
+#: ../../../changelog.rst:870
+msgid "Fix: disallowing duplicate URLs in remotes, better error management"
+msgstr ""
+
+#: ../../../changelog.rst:871
+msgid ""
+"Fix: improved error message for wildcard uploads not matching any package"
+msgstr ""
+
+#: ../../../changelog.rst:872
+msgid ""
+"Fix: remove deprecated ``platform.linux_distribution()``, using new "
+"\"distro\" package"
+msgstr ""
+
+#: ../../../changelog.rst:873
+msgid "Bugfix: fixed management of ``VerifySSL`` parameter for remotes"
+msgstr ""
+
+#: ../../../changelog.rst:874
+msgid ""
+"Bugfix: fixed misdetection of compiler version in conanbuildinfo.cmake for "
+"apple-clang"
+msgstr ""
+
+#: ../../../changelog.rst:875
+msgid "Bugfix: fixed trailing slash in remotes URLs producing crashes"
+msgstr ""
+
+#: ../../../changelog.rst:876
+msgid ""
+"Refactor: A big refactor has been do to ``options``. Nested options are no "
+"longer supported, and ``option.suboption`` will be managed as a single "
+"string option."
+msgstr ""
+
+#: ../../../changelog.rst:879
+msgid ""
+"This has been a huge release with contributors of 11 developers. Thanks very "
+"much to all of them!"
+msgstr ""
+
+#: ../../../changelog.rst:883
+msgid "0.18.1 (11-January-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:885
+msgid ""
+"Bug Fix: Handling of transitive private dependencies in modern cmake targets"
+msgstr ""
+
+#: ../../../changelog.rst:886
+msgid "Bug Fix: Missing quotes in CMake macro for modern cmake targets"
+msgstr ""
+
+#: ../../../changelog.rst:887
+msgid "Bug Fix: Handling LINK_FLAGS in cmake modern targets"
+msgstr ""
+
+#: ../../../changelog.rst:888
+msgid ""
+"Bug Fix: Environment variables no propagating to test project with "
+"test_package command"
+msgstr ""
+
+#: ../../../changelog.rst:892
+msgid "0.18.0 (3-January-2017)"
+msgstr ""
+
+#: ../../../changelog.rst:894
+msgid ""
+"Feature: uploads and downloads with **retries** on failures. This helps to "
+"avoid having to fully rebuild on CI when a network transfer fails"
+msgstr ""
+
+#: ../../../changelog.rst:896
+msgid "Feature: added **SCons** generator"
+msgstr ""
+
+#: ../../../changelog.rst:897
+msgid ""
+"Feature: support for **Python 3.6**, with several fixes. Added Python 3.6 to "
+"CI."
+msgstr ""
+
+#: ../../../changelog.rst:898
+msgid "Feature: show package dates in :command:`conan info` command"
+msgstr ""
+
+#: ../../../changelog.rst:899
+msgid ""
+"Feature: new ``cmake_multi`` generator for multi-configuration IDEs like "
+"Visual Studio and XCode"
+msgstr ""
+
+#: ../../../changelog.rst:900
+msgid "Feature: support for **Visual Studio 2017**, VS-15"
+msgstr ""
+
+#: ../../../changelog.rst:901
+msgid "Feature: **FreeBSD** now passes test suite"
+msgstr ""
+
+#: ../../../changelog.rst:902
+msgid ""
+"Feature: :command:`conan upload` showing error messages or URL of remote"
+msgstr ""
+
+#: ../../../changelog.rst:903
+msgid ""
+"Feature: **wildcard or pattern upload**. Useful to upload multiple packages "
+"to a remote."
+msgstr ""
+
+#: ../../../changelog.rst:904
+msgid ""
+"Feature: allow defining **settings as environment variables**. Useful for "
+"use cases like dockerized builds."
+msgstr ""
+
+#: ../../../changelog.rst:905
+msgid "Feature: improved help`` messages"
+msgstr ""
+
+#: ../../../changelog.rst:906
+msgid "Feature: cmake helper tools to launch conan directly from cmake"
+msgstr ""
+
+#: ../../../changelog.rst:907
+msgid "Added **code coverage** for code repository"
+msgstr ""
+
+#: ../../../changelog.rst:908
+msgid "Fix: conan.io badges when containing dash"
+msgstr ""
+
+#: ../../../changelog.rst:909
+msgid "Fix: manifests errors due to generated .pyc files"
+msgstr ""
+
+#: ../../../changelog.rst:910
+msgid "Bug Fix: unicode error messages crashes"
+msgstr ""
+
+#: ../../../changelog.rst:911
+msgid ""
+"Bug Fix: duplicated build of same binary package for private dependencies"
+msgstr ""
+
+#: ../../../changelog.rst:912
+msgid ""
+"Bug Fix: duplicated requirement if using version-ranges and "
+"``requirements()`` method."
+msgstr ""
+
+#: ../../../changelog.rst:916
+msgid "0.17.2 (21-December-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:918
+msgid "Bug Fix: ConfigureEnvironment helper ignoring libcxx setting. #791"
+msgstr ""
+
+#: ../../../changelog.rst:922
+msgid "0.17.1 (15-December-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:924
+msgid ""
+"Bug Fix: conan install --all generating corrupted packages. Thanks to @yogeva"
+msgstr ""
+
+#: ../../../changelog.rst:925
+msgid "Improved case sensitive folder management."
+msgstr ""
+
+#: ../../../changelog.rst:926
+msgid "Fix: appveyor links in README."
+msgstr ""
+
+#: ../../../changelog.rst:930
+msgid "0.17.0 (13-December-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:932
+msgid ""
+"Feature: support for **modern cmake** with cmake ``INTERFACE IMPORTED`` "
+"targets defined per package"
+msgstr ""
+
+#: ../../../changelog.rst:933
+msgid "Feature: support for more advanced queries in search."
+msgstr ""
+
+#: ../../../changelog.rst:934
+msgid ""
+"Feature: new ``profile list|show`` command, able to list or show details of "
+"profiles"
+msgstr ""
+
+#: ../../../changelog.rst:935
+msgid "Feature: adding preliminary support for **FreeBSD**"
+msgstr ""
+
+#: ../../../changelog.rst:936
+msgid "Feature: added new ``description`` field, to document package contents."
+msgstr ""
+
+#: ../../../changelog.rst:937
+msgid ""
+"Feature: generation of **imports manifest** and :command:`conan imports --"
+"undo` functionality to remove imported files"
+msgstr ""
+
+#: ../../../changelog.rst:939
+msgid ""
+"Feature: optional SSL certificate verification for remotes, to allow self "
+"signed certificates"
+msgstr ""
+
+#: ../../../changelog.rst:940
+msgid ""
+"Feature: allowing custom paths in profiles, so profiles can be easily shared "
+"in teams, just inside the source repository or elsewhere."
+msgstr ""
+
+#: ../../../changelog.rst:942
+msgid ""
+"Feature: fields ``user`` and ``channel`` now available in conan recipes. "
+"That allows to declare requirements for the same user/channel as the current "
+"package."
+msgstr ""
+
+#: ../../../changelog.rst:944
+msgid "Feature: improved conan.io package web, adding description."
+msgstr ""
+
+#: ../../../changelog.rst:945
+msgid "Fix: allow to modify cmake generator in ``CMake`` helper class."
+msgstr ""
+
+#: ../../../changelog.rst:946
+msgid "Fix: added ``strip`` parameter to ``tools.patch()`` utility"
+msgstr ""
+
+#: ../../../changelog.rst:947
+msgid "Fix: removed unused dependency to Boto"
+msgstr ""
+
+#: ../../../changelog.rst:948
+msgid "Fix: wrong line endings in Windows for conan.conf"
+msgstr ""
+
+#: ../../../changelog.rst:949
+msgid ""
+"Fix: proper automatic use of ``txt`` and ``env`` generators in *test_package*"
+msgstr ""
+
+#: ../../../changelog.rst:950
+msgid ""
+"Bug fix: solved problem when uploading python packages that generated .pyc "
+"at execution"
+msgstr ""
+
+#: ../../../changelog.rst:951
+msgid "Bug fix: crash when duplicate requires were declared in conanfile"
+msgstr ""
+
+#: ../../../changelog.rst:952
+msgid "Bug fix: crash with existing imported files with symlinks"
+msgstr ""
+
+#: ../../../changelog.rst:953
+msgid ""
+"Bug fix: options missing in \"copy install command to clipboard\" in web"
+msgstr ""
+
+#: ../../../changelog.rst:957
+msgid "0.16.1 (05-December-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:959
+msgid "Solved bug with *test_package* with arguments, like scopes."
+msgstr ""
+
+#: ../../../changelog.rst:963
+msgid "0.16.0 (19-November-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:965
+msgid ""
+"**Upgrade**: The build=outdated`` feature had a change in the hash "
+"computation, it might report outdated binaries from recipes. You can re-"
+"build the binaries or ignore it (if you haven't changed your recipes without "
+"re-generating binaries)"
+msgstr ""
+
+#: ../../../changelog.rst:969
+msgid ""
+"Feature: **version ranges**. Conan now supports defining requirements with "
+"version range expressions like ``Pkg/[>1.2,<1.9||1.0.1]@user/channel``. "
+"Check the :ref:`version ranges reference <version_ranges>` for details"
+msgstr ""
+
+#: ../../../changelog.rst:971
+msgid ""
+"Feature: decoupled ``imports`` from normal install. Now :command:`conan "
+"install --no-imports` skips the imports section."
+msgstr ""
+
+#: ../../../changelog.rst:973
+msgid ""
+"Feature: new :command:`conan imports` command that will execute the imports "
+"section without running install"
+msgstr ""
+
+#: ../../../changelog.rst:974
+msgid ""
+"Feature: **overriding settings per package**. Now it is possible to specify "
+"individual settings for each package. This can be specified both in the "
+"command line and in ``profiles``"
+msgstr ""
+
+#: ../../../changelog.rst:976
+msgid ""
+"Feature: **environment variables** definition in the command line, global "
+"and per package. This allows to define specific environment variables as the "
+"compiler (CC, CXX) for a specific package. These environment variables can "
+"also be defined in ``profiles``. Check :ref:`profiles reference <profiles>`"
+msgstr ""
+
+#: ../../../changelog.rst:979
+msgid ""
+"Feature: Now conan files copies handle **symlinks**, so files are not "
+"duplicated. This will save some space and improve download speed in some "
+"large packages. To enable it, use ``self.copy(..., links=True)``"
+msgstr ""
+
+#: ../../../changelog.rst:982
+msgid ""
+"Fix: Enabling correct use of **MSYS** in Windows, by using the Windows "
+"``C:/...`` path instead of the MSYS ones"
+msgstr ""
+
+#: ../../../changelog.rst:984
+msgid ""
+"Fix: Several fixes in :command:`conan search`, both local and in remotes"
+msgstr ""
+
+#: ../../../changelog.rst:985
+msgid ""
+"Fix: Manifests line endings and order fix, and hash computation fixed (it "
+"had wrong ordering)"
+msgstr ""
+
+#: ../../../changelog.rst:986
+msgid ""
+"Fix: Removed http->https redirection in conan_server that produced some "
+"issues for SSL reversed proxies"
+msgstr ""
+
+#: ../../../changelog.rst:988
+msgid "Fix: Taking into account \"ANY\" definition of settings and options"
+msgstr ""
+
+#: ../../../changelog.rst:989
+msgid ""
+"Fix: Improved some error messages and failures to encode OS errors with "
+"unicode characters"
+msgstr ""
+
+#: ../../../changelog.rst:990
+msgid "Update: added new arch ``ppc64`` to default settings"
+msgstr ""
+
+#: ../../../changelog.rst:991
+msgid "Update: updated python-requests library version"
+msgstr ""
+
+#: ../../../changelog.rst:992
+msgid ""
+"Fix: Using ``generator()`` instead of compiler to decide on cmake multi-"
+"configuration for Ninja+cl builds"
+msgstr ""
+
+#: ../../../changelog.rst:994
+msgid "Improved and completed documentation"
+msgstr ""
+
+#: ../../../changelog.rst:998
+msgid "0.15.0 (08-November-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1000
+msgid ""
+"**Upgrade**: If you were using the ``short_paths`` feature in Windows for "
+"packages with long paths, please reset your local cache. You could manually "
+"remove packages or just run :command:`conan remove \"*\"`"
+msgstr ""
+
+#: ../../../changelog.rst:1003
+msgid ""
+"Feature: New build=outdated`` functionality, that allows to build the binary "
+"packages for those dependencies whose recipe has been changed, or if the "
+"binary is not existing. Each binary package stores a hash of the recipe to "
+"know if they have to be regenerated (are outdated). This information is also "
+"provided in the :command:`conan search <ref>`` command. Useful for package "
+"creators and CI."
+msgstr ""
+
+#: ../../../changelog.rst:1008
+msgid ""
+"Feature: Extended the ``short_paths`` feature for Windows path limit to the "
+"``package`` folder, so package with very long paths, typically in headers in "
+"nested folder hierarchies are supported."
+msgstr ""
+
+#: ../../../changelog.rst:1010
+msgid ""
+"Feature: New ``tool.build_sln_command()`` helper to ``build()`` Microsoft "
+"Visual Studio solution (.sln) projects"
+msgstr ""
+
+#: ../../../changelog.rst:1012
+msgid ""
+"Feature: Extended the ``source`` and ``package`` command, so together with "
+"``build`` they can be fully executed in a user folder, as a convenience for "
+"package creation and testing."
+msgstr ""
+
+#: ../../../changelog.rst:1014
+msgid ""
+"Feature: Extending the scope of ``tools.pythonpath`` to work in local "
+"commands too"
+msgstr ""
+
+#: ../../../changelog.rst:1015
+msgid "Improved the parsing of ``profiles`` and better error messages"
+msgstr ""
+
+#: ../../../changelog.rst:1016
+msgid "Not adding ``-s`` compiler flag for clang, as it doesn't use it."
+msgstr ""
+
+#: ../../../changelog.rst:1017
+msgid ""
+"Automatic generation of *conanenv.txt* in local cache, warnings if using "
+"local commands and no ``conanbuildinfo.txt`` and no *conanenv.txt* are "
+"present to cache the information form install"
+msgstr ""
+
+#: ../../../changelog.rst:1019
+msgid ""
+"Fix: Fixed bug when using empty initial requirements (``requires = \"\"``)"
+msgstr ""
+
+#: ../../../changelog.rst:1020
+msgid "Fix: Added ``glob`` hidden import to pyinstaller"
+msgstr ""
+
+#: ../../../changelog.rst:1021
+msgid ""
+"Fix: Fixed minor bugs with ``short_paths`` as local search not listing "
+"packages"
+msgstr ""
+
+#: ../../../changelog.rst:1022
+msgid ""
+"Fix: Fixed problem with virtual envs in Windows with paths separator "
+"(using / instead of \\)"
+msgstr ""
+
+#: ../../../changelog.rst:1023
+msgid ""
+"Fix: Fixed parsing of conanbuildinfo.txt, so the root folder for each "
+"dependency is available in local commands too"
+msgstr ""
+
+#: ../../../changelog.rst:1025
+msgid ""
+"Fix: Fixed bug in *test_package* with the test project using the "
+"``requirements()`` method."
+msgstr ""
+
+#: ../../../changelog.rst:1028
+msgid "0.14.1 (20-October-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1030
+msgid "Fixed bug with `short_paths` feature in windows."
+msgstr ""
+
+#: ../../../changelog.rst:1031
+msgid "Improved error messages for non-valid `profile` test files."
+msgstr ""
+
+#: ../../../changelog.rst:1032
+msgid "Remove downloaded tgz package files from remotes after decompress them."
+msgstr ""
+
+#: ../../../changelog.rst:1033
+msgid "Fixes bug with `install --all` and short_paths"
+msgstr ""
+
+#: ../../../changelog.rst:1037
+msgid "0.14.0 (20-October-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1039
+msgid ""
+"Feature: Added profiles, as user predefined settings and environment "
+"variables (as CC and CXX for compiler paths). They are stored in files in "
+"the conan cache, so they can be easily edited, added, and shared. Use them "
+"with :command:`conan install --profile=name`"
+msgstr ""
+
+#: ../../../changelog.rst:1042
+msgid ""
+"Feature: ``short_paths`` feature for Windows now also handle long paths for "
+"the final package, in case that a user library has a very long final name, "
+"with nested subfolders."
+msgstr ""
+
+#: ../../../changelog.rst:1044
+msgid ""
+"Feature: Added ``tools.cpu_count()`` as a helper to retrieve the number of "
+"cores, so it can be used in concurrent builds"
+msgstr ""
+
+#: ../../../changelog.rst:1046
+msgid ""
+"Feature: Detects cycles in the dependency graph, and raise error instead of "
+"exhausting recursion limits"
+msgstr ""
+
+#: ../../../changelog.rst:1048
+msgid ""
+"Feature: Conan learned the werror`` option that will raise error and stop "
+"installation under some cases treated as warnings otherwise: Duplicated "
+"dependencies, or dependencies conflicts"
+msgstr ""
+
+#: ../../../changelog.rst:1050
+msgid ""
+"Feature: New ``env`` generator that generates a text file with the "
+"environment variables defined by dependencies, so it can be stored. Such "
+"file is parsed by :command:`conan build` to be able to use such environment "
+"variables for ``self.deps_env_info`` too, in the same way it uses the "
+"``txt`` generator to load variables for ``self.deps_cpp_info``."
+msgstr ""
+
+#: ../../../changelog.rst:1054
+msgid "Fix: Do not print progress bars when output is a file"
+msgstr ""
+
+#: ../../../changelog.rst:1055
+msgid ""
+"Fix: Improved the local conan search, using options too in the query :"
+"command:`conan search -q option=value`"
+msgstr ""
+
+#: ../../../changelog.rst:1056
+msgid "Fix: Boto dependency updated to 2.43.0 (necessary for ArchLinux)"
+msgstr ""
+
+#: ../../../changelog.rst:1057
+msgid ""
+"Fix: Simplified the :command:`conan package` command, removing unused and "
+"confusing options, and more informative messages about errors and utility of "
+"this command."
+msgstr ""
+
+#: ../../../changelog.rst:1059
+msgid ""
+"Fix: More fixes and improvements on ``ConfigureEnvironment``, mainly for "
+"Windows"
+msgstr ""
+
+#: ../../../changelog.rst:1060
+msgid ""
+"Fix: Conan now does not generate a ``conanbuildinfo.txt`` file when doing :"
+"command:`conan install <PkgRef>`."
+msgstr ""
+
+#: ../../../changelog.rst:1061
+msgid ""
+"Bug fix: Files of a package recipe are \"touched\" to update their "
+"timestamps to current time when retrieved, otherwise some build systems as "
+"Ninja can have problems with them."
+msgstr ""
+
+#: ../../../changelog.rst:1063
+msgid ""
+"Bug fix: ``qmake`` generator now uses quotes to handle paths with spaces"
+msgstr ""
+
+#: ../../../changelog.rst:1064
+msgid ""
+"Bug fix: Fixed ``OSInfo`` to return the short distro name instead of the "
+"long one."
+msgstr ""
+
+#: ../../../changelog.rst:1065
+msgid "Bug fix: fixed transitivy of ``private`` dependencies"
+msgstr ""
+
+#: ../../../changelog.rst:1069
+msgid "0.13.3 (13-October-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1071
+msgid ""
+"This minor solves some problems with ``ConfigureEnvironment``, mainly for "
+"Windows, but also fixes other things:"
+msgstr ""
+
+#: ../../../changelog.rst:1074
+msgid ""
+"Fixed concatenation problems in Windows for several environment variables. "
+"Fixed problems with path with spaces"
+msgstr ""
+
+#: ../../../changelog.rst:1076
+msgid ""
+"A batch file is created in Windows to be called, as ``if defined`` "
+"structures doesn't seem to work in the command line."
+msgstr ""
+
+#: ../../../changelog.rst:1078
+msgid ""
+"The ``vcvars_command`` from ``tools`` now checks the Visual Studio "
+"environment variable, if it is already set, it will check it with the "
+"current project settings, throwing an error if not matching, returning an "
+"empty command if matches."
+msgstr ""
+
+#: ../../../changelog.rst:1081
+msgid ""
+"Added a ``compile_flags`` property to ``ConfigureEnvironment``, to be passed "
+"in the command line to the compiler, but not as environment variables"
+msgstr ""
+
+#: ../../../changelog.rst:1083
+msgid ""
+"Added ``defines`` to environment for nix systems, it was not being handled "
+"before"
+msgstr ""
+
+#: ../../../changelog.rst:1084
+msgid ""
+"Added new tests, compiling simple projects and diamond dependencies with "
+"cmake, cl (msvc), gcc (gcc in linux, mingw in win) and clang (OSX), for a "
+"better coverage of the ``ConfigureEnvironment`` functionality."
+msgstr ""
+
+#: ../../../changelog.rst:1086
+msgid "Fixed wrong ``CPP_INCLUDE_PATH``, it is now ``CPLUS_INCLUDE_PATH``"
+msgstr ""
+
+#: ../../../changelog.rst:1090
+msgid "0.13.0 (03-October-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1092
+msgid ""
+"**IMPORTANT UPGRADE ISSUE:** There was a small error in the computation of "
+"binary packages IDs, that has been addressed by conan 0.13. It affects to "
+"third level (and higher) binary packages, i.e. A and B in A->B->C->D, which "
+"binaries **must** be regenerated for the new hashes. If you don't plan to "
+"provide support for older conan releases (<=0.12), which would be "
+"reasonable, you should remove all binaries first (:command:`conan remove -"
+"p`, works both locally and remotely), then re-build your binaries."
+msgstr ""
+
+#: ../../../changelog.rst:1098
+msgid "Features:"
+msgstr ""
+
+#: ../../../changelog.rst:1100
+msgid ""
+"Streaming from/to disk for all uploads/downloads. Previously, this was done "
+"for memory, but conan started to have issues for huge packages (>many "
+"hundreds Mbs), that sometimes could be alleviated using Python 64 bits "
+"distros. This issues should be alleviated now"
+msgstr ""
+
+#: ../../../changelog.rst:1103
+msgid ""
+"New security system that allows capturing and checking the package recipes "
+"and binaries manifests into user folders (project or any other folder). That "
+"ensures that packages cannot be replaced, hacked, forged, changed or wrongly "
+"edited, either locally or in any remote server, without notice."
+msgstr ""
+
+#: ../../../changelog.rst:1106
+msgid ""
+"Possible to handle and reuse python code in recipes. Actually, conan can be "
+"used as a package manager for python, by adding the package path to "
+"``env_info.PYTHONPATH``. Useful if you want to reuse common python code "
+"between different package recipes."
+msgstr ""
+
+#: ../../../changelog.rst:1109
+msgid ""
+"Avoiding re-compress the tgz for packages after uploads if it didn't change."
+msgstr ""
+
+#: ../../../changelog.rst:1110
+msgid ""
+"New command :command:`conan source` that executes the ``source()`` method of "
+"a given conanfile. Very useful for CI, if desired to run in parallel the "
+"construction of different binaries."
+msgstr ""
+
+#: ../../../changelog.rst:1112
+msgid ""
+"New propagation of ``cpp_info``, so it now allows for capturing binary "
+"packages libraries with new ``collect_libs()`` helper, and access to created "
+"binaries to compute the ``package_info()`` in general."
+msgstr ""
+
+#: ../../../changelog.rst:1114
+msgid ""
+"Command *test_package* now allows the update`` option, to automatically "
+"update dependencies."
+msgstr ""
+
+#: ../../../changelog.rst:1115
+msgid "Added new architectures for ``ppc64le`` and detection for ``AArch64``"
+msgstr ""
+
+#: ../../../changelog.rst:1116
+msgid ""
+"New methods for defining requires effect over binary packages ID (hash) in "
+"``conan_info()``"
+msgstr ""
+
+#: ../../../changelog.rst:1117
+msgid ""
+"Many bugs fixes: error in ``tools.download`` with python 3, restore correct "
+"prompt in virtualenvs, bug if removing an option in ``config_options()``, "
+"setup.py bug..."
+msgstr ""
+
+#: ../../../changelog.rst:1120
+msgid ""
+"This release has contributions from @tru, @raulbocanegra, @tivek, @mathieu, "
+"and the feedback of many other conan users, thanks very much to all of them!"
+msgstr ""
+
+#: ../../../changelog.rst:1125
+msgid "0.12.0 (13-September-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1127
+msgid ""
+"Major changes to **search** api and commands. Decoupled the search of "
+"package recipes, from the search of binary packages."
+msgstr ""
+
+#: ../../../changelog.rst:1129
+msgid ""
+"Fixed bug that didn't allow to ``export`` or ``upload`` packages with "
+"settings restrictions if the restrictions didn't match the host settings"
+msgstr ""
+
+#: ../../../changelog.rst:1131
+msgid ""
+"Allowing disabling color output with ``CONAN_COLOR_DISPLAY=0`` environment "
+"variable, or to configure color schema for light console backgrounds with "
+"``CONAN_COLOR_DARK=1`` environment variable"
+msgstr ""
+
+#: ../../../changelog.rst:1133
+msgid ""
+"Imports can use absolute paths, and files copied from local conan cache to "
+"those paths will not be removed when :command:`conan install`. Can be used "
+"as a way to install machine-wise things (outside conan local cache)"
+msgstr ""
+
+#: ../../../changelog.rst:1136
+msgid ""
+"More robust handling of failing transfers (network disconnect), and "
+"inconsistent status after such"
+msgstr ""
+
+#: ../../../changelog.rst:1137
+msgid ""
+"Large internal refactor for storage managers. Improved implementations and "
+"decoupling between server and client"
+msgstr ""
+
+#: ../../../changelog.rst:1139
+msgid ""
+"Fixed slow :command:`conan remove` for caches with many packages due to slow "
+"deletion of empty folders"
+msgstr ""
+
+#: ../../../changelog.rst:1140
+msgid ""
+"Always allowing explicit options scopes, ``- o Package:option=value`` as "
+"well as the implicit ``-o option=value`` for current ``Package``, for "
+"consistency"
+msgstr ""
+
+#: ../../../changelog.rst:1142
+msgid "Fixed some bugs in client-server auth process."
+msgstr ""
+
+#: ../../../changelog.rst:1143
+msgid "Allow to extract ``.tar`` files in ``tools.unzip()``"
+msgstr ""
+
+#: ../../../changelog.rst:1144
+msgid ""
+"Some helpers for ``conan_info()``, as ``self.info.requires.clear()`` and "
+"removal of settings and options"
+msgstr ""
+
+#: ../../../changelog.rst:1148
+msgid "0.11.1 (31-August-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1150
+msgid ""
+"New error reporting for failures in conanfiles, including line number and "
+"offending line, much easier for package creators"
+msgstr ""
+
+#: ../../../changelog.rst:1152
+msgid ""
+"Removed message requesting to create an account in **conan.io** for other "
+"remotes"
+msgstr ""
+
+#: ../../../changelog.rst:1153
+msgid ""
+"Removed localhost:9300 remote that was added by default mostly for demo "
+"purposes. Clarified in docs."
+msgstr ""
+
+#: ../../../changelog.rst:1154
+msgid ""
+"Fixed usernames case-sensitivity in conan_server, due to ConfigParser it was "
+"forcing lowercase"
+msgstr ""
+
+#: ../../../changelog.rst:1155
+msgid "Handling unicode characters in remote responses, fixed crash"
+msgstr ""
+
+#: ../../../changelog.rst:1156
+msgid "Added new compilers gcc 6.2, clang 8.0 to the default ``settings.yml``"
+msgstr ""
+
+#: ../../../changelog.rst:1157
+msgid ""
+"Bumped cryptography, boto and other conan dependencies, mostly for ArchLinux "
+"compatibility and new OSX security changes"
+msgstr ""
+
+#: ../../../changelog.rst:1162
+msgid "0.11.0 (3-August-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1164
+msgid ""
+"New solution for the path length limit in Windows, more robust and complete. "
+"Package conanfile.py just have to declare an attribute ``short_paths=True`` "
+"and everything will be managed. The old approach is deprecated and totally "
+"removed, so no shorts_paths.conf file is necessary. It should fix also the "
+"issues with uploads/retrievals."
+msgstr ""
+
+#: ../../../changelog.rst:1168
+msgid ""
+"New ``virtualenv`` generator that generates ``activate`` and ``deactivate`` "
+"scripts that set environment variables in the current shell. It is very "
+"useful, for example to install tools (like CMake, MinGW) with conan "
+"packages, so multiple versions can be installed in the same machine, and "
+"switch between them just by activating such virtual environments. Packages "
+"for MinGW and CMake are already available as a demo"
+msgstr ""
+
+#: ../../../changelog.rst:1173
+msgid ""
+"ConfigureEnvironment takes into account environment variables, defined in "
+"packages in new ``env_info``, which is similar to ``cpp_info`` but for "
+"environment information (like paths)."
+msgstr ""
+
+#: ../../../changelog.rst:1175
+msgid ""
+"New per-package ``build_policy``, which can be set to ``always`` or "
+"``missing``, so it is not necessary to create packages or specify the "
+"build`` parameter in command line. Useful for example in header only "
+"libraries or to create packages that always get the latest code from a "
+"branch in a github repository."
+msgstr ""
+
+#: ../../../changelog.rst:1179
+msgid ""
+"Command :command:`conan test_package`` now executes by default a :command:"
+"`conan export` with smarter package reference deduction. It is introduced as "
+"opt-out behavior."
+msgstr ""
+
+#: ../../../changelog.rst:1181
+msgid ""
+"Conan :command`export` command avoids copying *test_package/build* temporary "
+"files in case of ``export=*``"
+msgstr ""
+
+#: ../../../changelog.rst:1182
+msgid ""
+"Now, ``package_info()`` allows absolute paths in ``includedir``, ``libdirs`` "
+"and ``bindirs``, so wrapper packages can be defined that use system or "
+"manually installed libraries."
+msgstr ""
+
+#: ../../../changelog.rst:1184
+msgid "LDFLAGS in ``ConfigureEnvironment`` management of OSX frameworks."
+msgstr ""
+
+#: ../../../changelog.rst:1185
+msgid ""
+"Options allow the ``ANY`` value, so such option would accept any value. For "
+"example a commit of a git repository, useful to create packages that can "
+"build any specific commit of a git repo."
+msgstr ""
+
+#: ../../../changelog.rst:1187
+msgid ""
+"Added gcc 5.4 to the default settings, as well as MinGW options (Exceptions, "
+"threads...)"
+msgstr ""
+
+#: ../../../changelog.rst:1188
+msgid ""
+"Command :command:`conan info` learned a new option to output the packages "
+"from a project dependency tree that should be rebuilt in case of a "
+"modification of a certain package. It outputs a machine readable **ordered** "
+"list of packages to be built in that order. Useful for CI systems."
+msgstr ""
+
+#: ../../../changelog.rst:1191
+msgid ""
+"Better management of incomplete, dirty or failed ``source`` directories (e."
+"g. in case of a user interrupting with Ctrl+C a git clone inside the "
+"``source()`` method."
+msgstr ""
+
+#: ../../../changelog.rst:1193
+msgid ""
+"Added tools for easier detection of different OS versions and distributions, "
+"as well as command wrappers to install system packages (apt, yum). They use "
+"``sudo`` via a new environment variable CONAN_SYSREQUIRES_SUDO, so using "
+"sudo is opt-in/out, for users with different sudo needs. Useful for "
+"``system_requirements()``"
+msgstr ""
+
+#: ../../../changelog.rst:1196
+msgid ""
+"Deprecated the ``config()`` method (still works, for backwards "
+"compatibility), but has been replaced by a ``config_options()`` to modify "
+"options based on settings, and a ``configure()`` method for most use cases. "
+"This removes a nasty behaviour of having the ``config()`` method called "
+"twice with side effects."
+msgstr ""
+
+#: ../../../changelog.rst:1200
+msgid ""
+"Now, running a :command:`conan install MyLib/0.1@user/channel` to directly "
+"install packages without any consuming project, is also able to generate "
+"files with the ``-g`` option. Useful for installing tool packages (MinGW, "
+"CMake) and generate ``virtualenvs``."
+msgstr ""
+
+#: ../../../changelog.rst:1203
+msgid ""
+"Many small fixes and improvements: detect compiler bug in Py3, search was "
+"crashing for remotes, conan new failed if the package name had a dash, etc."
+msgstr ""
+
+#: ../../../changelog.rst:1205
+msgid "Improved some internal duplications of code, refactored many tests."
+msgstr ""
+
+#: ../../../changelog.rst:1207
+msgid ""
+"This has been a big release. Practically 100% of the released features are "
+"thanks to active users feedback and contributions. Thanks very much again to "
+"all of them!"
+msgstr ""
+
+#: ../../../changelog.rst:1212
+msgid "0.10.0 (29-June-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1214
+msgid ""
+"**conan new** command, that creates conan package conanfile.py templates, "
+"with a *test_package* package test (-t option), also for header only "
+"packages (-i option)"
+msgstr ""
+
+#: ../../../changelog.rst:1216
+msgid ""
+"Definition of **scopes**. There is a default **dev** scope for the user "
+"project, but any other scope (test, profile...) can be defined and used in "
+"packages. They can be used to fire extra processes (as running tests), but "
+"they do not affect the package binares, and are not included in the package "
+"IDs (hash)."
+msgstr ""
+
+#: ../../../changelog.rst:1217
+msgid ""
+"Definition of **dev_requires**. Those are requirements that are only "
+"retrieved when the package is in **dev** scope, otherwise they are not. They "
+"do not affect the binary packages. Typical use cases would be test libraries "
+"or build scripts."
+msgstr ""
+
+#: ../../../changelog.rst:1218
+msgid ""
+"Allow **shorter paths** for specific packages, which can be necessary to "
+"build packages with very long path names (e.g. Qt) in Windows."
+msgstr ""
+
+#: ../../../changelog.rst:1219
+msgid "Support for bzip2 and gzip decompression in ``tools``"
+msgstr ""
+
+#: ../../../changelog.rst:1220
+msgid ""
+"Added ``package_folder`` attribute to conanfile, so the ``package()`` method "
+"can for example call ``cmake install`` to create the package."
+msgstr ""
+
+#: ../../../changelog.rst:1221
+msgid ""
+"Added ``CONAN_CMAKE_GENERATOR`` environment variable that allows to override "
+"the ``CMake`` default generator. That can be useful to build with Ninja "
+"instead of the default Unix Makefiles"
+msgstr ""
+
+#: ../../../changelog.rst:1222
+msgid ""
+"Improved ``ConfigureEnvironment`` with include paths in CFLAGS and CPPFLAGS, "
+"and fixed bug."
+msgstr ""
+
+#: ../../../changelog.rst:1223
+msgid ""
+"New :command:`conan user --clean` option, to completely remove all user data "
+"for all remotes."
+msgstr ""
+
+#: ../../../changelog.rst:1224
+msgid ""
+"Allowed to raise ``Exceptions`` in ``config()`` method, so it is easier for "
+"package creators to raise under non-supported configurations"
+msgstr ""
+
+#: ../../../changelog.rst:1225
+msgid "Fixed many small bugs and other small improvements"
+msgstr ""
+
+#: ../../../changelog.rst:1227
+msgid ""
+"As always, thanks very much to all contributors and users providing feedback."
+msgstr ""
+
+#: ../../../changelog.rst:1230
+msgid "0.9.2 (11-May-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1231
+msgid ""
+"**Fixed download bug** that made it specially slow to download, even crash. "
+"Thanks to github @melmdk for fixing it."
+msgstr ""
+
+#: ../../../changelog.rst:1232
+msgid "**Fixed cmake check of CLang**, it was being skipped"
+msgstr ""
+
+#: ../../../changelog.rst:1233
+msgid ""
+"**Improved performance**. Check for updates has been removed from install, "
+"made it opt-in in :command:`conan info` command, as it was very slow, "
+"seriously affecting performance of large projects."
+msgstr ""
+
+#: ../../../changelog.rst:1235
+msgid ""
+"Improved internal representation of graph, also improves performance for "
+"large projects."
+msgstr ""
+
+#: ../../../changelog.rst:1236
+msgid "Fixed bug in :command:`conan install --update`."
+msgstr ""
+
+#: ../../../changelog.rst:1240
+msgid "0.9 (3-May-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1242
+msgid ""
+"**Python 3** \"experimental\" support. Now the main conan codebase is Python "
+"2 and 3 compatible. Python 2 still the reference platform, Python 3 stable "
+"support in next releases."
+msgstr ""
+
+#: ../../../changelog.rst:1244
+msgid ""
+"Create and share your **own custom generators for any build system or "
+"tool**. With \"generator packages\", you can write a generator just as any "
+"other package, upload it, modify and version it, etc. Require them by "
+"reference, as any other package, and pull it into your projects dynamically."
+msgstr ""
+
+#: ../../../changelog.rst:1247
+msgid "**Premake4** initial experimental support via a generator package."
+msgstr ""
+
+#: ../../../changelog.rst:1248
+msgid ""
+"Very large **re-write of the documentation**. New \"creating packages\" "
+"sections with in-source and out-source explicit examples. Please read it! :)"
+msgstr ""
+
+#: ../../../changelog.rst:1250
+msgid ""
+"Improved :command:`conan test`. Renamed ``test`` to *test_package* both for "
+"the command and the folder, but backwards compatibility remains. Custom "
+"folder name also possible. **Adapted test layout** might require minor "
+"changes to your package test, automatic warnings added for your convenience."
+msgstr ""
+
+#: ../../../changelog.rst:1254
+msgid "Upgraded pyinstaller to generate binary OS installers from 2.X to 3.1"
+msgstr ""
+
+#: ../../../changelog.rst:1255
+msgid ""
+":command:`conan search` now has command line options:, less verbose, "
+"verbose, extra verbose"
+msgstr ""
+
+#: ../../../changelog.rst:1256
+msgid "Added variable with full list of dependencies in conanbuildinfo.cmake"
+msgstr ""
+
+#: ../../../changelog.rst:1257
+msgid "Several minor bugfixes (check github issues)"
+msgstr ""
+
+#: ../../../changelog.rst:1258
+msgid "Improved :command:`conan user` to manage user login to multiple remotes"
+msgstr ""
+
+#: ../../../changelog.rst:1262
+msgid "0.8.4 (28-Mar-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1264
+msgid ""
+"Fixed linker problems with the new apple-clang 7.3 due to libraries with no "
+"setted timestamp."
+msgstr ""
+
+#: ../../../changelog.rst:1265
+msgid "Added apple-clang 7.3 to default settings"
+msgstr ""
+
+#: ../../../changelog.rst:1266
+msgid ""
+"Fixed default libcxx for apple-clang in auto detection of base conan.conf"
+msgstr ""
+
+#: ../../../changelog.rst:1270
+msgid "0.8 (15-Mar-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1272
+msgid ""
+"New **conan remote** command to manage remotes. Redesigned remotes "
+"architecture, now allows to work with several remotes in a more consistent, "
+"powerful and \"git-like\" way. New remotes registry keeps track of the "
+"remote of every installed package, and this information is shown in :command:"
+"`conan info` command too. Also, it keeps different user logins for different "
+"remotes, to improve support in corporate environments running in-house "
+"servers."
+msgstr ""
+
+#: ../../../changelog.rst:1277
+msgid ""
+"New **update** functionality. Now it is possible to :command:`conan install "
+"--update` to update packages that became obsolete because new ones were "
+"uploaded to the corresponding remote. Conan commands as install and info "
+"show information about the status of the local packages compared with the "
+"remote ones. In this way, using latest versions during development is much "
+"more natural."
+msgstr ""
+
+#: ../../../changelog.rst:1281
+msgid ""
+"Added new **compiler.libcxx** setting in order to support the different c++ "
+"standard libraries. It can take libstdc++, libstdc++11 or libc++ values to "
+"take into account different standard libraries for modern gcc and clang "
+"compilers. It is also possible to remove not needed settings, like this one "
+"in pure C projects, with the new syntax: ``del self.settings.compiler."
+"libcxx``"
+msgstr ""
+
+#: ../../../changelog.rst:1285
+msgid ""
+"Conan **virtual environment**: Define a custom conan directory with "
+"**CONAN_USER_HOME** env variable, and have a per project or per workspace "
+"storage for your dependencies. So you can isolate your dependencies and even "
+"bundle them within your project, by just setting the CONAN_USER_HOME "
+"variable to your ``<project>/deps`` folder, for example. This also improves "
+"support for continuous integration CI systems, in which many builds from "
+"different users could be run in parallel."
+msgstr ""
+
+#: ../../../changelog.rst:1290
+msgid ""
+"Better conanfile download method. More stable and now checks (opt-out) the "
+"**ssl certificates**."
+msgstr ""
+
+#: ../../../changelog.rst:1291
+msgid ""
+"Lots of improvements: Increased library name length limit, Improved and "
+"cleaner output messages."
+msgstr ""
+
+#: ../../../changelog.rst:1292
+msgid ""
+"Fixed several minor bugs: removing empty folders, case sensitive exports, "
+"arm settings detection."
+msgstr ""
+
+#: ../../../changelog.rst:1293
+msgid ""
+"Introduced the concept of **\"package recipe\"** that refers to conanfile.py "
+"and exported files."
+msgstr ""
+
+#: ../../../changelog.rst:1294
+msgid ""
+"Improved settings display in web, with new \"copy install command to "
+"clipboard\" to assist in installing packages discovered in web."
+msgstr ""
+
+#: ../../../changelog.rst:1296
+msgid ""
+"The OSX installer, problematic with latest OSX releases, has been deprecated "
+"in favour of homebrew and pip install procedures."
+msgstr ""
+
+#: ../../../changelog.rst:1301
+msgid "0.7 (5-Feb-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1303
+msgid ""
+"Custom conanfile names are allowed for developing. With file`` option you "
+"can define the file you want to use, allowing for ``.conaninfo.txt`` or "
+"having multiple ``conanfile_dev.py``, ``conanfile_test.py`` besides the "
+"standard ``conanfile.py`` which is used for sharing the package. Inheritance "
+"is allowed, e.g. ``conanfile_dev.py`` might extend/inherit from ``conanfile."
+"py``."
+msgstr ""
+
+#: ../../../changelog.rst:1307
+msgid ""
+"New :command:`conan copy` command that can be used to copy/rename packages, "
+"promote them between channels, forking other users packages."
+msgstr ""
+
+#: ../../../changelog.rst:1309
+msgid ""
+"New all`` and package`` options for :command:`conan install` that allows to "
+"download one, several, or all package configurations for a given reference."
+msgstr ""
+
+#: ../../../changelog.rst:1311
+msgid "Added ``patch()`` tool to easily patch sources if necessary."
+msgstr ""
+
+#: ../../../changelog.rst:1312
+msgid "New **qmake** and **qbs** generators"
+msgstr ""
+
+#: ../../../changelog.rst:1313
+msgid ""
+"Upload of conanfile **exported** files is also **tgz'd**, allowing fast "
+"upload/downloads of full sources if desired, avoiding retrieval of sources "
+"from externals sources."
+msgstr ""
+
+#: ../../../changelog.rst:1315
+msgid ""
+":command:`conan info` command improved showing info of current project too"
+msgstr ""
+
+#: ../../../changelog.rst:1316
+msgid ""
+"Output of ``run()`` can be redirected to buffer string for processing, or "
+"even removed."
+msgstr ""
+
+#: ../../../changelog.rst:1317
+msgid "Added **proxy** configuration to conan.conf for users behinds proxies."
+msgstr ""
+
+#: ../../../changelog.rst:1318
+msgid ""
+"Large improvements in commands output, prefixed with package reference, and "
+"much clear."
+msgstr ""
+
+#: ../../../changelog.rst:1319
+msgid "Updated settings for more versions of gcc and new arm architectures"
+msgstr ""
+
+#: ../../../changelog.rst:1320
+msgid ""
+"Treat dependencies includes as SYSTEM in cmake, so no warnings are raised"
+msgstr ""
+
+#: ../../../changelog.rst:1321
+msgid ""
+"Deleting source folder after :command:`conan export` so no manual removal is "
+"needed"
+msgstr ""
+
+#: ../../../changelog.rst:1322
+msgid "Normalizing to CRLF generated user files in Win"
+msgstr ""
+
+#: ../../../changelog.rst:1323
+msgid "Better detection and checks for compilers as VS, apple-clang"
+msgstr ""
+
+#: ../../../changelog.rst:1324
+msgid "Fixed CMAKE_SHARED_LINKER_FLAGS typo in cmake files"
+msgstr ""
+
+#: ../../../changelog.rst:1325
+msgid "Large internal refactor in generators"
+msgstr ""
+
+#: ../../../changelog.rst:1329
+msgid "0.6 (11-Jan-2016)"
+msgstr ""
+
+#: ../../../changelog.rst:1331
+msgid ""
+"New cmake variables in cmake generator to make FindPackage work better "
+"thanks to the underlaying FindLibrary. Now many FindXXX.cmake work \"as-is\" "
+"and the package creator does not have to create a custom override, and "
+"consumers can use packages transparently with the originals FindXXX.cmakes"
+msgstr ""
+
+#: ../../../changelog.rst:1332
+msgid ""
+"New \"conan info\" command that shows the full dependency graph and details "
+"(license, author, url, dependants, dependencies) for each dependency."
+msgstr ""
+
+#: ../../../changelog.rst:1333
+msgid ""
+"New environment helper with a ConfigureEnvironment class, that is able to "
+"translate conan information to autotools configure environment definition"
+msgstr ""
+
+#: ../../../changelog.rst:1334
+msgid ""
+"Relative importing from conanfiles now is possible. So if you have common "
+"functionality between different packages, you can reuse those python files "
+"by importing them from the conanfile.py. Note that export=\"...\" might be "
+"necessary, as packages as to be self-contained."
+msgstr ""
+
+#: ../../../changelog.rst:1335
+msgid "Added YouCompleteMe generator for vim auto-completion of dependencies."
+msgstr ""
+
+#: ../../../changelog.rst:1336
+msgid ""
+"New \"conanfile_directory\" property that points to the file in which the "
+"conanfile.py is located. This helps if using the conanfile.py \"build\" "
+"method to build your own project as a project, not a package, to be able to "
+"use any workflow, out-of-source builds, etc."
+msgstr ""
+
+#: ../../../changelog.rst:1337
+msgid ""
+"Many edits and improvements in help, docs, output messages for many commands."
+msgstr ""
+
+#: ../../../changelog.rst:1338
+msgid "All cmake syntax in modern lowercase"
+msgstr ""
+
+#: ../../../changelog.rst:1339
+msgid ""
+"Fixed several minor bugs: gcc detection failure when gcc not installed, "
+"missing import, copying source->build failing when symlinks"
+msgstr ""
+
+#: ../../../changelog.rst:1343
+msgid "0.5 (18-Dec-2015)"
+msgstr ""
+
+#: ../../../changelog.rst:1345
+msgid ""
+"New cmake functionality allows package creators to provide cmake finders, so "
+"that package consumers can use their CMakeLists.txt with typical FindXXX."
+"cmake files, without any change to them. CMake CONAN_CMAKE_MODULES_PATH "
+"added, so that package creators can provide any additional cmake scripts for "
+"consumers."
+msgstr ""
+
+#: ../../../changelog.rst:1348
+msgid ""
+"Now it is possible to generate out-of-source and multiple configuration "
+"installations for the same project, so you can switch between them without "
+"having to :command:`conan install` again. Check :ref:`the new "
+"workflows<workflows>`"
+msgstr ""
+
+#: ../../../changelog.rst:1350
+msgid "New qmake generator (thanks @dragly)"
+msgstr ""
+
+#: ../../../changelog.rst:1351
+msgid ""
+"Improved removal/deletion of folders with shutil.rmtree, so :command:`conan "
+"remove` commands and other processes requiring deletion of folders do not "
+"fail due to permissions and require manual deletion. This is an improvement, "
+"especially in Win."
+msgstr ""
+
+#: ../../../changelog.rst:1354
+msgid ""
+"Created ``pip`` package, so conan can be installed via: ``pip install conan``"
+msgstr ""
+
+#: ../../../changelog.rst:1355
+msgid ""
+"Released ``pyinstaller`` code for the creation of binaries from conan python "
+"source code. Distros package creators can create packages for the conan apps "
+"easily from those binaries."
+msgstr ""
+
+#: ../../../changelog.rst:1357
+msgid ""
+"Added md5, sha1, sha256 helpers in ``tools``, so external downloads from "
+"``conanfile.py`` files ``source()`` can be checked."
+msgstr ""
+
+#: ../../../changelog.rst:1359
+msgid "Added latest gcc versions to default ``settings.yml``"
+msgstr ""
+
+#: ../../../changelog.rst:1360
+msgid "Added CI support for conan development: travis-ci, appveyor"
+msgstr ""
+
+#: ../../../changelog.rst:1361
+msgid "Improved human-readability for download progress, help messages."
+msgstr ""
+
+#: ../../../changelog.rst:1362
+msgid "Minor bug fixes"
+msgstr ""

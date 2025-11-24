@@ -1,0 +1,242 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/output/install.rst:6
+msgid "Install and Create output"
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:10
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:12
+msgid ""
+"The :command:`conan install` and :command:`conan create` provide a ``--"
+"json`` parameter to generate a file containing the information of the "
+"installation process."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:15
+msgid "The output JSON contains a two first level keys:"
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:17
+msgid ""
+"**error**: ``True`` if the install completed without error, ``False`` "
+"otherwise."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:18
+msgid "**installed**: A list of installed packages. Each element contains:"
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:20
+msgid "**recipe**: Document representing the downloaded recipe."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:22
+#: ../../../reference/commands/output/install.rst:40
+msgid ""
+"**remote**: remote URL if the recipe has been downloaded. ``null`` otherwise."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:23
+#: ../../../reference/commands/output/install.rst:41
+msgid "**cache**: ``true``/``false``. Retrieved from cache (not downloaded)."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:24
+#: ../../../reference/commands/output/install.rst:42
+msgid ""
+"**downloaded**: ``true``/``false``. Downloaded from a remote (not in cache)."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:25
+msgid ""
+"**time**: ``ISO 8601`` string with the time the recipe was downloaded/"
+"retrieved."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:26
+#: ../../../reference/commands/output/install.rst:44
+msgid "**error**: ``true``/``false``."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:27
+msgid "**id**: Reference. E.g., \"openssl/1.0.2u\""
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:28
+msgid "**name**: name of the packaged library. E.g., \"openssl\""
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:29
+msgid "**version**: version of the packaged library. E.g., \"1.0.2u\""
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:30
+msgid "**user**: user of the packaged library. E.g., \"conan\""
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:31
+msgid "**channel**: channel of the packaged library. E.g., \"stable\""
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:32
+msgid ""
+"**dependency**: ``true``/``false``. Is the package being installed/created "
+"or a dependency. Same as :ref:`develop conanfile "
+"attribute<develop_attribute>`."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:35
+msgid ""
+"**packages**: List of elements, representing the binary packages downloaded "
+"for the recipe. Normally there will be only 1 element in this list, only in "
+"special cases with build requires, private dependencies and settings "
+"overridden this list could have more than one element."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:43
+msgid ""
+"**time**: ISO 8601 string with the time the recipe was downloaded/retrieved."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:45
+msgid "**id**: Package ID. E.g., \"8018a4df6e7d2b4630a814fa40c81b85b9182d2b\""
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:46
+msgid ""
+"**cpp_info**: dictionary containing the build information defined in the "
+"``package_info`` method on the recipe."
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:49
+msgid "**Example:**"
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:51
+msgid "$ conan install openssl/1.0.2u@ --json install.json"
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:55
+msgid "install.json"
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:55
+msgid ""
+" {\n"
+"     \"error\": false,\n"
+"     \"installed\": [{\n"
+"         \"recipe\": {\n"
+"             \"id\": \"openssl/1.0.2u\",\n"
+"             \"downloaded\": true,\n"
+"             \"exported\": false,\n"
+"             \"error\": null,\n"
+"             \"remote\": \"https://center.conan.io\",\n"
+"             \"time\": \"2020-01-30T19:19:21.217923\",\n"
+"             \"dependency\": true,\n"
+"             \"name\": \"openssl\",\n"
+"             \"version\": \"1.0.2u\",\n"
+"             \"user\": null,\n"
+"             \"channel\": null\n"
+"         },\n"
+"         \"packages\": [{\n"
+"             \"id\": \"f99afdbf2a1cc98ba2029817b35103455b6a9b77\",\n"
+"             \"downloaded\": true,\n"
+"             \"exported\": false,\n"
+"             \"error\": null,\n"
+"             \"remote\": \"https://center.conan.io\",\n"
+"             \"time\": \"2020-01-30T19:19:27.662199\",\n"
+"             \"built\": false,\n"
+"             \"cpp_info\": {\n"
+"                 \"name\": \"openssl\",\n"
+"                 \"names\": {\n"
+"                     \"cmake_find_package\": \"OpenSSL\",\n"
+"                     \"cmake_find_package_multi\": \"OpenSSL\"\n"
+"                 },\n"
+"                 \"includedirs\": [\"include\"],\n"
+"                 \"libdirs\": [\"lib\"],\n"
+"                 \"resdirs\": [\"res\"],\n"
+"                 \"bindirs\": [\"bin\"],\n"
+"                 \"builddirs\": [\"\"],\n"
+"                 \"frameworkdirs\": [\"Frameworks\"],\n"
+"                 \"libs\": [\"ssl\", \"crypto\", \"dl\", \"pthread\"],\n"
+"                 \"rootpath\": \"/home/user/.conan/data/openssl/1.0.2u/_/_/"
+"package/f99afdbf2a1cc98ba2029817b35103455b6a9b77\",\n"
+"                 \"version\": \"1.0.2u\",\n"
+"                 \"description\": \"A toolkit for the Transport Layer "
+"Security (TLS) and Secure Sockets Layer (SSL) protocols\",\n"
+"                 \"filter_empty\": true,\n"
+"                 \"public_deps\": [\"zlib\"]\n"
+"             }\n"
+"         }]\n"
+"     }, {\n"
+"         \"recipe\": {\n"
+"             \"id\": \"zlib/1.2.11#1cd4a227e1b846f961bf91fcb6f3980f\",\n"
+"             \"downloaded\": false,\n"
+"             \"exported\": false,\n"
+"             \"error\": null,\n"
+"             \"remote\": null,\n"
+"             \"time\": \"2020-01-30T19:19:21.237131\",\n"
+"             \"dependency\": true,\n"
+"             \"name\": \"zlib\",\n"
+"             \"version\": \"1.2.11\",\n"
+"             \"user\": null,\n"
+"             \"channel\": null\n"
+"         },\n"
+"         \"packages\": [{\n"
+"             \"id\": \"6af9cc7cb931c5ad942174fd7838eb655717c709\",\n"
+"             \"downloaded\": false,\n"
+"             \"exported\": false,\n"
+"             \"error\": null,\n"
+"             \"remote\": null,\n"
+"             \"time\": \"2020-01-30T19:19:22.061885\",\n"
+"             \"built\": false,\n"
+"             \"cpp_info\": {\n"
+"                 \"name\": \"ZLIB\",\n"
+"                 \"includedirs\": [\"include\"],\n"
+"                 \"libdirs\": [\"lib\"],\n"
+"                 \"resdirs\": [\"res\"],\n"
+"                 \"bindirs\": [\"bin\"],\n"
+"                 \"builddirs\": [\"\"],\n"
+"                 \"frameworkdirs\": [\"Frameworks\"],\n"
+"                 \"libs\": [\"z\"],\n"
+"                 \"rootpath\": \"/home/user/.conan/data/zlib/1.2.11/_/_/"
+"package/6af9cc7cb931c5ad942174fd7838eb655717c709\",\n"
+"                 \"version\": \"1.2.11\",\n"
+"                 \"description\": \"A Massively Spiffy Yet Delicately "
+"Unobtrusive Compression Library (Also Free, Not to Mention Unencumbered by "
+"Patents)\",\n"
+"                 \"filter_empty\": true\n"
+"             }\n"
+"         }]\n"
+"     }]\n"
+" }"
+msgstr ""
+
+#: ../../../reference/commands/output/install.rst:144
+msgid ""
+"As this is a marked as *experimental*, some fields may be removed or added: "
+"fields ``version`` and ``description`` inside ``cpp_info`` will eventually "
+"be removed and paths may be changed for absolute ones."
+msgstr ""

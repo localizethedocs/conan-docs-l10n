@@ -1,0 +1,158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.14\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/qbs/qbs.rst:4
+msgid "Qbs"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbs.rst:5
+msgid ""
+"The ``Qbs`` build helper is a wrapper around the command line invocation of "
+"the Qbs build tool. It will abstract the calls like ``qbs resolve``, ``qbs "
+"build`` and ``qbs install`` into Python method calls."
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbs.rst:9
+msgid ""
+"The helper is intended to be used in the ``build()`` and ``package()`` "
+"methods, to call Qbs commands automatically when a package is being built "
+"directly by Conan (create, install)."
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbs.rst:12
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.qbs import Qbs, QbsProfile, QbsDeps\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    exports_sources = \"*.h\", \"*.cpp\", \"*.qbs\",\n"
+"    requires = \"hello/0.1\"\n"
+"    options = {\"shared\": [True, False], \"fPIC\": [True, False]}\n"
+"    default_options = {\"shared\": False, \"fPIC\": True}\n"
+"\n"
+"    def generate(self):\n"
+"        profile = QbsProfile(self)\n"
+"        profile.generate()\n"
+"        deps = QbsDeps(self)\n"
+"        deps.generate()\n"
+"\n"
+"    def build(self):\n"
+"        qbs = Qbs(self)\n"
+"        qbs.resolve()\n"
+"        qbs.build()\n"
+"\n"
+"    def package(self):\n"
+"        qbs = Qbs(self)\n"
+"        qbs.install()"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbs.rst:40
+msgid "Reference"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs:1
+msgid ""
+"Qbs helper to use together with the QbsDeps feature. This class provides "
+"helper methods that wraps calls to the Qbs tool."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs:0 conan.tools.qbs.qbs.Qbs.add_configuration:0
+#: conan.tools.qbs.qbs.Qbs.build:0
+msgid "Parameters"
+msgstr "參數"
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs:4
+msgid "The current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs:5
+msgid ""
+"The name to the main project file. If not set, Qbs will try to autodetect "
+"the project file."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs.add_configuration:1
+msgid ""
+"Adds a build configuration for the multi-configuration build. This Qbs "
+"feature is rarely needed since each conan package can contain only one "
+"configuration, however might be useful when creating multiple versions of "
+"the same product that should be put in the same Conan package."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs.add_configuration:6
+msgid ""
+"the name of the configuration. This corresponds to the ``config`` parameter "
+"of ``qbs resolve``, ``qbs build`` and ``qbs install`` commands."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs.add_configuration:8
+msgid ""
+"the dict containing Qbs properties and their values for this configuration."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs.resolve:1
+msgid ""
+"Wraps the ``qbs resolve`` call. If QbsDeps generator is used, this will also "
+"set the necessary properites of the Qbs \"conan\" module provider "
+"automatically adding dependencies to the project. :param parallel: Whether "
+"to use multi-threaded resolving. Defaults to ``True``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs.build:1
+msgid "Wraps the ``qbs build`` call."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs.build:3
+msgid ""
+"The list of product names to build. If not set, builds all products that "
+"have builtByDefault set to true. This parameter corresponds to the ``--"
+"products`` option of the ``qbs build`` command."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs.build:7
+msgid "The resolve() method should be called before calling this method."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs.build_all:1
+msgid ""
+"Wraps the ``qbs build --all-products`` call. This method builds all "
+"products, even if their builtByDefault property is false. The resolve() "
+"method should be called before calling this method."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbs.py:docstring of
+#: conan.tools.qbs.qbs.Qbs.install:1
+msgid ""
+"Wraps the ``qbs install`` call. Perfoms the installation of files marked as "
+"installable in the Qbs project. The build() or build_all() methods should be "
+"called before calling this method."
+msgstr ""

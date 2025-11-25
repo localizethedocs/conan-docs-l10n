@@ -1,0 +1,162 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:5
+msgid "system_requirements()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:7
+msgid ""
+"The ``system_requirements()`` method can be used to call the system package "
+"managers to install packages at the system level. In general, this should be "
+"reduced to a minimum, system packages are not modeled dependencies, but it "
+"can be sometimes convenient to automate the installation of some system "
+"packages that are necessary for some Conan packages. For example, when "
+"creating a recipe to package the ``opencv`` library, we could realize that "
+"it needs in Linux the ``gtk`` libraries, but it might be undesired to create "
+"a package for them, because we want to make sure we use the system ones. We "
+"code"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:10
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.system.package_manager import Apt\n"
+"\n"
+"class OpenCV(ConanFile):\n"
+"    name = \"opencv\"\n"
+"    version = \"4.0\"\n"
+"\n"
+"    def system_requirements(self):\n"
+"        apt = Apt(self)\n"
+"        apt.install([\"libgtk-3-dev\"], update=True, check=True)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:23
+msgid ""
+"For full reference of the built-in helpers for different system package "
+"managers read the :ref:`tools.system.package_manager "
+"documentation<conan_tools_system_package_manager>`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:27
+msgid "Collecting system requirements"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:29
+msgid ""
+"When ``system_requirements()`` uses some built-in ``package_manager`` "
+"helpers, it is possible to collect information about the installed or "
+"required system requirements. If we have the following ``conanfile.py``:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:32
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.system.package_manager import Apt\n"
+"\n"
+"class MyPkg(ConanFile):\n"
+"    settings = \"arch\"\n"
+"\n"
+"    def system_requirements(self):\n"
+"        apt = Apt(self)\n"
+"        apt.install([\"pkg1\", \"pkg2\"])"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:44
+msgid ""
+"It is possible to display the installed system packages (with the default "
+"``tools.system.package_manager:mode`` requirements will be checked, but not "
+"installed) with:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:46
+msgid ""
+" # Assuming apt is the default or using explicitly\n"
+" #   -c tools.system.package_manager:tool=apt-get\n"
+" $ conan install . --format=json\n"
+"\"graph\": {\n"
+"     \"nodes\": [\n"
+"         {\n"
+"             \"ref\": \"\",\n"
+"             \"id\": 0,\n"
+"             \"settings\": {\n"
+"                 \"arch\": \"x86_64\"\n"
+"             },\n"
+"             \"system_requires\": {\n"
+"                 \"apt-get\": {\n"
+"                     \"install\": [\n"
+"                         \"pkg1\",\n"
+"                         \"pkg2\"\n"
+"                     ],\n"
+"                     \"missing\": []\n"
+"                 }\n"
+"             },"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:70
+msgid ""
+"A similar result can be obtained without even installing binaries, we could "
+"use the ``report`` or ``report-installed`` modes. The ``report`` mode "
+"displays the ``install`` packages, those are the packages that are required "
+"to be installed, irrespective of whether they are actually installed or not. "
+"The ``report`` mode does not check the system for those package, so it could "
+"even be ran in another OS:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:73
+msgid ""
+"$ conan graph info . -c tools.system.package_manager:mode=report --"
+"format=json\n"
+"...\n"
+"\"system_requires\": {\n"
+"    \"apt-get\": {\n"
+"        \"install\": [\n"
+"            \"pkg1\",\n"
+"            \"pkg2\"\n"
+"        ]\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:86
+msgid ""
+"On the other hand, the ``report-installed`` mode will do a check if the "
+"package is installed in the system or not, but not failing nor raising any "
+"error if it is not found:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/system_requirements.rst:88
+msgid ""
+"$ conan graph info . -c tools.system.package_manager:mode=report-installed --"
+"format=json\n"
+"...\n"
+"\"system_requires\": {\n"
+"    \"apt-get\": {\n"
+"        \"install\": [\n"
+"            \"pkg1\",\n"
+"            \"pkg2\"\n"
+"        ],\n"
+"        \"missing\": [\n"
+"            \"pkg1\",\n"
+"            \"pkg2\"\n"
+"        ]\n"
+"    }\n"
+"}"
+msgstr ""

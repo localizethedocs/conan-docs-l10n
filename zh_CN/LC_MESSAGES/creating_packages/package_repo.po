@@ -1,0 +1,339 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../creating_packages/package_repo.rst:4
+msgid "Recipe and Sources in the Same Repo"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:8
+msgid ""
+"We are actively working to finalize the *Conan 2.0 Release*. Some of the "
+"information on this page references **deprecated** features which will not "
+"be carried forward with the new release. It's important to check the :ref:"
+"`Migration Guidelines<conan2_migration_guide>` to ensure you are using the "
+"most up to date features."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:12
+msgid ""
+"Sometimes it is more convenient to have the recipe and source code together "
+"in the same repository. This is true especially if you are developing and "
+"packaging your own library, and not one from a third-party."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:15
+msgid "There are two different approaches:"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:19
+msgid ""
+"Using the :ref:`exports sources attribute <exports_sources_attribute>` of "
+"the conanfile to"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:18
+msgid ""
+"export the source code together with the recipe. This way the recipe is self-"
+"contained and will not need to fetch the code from external origins when "
+"building from sources. It can be considered a \"snapshot\" of the source "
+"code."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:21
+msgid ""
+"Using the :ref:`scm attribute <scm_attribute>` of the conanfile to capture "
+"the remote and commit of your repository automatically."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:26
+msgid "Exporting the Sources with the Recipe: ``exports_sources``"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:28
+msgid ""
+"This could be an appropriate approach if we want the package recipe to live "
+"in the same repository as the source code it is packaging."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:31
+msgid ""
+"First, let's get the initial source code and create the basic package recipe:"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:33
+msgid "$ conan new hello/0.1 -t -s"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:37
+msgid ""
+"A *src* folder will be created with the same \"hello\" source code as in the "
+"previous example. You can have a look at it and see that the code is "
+"straightforward."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:40
+msgid "Now let's have a look at *conanfile.py*:"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:42
+msgid ""
+"from conans import ConanFile, CMake\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    name = \"hello\"\n"
+"    version = \"0.1\"\n"
+"    license = \"<Put the package license here>\"\n"
+"    url = \"<Package recipe repository url here, for issues about the "
+"package>\"\n"
+"    description = \"<Description of hello here>\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    options = {\"shared\": [True, False]}\n"
+"    default_options = {\"shared\": False}\n"
+"    generators = \"cmake\"\n"
+"    exports_sources = \"src/*\"\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure(source_folder=\"src\")\n"
+"        cmake.build()\n"
+"\n"
+"        # Explicit way:\n"
+"        # self.run('cmake \"%s/src\" %s' % (self.source_folder, cmake."
+"command_line))\n"
+"        # self.run(\"cmake --build . %s\" % cmake.build_config)\n"
+"\n"
+"    def package(self):\n"
+"        self.copy(\"*.h\", dst=\"include\", src=\"src\")\n"
+"        self.copy(\"*.lib\", dst=\"lib\", keep_path=False)\n"
+"        self.copy(\"*.dll\", dst=\"bin\", keep_path=False)\n"
+"        self.copy(\"*.dylib*\", dst=\"lib\", keep_path=False)\n"
+"        self.copy(\"*.so\", dst=\"lib\", keep_path=False)\n"
+"        self.copy(\"*.a\", dst=\"lib\", keep_path=False)\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.libs = [\"hello\"]"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:78
+msgid "There are two important changes:"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:80
+msgid ""
+"Added the ``exports_sources`` field, indicating to Conan to copy all the "
+"files from the local *src* folder into the package recipe."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:82
+msgid ""
+"Removed the ``source()`` method, since it is no longer necessary to retrieve "
+"external sources."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:84
+msgid "Also, you can notice the two CMake lines:"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:86
+msgid ""
+"include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+"conan_basic_setup()"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:91
+msgid ""
+"They are not added in the package recipe, as they can be directly added to "
+"the *src/CMakeLists.txt* file."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:94
+msgid ""
+"And simply create the package for user and channel **demo/testing** as "
+"described previously:"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:96
+msgid ""
+"$ conan create . demo/testing\n"
+"...\n"
+"hello/0.1@demo/testing test package: Running test()\n"
+"Hello world Release!"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:106
+msgid "Capturing the Remote and Commit: ``scm``"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:110
+msgid ""
+"This is a **deprecated** feature. Please refer to the :ref:`Migration "
+"Guidelines<conan2_migration_guide>` to find the feature that replaces this "
+"one."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:113
+msgid ""
+"You can use the :ref:`scm attribute <scm_attribute>` with the ``url`` and "
+"``revision`` field set to ``auto``. When you export the recipe (or when :"
+"command:`conan create` is called) the exported recipe will capture the "
+"remote and commit of the local repository:"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:117
+msgid ""
+" import os\n"
+" from conans import ConanFile, CMake, tools\n"
+"\n"
+" class HelloConan(ConanFile):\n"
+"     scm = {\n"
+"         \"type\": \"git\",  # Use \"type\": \"svn\", if local repo is "
+"managed using SVN\n"
+"         \"subfolder\": \"hello\",\n"
+"         \"url\": \"auto\",\n"
+"         \"revision\": \"auto\",\n"
+"         \"password\": os.environ.get(\"SECRET\", None)\n"
+"     }\n"
+"     ..."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:133
+msgid ""
+"You can commit and push the *conanfile.py* to your origin repository, which "
+"will always preserve the ``auto`` values. When the file is exported to the "
+"Conan local cache (except you have uncommitted changes, read below), these "
+"data will be stored in the *conanfile.py* itself (Conan will modify the "
+"file) or in a special file :ref:`conandata_yml` that will be stored together "
+"with the recipe, depending on the value of the configuration parameter :ref:"
+"`scm_to_conandata<conan_conf>`."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:139
+msgid ""
+"If the ``scm_to_conandata`` is not activated (default behavior in Conan v1."
+"x) Conan will store a modified version of the *conanfile.py* with the values "
+"of the fields in plain text:"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:142
+msgid ""
+"    import os\n"
+"    from conans import ConanFile, CMake, tools\n"
+"\n"
+"    class HelloConan(ConanFile):\n"
+"        scm = {\n"
+"            \"type\": \"git\",\n"
+"            \"subfolder\": \"hello\",\n"
+"            \"url\": \"https://github.com/conan-io/hello.git\",\n"
+"            \"revision\": \"437676e15da7090a1368255097f51b1a470905a0\",\n"
+"            \"password\": \"MY_SECRET\"\n"
+"        }\n"
+"        ..."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:158
+msgid ""
+"So when you :ref:`upload the recipe <uploading_packages>` to a Conan remote, "
+"the recipe will contain the \"resolved\" URL and commit."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:161
+msgid ""
+"If ``scm_to_conandata`` is activated, the value of these fields (except "
+"``username`` and ``password``) will be stored in the :ref:`conandata_yml` "
+"file that will be automatically exported with the recipe."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:164
+msgid ""
+"Whichever option you choose, the data resolved will be assigned by Conan to "
+"the corresponding field when the recipe file is loaded, and they will be "
+"available for all the methods defined in the recipe. Also, if building the "
+"package from sources, Conan will fetch the code in the captured url/commit "
+"before running the method ``source()`` in the recipe (if defined)."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:169
+msgid ""
+"As SCM attributes are evaluated in the local directory context (see :ref:"
+"`scm attribute <scm_attribute>`), you can write more complex functions to "
+"retrieve the proper values, this source *conanfile.py* will be valid too:"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:173
+msgid ""
+" import os\n"
+" from conans import ConanFile, CMake, tools\n"
+"\n"
+" def get_remote_url():\n"
+"      \"\"\" Get remote url regardless of the cloned directory \"\"\"\n"
+"      here = os.path.dirname(__file__)\n"
+"      svn = tools.SVN(here)\n"
+"      return svn.get_remote_url()\n"
+"\n"
+" class HelloConan(ConanFile):\n"
+"      scm = {\n"
+"         \"type\": \"svn\",\n"
+"         \"subfolder\": \"hello\",\n"
+"         \"url\": get_remote_url(),\n"
+"         \"revision\": \"auto\"\n"
+"      }\n"
+"     ..."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:196
+msgid ""
+"When doing a :command:`conan create` or :command:`conan export`, Conan will "
+"capture the sources of the local scm project folder in the local cache."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:198
+msgid ""
+"This allows building packages making changes to the source code without the "
+"need of committing them and pushing them to the remote repository. This "
+"convenient to speed up the development of your packages when cloning from a "
+"local repository."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:201
+msgid ""
+"So, if you are using the ``scm`` feature, with some ``auto`` field for `url` "
+"and/or `revision` and you have uncommitted changes in your repository a "
+"warning message will be printed:"
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:204
+msgid ""
+"$ conan export . hello/0.1@demo/testing\n"
+"\n"
+" hello/0.1@demo/testing: WARN: There are uncommitted changes, skipping the "
+"replacement of 'scm.url'\n"
+" and 'scm.revision' auto fields. Use --ignore-dirty to force it.\n"
+" The 'conan upload' command will prevent uploading recipes with 'auto' "
+"values in these fields."
+msgstr ""
+
+#: ../../../creating_packages/package_repo.rst:212
+msgid ""
+"As the warning message explains, the ``auto`` fields won't be replaced "
+"unless you specify ``--ignore-dirty``, and by default, the :command:`conan "
+"upload` will block the upload of the recipe. This prevents recipes to be "
+"uploaded with incorrect scm values exported. You can use :command:`conan "
+"upload --force` to force uploading the recipe with the ``auto`` values un-"
+"replaced."
+msgstr ""

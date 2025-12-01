@@ -1,0 +1,534 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2021, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.43\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../developing_packages/workspaces.rst:4
+msgid "Workspaces"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:8
+msgid ""
+"This is an **experimental** feature. This is actually a preview of the "
+"feature, with the main goal of receiving feedbacks and improving it. "
+"Consider the file formats, commands and flows to be unstable and subject to "
+"changes in the next releases."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:11
+msgid ""
+"Sometimes, it is necessary to work simultaneously on more than one package. "
+"In theory, each package should be a \"work unit\", and developers should be "
+"able to work on them in isolation. But sometimes, some changes require "
+"modifications in more than one package at the same time. The local "
+"development flow can help, but it still requires using :command:`export-pkg` "
+"to put the artifacts in the local cache, where other packages under "
+"development will consume them."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:16
+msgid ""
+"The Conan workspaces allow to have more than one package in user folders, "
+"and have them directly use other packages from user folders without needing "
+"to put them in the local cache. Furthermore, they enable incremental builds "
+"on large projects containing multiple packages."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:19
+msgid ""
+"Lets introduce them with a practical example; the code can be found in the "
+"conan examples repository:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:21
+msgid ""
+"$ git clone https://github.com/conan-io/examples.git\n"
+"$ cd features/workspace/cmake"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:27
+msgid ""
+"Note that this folder contains two files *conanws_gcc.yml* and *conanws_vs."
+"yml*, for gcc (Makefiles, single-configuration build environments) and for "
+"Visual Studio (MSBuild, multi-configuration build environment), respectively."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:31
+msgid "Conan workspace definition"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:33
+msgid ""
+"Workspaces are defined in a yaml file, with any user defined name. Its "
+"structure is:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:35
+msgid ""
+"editables:\n"
+"    say/0.1@user/testing:\n"
+"        path: say\n"
+"    hello/0.1@user/testing:\n"
+"        path: hello\n"
+"    chat/0.1@user/testing:\n"
+"        path: chat\n"
+"layout: layout_gcc\n"
+"workspace_generator: cmake\n"
+"root: chat/0.1@user/testing"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:49
+msgid ""
+"The first section ``editables`` defines the mapping between package "
+"references and relative paths. Each one is equivalent to a :ref:"
+"`conan_editable_add` command (Do NOT do this -- it is not necessary. It will "
+"be automatically done later. Just to understand the behavior):"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:53
+msgid ""
+"$ conan editable add say say/0.1@user/testing --layout=layout_gcc\n"
+"$ conan editable add hello hello/0.1@user/testing --layout=layout_gcc\n"
+"$ conan editable add chat chat/0.1@user/testing --layout=layout_gcc"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:60
+msgid ""
+"The main difference is that this *Editable* state is only temporary for this "
+"workspace. It doesn't affect other projects or packages, which can still "
+"consume these say, hello, chat packages from the local cache."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:63
+msgid ""
+"Note that the ``layout: layout_gcc`` declaration in the workspace affects "
+"all the packages. It is also possible to define a different layout per "
+"package, as:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:66
+msgid ""
+"editables:\n"
+"    say/0.1@user/testing:\n"
+"        path: say\n"
+"        layout: custom_say_layout"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:73
+msgid ""
+"Layout files are explained in :ref:`editable_layout` and in the :ref:"
+"`editable_packages` sections."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:75
+msgid ""
+"The ``workspace_generator`` defines the file that will be generated for the "
+"top project. The only supported value so far is ``cmake`` and it will "
+"generate a *conanworkspace.cmake* file that looks like:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:78
+msgid ""
+"set(PACKAGE_say_SRC \"<path>/examples/workspace/cmake/say/src\")\n"
+"set(PACKAGE_say_BUILD \"<path>/examples/workspace/cmake/say/build/Debug\")\n"
+"set(PACKAGE_hello_SRC \"<path>/examples/workspace/cmake/hello/src\")\n"
+"set(PACKAGE_hello_BUILD \"<path>/examples/workspace/cmake/hello/build/"
+"Debug\")\n"
+"set(PACKAGE_chat_SRC \"<path>/examples/workspace/cmake/chat/src\")\n"
+"set(PACKAGE_chat_BUILD \"<path>/examples/workspace/cmake/chat/build/"
+"Debug\")\n"
+"\n"
+"macro(conan_workspace_subdirectories)\n"
+"    add_subdirectory(${PACKAGE_say_SRC} ${PACKAGE_say_BUILD})\n"
+"    add_subdirectory(${PACKAGE_hello_SRC} ${PACKAGE_hello_BUILD})\n"
+"    add_subdirectory(${PACKAGE_chat_SRC} ${PACKAGE_chat_BUILD})\n"
+"endmacro()"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:93
+msgid ""
+"This file can be included in your user-defined *CMakeLists.txt* (this file "
+"is not generated). Here you can see the *CMakeLists.txt* used in this "
+"project:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:96
+msgid ""
+"cmake_minimum_required(VERSION 3.0)\n"
+"\n"
+"project(WorkspaceProject)\n"
+"\n"
+"include(${CMAKE_BINARY_DIR}/conanworkspace.cmake)\n"
+"conan_workspace_subdirectories()"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:105
+msgid ""
+"The ``root: chat/0.1@user/testing`` defines which is the consumer node of "
+"the graph, typically some kind of executable. You can provide a comma "
+"separated list of references, as a string, or a yaml list (abbreviated or "
+"full as yaml items). All the root nodes will be in the same dependency "
+"graph, leading to conflicts if they depend on different versions of the same "
+"library, as in any other Conan command."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:109
+msgid ""
+"editables:\n"
+"    say/0.1@user/testing:\n"
+"        path: say\n"
+"    hello/0.1@user/testing:\n"
+"        path: hello\n"
+"    chat/0.1@user/testing:\n"
+"        path: chat\n"
+"\n"
+"root: chat/0.1@user/testing, say/0.1@user/testing\n"
+"# or\n"
+"root: [\"helloa/0.1@lasote/stable\", \"hellob/0.1@lasote/stable\"]\n"
+"# or\n"
+"root:\n"
+"    - helloa/0.1@lasote/stable\n"
+"    - hellob/0.1@lasote/stable"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:129
+msgid "Single configuration build environments"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:131
+msgid ""
+"There are some build systems, like Make, that require the developer to "
+"manage different configurations in different build folders, and switch "
+"between folders to change configuration. The file described above is "
+"*conan_gcc.yml* file, which defines a Conan workspace that works for a CMake "
+"based project for MinGW/Unix Makefiles gcc environments (working for apple-"
+"clang or clang would be very similar, if not identical)."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:135
+msgid "Lets use it to install this workspace:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:137
+msgid ""
+"$ mkdir build_release && cd build_release\n"
+"$ conan workspace install ../conanws_gcc.yml --profile=my_profile"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:142
+msgid ""
+"Here we assume that you have a ``my_profile`` profile defined which would "
+"use a single-configuration build system (like Makefiles). The example is "
+"tested with gcc in Linux, but working with apple-clang with Makefiles would "
+"be the same). You should see something like:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:146
+msgid ""
+"Configuration:\n"
+"[settings]\n"
+"...\n"
+"build_type=Release\n"
+"compiler=gcc\n"
+"compiler.libcxx=libstdc++\n"
+"compiler.version=4.9\n"
+"...\n"
+"\n"
+"Requirements\n"
+"    chat/0.1@user/testing from user folder - Editable\n"
+"    hello/0.1@user/testing from user folder - Editable\n"
+"    say/0.1@user/testing from user folder - Editable\n"
+"Packages\n"
+"    chat/0.1@user/testing:df2c4f4725219597d44b7eab2ea5c8680abd57f9 - "
+"Editable\n"
+"    hello/0.1@user/testing:b0e473ad8697d6069797b921517d628bba8b5901 - "
+"Editable\n"
+"    say/0.1@user/testing:80faec7955dcba29246085ff8d64a765db3b414f - "
+"Editable\n"
+"\n"
+"say/0.1@user/testing: Generator cmake created conanbuildinfo.cmake\n"
+"...\n"
+"hello/0.1@user/testing: Generator cmake created conanbuildinfo.cmake\n"
+"...\n"
+"chat/0.1@user/testing: Generator cmake created conanbuildinfo.cmake\n"
+"..."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:173
+msgid ""
+"These *conanbuildinfo.cmake* files have been created in each package *build/"
+"Release* folder, as defined by the *layout_gcc* file:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:176
+msgid ""
+"# This helps to define the location of CMakeLists.txt within package\n"
+"[source_folder]\n"
+"src\n"
+"\n"
+"# This defines where the conanbuildinfo.cmake will be written to\n"
+"[build_folder]\n"
+"build/{{settings.build_type}}"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:186
+msgid "Now we can configure and build our project as usual:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:188
+msgid ""
+"$ cmake .. -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Release\n"
+"$ cmake --build . # or just $ make\n"
+"$ ../chat/build/Release/app\n"
+"Release: Hello World!\n"
+"Release: Hello World!\n"
+"Release: Hello World!"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:197
+msgid ""
+"Now, go do a change in some of the packages, for example the \"say\" one, "
+"and rebuild. See how it does an incremental build (fast)."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:199
+msgid ""
+"Note that nothing will really be installed in the local cache, all the "
+"dependencies are resolved locally:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:201
+msgid ""
+"$ conan search say\n"
+"There are no packages matching the 'say' pattern"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:208
+msgid ""
+"The package *conanfile.py* recipes do not contain anything special, they are "
+"standard recipes. But the packages *CMakeLists.txt* have defined the "
+"following:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:211
+msgid "conan_basic_setup(NO_OUTPUT_DIRS)"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:215
+msgid ""
+"This is because the default ``conan_basic_setup()`` does define output "
+"directories for artifacts such as *bin*, *lib*, etc, which is not what the "
+"local project layout expects. You need to check and make sure that your "
+"build scripts and recipe matches both the expected local layout (as defined "
+"in layout files), and the recipe ``package()`` method logic."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:220
+msgid "Building for debug mode is done in its own folder:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:222
+msgid ""
+"$ cd .. && mkdir build_debug && cd build_debug\n"
+"$ conan workspace install ../conanws_gcc.yml --profile=my_gcc_profile -s "
+"build_type=Debug\n"
+"$ cmake .. -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Debug\n"
+"$ cmake --build . # or just $ make\n"
+"$ ../chat/build/Debug/app\n"
+"Debug: Bye World!\n"
+"Debug: Bye World!\n"
+"Debug: Bye World!"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:235
+msgid "Multi configuration build environments"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:237
+msgid ""
+"Some build systems, like Visual Studio (MSBuild), use \"multi-"
+"configuration\" environments. That is, even if the project is configured "
+"just once you can switch between different configurations (like Debug/"
+"Release) directly in the IDE and build there."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:240
+msgid ""
+"The above example uses the Conan ``cmake`` generator, that creates a single "
+"*conanbuildinfo.cmake* file. This is not a problem if we have our "
+"configurations built in different folders. Each one will contain its own "
+"*conanbuildinfo.cmake*. For Visual Studio that means that if we wanted to "
+"switch from Debug<->Release, we should issue a new ``conan workspace "
+"install`` command with the right ``-s build_type`` and do a clean build, in "
+"order to get the right dependencies."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:245
+msgid ""
+"Conan has the :ref:`cmake_multi` generator, that allows this direct switch "
+"of Debug/Release configuration in the IDE. The *conanfile.py* recipes they "
+"have defined the ``cmake`` generator, so the first step is to override that "
+"in our *conanws_vs.yml* file:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:248
+msgid ""
+"editables:\n"
+"say/0.1@user/testing:\n"
+"    path: say\n"
+"hello/0.1@user/testing:\n"
+"    path: hello\n"
+"chat/0.1@user/testing:\n"
+"    path: chat\n"
+"layout: layout_vs\n"
+"generators: cmake_multi\n"
+"workspace_generator: cmake\n"
+"root: chat/0.1@user/testing"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:262
+msgid ""
+"Note the ``generators: cmake_multi`` line, that will define the generators "
+"to be used by our workspace packages. Also, our *CMakeLists.txt* should take "
+"into account that now we won't have a *conanbuildinfo.cmake* file, but a "
+"*conanbuildinfo_multi.cmake* file. See for example the *hello/src/CMakeLists."
+"txt* file:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:266
+msgid ""
+"project(Hello)\n"
+"\n"
+"if(EXISTS ${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo_multi.cmake)\n"
+"    include(${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo_multi.cmake)\n"
+"else()\n"
+"    include(${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo.cmake)\n"
+"endif()\n"
+"\n"
+"conan_basic_setup(NO_OUTPUT_DIRS)\n"
+"\n"
+"add_library(hello hello.cpp)\n"
+"conan_target_link_libraries(hello)"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:282
+msgid ""
+"The last ``conan_target_link_libraries(hello)`` is a helper that does the "
+"right linking with Debug/Release libraries (also works when using cmake "
+"targets)."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:285
+msgid ""
+"Make sure to install both Debug and Release configurations straight ahead, "
+"if we want to later switch between them in the IDE:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:287
+msgid ""
+"$ mkdir build && cd build\n"
+"$ conan workspace install ../conanws_vs.yml\n"
+"$ conan workspace install ../conanws_vs.yml -s build_type=Debug\n"
+"$ cmake .. -G \"Visual Studio 15 Win64\""
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:294
+msgid ""
+"With those commands you will get a Visual Studio solution, that you can "
+"open, select the *app* executable as StartUp project, and start building, "
+"executing, debugging, switching from Debug and Release configurations freely "
+"from the IDE, without needing to issue further Conan commands."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:297
+msgid ""
+"You can check in the project folders, how the following files have been "
+"generated:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:299
+msgid ""
+"hello\n"
+"  |- build\n"
+"        | - conanbuildinfo_multi.cmake\n"
+"        | - conanbuildinfo_release.cmake\n"
+"        | - conanbuildinfo_debug.cmake"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:308
+msgid ""
+"Note that they are not located in *build/Release* and *build/Debug* "
+"subfolders; that is because of the multi-config environment. To account for "
+"that the *layout_vs* define the ``[build_folder]`` not as ``build/{settings."
+"build_type}`` but just as:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:311
+msgid ""
+"[build_folder]\n"
+"build"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:317
+msgid "Out of source builds"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:319
+msgid ""
+"The above examples are using a build folder in-source of the packages in "
+"editable mode. It is possible to define out-of-source builds layouts, using "
+"relative paths and the ``reference`` argument. The following layout "
+"definition could be used to locate the build artifacts of an editable "
+"package in a sibling ``build/<package-name>`` folder:"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:323
+msgid ""
+"[build_folder]\n"
+"../build/{{reference.name}}/{{settings.build_type}}\n"
+"\n"
+"[includedirs]\n"
+"src\n"
+"\n"
+"[libdirs]\n"
+"../build/{{reference.name}}/{{settings.build_type}}/lib"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:336
+msgid "Notes"
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:338
+msgid ""
+"Note that this way of developing packages shouldn't be used to create the "
+"final packages (you could try to use :command:`conan export-pkg`), but "
+"instead, a full package creation with :command:`conan create` (best in CI) "
+"is recommended."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:341
+msgid ""
+"So far, only the CMake super-project generator is implemented. A Visual "
+"Studio one is being considered, and seems feasible, but not yet available."
+msgstr ""
+
+#: ../../../developing_packages/workspaces.rst:345
+msgid ""
+"We really want your feedback. Please submit any issues to https://github.com/"
+"conan-io/conan/issues with any suggestion, problem, idea, and using "
+"[workspaces] prefix in the issue title."
+msgstr ""

@@ -1,0 +1,426 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.46\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:17+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/cross_platform/android.rst:4
+msgid "|android_logo| Android"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:6
+msgid ""
+"There are several ways to cross-compile packages for `Android <https://www."
+"android.com>`__ platform via conan."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:9
+msgid "Using android-ndk package (tool require)"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:11
+msgid ""
+"The easiest way so far is to use `android-ndk <https://conan.io/center/"
+"android-ndk>`_ conan package (which is in ``conancenter`` repository)."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:13
+msgid ""
+"Using the ``android-ndk`` package as a tool requirement will do the "
+"following steps:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:15
+msgid ""
+"Download the appropriate `Android NDK <https://developer.android.com/ndk>`_ "
+"archive."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:17
+msgid ""
+"Set up required environment variables, such as ``CC``, ``CXX``, ``RANLIB`` "
+"and so on to the appropriate tools from the NDK."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:19
+msgid ""
+"In case of using CMake, it will inject the appropriate `toolchain file "
+"<https://developer.android.com/ndk/guides/cmake#file>`_ and set up the "
+"necessary CMake `variables <https://developer.android.com/ndk/guides/"
+"cmake#variables>`_."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:21
+msgid ""
+"For instance, in order to cross-compile for ``ARMv8``, the following conan "
+"profile might be used:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:23
+msgid ""
+"include(default)\n"
+"[settings]\n"
+"arch=armv8\n"
+"build_type=Release\n"
+"compiler=clang\n"
+"compiler.libcxx=libc++\n"
+"compiler.version=11\n"
+"os=Android\n"
+"os.api_level=21\n"
+"[tool_requires]\n"
+"android-ndk/r22b\n"
+"[options]\n"
+"[env]"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:41
+msgid ""
+"In addition to the above, Windows users may need to specify "
+"``CONAN_MAKE_PROGRAM``, for instance from the existing MinGW installation (e."
+"g. ``C:\\MinGW\\bin\\mingw32-make.exe``), or use make from the "
+"``mingw_installer/1.0@conan/stable``."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:44
+msgid ""
+"Similar profile might be used to cross-compile for ``ARMv7`` (notice the "
+"``arch`` change):"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:46
+msgid ""
+"include(default)\n"
+"[settings]\n"
+"arch=armv7\n"
+"build_type=Release\n"
+"compiler=clang\n"
+"compiler.libcxx=libc++\n"
+"compiler.version=11\n"
+"os=Android\n"
+"os.api_level=21\n"
+"[tool_requires]\n"
+"android-ndk/r22b\n"
+"[options]\n"
+"[env]"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:62
+msgid ""
+"By adjusting ``arch`` setting, you may cross-compile for ``x86`` and "
+"``x86_64`` Android as well (e.g. if you need to run code in a simulator)."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:66
+msgid ""
+"``os.api_level`` is an important setting which affects compatibility - it "
+"defines the **minimum** Android version supported. In other words, it is the "
+"same meaning as `minSdkVersion <https://developer.android.com/guide/topics/"
+"manifest/uses-sdk-element>`_."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:73
+msgid "Use built-in Conan toolchain"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:77
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:79
+msgid ""
+"Conan will generate a toolchain for Android if the recipe is using a :ref:"
+"`conan-cmake-toolchain`. In that case all you need is to provide the path to "
+"the Android NDK and :ref:`working profiles <build_requires_context>`. This "
+"approach can also use the Android NDK package referenced in the previous "
+"section."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:83
+msgid "Use a regular profile for the *host* context:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:85
+msgid "**profile_host**"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:85
+msgid ""
+"[settings]\n"
+"os=Android\n"
+"os.api_level=23\n"
+"arch=x86_64\n"
+"compiler=clang\n"
+"compiler.version=9\n"
+"compiler.libcxx=c++_shared\n"
+"build_type=Release"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:97
+msgid ""
+"and add Android NDK to the ``PATH`` or populate the "
+"``CONAN_CMAKE_ANDROID_NDK`` environment variable."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:99
+msgid ""
+"Together with the files created by the generators that make it possible to "
+"find and link the requirements, :command:`conan install` command will "
+"generate a toolchain file like the following one:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:102
+msgid "**conan_toolchain.cmake** (some parts are stripped)"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:102
+msgid ""
+" set(CMAKE_BUILD_TYPE \"Release\" CACHE STRING \"Choose the type of build.\" "
+"FORCE)\n"
+"\n"
+" set(CMAKE_SYSTEM_NAME Android)\n"
+" set(CMAKE_SYSTEM_VERSION 23)\n"
+" set(CMAKE_ANDROID_ARCH_ABI x86_64)\n"
+" set(CMAKE_ANDROID_STL_TYPE c++_shared)\n"
+" set(CMAKE_ANDROID_NDK <path/provided/via/environment/variable>)"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:114
+msgid ""
+"With this toolchain file you can execute CMake's command to generate the "
+"binaries:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:116
+msgid ""
+"conan install <conanfile> --profile:host=profile_host --profile:"
+"build=default\n"
+"cmake . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake\n"
+"cmake --build . --config Release"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:124
+msgid "Using Docker images"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:126
+msgid ""
+"If you're using `Docker <https://www.docker.com>`_ for builds, you may "
+"consider using docker images from the `Conan Docker Tools <https://github."
+"com/conan-io/conan-docker-tools>`_ repository."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:129
+msgid "Currently, Conan Docker Tools provide the following Android images:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:131
+msgid "conanio/android-clang8"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:132
+msgid "conanio/android-clang8-x86"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:133
+msgid "conanio/android-clang8-armv7"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:134
+msgid "conanio/android-clang8-armv8"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:136
+msgid ""
+"All above mentioned images have corresponding `Android NDK <https://"
+"developer.android.com/ndk>`_ installed, with required environment variables "
+"set and with default conan profile configured for android cross-building. "
+"Therefore, these images might be especially useful for CI systems."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:140
+msgid "Using existing NDK"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:142
+msgid ""
+"It's also possible to use an existing `Android NDK <https://developer."
+"android.com/ndk>`_ installation with conan. For instance, if you're using "
+"`Android Studio <https://developer.android.com/studio/>`_ IDE, you may "
+"already have an NDK at ``~/Library/Android/sdk/ndk``."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:145
+msgid ""
+"You have to specify different environment variables in the Conan profile for "
+"make-based projects. For instance:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:147
+msgid ""
+"include(default)\n"
+"target_host=aarch64-linux-android\n"
+"android_ndk=/home/conan/Library/Android/sdk/ndk/20.0.5594570\n"
+"api_level=21\n"
+"[settings]\n"
+"arch=armv8\n"
+"build_type=Release\n"
+"compiler=clang\n"
+"compiler.libcxx=libc++\n"
+"compiler.version=8\n"
+"os=Android\n"
+"os.api_level=$api_level\n"
+"[tool_requires]\n"
+"[options]\n"
+"[env]\n"
+"PATH=[$android_ndk/toolchains/llvm/prebuilt/darwin-x86_64/bin]\n"
+"CHOST=$target_host\n"
+"AR=$target_host-ar\n"
+"AS=$target_host-as\n"
+"RANLIB=$target_host-ranlib\n"
+"CC=$target_host$api_level-clang\n"
+"CXX=$target_host$api_level-clang++\n"
+"LD=$target_host-ld\n"
+"STRIP=$target_host-strip"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:174
+msgid ""
+"However, when building CMake projects, there are several approaches "
+"available, and it's not always clear which one to follow."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:177
+msgid "Using toolchain from Android NDK"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:179
+msgid "This is the official way recommended by Android developers."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:181
+msgid "For this, you will need a small CMake toolchain file:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:183
+msgid ""
+"set(ANDROID_PLATFORM 21)\n"
+"set(ANDROID_ABI arm64-v8a)\n"
+"include($ENV{HOME}/Library/Android/sdk/ndk/20.0.5594570/build/cmake/android."
+"toolchain.cmake)"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:189
+msgid ""
+"This toolchain file only sets up the required CMake `variables <https://"
+"developer.android.com/ndk/guides/cmake#variables>`_, and then includes the "
+"default `toolchain file <https://developer.android.com/ndk/guides/"
+"cmake#file>`_ supplied with Android NDK."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:192
+msgid "And then, you may use the following profile:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:194
+msgid ""
+"include(default)\n"
+"[settings]\n"
+"arch=armv8\n"
+"build_type=Release\n"
+"compiler=clang\n"
+"compiler.libcxx=libc++\n"
+"compiler.version=8\n"
+"os=Android\n"
+"os.api_level=21\n"
+"[tool_requires]\n"
+"[options]\n"
+"[env]\n"
+"CONAN_CMAKE_TOOLCHAIN_FILE=/home/conan/my_android_toolchain.cmake"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:210
+msgid ""
+"In the profile, ``CONAN_CMAKE_TOOLCHAIN_FILE`` points to the CMake toolchain "
+"file listed above."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:214
+msgid "Using CMake build-in Android NDK support"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:218
+msgid ""
+"This workflow is not supported by Android and is often broken with new NDK "
+"releases or when using older versions of CMake. This workflow is **strongly "
+"discouraged** and will not work with Gradle."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:221
+msgid ""
+"For this approach, you don't need to specify CMake toolchain file at all. "
+"It's enough to indicate ``os`` is Android and Conan will automatically set "
+"up all required CMake `variables <https://cmake.org/cmake/help/latest/manual/"
+"cmake-toolchains.7.html#cross-compiling-for-android>`__ for you."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:225
+msgid "Therefore, the following conan profile could be used for ``ARMv8``:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:227
+msgid ""
+"include(default)\n"
+"[settings]\n"
+"arch=armv8\n"
+"build_type=Release\n"
+"compiler=clang\n"
+"compiler.libcxx=libc++\n"
+"compiler.version=7.0\n"
+"os=Android\n"
+"os.api_level=21\n"
+"[tool_requires]\n"
+"[options]\n"
+"[env]\n"
+"ANDROID_NDK_ROOT=/home/conan/android-ndk-r18b"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:243
+msgid ""
+"The only way you have to configure is ``ANDROID_NDK_ROOT`` which is a path "
+"to the Android NDK installation."
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:245
+msgid ""
+"Once profile is configured, you should see the following output during the "
+"CMake build:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:247
+msgid ""
+"-- Android: Targeting API '21' with architecture 'arm64', ABI 'arm64-v8a', "
+"and processor 'aarch64'\n"
+"-- Android: Selected Clang toolchain 'aarch64-linux-android-clang' with GCC "
+"toolchain 'aarch64-linux-android-4.9'"
+msgstr ""
+
+#: ../../../integrations/cross_platform/android.rst:252
+msgid ""
+"It means native CMake integration has successfully found Android NDK and "
+"configured the build."
+msgstr ""

@@ -1,0 +1,469 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.30\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/config_files/settings.yml.rst:4
+msgid "settings.yml"
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:6
+msgid ""
+"The input ``settings`` for packages in Conan are predefined in ``~/.conan/"
+"settings.yml`` file, so only a few like ``os`` or ``compiler`` are possible. "
+"These are the **default** values, but it is possible to customize them, see :"
+"ref:`custom_settings`."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:9
+msgid ""
+"# Only for cross building, 'os_build/arch_build' is the system that runs "
+"Conan\n"
+"os_build: [Windows, WindowsStore, Linux, Macos, FreeBSD, SunOS, AIX]\n"
+"arch_build: [x86, x86_64, ppc32be, ppc32, ppc64le, ppc64, armv5el, armv5hf, "
+"armv6, armv7, armv7hf, armv7s, armv7k, armv8, armv8_32, armv8.3, sparc, "
+"sparcv9, mips, mips64, avr, s390, s390x, sh4le]\n"
+"\n"
+"# Only for building cross compilation tools, 'os_target/arch_target' is the "
+"system for\n"
+"# which the tools generate code\n"
+"os_target: [Windows, Linux, Macos, Android, iOS, watchOS, tvOS, FreeBSD, "
+"SunOS, AIX, Arduino, Neutrino]\n"
+"arch_target: [x86, x86_64, ppc32be, ppc32, ppc64le, ppc64, armv5el, armv5hf, "
+"armv6, armv7, armv7hf, armv7s, armv7k, armv8, armv8_32, armv8.3, sparc, "
+"sparcv9, mips, mips64, avr, s390, s390x, asm.js, wasm, sh4le]\n"
+"\n"
+"# Rest of the settings are \"host\" settings:\n"
+"# - For native building/cross building: Where the library/program will run.\n"
+"# - For building cross compilation tools: Where the cross compiler will "
+"run.\n"
+"os:\n"
+"    Windows:\n"
+"        subsystem: [None, cygwin, msys, msys2, wsl]\n"
+"    WindowsStore:\n"
+"        version: [\"8.1\", \"10.0\"]\n"
+"    WindowsCE:\n"
+"        platform: ANY\n"
+"        version: [\"5.0\", \"6.0\", \"7.0\", \"8.0\"]\n"
+"    Linux:\n"
+"    Macos:\n"
+"        version: [None, \"10.6\", \"10.7\", \"10.8\", \"10.9\", \"10.10\", "
+"\"10.11\", \"10.12\", \"10.13\", \"10.14\", \"10.15\", \"11.0\"]\n"
+"    Android:\n"
+"        api_level: ANY\n"
+"    iOS:\n"
+"        version: [\"7.0\", \"7.1\", \"8.0\", \"8.1\", \"8.2\", \"8.3\", "
+"\"9.0\", \"9.1\", \"9.2\", \"9.3\", \"10.0\", \"10.1\", \"10.2\", \"10.3\", "
+"\"11.0\", \"11.1\", \"11.2\", \"11.3\", \"11.4\", \"12.0\", \"12.1\", "
+"\"12.2\", \"12.3\", \"12.4\", \"13.0\", \"13.1\", \"13.2\", \"13.3\", "
+"\"13.4\", \"13.5\", \"13.6\"]\n"
+"    watchOS:\n"
+"        version: [\"4.0\", \"4.1\", \"4.2\", \"4.3\", \"5.0\", \"5.1\", "
+"\"5.2\", \"5.3\", \"6.0\", \"6.1\"]\n"
+"    tvOS:\n"
+"        version: [\"11.0\", \"11.1\", \"11.2\", \"11.3\", \"11.4\", "
+"\"12.0\", \"12.1\", \"12.2\", \"12.3\", \"12.4\", \"13.0\"]\n"
+"    FreeBSD:\n"
+"    SunOS:\n"
+"    AIX:\n"
+"    Arduino:\n"
+"        board: ANY\n"
+"    Emscripten:\n"
+"    Neutrino:\n"
+"        version: [\"6.4\", \"6.5\", \"6.6\", \"7.0\"]\n"
+"arch: [x86, x86_64, ppc32be, ppc32, ppc64le, ppc64, armv4, armv4i, armv5el, "
+"armv5hf, armv6, armv7, armv7hf, armv7s, armv7k, armv8, armv8_32, armv8.3, "
+"sparc, sparcv9, mips, mips64, avr, s390, s390x, asm.js, wasm, sh4le]\n"
+"compiler:\n"
+"    sun-cc:\n"
+"        version: [\"5.10\", \"5.11\", \"5.12\", \"5.13\", \"5.14\"]\n"
+"        threads: [None, posix]\n"
+"        libcxx: [libCstd, libstdcxx, libstlport, libstdc++]\n"
+"    gcc: &gcc\n"
+"        version: [\"4.1\", \"4.4\", \"4.5\", \"4.6\", \"4.7\", \"4.8\", "
+"\"4.9\",\n"
+"                  \"5\", \"5.1\", \"5.2\", \"5.3\", \"5.4\", \"5.5\",\n"
+"                  \"6\", \"6.1\", \"6.2\", \"6.3\", \"6.4\", \"6.5\",\n"
+"                  \"7\", \"7.1\", \"7.2\", \"7.3\", \"7.4\", \"7.5\",\n"
+"                  \"8\", \"8.1\", \"8.2\", \"8.3\", \"8.4\",\n"
+"                  \"9\", \"9.1\", \"9.2\", \"9.3\",\n"
+"                  \"10\", \"10.1\"]\n"
+"        libcxx: [libstdc++, libstdc++11]\n"
+"        threads: [None, posix, win32] #  Windows MinGW\n"
+"        exception: [None, dwarf2, sjlj, seh] # Windows MinGW\n"
+"        cppstd: [None, 98, gnu98, 11, gnu11, 14, gnu14, 17, gnu17, 20, "
+"gnu20]\n"
+"    Visual Studio: &visual_studio\n"
+"        runtime: [MD, MT, MTd, MDd]\n"
+"        version: [\"8\", \"9\", \"10\", \"11\", \"12\", \"14\", \"15\", "
+"\"16\"]\n"
+"        toolset: [None, v90, v100, v110, v110_xp, v120, v120_xp,\n"
+"                  v140, v140_xp, v140_clang_c2, LLVM-vs2012, LLVM-"
+"vs2012_xp,\n"
+"                  LLVM-vs2013, LLVM-vs2013_xp, LLVM-vs2014, LLVM-vs2014_xp,\n"
+"                  LLVM-vs2017, LLVM-vs2017_xp, v141, v141_xp, v141_clang_c2, "
+"v142,\n"
+"                  llvm, ClangCL]\n"
+"        cppstd: [None, 14, 17, 20]\n"
+"    clang:\n"
+"        version: [\"3.3\", \"3.4\", \"3.5\", \"3.6\", \"3.7\", \"3.8\", "
+"\"3.9\", \"4.0\",\n"
+"                  \"5.0\", \"6.0\", \"7.0\", \"7.1\",\n"
+"                  \"8\", \"9\", \"10\", \"11\"]\n"
+"        libcxx: [None, libstdc++, libstdc++11, libc++, c++_shared, c+"
+"+_static]\n"
+"        cppstd: [None, 98, gnu98, 11, gnu11, 14, gnu14, 17, gnu17, 20, "
+"gnu20]\n"
+"        runtime: [None, MD, MT, MTd, MDd]\n"
+"    apple-clang: &apple_clang\n"
+"        version: [\"5.0\", \"5.1\", \"6.0\", \"6.1\", \"7.0\", \"7.3\", "
+"\"8.0\", \"8.1\", \"9.0\", \"9.1\", \"10.0\", \"11.0\", \"12.0\"]\n"
+"        libcxx: [libstdc++, libc++]\n"
+"        cppstd: [None, 98, gnu98, 11, gnu11, 14, gnu14, 17, gnu17, 20, "
+"gnu20]\n"
+"    intel:\n"
+"        version: [\"11\", \"12\", \"13\", \"14\", \"15\", \"16\", \"17\", "
+"\"18\", \"19\"]\n"
+"        base:\n"
+"            gcc:\n"
+"                <<: *gcc\n"
+"                threads: [None]\n"
+"                exception: [None]\n"
+"            Visual Studio:\n"
+"                <<: *visual_studio\n"
+"            apple-clang:\n"
+"                <<: *apple_clang\n"
+"    qcc:\n"
+"        version: [\"4.4\", \"5.4\"]\n"
+"        libcxx: [cxx, gpp, cpp, cpp-ne, accp, acpp-ne, ecpp, ecpp-ne]\n"
+"\n"
+"build_type: [None, Debug, Release, RelWithDebInfo, MinSizeRel]\n"
+"cppstd: [None, 98, gnu98, 11, gnu11, 14, gnu14, 17, gnu17, 20, gnu20]  # "
+"Deprecated, use compiler.cppstd"
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:107
+msgid ""
+"As you can see, the possible values ``settings`` can take are restricted in "
+"the same file. This is done to ensure matching naming and spelling as well "
+"as defining a common settings model among users and the OSS community. If a "
+"setting is allowed to be set to any value, you can use ``ANY``. If a setting "
+"is allowed to be set to any value or it can also be unset, you can use "
+"``[None, ANY]``."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:112
+msgid ""
+"However, this configuration file can be modified to any needs, including new "
+"settings or subsettings and their values. If you want to distribute a "
+"unified *settings.yml* file you can use the :ref:`conan config install "
+"command<conan_config_install>`."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:117
+msgid ""
+"The *settings.yml* file is not perfect nor definitive and surely incomplete. "
+"Please share any suggestion in the Conan issue tracker with any missing "
+"settings and values that could make sense for other users."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:120
+msgid ""
+"To force the creation of the *settings.yml* the command ``conan config "
+"init`` is available."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:124
+msgid "Architectures"
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:126
+msgid ""
+"Here you can find a brief explanation of each of the architectures defined "
+"as ``arch``, ``arch_build`` and ``arch_target`` settings."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:128
+msgid "**x86**: The popular 32 bit x86 architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:130
+msgid "**x86_64**: The popular 64 bit x64 architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:132
+msgid "**ppc64le**: The PowerPC 64 bit Big Endian architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:134
+msgid "**ppc32**: The PowerPC 32 bit architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:136
+msgid "**ppc64le**: The PowerPC 64 bit Little Endian architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:138
+msgid "**ppc64**: The PowerPC 64 bit Big Endian architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:140
+msgid "**armv5el**: The ARM 32 bit version 5 architecture, soft-float."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:142
+msgid "**armv5hf**: The ARM 32 bit version 5 architecture, hard-float."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:144
+msgid "**armv6**: The ARM 32 bit version 6 architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:146
+msgid "**armv7**: The ARM 32 bit version 7 architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:148
+msgid "**armv7hf**: The ARM 32 bit version 7 hard-float architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:150
+msgid ""
+"**armv7s**: The ARM 32 bit version 7 *swift* architecture mostly used in "
+"Apple's A6 and A6X chips on iPhone 5, iPhone 5C and iPad 4."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:152
+msgid ""
+"**armv7k**: The ARM 32 bit version 7 *k* architecture mostly used in Apple's "
+"WatchOS."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:154
+msgid ""
+"**armv8**: The ARM 64 bit and 32 bit compatible version 8 architecture. It "
+"covers only the ``aarch64`` instruction set."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:156
+msgid ""
+"**armv8_32**: The ARM 32 bit version 8 architecture. It covers only the "
+"``aarch32`` instruction set (a.k.a. ``ILP32``)."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:158
+msgid ""
+"**armv8.3**: The ARM 64 bit and 32 bit compatible version 8.3 architecture. "
+"Also known as ``arm64e``, it is used on the A12 chipset added in the latest "
+"iPhone models (XS/XS Max/XR)."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:161
+msgid ""
+"**sparc**: The SPARC (Scalable Processor Architecture) originally developed "
+"by Sun Microsystems."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:163
+msgid "**sparcv9**: The SPARC version 9 architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:165
+msgid ""
+"**mips**: The 32 bit MIPS (Microprocessor without Interlocked Pipelined "
+"Stages) developed by MIPS Technologies (formerly MIPS Computer Systems)."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:168
+msgid ""
+"**mips64**: The 64 bit MIPS (Microprocessor without Interlocked Pipelined "
+"Stages) developed by MIPS Technologies (formerly MIPS Computer Systems)."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:171
+msgid ""
+"**avr**: The 8 bit AVR microcontroller architecture developed by Atmel "
+"(Microchip Technology)."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:173
+msgid ""
+"**s390**: The 32 bit address Enterprise Systems Architecture 390 from IBM."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:175
+msgid ""
+"**s390x**: The 64 bit address Enterprise Systems Architecture 390 from IBM."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:177
+msgid ""
+"**asm.js**: The subset of JavaScript that can be used as low-level target "
+"for compilers, not really a processor architecture, it's produced by "
+"Emscripten. Conan treats it as an architecture to align with build systems "
+"design (e.g. GNU auto tools and CMake)."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:180
+msgid ""
+"**wasm**: The Web Assembly, not really a processor architecture, but byte-"
+"code format for Web, it's produced by Emscripten. Conan treats it as an "
+"architecture to align with build systems design (e.g. GNU auto tools and "
+"CMake)."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:183
+msgid "**sh4le**: The Hitachi SH-4 SuperH architecture."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:186
+msgid "C++ standard libraries (aka compiler.libcxx)"
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:188
+msgid ""
+"``compiler.libcxx`` sub-setting defines C++ standard libraries "
+"implementation to be used. The sub-setting applies only to certain "
+"compilers, e.g. it applies to *clang*, *apple-clang* and *gcc*, but doesn't "
+"apply to *Visual Studio*."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:191
+msgid ""
+"**libstdc++** (gcc, clang, apple-clang, sun-cc): `The GNU C++ Library "
+"<https://gcc.gnu.org/onlinedocs/libstdc++/>`__. NOTE that this implicitly "
+"defines **_GLIBCXX_USE_CXX11_ABI=0** to use old ABI. See :ref:`How to manage "
+"the GCC >= 5 ABI <manage_gcc_abi>` for the additional details. Might be a "
+"wise choice for old systems, such as CentOS 6. On Linux systems, you may "
+"need to install `libstdc++-dev <https://packages.debian.org/sid/libstdc++-"
+"dev>`_ (package name could be different in various distros) in order to use "
+"the standard library. NOTE that on Apple systems usage of **libstdc++** has "
+"been deprecated."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:196
+msgid ""
+"**libstdc++11** (gcc, clang, apple-clang): `The GNU C++ Library <https://gcc."
+"gnu.org/onlinedocs/libstdc++/>`__. NOTE that this implicitly defines "
+"**_GLIBCXX_USE_CXX11_ABI=1** to use new ABI. See :ref:`How to manage the GCC "
+">= 5 ABI <manage_gcc_abi>` for the additional details. Might be a wise "
+"choice for newer systems, such as Ubuntu 20. On Linux systems, you may need "
+"to install `libstdc++-dev <https://packages.debian.org/sid/libstdc++-dev>`_ "
+"(package name could be different in various distros) in order to use the "
+"standard library. NOTE that on Apple systems usage of **libstdc++** has been "
+"deprecated."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:201
+msgid ""
+"**libc++** (clang, apple-clang): `LLVM libc++ <https://libcxx.llvm.org/>`__. "
+"On Linux systems, you may need to install `libc++-dev <https://packages."
+"debian.org/sid/libc++-dev>`_ (package name could be different in various "
+"distros) in order to use the standard library."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:204
+msgid ""
+"**c++_shared** (clang, Android only): use `LLVM libc++ <https://libcxx.llvm."
+"org/>`__ as a shared library. Refer to the `C++ Library Support <https://"
+"developer.android.com/ndk/guides/cpp-support>`__ for the additiona details."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:207
+msgid ""
+"**c++_static** (clang, Android only): use `LLVM libc++ <https://libcxx.llvm."
+"org/>`__ as a static library. Refer to the `C++ Library Support <https://"
+"developer.android.com/ndk/guides/cpp-support>`__ for the additiona details."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:210
+msgid ""
+"**libCstd** (sun-cc): Rogue Wave's stdlib. See `Comparing C++ Standard "
+"Libraries libCstd, libstlport, and libstdcxx <https://www.oracle.com/solaris/"
+"technologies/cmp-stlport-libcstd.html>`__."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:212
+msgid ""
+"**libstlport** (sun-cc): `STLport <http://www.stlport.org/>`__. See "
+"`Comparing C++ Standard Libraries libCstd, libstlport, and libstdcxx "
+"<https://www.oracle.com/solaris/technologies/cmp-stlport-libcstd.html>`__."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:214
+msgid ""
+"**libstdcxx** (sun-cc): `Apache C++ Standard Library <http://people.apache."
+"org/~gmcdonald/stdcxx/index.html>`__. See `Comparing C++ Standard Libraries "
+"libCstd, libstlport, and libstdcxx <https://www.oracle.com/solaris/"
+"technologies/cmp-stlport-libcstd.html>`__."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:216
+msgid ""
+"**gpp** (qcc): GNU C++ lib. See `QCC documentation <https://www.qnx.com/"
+"developers/docs/6.5.0SP1.update/com.qnx.doc.neutrino_utilities/q/qcc."
+"html>`__."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:218
+msgid ""
+"**cpp** (qcc): Dinkum C++ lib. See `QCC documentation <https://www.qnx.com/"
+"developers/docs/6.5.0SP1.update/com.qnx.doc.neutrino_utilities/q/qcc."
+"html>`__."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:220
+msgid ""
+"**cpp-ne** (qcc): Dinkum C++ lib (no exceptions). See `QCC documentation "
+"<https://www.qnx.com/developers/docs/6.5.0SP1.update/com.qnx.doc."
+"neutrino_utilities/q/qcc.html>`__."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:222
+msgid ""
+"**acpp** (qcc): Dinkum Abridged C++ lib. See `QCC documentation <https://www."
+"qnx.com/developers/docs/6.5.0SP1.update/com.qnx.doc.neutrino_utilities/q/qcc."
+"html>`__."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:224
+msgid ""
+"**acpp-ne** (qcc): Dinkum Abridged C++ lib (no exceptions). See `QCC "
+"documentation <https://www.qnx.com/developers/docs/6.5.0SP1.update/com.qnx."
+"doc.neutrino_utilities/q/qcc.html>`__."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:226
+msgid ""
+"**ecpp** (qcc): Embedded Dinkum C++ lib. See `QCC documentation <https://www."
+"qnx.com/developers/docs/6.5.0SP1.update/com.qnx.doc.neutrino_utilities/q/qcc."
+"html>`__."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:228
+msgid ""
+"**ecpp-ne** (qcc): Embedded Dinkum C++ lib (no exceptions). See `QCC "
+"documentation <https://www.qnx.com/developers/docs/6.5.0SP1.update/com.qnx."
+"doc.neutrino_utilities/q/qcc.html>`__."
+msgstr ""
+
+#: ../../../reference/config_files/settings.yml.rst:230
+msgid ""
+"**cxx** (qcc): LLVM C++. See `QCC documentation <https://www.qnx.com/"
+"developers/docs/6.5.0SP1.update/com.qnx.doc.neutrino_utilities/q/qcc."
+"html>`__."
+msgstr ""

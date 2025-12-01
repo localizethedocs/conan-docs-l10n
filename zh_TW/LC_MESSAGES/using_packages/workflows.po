@@ -1,0 +1,204 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.41\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../using_packages/workflows.rst:4
+msgid "Workflows"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:6
+msgid ""
+"This section summarizes some possible layouts and workflows when using Conan "
+"together with other tools as an end-user for installing and consuming "
+"existing packages. To create your own packages, please refer to :ref:"
+"`Creating Packages <packaging>`."
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:10
+msgid ""
+"Whether you are working on a single configuration or a multi configuration "
+"project, in both cases, the recommended approach is to have a conanfile "
+"(either .py or .txt) at the root of your project."
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:14
+msgid "Single configuration"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:16
+msgid ""
+"When working with a  single configuration, your conanfile will be quite "
+"simple as shown in the examples and tutorials we have used so far in this "
+"user guide. For example, in :ref:`Getting started<getting_started>`, we "
+"showed how you can run the :command:`conan install ..` command inside the "
+"*build* folder resulting in the *conaninfo.txt* and *conanbuildinfo.cmake* "
+"files being generated there too. Note that the build folder is temporary, so "
+"you should exclude it from version control to exclude these temporary files."
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:20
+msgid ""
+"**Out-of-source builds** are also supported. Let's look at a simple example:"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:22
+msgid ""
+"$ git clone git@github.com:conan-io/examples\n"
+"$ cd libraries/poco\n"
+"$ conan install ./md5 --install-folder=md5_build"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:28
+msgid "This will result in the following layout:"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:30
+msgid ""
+"md5_build\n"
+"    conaninfo.txt\n"
+"    conanbuildinfo.txt\n"
+"    conanbuildinfo.cmake\n"
+"md5\n"
+"    CMakeLists.txt  # If using cmake, but can be Makefile, sln...\n"
+"    README.md\n"
+"    conanfile.txt\n"
+"    md5.cpp"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:42
+msgid "Now you are ready to build:"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:44
+msgid ""
+"$ cd md5_build\n"
+"$ cmake ../md5 -G \"Visual Studio 15 Win64\"  # or other generator\n"
+"$ cmake --build . --config Release\n"
+"$ ./bin/md5\n"
+"> c3fcd3d76192e4007dfb496cca67e13b"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:52
+msgid ""
+"We have created a separate build configuration of the project without "
+"affecting the original source directory in any way. The benefit is that we "
+"can freely experiment with the configuration: We can clear the build folder "
+"and build another. For example, changing the build type to Debug:"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:56
+msgid ""
+"$ rm -rf *\n"
+"$ conan install ../md5 -s build_type=Debug\n"
+"$ cmake ../md5 -G \"Visual Studio 15 Win64\"\n"
+"$ cmake --build . --config Debug\n"
+"$ ./bin/md5\n"
+"> c3fcd3d76192e4007dfb496cca67e13b"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:66
+msgid "Multi configuration"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:68
+msgid ""
+"You can also manage different configurations, whether in-source or out of "
+"source, and switch between them without having to re-issue the :command:"
+"`conan install` command (Note however, that even if you did have to run :"
+"command:`conan install` again, since subsequent runs use the same "
+"parameters, they would be very fast since packages would already have been "
+"installed in the local cache rather than in the project)"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:71
+msgid ""
+"$ git clone git@github.com:conan-io/examples\n"
+"$ cd libraries/poco\n"
+"$ conan install md5 -s build_type=Debug -if md5_build_debug\n"
+"$ conan install md5 -s build_type=Release -if md5_build_release\n"
+"\n"
+"$ cd md5_build_debug && cmake ../md5 -G \"Visual Studio 15 Win64\" && "
+"cd ../..\n"
+"$ cd md5_build_release && cmake ../md5 -G \"Visual Studio 15 Win64\" && "
+"cd ../.."
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:83
+msgid ""
+"You can either use the ``--install-folder`` or ``-if`` flags to specify "
+"where to generate the output files, or manually create the output directory "
+"and navigate to it before executing the :command:`conan install` command."
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:86
+msgid "So the layout will be:"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:88
+msgid ""
+"md5_build_debug\n"
+"    conaninfo.txt\n"
+"    conanbuildinfo.txt\n"
+"    conanbuildinfo.cmake\n"
+"    CMakeCache.txt # and other cmake files\n"
+"md5_build_release\n"
+"    conaninfo.txt\n"
+"    conanbuildinfo.txt\n"
+"    conanbuildinfo.cmake\n"
+"    CMakeCache.txt # and other cmake files\n"
+"example-poco-timer\n"
+"    CMakeLists.txt  # If using cmake, but can be Makefile, sln...\n"
+"    README.md\n"
+"    conanfile.txt\n"
+"    md5.cpp"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:106
+msgid ""
+"Now you can switch between your build configurations in exactly the same way "
+"you do for CMake or other build systems, by moving to the folder in which "
+"the build configuration is located, because the Conan configuration files "
+"for that build configuration will also be there."
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:110
+msgid ""
+"$ cd md5_build_debug && cmake --build . --config Debug && cd ../..\n"
+"$ cd md5_build_release && cmake --build . --config Release && cd ../.."
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:115
+msgid ""
+"Note that the CMake ``include()`` of your project must be prefixed with the "
+"current cmake binary directory, otherwise it will not find the necessary "
+"file:"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:118
+msgid ""
+"include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+"conan_basic_setup()"
+msgstr ""
+
+#: ../../../using_packages/workflows.rst:125
+msgid ""
+"There are two generators, ``cmake_multi`` and ``visual_studio_multi`` that "
+"could help to avoid the context switch and using Debug and Release "
+"configurations simultaneously. Read more about them in :ref:"
+"`cmakemulti_generator` and :ref:`visual_studio_multi`"
+msgstr ""

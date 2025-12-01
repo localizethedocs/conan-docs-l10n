@@ -1,0 +1,345 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.41\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:2
+msgid "CMakeDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:6
+msgid "These tools are **experimental** and subject to breaking changes."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:9
+msgid ""
+"Available since: `1.33.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.33.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:11
+msgid ""
+"The ``CMakeDeps`` helper will generate one **xxxx-config.cmake** file per "
+"dependency, together with other necessary *.cmake* files like version, flags "
+"and directory data or configuration. It can be used like:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:15
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"    generators = \"CMakeDeps\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:25
+msgid ""
+"The full instantiation, that allows custom configuration can be done in the "
+"``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:28
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.cmake import CMakeDeps\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"\n"
+"    def generate(self):\n"
+"        cmake = CMakeDeps(self)\n"
+"        cmake.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:44
+msgid ""
+"This class will require very soon to define both the \"host\" and \"build\" "
+"profiles. It is very recommended to start defining both profiles immediately "
+"to avoid future breaking. Furthermore, some features, like trying to cross-"
+"compile might not work at all if the \"build\" profile is not provided."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:49
+msgid ""
+"There are some attributes you can adjust in the created ``CMakeDeps`` object "
+"to change the default behavior:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:52
+msgid "configurations"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:54
+msgid ""
+"Allows to define custom user CMake configurations besides the standard "
+"Release, Debug, etc ones. If the **settings.yml** file is customized to add "
+"new configurations to the ``settings.build_type``, then, adding it "
+"explicitly to ``.configurations`` is not necessary."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:58
+msgid ""
+"def generate(self):\n"
+"    cmake = CMakeDeps(self)\n"
+"    cmake.configurations.append(\"ReleaseShared\")\n"
+"    if self.options[\"hello\"].shared:\n"
+"        cmake.configuration = \"ReleaseShared\"\n"
+"    cmake.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:69
+msgid "build_context_activated"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:71
+msgid ""
+"When you have a **build-require**, by default, the config files (`xxx-config."
+"cmake`) files are not generated. But you can activate it using the "
+"**build_context_activated** attribute:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:74
+msgid ""
+"build_requires = [\"my_tool/0.0.1\"]\n"
+"\n"
+"def generate(self):\n"
+"    cmake = CMakeDeps(self)\n"
+"    # generate the config files for the build require\n"
+"    cmake.build_context_activated = [\"my_tool\"]\n"
+"    cmake.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:86
+msgid ""
+"The ``build_context_activated`` feature will fail if no \"build\" profile is "
+"used. This feature only work when using the two host and build profiles."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:91
+msgid "build_context_suffix"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:93
+msgid ""
+"When you have the same package as a **build-require** and as a **regular "
+"require** it will cause a conflict in the generator because the file names "
+"of the config files will collide as well as the targets names, variables "
+"names etc."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:96
+msgid ""
+"For example, this is a typical situation with some requirements (capnproto, "
+"protobuf...) that contain a tool used to generate source code at build time "
+"(so it is a **build_require**), but also providing a library to link to the "
+"final application, so you also have a **regular require**. Solving this "
+"conflict is specially important when we are cross-building because the tool "
+"(that will run in the building machine) belongs to a different binary "
+"package than the library, that will \"run\" in the host machine."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:103
+msgid ""
+"You can use the **build_context_suffix** attribute to specify a suffix for a "
+"requirement, so the files/targets/variables of the requirement in the build "
+"context (build require) will be renamed:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:106
+msgid ""
+"build_requires = [\"my_tool/0.0.1\"]\n"
+"requires = [\"my_tool/0.0.1\"]\n"
+"\n"
+"def generate(self):\n"
+"    cmake = CMakeDeps(self)\n"
+"    # generate the config files for the build require\n"
+"    cmake.build_context_activated = [\"my_tool\"]\n"
+"    # disambiguate the files, targets, etc\n"
+"    cmake.build_context_suffix = {\"my_tool\": \"_BUILD\"}\n"
+"    cmake.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:122
+msgid ""
+"The ``build_context_suffix`` feature will fail if no \"build\" profile is "
+"used. This feature only work when using the two host and build profiles."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:127
+msgid "build_context_build_modules"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:129
+msgid ""
+"Also there is another issue with the **build_modules**. As you may know, the "
+"recipes of the requirements can declare a `cppinfo.build_modules` entry "
+"containing one or more **.cmake** files. When the requirement is found by "
+"the cmake ``find_package()`` function, Conan will include automatically "
+"these files."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:134
+msgid ""
+"By default, Conan will include only the build modules from the ``host`` "
+"context (regular requires) to avoid the collision, but you can change the "
+"default behavior."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:137
+msgid ""
+"Use the **build_context_build_modules** attribute to specify require names "
+"to include the **build_modules** from **build_requires**:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:140
+msgid ""
+"build_requires = [\"my_tool/0.0.1\"]\n"
+"\n"
+"def generate(self):\n"
+"    cmake = CMakeDeps(self)\n"
+"    # generate the config files for the build require\n"
+"    cmake.build_context_activated = [\"my_tool\"]\n"
+"    # Choose the build modules from \"build\" context\n"
+"    cmake.build_context_build_modules = [\"my_tool\"]\n"
+"    cmake.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:155
+msgid ""
+"The ``build_context_build_modules`` feature will fail if no \"build\" "
+"profile is used. This feature only work when using the two host and build "
+"profiles."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:160
+msgid "Properties"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:162
+msgid "The following properties affect the CMakeDeps generator:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:164
+msgid ""
+"**cmake_file_name**: The config file generated for the current package will "
+"follow the ``<VALUE>-config.cmake`` pattern, so to find the package you "
+"write ``find_package(<VALUE>)``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:166
+msgid "**cmake_target_name**: Name of the target to be consumed."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:167
+msgid ""
+"**cmake_target_namespace**: Namespace of the target to be consumed. If not "
+"specified, it will use **cmake_target_name**. This is only read when set on "
+"the root ``cpp_info`` (see the example below)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:168
+msgid "**cmake_find_mode**: Defaulted to ``config``. Possible values are:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:170
+msgid ""
+"``config``: The CMakeDeps generator will create config scripts for the "
+"dependency."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:171
+msgid ""
+"``module``: Will create module config (FindXXX.cmake) scripts for the "
+"dependency."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:172
+msgid "``both``: Will generate both config and modules."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:173
+msgid ""
+"``none``: Won't generate any file. It can be used, for instance, to create a "
+"system wrapper package so the consumers find the config files in the CMake "
+"installation config path and not in the generated by Conan (because it has "
+"been skipped)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:175
+msgid ""
+"**cmake_module_file_name**: Same as **cmake_file_name** but when generating "
+"modules with ``cmake_find_mode=module/both``. If not specified it will "
+"default to **cmake_file_name**."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:176
+msgid ""
+"**cmake_module_target_name**: Same as **cmake_target_name**  but when "
+"generating modules with ``cmake_find_mode=module/both``.  If not specified "
+"it will default to **cmake_target_name**."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:177
+msgid ""
+"**cmake_module_target_namespace**: Same as **cmake_target_namespace**  but "
+"when generating modules with ``cmake_find_mode=module/both``. This is only "
+"read when set on the root ``cpp_info``. If not specified it will default to "
+"**cmake_target_namespace**."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:178
+msgid ""
+"**cmake_build_modules**: List of ``.cmake`` files (route relative to root "
+"package folder) that are automatically included when the consumer run the "
+"``find_package()``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:181
+msgid "Example:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:183
+msgid ""
+"def package_info(self):\n"
+"    ...\n"
+"    # MyFileName-config.cmake\n"
+"    self.cpp_info.set_property(\"cmake_file_name\", \"MyFileName\")\n"
+"    # Foo:: namespace for the targets (Foo::Foo if no components)\n"
+"    self.cpp_info.set_property(\"cmake_target_name\", \"Foo\")\n"
+"    # self.cpp_info.set_property(\"cmake_target_namespace\", \"Foo\")  # "
+"This can be omitted as the value is the same\n"
+"\n"
+"    # Foo::Var target name for the component \"mycomponent\"\n"
+"    self.cpp_info.components[\"mycomponent\"]."
+"set_property(\"cmake_target_name\", \"Var\")\n"
+"    # Automatically include the lib/mypkg.cmake file when calling "
+"find_package()\n"
+"    self.cpp_info.components[\"mycomponent\"]."
+"set_property(\"cmake_build_modules\", [os.path.join(\"lib\", \"mypkg."
+"cmake\")])\n"
+"\n"
+"    # Skip this package when generating the files for the whole dependency "
+"tree in the consumer\n"
+"    # note: it will make useless the previous adjustements.\n"
+"    # self.cpp_info.set_property(\"cmake_find_mode\", \"none\")\n"
+"\n"
+"    # Generate both MyFileNameConfig.cmake and FindMyFileName.cmake\n"
+"    self.cpp_info.set_property(\"cmake_find_mode\", \"both\")"
+msgstr ""

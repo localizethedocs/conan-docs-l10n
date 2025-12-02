@@ -1,0 +1,297 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:4
+msgid "PkgConfigDeps"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:8
+msgid ""
+"The ``PkgConfigDeps`` is the dependencies generator for pkg-config. "
+"Generates pkg-config files named ``<PKG-NAME>.pc`` containing a valid pkg-"
+"config file syntax."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:11
+msgid "This generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:13
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:13
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"PkgConfigDeps\""
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:19
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:19
+msgid ""
+"[generators]\n"
+"PkgConfigDeps"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:25
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:27
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.gnu import PkgConfigDeps\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"zlib/1.2.11\"\n"
+"\n"
+"    def generate(self):\n"
+"        pc = PkgConfigDeps(self)\n"
+"        pc.generate()"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:42
+msgid "Generated files"
+msgstr "生成的文件"
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:44
+msgid ""
+"`pkg-config` format files named ``<PKG-NAME>.pc``, containing a valid pkg-"
+"config file syntax. The ``prefix`` variable is automatically adjusted to the "
+"``package_folder``:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:47
+msgid ""
+"prefix=/Users/YOUR_USER/.conan/data/zlib/1.2.11/_/_/"
+"package/647afeb69d3b0a2d3d316e80b24d38c714cc6900\n"
+"libdir=${prefix}/lib\n"
+"includedir=${prefix}/include\n"
+"bindir=${prefix}/bin\n"
+"\n"
+"Name: zlib\n"
+"Description: Conan package: zlib\n"
+"Version: 1.2.11\n"
+"Libs: -L\"${libdir}\" -lz -F Frameworks\n"
+"Cflags: -I\"${includedir}\""
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:62
+msgid "Customization"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:65
+msgid "Naming"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:67
+msgid "By default, the ``*.pc`` files will be named following these rules:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:69
+msgid ""
+"For packages, it uses the package name, e.g., package ``zlib/1.2.11`` -> "
+"``zlib.pc``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:70
+msgid ""
+"For components, the package name + hyphen + component name, e.g., "
+"``openssl/3.0.0`` with ``self.cpp_info.components[\"crypto\"]``  -> "
+"``openssl-crypto.pc``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:72
+msgid ""
+"You can change that default behavior with the ``pkg_config_name`` and "
+"``pkg_config_aliases`` properties. See :ref:`Properties section below "
+"<PkgConfigDeps Properties>`."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:75
+msgid ""
+"If a recipe uses **components**, the files generated will be ``<[PKG-NAME]-"
+"[COMP-NAME]>.pc`` with their corresponding flags and require relations."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:78
+msgid ""
+"Additionally, a ``<PKG-NAME>.pc`` is generated to maintain compatibility for "
+"consumers with recipes that start supporting components. This ``<PKG-NAME>."
+"pc`` file declares all the components of the package as requires while the "
+"rest of the fields will be empty, relying on the propagation of flags coming "
+"from the components ``<[PKG-NAME]-[COMP-NAME]>.pc`` files."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:84
+msgid "Reference"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/pkgconfigdeps.py:docstring of
+#: conan.tools.gnu.PkgConfigDeps.content:1
+msgid "Get all the .pc files content"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/pkgconfigdeps.py:docstring of
+#: conan.tools.gnu.pkgconfigdeps.PkgConfigDeps.generate:1
+msgid "Save all the `*.pc` files"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:93
+msgid "Attributes"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:96
+msgid "build_context_activated"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:98
+msgid ""
+"When you have a **build-require**, by default, the ``*.pc`` files are not "
+"generated. But you can activate it using the **build_context_activated** "
+"attribute:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:101
+msgid ""
+"tool_requires = [\"my_tool/0.0.1\"]\n"
+"def generate(self):\n"
+"    pc = PkgConfigDeps(self)\n"
+"    # generate the *.pc file for the tool require\n"
+"    pc.build_context_activated = [\"my_tool\"]\n"
+"    pc.generate()"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:112
+msgid "build_context_suffix"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:114
+msgid ""
+"When you have the same package as a **build-require** and as a **regular "
+"require** it will cause a conflict in the generator because the file names "
+"of the ``*.pc`` files will collide as well as the names, requires names, etc."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:118
+msgid ""
+"For example, this is a typical situation with some requirements (capnproto, "
+"protobuf...) that contain a tool used to generate source code at build time "
+"(so it is a **build_require**), but also providing a library to link to the "
+"final application, so you also have a **regular require**. Solving this "
+"conflict is specially important when we are cross-building because the tool "
+"(that will run in the building machine) belongs to a different binary "
+"package than the library, that will \"run\" in the host machine."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:125
+msgid ""
+"You can use the **build_context_suffix** attribute to specify a suffix for a "
+"requirement, so the files/requires/names of the requirement in the build "
+"context (tool require) will be renamed:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:129
+msgid ""
+"tool_requires = [\"my_tool/0.0.1\"]\n"
+"requires = [\"my_tool/0.0.1\"]\n"
+"def generate(self):\n"
+"    pc = PkgConfigDeps(self)\n"
+"    # generate the *.pc file for the tool require\n"
+"    pc.build_context_activated = [\"my_tool\"]\n"
+"    # disambiguate the files, requires, names, etc\n"
+"    pc.build_context_suffix = {\"my_tool\": \"_BUILD\"}\n"
+"    pc.generate()"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:145
+msgid "Properties"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:147
+msgid "The following properties affect the ``PkgConfigDeps`` generator:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:149
+msgid ""
+"**pkg_config_name** property will define the name of the generated ``*.pc`` "
+"file (``xxxxx.pc``)"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:150
+msgid ""
+"**pkg_config_aliases** property sets some aliases of any package/component "
+"name for *pkg_config* generator. This property only accepts list-like Python "
+"objects."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:151
+msgid ""
+"**pkg_config_custom_content** property will add user defined content to the "
+"*.pc* files created by this generator as freeform variables. That content "
+"can be a string or a dict-like Python object. Notice that the variables "
+"declared here will overwrite those ones already defined by Conan. Click "
+"`here <https://people.freedesktop.org/~dbn/pkg-config-guide."
+"html#concepts>`__ for more information about the type of variables in a ``*."
+"pc`` file."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:154
+msgid ""
+"**system_package_version**: property sets a custom version to be used in the "
+"``Version`` field belonging to the created ``*.pc`` file for the package."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:155
+msgid ""
+"**component_version** property sets a custom version to be used in the "
+"``Version`` field belonging to the created ``*.pc`` file for that component "
+"(takes precedence over the **system_package_version** property)."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:159
+msgid ""
+"These properties can be defined at global ``cpp_info`` level or at component "
+"level."
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:161
+msgid "Example:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/pkgconfigdeps.rst:163
+msgid ""
+"def package_info(self):\n"
+"    custom_content = {\"datadir\": \"${prefix}/share\"}  # or "
+"\"datadir=${prefix}/share\"\n"
+"    self.cpp_info.set_property(\"pkg_config_custom_content\", "
+"custom_content)\n"
+"    self.cpp_info.set_property(\"pkg_config_name\", \"myname\")\n"
+"    self.cpp_info.components[\"mycomponent\"]."
+"set_property(\"pkg_config_name\", \"componentname\")\n"
+"    self.cpp_info.components[\"mycomponent\"]."
+"set_property(\"pkg_config_aliases\", [\"alias1\", \"alias2\"])\n"
+"    self.cpp_info.components[\"mycomponent\"]."
+"set_property(\"component_version\", \"1.14.12\")"
+msgstr ""

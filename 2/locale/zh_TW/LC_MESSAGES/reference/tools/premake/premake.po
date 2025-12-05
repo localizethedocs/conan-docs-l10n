@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-18 08:38+0000\n"
+"POT-Creation-Date: 2025-12-02 08:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -169,4 +169,59 @@ msgstr ""
 msgid ""
 "``tools.compilation:verbosity`` which accepts one of ``quiet`` or "
 "``verbose`` and sets the ``--verbose`` flag in ``Premake.build()``"
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:62
+msgid "Extra configuration"
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:64
+msgid ""
+"By default, typical Premake configurations are ``Release`` and ``Debug``. "
+"This configurations could vary depending on the used Premake script."
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:67
+msgid "For example,"
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:69
+msgid ""
+"workspace \"MyProject\"\n"
+"    configurations { \"Debug\", \"Release\", \"DebugDLL\", \"ReleaseDLL\" }"
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:74
+msgid ""
+"If you wish to use a different configuration than ``Release`` or ``Debug``, "
+"you can override the configuration from the ``Premake`` generator."
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:76
+msgid ""
+"If the project also have dependencies, you will also need to override the "
+"``configuration`` property of the ``PremakeDeps`` generator accordingly, "
+"with the same value."
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:79
+msgid ""
+"class MyRecipe(Conanfile):\n"
+"    ...\n"
+"    def _premake_configuration(self):\n"
+"        return str(self.settings.build_type) + (\"DLL\" if self.options."
+"shared else \"\")\n"
+"\n"
+"    def generate(self):\n"
+"        deps = PremakeDeps(self)\n"
+"        deps.configuration = self._premake_configuration\n"
+"        deps.generate()\n"
+"        tc = PremakeToolchain(self)\n"
+"        tc.generate()\n"
+"\n"
+"    def build(self):\n"
+"        premake = Premake(self)\n"
+"        premake.configure()\n"
+"        premake.build(workspace=\"MyProject\", configuration=self."
+"_premake_configuration)"
 msgstr ""

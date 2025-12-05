@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-12-02 08:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,13 +148,29 @@ msgstr ""
 "    elif url.startswith(\"https://my-private-token-sources.my-org/\"):\n"
 "        return {'token': 'my-secure-token'}"
 
+#: ../../../reference/extensions/authorization_plugins.rst:62
+msgid ""
+"Additionally, returning a ``headers`` dictionary will add the contents as "
+"HTTP headers for the sources request, as some servers might need some "
+"specific custom headers:"
+msgstr ""
+
 #: ../../../reference/extensions/authorization_plugins.rst:65
+msgid ""
+"def auth_source_plugin(url, **kwargs):\n"
+"    if url.startswith(\"https://my-private-token-sources-with-headers.my-org/"
+"\"):\n"
+"        return {'token': 'my-secure-token', 'headers': {'my-header-1': 'my-"
+"value-1'}}"
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:74
 msgid ""
 "These plugins can be shared and installed using ``conan config install`` or "
 "``conan config install-pkg``"
 msgstr ""
 
-#: ../../../reference/extensions/authorization_plugins.rst:67
+#: ../../../reference/extensions/authorization_plugins.rst:76
 msgid ""
 "**Important:** Ensure that your plugins and configurations do **not** "
 "contain hardcoded secrets or sensitive data. Instead, passwords should be "

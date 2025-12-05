@@ -8,6 +8,9 @@ var CONFIG_OPTIONS = {
   ],
   CONFIG_VERSIONS: [
     ["2",       "Development 2"],
+    ["2.23",    "Release 2.23"],
+    ["2.22",    "Release 2.22"],
+    ["2.21",    "Release 2.21"],
     ["2.20",    "Release 2.20"],
     ["2.19",    "Release 2.19"],
     ["2.18",    "Release 2.18"],

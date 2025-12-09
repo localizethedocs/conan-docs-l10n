@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-12-09 17:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,49 +149,51 @@ msgstr ""
 msgid ""
 "``tools.microsoft.msbuildtoolchain:compile_options`` dict-like object of "
 "extra compile options to be added to ``<ClCompile>`` section. The dict will "
-"be translated as follows: ``<[KEY]>[VALUE]</[KEY]>``."
+"be translated as follows: ``<[KEY]>[VALUE]</[KEY]>`` and inserted inside the "
+"``<ClCompile>`` element. If the ``compile_options`` attribute is defined, it "
+"will be updated with the values from this dict."
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:78
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:79
 msgid ""
 "``tools.microsoft:winsdk_version`` value will define the "
 "``<WindowsTargetPlatformVersion>`` element in the toolchain file."
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:79
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:80
 msgid ""
 "``tools.build:cxxflags`` list of extra C++ flags that will be appended to "
 "``<AdditionalOptions>`` section from ``<ClCompile>`` and "
 "``<ResourceCompile>`` one."
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:80
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:81
 msgid ""
 "``tools.build:cflags`` list of extra of pure C flags that will be appended "
 "to ``<AdditionalOptions>`` section from ``<ClCompile>`` and "
 "``<ResourceCompile>`` one."
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:81
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:82
 msgid ""
 "``tools.build:sharedlinkflags`` list of extra linker flags that will be "
 "appended to ``<AdditionalOptions>`` section from ``<Link>`` one."
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:82
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:83
 msgid ""
 "``tools.build:exelinkflags`` list of extra linker flags that will be "
 "appended to ``<AdditionalOptions>`` section from ``<Link>`` one."
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:83
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:84
 msgid ""
 "``tools.build:defines`` list of preprocessor definitions that will be "
 "appended to ``<PreprocessorDefinitions>`` section from ``<ResourceCompile>`` "
 "one."
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:87
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:88
 msgid "Reference"
 msgstr ""
 
@@ -221,17 +223,17 @@ msgid ""
 "bat`` env script. See also :class:`VCVars`."
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:95
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:96
 msgid "Attributes"
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:97
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:98
 msgid ""
 "**properties**: Additional properties added to the generated ``.props`` "
 "files. You can define the properties in a key-value syntax like:"
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:100
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:101
 msgid ""
 "from conan import ConanFile\n"
 "from conan.tools.microsoft import MSBuildToolchain\n"
@@ -245,13 +247,13 @@ msgid ""
 "        msbuild.generate()"
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:113
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:114
 msgid ""
 "Then, the generated *conantoolchain_<config>.props* file will contain the "
 "defined property in its contents:"
 msgstr ""
 
-#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:117
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:118
 msgid ""
 "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
 "<Project xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\n"
@@ -264,4 +266,39 @@ msgid ""
 "    ...\n"
 "</PropertyGroup>\n"
 "</Project>"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:134
+msgid ""
+"**compile_options**: Additional compile options added to the generated ``."
+"props`` files. You can define the properties in a key-value syntax like:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:137
+msgid ""
+"def generate(self):\n"
+"    msbuild = MSBuildToolchain(self)\n"
+"    msbuild.compile_options = {'ExceptionHandling': 'Async'}\n"
+"    msbuild.generate()"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:144
+msgid ""
+"Then, the generated *conantoolchain_<config>.props* file will contain the "
+"defined compile option in its contents:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:147
+msgid ""
+"<ClCompile>\n"
+"    ...\n"
+"    <LanguageStandard>...</LanguageStandard>\n"
+"    <ExceptionHandling>Async</ExceptionHandling>\n"
+"</ClCompile>"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:156
+msgid ""
+"Note this attribute will be updated with the ``conf`` from ``tools.microsoft."
+"msbuildtoolchain:compile_options``."
 msgstr ""

@@ -1,0 +1,160 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.22\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-09 17:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:4
+msgid "QbsProfile"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:6
+msgid ""
+"The ``QbsProfile`` generator produces the settings file that contains "
+"toolchain information. This file can be imported into Qbs. The "
+"``QbsProfile`` generator can be used like:"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:9
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"    generators = \"QbsProfile\""
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:19
+msgid ""
+"It is also possible to use ``QbsProfile`` manually in the ``generate()`` "
+"method:"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:21
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.qbs import QbsProfile\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"\n"
+"    def generate(self):\n"
+"        profile = QbsProfile(self)\n"
+"        profile.generate()"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:34
+msgid "Now we can generate the file using the ``conan install`` command."
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:36
+msgid "$ conan install . --output-folder=build --build missing"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:40
+msgid "And import it into Qbs:"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:42
+msgid "$ qbs config import qbs_settings.txt --settings-dir qbs"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:46
+msgid ""
+"Note that to acutually use the imported file, Qbs should be called with ``--"
+"settings-dir``:"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:48
+msgid "$ qbs resolve --settings-dir qbs"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:52
+msgid ""
+"Those commands are called automatically when using the ``Qbs`` helper "
+"class. .. seealso::"
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:55
+msgid "- Check the :ref:`Qbs helper <_conan_tools_qbs_helper>` for details."
+msgstr ""
+
+#: ../../../reference/tools/qbs/qbsprofile.rst:58
+msgid "Reference"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbsprofile.py:docstring of
+#: conan.tools.qbs.qbsprofile.QbsProfile:1
+msgid "Qbs profiles generator."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbsprofile.py:docstring of
+#: conan.tools.qbs.qbsprofile.QbsProfile:3
+msgid ""
+"This class generates file with the toolchain information that can be "
+"imported by Qbs."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbsprofile.py:docstring of
+#: conan.tools.qbs.qbsprofile.QbsProfile:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbsprofile.py:docstring of
+#: conan.tools.qbs.qbsprofile.QbsProfile:5
+msgid "The current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbsprofile.py:docstring of
+#: conan.tools.qbs.qbsprofile.QbsProfile:6
+msgid "The name of the profile in settings. Defaults to ``\"conan\"``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbsprofile.py:docstring of
+#: conan.tools.qbs.qbsprofile.QbsProfile:7
+msgid "The name of the default profile. Defaults to ``\"conan\"``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbsprofile.py:docstring of
+#: conan.tools.qbs.qbsprofile.QbsProfile.filename:1
+msgid "The name of the generated file. Returns ``qbs_settings.txt``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbsprofile.py:docstring of
+#: conan.tools.qbs.qbsprofile.QbsProfile.content:1
+msgid "Returns the content of the settings file as dict of Qbs properties."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbsprofile.py:docstring of
+#: conan.tools.qbs.qbsprofile.QbsProfile.render:1
+msgid "Returns the content of the settings file as string."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbsprofile.py:docstring of
+#: conan.tools.qbs.qbsprofile.QbsProfile.generate:1
+msgid ""
+"This method will save the generated files to the conanfile.generators_folder."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/qbs/qbsprofile.py:docstring of
+#: conan.tools.qbs.qbsprofile.QbsProfile.generate:3
+msgid ""
+"Generates the \"qbs_settings.txt\" file. This file contains Qbs settings "
+"such as toolchain properties and can be imported using ``qbs config --"
+"import``."
+msgstr ""

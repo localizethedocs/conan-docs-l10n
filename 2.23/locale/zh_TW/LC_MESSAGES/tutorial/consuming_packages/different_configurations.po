@@ -33,6 +33,8 @@ msgid ""
 "$ git clone https://github.com/conan-io/examples2.git\n"
 "$ cd examples2/tutorial/consuming_packages/different_configurations"
 msgstr ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/tutorial/consuming_packages/different_configurations"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:15
 msgid ""
@@ -95,6 +97,8 @@ msgid ""
 "$ conan install . --build=missing\n"
 "$ conan install . --build=missing --profile=default"
 msgstr ""
+"$ conan install . --build=missing\n"
+"$ conan install . --build=missing --profile=default"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:64
 msgid ""
@@ -106,7 +110,7 @@ msgstr ""
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:68
 msgid "<conan home>/profiles/debug"
-msgstr ""
+msgstr "<conan home>/profiles/debug"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:68
 msgid ""
@@ -119,6 +123,14 @@ msgid ""
 "compiler.cppstd=gnu11\n"
 "build_type=Debug"
 msgstr ""
+"[settings]\n"
+"os=Macos\n"
+"arch=x86_64\n"
+"compiler=apple-clang\n"
+"compiler.version=14.0\n"
+"compiler.libcxx=libc++\n"
+"compiler.cppstd=gnu11\n"
+"build_type=Debug"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:85
 msgid ""
@@ -156,6 +168,19 @@ msgid ""
 "    return EXIT_SUCCESS;\n"
 "}"
 msgstr ""
+"#include <stdlib.h>\n"
+"...\n"
+"\n"
+"int main(void) {\n"
+"    ...\n"
+"    #ifdef NDEBUG\n"
+"    printf(\"Release configuration!\\n\");\n"
+"    #else\n"
+"    printf(\"Debug configuration!\\n\");\n"
+"    #endif\n"
+"\n"
+"    return EXIT_SUCCESS;\n"
+"}"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:112
 msgid "Now let's build our project for *Debug* configuration:"
@@ -166,6 +191,8 @@ msgid ""
 "$ conan install . --output-folder=build --build=missing --"
 "settings=build_type=Debug"
 msgstr ""
+"$ conan install . --output-folder=build --build=missing --"
+"settings=build_type=Debug"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:119
 msgid ""
@@ -192,7 +219,7 @@ msgstr ""
 #: ../../../tutorial/consuming_packages/different_configurations.rst:250
 #: ../../../tutorial/consuming_packages/different_configurations.rst:274
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:130
 msgid ""
@@ -228,6 +255,15 @@ msgid ""
 "ZLIB VERSION: 1.2.11\n"
 "Debug configuration!"
 msgstr ""
+"$ cd build\n"
+"$ cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -"
+"DCMAKE_BUILD_TYPE=Debug\n"
+"$ cmake --build .\n"
+"$ ./compressor\n"
+"Uncompressed size is: 233\n"
+"Compressed size is: 147\n"
+"ZLIB VERSION: 1.2.11\n"
+"Debug configuration!"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:161
 msgid ""
@@ -292,6 +328,12 @@ msgid ""
 "...\n"
 "[100%] Built target compressor"
 msgstr ""
+"$ cd build\n"
+"$ cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -"
+"DCMAKE_BUILD_TYPE=Release\n"
+"$ cmake --build .\n"
+"...\n"
+"[100%] Built target compressor"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:209
 msgid ""
@@ -366,6 +408,11 @@ msgid ""
 "Compressed size is: 147\n"
 "..."
 msgstr ""
+"$ conanrun.bat\n"
+"$ Release\\compressor.exe\n"
+"Uncompressed size is: 233\n"
+"Compressed size is: 147\n"
+"..."
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:259
 msgid ""
@@ -375,6 +422,11 @@ msgid ""
 "Compressed size is: 147\n"
 "..."
 msgstr ""
+"$ source conanrun.sh\n"
+"$ ./compressor\n"
+"Uncompressed size is: 233\n"
+"Compressed size is: 147\n"
+"..."
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:269
 msgid ""
@@ -386,15 +438,15 @@ msgstr ""
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:274
 msgid "$ deactivate_conanrun.bat"
-msgstr ""
+msgstr "$ deactivate_conanrun.bat"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:279
 msgid "$ source deactivate_conanrun.sh"
-msgstr ""
+msgstr "$ source deactivate_conanrun.sh"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:287
 msgid "Difference between settings and options"
-msgstr ""
+msgstr "設定（settings）和選項（options）之間的區別"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:289
 msgid ""
@@ -414,6 +466,11 @@ msgid ""
 "default compiler because that is something defined by the end consumer, and "
 "unlikely to make sense if they are working in Linux."
 msgstr ""
+"**設定（settings）**\\ 通常是由客戶端機器定義的專案級組態。例如作業系統、編譯"
+"器或建置組態等，這些將是多個 Conan 軟體包共有的，並且為其中一個設定定義預設值"
+"是沒有意義的。舉例來說，Conan 軟體包宣告「Visual Studio」作為預設編譯器是沒有"
+"意義的，因為這是由最終使用者定義的，如果他們在 Linux 環境下工作，這可能就沒有"
+"意義。"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:300
 msgid ""
@@ -425,7 +482,7 @@ msgstr ""
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:306
 msgid "Introducing the concept of Package ID"
-msgstr ""
+msgstr "軟體包 ID 的概念簡介"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:308
 msgid ""
@@ -453,6 +510,8 @@ msgid ""
 "settings and options. These can come from the command line or profiles like "
 "`--settings=build_type=Debug` or `--profile=debug`."
 msgstr ""
+"**確定設定和選項：**\\ Conan 首先會取得使用者的輸入設定和選項。這些可以來自命"
+"令行或設定檔，例如 `--settings=build_type=Debug` 或 `--profile=debug`。"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:322
 msgid ""
@@ -460,6 +519,8 @@ msgid ""
 "`options`, and dependencies, Conan computes a hash. This hash serves as the "
 "`package_id`, representing the binary package's unique identity."
 msgstr ""
+"**計算軟體包 ID：**\\ Conan 會根據 `settings`、`options` 和相依項的目前值計算"
+"一個雜湊值。該雜湊值即為 `package_id`，代表二進位軟體包的唯一識別。"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:325
 msgid ""
@@ -475,6 +536,9 @@ msgid ""
 "`settings` and `options`, Conan used the `package_id` to ensure that it "
 "fetched the correct binary that matched our specified configuration."
 msgstr ""
+"在我們的教學中，當我們使用不同的 `settings` 和 `options` 來使用 Zlib 時，"
+"Conan 會使用 `package_id` 來確保它擷取了與我們指定組態相符的正確二進位軟體"
+"包。"
 
 #: ../../../tutorial/consuming_packages/different_configurations.rst:336
 msgid ""

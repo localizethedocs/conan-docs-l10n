@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-09 17:38+0000\n"
+"POT-Creation-Date: 2025-12-16 08:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -233,7 +233,7 @@ msgid ""
 msgstr ""
 
 #: ../../../reference/commands/cache.rst:130
-#: ../../../reference/commands/cache.rst:261
+#: ../../../reference/commands/cache.rst:271
 msgid "**Best practices**"
 msgstr ""
 
@@ -433,7 +433,21 @@ msgid ""
 "zlib/1.3.1:6fe7fa69f760aee504e0be85c12b2327c716f9e7: Integrity checked: ok"
 msgstr ""
 
-#: ../../../reference/commands/cache.rst:216
+#: ../../../reference/commands/cache.rst:215
+msgid ""
+"This command can also return a pkglist when the ``--format=json`` option is "
+"used. This returns the packages the are corrupted, which is useful for "
+"generating a list of packages that can later be used, for example, to remove "
+"all potentially corrupted packages in a single operation:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:219
+msgid ""
+"$ conan cache check-integrity \"*\" --format=json --out-file pkglist.json\n"
+"$ conan remove --list pkglist.json"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:226
 msgid "conan cache backup-upload"
 msgstr ""
 
@@ -466,7 +480,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/cache.rst:222
+#: ../../../reference/commands/cache.rst:232
 msgid ""
 "The ``conan cache backup-upload`` will upload all source backups present in "
 "the local cache to the backup server, (excluding those which have been "
@@ -474,7 +488,7 @@ msgid ""
 "conf), regardless of which package they belong to, if any."
 msgstr ""
 
-#: ../../../reference/commands/cache.rst:229
+#: ../../../reference/commands/cache.rst:239
 msgid "conan cache save"
 msgstr ""
 
@@ -522,12 +536,12 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/cache.rst:235
 #: ../../../reference/commands/cache.rst:245
+#: ../../../reference/commands/cache.rst:255
 msgid "Read more in :ref:`devops_save_restore`."
 msgstr ""
 
-#: ../../../reference/commands/cache.rst:239
+#: ../../../reference/commands/cache.rst:249
 msgid "conan cache restore"
 msgstr ""
 
@@ -566,7 +580,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/cache.rst:249
+#: ../../../reference/commands/cache.rst:259
 msgid "conan cache ref"
 msgstr ""
 
@@ -603,7 +617,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/cache.rst:255
+#: ../../../reference/commands/cache.rst:265
 msgid ""
 "For a given cache folder, returns the Conan reference, that is, a recipe "
 "reference in the form ``name/version#recipe_revision``, or a package "
@@ -612,14 +626,14 @@ msgid ""
 "on the contents of the folder."
 msgstr ""
 
-#: ../../../reference/commands/cache.rst:257
+#: ../../../reference/commands/cache.rst:267
 msgid ""
 "This is a developer and debugging command, intended for occasional developer "
 "usage while debugging potential issues, but it is not recommended for any "
 "other use case."
 msgstr ""
 
-#: ../../../reference/commands/cache.rst:263
+#: ../../../reference/commands/cache.rst:273
 msgid ""
 "Navigating the Conan cache is not an intended or supported use case. Using "
 "the ``conan cache ref`` command in any automation, CI or scripting is "

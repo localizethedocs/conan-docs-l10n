@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-12-16 08:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,13 @@ msgstr ""
 msgid ""
 "This feature is experimental and subject to breaking changes. See :ref:`the "
 "Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../common/subapi_instantiation_warning.inc:3
+msgid ""
+"Subapis **must not** be initialized by themselves. They are intended to be "
+"accessed only through the main :ref:`ConanAPI "
+"<reference_python_api_conan_api>` attributes."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
@@ -50,6 +57,7 @@ msgstr ""
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
 #: conan.api.subapi.upload.UploadAPI.check_upstream:0
 #: conan.api.subapi.upload.UploadAPI.prepare:0
+#: conan.api.subapi.upload.UploadAPI.upload_backup_sources:0
 #: conan.api.subapi.upload.UploadAPI.upload_full:0
 msgid "Parameters"
 msgstr "參數"
@@ -89,7 +97,7 @@ msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
 #: conan.api.subapi.upload.UploadAPI.prepare:5
-#: conan.api.subapi.upload.UploadAPI.upload_full:13
+#: conan.api.subapi.upload.UploadAPI.upload_full:14
 msgid "A PackagesList object with the recipes and packages to upload."
 msgstr ""
 
@@ -102,7 +110,7 @@ msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
 #: conan.api.subapi.upload.UploadAPI.prepare:8
-#: conan.api.subapi.upload.UploadAPI.upload_full:22
+#: conan.api.subapi.upload.UploadAPI.upload_full:23
 msgid ""
 "A list of patterns of metadata that should be uploaded. Default ``None`` "
 "means all metadata will be uploaded together with the package artifacts. If "
@@ -118,7 +126,7 @@ msgid ""
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
-#: conan.api.subapi.upload.UploadAPI.upload_full:11
+#: conan.api.subapi.upload.UploadAPI.upload_full:12
 msgid "The steps that this method performs are:"
 msgstr ""
 
@@ -130,7 +138,7 @@ msgid ""
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
-#: conan.api.subapi.upload.UploadAPI.upload_full:6
+#: conan.api.subapi.upload.UploadAPI.upload_full:7
 msgid "checks the upload policy of the recipes"
 msgstr ""
 
@@ -142,34 +150,34 @@ msgid ""
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
-#: conan.api.subapi.upload.UploadAPI.upload_full:8
+#: conan.api.subapi.upload.UploadAPI.upload_full:9
 msgid ""
 "checks which revisions already exist in the server so that it can skip the "
 "upload"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
-#: conan.api.subapi.upload.UploadAPI.upload_full:9
+#: conan.api.subapi.upload.UploadAPI.upload_full:10
 msgid "prepares the artifacts to upload (compresses the conan_package.tgz)"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
-#: conan.api.subapi.upload.UploadAPI.upload_full:10
+#: conan.api.subapi.upload.UploadAPI.upload_full:11
 msgid "executes the actual upload"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
-#: conan.api.subapi.upload.UploadAPI.upload_full:11
+#: conan.api.subapi.upload.UploadAPI.upload_full:12
 msgid "uploads associated sources backups if any"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
-#: conan.api.subapi.upload.UploadAPI.upload_full:14
+#: conan.api.subapi.upload.UploadAPI.upload_full:15
 msgid "The remote to upload the packages to."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
-#: conan.api.subapi.upload.UploadAPI.upload_full:15
+#: conan.api.subapi.upload.UploadAPI.upload_full:16
 msgid ""
 "A list of remotes that are enabled in the client. Recipe sources will "
 "attempt to be fetched from these remotes, and to possibly load "
@@ -177,22 +185,34 @@ msgid ""
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
-#: conan.api.subapi.upload.UploadAPI.upload_full:18
+#: conan.api.subapi.upload.UploadAPI.upload_full:19
 msgid ""
 "If ``True``, it will check the integrity of the cache packages before "
 "uploading them. This is useful to ensure that the packages are not corrupted."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
-#: conan.api.subapi.upload.UploadAPI.upload_full:20
+#: conan.api.subapi.upload.UploadAPI.upload_full:21
 msgid ""
 "If ``True``, it will force the upload of the recipes and packages, even if "
 "they already exist in the remote. Note that this might update the timestamps"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
-#: conan.api.subapi.upload.UploadAPI.upload_full:26
+#: conan.api.subapi.upload.UploadAPI.upload_full:27
 msgid ""
 "If ``True``, it will not perform the actual upload, but will still prepare "
 "the artifacts and check the upstream."
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
+#: conan.api.subapi.upload.UploadAPI.upload_backup_sources:1
+msgid ""
+"Upload to the server the backup sources files, that have been typically "
+"gathered by CacheAPI.get_backup_sources()"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/upload.py:docstring of
+#: conan.api.subapi.upload.UploadAPI.upload_backup_sources:4
+msgid "The list of files that must be uploaded"
 msgstr ""

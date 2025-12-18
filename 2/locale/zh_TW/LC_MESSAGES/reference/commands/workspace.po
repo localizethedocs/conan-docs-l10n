@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2025-12-16 08:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,7 +128,15 @@ msgid ""
 "      return super().remove(path, *args, **kwargs)"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:69
+#: ../../../reference/commands/workspace.rst:67
+#: ../../../reference/commands/workspace.rst:131
+msgid ""
+"See :ref:`conan workspace complete<workspace_complete_command>` command to "
+"open/add multiple packages that are missing in the package to connect "
+"different packages already existing in the workspace."
+msgstr ""
+
+#: ../../../reference/commands/workspace.rst:72
 msgid "conan workspace info"
 msgstr ""
 
@@ -141,11 +149,11 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:75
+#: ../../../reference/commands/workspace.rst:78
 msgid "Use this command to show information about the current workspace"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:77
+#: ../../../reference/commands/workspace.rst:80
 msgid ""
 "$ cd myfolder\n"
 "$ conan new workspace\n"
@@ -163,7 +171,7 @@ msgid ""
 "    ref: app1/0.1"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:96
+#: ../../../reference/commands/workspace.rst:99
 msgid "conan workspace clean"
 msgstr ""
 
@@ -176,7 +184,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:102
+#: ../../../reference/commands/workspace.rst:105
 msgid ""
 "The new ``conan workspace clean`` command removes by default the ``output-"
 "folder`` of every package in the workspace if it was defined. If it is not "
@@ -187,7 +195,7 @@ msgid ""
 "implementing the ``clean()`` method:"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:107
+#: ../../../reference/commands/workspace.rst:110
 msgid ""
 "class Ws(Workspace):\n"
 "   def name(self):\n"
@@ -196,7 +204,7 @@ msgid ""
 "      self.output.info(\"MY CLEAN!!!!\")"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:118
+#: ../../../reference/commands/workspace.rst:121
 msgid "conan workspace open"
 msgstr ""
 
@@ -209,7 +217,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:124
+#: ../../../reference/commands/workspace.rst:127
 msgid ""
 "The new ``conan workspace open`` command implements a new concept. The "
 "packages containing an ``scm`` information in the ``conandata.yml`` (with "
@@ -218,7 +226,7 @@ msgid ""
 "recipe revision)."
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:130
+#: ../../../reference/commands/workspace.rst:136
 msgid "conan workspace root"
 msgstr ""
 
@@ -231,11 +239,11 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:136
+#: ../../../reference/commands/workspace.rst:142
 msgid "Return the folder containing the conanws.py/conanws.yml workspace file."
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:140
+#: ../../../reference/commands/workspace.rst:146
 msgid "conan workspace source"
 msgstr ""
 
@@ -248,13 +256,13 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:145
+#: ../../../reference/commands/workspace.rst:151
 msgid ""
 "The command ``conan workspace source`` performs the equivalent of ``conan "
 "source <package-path>`` for every ``package`` defined within the workspace."
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:150
+#: ../../../reference/commands/workspace.rst:156
 msgid "conan workspace install"
 msgstr ""
 
@@ -267,14 +275,14 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:156
+#: ../../../reference/commands/workspace.rst:162
 msgid ""
 "The command ``conan workspace install`` performs the equivalent of ``conan "
 "install <package-path>`` for every ``package`` defined within the workspace "
 "in the correct order."
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:161
+#: ../../../reference/commands/workspace.rst:167
 msgid "conan workspace build"
 msgstr ""
 
@@ -287,14 +295,14 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:167
+#: ../../../reference/commands/workspace.rst:173
 msgid ""
 "The command ``conan workspace build`` performs the equivalent of ``conan "
 "build <package-path>`` for every ``package`` defined within the workspace in "
 "the correct order."
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:172
+#: ../../../reference/commands/workspace.rst:178
 msgid "conan workspace create"
 msgstr ""
 
@@ -307,14 +315,14 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:177
+#: ../../../reference/commands/workspace.rst:183
 msgid ""
 "The command ``conan workspace create`` performs the equivalent of ``conan "
 "create <package-path>`` for every ``package`` defined within the workspace "
 "in the correct order. They will be created in the Conan cache, not locally."
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:182
+#: ../../../reference/commands/workspace.rst:188
 msgid "conan workspace super-install"
 msgstr ""
 
@@ -327,13 +335,13 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:188
+#: ../../../reference/commands/workspace.rst:194
 msgid ""
 "The command ``conan workspace super-install`` is useful to install and build "
 "the current workspace as a monolithic super-project of the editables."
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:191
+#: ../../../reference/commands/workspace.rst:197
 msgid ""
 "By default it uses all the ``editable`` packages in the workspace. It is "
 "possible to select only a subset of them with the ``conan workspace super-"
@@ -342,8 +350,69 @@ msgid ""
 "dependencies will be installed."
 msgstr ""
 
-#: ../../../reference/commands/workspace.rst:199
+#: ../../../reference/commands/workspace.rst:206
+msgid "conan workspace complete"
+msgstr ""
+
+#: ../../../reference/commands/workspace.rst:-1
 msgid ""
-"Read the :ref:`Workspace tutorial<tutorial_workspaces>` section. Read the :"
-"ref:`conan new workspace<reference_commands_new>` command section."
+"$ conan workspace complete -h\n"
+"Error executing: conan workspace complete -h\n"
+"ERROR: Workspace command disabled without CONAN_WORKSPACE_ENABLE env var,"
+"please read the docs about this 'incubating' feature\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/workspace.rst:212
+msgid ""
+"The ``conan workspace complete`` command is intended to complete the ``conan "
+"workspace open/add`` commands. When there are packages in a workspace that "
+"have dependencies on some packages in the Conan cache, and in turn those "
+"cache packages depend on packages that are in the workspace, this creates an "
+"undesired and risky situation."
+msgstr ""
+
+#: ../../../reference/commands/workspace.rst:216
+msgid ""
+"Packages in the Conan cache must be reproducible, including their "
+"dependencies. Having binaries in the Conan cache that build against headers "
+"and libraries in a workspace, that are not really packages yet, and might "
+"never be, is a dangerous situation. It means that it is very easy to have "
+"Conan packages in the cache that build and link against code and binaries "
+"that never exist in Conan, that are never uploaded as packages. When the "
+"cache packages are uploaded and later deployed to production they will link "
+"and/or run with different packages, which can cause different issues, from "
+"compile or link problems to very difficult to debug and understand runtime "
+"errors."
+msgstr ""
+
+#: ../../../reference/commands/workspace.rst:223
+msgid ""
+"So when a Conan ``workspace`` command detects this situation, it will raise "
+"an error like:"
+msgstr ""
+
+#: ../../../reference/commands/workspace.rst:225
+msgid ""
+"ERROR: Workspace definition error. Package mypkg/version in the Conan cache\n"
+"has dependencies to packages in the workspace: [\"dep1/1.0\", \"dep2/0.2\"]\n"
+"Try the 'conan workspace complete' to open/add intermediate packages"
+msgstr ""
+
+#: ../../../reference/commands/workspace.rst:231
+msgid ""
+"This could be solved by manually doing a ``conan workspace open/add <dep>`` "
+"for the missing packages, and add them to the workspace, then repeat the "
+"previous command until the error is gone. The ``conan workspace complete`` "
+"command is basically a helper to do this process automatically, detecting "
+"what are the missing packages and adding all of them to the workspace."
+msgstr ""
+
+#: ../../../reference/commands/workspace.rst:239
+msgid "Read the :ref:`Workspace tutorial<tutorial_workspaces>` section."
+msgstr ""
+
+#: ../../../reference/commands/workspace.rst:240
+msgid ""
+"Read the :ref:`conan new workspace<reference_commands_new>` command section."
 msgstr ""

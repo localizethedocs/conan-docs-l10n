@@ -1,0 +1,223 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.39\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/consumer/search.rst:5
+msgid "conan search"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:7
+msgid ""
+"$ conan search [-h] [-o] [-q QUERY] [-r REMOTE] [--case-sensitive]\n"
+"               [--raw] [--table TABLE] [-j JSON] [-rev]\n"
+"               [pattern_or_reference]"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:13
+msgid ""
+"Searches package recipes and binaries in the local cache or a remote. Unless "
+"a remote is specified only the local cache is searched."
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:16
+msgid ""
+"If you provide a pattern, then it will search for existing package recipes "
+"matching it.  If a full reference is provided (pkg/0.1@user/channel) then "
+"the existing binary packages for that reference will be displayed. The "
+"default remote is ignored, if no remote is specified, the search will be "
+"done in the local cache. Search is case sensitive, the exact case has to be "
+"used. For case insensitive file systems, like Windows, case sensitive search "
+"can be forced with '--case-sensitive'."
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:25
+msgid ""
+"positional arguments:\n"
+"  pattern_or_reference  Pattern or package recipe reference, e.g., 'boost/"
+"*',\n"
+"                        'MyPackage/1.2@user/channel'\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  -o, --outdated        Show only outdated from recipe packages. This flag "
+"can\n"
+"                        only be used with a reference\n"
+"  -q QUERY, --query QUERY\n"
+"                        Packages query: 'os=Windows AND (arch=x86 OR\n"
+"                        compiler=gcc)'. The 'pattern_or_reference' "
+"parameter\n"
+"                        has to be a reference: MyPackage/1.2@user/channel\n"
+"  -r REMOTE, --remote REMOTE\n"
+"                        Remote to search in. '-r all' searches all remotes\n"
+"  --case-sensitive      Make a case-sensitive search. Use it to guarantee\n"
+"                        case-sensitive search in Windows or other case-\n"
+"                        insensitive file systems\n"
+"  --raw                 Print just the list of recipes\n"
+"  --table TABLE         Outputs html file with a table of binaries. Only "
+"valid\n"
+"                        for a reference search\n"
+"  -j JSON, --json JSON  json file path where the search information will be\n"
+"                        written to\n"
+"  -rev, --revisions     Get a list of revisions for a reference or a "
+"package\n"
+"                        reference."
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:54
+msgid "Examples"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:56
+msgid ""
+"$ conan search \"zlib/*\"\n"
+"$ conan search \"zlib/*\" -r=conan-center"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:61
+msgid ""
+"To search for recipes in all defined remotes use :command:`-r all` (this is "
+"only valid for searching recipes, not binaries):"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:63
+msgid "$ conan search \"zlib/*\" -r=all"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:68
+msgid ""
+"If you use instead the full package recipe reference, you can explore the "
+"binaries existing for that recipe, also in a remote or in the local conan "
+"cache:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:71
+msgid "$ conan search boost/1.71.0@"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:77
+msgid "Query syntax"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:79
+msgid ""
+"A query syntax is allowed to look for specific binaries, you can use ``AND`` "
+"and ``OR`` operators and parenthesis, with settings and also options."
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:82
+msgid ""
+"$ conan search boost/1.71.0@ -q arch=x86_64\n"
+"$ conan search boost/1.71.0@ -q \"(arch=x86_64 OR arch=ARM) AND "
+"(build_type=Release OR os=Windows)\""
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:87
+msgid "Query syntax allows sub-settings, even for custom ones. e.g:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:89
+msgid ""
+"$ conan search boost/1.71.0@ -q \"compiler=gcc AND compiler.version=9\"\n"
+"$ conan search boost/1.71.0@ -q \"os=Linux AND os.distro=Ubuntu AND os."
+"distro.version=19.04\""
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:94
+msgid ""
+"If you specify a query filter for a setting and the package recipe is not "
+"restricted by this setting, Conan won't find the packages. e.g:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:97
+msgid ""
+"class MyRecipe(ConanFile):\n"
+"    name = \"my_recipe\"\n"
+"    settings = \"arch\","
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:103
+msgid "$ conan search my_recipe/1.0@lasote/stable -q os=Windows"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:107
+msgid ""
+"The query above won't find the ``my_recipe`` binary packages (because the "
+"recipe doesn't declare \"os\" as a setting) unless you specify the ``None`` "
+"value:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:110
+msgid "$ conan search my_recipe/1.0@lasote/stable -q os=None"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:115
+msgid "Tabular output"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:117
+msgid ""
+"You can generate a table for all binaries from a given recipe with the :"
+"command:`--table` argument:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:119
+msgid ""
+"$ conan search jinja2cpp/1.1.0@ --table=file.html -r=conan-center\n"
+"$ file.html # or open the file, double-click"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:131
+msgid "Recipe and package revisions"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:133
+msgid ""
+"Search all the local Conan packages matching a pattern and showing the "
+"revision:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:135
+msgid ""
+"$ conan search \"lib*\" --revisions\n"
+"$ Existing package recipes:\n"
+"\n"
+"  lib/1.0@user/channel#404e86c18e4a47a166fabe70b3b15e33"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:143
+msgid "Search the local revision for a local cache recipe:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:145
+msgid ""
+"$ conan search lib/1.0@conan/testing --revisions\n"
+"$ Revisions for 'lib/1.0@conan/testing':\n"
+"    a55e3b054fdbf4e2c6f10e955da69502 (2019-03-05 16:37:27 UTC)"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:151
+msgid "Search the remote revisions in a server:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/search.rst:153
+msgid ""
+"$ conan search lib/1.0@conan/testing --revisions -r=myremote\n"
+"  Revisions for 'lib/1.0@conan/testing' at remote 'myremote':\n"
+"    78fcef25a1eaeecd5facbbf08624c561 (2019-03-05 16:37:27 UTC)\n"
+"    f3367e0e7d170aa12abccb175fee5f97 (2019-03-05 16:37:27 UTC)"
+msgstr ""

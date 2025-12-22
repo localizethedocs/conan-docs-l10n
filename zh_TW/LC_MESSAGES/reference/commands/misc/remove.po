@@ -1,0 +1,178 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.59\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/misc/remove.rst:5
+msgid "conan remove"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:7
+msgid ""
+"$ conan remove [-h] [-b [BUILDS [BUILDS ...]]] [-f] [-l] [-o]\n"
+"               [-p [PACKAGES [PACKAGES ...]]] [-q QUERY] [-r REMOTE] [-s]\n"
+"               [-t]\n"
+"               [pattern_or_reference]"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:14
+msgid ""
+"Removes packages or binaries matching pattern from local cache or remote."
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:16
+msgid ""
+"It can also be used to remove the temporary source or build folders in the "
+"local conan cache. If no remote is specified, the removal will be done by "
+"default in the local conan cache."
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:20
+msgid ""
+"positional arguments:\n"
+"  pattern_or_reference  Pattern or package recipe reference, e.g., 'boost/"
+"*',\n"
+"                        'MyPackage/1.2@user/channel'\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  -b [BUILDS [BUILDS ...]], --builds [BUILDS [BUILDS ...]]\n"
+"                        By default, remove all the build folders or select\n"
+"                        one, specifying the package ID\n"
+"  -f, --force           Remove without requesting a confirmation\n"
+"  -l, --locks           Remove locks\n"
+"  -o, --outdated        Remove only outdated from recipe packages. This "
+"flag\n"
+"                        can only be used with a pattern or a reference\n"
+"  -p [PACKAGES [PACKAGES ...]], --packages [PACKAGES [PACKAGES ...]]\n"
+"                        Remove all packages of the specified reference if "
+"no\n"
+"                        specific package ID is provided\n"
+"  -q QUERY, --query QUERY\n"
+"                        Packages query: 'os=Windows AND (arch=x86 OR\n"
+"                        compiler=gcc)'. The 'pattern_or_reference' "
+"parameter\n"
+"                        has to be a reference: MyPackage/1.2@user/channel\n"
+"  -r REMOTE, --remote REMOTE\n"
+"                        Will remove from the specified remote\n"
+"  -s, --src             Remove source folders\n"
+"  -t, --system-reqs     Remove system_reqs folders"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:49
+msgid ""
+"The ``-q`` parameter can't be used along with ``-p`` nor ``-b`` parameters."
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:51
+msgid "**Examples**:"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:53
+msgid ""
+"Remove from the local cache the binary packages (the package recipes will "
+"not be removed) from all the recipes matching ``openssl/*`` pattern:"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:56
+msgid "$ conan remove openssl/* --packages"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:60
+msgid ""
+"Remove the temporary build folders from all the recipes matching ``openssl/"
+"*`` pattern without requesting confirmation:"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:63
+msgid "$ conan remove openssl/* --builds --force"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:67
+msgid "Remove the recipe and the binary packages from a specific remote:"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:69
+msgid "$ conan remove openssl/1.0.u@ -r myremote"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:73
+msgid "Remove only Windows openssl packages from local cache:"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:75
+msgid "$ conan remove openssl/1.0.u@ -q \"os=Windows\""
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:81
+msgid ""
+"Remove system requirements installation registry for the package name "
+"referred globally for all package ids:"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:83
+msgid "$ conan remove --system-reqs package/version@user/channel"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:87
+msgid ""
+"This command does not remove the system installed packages, but only the "
+"Conan lock to indicate they were installed."
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:89
+msgid ""
+"Remove system requirements installation registry for all packages named "
+"``package`` via a wildcard"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:91
+msgid "$ conan remove --system-reqs 'package/*'"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:95
+msgid ""
+"Remove system requirements installation registry for all packages via a "
+"wildcard"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:97
+msgid "$ conan remove --system-reqs '*'"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:101
+msgid "Remove all remote packages only related to a specific recipe revision"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:103
+msgid "$ conan remove -r myremote package/version@user/channel#RREV --packages"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:107
+msgid ""
+"Remove only a single remote package related to a specific recipe revision "
+"and its package ID"
+msgstr ""
+
+#: ../../../reference/commands/misc/remove.rst:109
+msgid ""
+"$ conan remove -r myremote package/version@user/channel#RREV -p package_id\n"
+"\n"
+"OR\n"
+"\n"
+"$ conan remove -r myremote package/version@user/channel#RREV:PACKAGE_ID"
+msgstr ""

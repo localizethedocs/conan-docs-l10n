@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/config_options.rst:4
+msgid "config_options()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:6
+msgid ""
+"The ``config_options()`` method is used to configure or constrain the "
+"available options in a package **before** assigning them a value. A typical "
+"use case is to remove an option in a given platform. For example, the "
+"``SSE2`` flag doesn't exist in architectures different than 32 bits, so it "
+"should be removed in this method like so:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:10
+msgid ""
+"def config_options(self):\n"
+"    if self.settings.arch != \"x86_64\":\n"
+"        del self.options.with_sse2"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:16
+msgid ""
+"The ``config_options()`` method executes: * Before calling the "
+"``configure()`` method. * Before assigning the ``options`` values. * After "
+"``settings`` are already defined."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:24
+msgid "Available automatic implementations"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:28
+msgid ""
+"When the ``config_options()`` method is not defined, Conan can automatically "
+"manage some conventional options if specified in the :ref:"
+"`implements<conan_conanfile_attributes_implements>` ConanFile attribute:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:33
+msgid "auto_shared_fpic"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:35
+msgid "Options automatically managed:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:37
+msgid "``fPIC`` (True, False)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:39
+msgid "It can be added to the recipe like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:41
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    implements = [\"auto_shared_fpic\"]\n"
+"    ..."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:49
+msgid ""
+"Then, if no ``config_options()`` method is specified in the recipe, Conan "
+"will automatically manage the fPIC setting in the ``config_options`` step "
+"like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:52
+msgid ""
+"if conanfile.settings.get_safe(\"os\") == \"Windows\":\n"
+"    conanfile.options.rm_safe(\"fPIC\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:57
+msgid ""
+"Be aware that adding this implementation to the recipe may also affect the :"
+"ref:`configure<reference_conanfile_methods_configure_implementations>` step."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:60
+msgid ""
+"If you need to implement custom behaviors in your recipes but also need this "
+"logic, it must be explicitly declared:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:63
+msgid ""
+"def config_options(self):\n"
+"    if conanfile.settings.get_safe(\"os\") == \"Windows\":\n"
+"        conanfile.options.rm_safe(\"fPIC\")\n"
+"    if self.settings.arch != \"x86_64\":\n"
+"        del self.options.with_sse2"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/config_options.rst:74
+msgid ""
+"Follow the :ref:`tutorial about recipe configuration "
+"methods<tutorial_creating_configure>`."
+msgstr ""

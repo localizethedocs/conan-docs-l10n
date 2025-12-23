@@ -1,0 +1,259 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.15\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:4
+msgid "Testing Conan packages"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:6
+msgid ""
+"In all the previous sections of the tutorial, we used the *test_package*. It "
+"was invoked automatically at the end of the ``conan create`` command after "
+"building our package verifying that the package is created correctly. Let's "
+"explain the *test_package* in more detail in this section."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:11
+msgid ""
+"Please, first clone the sources to recreate this project. You can find them "
+"in the `examples2 repository <https://github.com/conan-io/examples2>`_ on "
+"GitHub:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:14
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/tutorial/creating_packages/testing_packages"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:20
+msgid "Some important notes to have in mind about the *test_package*:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:22
+msgid ""
+"The *test_package* folder is different from unit or integration tests. These "
+"tests are “package” tests, and validate that the package is properly "
+"created, and that the package consumers will be able to link against it and "
+"reuse it."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:26
+msgid ""
+"It is a small Conan project itself, that contains its own *conanfile.py* and "
+"its source code including build scripts. It depends on the package being "
+"created and builds and executes a small application that requires the "
+"library in the package."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:30
+msgid ""
+"It doesn't belong to the package. It only exist in the source repository, "
+"not in the package."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:33
+msgid ""
+"The *test_package* folder is the default one, but a different one can be "
+"defined via the command line argument ``--test-folder`` or with the "
+"``test_package_folder`` recipe attribute."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:36
+msgid ""
+"The *test_package* folder for our hello/1.0 Conan package has the following "
+"contents:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:38
+msgid ""
+"test_package\n"
+" ├── CMakeLists.txt\n"
+" ├── conanfile.py\n"
+" └── src\n"
+"     └── example.cpp"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:46
+msgid ""
+"Let's have a look at the different files that are part of the "
+"*test_package*. First, *example.cpp* is just a minimal example of how to use "
+"the *libhello* library that we are packaging:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:50
+msgid "*test_package/src/example.cpp*"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:50
+msgid ""
+"#include \"hello.h\"\n"
+"\n"
+"int main() {\n"
+"    hello();\n"
+"}"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:59
+msgid "Then the *CMakeLists.txt* file to tell CMake how to build the example:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:61
+msgid "*test_package/CMakeLists.txt*"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:61
+msgid ""
+"cmake_minimum_required(VERSION 3.15)\n"
+"project(PackageTest CXX)\n"
+"\n"
+"find_package(hello CONFIG REQUIRED)\n"
+"\n"
+"add_executable(example src/example.cpp)\n"
+"target_link_libraries(example hello::hello)"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:72
+msgid ""
+"Finally, the recipe for the *test_package* that consumes the *hello/1.0* "
+"Conan package:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:74
+msgid "*test_package/conanfile.py*"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:74
+msgid ""
+"import os\n"
+"\n"
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMake, cmake_layout\n"
+"from conan.tools.build import can_run\n"
+"\n"
+"\n"
+"class helloTestConan(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    generators = \"CMakeDeps\", \"CMakeToolchain\"\n"
+"\n"
+"    def requirements(self):\n"
+"        self.requires(self.tested_reference_str)\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure()\n"
+"        cmake.build()\n"
+"\n"
+"    def layout(self):\n"
+"        cmake_layout(self)\n"
+"\n"
+"    def test(self):\n"
+"        if can_run(self):\n"
+"            cmd = os.path.join(self.cpp.build.bindir, \"example\")\n"
+"            self.run(cmd, env=\"conanrun\")"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:104
+msgid "Let's go through the most relevant parts:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:106
+msgid ""
+"We add the requirements in the ``requirements()`` method, but in this case "
+"we use the ``tested_reference_str`` attribute that Conan passes to the "
+"test_package. This is a convenience attribute to avoid hardcoding the "
+"package name in the test_package so that we can reuse the same test_package "
+"for several versions of the same Conan package. In our case, this variable "
+"will take the ``hello/1.0`` value."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:112
+msgid ""
+"We define a ``test()`` method. This method will only be invoked in "
+"*test_package* recipes. It executes immediately after ``build()`` is called "
+"and is meant to run some executable or tests on binaries to prove the "
+"package is correctly created. A couple of comments about the contents of our "
+"``test()`` method:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:117
+msgid ""
+"We are using the :ref:`conan.tools.build."
+"cross_building<conan_tools_build_can_run>` tool to check if we can run the "
+"built executable on the current platform. This tool will return the value of "
+"the ``tools.build.cross_building:can_run`` configuration in case it's set. "
+"Otherwise it will return if we are cross-building or not. It’s a useful "
+"feature for the case that your architecture can run more than one target. "
+"For instance, Mac M1 machines can run both *armv8* and *x86_64*."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:124
+msgid ""
+"We run the example binary that was generated in the ``self.cpp.build."
+"bindir`` folder using the environment information that Conan put in the run "
+"environment. Conan will then invoke a launcher containing the runtime "
+"environment information, anything that is necessary for the environment to "
+"run the compiled executables and applications."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:129
+msgid ""
+"Now that we have gone through all the important bits of the code, let's try "
+"our *test_package*. Although we already learned that the *test_package* is "
+"invoked when we call ``conan create``, you can also just create the "
+"*test_package* if you have already created the ``hello/1.0`` package in the "
+"Conan cache. This is done with the :ref:`conan test<reference_commands>` "
+"command:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:135
+msgid ""
+"$ conan test test_package hello/1.0\n"
+"\n"
+"...\n"
+"\n"
+"-------- test_package: Computing necessary packages --------\n"
+"Requirements\n"
+"    fmt/8.1.1#cd132b054cf999f31bd2fd2424053ddc:"
+"ff7a496f48fca9a88dc478962881e015f4a5b98f#1d9bb4c015de50bcb4a338c07229b3bc - "
+"Cache\n"
+"    hello/1.0#25e0b5c00ae41ef9fbfbbb1e5ac86e1e:"
+"fd7c4113dad406f7d8211b3470c16627b54ff3af#4ff3fd65a1d37b52436bf62ea6eaac04 - "
+"Cache\n"
+"Test requirements\n"
+"    gtest/1.11.0#d136b3379fdb29bdfe31404b916b29e1:656efb9d626073d4ffa0dda2cc8178bc408b1bee#ee8cbd2bf32d1c89e553bdd9d5606127 "
+"- Skip\n"
+"\n"
+"...\n"
+"\n"
+"[ 50%] Building CXX object CMakeFiles/example.dir/src/example.cpp.o\n"
+"[100%] Linking CXX executable example\n"
+"[100%] Built target example\n"
+"\n"
+"-------- Testing the package: Running test() --------\n"
+"hello/1.0 (test package): Running test()\n"
+"hello/1.0 (test package): RUN: ./example\n"
+"hello/1.0: Hello World Release! (with color!)"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/test_conan_packages.rst:160
+msgid ""
+"As you can see in the output, our *test_package* builds successfully testing "
+"that the *hello/1.0* Conan package can be consumed with no problem."
+msgstr ""

@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.52\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../mastering/policies.rst:2
+msgid "Build policies"
+msgstr ""
+
+#: ../../../mastering/policies.rst:4
+msgid ""
+"By default, :command:`conan install` command will search for a binary "
+"package (corresponding to our settings and defined options) in a remote. If "
+"it's not present the install command will fail."
+msgstr ""
+
+#: ../../../mastering/policies.rst:7
+msgid ""
+"As previously demonstrated, we can use the :command:`--build` option to "
+"change the default :command:`conan install` behavior:"
+msgstr ""
+
+#: ../../../mastering/policies.rst:9
+msgid ":command:`--build some_package` will build only \"some_package\"."
+msgstr ""
+
+#: ../../../mastering/policies.rst:10
+msgid ":command:`--build missing` will build only the missing requires."
+msgstr ""
+
+#: ../../../mastering/policies.rst:11
+msgid ":command:`--build` will build all requirements from sources."
+msgstr ""
+
+#: ../../../mastering/policies.rst:12
+msgid ""
+":command:`--build outdated` will try to build from code if the binary is not "
+"built with the current recipe or when missing binary package."
+msgstr ""
+
+#: ../../../mastering/policies.rst:13
+msgid ""
+":command:`--build cascade` will build from code all the nodes with some "
+"dependency being built (for any reason). Can be used together with any other "
+"build policy. Useful to make sure that any new change introduced in a "
+"dependency is incorporated by building again the package."
+msgstr ""
+
+#: ../../../mastering/policies.rst:15
+msgid ""
+":command:`--build pattern*` will build only the packages with the reference "
+"starting with \"pattern\"."
+msgstr ""
+
+#: ../../../mastering/policies.rst:16
+msgid ""
+":command:`--build=* --build=!some_package1 --build=!some_package2` will "
+"build all requirements from sources, except for some_package1 and "
+"some_package2."
+msgstr ""
+
+#: ../../../mastering/policies.rst:19
+msgid ""
+"With the ``build_policy`` attribute in the `conanfile.py` the package "
+"creator can change the default Conan's build behavior. The allowed "
+"build_policy values are:"
+msgstr ""
+
+#: ../../../mastering/policies.rst:21
+msgid ""
+"``missing``: If no binary package is found, Conan will build it without the "
+"need to invoke Conan install with :command:`--build missing` option."
+msgstr ""
+
+#: ../../../mastering/policies.rst:23
+msgid ""
+"``always``: The package will be built always, **retrieving each time the "
+"source code** executing the \"source\" method."
+msgstr ""
+
+#: ../../../mastering/policies.rst:24
+msgid ""
+"``never``: (experimental, available from Conan 1.37) Never builds this "
+"package from source, this package can only be created with a ``conan export-"
+"pkg`` command."
+msgstr ""
+
+#: ../../../mastering/policies.rst:27
+msgid ""
+" class PocoTimerConan(ConanFile):\n"
+"     settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"     requires = \"poco/1.9.4\" # comma-separated list of requirements\n"
+"     generators = \"cmake\", \"gcc\", \"txt\"\n"
+"     default_options = {\"poco:shared\": True, \"poco:shared\": True}\n"
+"     build_policy = \"always\" # \"missing\""
+msgstr ""
+
+#: ../../../mastering/policies.rst:37
+msgid ""
+"These build policies are especially useful if the package creator doesn't "
+"want to provide binary package; for example, with header only libraries."
+msgstr ""
+
+#: ../../../mastering/policies.rst:40
+msgid ""
+"The ``always`` policy will retrieve the sources each time the package is "
+"installed, so it can be useful for providing a \"latest\" mechanism or "
+"ignoring the uploaded binary packages."
+msgstr ""
+
+#: ../../../mastering/policies.rst:43
+msgid ""
+"The package pattern can be referred as a case-sensitive fnmatch pattern of "
+"the package name or the full package reference. e.g :command:`--build "
+"poco`, :command:`--build poc*`, :command:`--build zlib/*`, :command:`--build "
+"*@conan/stable` or :command:`--build zlib/1.2.11`."
+msgstr ""

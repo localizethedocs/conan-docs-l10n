@@ -1,0 +1,300 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.65\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:2
+msgid "conan.tools.files downloads"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:6
+msgid ""
+"Some of the features used in this section are still **under development**, "
+"while they are recommended and usable and we will try not to break them in "
+"future releases, some breaking changes might still happen if necessary to "
+"prepare for the *Conan 2.0 release*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:12
+msgid "conan.tools.files.get()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:14
+#: ../../../reference/conanfile/tools/files/downloads.rst:48
+#: ../../../reference/conanfile/tools/files/downloads.rst:80
+msgid ""
+"Available since: `1.35.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.35.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:16
+msgid ""
+"def get(conanfile, url, md5='', sha1='', sha256='', destination=\".\", "
+"filename=\"\",\n"
+"        keep_permissions=False, pattern=None, verify=True, retry=None, "
+"retry_wait=None,\n"
+"        auth=None, headers=None, strip_root=False)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:22
+msgid ""
+"High level download and decompressing of a tgz, zip or other compressed "
+"format file. Just a high level wrapper for download, unzip, and remove the "
+"temporary zip file once unzipped. You can pass hash checking parameters: "
+"``md5``, ``sha1``, ``sha256``. All the specified algorithms will be checked. "
+"If any of them doesn't match, it will raise a ``ConanException``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:27
+#: ../../../reference/conanfile/tools/files/downloads.rst:58
+#: ../../../reference/conanfile/tools/files/downloads.rst:96
+msgid "Parameters:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:29
+msgid ""
+"**url**, **filename**, **md5**, **sha1**, **sha256**, **verify**, **retry**, "
+"**retry_wait**, **auth**, **headers**: forwarded to ``download()``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:30
+msgid ""
+"**keep_permissions**, **pattern**, **strip_root**: forwarded to ``tools."
+"unzip()`` (legacy, will be updated)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:33
+#: ../../../reference/conanfile/tools/files/downloads.rst:66
+#: ../../../reference/conanfile/tools/files/downloads.rst:118
+msgid "Examples:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:35
+msgid ""
+"from conan.tools.files import get\n"
+"\n"
+"def source(self):\n"
+"    get(self, \"http://url/file\", md5='d2da0cd0756cd9da6560b9a56016a0cb')\n"
+"    # also, specify a destination folder\n"
+"    get(self, \"http://url/file\", destination=\"subfolder\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:46
+msgid "conan.tools.files.ftp_download()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:50
+msgid "def ftp_download(conanfile, ip, filename, login='', password='')"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:55
+msgid ""
+"Ftp download of a file. Retrieves a file from an FTP server. This doesn't "
+"support SSL, but you might implement it yourself using the standard Python "
+"FTP library."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:60
+msgid "**conanfile**: Conanfile object, use always ``self``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:61
+msgid "**ip** (Required): The IP or address of the ftp server."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:62
+msgid ""
+"**filename** (Required): The filename, including the path/folder where it is "
+"located."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:63
+msgid ""
+"**login** (Optional, Defaulted to ``\"\"``): Login credentials for the ftp "
+"server."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:64
+msgid ""
+"**password** (Optional, Defaulted to ``\"\"``): Password credentials for the "
+"ftp server."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:68
+msgid ""
+"from conan.tools.files import ftp_download\n"
+"\n"
+"def source(self):\n"
+"    ftp_download(self, 'ftp.debian.org', \"debian/README\")\n"
+"    self.output.info(load(\"README\"))"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:78
+msgid "conan.tools.files.download()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:82
+msgid "Download a file"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:84
+msgid ""
+"def download(conanfile, url, filename, verify=True, retry=None, "
+"retry_wait=None,\n"
+"             auth=None, headers=None, md5='', sha1='', sha256='')"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:89
+msgid ""
+"Retrieves a file from a given URL into a file with a given filename. It uses "
+"certificates from a list of known verifiers for https downloads, but this "
+"can be optionally disabled."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:92
+msgid ""
+"You can pass hash checking parameters: ``md5``, ``sha1``, ``sha256``. All "
+"the specified algorithms will be checked. If any of them doesn't match, the "
+"downloaded file will be removed and it will raise a ``ConanException``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:98
+msgid "**conanfile** (Required): Conanfile object, use ``self`` always"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:100
+msgid ""
+"**url** (Required): URL to download. It can be a list, which only the first "
+"one will be downloaded, and the follow URLs will be used as mirror in case "
+"of download error."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:100
+msgid ""
+"Since Conan `1.51.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.51.0>`_, files accessible in the local filesystem can be referenced "
+"with a URL starting with ``file:///`` followed by an absolute path to a file "
+"(where the third ``/`` implies ``localhost``)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:102
+msgid ""
+"**filename** (Required): Name of the file to be created in the local storage"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:103
+msgid ""
+"**verify** (Optional, Defaulted to ``True``): When False, disables https "
+"certificate validation."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:104
+msgid ""
+"**retry** (Optional, Defaulted to ``1``): Number of retries in case of "
+"failure."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:105
+msgid ""
+"**retry_wait** (Optional, Defaulted to ``5``): Seconds to wait between "
+"download attempts."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:106
+msgid ""
+"**auth** (Optional, Defaulted to ``None``): A tuple of user and password to "
+"use HTTPBasic authentication. This is used directly in the ``requests`` "
+"Python library. Check other uses here: https://requests.readthedocs.io/en/"
+"master/user/authentication/#basic-authentication"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:107
+msgid ""
+"**headers** (Optional, Defaulted to ``None``): A dictionary with additional "
+"headers."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:108
+msgid ""
+"**md5** (Optional, Defaulted to ``\"\"``): MD5 hash code to check the "
+"downloaded file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:109
+msgid ""
+"**sha1** (Optional, Defaulted to ``\"\"``): SHA-1 hash code to check the "
+"downloaded file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:110
+msgid ""
+"**sha256** (Optional, Defaulted to ``\"\"``): SHA-256 hash code to check the "
+"downloaded file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:112
+msgid "Configuration:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:114
+msgid ""
+"``tools.files.download:retry``: number of retries in case some error occurs."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:115
+msgid "``tools.files.download:retry_wait``: seconds to wait between retries."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/downloads.rst:120
+msgid ""
+"download(self, \"http://someurl/somefile.zip\", \"myfilename.zip\")\n"
+"\n"
+"# to disable verification:\n"
+"download(self, \"http://someurl/somefile.zip\", \"myfilename.zip\", "
+"verify=False)\n"
+"\n"
+"# to retry the download 2 times waiting 5 seconds between them\n"
+"download(self, \"http://someurl/somefile.zip\", \"myfilename.zip\", retry=2, "
+"retry_wait=5)\n"
+"\n"
+"# Use https basic authentication\n"
+"download(self, \"http://someurl/somefile.zip\", \"myfilename.zip\", "
+"auth=(\"user\", \"password\"))\n"
+"\n"
+"# Pass some header\n"
+"download(self, \"http://someurl/somefile.zip\", \"myfilename.zip\", "
+"headers={\"Myheader\": \"My value\"})\n"
+"\n"
+"# Download and check file checksum\n"
+"download(self, \"http://someurl/somefile.zip\", \"myfilename.zip\", "
+"md5=\"e5d695597e9fa520209d1b41edad2a27\")\n"
+"\n"
+"# Retrieve file that is visible in the local filesystem\n"
+"tools.download(\"file:///C:/Users/MyUser/Downloads/somefile.zip\", "
+"\"myfilename.zip\", md5=\"e5d695597e9fa520209d1b41edad2a27\")\n"
+"tools.download(\"file:///home/myuser/downloads/somefile.zip\", \"myfilename."
+"zip\", md5=\"e5d695597e9fa520209d1b41edad2a27\")\n"
+"\n"
+"# to add mirrors\n"
+"download(self, [\"https://ftp.gnu.org/gnu/gcc/gcc-9.3.0/gcc-9.3.0.tar.gz\",\n"
+"                \"http://mirror.linux-ia64.org/gnu/gcc/releases/gcc-9.3.0/"
+"gcc-9.3.0.tar.gz\",\n"
+"                \"file:///home/myuser/localmirror/gcc-9.3.0/gcc-9.3.0.tar."
+"gz\"],\n"
+"                \"gcc-9.3.0.tar.gz\",\n"
+"               sha256=\"5258a9b6afe9463c2e56b9e8355b1a4bee125ca828b8078f910303bc2ef91fa6\")"
+msgstr ""

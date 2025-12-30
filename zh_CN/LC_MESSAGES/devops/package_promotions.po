@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.17\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devops/package_promotions.rst:4
+msgid "Package promotions"
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:6
+msgid ""
+"Package promotions are the recommended devops practice to handle quality, "
+"maturity or stages of packages in different technologies, and of course, "
+"also for Conan packages."
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:9
+msgid ""
+"The principle of package promotions is that there are multiple server "
+"package repositories defined and packages are uploaded and copied among "
+"repositories depending on the stage. For example we could have two different "
+"server package repositories called \"testing\" and \"release\":"
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:31
+#: ../../../devops/package_promotions.rst:147
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:33
+msgid ""
+"Using different ``user/channel`` to try to denote maturity is strongly "
+"discouraged. It was described in the early Conan 1 days years ago, before "
+"the possibility of having multiple repositories, but it shouldn't be used "
+"anymore."
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:35
+msgid ""
+"Packages should be completely immutable accross pipelines and stages, a "
+"package cannot rename or change its ``user/channel``, and re-building it "
+"from source to have a new ``user/channel`` is also a strongly discourage "
+"devops practice."
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:39
+msgid ""
+"Between those repositories there will be some quality gates. In our case, "
+"some packages will be put in the \"testing\" repository, for the QA team to "
+"test them, for example ``zlib/1.3.1`` and ``openssl/3.2.2``:"
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:77
+msgid ""
+"When the QA team tests and approves these packages, they can be promoted to "
+"the \"release\" repository. Basically, a promotion is a copy of the "
+"packages, including all the artifacts and metadata from the \"testing\" to "
+"the \"release\" repository."
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:82
+msgid ""
+"There are different ways to implement and execute a package promotion. "
+"Artifactory has some APIs that can be used to move individual files or "
+"folders. The `Conan extensions repository <https://github.com/conan-io/conan-"
+"extensions>`_ contains the ``conan art:promote`` command that can be used to "
+"promote Conan \"package lists\" from one server repository to another "
+"repository."
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:87
+msgid ""
+"If we have a package list ``pkglist.json`` that contains the above "
+"``zlib/1.3.1`` and ``openssl/3.2.2`` packages, then the command would look "
+"like:"
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:90
+#: ../../../devops/package_promotions.rst:99
+msgid "Promoting from testing->release"
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:90
+msgid ""
+"$ conan art:promote pkglist.json --from=testing --to=release --url=https://"
+"<url>/artifactory --user=<user> --password=<password>"
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:96
+msgid ""
+"Note that the ``conan art:promote`` command doesn't work with ArtifactoryCE, "
+"Pro editions of Artifactory are needed. The promote functionality can be "
+"implemented in these cases with a simple download+upload flow:"
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:99
+msgid ""
+"# Promotion using Conan download/upload commands\n"
+"# (slow, can be improved with art:promote custom command)\n"
+"$ conan download --list=promote.json -r=testing --format=json > downloaded."
+"json\n"
+"$ conan upload --list=downloaded.json -r=release -c"
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:108
+msgid ""
+"After the promotion from \"testing\" to \"release\" repository, the packages "
+"would be like:"
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:149
+msgid ""
+"In modern package servers such as Artifactory package artifacts are "
+"**deduplicated**, that is, they do not take any extra storage when they are "
+"copied in different locations, including different repositories. The "
+"**deduplication** is checksum based, so the system is also smart to avoid re-"
+"uploading existing artifacts. This is very important for the \"promotions\" "
+"mechanism: this mechanism is only copying some metadata, so it can be very "
+"fast and it is storage efficient. Pipelines can define as many repositories "
+"and promotions as necessary without concerns about storage costs."
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:155
+msgid ""
+"Promotions can also be done in JFrog platform with ``Release Bundles``. The "
+"`Conan extensions repository <https://github.com/conan-io/conan-"
+"extensions>`_ also contains one command to generate a release bundle (that "
+"can be promoted using the Artifatory API)."
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:161
+msgid ":ref:`Using package lists examples <examples_commands_pkglists>`"
+msgstr ""
+
+#: ../../../devops/package_promotions.rst:162
+msgid ":ref:`Promotions usage in CI <ci_tutorial>`"
+msgstr ""

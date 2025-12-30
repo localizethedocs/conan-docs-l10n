@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.23\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-16 08:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/set_name.rst:5
+msgid "set_name()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/set_name.rst:7
+msgid ""
+"Dynamically define ``name`` attribute. This method would be rarely needed, "
+"as the only use case that makes sense is when a recipe is shared and used to "
+"create different packages with the same recipe. In most cases the "
+"recommended approach is to define the ``name = \"mypkg\"`` attribute in the "
+"recipe."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/set_name.rst:11
+msgid ""
+"This method is executed only when the recipe is exported to the cache with "
+"``conan create`` or ``conan export``, or when the recipe is being locally "
+"used, like with ``conan install .``. In all other cases, the name of the "
+"package is fully defined, and ``set_name()`` will not be called, so do not "
+"rely on it for any other functionality different than defining the ``self."
+"name`` value."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/set_name.rst:15
+msgid ""
+"If the current package name was defined in a *name.txt* file, it would be "
+"possible to do:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/set_name.rst:17
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.files import load\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    def set_name(self):\n"
+"        # This will execute relatively to the current user directory (name."
+"txt in cwd)\n"
+"        self.name = load(self, \"name.txt\")\n"
+"        # if \"name.txt\" is located relative to the conanfile.py better "
+"do:\n"
+"        self.name = load(self, os.path.join(self.recipe_folder, \"name."
+"txt\"))"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/set_name.rst:29
+msgid ""
+"The package name can also be defined in command line for some commands with "
+"``--name=xxxx`` argument. If we want to prioritize the command line argument "
+"we should do:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/set_name.rst:32
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.files import load\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    def set_name(self):\n"
+"        # Command line ``--name=xxxx`` will be assigned first to self.name "
+"and have priority\n"
+"        self.name = self.name or load(self, \"name.txt\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/set_name.rst:43
+msgid ""
+"The ``set_name()`` method can decide to define the ``name`` value, "
+"irrespective of the potential ``--name=xxx`` command line argument, that can "
+"be even completely ignored by ``set_name()``. It is the responsibility of "
+"the developer to provide a correct ``set_name()``:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/set_name.rst:47
+msgid ""
+"def set_name(self):\n"
+"    # This will always assign \"pkg\" as name, ignoring ``--name`` command "
+"line argument\n"
+"    # and without erroring or warning\n"
+"    self.name = \"pkg\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods/set_name.rst:55
+msgid ""
+"If a command line argument ``--name=xxx`` is provided, it will be "
+"initialized in the ``self.name`` attribute, so ``set_name()`` method can "
+"read and use it:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/set_name.rst:58
+msgid ""
+"def set_name(self):\n"
+"    # Takes the provided command line ``--name`` argument and creates a name "
+"appending to\n"
+"    # it the \".extra\" string\n"
+"    self.name = self.name + \".extra\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods/set_name.rst:68
+msgid ""
+"The ``set_name()`` method is an alternative to the ``name`` attribute. It is "
+"not advised or supported to define both a ``name`` attribute and a "
+"``set_name()`` method."
+msgstr ""

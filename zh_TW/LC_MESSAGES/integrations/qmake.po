@@ -1,0 +1,133 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/qmake.rst:5
+msgid "QMake"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:7
+msgid ""
+"A qmake generator will generate a ``conanbuildinfo.pri`` file that can be "
+"used for your qmake builds."
+msgstr ""
+
+#: ../../../integrations/qmake.rst:9
+msgid "$ conan install . -g qmake"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:13
+msgid ""
+"Add ``conan_basic_setup`` to ``CONFIG`` and include the file in your "
+"existing project ``.pro`` file:"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:15 ../../../integrations/qmake.rst:29
+msgid "**yourproject.pro**"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:17
+msgid ""
+"# ...\n"
+"\n"
+"CONFIG += conan_basic_setup\n"
+"include(conanbuildinfo.pri)"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:24
+msgid ""
+"This will include all the statements in ``conanbuildinfo.pri`` in your "
+"project. Include paths, libraries, defines, etc. will be set up for all "
+"requirements you have defined in ``conanfile.txt``."
+msgstr ""
+
+#: ../../../integrations/qmake.rst:27
+msgid ""
+"If you'd rather like to manually add the variables for each dependency, you "
+"can do so by skipping the CONFIG statement and only include ``conanbuildinfo."
+"pri``:"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:31
+msgid ""
+"# ...\n"
+"\n"
+"include(conanbuildinfo.pri)\n"
+"\n"
+"# you may now modify your variables manually for each library, such as\n"
+"# INCLUDEPATH += CONAN_INCLUDEPATH_POCO"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:40
+msgid ""
+"The ``qmake`` generator allows multi-configuration packages, i.e. packages "
+"that contains both debug and release artifacts. Lets see an example:"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:43
+msgid "Example"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:45
+msgid ""
+"There is a complete example in https://github.com/memsharded/qmake_example "
+"This project will depend on a multi-configuration (debug/release) \"Hello "
+"World\" package, that should be installed first:"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:48
+msgid ""
+"$ git clone https://github.com/memsharded/hello_multi_config\n"
+"$ cd hello_multi_config\n"
+"$ conan create . user/channel"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:54
+msgid ""
+"This hello package is created with cmake, but that doesn't matter, it can be "
+"consumed from a qmake project:"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:56
+msgid ""
+"Then, you can get the qmake project and build it, both for debug and release "
+"(this example has been tested on linux):"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:58
+msgid ""
+"$ git clone https://github.com/memsharded/qmake_example\n"
+"$ cd qmake_example\n"
+"$ conan install .\n"
+"$ qmake\n"
+"$ make\n"
+"$ ./helloworld\n"
+"> Hello World Release!\n"
+"# now lets build the debug one\n"
+"$ make clean\n"
+"$ qmake CONFIG+=debug\n"
+"$ make\n"
+"$ ./helloworld\n"
+"> Hello World Debug!"
+msgstr ""
+
+#: ../../../integrations/qmake.rst:77
+msgid ""
+"Check the :ref:`Reference/Generators/qmake <qmake_generator>` for the "
+"complete reference."
+msgstr ""

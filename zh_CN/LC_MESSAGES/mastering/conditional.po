@@ -1,0 +1,95 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:17+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../mastering/conditional.rst:2
+msgid "Conditional settings, options and requirements"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:4
+msgid ""
+"Remember, in your ``conanfile.py`` you have also access to the options of "
+"your dependencies, and you can use them to:"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:7
+msgid "Add requirements dynamically"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:8
+msgid "Change values of options"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:10
+msgid ""
+"The **configure** method might be used to hardcode dependencies options "
+"values. It is strongly discouraged to use it to change the settings values, "
+"please remember that ``settings`` are a configuration *input*, so it doesn't "
+"make sense to modify it in the recipes."
+msgstr ""
+
+#: ../../../mastering/conditional.rst:14
+msgid ""
+"Also, for options, a more flexible solution is to define dependencies "
+"options values in the ``default_options``, not in the ``configure()`` "
+"method, as this would allow to override them. Hardcoding them in the "
+"``configure()`` method won't allow that and thus won't easily allow conflict "
+"resolution. Use it only when it is absolutely necessary that the package "
+"dependencies use those options."
+msgstr ""
+
+#: ../../../mastering/conditional.rst:19
+msgid "Here is an example of what we could do in our **configure method**:"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:21
+msgid ""
+"...\n"
+"requires = \"Poco/1.9.0@pocoproject/stable\" # We will add OpenSSL "
+"dynamically \"OpenSSL/1.0.2d@lasote/stable\"\n"
+"...\n"
+"\n"
+"def configure(self):\n"
+"    # We can control the options of our dependencies based on current "
+"options\n"
+"    self.options[\"OpenSSL\"].shared = self.options.shared\n"
+"\n"
+"    # Maybe in windows we know that OpenSSL works better as shared (false)\n"
+"    if self.settings.os == \"Windows\":\n"
+"       self.options[\"OpenSSL\"].shared = True\n"
+"\n"
+"       # Or adjust any other available option\n"
+"       self.options[\"Poco\"].other_option = \"foo\"\n"
+"\n"
+"    # We could check the presence of an option\n"
+"    if \"shared\" in self.options:\n"
+"        pass\n"
+"\n"
+"def requirements(self):\n"
+"    # Or add a new requirement!\n"
+"    if self.options.testing:\n"
+"       self.requires(\"OpenSSL/2.1@memsharded/testing\")\n"
+"    else:\n"
+"       self.requires(\"OpenSSL/1.0.2d@lasote/stable\")"
+msgstr ""
+
+#: ../../../mastering/conditional.rst:50
+msgid ""
+"Check the section :ref:`Reference/conanfile.py/configure(), config_options() "
+"<method_configure_config_options>` to find out more."
+msgstr ""

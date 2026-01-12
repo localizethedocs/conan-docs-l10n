@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:17+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/cmake_install.rst:4
+msgid "How to reuse cmake install for package() method"
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:6
+msgid ""
+"It is possible that your project's *CMakeLists.txt* has already defined some "
+"functionality that extracts the artifacts (headers, libraries, binaries) "
+"from the build and source folder to a predetermined place."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:10
+msgid ""
+"The conan ``package()`` method does exactly that: it defines which files "
+"have to be copied from the build folder to the package folder."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:13
+msgid "If you want to reuse that functionality, you can do it with cmake."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:15
+msgid ""
+"Invoke cmake with ``CMAKE_INSTALL_PREFIX`` using the ``package_folder`` "
+"variable. If the ``cmake install`` target correctly copies all the required "
+"libraries, headers, etc. to the ``package_folder``, then the ``package()`` "
+"method is not required."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:19
+msgid ""
+"def build(self):\n"
+"    cmake = CMake(self)\n"
+"    cmake.configure()\n"
+"    cmake.build()\n"
+"    cmake.install()\n"
+"    # equivalent to\n"
+"    # args += ['-DCMAKE_INSTALL_PREFIX=\"%s\"' % self.package_folder]\n"
+"    # self.run('cmake \"%s/src\" %s %s'\n"
+"    #          % (self.source_folder, cmake.command_line, ' '."
+"join( args ) ) )\n"
+"    # self.run(\"cmake --build . --target install %s\" % cmake."
+"build_config)\n"
+"\n"
+"def package(self):\n"
+"    # nothing to do here now"
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:35
+msgid ""
+"The ``package_info()`` method is still necessary, as there is no possible "
+"way to automatically extract the information of the necessary libraries, "
+"defines and flags for different build configurations from the cmake install."
+msgstr ""

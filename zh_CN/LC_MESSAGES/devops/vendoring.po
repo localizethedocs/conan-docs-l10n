@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devops/vendoring.rst:4
+msgid "Vendoring dependencies in Conan packages"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../devops/vendoring.rst:8
+msgid ""
+"From Conan 2.4 it is possible to create and use Conan packages that "
+"completely vendor their dependencies, that is, they completely hide and "
+"isolate their dependencies from their consumers. This can be useful in some "
+"different cases:"
+msgstr ""
+
+#: ../../../devops/vendoring.rst:12
+msgid ""
+"When sharing Conan packages with other organizations which vendor (copy, "
+"embed or link) the dependencies, so it is not necessary for the consumers of "
+"their packages to have access to those dependencies and the intention is "
+"that they always use the shared precompiled binaries."
+msgstr ""
+
+#: ../../../devops/vendoring.rst:15
+msgid "To introduce a hard decoupling between parts of a project."
+msgstr ""
+
+#: ../../../devops/vendoring.rst:17
+msgid ""
+"To make a package vendor its dependencies, define in its recipe the "
+"following attribute:"
+msgstr ""
+
+#: ../../../devops/vendoring.rst:19
+msgid ""
+"class MyPkg(ConanFile):\n"
+"   name = \"mypkg\"\n"
+"   version = \"0.1\"\n"
+"\n"
+"   vendor = True\n"
+"\n"
+"   requires = \"somedep/1.2\""
+msgstr ""
+
+#: ../../../devops/vendoring.rst:31
+msgid ""
+"When we have this recipe, we can create its binaries with a normal ``conan "
+"create .``. But when we use this package as a requirement for other "
+"packages, its dependencies will be fully invisible. The graph will not even "
+"expand the ``somedep/1.2`` requirement. This dependency doesn't even need to "
+"be available in the remotes for the consumers, it will not be checked."
+msgstr ""
+
+#: ../../../devops/vendoring.rst:36
+msgid "Some important notes:"
+msgstr ""
+
+#: ../../../devops/vendoring.rst:38
+msgid ""
+"A package that vendors its dependencies is intended to be consumed always in "
+"binary form."
+msgstr ""
+
+#: ../../../devops/vendoring.rst:39
+msgid ""
+"The dependencies of a vendoring package always form a fully private and "
+"isolated dependency graph, decoupled from the rest of the dependency graph "
+"that uses this package."
+msgstr ""
+
+#: ../../../devops/vendoring.rst:41
+msgid ""
+"It is the responsibility of the vendoring package and its users to guarantee "
+"that vendored dependencies do not collide. If a vendoring package vendors "
+"for example ``libssl.a`` as a static library doing a regular copy of it in "
+"its package, and there is another package in the graph that also provides "
+"``libssl``, there will be a conflict that Conan cannot detect as ``libssl."
+"a`` is vendored as an internal implementation detail of the package, but not "
+"explicitly modeled. Mechanisms like ``provides`` can be used for this "
+"purpose, but it is the responsibility of the recipe authors to take it into "
+"account."
+msgstr ""
+
+#: ../../../devops/vendoring.rst:47
+msgid ""
+"The ``package_id`` of a package that defines ``vendor=True`` is fully "
+"independent of its dependencies. The dependencies versions will never affect "
+"the ``package_id`` of the vendoring package, so it is important to note that "
+"the version of the vendoring package represents a full private dependency "
+"graph."
+msgstr ""
+
+#: ../../../devops/vendoring.rst:50
+msgid ""
+"The regular ``default_options`` or options values definitions from consumer "
+"``conanfile.py`` recipes do not propagate over vendoring packages, as they "
+"don't even expand their dependencies."
+msgstr ""
+
+#: ../../../devops/vendoring.rst:52
+msgid ""
+"If a vendoring package binary is missing and/or the user request to build "
+"such a package from sources, Conan will fail, raising an error that it is "
+"not possible to build it."
+msgstr ""
+
+#: ../../../devops/vendoring.rst:54
+msgid ""
+"To allow the expansion of the private dependency the ``tools.graph:"
+"vendor=build`` configuration can be activated. If that is the case, the "
+"private dependency graph of the package will be computed and expanded and "
+"the package will be allowed to build."
+msgstr ""

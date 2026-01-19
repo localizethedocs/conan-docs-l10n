@@ -82,25 +82,29 @@ msgstr ""
 #: ../../../reference/conanfile/tools/microsoft.rst:327
 #: ../../../reference/conanfile/tools/microsoft.rst:341
 msgid "conanfile.py"
-msgstr ""
+msgstr "conanfile.py"
 
 #: ../../../reference/conanfile/tools/microsoft.rst:37
 msgid ""
 "class Pkg(ConanFile):\n"
 "    generators = \"MSBuildDeps\""
 msgstr ""
+"class Pkg(ConanFile):\n"
+"    generators = \"MSBuildDeps\""
 
 #: ../../../reference/conanfile/tools/microsoft.rst:43
 #: ../../../reference/conanfile/tools/microsoft.rst:177
 #: ../../../reference/conanfile/tools/microsoft.rst:333
 msgid "conanfile.txt"
-msgstr ""
+msgstr "conanfile.txt"
 
 #: ../../../reference/conanfile/tools/microsoft.rst:43
 msgid ""
 "[generators]\n"
 "MSBuildDeps"
 msgstr ""
+"[generators]\n"
+"MSBuildDeps"
 
 #: ../../../reference/conanfile/tools/microsoft.rst:49
 #: ../../../reference/conanfile/tools/microsoft.rst:183
@@ -136,6 +140,8 @@ msgid ""
 "$ conan install conanfile.py # default is Release\n"
 "$ conan install conanfile.py -s build_type=Debug"
 msgstr ""
+"$ conan install conanfile.py # 預設值為 Release\n"
+"$ conan install conanfile.py -s build_type=Debug"
 
 #: ../../../reference/conanfile/tools/microsoft.rst:74
 msgid ""
@@ -241,7 +247,7 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/microsoft.rst:106
 msgid "Custom configurations"
-msgstr ""
+msgstr "自訂組態"
 
 #: ../../../reference/conanfile/tools/microsoft.rst:108
 msgid ""
@@ -337,12 +343,16 @@ msgid ""
 "class Pkg(ConanFile):\n"
 "    generators = \"MSBuildToolchain\""
 msgstr ""
+"class Pkg(ConanFile):\n"
+"    generators = \"MSBuildToolchain\""
 
 #: ../../../reference/conanfile/tools/microsoft.rst:177
 msgid ""
 "[generators]\n"
 "MSBuildToolchain"
 msgstr ""
+"[generators]\n"
+"MSBuildToolchain"
 
 #: ../../../reference/conanfile/tools/microsoft.rst:197
 msgid ""
@@ -356,6 +366,15 @@ msgid ""
 "        tc = MSBuildToolchain(self)\n"
 "        tc.generate()"
 msgstr ""
+"from conan import ConanFile\n"
+"from conan.tools.microsoft import MSBuildToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = MSBuildToolchain(self)\n"
+"        tc.generate()"
 
 #: ../../../reference/conanfile/tools/microsoft.rst:198
 msgid ""
@@ -501,6 +520,8 @@ msgid ""
 "$ <vcvars-cmd> && msbuild \"MyProject.sln\" /p:"
 "Configuration=<configuration> /p:Platform=<platform> /target=mytarget"
 msgstr ""
+"$ <vcvars-cmd> && msbuild \"MyProject.sln\" /p:"
+"Configuration=<configuration> /p:Platform=<platform> /target=mytarget"
 
 #: ../../../reference/conanfile/tools/microsoft.rst:269
 msgid "Where:"
@@ -611,12 +632,16 @@ msgid ""
 "class Pkg(ConanFile):\n"
 "    generators = \"VCVars\""
 msgstr ""
+"class Pkg(ConanFile):\n"
+"    generators = \"VCVars\""
 
 #: ../../../reference/conanfile/tools/microsoft.rst:333
 msgid ""
 "[generators]\n"
 "VCVars"
 msgstr ""
+"[generators]\n"
+"VCVars"
 
 #: ../../../reference/conanfile/tools/microsoft.rst:341
 msgid ""
@@ -631,6 +656,16 @@ msgid ""
 "        ms = VCVars(self)\n"
 "        ms.generate()"
 msgstr ""
+"from conan import ConanFile\n"
+"from conan.tools.microsoft import VCVars\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    requires = \"zlib/1.2.11\", \"bzip2/1.0.8\"\n"
+"\n"
+"    def generate(self):\n"
+"        ms = VCVars(self)\n"
+"        ms.generate()"
 
 #: ../../../reference/conanfile/tools/microsoft.rst:356
 msgid "Constructor"
@@ -638,7 +673,7 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/microsoft.rst:361
 msgid "def __init__(self, conanfile):"
-msgstr ""
+msgstr "def __init__(self, conanfile):"
 
 #: ../../../reference/conanfile/tools/microsoft.rst:362
 msgid "``conanfile``: the current recipe object. Always use ``self``."
@@ -658,7 +693,7 @@ msgstr "def generate(self, scope=\"build\"):"
 #: ../../../reference/conanfile/tools/microsoft.rst:449
 #: ../../../reference/conanfile/tools/microsoft.rst:486
 msgid "Parameters:"
-msgstr ""
+msgstr "參數："
 
 #: ../../../reference/conanfile/tools/microsoft.rst:374
 msgid ""

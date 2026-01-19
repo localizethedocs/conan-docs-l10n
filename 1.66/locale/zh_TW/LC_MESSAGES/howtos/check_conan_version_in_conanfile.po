@@ -35,7 +35,7 @@ msgstr ""
 
 #: ../../../howtos/check_conan_version_in_conanfile.rst:11
 msgid "conanfile.py"
-msgstr ""
+msgstr "conanfile.py"
 
 #: ../../../howtos/check_conan_version_in_conanfile.rst:11
 msgid ""
@@ -54,6 +54,20 @@ msgid ""
 "             cmake = CMake(self)\n"
 "     ..."
 msgstr ""
+" from conans import ConanFile, CMake, __version__ as conan_version\n"
+" from conans.tools import Version\n"
+"\n"
+"\n"
+" class MyLibraryConan(ConanFile):\n"
+"     name = \"mylibrary\"\n"
+"     version = \"1.0\"\n"
+"\n"
+"     def build(self):\n"
+"         if conan_version < Version(\"0.29\"):\n"
+"             cmake = CMake(self.settings)\n"
+"         else:\n"
+"             cmake = CMake(self)\n"
+"     ..."
 
 #: ../../../howtos/check_conan_version_in_conanfile.rst:29
 msgid ""

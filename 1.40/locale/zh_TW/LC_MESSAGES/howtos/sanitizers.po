@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../../howtos/sanitizers.rst:4
 msgid "Compiler sanitizers"
-msgstr ""
+msgstr "編譯器淨化器"
 
 #: ../../../howtos/sanitizers.rst:6
 msgid ""
@@ -72,7 +72,7 @@ msgstr ""
 
 #: ../../../howtos/sanitizers.rst:34 ../../../howtos/sanitizers.rst:61
 msgid "*settings.yml*"
-msgstr ""
+msgstr "*settings.yml*"
 
 #: ../../../howtos/sanitizers.rst:34
 msgid ""
@@ -85,6 +85,14 @@ msgid ""
 "    sanitizer: [None, Address, Thread, Memory, UndefinedBehavior, "
 "AddressUndefinedBehavior]"
 msgstr ""
+"apple-clang:\n"
+"    version: [\"5.0\", \"5.1\", \"6.0\", \"6.1\", \"7.0\", \"7.3\", \"8.0\", "
+"\"8.1\",\n"
+"              \"9.0\", \"9.1\", \"10.0\", \"11.0\"]\n"
+"    libcxx: [libstdc++, libc++]\n"
+"    cppstd: [None, 98, gnu98, 11, gnu11, 14, gnu14, 17, gnu17, 20, gnu20]\n"
+"    sanitizer: [None, Address, Thread, Memory, UndefinedBehavior, "
+"AddressUndefinedBehavior]"
 
 #: ../../../howtos/sanitizers.rst:45
 msgid ""
@@ -125,6 +133,15 @@ msgid ""
 "    thread_sanitizer: [None, True]\n"
 "    undefined_sanitizer: [None, True]"
 msgstr ""
+"apple-clang:\n"
+"    version: [\"5.0\", \"5.1\", \"6.0\", \"6.1\", \"7.0\", \"7.3\", "
+"\"8.0\",\n"
+"              \"8.1\", \"9.0\", \"9.1\", \"10.0\", \"11.0\"]\n"
+"    libcxx: [libstdc++, libc++]\n"
+"    cppstd: [None, 98, gnu98, 11, gnu11, 14, gnu14, 17, gnu17, 20, gnu20]\n"
+"    address_sanitizer: [None, True]\n"
+"    thread_sanitizer: [None, True]\n"
+"    undefined_sanitizer: [None, True]"
 
 #: ../../../howtos/sanitizers.rst:74
 msgid ""
@@ -203,7 +220,7 @@ msgstr ""
 
 #: ../../../howtos/sanitizers.rst:120
 msgid "*CMakeLists.txt*"
-msgstr ""
+msgstr "*CMakeLists.txt*"
 
 #: ../../../howtos/sanitizers.rst:120
 msgid ""
@@ -220,6 +237,18 @@ msgid ""
 " endif()\n"
 " add_executable(sanit_example src/main.cpp)"
 msgstr ""
+" cmake_minimum_required(VERSION 3.2)\n"
+" project(SanitizerExample)\n"
+" set (CMAKE_CXX_STANDARD 11)\n"
+" include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+" conan_basic_setup()\n"
+" set(SANITIZER ${CONAN_SETTINGS_COMPILER_SANITIZER})\n"
+" if(SANITIZER)\n"
+"     if(SANITIZER MATCHES \"(Address)\")\n"
+"     set(CMAKE_CXX_FLAGS \"${CMAKE_CXX_FLAGS} -fsanitize=address\" )\n"
+"     endif()\n"
+" endif()\n"
+" add_executable(sanit_example src/main.cpp)"
 
 #: ../../../howtos/sanitizers.rst:137
 msgid ""

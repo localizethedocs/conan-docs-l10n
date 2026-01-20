@@ -57,7 +57,7 @@ msgstr ""
 
 #: ../../../reference/tools/microsoft/nmake.rst:35
 msgid "NMakeToolchain"
-msgstr ""
+msgstr "NMakeToolchain"
 
 #: ../../../reference/tools/microsoft/nmake.rst:39
 msgid ""
@@ -70,6 +70,14 @@ msgid ""
 "    def build(self):\n"
 "        self.run(\"nmake /f makefile\")"
 msgstr ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    generators = \"NMakeToolchain\"\n"
+"\n"
+"    def build(self):\n"
+"        self.run(\"nmake /f makefile\")"
 
 #: ../../../reference/tools/microsoft/nmake.rst:50
 msgid "Or it can be fully instantiated in the conanfile ``generate()`` method:"
@@ -108,7 +116,7 @@ msgstr ""
 
 #: ../../../reference/tools/microsoft/nmake.rst:76
 msgid "def __init__(self, conanfile):"
-msgstr ""
+msgstr "def __init__(self, conanfile):"
 
 #: ../../../reference/tools/microsoft/nmake.rst:80
 msgid "``conanfile``: the current recipe object. Always use ``self``."

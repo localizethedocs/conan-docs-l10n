@@ -1,0 +1,272 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.34\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:5
+msgid "cmake_find_package_multi"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:9
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:13
+msgid ""
+"This is the reference page for ``cmake_find_package_multi`` generator. Go "
+"to :ref:`Integrations/CMake<cmake>` if you want to learn how to integrate "
+"your project or recipes with CMake."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:17
+msgid "Generated files"
+msgstr "生成的文件"
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:19
+msgid ""
+"For each conan package in your graph, it will generate 2 files and 1 more "
+"per different ``build_type``. Being ``<PKG-NAME>`` the package name used in "
+"the reference (by default) or the one declared in ``cpp_info.name`` or in "
+"``cpp_info.names[\"cmake_find_package_multi\"]`` if specified:"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:24
+msgid "NAME"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:24
+msgid "CONTENTS"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:0
+msgid "<PKG-NAME>Config.cmake /"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:0
+msgid "<PKG-NAME>-config.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:26
+msgid ""
+"It includes the <PKG-NAME>Targets.cmake and call find_dependency for each dep"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:0
+msgid "<PKG-NAME>ConfigVersion.cmake /"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:0
+msgid "<PKG-NAME>-config-version.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:29
+msgid "Package version file for each dep"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:0
+msgid "<PKG-NAME>Targets.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:32
+msgid "It includes the files *<PKG-NAME>Targets-<BUILD-TYPE>.cmake*"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:0
+msgid "<PKG-NAME>Targets-debug.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:34
+msgid "Specific information for the Debug configuration"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:0
+msgid "<PKG-NAME>Targets-release.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:36
+msgid "Specific information for the Release configuration"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:0
+msgid "<PKG-NAME>Targets-relwithdebinfo.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:38
+msgid "Specific information for the RelWithDebInfo configuration"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:0
+msgid "<PKG-NAME>Targets-minsizerel.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:40
+msgid "Specific information for the MinSizeRel configuration"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:44
+msgid "Targets"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:46
+msgid ""
+"A target named ``<PKG-NAME>::<PKG-NAME>`` target is generated with the "
+"following properties adjusted:"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:48
+msgid ""
+"``INTERFACE_INCLUDE_DIRECTORIES``: Containing all the include directories of "
+"the package."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:49
+msgid "``INTERFACE_LINK_LIBRARIES``: Library paths to link."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:50
+msgid "``INTERFACE_COMPILE_DEFINITIONS``: Definitions of the library."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:51
+msgid "``INTERFACE_COMPILE_OPTIONS``: Compile options of the library."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:53
+msgid ""
+"The targets contains multi-configuration properties, for example, the "
+"compile options property is declared like this:"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:56
+msgid ""
+"set_property(TARGET <PKG-NAME>::<PKG-NAME>\n"
+"         PROPERTY INTERFACE_COMPILE_OPTIONS\n"
+"             $<$<CONFIG:Release>:${{<PKG-NAME>_COMPILE_OPTIONS_RELEASE_LIST}}"
+">\n"
+"             $<$<CONFIG:RelWithDebInfo>:${{<PKG-"
+"NAME>_COMPILE_OPTIONS_RELWITHDEBINFO_LIST}}>\n"
+"             $<$<CONFIG:MinSizeRel>:${{<PKG-"
+"NAME>_COMPILE_OPTIONS_MINSIZEREL_LIST}}>\n"
+"             $<$<CONFIG:Debug>:${{<PKG-NAME>_COMPILE_OPTIONS_DEBUG_LIST}}>)"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:65
+msgid ""
+"The targets are also transitive. So, if your project depends on a packages "
+"``A`` and ``B``, and at the same time ``A`` depends on ``C``, the ``A`` "
+"target will contain automatically the properties of the ``C`` dependency, so "
+"in your `CMakeLists.txt` file you only need to ``find_package(A CONFIG)`` "
+"and ``find_package(B CONFIG)``."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:71
+msgid ""
+"Add the ``CONFIG`` option to ``find_package`` so that *module mode* is "
+"explicitly skipped by CMake. This helps to solve issues when there is for "
+"example a ``Find<PKG-NAME>.cmake`` file in CMake's default modules directory "
+"that could be loaded instead of the ``<PKG-NAME>Config.cmake`` generated by "
+"Conan."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:75
+msgid ""
+"You also need to adjust `CMAKE_PREFIX_PATH <https://cmake.org/cmake/help/"
+"v3.0/variable/CMAKE_PREFIX_PATH.html>`_ and `CMAKE_MODULE_PATH <https://"
+"cmake.org/cmake/help/v3.0/variable/CMAKE_MODULE_PATH.html>`_ so CMake can "
+"locate all the ``<PKG-NAME>Config.cmake``/``<PKG-NAME>-config.cmake`` files: "
+"The ``CMAKE_PREFIX_PATH`` is used by the ``find_package`` and the "
+"``CMAKE_MODULE_PATH`` is used by the ``find_dependency`` calls that locates "
+"the transitive dependencies."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:80
+msgid ""
+"The *<PKG-NAME>Targets-.cmake* files use `<PKG-NAME>_BUILD_MODULES_<BUILD-"
+"TYPE>` values to include the files using the `include(...)` CMake directive "
+"after the targets are created. This makes functions or utilities exported by "
+"the package available for consumers just by setting `find_package(<PKG-"
+"NAME>)` in the *CMakeLists.txt*."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:84
+msgid ""
+"Moreover, this also adjusts `CMAKE_MODULE_PATH` and `CMAKE_PREFIX_PATH` to "
+"the values declared by the package in ``cpp_info.buildirs``, so modules in "
+"those directories can be found."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:88
+msgid "Components"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:90
+msgid ""
+"If a recipe uses :ref:`components <package_information_components>`, the "
+"targets generated will be ``<PKG-NAME>::<COMP-NAME>`` with the following "
+"properties adjusted. Being ``<COMP-NAME>`` the dictionary key used to "
+"declare the component or the one declared in ``cpp_info.name`` or the "
+"alternative name declared in ``cpp_info.components[\"comp_name\"]."
+"names[\"cmake_find_package_multi\"]`` if specified:"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:94
+msgid ""
+"``INTERFACE_INCLUDE_DIRECTORIES``: Containing all the include directories of "
+"the component."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:95
+msgid ""
+"``INTERFACE_LINK_LIBRARIES``: Containing the targets to link the component "
+"to (includes component's libraries and dependencies)."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:96
+msgid ""
+"``INTERFACE_COMPILE_DEFINITIONS``: Containing the definitions of the "
+"component."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:97
+msgid ""
+"``INTERFACE_COMPILE_OPTIONS``: Containing the compile options of the "
+"component."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:99
+msgid ""
+"Moreover, a global target ``<PKG-NAME>::<PKG-NAME>`` will be declared with "
+"the following properties adjusted:"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:101
+msgid ""
+"``INTERFACE_LINK_LIBRARIES``: Containing the list of targets for all the "
+"components in the package."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:105
+msgid ""
+"**Name conflicts**: If the name of the global target is the same for "
+"different packages, Conan will aggregate into this global target all the "
+"components from all those different packages. This means that this global "
+"target will contain information coming from different packages. For the "
+"components themselves, a name conflict will result in one of them being "
+"inaccessible without further notice."
+msgstr ""

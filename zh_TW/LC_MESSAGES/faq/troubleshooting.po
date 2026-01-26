@@ -1,0 +1,360 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.24\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../faq/troubleshooting.rst:2
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:5
+msgid "ERROR: Missing prebuilt package"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:7
+msgid ""
+"When you are installing packages (with :command:`conan install` or :command:"
+"`conan create`) it is possible that you get an error like the following one:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:11
+msgid ""
+" WARN: Can't find a 'czmq/4.2.0' package for the specified settings, options "
+"and dependencies:\n"
+"- Settings: arch=x86_64, build_type=Release, compiler=Visual Studio, "
+"compiler.runtime=MD, compiler.version=16, os=Windows\n"
+"- Options: shared=False, with_libcurl=True, with_libuuid=True, "
+"with_lz4=True, libcurl:shared=False, ...\n"
+"- Dependencies: openssl/1.1.1d, zeromq/4.3.2, libcurl/7.67.0, lz4/1.9.2\n"
+"- Requirements: libcurl/7.Y.Z, lz4/1.Y.Z, openssl/1.Y.Z, zeromq/4.Y.Z\n"
+"- Package ID: 7a4079899e0893ca670df1f682b4606abe79ee5b\n"
+"\n"
+"ERROR: Missing prebuilt package for 'czmq/4.2.0'\n"
+"Try to build it from sources with \"--build czmq\"\n"
+"Or read \"http://docs.conan.io/en/latest/faq/troubleshooting.html#error-"
+"missing-prebuilt-package\""
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:25
+msgid ""
+"This means that the package recipe ``czmq/4.2.0@`` exists, but for some "
+"reason there is no precompiled package for your current settings. Maybe the "
+"package creator didn't build and shared pre-built packages at all and only "
+"uploaded the package recipe, or maybe they are only providing packages for "
+"some platforms or compilers. E.g. the package creator built packages from "
+"the recipe for Visual Studio 14 and 15, but you are using Visual Studio 16."
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:31
+msgid ""
+"By default, conan doesn't build packages from sources. There are several "
+"possibilities:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:33
+msgid ""
+"You can try to build the package for your settings from sources, indicating "
+"some build policy as argument, like ``--build czmq`` or ``--build missing``. "
+"If the package recipe and the source code work for your settings you will "
+"have your binaries built locally and ready for use."
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:37
+msgid ""
+"If building from sources fail, you might want to fork the original recipe, "
+"improve it until it supports your configuration, and then use it. Most "
+"likely contributing back to the original package creator is the way to go. "
+"But you can also upload your modified recipe and pre-built binaries under "
+"your own username too."
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:46
+msgid "ERROR: Invalid setting"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:48
+msgid ""
+"It might happen sometimes, when you specify a setting not present in the "
+"defaults that you receive a message like this:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:51
+msgid ""
+"$ conan install . -s compiler.version=4.19 ...\n"
+"\n"
+"ERROR: Invalid setting '4.19' is not a valid 'settings.compiler.version' "
+"value.\n"
+"Possible values are ['4.4', '4.5', '4.6', '4.7', '4.8', '4.9', '5.1', '5.2', "
+"'5.3', '5.4', '6.1', '6.2']\n"
+"Read \"http://docs.conan.io/en/latest/faq/troubleshooting.html#error-invalid-"
+"setting\""
+msgstr ""
+"$ conan install . -s compiler.version=4.19 ...\n"
+"\n"
+"ERROR: Invalid setting '4.19' is not a valid 'settings.compiler.version' "
+"value.\n"
+"Possible values are ['4.4', '4.5', '4.6', '4.7', '4.8', '4.9', '5.1', '5.2', "
+"'5.3', '5.4', '6.1', '6.2']\n"
+"Read \"http://docs.conan.io/en/latest/faq/troubleshooting.html#error-invalid-"
+"setting\""
+
+#: ../../../faq/troubleshooting.rst:60
+msgid ""
+"This doesn't mean that such architecture is not supported by conan, it is "
+"just that it is not present in the actual defaults settings. You can find in "
+"your user home folder ``~/.conan/settings.yml`` a settings file that you can "
+"modify, edit, add any setting or any value, with any nesting if necessary. "
+"See :ref:`custom_settings`."
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:64
+msgid ""
+"As long as your team or users have the same settings (you can share with "
+"them the file), everything will work. The *settings.yml* file is just a "
+"mechanism so users agree on a common spelling for typical settings. Also, if "
+"you think that some settings would be useful for many other conan users, "
+"please submit it as an issue or a pull request, so it is included in future "
+"releases."
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:69
+msgid ""
+"It is possible that some build helper, like ``CMake`` will not understand "
+"the new added settings, don't use them or even fail. Such helpers as "
+"``CMake`` are simple utilities to translate from conan settings to the "
+"respective build system syntax and command line arguments, so they can be "
+"extended or replaced with your own one that would handle your own private "
+"settings."
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:76
+msgid "ERROR: Setting value not defined"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:78
+msgid ""
+"When you install or create a package, it is possible to see an error like "
+"this:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:80
+msgid "ERROR: hello/0.1@user/testing: 'settings.arch' value not defined"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:84
+msgid ""
+"This means that the recipe defined ``settings = \"os\", \"arch\", ...`` but "
+"a value for the ``arch`` setting was not provided either in a profile or in "
+"the command line. Make sure to specify a value for it in your profile, or in "
+"the command line:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:88
+msgid "$ conan install . -s arch=x86 ..."
+msgstr "$ conan install . -s arch=x86 ..."
+
+#: ../../../faq/troubleshooting.rst:92
+msgid ""
+"If you are building a pure C library with gcc/clang, you might encounter an "
+"error like this:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:94
+msgid ""
+"ERROR: hello/0.1@user/testing: 'settings.compiler.libcxx' value not defined"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:98
+msgid ""
+"Indeed, for building a C library, it is not necessary to define a C++ "
+"standard library. And if you provide a value, you might end with multiple "
+"packages for exactly the same binary. What has to be done is to remove such "
+"subsetting in your recipe:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:103
+msgid ""
+"def configure(self):\n"
+"    del self.settings.compiler.libcxx"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:110
+msgid "ERROR: Failed to create process"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:112
+msgid ""
+"When conan is installed via pip/PyPI, and python is installed in a path with "
+"spaces (like many times in Windows \"C:/Program Files...\"), conan can fail "
+"to launch. This is a known python issue, and can't be fixed from conan. The "
+"current workarounds would be:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:115
+msgid "Install python in a path without spaces"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:116
+msgid "Use virtualenvs. Short guide:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:118
+msgid ""
+"$ pip install virtualenvwrapper-win # virtualenvwrapper if not Windows\n"
+"$ mkvirtualenv conan\n"
+"(conan) $ pip install conan\n"
+"(conan) $ conan --help"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:125
+msgid ""
+"Then, when you will be using conan, for example in a new shell, you have to "
+"activate the virtualenv:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:127
+msgid ""
+"$ workon conan\n"
+"(conan) $ conan --help"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:132
+msgid ""
+"Virtualenvs are very convenient, not only for this workaround, but to keep "
+"your system clean and to avoid unwanted interaction between different tools "
+"and python projects."
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:136
+msgid "ERROR: Failed to remove folder (Windows)"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:137
+msgid ""
+"It is possible that operating conan, some random exceptions (some with "
+"complete tracebacks) are produced, related to the impossibility to remove "
+"one folder. Two things can happen:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:139
+msgid ""
+"The user has some file or folder open (in a file editor, in the terminal), "
+"so it cannot be removed, and the process fails. Make sure to close files, "
+"specially if you are opening or inspecting the local conan cache."
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:140
+msgid ""
+"In Windows, the Search Indexer might be opening and locking the files, "
+"producing random, difficult to reproduce and annoying errors. Please "
+"**disable the Windows Search Indexer for the conan local storage folder**"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:144
+msgid "ERROR: Error while initializing Options"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:146
+msgid "When installing a Conan package and the follow error occurs:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:148
+msgid ""
+"ERROR: conanfile.py: Error while initializing options. Please define your "
+"default_options as list or multiline string"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:152
+msgid ""
+"Probably your Conan version is outdated. The error is related to "
+"`default_options` be used as dictionary and only can be handled by Conan >= "
+"1.8. To fix this error, update Conan to 1.8 or higher."
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:158
+msgid "ERROR: Error while starting Conan Server with multiple workers"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:160
+msgid ""
+"When running ``gunicorn`` to start ``conan_server`` in an empty environment:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:162
+msgid ""
+"$ gunicorn -b 0.0.0.0:9300 -w 4 -t 300 conans.server.server_launcher:app\n"
+"\n"
+"    **********************************************\n"
+"    *                                            *\n"
+"    *      ERROR: STORAGE MIGRATION NEEDED!      *\n"
+"    *                                            *\n"
+"    **********************************************\n"
+"    A migration of your storage is needed, please backup first the storage "
+"directory and run:\n"
+"\n"
+"    $ conan_server --migrate"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:175
+msgid ""
+"Conan Server will try to create `~/.conan_server/data`, `~/.conan_server/"
+"server.conf` and `~/.conan_server/version.txt` at first time. However, as "
+"multiple workers are running at same time, it could result in a conflict. To "
+"fix this error, you should run:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:179
+msgid "$ conan_server --migrate"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:183
+msgid ""
+"This command must be executed before to start the workers. It will not "
+"migrate anything, but it will populate the conan_server folder. The original "
+"discussion about this error is `here <https://github.com/conan-io/conan/"
+"issues/4723>`_."
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:188
+msgid "ERROR: Requested a package but found case incompatible"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:190
+msgid ""
+"When installing a package which is already installed, but using a different "
+"case, will result on the follow error:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:192
+msgid ""
+"$ conan install poco/1.10.1@\n"
+"\n"
+"    [...]\n"
+"    ERROR: Failed requirement 'openssl/1.0.2t' from 'poco/1.10.1@'\n"
+"    ERROR: Requested 'openssl/1.0.2t' but found case incompatible 'OpenSSL'\n"
+"    Case insensitive filesystem can not manage this"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:201
+msgid ""
+"The package ``OpenSSL/x.y.z@conan/stable`` is already installed. To solve "
+"this problem the different package with the same name must be removed:"
+msgstr ""
+
+#: ../../../faq/troubleshooting.rst:204
+msgid "$ conan remove \"OpenSSL/*\""
+msgstr "$ conan remove \"OpenSSL/*\""

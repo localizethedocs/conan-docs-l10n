@@ -1,0 +1,2958 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.24\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools.rst:9
+msgid "Tools"
+msgstr ""
+
+#: ../../../reference/tools.rst:11
+msgid ""
+"Under the tools module there are several functions and utilities that can be "
+"used in Conan package recipes:"
+msgstr ""
+
+#: ../../../reference/tools.rst:13
+msgid ""
+" from conans import ConanFile\n"
+" from conans import tools\n"
+"\n"
+" class ExampleConan(ConanFile):\n"
+"     ..."
+msgstr ""
+
+#: ../../../reference/tools.rst:25
+msgid "tools.cpu_count()"
+msgstr ""
+
+#: ../../../reference/tools.rst:27
+msgid "def tools.cpu_count()"
+msgstr ""
+
+#: ../../../reference/tools.rst:31
+msgid ""
+"Returns the number of CPUs available, for parallel builds. If processor "
+"detection is not enabled, it will safely return 1. When running in Docker, "
+"it reads cgroup to detect the configured number of CPUs. It Can be "
+"overwritten with the environment variable :ref:`env_vars_conan_cpu_count` "
+"and configured in the :ref:`conan_conf`."
+msgstr ""
+
+#: ../../../reference/tools.rst:38
+msgid "tools.vcvars_command()"
+msgstr ""
+
+#: ../../../reference/tools.rst:40
+msgid ""
+"def vcvars_command(settings, arch=None, compiler_version=None, force=False, "
+"vcvars_ver=None,\n"
+"                   winsdk_version=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:45
+msgid ""
+"Returns, for given settings, the command that should be called to load the "
+"Visual Studio environment variables for a certain Visual Studio version. It "
+"wraps the functionality of `vcvarsall <https://docs.microsoft.com/en-us/cpp/"
+"build/building-on-the-command-line?view=vs-2017>`_ but does not execute the "
+"command, as that typically have to be done in the same command as the "
+"compilation, so the variables are loaded for the same subprocess. It will be "
+"typically used in the ``build()`` method, like this:"
+msgstr ""
+
+#: ../../../reference/tools.rst:50
+msgid ""
+"from conans import tools\n"
+"\n"
+"def build(self):\n"
+"    if self.settings.build_os == \"Windows\":\n"
+"        vcvars = tools.vcvars_command(self.settings)\n"
+"        build_command = ...\n"
+"        self.run(\"%s && configure %s\" % (vcvars, \" \".join(args)))\n"
+"        self.run(\"%s && %s %s\" % (vcvars, build_command, \" \"."
+"join(build_args)))"
+msgstr ""
+
+#: ../../../reference/tools.rst:61
+msgid ""
+"The ``vcvars_command`` string will contain something like ``call "
+"\"%vsXX0comntools%../../VC/vcvarsall.bat\"`` for the corresponding Visual "
+"Studio version for the current settings."
+msgstr ""
+
+#: ../../../reference/tools.rst:64
+msgid ""
+"This is typically not needed if using CMake, as the ``cmake`` generator will "
+"handle the correct Visual Studio version."
+msgstr ""
+
+#: ../../../reference/tools.rst:66
+msgid ""
+"If **arch** or **compiler_version** is specified, it will ignore the "
+"settings and return the command to set the Visual Studio environment for "
+"these parameters."
+msgstr ""
+
+#: ../../../reference/tools.rst:75 ../../../reference/tools.rst:113
+#: ../../../reference/tools.rst:191 ../../../reference/tools.rst:212
+#: ../../../reference/tools.rst:266 ../../../reference/tools.rst:294
+#: ../../../reference/tools.rst:340 ../../../reference/tools.rst:376
+#: ../../../reference/tools.rst:439 ../../../reference/tools.rst:464
+#: ../../../reference/tools.rst:498 ../../../reference/tools.rst:535
+#: ../../../reference/tools.rst:563 ../../../reference/tools.rst:652
+#: ../../../reference/tools.rst:679 ../../../reference/tools.rst:701
+#: ../../../reference/tools.rst:754 ../../../reference/tools.rst:796
+#: ../../../reference/tools.rst:830 ../../../reference/tools.rst:846
+#: ../../../reference/tools.rst:881 ../../../reference/tools.rst:939
+#: ../../../reference/tools.rst:956 ../../../reference/tools.rst:979
+#: ../../../reference/tools.rst:999 ../../../reference/tools.rst:1022
+#: ../../../reference/tools.rst:1047 ../../../reference/tools.rst:1075
+#: ../../../reference/tools.rst:1100 ../../../reference/tools.rst:1120
+#: ../../../reference/tools.rst:1140 ../../../reference/tools.rst:1167
+#: ../../../reference/tools.rst:1187 ../../../reference/tools.rst:1221
+#: ../../../reference/tools.rst:1241 ../../../reference/tools.rst:1267
+#: ../../../reference/tools.rst:1504 ../../../reference/tools.rst:1518
+#: ../../../reference/tools.rst:1533 ../../../reference/tools.rst:1549
+#: ../../../reference/tools.rst:1564 ../../../reference/tools.rst:1618
+#: ../../../reference/tools.rst:1659 ../../../reference/tools.rst:1691
+#: ../../../reference/tools.rst:1722 ../../../reference/tools.rst:1736
+msgid "Parameters:"
+msgstr "參數："
+
+#: ../../../reference/tools.rst:70 ../../../reference/tools.rst:825
+#: ../../../reference/tools.rst:1737
+msgid "**settings** (Required): Conanfile settings. Use ``self.settings``."
+msgstr ""
+
+#: ../../../reference/tools.rst:71
+msgid "**arch** (Optional, Defaulted to ``None``): Will use ``settings.arch``."
+msgstr ""
+
+#: ../../../reference/tools.rst:72
+msgid ""
+"**compiler_version** (Optional, Defaulted to ``None``): Will use ``settings."
+"compiler.version``."
+msgstr ""
+
+#: ../../../reference/tools.rst:73
+msgid ""
+"**force** (Optional, Defaulted to ``False``): Will ignore if the environment "
+"is already set for a different Visual Studio version."
+msgstr ""
+
+#: ../../../reference/tools.rst:74
+msgid ""
+"**winsdk_version** (Optional, Defaulted to ``None``): Specifies the version "
+"of the Windows SDK to use."
+msgstr ""
+
+#: ../../../reference/tools.rst:75
+msgid ""
+"**vcvars_ver** (Optional, Defaulted to ``None``): Specifies the Visual "
+"Studio compiler toolset to use."
+msgstr ""
+
+#: ../../../reference/tools.rst:79
+msgid ""
+"When cross-building from x64 to x86 the toolchain by default is ``x86``. If "
+"you want to use ``amd64_x86`` instead, set the environment variable "
+"``PreferredToolArchitecture=x64``."
+msgstr ""
+
+#: ../../../reference/tools.rst:85
+msgid "tools.vcvars_dict()"
+msgstr ""
+
+#: ../../../reference/tools.rst:87
+msgid ""
+"vcvars_dict(settings, arch=None, compiler_version=None, force=False, "
+"filter_known_paths=False,\n"
+"            vcvars_ver=None, winsdk_version=None, only_diff=True)"
+msgstr ""
+
+#: ../../../reference/tools.rst:92
+msgid ""
+"Returns a dictionary with the variables set by the :ref:"
+"`tools_vcvars_command` that can be directly applied to :ref:"
+"`tools_environment_append`."
+msgstr ""
+
+#: ../../../reference/tools.rst:95
+msgid ""
+"The values of the variables ``INCLUDE``, ``LIB``, ``LIBPATH`` and ``PATH`` "
+"will be returned as a list. When used with :ref:`tools_environment_append`, "
+"the previous environment values that these variables may have will be "
+"appended automatically."
+msgstr ""
+
+#: ../../../reference/tools.rst:98
+msgid ""
+"from conans import tools\n"
+"\n"
+"def build(self):\n"
+"    env_vars = tools.vcvars_dict(self.settings)\n"
+"    with tools.environment_append(env_vars):\n"
+"        # Do something"
+msgstr ""
+
+#: ../../../reference/tools.rst:108
+msgid "Same as :ref:`tools_vcvars_command`."
+msgstr ""
+
+#: ../../../reference/tools.rst:109
+msgid ""
+"**filter_known_paths** (Optional, Defaulted to ``False``): When True, the "
+"function will only keep the ``PATH`` entries that follows some known "
+"patterns, filtering all the non-Visual Studio ones. When False, it will keep "
+"the ``PATH`` will all the system entries."
+msgstr ""
+
+#: ../../../reference/tools.rst:111
+msgid ""
+"**only_diff** (Optional, Defaulted to ``True``): When True, the command will "
+"return only the variables set by ``vcvarsall`` and not the whole "
+"environment. If `vcvars` modifies an environment variable by appending "
+"values to the old value (separated by ``;``), only the new values will be "
+"returned, as a list."
+msgstr ""
+
+#: ../../../reference/tools.rst:118
+msgid "tools.vcvars()"
+msgstr ""
+
+#: ../../../reference/tools.rst:120
+msgid ""
+"vcvars(settings, arch=None, compiler_version=None, force=False, "
+"filter_known_paths=False)"
+msgstr ""
+
+#: ../../../reference/tools.rst:126
+msgid ""
+"This context manager tool has no effect if used in a platform different from "
+"Windows."
+msgstr ""
+
+#: ../../../reference/tools.rst:128
+msgid ""
+"This is a context manager that allows to append to the environment all the "
+"variables set by the :ref:`tools_vcvars_dict`. You can replace :ref:"
+"`tools_vcvars_command` and use this context manager to get a cleaner way to "
+"activate the Visual Studio environment:"
+msgstr ""
+
+#: ../../../reference/tools.rst:131
+msgid ""
+"from conans import tools\n"
+"\n"
+"def build(self):\n"
+"    with tools.vcvars(self.settings):\n"
+"        do_something()"
+msgstr ""
+
+#: ../../../reference/tools.rst:142
+msgid "tools.build_sln_command() [DEPRECATED]"
+msgstr ""
+
+#: ../../../reference/tools.rst:146
+msgid ""
+"This tool is deprecated and will be removed in Conan 2.0. Use :ref:"
+"`MSBuild()<msbuild>` build helper instead."
+msgstr ""
+
+#: ../../../reference/tools.rst:148
+msgid ""
+"def build_sln_command(settings, sln_path, targets=None, "
+"upgrade_project=True, build_type=None,\n"
+"                      arch=None, parallel=True, toolset=None, "
+"platforms=None, verbosity=None,\n"
+"                      definitions=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:154
+msgid ""
+"Returns the command to call `devenv` and `msbuild` to build a Visual Studio "
+"project. It's recommended to use it with :ref:`tools_vcvars_command`, so "
+"that the Visual Studio tools will be in path."
+msgstr ""
+
+#: ../../../reference/tools.rst:157
+msgid ""
+"from conans import tools\n"
+"\n"
+"def build(self):\n"
+"    build_command = build_sln_command(self.settings, \"myfile.sln\", "
+"targets=[\"SDL2_image\"])\n"
+"    command = \"%s && %s\" % (tools.vcvars_command(self.settings), "
+"build_command)\n"
+"    self.run(command)"
+msgstr ""
+
+#: ../../../reference/tools.rst:167
+msgid "**settings** (Required): Conanfile settings. Use \"self.settings\"."
+msgstr ""
+
+#: ../../../reference/tools.rst:168
+msgid "**sln_path** (Required):  Visual Studio project file path."
+msgstr ""
+
+#: ../../../reference/tools.rst:169
+msgid ""
+"**targets** (Optional, Defaulted to ``None``):  List of targets to build."
+msgstr ""
+
+#: ../../../reference/tools.rst:170
+msgid ""
+"**upgrade_project** (Optional, Defaulted to ``True``): If ``True``, the "
+"project file will be upgraded if the project's VS version is older than "
+"current. When :ref:`env_vars_conan_skip_vs_project_upgrade` environment "
+"variable is set to ``True``/``1``, this parameter will be ignored and the "
+"project won't be upgraded."
+msgstr ""
+
+#: ../../../reference/tools.rst:173
+msgid ""
+"**build_type** (Optional, Defaulted to ``None``): Override the build type "
+"defined in the settings (``settings.build_type``)."
+msgstr ""
+
+#: ../../../reference/tools.rst:174
+msgid ""
+"**arch** (Optional, Defaulted to ``None``): Override the architecture "
+"defined in the settings (``settings.arch``)."
+msgstr ""
+
+#: ../../../reference/tools.rst:175
+msgid ""
+"**parallel** (Optional, Defaulted to ``True``): Enables Visual Studio "
+"parallel build with ``/m:X`` argument, where X is defined by :ref:"
+"`env_vars_conan_cpu_count` environment variable or by the number of cores in "
+"the processor by default."
+msgstr ""
+
+#: ../../../reference/tools.rst:177
+msgid ""
+"**toolset** (Optional, Defaulted to ``None``): Specify a toolset. Will "
+"append a ``/p:PlatformToolset`` option."
+msgstr ""
+
+#: ../../../reference/tools.rst:178
+msgid ""
+"**platforms** (Optional, Defaulted to ``None``): Dictionary with the mapping "
+"of archs/platforms from Conan naming to another one. It is useful for Visual "
+"Studio solutions that have a different naming in architectures. Example: "
+"``platforms={\"x86\":\"Win32\"}`` (Visual solution uses \"Win32\" instead of "
+"\"x86\"). This dictionary will update the following default one:"
+msgstr ""
+
+#: ../../../reference/tools.rst:182
+msgid ""
+"msvc_arch = {'x86': 'x86',\n"
+"             'x86_64': 'x64',\n"
+"             'armv7': 'ARM',\n"
+"             'armv8': 'ARM64'}"
+msgstr ""
+
+#: ../../../reference/tools.rst:189
+msgid ""
+"**verbosity** (Optional, Defaulted to ``None``): Specifies verbosity level "
+"(``/verbosity:`` parameter)."
+msgstr ""
+
+#: ../../../reference/tools.rst:190
+msgid ""
+"**definitions** (Optional, Defaulted to ``None``): Dictionary with "
+"additional compiler definitions to be applied during the build. Use value of "
+"None to set compiler definition with no value."
+msgstr ""
+
+#: ../../../reference/tools.rst:196
+msgid "tools.msvc_build_command() [DEPRECATED]"
+msgstr ""
+
+#: ../../../reference/tools.rst:200
+msgid ""
+"This tool is deprecated and will be removed in Conan 2.0. Use :ref:"
+"`MSBuild()<msbuild>`.get_command() instead."
+msgstr ""
+
+#: ../../../reference/tools.rst:202
+msgid ""
+"def msvc_build_command(settings, sln_path, targets=None, "
+"upgrade_project=True, build_type=None,\n"
+"                       arch=None, parallel=True, force_vcvars=False, "
+"toolset=None, platforms=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:207
+msgid ""
+"Returns a string with a joint command consisting in setting the environment "
+"variables via ``vcvars.bat`` with the above :ref:`tools_vcvars_command` "
+"function, and building a Visual Studio project with the :ref:"
+"`tools_build_sln_command` function."
+msgstr ""
+
+#: ../../../reference/tools.rst:211
+msgid "Same parameters as the above :ref:`tools_build_sln_command`."
+msgstr ""
+
+#: ../../../reference/tools.rst:212
+msgid ""
+"**force_vcvars**: Optional. Defaulted to False. Will set ``tools."
+"vcvars_command(force=force_vcvars)``."
+msgstr ""
+
+#: ../../../reference/tools.rst:217
+msgid "tools.unzip()"
+msgstr ""
+
+#: ../../../reference/tools.rst:219
+msgid ""
+"def unzip(filename, destination=\".\", keep_permissions=False, pattern=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:223
+msgid ""
+"Function mainly used in ``source()``, but could be used in ``build()`` in "
+"special cases, as when retrieving pre-built binaries from the Internet."
+msgstr ""
+
+#: ../../../reference/tools.rst:226
+msgid ""
+"This function accepts ``.tar.gz``, ``.tar``, ``.tzb2``, ``.tar.bz2``, ``."
+"tgz``, ``.txz``, ``tar.xz``, and ``.zip`` files, and decompresses them into "
+"the given destination folder (the current one by default)."
+msgstr ""
+
+#: ../../../reference/tools.rst:229
+msgid ""
+"It also accepts gzipped files, with extension ``.gz`` (not matching any of "
+"the above), and it will unzip them into a file with the same name but "
+"without the extension, or to a filename defined by the ``destination`` "
+"argument."
+msgstr ""
+
+#: ../../../reference/tools.rst:232
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.unzip(\"myfile.zip\")\n"
+"# or to extract in \"myfolder\" sub-folder\n"
+"tools.unzip(\"myfile.zip\", \"myfolder\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:240
+msgid ""
+"You can keep the permissions of the files using the "
+"``keep_permissions=True`` parameter."
+msgstr ""
+
+#: ../../../reference/tools.rst:242
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.unzip(\"myfile.zip\", \"myfolder\", keep_permissions=True)"
+msgstr ""
+
+#: ../../../reference/tools.rst:248
+msgid ""
+"Use ``pattern=None`` if you want to filter specific files and paths to "
+"decompress from the archive."
+msgstr ""
+
+#: ../../../reference/tools.rst:250
+msgid ""
+"from conans import tools\n"
+"\n"
+"# Extract only files inside relative folder \"small\"\n"
+"tools.unzip(\"bigfile.zip\", pattern=\"small/*\")\n"
+"# Extract only txt files\n"
+"tools.unzip(\"bigfile.zip\", pattern=\"*.txt\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:260 ../../../reference/tools.rst:291
+msgid "**filename** (Required): File to be unzipped."
+msgstr ""
+
+#: ../../../reference/tools.rst:261
+msgid ""
+"**destination** (Optional, Defaulted to ``\".\"``): Destination folder for "
+"unzipped files."
+msgstr ""
+
+#: ../../../reference/tools.rst:262
+msgid ""
+"**keep_permissions** (Optional, Defaulted to ``False``): Keep permissions of "
+"files. **WARNING:** Can be dangerous if the zip was not created in a NIX "
+"system, the bits could produce undefined permission schema. Use only this "
+"option if you are sure that the zip was created correctly."
+msgstr ""
+
+#: ../../../reference/tools.rst:265 ../../../reference/tools.rst:293
+msgid ""
+"**pattern** (Optional, Defaulted to ``None``): Extract from the archive only "
+"paths matching the pattern. This should be a Unix shell-style wildcard. See "
+"`fnmatch <https://docs.python.org/3/library/fnmatch.html>`_ documentation "
+"for more details."
+msgstr ""
+
+#: ../../../reference/tools.rst:271
+msgid "tools.untargz()"
+msgstr ""
+
+#: ../../../reference/tools.rst:273
+msgid "def untargz(filename, destination=\".\", pattern=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:277
+msgid ""
+"Extract *.tar.gz* files (or in the family). This is the function called by "
+"the previous ``unzip()`` for the matching extensions, so generally not "
+"needed to be called directly, call ``unzip()`` instead unless the file had a "
+"different extension."
+msgstr ""
+
+#: ../../../reference/tools.rst:280
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.untargz(\"myfile.tar.gz\")\n"
+"# or to extract in \"myfolder\" sub-folder\n"
+"tools.untargz(\"myfile.tar.gz\", \"myfolder\")\n"
+"# or to extract only txt files\n"
+"tools.untargz(\"myfile.tar.gz\", pattern=\"*.txt\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:292
+msgid ""
+"**destination** (Optional, Defaulted to ``\".\"``): Destination folder for "
+"*untargzed* files."
+msgstr ""
+
+#: ../../../reference/tools.rst:299
+msgid "tools.get()"
+msgstr ""
+
+#: ../../../reference/tools.rst:301
+msgid ""
+"def get(url, md5='', sha1='', sha256='', destination=\".\", filename=\"\", "
+"keep_permissions=False,\n"
+"        pattern=None, requester=None, output=None, verify=True, retry=None, "
+"retry_wait=None,\n"
+"        overwrite=False, auth=None, headers=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:307
+msgid ""
+"Just a high level wrapper for download, unzip, and remove the temporary zip "
+"file once unzipped. You can pass hash checking parameters: ``md5``, "
+"``sha1``, ``sha256``. All the specified algorithms will be checked. If any "
+"of them doesn't match, it will raise a ``ConanException``."
+msgstr ""
+
+#: ../../../reference/tools.rst:311
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.get(\"http://url/file\", md5='d2da0cd0756cd9da6560b9a56016a0cb')\n"
+"# also, specify a destination folder\n"
+"tools.get(\"http://url/file\", destination=\"subfolder\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:320
+msgid ""
+"**url** (Required): URL to download. It can be a list, which only the first "
+"one will be downloaded, and the follow URLs will be used as mirror in case "
+"of a download error."
+msgstr ""
+
+#: ../../../reference/tools.rst:322 ../../../reference/tools.rst:437
+msgid ""
+"**md5** (Optional, Defaulted to ``\"\"``): MD5 hash code to check the "
+"downloaded file."
+msgstr ""
+
+#: ../../../reference/tools.rst:323 ../../../reference/tools.rst:438
+msgid ""
+"**sha1** (Optional, Defaulted to ``\"\"``): SHA-1 hash code to check the "
+"downloaded file."
+msgstr ""
+
+#: ../../../reference/tools.rst:324 ../../../reference/tools.rst:439
+msgid ""
+"**sha256** (Optional, Defaulted to ``\"\"``): SHA-256 hash code to check the "
+"downloaded file."
+msgstr ""
+
+#: ../../../reference/tools.rst:325
+msgid ""
+"**filename** (Optional, Defaulted to ```\"\"``): Specify the name of the "
+"compressed file if it cannot be deduced from the URL."
+msgstr ""
+
+#: ../../../reference/tools.rst:326
+msgid ""
+"**keep_permissions** (Optional, Defaulted to ``False``): Propagates the "
+"parameter to :ref:`tools_unzip`."
+msgstr ""
+
+#: ../../../reference/tools.rst:327
+msgid ""
+"**pattern** (Optional, Defaulted to ``None``): Propagates the parameter to :"
+"ref:`tools_unzip`."
+msgstr ""
+
+#: ../../../reference/tools.rst:328 ../../../reference/tools.rst:436
+msgid "**requester** (Optional, Defaulted to ``None``): HTTP requests instance"
+msgstr ""
+
+#: ../../../reference/tools.rst:329 ../../../reference/tools.rst:651
+msgid "**output** (Optional, Defaulted to ``None``): Stream object."
+msgstr ""
+
+#: ../../../reference/tools.rst:330 ../../../reference/tools.rst:424
+msgid ""
+"**verify** (Optional, Defaulted to ``True``): When False, disables https "
+"certificate validation."
+msgstr ""
+
+#: ../../../reference/tools.rst:331
+msgid ""
+"**retry** (Optional, Defaulted to ``2``): Number of retries in case of "
+"failure. Default is overriden by ``general.retry`` in the *conan.conf* file "
+"or an env variable ``CONAN_RETRY``."
+msgstr ""
+
+#: ../../../reference/tools.rst:333 ../../../reference/tools.rst:429
+msgid ""
+"**retry_wait** (Optional, Defaulted to ``5``): Seconds to wait between "
+"download attempts. Default is overriden by ``general.retry_wait`` in the "
+"*conan.conf* file or an env variable ``CONAN_RETRY_WAIT``."
+msgstr ""
+
+#: ../../../reference/tools.rst:335
+msgid ""
+"**overwrite**: (Optional, Defaulted to ``False``): When ``True`` Conan will "
+"overwrite the destination file if it exists. Otherwise it will raise."
+msgstr ""
+
+#: ../../../reference/tools.rst:337
+msgid ""
+"**auth** (Optional, Defaulted to ``None``): A tuple of user, password can be "
+"passed to use HTTPBasic authentication. This is passed directly to the "
+"``requests`` Python library. Check here other uses of the **auth** "
+"parameter: https://requests.readthedocs.io/en/master/user/authentication/"
+"#basic-authentication"
+msgstr ""
+
+#: ../../../reference/tools.rst:340 ../../../reference/tools.rst:435
+msgid ""
+"**headers** (Optional, Defaulted to ``None``): A dictionary with additional "
+"headers."
+msgstr ""
+
+#: ../../../reference/tools.rst:345
+msgid "tools.get_env()"
+msgstr ""
+
+#: ../../../reference/tools.rst:347
+msgid "def get_env(env_key, default=None, environment=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:351
+msgid ""
+"Parses an environment and cast its value against the **default** type passed "
+"as an argument. Following Python conventions, returns **default** if "
+"**env_key** is not defined."
+msgstr ""
+
+#: ../../../reference/tools.rst:354
+msgid ""
+"This is a usage example with an environment variable defined while executing "
+"Conan:"
+msgstr ""
+
+#: ../../../reference/tools.rst:356
+msgid "$ TEST_ENV=\"1\" conan <command> ..."
+msgstr ""
+
+#: ../../../reference/tools.rst:360
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.get_env(\"TEST_ENV\") # returns \"1\", returns current value\n"
+"tools.get_env(\"TEST_ENV_NOT_DEFINED\") # returns None, TEST_ENV_NOT_DEFINED "
+"not declared\n"
+"tools.get_env(\"TEST_ENV_NOT_DEFINED\", []) # returns [], "
+"TEST_ENV_NOT_DEFINED not declared\n"
+"tools.get_env(\"TEST_ENV\", \"2\") # returns \"1\"\n"
+"tools.get_env(\"TEST_ENV\", False) # returns True (default value is "
+"boolean)\n"
+"tools.get_env(\"TEST_ENV\", 2) # returns 1\n"
+"tools.get_env(\"TEST_ENV\", 2.0) # returns 1.0\n"
+"tools.get_env(\"TEST_ENV\", []) # returns [\"1\"]"
+msgstr ""
+
+#: ../../../reference/tools.rst:374
+msgid "**env_key** (Required): environment variable name."
+msgstr ""
+
+#: ../../../reference/tools.rst:375
+msgid ""
+"**default** (Optional, Defaulted to ``None``): default value to return if "
+"not defined or cast value against."
+msgstr ""
+
+#: ../../../reference/tools.rst:376
+msgid ""
+"**environment** (Optional, Defaulted to ``None``): ``os.environ`` if "
+"``None`` or environment dictionary to look for."
+msgstr ""
+
+#: ../../../reference/tools.rst:381
+msgid "tools.download()"
+msgstr ""
+
+#: ../../../reference/tools.rst:383
+msgid ""
+"def download(url, filename, verify=True, out=None, retry=None, "
+"retry_wait=None, overwrite=False,\n"
+"             auth=None, headers=None, requester=None, md5='', sha1='', "
+"sha256='')"
+msgstr ""
+
+#: ../../../reference/tools.rst:388
+msgid ""
+"Retrieves a file from a given URL into a file with a given filename. It uses "
+"certificates from a list of known verifiers for https downloads, but this "
+"can be optionally disabled."
+msgstr ""
+
+#: ../../../reference/tools.rst:391
+msgid ""
+"You can pass hash checking parameters: ``md5``, ``sha1``, ``sha256``. All "
+"the specified algorithms will be checked. If any of them doesn't match, it "
+"will raise a ``ConanException``."
+msgstr ""
+
+#: ../../../reference/tools.rst:394
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.download(\"http://someurl/somefile.zip\", \"myfilename.zip\")\n"
+"\n"
+"# to disable verification:\n"
+"tools.download(\"http://someurl/somefile.zip\", \"myfilename.zip\", "
+"verify=False)\n"
+"\n"
+"# to retry the download 2 times waiting 5 seconds between them\n"
+"tools.download(\"http://someurl/somefile.zip\", \"myfilename.zip\", retry=2, "
+"retry_wait=5)\n"
+"\n"
+"# Use https basic authentication\n"
+"tools.download(\"http://someurl/somefile.zip\", \"myfilename.zip\", "
+"auth=(\"user\", \"password\"))\n"
+"\n"
+"# Pass some header\n"
+"tools.download(\"http://someurl/somefile.zip\", \"myfilename.zip\", "
+"headers={\"Myheader\": \"My value\"})\n"
+"\n"
+"# Download and check file checksum\n"
+"tools.download(\"http://someurl/somefile.zip\", \"myfilename.zip\", "
+"md5=\"e5d695597e9fa520209d1b41edad2a27\")\n"
+"\n"
+"# to add mirrors\n"
+"tools.download([\"https://ftp.gnu.org/gnu/gcc/gcc-9.3.0/gcc-9.3.0.tar.gz\",\n"
+"                \"http://mirror.linux-ia64.org/gnu/gcc/releases/gcc-9.3.0/"
+"gcc-9.3.0.tar.gz\"], \"gcc-9.3.0.tar.gz\",\n"
+"               sha256=\"5258a9b6afe9463c2e56b9e8355b1a4bee125ca828b8078f910303bc2ef91fa6\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:421
+msgid ""
+"**url** (Required): URL to download. It can be a list, which only the first "
+"one will be downloaded, and the follow URLs will be used as mirror in case "
+"of download error."
+msgstr ""
+
+#: ../../../reference/tools.rst:423
+msgid ""
+"**filename** (Required): Name of the file to be created in the local storage"
+msgstr ""
+
+#: ../../../reference/tools.rst:425
+msgid ""
+"**out**: (Optional, Defaulted to ``None``): An object with a ``write()`` "
+"method can be passed to get the output. ``stdout`` will use if not specified."
+msgstr ""
+
+#: ../../../reference/tools.rst:427
+msgid ""
+"**retry** (Optional, Defaulted to ``1``): Number of retries in case of "
+"failure. Default is overriden by ``general.retry`` in the *conan.conf* file "
+"or an env variable ``CONAN_RETRY``."
+msgstr ""
+
+#: ../../../reference/tools.rst:431
+msgid ""
+"**overwrite**: (Optional, Defaulted to ``False``): When ``True``, Conan will "
+"overwrite the destination file if exists. Otherwise it will raise an "
+"exception."
+msgstr ""
+
+#: ../../../reference/tools.rst:433
+msgid ""
+"**auth** (Optional, Defaulted to ``None``): A tuple of user and password to "
+"use HTTPBasic authentication. This is used directly in the ``requests`` "
+"Python library. Check other uses here: https://requests.readthedocs.io/en/"
+"master/user/authentication/#basic-authentication"
+msgstr ""
+
+#: ../../../reference/tools.rst:444
+msgid "tools.ftp_download()"
+msgstr ""
+
+#: ../../../reference/tools.rst:446
+msgid "def ftp_download(ip, filename, login=\"\", password=\"\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:450
+msgid ""
+"Retrieves a file from an FTP server. This doesn't support SSL, but you might "
+"implement it yourself using the standard Python FTP library."
+msgstr ""
+
+#: ../../../reference/tools.rst:452
+msgid ""
+"from conans import tools\n"
+"\n"
+"def source(self):\n"
+"    tools.ftp_download('ftp.debian.org', \"debian/README\")\n"
+"    self.output.info(load(\"README\"))"
+msgstr ""
+
+#: ../../../reference/tools.rst:461
+msgid "**ip** (Required): The IP or address of the ftp server."
+msgstr ""
+
+#: ../../../reference/tools.rst:462
+msgid ""
+"**filename** (Required): The filename, including the path/folder where it is "
+"located."
+msgstr ""
+
+#: ../../../reference/tools.rst:463
+msgid ""
+"**login** (Optional, Defaulted to ``\"\"``): Login credentials for the ftp "
+"server."
+msgstr ""
+
+#: ../../../reference/tools.rst:464
+msgid ""
+"**password** (Optional, Defaulted to ``\"\"``): Password credentials for the "
+"ftp server."
+msgstr ""
+
+#: ../../../reference/tools.rst:469
+msgid "tools.replace_in_file()"
+msgstr ""
+
+#: ../../../reference/tools.rst:471
+msgid ""
+"def replace_in_file(file_path, search, replace, strict=True, encoding=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:475
+msgid ""
+"This function is useful for a simple \"patch\" or modification of source "
+"files. A typical use would be to augment some library existing *CMakeLists."
+"txt* in the ``source()`` method of a *conanfile.py*, so it uses Conan "
+"dependencies without forking or modifying the original project:"
+msgstr ""
+
+#: ../../../reference/tools.rst:479
+msgid ""
+"from conans import tools\n"
+"\n"
+"def source(self):\n"
+"    # get the sources from somewhere\n"
+"    tools.replace_in_file(\"hello/CMakeLists.txt\", \"PROJECT(MyHello)\",\n"
+"        '''PROJECT(MyHello)\n"
+"           include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+"           conan_basic_setup()''')"
+msgstr ""
+
+#: ../../../reference/tools.rst:491 ../../../reference/tools.rst:520
+msgid ""
+"**file_path** (Required): File path of the file to perform the replace in."
+msgstr ""
+
+#: ../../../reference/tools.rst:492
+msgid "**search** (Required): String you want to be replaced."
+msgstr ""
+
+#: ../../../reference/tools.rst:493
+msgid "**replace** (Required): String to replace the searched string."
+msgstr ""
+
+#: ../../../reference/tools.rst:494
+msgid ""
+"**strict** (Optional, Defaulted to ``True``): If ``True``, it raises an "
+"error if the searched string is not found, so nothing is actually replaced."
+msgstr ""
+
+#: ../../../reference/tools.rst:496 ../../../reference/tools.rst:532
+msgid ""
+"**encoding** (Optional, Defaulted to ``None``): Specifies the input and "
+"output files text encoding. The ``None`` value has a special meaning - "
+"perform the encoding detection by checking the BOM (byte order mask), if no "
+"BOM is present tries to use: ``utf-8``, ``cp1252``. In case of ``None``, the "
+"output file is saved to the ``utf-8``"
+msgstr ""
+
+#: ../../../reference/tools.rst:503
+msgid "tools.replace_path_in_file()"
+msgstr ""
+
+#: ../../../reference/tools.rst:505
+msgid ""
+"def replace_path_in_file(file_path, search, replace, strict=True, "
+"windows_paths=None,\n"
+"                         encoding=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:510
+msgid ""
+"Replace a path in a file with another string. In Windows, it will match the "
+"path even if the casing and the path separator doesn't match."
+msgstr ""
+
+#: ../../../reference/tools.rst:512
+msgid ""
+"from conans import tools\n"
+"\n"
+"def build(self):\n"
+"    tools.replace_path_in_file(\"hello/somefile.cmake\", \"c:\\Some/PATH/"
+"to\\File.txt\",\"PATTERN/file.txt\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:521
+msgid "**search** (Required): String with the path you want to be replaced."
+msgstr ""
+
+#: ../../../reference/tools.rst:522
+msgid "**replace** (Required): String to replace the searched path."
+msgstr ""
+
+#: ../../../reference/tools.rst:523
+msgid ""
+"**strict** (Optional, Defaulted to ``True``): If ``True``, it raises an "
+"error if the search string is not found and nothing is actually replaced."
+msgstr ""
+
+#: ../../../reference/tools.rst:525
+msgid ""
+"**windows_paths** (Optional, Defaulted to ``None``): Controls whether the "
+"casing of the path and the different directory separators are taken into "
+"account:"
+msgstr ""
+
+#: ../../../reference/tools.rst:528
+msgid "``None``: Only when Windows operating system is detected."
+msgstr ""
+
+#: ../../../reference/tools.rst:529
+msgid ""
+"``False``: Deactivated, it will match exact patterns (like :ref:"
+"`tools_replace_in_file`)."
+msgstr ""
+
+#: ../../../reference/tools.rst:530
+msgid ""
+"``True``: Always activated, irrespective of the detected operating system."
+msgstr ""
+
+#: ../../../reference/tools.rst:540
+msgid "tools.run_environment()"
+msgstr ""
+
+#: ../../../reference/tools.rst:542
+msgid "def run_environment(conanfile)"
+msgstr ""
+
+#: ../../../reference/tools.rst:546
+msgid ""
+"Context manager that sets temporary environment variables set by :ref:"
+"`run_environment_reference`."
+msgstr ""
+
+#: ../../../reference/tools.rst:551
+msgid "tools.check_with_algorithm_sum()"
+msgstr ""
+
+#: ../../../reference/tools.rst:553
+msgid "def check_with_algorithm_sum(algorithm_name, file_path, signature)"
+msgstr ""
+
+#: ../../../reference/tools.rst:557
+msgid ""
+"Useful to check that some downloaded file or resource has a predefined hash, "
+"so integrity and security are guaranteed. Something that could be typically "
+"done in ``source()`` method after retrieving some file from the internet."
+msgstr ""
+
+#: ../../../reference/tools.rst:561
+msgid "**algorithm_name** (Required): Name of the algorithm to be checked."
+msgstr ""
+
+#: ../../../reference/tools.rst:562
+msgid "**file_path** (Required): File path of the file to be checked."
+msgstr ""
+
+#: ../../../reference/tools.rst:563
+msgid "**signature** (Required): Hash code that the file should have."
+msgstr ""
+
+#: ../../../reference/tools.rst:565
+msgid "There are specific functions for common algorithms:"
+msgstr ""
+
+#: ../../../reference/tools.rst:567
+msgid ""
+"def check_sha1(file_path, signature)\n"
+"def check_md5(file_path, signature)\n"
+"def check_sha256(file_path, signature)"
+msgstr ""
+
+#: ../../../reference/tools.rst:573 ../../../reference/tools.rst:722
+msgid "For example:"
+msgstr ""
+
+#: ../../../reference/tools.rst:575
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.check_sha1(\"myfile.zip\", "
+"\"eb599ec83d383f0f25691c184f656d40384f9435\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:581
+msgid ""
+"Other algorithms are also possible, as long as are recognized by python "
+"``hashlib`` implementation, via ``hashlib.new(algorithm_name)``. The "
+"previous is equivalent to:"
+msgstr ""
+
+#: ../../../reference/tools.rst:584
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.check_with_algorithm_sum(\"sha1\", \"myfile.zip\",\n"
+"                                \"eb599ec83d383f0f25691c184f656d40384f9435\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:594
+msgid "tools.patch()"
+msgstr ""
+
+#: ../../../reference/tools.rst:596
+msgid ""
+"def patch(base_path=None, patch_file=None, patch_string=None, strip=0, "
+"output=None, fuzz=False)"
+msgstr ""
+
+#: ../../../reference/tools.rst:600
+msgid ""
+"Applies a patch from a file or from a string into the given path. The patch "
+"should be in diff (unified diff) format. Use it preferably in the "
+"``build()`` method."
+msgstr ""
+
+#: ../../../reference/tools.rst:602
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.patch(patch_file=\"file.patch\")\n"
+"# from a string:\n"
+"patch_content = \" real patch content ...\"\n"
+"tools.patch(patch_string=patch_content)\n"
+"# to apply in subfolder\n"
+"tools.patch(base_path=mysubfolder, patch_string=patch_content)\n"
+"# from conandata\n"
+"tools.patch(**self.conan_data[\"patches\"][self.version])\n"
+"# from conandata, using multiple versions\n"
+"for patch in self.conan_data[\"patches\"][self.version]:\n"
+"    tools.patch(**patch)"
+msgstr ""
+
+#: ../../../reference/tools.rst:618
+msgid ""
+"If the patch to be applied uses alternate paths that have to be stripped "
+"like this example:"
+msgstr ""
+
+#: ../../../reference/tools.rst:620
+msgid ""
+"--- old_path/text.txt\\t2016-01-25 17:57:11.452848309 +0100\n"
+"+++ new_path/text_new.txt\\t2016-01-25 17:57:28.839869950 +0100\n"
+"@@ -1 +1 @@\n"
+"- old content\n"
+"+ new content"
+msgstr ""
+
+#: ../../../reference/tools.rst:628
+msgid ""
+"Then, the number of folders to be stripped from the path can be specified:"
+msgstr ""
+
+#: ../../../reference/tools.rst:630
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.patch(patch_file=\"file.patch\", strip=1)"
+msgstr ""
+
+#: ../../../reference/tools.rst:636
+msgid ""
+"If the patch to be applied differs from the source (fuzzy) the patch will "
+"fail by default, however, you can force it using the ``fuzz`` option:"
+msgstr ""
+
+#: ../../../reference/tools.rst:639
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.patch(patch_file=\"file.patch\", fuzz=True)"
+msgstr ""
+
+#: ../../../reference/tools.rst:647
+msgid ""
+"**base_path** (Optional, Defaulted to ``None``): Base path where the patch "
+"should be applied."
+msgstr ""
+
+#: ../../../reference/tools.rst:648
+msgid ""
+"**patch_file** (Optional, Defaulted to ``None``): Patch file that should be "
+"applied."
+msgstr ""
+
+#: ../../../reference/tools.rst:649
+msgid ""
+"**patch_string** (Optional, Defaulted to ``None``): Patch string that should "
+"be applied."
+msgstr ""
+
+#: ../../../reference/tools.rst:650
+msgid ""
+"**strip** (Optional, Defaulted to ``0``): Number of folders to be stripped "
+"from the path."
+msgstr ""
+
+#: ../../../reference/tools.rst:652
+msgid "**fuzz** (Optional, Defaulted to ``False``): Accept fuzzy patches."
+msgstr ""
+
+#: ../../../reference/tools.rst:657
+msgid "tools.environment_append()"
+msgstr ""
+
+#: ../../../reference/tools.rst:659
+msgid "def environment_append(env_vars)"
+msgstr ""
+
+#: ../../../reference/tools.rst:663
+msgid ""
+"This is a context manager that allows to temporary use environment variables "
+"for a specific piece of code in your conanfile:"
+msgstr ""
+
+#: ../../../reference/tools.rst:665
+msgid ""
+"from conans import tools\n"
+"\n"
+"def build(self):\n"
+"    with tools.environment_append({\"MY_VAR\": \"3\", \"CXX\": \"/path/to/"
+"cxx\", \"CPPFLAGS\": None}):\n"
+"        do_something()"
+msgstr ""
+
+#: ../../../reference/tools.rst:673
+msgid ""
+"The environment variables will be overridden if the value is a string, while "
+"it will be prepended if the value is a list. Additionally, if value is "
+"``None``, the given environment variable is unset (In the previous example, "
+"``CPPFLAGS`` environment variable will be unset), and in case variable "
+"wasn't set prior to the invocation, it has no effect on the given variable "
+"(``CPPFLAGS``). When the context manager block ends, the environment "
+"variables will recover their previous state."
+msgstr ""
+
+#: ../../../reference/tools.rst:679
+msgid ""
+"**env_vars** (Required): Dictionary object with environment variable name "
+"and its value."
+msgstr ""
+
+#: ../../../reference/tools.rst:684
+msgid "tools.chdir()"
+msgstr ""
+
+#: ../../../reference/tools.rst:686
+msgid "def chdir(newdir)"
+msgstr ""
+
+#: ../../../reference/tools.rst:690
+msgid ""
+"This is a context manager that allows to temporary change the current "
+"directory in your conanfile:"
+msgstr ""
+
+#: ../../../reference/tools.rst:692
+msgid ""
+"from conans import tools\n"
+"\n"
+"def build(self):\n"
+"    with tools.chdir(\"./subdir\"):\n"
+"        do_something()"
+msgstr ""
+
+#: ../../../reference/tools.rst:701
+msgid ""
+"**newdir** (Required): Directory path name to change the current directory."
+msgstr ""
+
+#: ../../../reference/tools.rst:706
+msgid "tools.pythonpath()"
+msgstr ""
+
+#: ../../../reference/tools.rst:710
+msgid ""
+"This way of reusing python code from other recipes can be improved via :ref:"
+"`python_requires`."
+msgstr ""
+
+#: ../../../reference/tools.rst:712
+msgid ""
+"This tool is automatically applied in the conanfile methods unless :ref:"
+"`apply_env<apply_env>` is deactivated, so any ``PYTHONPATH`` inherited from "
+"the requirements will be automatically available."
+msgstr ""
+
+#: ../../../reference/tools.rst:715
+msgid "def pythonpath(conanfile)"
+msgstr ""
+
+#: ../../../reference/tools.rst:719
+msgid ""
+"This is a context manager that allows to load the ``PYTHONPATH`` for "
+"dependent packages, create packages with Python code and reuse that code "
+"into your own recipes."
+msgstr ""
+
+#: ../../../reference/tools.rst:724
+msgid ""
+"from conans import tools\n"
+"\n"
+"def build(self):\n"
+"    with tools.pythonpath(self):\n"
+"        from module_name import whatever\n"
+"        whatever.do_something()"
+msgstr ""
+
+#: ../../../reference/tools.rst:733
+msgid ""
+"When the :ref:`apply_env<apply_env>` is activated (default) the above code "
+"could be simplified as:"
+msgstr ""
+
+#: ../../../reference/tools.rst:735
+msgid ""
+"from conans import tools\n"
+"\n"
+"def build(self):\n"
+"    from module_name import whatever\n"
+"    whatever.do_something()"
+msgstr ""
+
+#: ../../../reference/tools.rst:743
+msgid ""
+"For that to work, one of the dependencies of the current recipe, must have a "
+"``module_name`` file or folder with a ``whatever`` file or object inside, "
+"and should have declared in its ``package_info()``:"
+msgstr ""
+
+#: ../../../reference/tools.rst:746
+msgid ""
+"from conans import tools\n"
+"\n"
+"def package_info(self):\n"
+"    self.env_info.PYTHONPATH.append(self.package_folder)"
+msgstr ""
+
+#: ../../../reference/tools.rst:754 ../../../reference/tools.rst:871
+msgid "**conanfile** (Required): Current ``ConanFile`` object."
+msgstr ""
+
+#: ../../../reference/tools.rst:759
+msgid "tools.no_op()"
+msgstr ""
+
+#: ../../../reference/tools.rst:761
+msgid "def no_op()"
+msgstr ""
+
+#: ../../../reference/tools.rst:765
+msgid ""
+"Context manager that performs nothing. Useful to condition any other context "
+"manager to get a cleaner code:"
+msgstr ""
+
+#: ../../../reference/tools.rst:767
+msgid ""
+"from conans import tools\n"
+"\n"
+"def build(self):\n"
+"    with tools.chdir(\"some_dir\") if self.options.myoption else tools."
+"no_op():\n"
+"        # if not self.options.myoption, we are not in the \"some_dir\"\n"
+"        pass"
+msgstr ""
+
+#: ../../../reference/tools.rst:779
+msgid "tools.human_size()"
+msgstr ""
+
+#: ../../../reference/tools.rst:781
+msgid "def human_size(size_bytes)"
+msgstr ""
+
+#: ../../../reference/tools.rst:785
+msgid ""
+"Will return a string from a given number of bytes, rounding it to the most "
+"appropriate unit: GB, MB, KB, etc. It is mostly used by the Conan downloads "
+"and unzip progress."
+msgstr ""
+
+#: ../../../reference/tools.rst:788
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.human_size(1024)\n"
+">> 1.0KB"
+msgstr ""
+
+#: ../../../reference/tools.rst:796
+msgid "**size_bytes** (Required): Number of bytes."
+msgstr ""
+
+#: ../../../reference/tools.rst:802
+msgid "tools.OSInfo and tools.SystemPackageTool"
+msgstr ""
+
+#: ../../../reference/tools.rst:804
+msgid ""
+"These are helpers to install system packages. Check :ref:"
+"`method_system_requirements`."
+msgstr ""
+
+#: ../../../reference/tools.rst:809
+msgid "tools.cross_building()"
+msgstr ""
+
+#: ../../../reference/tools.rst:811
+msgid ""
+"def cross_building(settings, self_os=None, self_arch=None, "
+"skip_x64_x86=False)"
+msgstr ""
+
+#: ../../../reference/tools.rst:815
+msgid ""
+"Reading the settings and the current host machine it returns ``True`` if we "
+"are cross building a Conan package:"
+msgstr ""
+
+#: ../../../reference/tools.rst:817
+msgid ""
+"from conans import tools\n"
+"\n"
+"if tools.cross_building(self.settings):\n"
+"    # Some special action"
+msgstr ""
+
+#: ../../../reference/tools.rst:826
+msgid ""
+"**self_os** (Optional, Defaulted to ``None``): Current operating system "
+"where the build is being done."
+msgstr ""
+
+#: ../../../reference/tools.rst:827
+msgid ""
+"**self_arch** (Optional, Defaulted to ``None``): Current architecture where "
+"the build is being done."
+msgstr ""
+
+#: ../../../reference/tools.rst:828
+msgid ""
+"**skip_x64_x86** (Optional, Defaulted to ``False``): Do not consider "
+"building for ``x86`` host from ``x86_64`` build machine as cross building, "
+"in case of host and build machine use the same operating system. Normally, "
+"in such case build machine may execute binaries produced for the target "
+"machine, and special cross-building handling may not be needed."
+msgstr ""
+
+#: ../../../reference/tools.rst:835
+msgid "tools.get_gnu_triplet()"
+msgstr ""
+
+#: ../../../reference/tools.rst:837
+msgid "def get_gnu_triplet(os_, arch, compiler=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:841
+msgid ""
+"Returns string with GNU like ``<machine>-<vendor>-<op_system>`` triplet."
+msgstr ""
+
+#: ../../../reference/tools.rst:844
+msgid "**os_** (Required): Operating system to be used to create the triplet."
+msgstr ""
+
+#: ../../../reference/tools.rst:845
+msgid "**arch** (Required): Architecture to be used to create the triplet."
+msgstr ""
+
+#: ../../../reference/tools.rst:846
+msgid ""
+"**compiler** (Optional, Defaulted to ``None``): Compiler used to create the "
+"triplet (only needed for Windows)."
+msgstr ""
+
+#: ../../../reference/tools.rst:851
+msgid "tools.run_in_windows_bash()"
+msgstr ""
+
+#: ../../../reference/tools.rst:853
+msgid ""
+"def run_in_windows_bash(conanfile, bashcmd, cwd=None, subsystem=None, "
+"msys_mingw=True, env=None, with_login=True)"
+msgstr ""
+
+#: ../../../reference/tools.rst:857
+msgid ""
+"Runs a UNIX command inside a bash shell. It requires to have \"bash\" in the "
+"path. Useful to build libraries using ``configure`` and ``make`` in Windows. "
+"Check :ref:`Windows subsytems <windows_subsystems>` section."
+msgstr ""
+
+#: ../../../reference/tools.rst:860
+msgid ""
+"You can customize the path of the bash executable using the environment "
+"variable ``CONAN_BASH_PATH`` or the :ref:`conan_conf` ``bash_path`` variable "
+"to change the default bash location."
+msgstr ""
+
+#: ../../../reference/tools.rst:863
+msgid ""
+"from conans import tools\n"
+"\n"
+"command = \"pwd\"\n"
+"tools.run_in_windows_bash(self, command) # self is a conanfile instance"
+msgstr ""
+
+#: ../../../reference/tools.rst:872
+msgid "**bashcmd** (Required): String with the command to be run."
+msgstr ""
+
+#: ../../../reference/tools.rst:873
+msgid ""
+"**cwd** (Optional, Defaulted to ``None``): Path to directory where to apply "
+"the command from."
+msgstr ""
+
+#: ../../../reference/tools.rst:874
+msgid ""
+"**subsystem** (Optional, Defaulted to ``None`` will autodetect the "
+"subsystem): Used to escape the command according to the specified subsystem."
+msgstr ""
+
+#: ../../../reference/tools.rst:876
+msgid ""
+"**msys_mingw** (Optional, Defaulted to ``True``): If the specified subsystem "
+"is MSYS2, will start it in MinGW mode (native windows development)."
+msgstr ""
+
+#: ../../../reference/tools.rst:878
+msgid ""
+"**env** (Optional, Defaulted to ``None``): You can pass a dictionary with "
+"environment variable to be applied **at first place** so they will have more "
+"priority than others."
+msgstr ""
+
+#: ../../../reference/tools.rst:880
+msgid ""
+"**with_login** (Optional, Defaulted to ``True``): Pass the ``--login`` flag "
+"to :command:`bash` command. This might come handy when you don't want to "
+"create a fresh user session for running the command."
+msgstr ""
+
+#: ../../../reference/tools.rst:886
+msgid "tools.get_cased_path()"
+msgstr ""
+
+#: ../../../reference/tools.rst:888
+msgid "get_cased_path(abs_path)"
+msgstr ""
+
+#: ../../../reference/tools.rst:892
+msgid ""
+"This function converts a case-insensitive absolute path to a case-sensitive "
+"one. That is, with the real cased characters. Useful when using Windows "
+"subsystems where the file system is case-sensitive."
+msgstr ""
+
+#: ../../../reference/tools.rst:898
+msgid "tools.detected_os()"
+msgstr ""
+
+#: ../../../reference/tools.rst:900
+msgid "detected_os()"
+msgstr ""
+
+#: ../../../reference/tools.rst:904
+msgid ""
+"It returns the recognized OS name e.g \"Macos\", \"Windows\". Otherwise it "
+"will return the value from ``platform.system()``."
+msgstr ""
+
+#: ../../../reference/tools.rst:909
+msgid "tools.remove_from_path()"
+msgstr ""
+
+#: ../../../reference/tools.rst:911
+msgid "remove_from_path(command)"
+msgstr ""
+
+#: ../../../reference/tools.rst:915
+msgid ""
+"This is a context manager that allows you to remove a tool from the "
+"``PATH``. Conan will locate the executable (using :ref:`tools_which`) and "
+"will remove from the ``PATH`` the directory entry that contains it. It's not "
+"necessary to specify the extension."
+msgstr ""
+
+#: ../../../reference/tools.rst:918
+msgid ""
+"from conans import tools\n"
+"\n"
+"with tools.remove_from_path(\"make\"):\n"
+"    self.run(\"some command\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:928
+msgid "tools.unix_path()"
+msgstr ""
+
+#: ../../../reference/tools.rst:930
+msgid "def unix_path(path, path_flavor=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:934
+msgid ""
+"Used to translate Windows paths to MSYS/CYGWIN Unix paths like ``c/users/"
+"path/to/file``."
+msgstr ""
+
+#: ../../../reference/tools.rst:937
+msgid "**path** (Required): Path to be converted."
+msgstr ""
+
+#: ../../../reference/tools.rst:938
+msgid ""
+"**path_flavor** (Optional, Defaulted to ``None``, will try to autodetect the "
+"subsystem): Type of Unix path to be returned. Options are ``MSYS``, "
+"``MSYS2``, ``CYGWIN``, ``WSL`` and ``SFU``."
+msgstr ""
+
+#: ../../../reference/tools.rst:944
+msgid "tools.escape_windows_cmd()"
+msgstr ""
+
+#: ../../../reference/tools.rst:946
+msgid "def escape_windows_cmd(command)"
+msgstr ""
+
+#: ../../../reference/tools.rst:950
+msgid ""
+"Useful to escape commands to be executed in a windows bash (msys2, cygwin "
+"etc)."
+msgstr ""
+
+#: ../../../reference/tools.rst:952
+msgid ""
+"Adds escapes so the argument can be unpacked by ``CommandLineToArgvW()``."
+msgstr ""
+
+#: ../../../reference/tools.rst:953
+msgid ""
+"Adds escapes for *cmd.exe* so the argument survives to ``cmd.exe``'s "
+"substitutions."
+msgstr ""
+
+#: ../../../reference/tools.rst:956
+msgid "**command** (Required): Command to execute."
+msgstr ""
+
+#: ../../../reference/tools.rst:961
+msgid "tools.sha1sum(), sha256sum(), md5sum()"
+msgstr ""
+
+#: ../../../reference/tools.rst:963
+msgid ""
+"def def md5sum(file_path)\n"
+"def sha1sum(file_path)\n"
+"def sha256sum(file_path)"
+msgstr ""
+
+#: ../../../reference/tools.rst:969
+msgid "Return the respective hash or checksum for a file."
+msgstr ""
+
+#: ../../../reference/tools.rst:971
+msgid ""
+"from conans import tools\n"
+"\n"
+"md5 = tools.md5sum(\"myfilepath.txt\")\n"
+"sha1 = tools.sha1sum(\"myfilepath.txt\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:979
+msgid "**file_path** (Required): Path to the file."
+msgstr ""
+
+#: ../../../reference/tools.rst:984
+msgid "tools.md5()"
+msgstr ""
+
+#: ../../../reference/tools.rst:986
+msgid "def md5(content)"
+msgstr ""
+
+#: ../../../reference/tools.rst:990
+msgid "Returns the MD5 hash for a string or byte object."
+msgstr ""
+
+#: ../../../reference/tools.rst:992
+msgid ""
+"from conans import tools\n"
+"\n"
+"md5 = tools.md5(\"some string, not a file path\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:999
+msgid "**content** (Required): String or bytes to calculate its md5."
+msgstr ""
+
+#: ../../../reference/tools.rst:1004
+msgid "tools.save()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1006
+msgid "def save(path, content, append=False, encoding=\"utf-8\")"
+msgstr "def save(path, content, append=False, encoding=\"utf-8\")"
+
+#: ../../../reference/tools.rst:1010
+msgid ""
+"Utility function to save files in one line. It will manage the open and "
+"close of the file and creating directories if necessary."
+msgstr ""
+
+#: ../../../reference/tools.rst:1012
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.save(\"otherfile.txt\", \"contents of the file\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:1019 ../../../reference/tools.rst:1043
+msgid "**path** (Required): Path to the file."
+msgstr ""
+
+#: ../../../reference/tools.rst:1020
+msgid "**content** (Required): Content that should be saved into the file."
+msgstr ""
+
+#: ../../../reference/tools.rst:1021
+msgid ""
+"**append** (Optional, Defaulted to ``False``): If ``True``, it will append "
+"the content."
+msgstr ""
+
+#: ../../../reference/tools.rst:1022
+msgid ""
+"**encoding** (Optional, Defaulted to ``utf-8``): Specifies the output file "
+"text encoding."
+msgstr ""
+
+#: ../../../reference/tools.rst:1027
+msgid "tools.load()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1029
+msgid "def load(path, binary=False, encoding=\"auto\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:1033
+msgid ""
+"Utility function to load files in one line. It will manage the open and "
+"close of the file, and load binary encodings. Returns the content of the "
+"file."
+msgstr ""
+
+#: ../../../reference/tools.rst:1036
+msgid ""
+"from conans import tools\n"
+"\n"
+"content = tools.load(\"myfile.txt\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:1044
+msgid ""
+"**binary** (Optional, Defaulted to ``False``): If ``True``, it reads the the "
+"file as binary code."
+msgstr ""
+
+#: ../../../reference/tools.rst:1045
+msgid ""
+"**encoding** (Optional, Defaulted to ``auto``): Specifies the input file "
+"text encoding. The ``auto`` value has a special meaning - perform the "
+"encoding detection by checking the BOM (byte order mask), if no BOM is "
+"present tries to use: ``utf-8``, ``cp1252``. The value is ignored in case of "
+"``binary`` set to the ``True``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1052
+msgid "tools.mkdir(), tools.rmdir()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1054
+msgid ""
+"def mkdir(path)\n"
+"def rmdir(path)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1059
+msgid ""
+"Utility functions to create/delete a directory. The existence of the "
+"specified directory is checked, so ``mkdir()`` will do nothing if the "
+"directory already exists and ``rmdir()`` will do nothing if the directory "
+"does not exists."
+msgstr ""
+
+#: ../../../reference/tools.rst:1062
+msgid ""
+"This makes it safe to use these functions in the ``package()`` method of a "
+"*conanfile.py* when ``no_copy_source=True``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1064
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.mkdir(\"mydir\") # Creates mydir if it does not already exist\n"
+"tools.mkdir(\"mydir\") # Does nothing\n"
+"\n"
+"tools.rmdir(\"mydir\") # Deletes mydir\n"
+"tools.rmdir(\"mydir\") # Does nothing"
+msgstr ""
+
+#: ../../../reference/tools.rst:1075
+msgid "**path** (Required): Path to the directory."
+msgstr ""
+
+#: ../../../reference/tools.rst:1080
+msgid "tools.which()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1082
+msgid "def which(filename)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1086
+msgid ""
+"Returns the path to a specified executable searching in the ``PATH`` "
+"environment variable. If not found, it returns ``None``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1088
+msgid ""
+"This tool also looks for filenames with following extensions if no extension "
+"provided:"
+msgstr ""
+
+#: ../../../reference/tools.rst:1090
+msgid "``.com``, ``.exe``, ``.bat`` ``.cmd`` for Windows."
+msgstr ""
+
+#: ../../../reference/tools.rst:1091
+msgid "``.sh`` if not Windows."
+msgstr ""
+
+#: ../../../reference/tools.rst:1093
+msgid ""
+"from conans import tools\n"
+"\n"
+"abs_path_make = tools.which(\"make\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:1100
+msgid ""
+"**filename** (Required): Name of the executable file. It doesn't require the "
+"extension of the executable."
+msgstr ""
+
+#: ../../../reference/tools.rst:1105
+msgid "tools.unix2dos()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1107
+msgid "def unix2dos(filepath)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1111
+msgid ""
+"Converts line breaks in a text file from Unix format (LF) to DOS format "
+"(CRLF)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1113
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.unix2dos(\"project.dsp\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:1120 ../../../reference/tools.rst:1140
+msgid "**filepath** (Required): The file to convert."
+msgstr ""
+
+#: ../../../reference/tools.rst:1125
+msgid "tools.dos2unix()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1127
+msgid "def dos2unix(filepath)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1131
+msgid ""
+"Converts line breaks in a text file from DOS format (CRLF) to Unix format "
+"(LF)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1133
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.dos2unix(\"dosfile.txt\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:1145
+msgid "tools.touch()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1147
+msgid "def touch(fname, times=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1151
+msgid ""
+"Updates the timestamp (last access and last modification times) of a file. "
+"This is similar to Unix' ``touch`` command except that this one fails if the "
+"file does not exist."
+msgstr ""
+
+#: ../../../reference/tools.rst:1154
+msgid ""
+"Optionally, a tuple of two numbers can be specified, which denotes the new "
+"values for the last access and last modified times respectively."
+msgstr ""
+
+#: ../../../reference/tools.rst:1156
+msgid ""
+"from conans import tools\n"
+"import time\n"
+"\n"
+"tools.touch(\"myfile\")                            # Sets atime and mtime to "
+"the current time\n"
+"tools.touch(\"myfile\", (time.time(), time.time()) # Similar to above\n"
+"tools.touch(\"myfile\", (time.time(), 1))          # Modified long, long ago"
+msgstr ""
+
+#: ../../../reference/tools.rst:1166
+msgid "**fname** (Required): File name of the file to be touched."
+msgstr ""
+
+#: ../../../reference/tools.rst:1167
+msgid ""
+"**times** (Optional, Defaulted to ``None``: Tuple with 'last access' and "
+"'last modified' times."
+msgstr ""
+
+#: ../../../reference/tools.rst:1172
+msgid "tools.relative_dirs()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1174
+msgid "def relative_dirs(path)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1178
+msgid ""
+"Recursively walks a given directory (using ``os.walk()``) and returns a list "
+"of all contained file paths relative to the given directory."
+msgstr ""
+
+#: ../../../reference/tools.rst:1180
+msgid ""
+"from conans import tools\n"
+"\n"
+"tools.relative_dirs(\"mydir\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:1187
+msgid "**path** (Required): Path of the directory."
+msgstr ""
+
+#: ../../../reference/tools.rst:1192
+msgid "tools.vswhere()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1194
+msgid ""
+"def vswhere(all_=False, prerelease=False, products=None, requires=None, "
+"version=\"\",\n"
+"            latest=False, legacy=False, property_=\"\", nologo=True)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1199
+msgid ""
+"Wrapper of ``vswhere`` tool to look for details of Visual Studio "
+"installations. Its output is always a list with a dictionary for each "
+"installation found."
+msgstr ""
+
+#: ../../../reference/tools.rst:1202
+msgid ""
+"from conans import tools\n"
+"\n"
+"vs_legacy_installations = tool.vswhere(legacy=True)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1209
+msgid ""
+"**all_** (Optional, Defaulted to ``False``): Finds all instances even if "
+"they are incomplete and may not launch."
+msgstr ""
+
+#: ../../../reference/tools.rst:1210
+msgid ""
+"**prerelease** (Optional, Defaulted to ``False``): Also searches "
+"prereleases. By default, only releases are searched."
+msgstr ""
+
+#: ../../../reference/tools.rst:1211
+msgid ""
+"**products** (Optional, Defaulted to ``None``): List of one or more product "
+"IDs to find. Defaults to Community, Professional, and Enterprise. Specify "
+"``[\"*\"]`` by itself to search all product instances installed."
+msgstr ""
+
+#: ../../../reference/tools.rst:1213
+msgid ""
+"**requires** (Optional, Defaulted to ``None``): List of one or more workload "
+"or component IDs required when finding instances. See https://docs.microsoft."
+"com/en-us/visualstudio/install/workload-and-component-ids?view=vs-2017 "
+"listing all workload and component IDs."
+msgstr ""
+
+#: ../../../reference/tools.rst:1215
+msgid ""
+"**version** (Optional, Defaulted to ``\"\"``): A version range of instances "
+"to find. Example: ``\"[15.0,16.0)\"`` will find versions 15.*."
+msgstr ""
+
+#: ../../../reference/tools.rst:1216
+msgid ""
+"**latest** (Optional, Defaulted to ``False``): Return only the newest "
+"version and last installed."
+msgstr ""
+
+#: ../../../reference/tools.rst:1217
+msgid ""
+"**legacy** (Optional, Defaulted to ``False``): Also searches Visual Studio "
+"2015 and older products. Information is limited. This option cannot be used "
+"with either ``products`` or ``requires`` parameters."
+msgstr ""
+
+#: ../../../reference/tools.rst:1219
+msgid ""
+"**property_** (Optional, Defaulted to ``\"\"``): The name of a property to "
+"return. Use delimiters ``.``, ``/``, or ``_`` to separate object and "
+"property names. Example: ``\"properties.nickname\"`` will return the "
+"\"nickname\" property under \"properties\"."
+msgstr ""
+
+#: ../../../reference/tools.rst:1221
+msgid ""
+"**nologo** (Optional, Defaulted to ``True``): Do not show logo information."
+msgstr ""
+
+#: ../../../reference/tools.rst:1226
+msgid "tools.vs_comntools()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1228
+msgid "def vs_comntools(compiler_version)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1232
+msgid ""
+"Returns the value of the environment variable "
+"``VS<compiler_version>.0COMNTOOLS`` for the compiler version indicated."
+msgstr ""
+
+#: ../../../reference/tools.rst:1234
+msgid ""
+"from conans import tools\n"
+"\n"
+"vs_path = tools.vs_comntools(\"14\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:1241
+msgid ""
+"**compiler_version** (Required): String with the version number: ``\"14\"``, "
+"``\"12\"``..."
+msgstr ""
+
+#: ../../../reference/tools.rst:1246
+msgid "tools.vs_installation_path()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1248
+msgid "def vs_installation_path(version, preference=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1252
+msgid ""
+"Returns the Visual Studio installation path for the given version. It uses :"
+"ref:`tools_vswhere` and :ref:`tools_vs_comntools`. It will also look for the "
+"installation paths following :ref:"
+"`env_vars_conan_vs_installation_preference` environment variable or the "
+"preference parameter itself. If the tool is not able to return the path it "
+"will return ``None``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1256
+msgid ""
+"from conans import tools\n"
+"\n"
+"vs_path_2017 = tools.vs_installation_path(\"15\", preference=[\"Community\", "
+"\"BuildTools\", \"Professional\", \"Enterprise\"])"
+msgstr ""
+
+#: ../../../reference/tools.rst:1263
+msgid ""
+"**version** (Required): Visual Studio version to locate. Valid version "
+"numbers are strings: ``\"10\"``, ``\"11\"``, ``\"12\"``, ``\"13\"``, "
+"``\"14\"``, ``\"15\"``..."
+msgstr ""
+
+#: ../../../reference/tools.rst:1265
+msgid ""
+"**preference** (Optional, Defaulted to ``None``): Set to value of :ref:"
+"`env_vars_conan_vs_installation_preference` or defaulted to "
+"``[\"Enterprise\", \"Professional\", \"Community\", \"BuildTools\"]``. If "
+"only set to one type of preference, it will return the installation path "
+"only for that Visual type and version, otherwise ``None``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1272
+msgid "tools.replace_prefix_in_pc_file()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1274
+msgid "def replace_prefix_in_pc_file(pc_file, new_prefix)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1278
+msgid ""
+"Replaces the ``prefix`` variable in a package config file *.pc* with the "
+"specified value."
+msgstr ""
+
+#: ../../../reference/tools.rst:1280
+msgid ""
+"from conans import tools\n"
+"\n"
+"lib_b_path = self.deps_cpp_info[\"libB\"].rootpath\n"
+"tools.replace_prefix_in_pc_file(\"libB.pc\", lib_b_path)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1289 ../../../reference/tools.rst:1321
+msgid "**Parameters:**"
+msgstr ""
+
+#: ../../../reference/tools.rst:1288
+msgid "**pc_file** (Required): Path to the pc file"
+msgstr ""
+
+#: ../../../reference/tools.rst:1289
+msgid ""
+"**new_prefix** (Required): New prefix variable value (Usually a path "
+"pointing to a package)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1293
+msgid "Check section :ref:`pc_files` to know more."
+msgstr ""
+
+#: ../../../reference/tools.rst:1298
+msgid "tools.collect_libs()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1300
+msgid "def collect_libs(conanfile, folder=None)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1304
+msgid ""
+"Returns a sorted list of library names from the libraries (files with "
+"extensions *.so*, *.lib*, *.a* and *.dylib*) located inside the ``conanfile."
+"cpp_info.libdirs`` (by default) or the **folder** directory relative to the "
+"package folder. Useful to collect not inter-dependent libraries or with "
+"complex names like ``libmylib-x86-debug-en.lib``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1308
+msgid ""
+"from conans import tools\n"
+"\n"
+"def package_info(self):\n"
+"    self.cpp_info.libdirs = [\"lib\", \"other_libdir\"]  # Deafult value is "
+"'lib'\n"
+"    self.cpp_info.libs = tools.collect_libs(self)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1316
+msgid ""
+"For UNIX libraries staring with **lib**, like *libmath.a*, this tool will "
+"collect the library name **math**."
+msgstr ""
+
+#: ../../../reference/tools.rst:1319
+msgid ""
+"**conanfile** (Required): A ``ConanFile`` object to get the "
+"``package_folder`` and ``cpp_info``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1320
+msgid ""
+"**folder** (Optional, Defaulted to ``None``): String indicating the "
+"subfolder name inside ``conanfile.package_folder`` where the library files "
+"are."
+msgstr ""
+
+#: ../../../reference/tools.rst:1325
+msgid ""
+"This tool collects the libraries searching directly inside the package "
+"folder and returns them in no specific order. If libraries are inter-"
+"dependent, then ``package_info()`` method should order them to achieve "
+"correct linking order."
+msgstr ""
+
+#: ../../../reference/tools.rst:1331
+msgid "tools.PkgConfig()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1333
+msgid ""
+"class PkgConfig(library, pkg_config_executable=\"pkg-config\", static=False, "
+"msvc_syntax=False, variables=None, print_errors=True)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1337
+msgid "Wrapper of the ``pkg-config`` tool."
+msgstr "``pkg-config`` 工具的包裝器。"
+
+#: ../../../reference/tools.rst:1339
+msgid ""
+"from conans import tools\n"
+"\n"
+"with environment_append({'PKG_CONFIG_PATH': tmp_dir}):\n"
+"    pkg_config = PkgConfig(\"libastral\")\n"
+"    print(pkg_config.cflags)\n"
+"    print(pkg_config.cflags_only_I)\n"
+"    print(pkg_config.variables)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1358 ../../../reference/tools.rst:1412
+#: ../../../reference/tools.rst:1461
+msgid "Parameters of the constructor:"
+msgstr ""
+
+#: ../../../reference/tools.rst:1350
+msgid "**library** (Required): Library (package) name, such as ``libastral``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1351
+msgid ""
+"**pkg_config_executable** (Optional, Defaulted to ``\"pkg-config\"``): "
+"Specify custom pkg-config executable (e.g., for cross-compilation)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1353
+msgid ""
+"**static** (Optional, Defaulted to ``False``): Output libraries suitable for "
+"static linking (adds ``--static`` to ``pkg-config`` command line)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1355
+msgid ""
+"**msvc_syntax** (Optional, Defaulted to ``False``): MSVC compatibility (adds "
+"``--msvc-syntax`` to ``pkg-config`` command line)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1356
+msgid ""
+"**variables** (Optional, Defaulted to ``None``): Dictionary of pkg-config "
+"variables (passed as ``--define-variable=VARIABLENAME=VARIABLEVALUE``)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1358
+msgid ""
+"**print_errors** (Optional, Defaulted to ``True``): Output error messages "
+"(adds --print-errors)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1360
+msgid "**Properties:**"
+msgstr ""
+
+#: ../../../reference/tools.rst:1363
+msgid "PROPERTY"
+msgstr ""
+
+#: ../../../reference/tools.rst:1363
+msgid "DESCRIPTION"
+msgstr ""
+
+#: ../../../reference/tools.rst:1365
+msgid ".cflags"
+msgstr ""
+
+#: ../../../reference/tools.rst:1365
+msgid "get all pre-processor and compiler flags"
+msgstr ""
+
+#: ../../../reference/tools.rst:1367
+msgid ".cflags_only_I"
+msgstr ""
+
+#: ../../../reference/tools.rst:1367
+msgid "get -I flags"
+msgstr ""
+
+#: ../../../reference/tools.rst:1369
+msgid ".cflags_only_other"
+msgstr ""
+
+#: ../../../reference/tools.rst:1369
+msgid "get cflags not covered by the cflags-only-I option"
+msgstr ""
+
+#: ../../../reference/tools.rst:1371
+msgid ".libs"
+msgstr ""
+
+#: ../../../reference/tools.rst:1371
+msgid "get all linker flags"
+msgstr ""
+
+#: ../../../reference/tools.rst:1373
+msgid ".libs_only_L"
+msgstr ""
+
+#: ../../../reference/tools.rst:1373
+msgid "get -L flags"
+msgstr ""
+
+#: ../../../reference/tools.rst:1375
+msgid ".libs_only_l"
+msgstr ""
+
+#: ../../../reference/tools.rst:1375
+msgid "get -l flags"
+msgstr ""
+
+#: ../../../reference/tools.rst:1377
+msgid ".libs_only_other"
+msgstr ""
+
+#: ../../../reference/tools.rst:1377
+msgid "get other libs (e.g., -pthread)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1379
+msgid ".provides"
+msgstr ""
+
+#: ../../../reference/tools.rst:1379
+msgid "get which packages the package provides"
+msgstr ""
+
+#: ../../../reference/tools.rst:1381
+msgid ".requires"
+msgstr ""
+
+#: ../../../reference/tools.rst:1381
+msgid "get which packages the package requires"
+msgstr ""
+
+#: ../../../reference/tools.rst:1383
+msgid ".requires_private"
+msgstr ""
+
+#: ../../../reference/tools.rst:1383
+msgid "get packages the package requires for static linking"
+msgstr ""
+
+#: ../../../reference/tools.rst:1385
+msgid ".variables"
+msgstr ""
+
+#: ../../../reference/tools.rst:1385
+msgid "get list of variables defined by the module"
+msgstr ""
+
+#: ../../../reference/tools.rst:1391
+msgid "tools.Git()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1395 ../../../reference/tools.rst:1444
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../reference/tools.rst:1397
+msgid ""
+"class Git(folder=None, verify_ssl=True, username=None, password=None,\n"
+"          force_english=True, runner=None):"
+msgstr ""
+"class Git(folder=None, verify_ssl=True, username=None, password=None,\n"
+"          force_english=True, runner=None):"
+
+#: ../../../reference/tools.rst:1402
+msgid "Wrapper of the ``git`` tool."
+msgstr ""
+
+#: ../../../reference/tools.rst:1405 ../../../reference/tools.rst:1454
+msgid ""
+"**folder** (Optional, Defaulted to ``None``): Specify a subfolder where the "
+"code will be cloned. If not specified it will clone in the current directory."
+msgstr ""
+
+#: ../../../reference/tools.rst:1407 ../../../reference/tools.rst:1456
+msgid ""
+"**verify_ssl** (Optional, Defaulted to ``True``): Verify SSL certificate of "
+"the specified **url**."
+msgstr ""
+
+#: ../../../reference/tools.rst:1408 ../../../reference/tools.rst:1457
+msgid ""
+"**username** (Optional, Defaulted to ``None``): When present, it will be "
+"used as the login to authenticate with the remote."
+msgstr ""
+
+#: ../../../reference/tools.rst:1409 ../../../reference/tools.rst:1458
+msgid ""
+"**password** (Optional, Defaulted to ``None``): When present, it will be "
+"used as the password to authenticate with the remote."
+msgstr ""
+
+#: ../../../reference/tools.rst:1410 ../../../reference/tools.rst:1459
+msgid ""
+"**force_english** (Optional, Defaulted to ``True``): The encoding of the "
+"tool will be forced to use ``en_US.UTF-8`` to ease the output parsing."
+msgstr ""
+
+#: ../../../reference/tools.rst:1412
+msgid ""
+"**runner** (Optional, Defaulted to ``None``): By default ``subprocess."
+"check_output`` will be used to invoke the ``git`` tool."
+msgstr ""
+
+#: ../../../reference/tools.rst:1435 ../../../reference/tools.rst:1485
+msgid "Methods:"
+msgstr ""
+
+#: ../../../reference/tools.rst:1415
+msgid "**run(command)**: Run any \"git\" command, e.g., ``run(\"status\")``"
+msgstr ""
+
+#: ../../../reference/tools.rst:1416
+msgid ""
+"**get_url_with_credentials(url)**: Returns the passed URL but containing the "
+"``username`` and ``password`` in the URL to authenticate (only if "
+"``username`` and ``password`` is specified)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1418
+msgid ""
+"**clone(url, branch=None, args=\"\", shallow=False)**: Clone a repository. "
+"Optionally you can specify a branch. Note: If you want to clone a repository "
+"and the specified **folder** already exist you have to specify a ``branch``. "
+"Additional ``args`` may be specified (e.g. git config variables). Use "
+"``shallow`` to perform a shallow clone (with `--depth 1` - only last "
+"revision is being cloned, such clones are usually done faster and take less "
+"disk space). In this case, ``branch`` may specify any valid git reference - "
+"e.g. branch name, tag name, sha256 of the revision, expression like `HEAD~1` "
+"or `None` (default branch, e.g. `master`)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1423
+msgid ""
+"**checkout(element, submodule=None)**: Checkout a branch, commit or tag "
+"given by ``element``. Argument ``submodule`` can get values in ``shallow`` "
+"or ``recursive`` to instruct what to do with submodules."
+msgstr ""
+
+#: ../../../reference/tools.rst:1425
+msgid ""
+"**get_remote_url(remote_name=None)**: Returns the remote URL of the "
+"specified remote. If not ``remote_name`` is specified ``origin`` will be "
+"used."
+msgstr ""
+
+#: ../../../reference/tools.rst:1427
+msgid ""
+"**get_qualified_remote_url()**: Returns the remote url (see "
+"``get_remote_url()``) but with forward slashes if it is a local folder."
+msgstr ""
+
+#: ../../../reference/tools.rst:1428
+msgid "**get_revision(), get_commit()**: Gets the current commit hash."
+msgstr ""
+
+#: ../../../reference/tools.rst:1429
+msgid "**get_branch()**: Gets the current branch."
+msgstr ""
+
+#: ../../../reference/tools.rst:1430
+msgid ""
+"**get_tag()**: Gets the current checkout tag (:command:`git describe --exact-"
+"match --tags`) and returns ``None`` if not in a tag."
+msgstr ""
+
+#: ../../../reference/tools.rst:1431
+msgid ""
+"**excluded_files()**: Gets a list of the files and folders that would be "
+"excluded by *.gitignore* file."
+msgstr ""
+
+#: ../../../reference/tools.rst:1432 ../../../reference/tools.rst:1481
+msgid ""
+"**is_local_repository()**: Returns `True` if the remote is a local folder."
+msgstr ""
+
+#: ../../../reference/tools.rst:1433 ../../../reference/tools.rst:1482
+msgid ""
+"**is_pristine()**: Returns `True` if there aren't modified or uncommitted "
+"files in the working copy."
+msgstr ""
+
+#: ../../../reference/tools.rst:1434 ../../../reference/tools.rst:1483
+msgid "**get_repo_root()**: Returns the root folder of the working copy."
+msgstr ""
+
+#: ../../../reference/tools.rst:1435
+msgid "**get_commit_message()**: Returns the latest log message"
+msgstr ""
+
+#: ../../../reference/tools.rst:1440
+msgid "tools.SVN()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1446
+msgid ""
+"class SVN(folder=None, verify_ssl=True, username=None, password=None,\n"
+"          force_english=True, runner=None):"
+msgstr ""
+"class SVN(folder=None, verify_ssl=True, username=None, password=None,\n"
+"          force_english=True, runner=None):"
+
+#: ../../../reference/tools.rst:1451
+msgid "Wrapper of the ``svn`` tool."
+msgstr ""
+
+#: ../../../reference/tools.rst:1461
+msgid ""
+"**runner** (Optional, Defaulted to ``None``): By default ``subprocess."
+"check_output`` will be used to invoke the ``svn`` tool."
+msgstr ""
+
+#: ../../../reference/tools.rst:1464
+msgid "**version()**: Retrieve version from the installed SVN client."
+msgstr ""
+
+#: ../../../reference/tools.rst:1465
+msgid "**run(command)**: Run any \"svn\" command, e.g., ``run(\"status\")``"
+msgstr ""
+
+#: ../../../reference/tools.rst:1466
+msgid ""
+"**get_url_with_credentials(url)**: Return the passed url but containing the "
+"``username`` and ``password`` in the URL to authenticate (only if "
+"``username`` and ``password`` is specified)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1468
+msgid ""
+"**checkout(url, revision=\"HEAD\")**: Checkout the revision number given by "
+"``revision`` from the specified ``url``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1469
+msgid ""
+"**update(revision=\"HEAD\")**: Update working copy to revision number given "
+"by ``revision``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1470
+msgid "**get_remote_url()**: Returns the remote url of working copy."
+msgstr ""
+
+#: ../../../reference/tools.rst:1471
+msgid ""
+"**get_qualified_remote_url()**: Returns the remote url of the working copy "
+"with the `peg revision <http://svnbook.red-bean.com/en/1.7/svn.advanced."
+"pegrevs.html>`_ appended to it."
+msgstr ""
+
+#: ../../../reference/tools.rst:1473
+msgid ""
+"**get_revision()**: Gets the current revision number from the repo server."
+msgstr ""
+
+#: ../../../reference/tools.rst:1474
+msgid ""
+"**get_last_changed_revision(use_wc_root=True)**: Returns the revision number "
+"corresponding to the last changed item in the working folder "
+"(``use_wc_root=False``) or in the working copy root (``use_wc_root=True``)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1476
+msgid ""
+"**get_branch()**: Tries to deduce the branch name from the `standard SVN "
+"layout <http://svnbook.red-bean.com/en/1.7/svn.branchmerge.maint.html>`_. "
+"Will raise if cannot resolve it."
+msgstr ""
+
+#: ../../../reference/tools.rst:1478
+msgid ""
+"**get_tag()**: Tries to deduce the tag name from the `standard SVN layout "
+"<http://svnbook.red-bean.com/en/1.7/svn.branchmerge.maint.html>`_ and "
+"returns the current tag name. Otherwise it will return ``None``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1480
+msgid ""
+"**excluded_files()**: Gets a list of the files and folders that are marked "
+"to be ignored."
+msgstr ""
+
+#: ../../../reference/tools.rst:1484
+msgid "**get_revision_message()**: Returns the latest log message"
+msgstr ""
+
+#: ../../../reference/tools.rst:1489
+msgid ""
+"SVN allows to checkout a subdirectory of the remote repository, take into "
+"account that the return value of some of these functions may depend on the "
+"root of the working copy that has been checked out."
+msgstr ""
+
+#: ../../../reference/tools.rst:1495
+msgid "tools.is_apple_os()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1497
+msgid "def is_apple_os(os_)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1501
+msgid "Returns ``True`` if OS is an Apple one: macOS, iOS, watchOS or tvOS."
+msgstr ""
+
+#: ../../../reference/tools.rst:1504
+msgid ""
+"**os_** (Required): OS to perform the check. Usually this would be ``self."
+"settings.os``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1509
+msgid "tools.to_apple_arch()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1511
+msgid "def to_apple_arch(arch)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1515
+msgid "Converts Conan style architecture into Apple style architecture."
+msgstr ""
+
+#: ../../../reference/tools.rst:1518
+msgid ""
+"**arch** (Required): arch to perform the conversion. Usually this would be "
+"``self.settings.arch``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1523
+msgid "tools.apple_sdk_name()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1525
+msgid "def apple_sdk_name(settings)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1529
+msgid ""
+"Returns proper SDK name suitable for OS and architecture you are building "
+"for (considering simulators)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1532
+msgid "**settings** (Required): Conanfile settings."
+msgstr ""
+
+#: ../../../reference/tools.rst:1538
+msgid "tools.apple_deployment_target_env()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1540
+msgid "def apple_deployment_target_env(os_, os_version)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1544
+msgid ""
+"Environment variable name which controls deployment target: "
+"``MACOSX_DEPLOYMENT_TARGET``, ``IOS_DEPLOYMENT_TARGET``, "
+"``WATCHOS_DEPLOYMENT_TARGET`` or ``TVOS_DEPLOYMENT_TARGET``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1548 ../../../reference/tools.rst:1563
+msgid "**os_** (Required): OS of the settings. Usually ``self.settings.os``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1549 ../../../reference/tools.rst:1564
+msgid "**os_version** (Required): OS version."
+msgstr ""
+
+#: ../../../reference/tools.rst:1554
+msgid "tools.apple_deployment_target_flag()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1556
+msgid "def apple_deployment_target_flag(os_, os_version)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1560
+msgid ""
+"Compiler flag name which controls deployment target. For example: ``-"
+"mappletvos-version-min=9.0``"
+msgstr ""
+
+#: ../../../reference/tools.rst:1569
+msgid "tools.XCRun()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1571
+msgid ""
+"class XCRun(object):\n"
+"\n"
+"    def __init__(self, settings, sdk=None):"
+msgstr ""
+
+#: ../../../reference/tools.rst:1577
+msgid "XCRun wrapper used to get information for building."
+msgstr ""
+
+#: ../../../reference/tools.rst:1588 ../../../reference/tools.rst:1645
+msgid "Properties:"
+msgstr ""
+
+#: ../../../reference/tools.rst:1580
+msgid "**sdk_path**: Obtain SDK path (a.k.a. Apple sysroot or -isysroot)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1581
+msgid "**sdk_version**: Obtain SDK version."
+msgstr ""
+
+#: ../../../reference/tools.rst:1582
+msgid "**sdk_platform_path**: Obtain SDK platform path."
+msgstr ""
+
+#: ../../../reference/tools.rst:1583
+msgid "**sdk_platform_version**: Obtain SDK platform version."
+msgstr ""
+
+#: ../../../reference/tools.rst:1584
+msgid "**cc**: Path to C compiler (CC)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1585
+msgid "**cxx**: Path to C++ compiler (CXX)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1586
+msgid "**ar**: Path to archiver (AR)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1587
+msgid "**ranlib**: Path to archive indexer (RANLIB)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1588
+msgid "**strip**: Path to symbol removal utility (STRIP)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1593
+msgid "tools.latest_vs_version_installed()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1595
+msgid "def latest_vs_version_installed()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1599
+msgid ""
+"Returns a string with the major version of latest Microsoft Visual Studio "
+"available on machine. If no Microsoft Visual Studio installed, it returns "
+"``None``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1605
+msgid "tools.apple_dot_clean()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1607
+msgid "def apple_dot_clean(folder)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1611
+msgid ""
+"Remove recursively all ``._`` files inside ``folder``, these files are "
+"created by Apple OS when the underlying filesystem cannot store metadata "
+"associated to files (they could appear when unzipping a file that has been "
+"created in Macos). This tool will remove only the ``._`` files that are "
+"accompanied with a file without that prefix (it will remove ``._file.txt`` "
+"only if ``file.txt`` exists)."
+msgstr ""
+
+#: ../../../reference/tools.rst:1618
+msgid "**folder** (Required): root folder to start deleting ``._`` files."
+msgstr ""
+
+#: ../../../reference/tools.rst:1623
+msgid "tools.Version()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1625
+msgid ""
+"from conans import tools\n"
+"\n"
+"v = tools.Version(\"1.2.3-dev23\")\n"
+"assert v < \"1.2.3\""
+msgstr ""
+
+#: ../../../reference/tools.rst:1632
+msgid ""
+"This is a helper class to work with semantic versions, built on top of "
+"``semver.SemVer`` class with loose parsing. It exposes all the version "
+"components as properties and offers total ordering through compare operators."
+msgstr ""
+
+#: ../../../reference/tools.rst:1636
+msgid ""
+"Build the ``tools.Version`` object using any valid string or any object that "
+"converts to string, the constructor will raise if the string is not a valid "
+"loose semver."
+msgstr ""
+
+#: ../../../reference/tools.rst:1640
+msgid "**major**: component ``major`` of semver version"
+msgstr ""
+
+#: ../../../reference/tools.rst:1641
+msgid ""
+"**minor**: component ``minor`` of semver version (defaults to ``\"0\"``)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1642
+msgid ""
+"**patch**: component ``patch`` of semver version (defaults to ``\"0\"``)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1643
+msgid ""
+"**prerelease**: component ``prerelease`` of semver version (defaults to "
+"``\"\"``)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1644
+msgid ""
+"**build**: component ``build`` of semver version (defaults to ``\"\"``). "
+"Take into account that ``build`` component doesn't affect precedence between "
+"versions."
+msgstr ""
+
+#: ../../../reference/tools.rst:1650
+msgid "tools.to_android_abi()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1652
+msgid "def to_android_abi(arch)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1656
+msgid "Converts Conan style architecture into Android NDK style architecture."
+msgstr ""
+
+#: ../../../reference/tools.rst:1659
+msgid ""
+"**arch** (Required): Arch to perform the conversion. Usually this would be "
+"``self.settings.arch``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1664
+msgid "tools.check_min_cppstd()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1666
+msgid "def check_min_cppstd(conanfile, cppstd, gnu_extensions=False)"
+msgstr "def check_min_cppstd(conanfile, cppstd, gnu_extensions=False)"
+
+#: ../../../reference/tools.rst:1670
+msgid ""
+"Validates if the applied cppstd setting (from `compiler.cppstd` settings or "
+"deducing the default from `compiler` and `compiler.version`) is at least the "
+"value specified in the `cppstd` argument. It raises a "
+"``ConanInvalidConfiguration`` when is not supported."
+msgstr ""
+
+#: ../../../reference/tools.rst:1673
+msgid ""
+"from conans import tools, ConanFile\n"
+"\n"
+"class Recipe(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def configure(self):\n"
+"        tools.check_min_cppstd(self, \"17\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:1683
+msgid ""
+"If the current cppstd does not support C++17, ``check_min_cppstd`` will "
+"raise an ``ConanInvalidConfiguration`` error."
+msgstr ""
+
+#: ../../../reference/tools.rst:1684
+msgid ""
+"If ``gnu_extensions`` is True, it is required that the applied ``cppstd`` "
+"supports the gnu extensions. (e.g. gnu17), otherwise, an :ref:"
+"`ConanInvalidConfiguration<conditional_settings_options_requirements>` will "
+"be raised. The ``gnu_extensions`` is checked in any OS."
+msgstr ""
+
+#: ../../../reference/tools.rst:1686
+msgid ""
+"If no compiler has been specified or the compiler is unknown, it raises a "
+"``ConanException`` exception."
+msgstr ""
+
+#: ../../../reference/tools.rst:1689 ../../../reference/tools.rst:1719
+msgid "**conanfile** (Required): ConanFile instance. Usually ``self``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1690 ../../../reference/tools.rst:1720
+msgid "**cppstd** (Required): C++ standard version which must be supported."
+msgstr ""
+
+#: ../../../reference/tools.rst:1691 ../../../reference/tools.rst:1721
+msgid "**gnu_extensions** (Optional): GNU extension is required."
+msgstr ""
+
+#: ../../../reference/tools.rst:1696
+msgid "tools.valid_min_cppstd()"
+msgstr ""
+
+#: ../../../reference/tools.rst:1698
+msgid "def valid_min_cppstd(conanfile, cppstd, gnu_extensions=False)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1702
+msgid ""
+"Validate the current cppstd from settings or compiler, if it is supported by "
+"the required cppstd version. It returns ``True`` when is valid, otherwise, "
+"``False``."
+msgstr ""
+
+#: ../../../reference/tools.rst:1705
+msgid ""
+"from conans import tools, ConanFile\n"
+"\n"
+"class Recipe(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def configure(self):\n"
+"        if not tools.valid_min_cppstd(self, \"17\"):\n"
+"            self.output.error(\"C++17 is required.\")"
+msgstr ""
+
+#: ../../../reference/tools.rst:1716
+msgid ""
+"The ``valid_min_cppstd`` works exactly like ``check_min_cppstd``, however, "
+"it does not raise ``ConanInvalidConfiguration`` error."
+msgstr ""
+
+#: ../../../reference/tools.rst:1727
+msgid "tools.cppstd_flag():"
+msgstr ""
+
+#: ../../../reference/tools.rst:1729
+msgid "def cppstd_flag(settings)"
+msgstr ""
+
+#: ../../../reference/tools.rst:1733
+msgid ""
+"Returns the corresponding C++ standard flag based on the settings. For "
+"instance, it may return ``-std=c++17`` for ``compiler.cppstd=17``, and so on."
+msgstr ""

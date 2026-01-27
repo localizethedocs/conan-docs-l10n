@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.20\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 08:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/extensions/package_signing.rst:4
+msgid "Package signing"
+msgstr ""
+
+#: ../../../reference/extensions/package_signing.rst:8
+msgid ""
+"The package signing plugin is in **preview**. See :ref:`the Conan "
+"stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/extensions/package_signing.rst:12
+msgid ""
+"This plugin, which must be located in the cache ``extensions/plugins/sign/"
+"sign.py`` file contains 2 methods:"
+msgstr ""
+
+#: ../../../reference/extensions/package_signing.rst:14
+msgid ""
+"The ``sign(ref, artifacts_folder, signature_folder, **kwargs)`` executes for "
+"every recipe and package that is to be uploaded to a server. The ``ref`` is "
+"the full reference to the artifact, it can be either a recipe reference or a "
+"package reference. The ``artifacts_folder`` is the folder containing the "
+"files to be uploaded, typically the ``conanfile.py``, ``conan_package.tgz``, "
+"``conanmanifest.txt``, etc. The ``signature_folder`` contains the folder in "
+"which the generated files should be written."
+msgstr ""
+
+#: ../../../reference/extensions/package_signing.rst:19
+msgid ""
+"The ``verify(ref, artifacts_folder, signature_folder, files, **kwargs)`` "
+"executes when a package is installed from a server, receives the same "
+"arguments as above and should be used to verify the integrity or correctness "
+"of the signatures. The ``files`` is an iterable of downloaded files, because "
+"this function can be called twice when a package is being installed: first, "
+"the recipe is installed, and ``verify()`` will be called with the recipe "
+"files, that is ``conanfile.py``, ``conandata.yml``, etc. But also, when a "
+"package is being built from sources, it is possible that the recipe exported "
+"``conan_sources.tgz`` file is also downloaded, and the ``verify()`` function "
+"will be called again, now this time with the ``files`` argument containing "
+"``conan_sources.tgz`` only."
+msgstr ""
+
+#: ../../../reference/extensions/package_signing.rst:28
+msgid ""
+"Example of a package signer that puts the artifact filenames in a file "
+"called ``signature.asc`` when the package is uploaded and assert that the "
+"downloaded artifacts are in the downloaded ``signature.asc``:"
+msgstr ""
+
+#: ../../../reference/extensions/package_signing.rst:32
+msgid ""
+"import os\n"
+"\n"
+"def sign(ref, artifacts_folder, signature_folder, **kwargs):\n"
+"    print(\"Signing ref: \", ref)\n"
+"    print(\"Signing folder: \", artifacts_folder)\n"
+"    files = []\n"
+"    for f in sorted(os.listdir(artifacts_folder)):\n"
+"        if os.path.isfile(os.path.join(artifacts_folder, f)):\n"
+"            files.append(f)\n"
+"    signature = os.path.join(signature_folder, \"signature.asc\")\n"
+"    open(signature, \"w\").write(\"\\n\".join(files))\n"
+"\n"
+"def verify(ref, artifacts_folder, signature_folder, files, **kwargs):\n"
+"    print(\"Verifying ref: \", ref)\n"
+"    print(\"Verifying folder: \", artifacts_folder)\n"
+"    signature = os.path.join(signature_folder, \"signature.asc\")\n"
+"    contents = open(signature).read()\n"
+"    print(\"verifying contents\", contents)\n"
+"    for f in files:\n"
+"        print(\"VERIFYING \", f)\n"
+"        if os.path.isfile(os.path.join(artifacts_folder, f)):\n"
+"            assert f in contents"
+msgstr ""
+
+#: ../../../reference/extensions/package_signing.rst:58
+msgid ""
+"Note that the ``**kwargs`` argument is important to avoid future changes "
+"adding new arguments that would otherwise break the plugin, please make sure "
+"to add it to your methods."
+msgstr ""

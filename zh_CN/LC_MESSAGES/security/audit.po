@@ -1,0 +1,133 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.23\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-16 08:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../security/audit.rst:4
+msgid "Scanning dependencies with ``conan audit``"
+msgstr ""
+
+#: ../../../security/audit.rst:6
+msgid ""
+"The ``conan audit`` commands provide a built-in way to **scan your "
+"dependencies for known CVEs**."
+msgstr ""
+
+#: ../../../security/audit.rst:8
+msgid ""
+"For a step-by-step guide on authentication, usage examples, output formats, "
+"and setting up private providers, see :ref:`Checking package vulnerabilities "
+"<devops_audit>`. In short:"
+msgstr ""
+
+#: ../../../security/audit.rst:11
+msgid "**Register** at `audit.conan.io <https://audit.conan.io/register>`_."
+msgstr ""
+
+#: ../../../security/audit.rst:12
+msgid "**Activate your account** via the confirmation email you receive."
+msgstr ""
+
+#: ../../../security/audit.rst:13
+msgid "**Save your token**, which is displayed on the page after activation."
+msgstr ""
+
+#: ../../../security/audit.rst:14
+msgid "**Configure Conan to use your token**:"
+msgstr ""
+
+#: ../../../security/audit.rst:16
+msgid "conan audit provider auth conancenter --token=<token>"
+msgstr ""
+
+#: ../../../security/audit.rst:20
+msgid "Run a scan:"
+msgstr ""
+
+#: ../../../security/audit.rst:22
+msgid ""
+"# Check a specific reference\n"
+"conan audit list zlib/1.2.13\n"
+"\n"
+"# Scan the entire dependency graph\n"
+"conan audit scan .  # Path to the conanfile.py/txt"
+msgstr ""
+
+#: ../../../security/audit.rst:31
+msgid ""
+"This command also supports using your own JFrog Platform as a private "
+"provider for vulnerability scanning. See the :ref:`Adding private providers "
+"<devops_audit_private_providers>` section for more details."
+msgstr ""
+
+#: ../../../security/audit.rst:36
+msgid "Filtering queried packages"
+msgstr ""
+
+#: ../../../security/audit.rst:38
+msgid ""
+"By default, the ``conan audit scan`` command will query all packages in the "
+"dependency graph. You can filter the packages to be queried based on their "
+"context using the ``--context`` option, which accepts ``\"host\"``, or "
+"``\"build\"`` as values, and when omitted, defaults to quering both contexts."
+msgstr ""
+
+#: ../../../security/audit.rst:42
+msgid ""
+"This allows you to skip checking for CVEs in build requirements, which are "
+"not part of the final product and therefore less relevant (but still "
+"important!) for vulnerability scanning."
+msgstr ""
+
+#: ../../../security/audit.rst:45
+msgid ""
+"It's also possible to perform this filter using the ``conan audit list`` "
+"command, by leveraging the packages list filtering from the ``conan list`` "
+"command. For example:"
+msgstr ""
+
+#: ../../../security/audit.rst:48
+msgid ""
+"# Generate the dependency graph in JSON format\n"
+"$ conan graph info . --format=json > graph.json\n"
+"# Create a packages list for the resolved dependency graph, filtering to "
+"only contain the `host` context packages\n"
+"$ conan list --graph=graph.json --graph-context=host --format=json > pkglist."
+"json\n"
+"# Scan the filtered packages list for vulnerabilities\n"
+"$ conan audit list --list=pkglist.json"
+msgstr ""
+
+#: ../../../security/audit.rst:61
+msgid ""
+"`JFrog Academy Conan 2 Essentials: Scanning C++ packages for Vulnerabilities "
+"using Conan Audit <https://academy.jfrog.com/conan-2-essentials/2164300?"
+"utm_source=Conan+Docs>`__"
+msgstr ""
+
+#: ../../../security/audit.rst:62
+msgid ""
+"For detailed reference documentation on all ``conan audit`` subcommands and "
+"their options, consult the :ref:`conan audit command reference "
+"<reference_commands_audit>`."
+msgstr ""
+
+#: ../../../security/audit.rst:65
+msgid ""
+"Read more in the dedicated `blog post <https://blog.conan.io/introducing-"
+"conan-audit-command/>`_."
+msgstr ""

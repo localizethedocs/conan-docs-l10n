@@ -1,0 +1,377 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:4
+msgid "Header-only packages"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:6
+msgid ""
+"In this section, we are going to learn how to create a recipe for a header-"
+"only library."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:8
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:136
+msgid ""
+"Please, first clone the sources to recreate this project. You can find them "
+"in the `examples2 repository <https://github.com/conan-io/examples2>`_ on "
+"GitHub:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:11
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/tutorial/creating_packages/other_packages/header_only"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:17
+msgid ""
+"A header-only library is composed only of header files. That means a "
+"consumer doesn't link with any library but includes headers, so we need only "
+"one binary configuration for a header-only library."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:20
+msgid ""
+"In the :ref:`Create your first Conan package "
+"<creating_packages_create_your_first_conan_package>` section, we learned "
+"about the settings, and how building the recipe applying different "
+"``build_type`` (Release/Debug) generates a new binary package."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:24
+msgid ""
+"As we only need one binary package, we don't need to declare the `settings` "
+"attribute. This is a basic recipe for a header-only recipe:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:27
+msgid "conanfile.py"
+msgstr "conanfile.py"
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:27
+msgid ""
+" from conan import ConanFile\n"
+" from conan.tools.files import copy\n"
+"\n"
+"\n"
+" class SumConan(ConanFile):\n"
+"     name = \"sum\"\n"
+"     version = \"0.1\"\n"
+"     # No settings/options are necessary, this is header only\n"
+"     exports_sources = \"include/*\"\n"
+"     # We can avoid copying the sources to the build folder in the cache\n"
+"     no_copy_source = True\n"
+"\n"
+"     def package(self):\n"
+"         # This will also copy the \"include\" folder\n"
+"         copy(self, \"*.h\", self.source_folder, self.package_folder)\n"
+"\n"
+"     def package_info(self):\n"
+"         # For header-only packages, libdirs and bindirs are not used\n"
+"         # so it's necessary to set those as empty.\n"
+"         self.cpp_info.bindirs = []\n"
+"         self.cpp_info.libdirs = []"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:53
+msgid ""
+"Please, note that we are setting ``cpp_info.bindirs`` and ``cpp_info."
+"libdirs`` to ``[]`` because header-only libraries don't have compiled "
+"libraries or binaries, but they default to ``[\"bin\"]``, and ``[\"lib\"]``, "
+"then it is necessary to change it."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:56
+msgid ""
+"Also check that we are setting the :ref:`no_copy_source "
+"<conan_conanfile_properties_no_copy_source>` attribute to ``True`` so that "
+"the source code will not be copied from the ``source_folder`` to the "
+"``build_folder``. This is a typical optimization for header-only libraries "
+"to avoid extra copies."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:61
+msgid "Our header-only library is this simple function that sums two numbers:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:64
+msgid "include/sum.h"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:64
+msgid ""
+" inline int sum(int a, int b){\n"
+"     return a + b;\n"
+" }"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:72
+msgid ""
+"The folder `examples2/tutorial/creating_packages/other_packages/header_only` "
+"in the cloned project contains a ``test_package`` folder with an example of "
+"an application consuming the header-only library. So we can run a ``conan "
+"create .`` command to build the package and test the package:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:76
+msgid ""
+"$ conan create .\n"
+"...\n"
+"[ 50%] Building CXX object CMakeFiles/example.dir/src/example.cpp.o\n"
+"[100%] Linking CXX executable example\n"
+"[100%] Built target example\n"
+"\n"
+"-------- Testing the package: Running test() ----------\n"
+"sum/0.1 (test package): Running test()\n"
+"sum/0.1 (test package): RUN: ./example\n"
+"1 + 3 = 4"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:89
+msgid ""
+"After running the ``conan create`` a new binary package is created for the "
+"header-only library, and we can see how the ``test_package`` project can use "
+"it correctly."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:92
+msgid "We can list the binary packages created running this command:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:94
+msgid ""
+"$ conan list \"sum/0.1#:*\"\n"
+"Local Cache\n"
+"  sum\n"
+"    sum/0.1\n"
+"      revisions\n"
+"        c1a714a086933b067bcbf12002fb0780 (2024-05-09 15:28:51 UTC)\n"
+"          packages\n"
+"            da39a3ee5e6b4b0d3255bfef95601890afd80709\n"
+"              info"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:106
+msgid ""
+"We get one package with the package ID "
+"``da39a3ee5e6b4b0d3255bfef95601890afd80709``. Let's see what happen if we "
+"run the ``conan create`` but specifying ``-s build_type=Debug``:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:109
+msgid ""
+"$ conan create . -s build_type=Debug\n"
+"$ conan list \"sum/0.1#:*\"\n"
+"Local Cache\n"
+"  sum\n"
+"    sum/0.1\n"
+"      revisions\n"
+"        c1a714a086933b067bcbf12002fb0780 (2024-05-09 15:28:51 UTC)\n"
+"          packages\n"
+"            da39a3ee5e6b4b0d3255bfef95601890afd80709\n"
+"              info"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:122
+msgid ""
+"Even in the ``test_package`` executable is built for Debug, we get the same "
+"binary package for the header-only library. This is because we didn't "
+"specify the ``settings`` attribute in the recipe, so the changes in the "
+"input settings (``-s build_type=Debug``) do not affect the recipe and "
+"therefore the generated binary package is always the same."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:128
+msgid "Header-only library with tests"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:130
+msgid ""
+"In the previous example, we saw why a recipe header-only library shouldn't "
+"declare the ``settings`` attribute, but sometimes the recipe needs them to "
+"build some executable, for example, for testing the library. Nonetheless, "
+"the binary package of the header-only library should still be unique, so we "
+"are going to review how to achieve that."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:139
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/tutorial/creating_packages/other_packages/header_only_gtest"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:144
+msgid ""
+"We have the same header-only library that sums two numbers, but now we have "
+"this recipe:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:147
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"from conan.tools.files import copy\n"
+"from conan.tools.cmake import cmake_layout, CMake\n"
+"\n"
+"\n"
+"class SumConan(ConanFile):\n"
+"    name = \"sum\"\n"
+"    version = \"0.1\"\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    exports_sources = \"include/*\", \"test/*\"\n"
+"    no_copy_source = True\n"
+"    generators = \"CMakeToolchain\", \"CMakeDeps\"\n"
+"\n"
+"    def requirements(self):\n"
+"        self.test_requires(\"gtest/1.11.0\")\n"
+"\n"
+"    def validate(self):\n"
+"        check_min_cppstd(self, 11)\n"
+"\n"
+"    def layout(self):\n"
+"        cmake_layout(self)\n"
+"\n"
+"    def build(self):\n"
+"        if not self.conf.get(\"tools.build:skip_test\", default=False):\n"
+"            cmake = CMake(self)\n"
+"            cmake.configure(build_script_folder=\"test\")\n"
+"            cmake.build()\n"
+"            self.run(os.path.join(self.cpp.build.bindir, \"test_sum\"))\n"
+"\n"
+"    def package(self):\n"
+"        # This will also copy the \"include\" folder\n"
+"        copy(self, \"*.h\", self.source_folder, self.package_folder)\n"
+"\n"
+"    def package_info(self):\n"
+"        # For header-only packages, libdirs and bindirs are not used\n"
+"        # so it's necessary to set those as empty.\n"
+"        self.cpp_info.bindirs = []\n"
+"        self.cpp_info.libdirs = []\n"
+"\n"
+"    def package_id(self):\n"
+"        self.info.clear()"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:195
+msgid "These are the changes introduced in the recipe:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:197
+msgid ""
+"We are introducing a ``test_require`` to ``gtest/1.11.0``. A "
+"``test_require`` is similar to a regular requirement but it is not "
+"propagated to the consumers and cannot conflict."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:199
+msgid ""
+"``gtest`` needs at least C++11 to build. So we introduced a ``validate()`` "
+"method calling ``check_min_cppstd``."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:200
+msgid ""
+"As we are building the ``gtest`` examples with CMake, we use the generators "
+"``CMakeToolchain`` and ``CMakeDeps``, and we declared the ``cmake_layout()`` "
+"to have a known/standard directory structure."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:202
+msgid ""
+"We have a ``build()`` method, building the tests, but only when the standard "
+"conf ``tools.build:skip_test`` is not True. Use that conf as a standard way "
+"to enable/disable the testing. It is used by the helpers like ``CMake`` to "
+"skip the ``cmake.test()`` in case we implement the tests in CMake."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:205
+msgid ""
+"We have a ``package_id()`` method calling ``self.info.clear()``. This is "
+"internally removing all the information (settings, options, requirements) "
+"from the package_id calculation so we generate only one configuration for "
+"our header-only library."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:210
+msgid "We can call ``conan create`` to build and test our package."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:212
+msgid ""
+"$ conan create . -s compiler.cppstd=14 --build missing\n"
+"...\n"
+"Running main() from /Users/luism/.conan2/p/tmp/9bf83ef65d5ff0d6/b/googletest/"
+"src/gtest_main.cc\n"
+"[==========] Running 1 test from 1 test suite.\n"
+"[----------] Global test environment set-up.\n"
+"[----------] 1 test from SumTest\n"
+"[ RUN      ] SumTest.BasicSum\n"
+"[       OK ] SumTest.BasicSum (0 ms)\n"
+"[----------] 1 test from SumTest (0 ms total)\n"
+"\n"
+"[----------] Global test environment tear-down\n"
+"[==========] 1 test from 1 test suite ran. (0 ms total)\n"
+"[  PASSED  ] 1 test.\n"
+"sum/0.1: Package 'da39a3ee5e6b4b0d3255bfef95601890afd80709' built\n"
+"..."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:230
+msgid ""
+"We can run ``conan create`` again specifying a different ``compiler.cppstd`` "
+"and the built package would be the same:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:232
+msgid ""
+"$ conan create . -s compiler.cppstd=17\n"
+"...\n"
+"sum/0.1: RUN: ./test_sum\n"
+"Running main() from /Users/luism/.conan2/p/tmp/9bf83ef65d5ff0d6/b/googletest/"
+"src/gtest_main.cc\n"
+"[==========] Running 1 test from 1 test suite.\n"
+"[----------] Global test environment set-up.\n"
+"[----------] 1 test from SumTest\n"
+"[ RUN      ] SumTest.BasicSum\n"
+"[       OK ] SumTest.BasicSum (0 ms)\n"
+"[----------] 1 test from SumTest (0 ms total)\n"
+"\n"
+"[----------] Global test environment tear-down\n"
+"[==========] 1 test from 1 test suite ran. (0 ms total)\n"
+"[  PASSED  ] 1 test.\n"
+"sum/0.1: Package 'da39a3ee5e6b4b0d3255bfef95601890afd80709' built"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:252
+msgid ""
+"Once we have the ``sum/0.1`` binary package available (in a server, after a "
+"``conan upload``, or in the local cache), we can install it even if we don't "
+"specify input values for ``os``, ``arch``, ... etc. This is a new feature of "
+"Conan 2.X."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.rst:255
+msgid ""
+"We could call ``conan install --require sum/0.1`` with an empty profile and "
+"would get the binary package from the server. But if we miss the binary and "
+"we need to build the package again, it will fail because of the lack of "
+"settings."
+msgstr ""

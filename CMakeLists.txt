@@ -310,7 +310,7 @@ elseif (VERSION MATCHES "^(1)$")
     set(VERSION_OF_GRAPHVIZ     "")
     set(VERSION_OF_ENCHANT      "2.3")
 elseif (VERSION MATCHES "^([0-9]+)\\.([0-9]+)$")
-    if     (VERSION VERSION_LESS_EQUAL    "2.24" AND
+    if     (VERSION VERSION_LESS_EQUAL    "2.25" AND
             VERSION VERSION_GREATER_EQUAL "2.0")
         set(VERSION_OF_PYTHON       "3.12")
         set(VERSION_OF_GRAPHVIZ     "")

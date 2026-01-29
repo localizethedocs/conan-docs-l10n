@@ -1,0 +1,175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.24\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-29 06:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:4
+msgid "CMakeToolchain: Building your project using CMakePresets"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:6
+msgid ""
+"In this example we are going to see how to use ``CMakeToolchain``, "
+"predefined layouts like ``cmake_layout`` and the ``CMakePresets`` CMake "
+"feature."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:9
+msgid ""
+"Let's create a basic project based on the template ``cmake_exe`` as an "
+"example of a C++ project:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:11
+msgid "$ conan new cmake_exe -d name=foo -d version=1.0"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:17
+msgid "Generating the toolchain"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:19
+msgid "The recipe from our project declares the generator \"CMakeToolchain\"."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:21
+msgid ""
+"We can call :command:`conan install` to install both ``Release`` and "
+"``Debug`` configurations. Conan will generate a ``conan_toolchain.cmake`` at "
+"the corresponding *generators* folder:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:25
+msgid ""
+"$ conan install .\n"
+"$ conan install . -s build_type=Debug"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:32
+msgid "Building the project using ``CMakePresets``"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:34
+msgid ""
+"A ``CMakeUserPresets.json`` file is generated in the same folder of your "
+"``CMakeLists.txt`` file, so you can use the ``--preset`` argument from "
+"``cmake >= 3.23`` or use an IDE that supports it."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:38
+msgid ""
+"The ``CMakeUserPresets.json`` is including the ``CMakePresets.json`` files "
+"located at the corresponding *generators* folder."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:42
+msgid ""
+"The ``CMakePresets.json`` contain information about the ``conan_toolchain."
+"cmake`` location and even the ``binaryDir`` set with the output directory."
+msgstr ""
+
+#: ../../../tutorial/cmake_presets_note.inc:3
+msgid ""
+"We use CMake presets in this example. This requires CMake >= 3.23 because "
+"the \"include\" from ``CMakeUserPresets.json`` to ``CMakePresets.json`` is "
+"only supported since that version. If you prefer not to use presets you can "
+"use something like:"
+msgstr ""
+
+#: ../../../tutorial/cmake_presets_note.inc:7
+msgid ""
+"cmake <path> -G <CMake generator> -DCMAKE_TOOLCHAIN_FILE=<path to\n"
+"conan_toolchain.cmake> -DCMAKE_BUILD_TYPE=Release"
+msgstr ""
+
+#: ../../../tutorial/cmake_presets_note.inc:12
+msgid ""
+"Conan will show the exact CMake command everytime you run ``conan install`` "
+"in case you can't use the presets feature."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:49
+msgid "If you are using a multi-configuration generator:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:51
+msgid ""
+"$ cmake --preset conan-default\n"
+"$ cmake --build --preset conan-debug\n"
+"$ build\\Debug\\foo.exe\n"
+"foo/1.0: Hello World Debug!\n"
+"\n"
+"$ cmake --build --preset conan-release\n"
+"$ build\\Release\\foo.exe\n"
+"foo/1.0: Hello World Release!"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:63
+msgid "If you are using a single-configuration generator:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:65
+msgid ""
+"$ cmake --preset conan-debug\n"
+"$ cmake --build --preset conan-debug\n"
+"$ ./build/Debug/foo\n"
+"foo/1.0: Hello World Debug!\n"
+"\n"
+"\n"
+"$ cmake --preset conan-release\n"
+"$ cmake --build --preset conan-release\n"
+"$ ./build/Release/foo\n"
+"foo/1.0: Hello World Release!"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:79
+msgid ""
+"Note that we didn't need to create the ``build/Release`` or ``build/Debug`` "
+"folders, as we did :ref:`in the "
+"tutorial<consuming_packages_flexibility_of_conanfile_py_use_layout>`. The "
+"output directory is declared by the ``cmake_layout()`` and automatically "
+"managed by the CMake Presets feature."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:83
+msgid ""
+"This behavior is also managed automatically by Conan (with CMake >= 3.15) "
+"when you build a package in the Conan cache (with :command:`conan create` "
+"command). The CMake >= 3.23 is not required."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:86
+msgid "Read More:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:88
+msgid "``cmake_layout()`` :ref:`reference <cmake_layout>`"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:89
+msgid ""
+"Conanfile :ref:`layout() method reference "
+"<reference_conanfile_methods_layout>`"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:90
+msgid "Package layout tutorial :ref:`tutorial <developing_packages_layout>`"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.rst:91
+msgid "Understanding :ref:`Conan package layouts <tutorial_package_layout>`"
+msgstr ""

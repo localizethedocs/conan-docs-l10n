@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-02-03 09:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -357,4 +357,129 @@ msgstr ""
 msgid ""
 "That's it! You have successfully packaged a system library and consumed it "
 "in a Conan package."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:242
+msgid "Wrapping a library installed in the system as a Conan package"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:244
+msgid ""
+"As a variant of the above case, it is also possible to apply the above "
+"strategy to libraries that are installed in the system, but not necessarily "
+"installed by the system package manager, nor necessarily in the common "
+"system locations where the compilers will find them by default."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:248
+msgid ""
+"Suppose that there is an existing library, already compiled in a user folder "
+"such as:"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:250
+msgid ""
+"/home/myuser/mymath\n"
+"                └── include\n"
+"                    ├── mymath.h\n"
+"                └── lib\n"
+"                    ├── mymath.lib"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:258
+msgid ""
+"And ``/home/myuser/mymath`` is not added to the compilers default paths or "
+"anything like that."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:260
+msgid ""
+"In general, a more recommended approach is to create a full package from "
+"those precompiled binaries, and upload that package, and then manage it as "
+"any other regular package. See the tutorial about :ref:`creating packages "
+"from pre-compiled binaries here<creating_packages_other_prebuilt>`."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:264
+msgid ""
+"But in some scenarios, it might still be desirable to use that library from "
+"its installed location ``/home/myuser/mymath`` without putting the artifacts "
+"inside a Conan package. This can be done with a \"wrapper\" recipe, similar "
+"to the one above, but which does not have any ``system_requirements()`` "
+"method."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:269
+msgid "It could be something like:"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:272
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class MyMath(ConanFile):\n"
+"    name = \"mymath\"\n"
+"    version = \"1.2\"  # In this case an actual version might make more "
+"sense\n"
+"    package_type = \"static-library\"\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.bindirs = []\n"
+"        # Absolute paths are allowed here\n"
+"        self.cpp_info.includedirs = [\"/home/myuser/mymath/include\"]\n"
+"        self.cpp_info.libdirs = [\"/home/myuser/mymath/lib\"]\n"
+"        self.cpp_info.libs = [\"mymath\"]"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:289
+msgid ""
+"Note that it is also possible to still do conditions based on settings, in "
+"case that the library is installed in the system in different locations "
+"based on the platform:"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:292
+msgid ""
+"settings = \"os\"\n"
+"\n"
+"def package_info(self):\n"
+"    self.cpp_info.bindirs = []\n"
+"    # Absolute paths are allowed here\n"
+"    if self.settings.os == \"Windows\":\n"
+"        self.cpp_info.includedirs = [\"C:/Users/myuser/mymath/include\"]\n"
+"        self.cpp_info.libdirs = [\"C:/Users/myuser/mymath/lib\"]\n"
+"    else:\n"
+"        self.cpp_info.includedirs = [\"/home/myuser/mymath/include\"]\n"
+"        self.cpp_info.libdirs = [\"/home/myuser/mymath/lib\"]\n"
+"    self.cpp_info.libs = [\"mymath\"]"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:308
+msgid ""
+"It might even be possible to parametrize those absolute paths with some "
+"environment variable specific for that platform too."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:313
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:315
+msgid ""
+"The use of \"wrapper\" recipes like this one should be minimized, as it "
+"makes reproducibility and traceability harder. Creating a real package "
+"putting the headers and libraries inside it, uploading it to the server, "
+"makes it possible to achieve such traceability and reproducibility."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:318
+msgid ""
+"This type of \"wrapper\" recipe can be convenient together with the "
+"``[replace_requires]`` feature, for specific platform constraints, like a "
+"platform that mandates that some ``openssl`` library must be the one "
+"contained in a sysroot, not the one from the Conan package ``openssl/"
+"version``, but in general, such a dependency to ``openssl/version`` is "
+"required by other packages. In those cases, writing a wrapper recipe around "
+"the sysroot ``openssl`` and using ``[replace_requires]`` to force the "
+"dependency graph to resolve to it could make sense."
 msgstr ""

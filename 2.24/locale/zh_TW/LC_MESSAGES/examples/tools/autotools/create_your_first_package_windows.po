@@ -56,7 +56,7 @@ msgstr ""
 
 #: ../../../examples/tools/autotools/create_your_first_package_windows.rst:24
 msgid "$ conan new autotools_lib -d name=mypkg -d version=0.1"
-msgstr ""
+msgstr "$ conan new autotools_lib -d name=mypkg -d version=0.1"
 
 #: ../../../examples/tools/autotools/create_your_first_package_windows.rst:28
 msgid "Check the above tutorial to understand the created files."
@@ -68,7 +68,7 @@ msgstr ""
 
 #: ../../../examples/tools/autotools/create_your_first_package_windows.rst:32
 msgid "msys2_profile"
-msgstr ""
+msgstr "msys2_profile"
 
 #: ../../../examples/tools/autotools/create_your_first_package_windows.rst:32
 msgid ""
@@ -81,6 +81,14 @@ msgid ""
 "# by default for the 'compiler=msvc'\n"
 "# tools.build:compiler_executables={\"c\": \"cl\", \"cpp\": \"cl\"}"
 msgstr ""
+"include(default)\n"
+"\n"
+"[conf]\n"
+"tools.microsoft.bash:subsystem=msys2\n"
+"tools.microsoft.bash:path=C:\\ws\\msys64\\usr\\bin\\bash\n"
+"# since Conan 2.9, this \"cl\" compiler definition is not necessary\n"
+"# by default for the 'compiler=msvc'\n"
+"# tools.build:compiler_executables={\"c\": \"cl\", \"cpp\": \"cl\"}"
 
 #: ../../../examples/tools/autotools/create_your_first_package_windows.rst:45
 msgid ""
@@ -94,7 +102,7 @@ msgstr ""
 
 #: ../../../examples/tools/autotools/create_your_first_package_windows.rst:49
 msgid "win_bash = True"
-msgstr ""
+msgstr "win_bash = True"
 
 #: ../../../examples/tools/autotools/create_your_first_package_windows.rst:53
 msgid ""
@@ -164,6 +172,27 @@ msgid ""
 "                options\n"
 "                  shared: False"
 msgstr ""
+"$  conan list \"mypkg:*\"\n"
+"Found 1 pkg/version recipes matching mypkg in local cache\n"
+"Local Cache\n"
+"  mypkg\n"
+"    mypkg/0.1\n"
+"      revisions\n"
+"        6e85b0c27c7fbc8eddc1994dbb543b52 (2024-04-30 18:29:44 UTC)\n"
+"          packages\n"
+"            9bdee485ef71c14ac5f8a657202632bdb8b4482b\n"
+"              info\n"
+"                settings\n"
+"                  arch: x86_64\n"
+"                  build_type: Release\n"
+"                  compiler: msvc\n"
+"                  compiler.cppstd: 14\n"
+"                  compiler.runtime: dynamic\n"
+"                  compiler.runtime_type: Release\n"
+"                  compiler.version: 193\n"
+"                  os: Windows\n"
+"                options\n"
+"                  shared: False"
 
 #: ../../../examples/tools/autotools/create_your_first_package_windows.rst:107
 msgid "Note how the binary is a ``compiler=msvc`` one."

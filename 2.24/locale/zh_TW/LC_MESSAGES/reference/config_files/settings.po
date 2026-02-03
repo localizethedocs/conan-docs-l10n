@@ -302,7 +302,7 @@ msgstr ""
 
 #: ../../../reference/config_files/settings.rst:24
 msgid ":ref:`creating_packages_configure_options_settings`"
-msgstr ""
+msgstr ":ref:`creating_packages_configure_options_settings`"
 
 #: ../../../reference/config_files/settings.rst:25
 msgid ":ref:`conan_conanfile_properties_settings`"
@@ -946,6 +946,10 @@ msgid ""
 "os.distro = \"CentOS\"\n"
 "compiler = \"gcc\""
 msgstr ""
+"[settings]\n"
+"os = \"Linux\"\n"
+"os.distro = \"CentOS\"\n"
+"compiler = \"gcc\""
 
 #: ../../../reference/config_files/settings.rst:297
 msgid ""
@@ -1055,6 +1059,14 @@ msgid ""
 "my=compiler\"]\n"
 "            self.run([\"mycompiler\", \".\"] + my_custom_compile)"
 msgstr ""
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"    def build(self):\n"
+"        if self.settings.compiler == \"mycompiler\":\n"
+"            my_custom_compile = [\"some\", \"--flags\", \"for\", \"--"
+"my=compiler\"]\n"
+"            self.run([\"mycompiler\", \".\"] + my_custom_compile)"
 
 #: ../../../reference/config_files/settings.rst:371
 msgid ""

@@ -41,6 +41,8 @@ msgid ""
 "git clone https://github.com/conan-io/examples2.git\n"
 "cd examples2/examples/security/sanitizers/compiler_sanitizers"
 msgstr ""
+"git clone https://github.com/conan-io/examples2.git\n"
+"cd examples2/examples/security/sanitizers/compiler_sanitizers"
 
 #: ../../../examples/security/sanitizers.rst:18
 msgid ""
@@ -89,6 +91,24 @@ msgid ""
 " [runenv]\n"
 " ASAN_OPTIONS=halt_on_error=1:detect_leaks=1"
 msgstr ""
+" [settings]\n"
+" arch=x86_64\n"
+" os=Linux\n"
+" build_type=Debug\n"
+" compiler=gcc\n"
+" compiler.cppstd=gnu20\n"
+" compiler.libcxx=libstdc++11\n"
+" compiler.version=15\n"
+" compiler.sanitizer=Address\n"
+"\n"
+" [conf]\n"
+" tools.build:cflags=['-fsanitize=address']\n"
+" tools.build:cxxflags=['-fsanitize=address']\n"
+" tools.build:exelinkflags=['-fsanitize=address']\n"
+" tools.build:sharedlinkflags+=[\"-fsanitize=address\"]\n"
+"\n"
+" [runenv]\n"
+" ASAN_OPTIONS=halt_on_error=1:detect_leaks=1"
 
 #: ../../../examples/security/sanitizers.rst:51
 msgid ""
@@ -107,7 +127,7 @@ msgstr ""
 
 #: ../../../examples/security/sanitizers.rst:60
 msgid "index_out_of_bounds/main.cpp"
-msgstr ""
+msgstr "index_out_of_bounds/main.cpp"
 
 #: ../../../examples/security/sanitizers.rst:60
 msgid ""
@@ -176,7 +196,7 @@ msgstr ""
 
 #: ../../../examples/security/sanitizers.rst:110
 msgid "profiles/gcc_asan_ubsan"
-msgstr ""
+msgstr "profiles/gcc_asan_ubsan"
 
 #: ../../../examples/security/sanitizers.rst:110
 msgid ""
@@ -198,6 +218,23 @@ msgid ""
 "tools.build:exelinkflags+=[\"-fsanitize=address,undefined\"]\n"
 "tools.build:sharedlinkflags+=[\"-fsanitize=address,undefined\"]"
 msgstr ""
+"[settings]\n"
+"arch=x86_64\n"
+"os=Linux\n"
+"build_type=Debug\n"
+"compiler=gcc\n"
+"compiler.cppstd=gnu20\n"
+"compiler.libcxx=libstdc++11\n"
+"compiler.version=15\n"
+"compiler.sanitizer=AddressUndefinedBehavior\n"
+"\n"
+"[conf]\n"
+"tools.build:cflags+=[\"-fsanitize=address,undefined\", \"-fno-omit-frame-"
+"pointer\"]\n"
+"tools.build:cxxflags+=[\"-fsanitize=address,undefined\", \"-fno-omit-frame-"
+"pointer\"]\n"
+"tools.build:exelinkflags+=[\"-fsanitize=address,undefined\"]\n"
+"tools.build:sharedlinkflags+=[\"-fsanitize=address,undefined\"]"
 
 #: ../../../examples/security/sanitizers.rst:130
 msgid "It is supported by GCC and Clang. MSVC does not support UBSan."
@@ -205,11 +242,11 @@ msgstr ""
 
 #: ../../../examples/security/sanitizers.rst:132
 msgid "**Source code:**"
-msgstr ""
+msgstr "**來源碼：**"
 
 #: ../../../examples/security/sanitizers.rst:134
 msgid "signed_integer_overflow/main.cpp"
-msgstr ""
+msgstr "signed_integer_overflow/main.cpp"
 
 #: ../../../examples/security/sanitizers.rst:134
 msgid ""
@@ -233,7 +270,7 @@ msgstr ""
 
 #: ../../../examples/security/sanitizers.rst:155
 msgid "**Build and run:**"
-msgstr ""
+msgstr "**建置並執行：**"
 
 #: ../../../examples/security/sanitizers.rst:157
 msgid ""
@@ -241,6 +278,9 @@ msgid ""
 "conan build . -pr ../profiles/gcc_asan_ubsan\n"
 "build/Debug/signed_integer_overflow"
 msgstr ""
+"cd signed_integer_overflow/\n"
+"conan build . -pr ../profiles/gcc_asan_ubsan\n"
+"build/Debug/signed_integer_overflow"
 
 #: ../../../examples/security/sanitizers.rst:165
 msgid ""

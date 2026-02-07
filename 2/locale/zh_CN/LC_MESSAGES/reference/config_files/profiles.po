@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-16 08:57+0000\n"
+"POT-Creation-Date: 2026-02-03 09:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -285,12 +285,12 @@ msgstr ""
 #: ../../../reference/config_files/profiles.rst:495
 #: ../../../reference/config_files/profiles.rst:523
 #: ../../../reference/config_files/profiles.rst:571
-#: ../../../reference/config_files/profiles.rst:719
-#: ../../../reference/config_files/profiles.rst:861
-#: ../../../reference/config_files/profiles.rst:875
-#: ../../../reference/config_files/profiles.rst:886
-#: ../../../reference/config_files/profiles.rst:902
-#: ../../../reference/config_files/profiles.rst:950
+#: ../../../reference/config_files/profiles.rst:724
+#: ../../../reference/config_files/profiles.rst:879
+#: ../../../reference/config_files/profiles.rst:893
+#: ../../../reference/config_files/profiles.rst:904
+#: ../../../reference/config_files/profiles.rst:920
+#: ../../../reference/config_files/profiles.rst:968
 msgid "*myprofile*"
 msgstr ""
 
@@ -919,9 +919,9 @@ msgstr ""
 #: ../../../reference/config_files/profiles.rst:634
 #: ../../../reference/config_files/profiles.rst:642
 #: ../../../reference/config_files/profiles.rst:660
-#: ../../../reference/config_files/profiles.rst:687
-#: ../../../reference/config_files/profiles.rst:699
-#: ../../../reference/config_files/profiles.rst:714
+#: ../../../reference/config_files/profiles.rst:692
+#: ../../../reference/config_files/profiles.rst:704
+#: ../../../reference/config_files/profiles.rst:719
 msgid "*profile_vars*"
 msgstr ""
 
@@ -1000,6 +1000,15 @@ msgstr ""
 
 #: ../../../reference/config_files/profiles.rst:680
 msgid ""
+"If you want to use the original profile file name, instead of the current "
+"profile name, for example, if the current profile file is called ``common``, "
+"and another profile called ``windows-arm`` was doing an ``include(common)``, "
+"then the ``root_profile_name`` variable will be equal to ``windows-arm``, "
+"even inside the ``common`` file."
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:685
+msgid ""
 "Executing external commands and using their output. The ``subprocess`` "
 "module is added to the context, so you can use it to execute commands and "
 "capture their output. Note that Conan startup times for some commands can be "
@@ -1009,7 +1018,7 @@ msgid ""
 "case):"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:687
+#: ../../../reference/config_files/profiles.rst:692
 msgid ""
 "{% set version = subprocess.check_output(['clang++', \"-dumpversion\"])."
 "strip() %}\n"
@@ -1017,7 +1026,7 @@ msgid ""
 "compiler.version={{ version }}"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:694
+#: ../../../reference/config_files/profiles.rst:699
 msgid ""
 "Branching based on the context that the profile is being rendered for. The "
 "``context`` variable is injected and can take the values ``host``, ``build`` "
@@ -1025,7 +1034,7 @@ msgid ""
 "and build contexts without having to create two different profiles:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:699
+#: ../../../reference/config_files/profiles.rst:704
 msgid ""
 "[settings]\n"
 "os=Linux\n"
@@ -1038,22 +1047,22 @@ msgid ""
 "{% endif %}"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:712
+#: ../../../reference/config_files/profiles.rst:717
 msgid "Including or importing other files from ``profiles`` folder:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:714
+#: ../../../reference/config_files/profiles.rst:719
 msgid "{% set a = \"Debug\" %}"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:719
+#: ../../../reference/config_files/profiles.rst:724
 msgid ""
 "{% import \"profile_vars\" as vars %}\n"
 "[settings]\n"
 "build_type = {{ vars.a }}"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:726
+#: ../../../reference/config_files/profiles.rst:731
 msgid ""
 "When including or importing other files using relative paths, the Jinja "
 "renderer uses the base path of the current profile file as the first "
@@ -1062,24 +1071,64 @@ msgid ""
 "conan2/profiles``)."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:730
+#: ../../../reference/config_files/profiles.rst:735
 msgid ""
 "Any other feature supported by *jinja2* is possible: for loops, if-else, "
 "etc. This would be useful to define custom per-package settings or options "
 "for multiple packages in a large dependency graph."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:736
+#: ../../../reference/config_files/profiles.rst:740
+msgid ""
+"As a summary, this is the rendering context for profile files (all the items "
+"Conan injects):"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:742
+msgid ""
+"``platform``, ``os``, ``subprocess``: The Python ``platform``, ``os`` and "
+"``subprocess`` modules"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:743
+msgid "``profile_dir``: The folder where the current profile file is located"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:744
+msgid "``profile_name``: The current profile file filename"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:745
+msgid ""
+"``root_profile_name``: The initial profile that was loaded. It is different "
+"of the current ``profile_name`` when there is an ``include(otherprofile)``"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:746
+msgid "``conan_version``: The current Conan version"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:747
+msgid "``detect_api``: This is a full automatic detection API, see below"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:748
+msgid ""
+"``context``: The current Conan context, can be ``host``, ``build`` or be "
+"``None``"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:754
 msgid "**Profile Rendering with ``detect_api``**"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:740
+#: ../../../reference/config_files/profiles.rst:758
 msgid ""
 "**Stability Guarantees**: The detect_api, similar to ``conan profile "
 "detect``, does not offer strong stability guarantees."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:743
+#: ../../../reference/config_files/profiles.rst:761
 msgid ""
 "**Usage Recommendations**: The detect_api is not a regular API meant for "
 "creating new commands or similar functionalities. While auto-detection can "
@@ -1088,7 +1137,7 @@ msgid ""
 "rendering. It's advised to use it judiciously."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:748
+#: ../../../reference/config_files/profiles.rst:766
 msgid ""
 "Conan also injects ``detect_api`` to the jinja rendering context. With it, "
 "it's possible to use Conan's auto-detection capabilities directly within "
@@ -1096,26 +1145,26 @@ msgid ""
 "certain settings based on the environment."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:753
+#: ../../../reference/config_files/profiles.rst:771
 msgid ""
 "``detect_api`` can be invoked within the Jinja template of a profile. For "
 "instance, to detect the operating system and architecture, you can use:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:756
+#: ../../../reference/config_files/profiles.rst:774
 msgid ""
 "[settings]\n"
 "os={{detect_api.detect_os()}}\n"
 "arch={{detect_api.detect_arch()}}"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:762
+#: ../../../reference/config_files/profiles.rst:780
 msgid ""
 "Similarly, for more advanced detections like determining the compiler, its "
 "version, and the associated runtime, you can use:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:765
+#: ../../../reference/config_files/profiles.rst:783
 msgid ""
 "{% set compiler, version, compiler_exe = detect_api."
 "detect_default_compiler() %}\n"
@@ -1128,54 +1177,54 @@ msgid ""
 "compiler.libcxx={{detect_api.detect_libcxx(compiler, version, compiler_exe)}}"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:776
+#: ../../../reference/config_files/profiles.rst:794
 msgid "**detect_api reference**:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:778
+#: ../../../reference/config_files/profiles.rst:796
 msgid ""
 "``detect_os()``: returns operating system as a string (e.g., \"Windows\", "
 "\"Macos\")."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:779
+#: ../../../reference/config_files/profiles.rst:797
 msgid ""
 "``detect_arch()``: returns system architecture as a string (e.g., "
 "\"x86_64\", \"armv8\")."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:780
+#: ../../../reference/config_files/profiles.rst:798
 msgid ""
 "``detect_libc(ldd=\"/usr/bin/ldd\")``: **experimental** returns a tuple with "
 "the name (e.g., \"gnu\", \"musl\") and version (e.g., \"2.39\", \"1.2.4\") "
 "of the C library."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:781
+#: ../../../reference/config_files/profiles.rst:799
 msgid ""
 "``detect_libcxx(compiler, version, compiler_exe=None)``: returns C++ "
 "standard library as a string (e.g., \"libstdc++\", \"libc++\")."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:782
+#: ../../../reference/config_files/profiles.rst:800
 msgid ""
 "``default_msvc_runtime(compiler)``: returns tuple with runtime (e.g., "
 "\"dynamic\") and its version (e.g., \"v143\")."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:783
+#: ../../../reference/config_files/profiles.rst:801
 msgid ""
 "``default_cppstd(compiler, compiler_version)``: returns default C++ standard "
 "as a string (e.g., \"gnu14\")."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:784
+#: ../../../reference/config_files/profiles.rst:802
 msgid ""
 "``detect_default_compiler()``: returns tuple with compiler name (e.g., "
 "\"gcc\"), its version and the executable path."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:785
+#: ../../../reference/config_files/profiles.rst:803
 msgid ""
 "``detect_msvc_update(version)``: returns the MSVC update version as a string "
 "(e.g., \"12\" for VS 17.12.1). Note that in Conan profiles, the ``compiler."
@@ -1184,11 +1233,11 @@ msgid ""
 "something like this:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:790
+#: ../../../reference/config_files/profiles.rst:808
 msgid "Example:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:792
+#: ../../../reference/config_files/profiles.rst:810
 msgid ""
 "...\n"
 "[settings]\n"
@@ -1200,79 +1249,79 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:802
+#: ../../../reference/config_files/profiles.rst:820
 msgid ""
 "``default_msvc_ide_version(version)``: returns MSVC IDE version as a string "
 "(e.g., \"17\")."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:803
+#: ../../../reference/config_files/profiles.rst:821
 msgid ""
 "``default_compiler_version(compiler, version)``: returns the default version "
 "that  Conan uses in profiles, typically dropping some of the minor or patch "
 "digits, that do not affect binary compatibility."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:805
+#: ../../../reference/config_files/profiles.rst:823
 msgid ""
 "``detect_gcc_compiler(compiler_exe=\"gcc\")``: Return the tuple ('gcc', "
 "version, executable) for ``gcc``"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:806
+#: ../../../reference/config_files/profiles.rst:824
 msgid ""
 "``detect_intel_compiler(compiler_exe=\"icx\")``: Return the tuple ('intel-"
 "cc', version, executable) for ``intel-cc``"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:807
+#: ../../../reference/config_files/profiles.rst:825
 msgid ""
 "``detect_suncc_compiler(compiler_exe=\"cc\")``: Return the tuple ('sun-cc', "
 "version, executable) for ``sun-cc``"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:808
+#: ../../../reference/config_files/profiles.rst:826
 msgid ""
 "``detect_clang_compiler(compiler_exe=\"clang\")``: Return the tuple "
 "('clang'|'apple-clang', version, executable) for ``clang`` or ``apple-"
 "clang``."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:809
+#: ../../../reference/config_files/profiles.rst:827
 msgid ""
 "``detect_msvc_compiler()``: Detect the compiler ('msvc', version, None) "
 "default version of the latest VS IDE installed"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:810
+#: ../../../reference/config_files/profiles.rst:828
 msgid ""
 "``detect_cl_compiler(compiler_exe=\"cl\")``: Detect the compiler ('msvc', "
 "version, executable) for the ``cl.exe`` compiler"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:811
+#: ../../../reference/config_files/profiles.rst:829
 msgid ""
 "``detect_sdk_version(sdk)``: Detect the Apple SDK version (``None`` for non "
 "Apple platforms), for the given ``sdk``. Equivalent to ``xcrun -sdk {sdk} --"
 "show-sdk-version``"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:817
+#: ../../../reference/config_files/profiles.rst:835
 msgid "Profile patterns"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:819
+#: ../../../reference/config_files/profiles.rst:837
 msgid ""
 "Profiles (and everywhere where a setting or option is defined) also support "
 "patterns definition, so you can override some settings, configuration "
 "variables, etc. for some specific packages:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:822
+#: ../../../reference/config_files/profiles.rst:840
 msgid "*zlib_clang_profile*"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:822
+#: ../../../reference/config_files/profiles.rst:840
 msgid ""
 "[settings]\n"
 "# Only for zlib\n"
@@ -1299,27 +1348,27 @@ msgid ""
 "bin/clang++'}"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:849
+#: ../../../reference/config_files/profiles.rst:867
 msgid ""
 "Your build tool will locate **clang** compiler only for the **zlib** package "
 "and **gcc** (default one) for the rest of your dependency tree."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:854
+#: ../../../reference/config_files/profiles.rst:872
 msgid ""
 "Putting only ``zlib:`` is deprecated behaviour and won't work, you have to "
 "always put a pattern-like expression, e.g., ``zlib*:``, ``zlib/*:``, "
 "``zlib/1.*:``, etc."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:858
+#: ../../../reference/config_files/profiles.rst:876
 msgid ""
 "They accept patterns too, like ``-s *@myuser/*``, which means that packages "
 "that have the username \"myuser\" will use clang 3.5 as compiler, and gcc "
 "otherwise:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:861
+#: ../../../reference/config_files/profiles.rst:879
 msgid ""
 "[settings]\n"
 "*@myuser/*:compiler=clang\n"
@@ -1330,7 +1379,7 @@ msgid ""
 "compiler.libcxx=libstdc++11"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:872
+#: ../../../reference/config_files/profiles.rst:890
 msgid ""
 "Also ``&`` can be specified as the package name. It will apply only to the "
 "consumer conanfile (.py or .txt). This is a special case because the "
@@ -1338,7 +1387,7 @@ msgid ""
 "reference it."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:875
+#: ../../../reference/config_files/profiles.rst:893
 msgid ""
 "[settings]\n"
 "&:compiler=gcc\n"
@@ -1346,7 +1395,7 @@ msgid ""
 "&:compiler.libcxx=libstdc++11"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:883
+#: ../../../reference/config_files/profiles.rst:901
 msgid ""
 "Partial matches are also supported, so you can define a pattern like "
 "``zlib*`` to match all the zlib like libraries, so it will match everything "
@@ -1354,7 +1403,7 @@ msgid ""
 "etc."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:886
+#: ../../../reference/config_files/profiles.rst:904
 msgid ""
 "[settings]\n"
 "zlib*:compiler=clang\n"
@@ -1362,32 +1411,32 @@ msgid ""
 "zlib*:compiler.libcxx=libstdc++11"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:895
+#: ../../../reference/config_files/profiles.rst:913
 msgid ""
 "If a pattern begins with ``!``, it's considered an exclusion pattern, "
 "meaning that it will match everything except the specified pattern. This "
 "also works for the consumer ``&`` pattern mentioned above."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:898
+#: ../../../reference/config_files/profiles.rst:916
 msgid ""
 "Care must be taken when using exclusion patterns, as they can lead to "
 "unexpected results if not used carefully."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:900
+#: ../../../reference/config_files/profiles.rst:918
 msgid ""
 "For example, to define a ``shared=True`` option for all packages except to "
 "`zlib`, you can use:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:902
+#: ../../../reference/config_files/profiles.rst:920
 msgid ""
 "[options]\n"
 "!zlib/*:shared=True"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:909
+#: ../../../reference/config_files/profiles.rst:927
 msgid ""
 "Note that for the ``msvc`` compiler, the ``compiler.runtime_type`` setting "
 "is  automatically initialized from the ``build_type`` setting value by the "
@@ -1401,25 +1450,25 @@ msgid ""
 "runtime_type``."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:918
+#: ../../../reference/config_files/profiles.rst:936
 msgid ""
 "In some circumstances it might be desired to undefine some specific package "
 "settings, assuming that such a setting allows to be undefined. For this "
 "case, the syntax ``~`` can be used as:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:921
+#: ../../../reference/config_files/profiles.rst:939
 msgid "myprofile"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:921
+#: ../../../reference/config_files/profiles.rst:939
 msgid ""
 "[settings]\n"
 "build_type=Release\n"
 "mypkg/*:build_type=~"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:929
+#: ../../../reference/config_files/profiles.rst:947
 msgid ""
 "This syntax will define ``build_type=Release`` for all packages, except for "
 "``mypkg`` (any version), that will leave ``build_type`` undefined, as it was "
@@ -1427,26 +1476,26 @@ msgid ""
 "build_type`` will be ``None``."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:935
+#: ../../../reference/config_files/profiles.rst:953
 msgid "Profile includes"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:937
+#: ../../../reference/config_files/profiles.rst:955
 msgid ""
 "You can include other profile files using the ``include()`` statement. The "
 "path can be relative to the current profile, absolute, or a profile name "
 "from the default profile location in the local cache."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:940
+#: ../../../reference/config_files/profiles.rst:958
 msgid "The ``include()`` statement has to be at the top of the profile file:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:942
+#: ../../../reference/config_files/profiles.rst:960
 msgid "*gcc_49*"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:942
+#: ../../../reference/config_files/profiles.rst:960
 msgid ""
 "[settings]\n"
 "compiler=gcc\n"
@@ -1454,7 +1503,7 @@ msgid ""
 "compiler.libcxx=libstdc++11"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:950
+#: ../../../reference/config_files/profiles.rst:968
 msgid ""
 "include(gcc_49)\n"
 "\n"
@@ -1464,34 +1513,34 @@ msgid ""
 "zlib/*:compiler.libcxx=libstdc++11"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:963
+#: ../../../reference/config_files/profiles.rst:981
 msgid ""
 "Cache profiles have more priority than the ones in the current working "
 "directory, so if you have a profile named ``myprofile`` in the cache, it "
 "will be used instead of the one in the current working directory."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:967
+#: ../../../reference/config_files/profiles.rst:985
 msgid "To use the profile in the current working directory, you can use:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:969
+#: ../../../reference/config_files/profiles.rst:987
 msgid "``-pr ./myprofile`` option in the command line or"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:970
+#: ../../../reference/config_files/profiles.rst:988
 msgid "``include(./myprofile)`` in the profile file itself."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:973
+#: ../../../reference/config_files/profiles.rst:991
 msgid "The final result of using *myprofile* is:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:975
+#: ../../../reference/config_files/profiles.rst:993
 msgid "*myprofile (virtual result)*"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:975
+#: ../../../reference/config_files/profiles.rst:993
 msgid ""
 "[settings]\n"
 "compiler=gcc\n"
@@ -1502,7 +1551,7 @@ msgid ""
 "zlib/*:compiler.version=3.5"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:989
+#: ../../../reference/config_files/profiles.rst:1007
 msgid ""
 ":ref:`How to compose two or more profiles "
 "<reference_commands_install_composition>`"

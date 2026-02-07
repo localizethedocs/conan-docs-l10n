@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-02-03 09:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,7 +102,7 @@ msgstr "conanfile.py"
 msgid ""
 "import os\n"
 "from conan import ConanFile\n"
-"from conan.tools.files import get, copy, download\n"
+"from conan.tools.files import get, copy, save\n"
 "from conan.errors import ConanInvalidConfiguration\n"
 "from conan.tools.scm import Version\n"
 "\n"
@@ -140,8 +140,8 @@ msgid ""
 "not in valid_archs:\n"
 "            raise ConanInvalidConfiguration(f\"This toolchain only supports "
 "building for Linux-{valid_archs.join(',')}. \"\n"
-"                                        f\"{self.settings_target.os}-{self."
-"settings_target.arch} is not supported.\")\n"
+"                                           f\"{self.settings_target.os}-"
+"{self.settings_target.arch} is not supported.\")\n"
 "\n"
 "        if self.settings_target.compiler != \"gcc\":\n"
 "            raise ConanInvalidConfiguration(f\"The compiler is set to '{self."
@@ -153,18 +153,24 @@ msgid ""
 "or Version(self.settings_target.compiler.version) < Version(\"13\"):\n"
 "            raise ConanInvalidConfiguration(f\"Invalid gcc version '{self."
 "settings_target.compiler.version}'. \"\n"
-"                                                \"Only 13.X versions are "
+"                                            \"Only 13.X versions are "
 "supported for the compiler.\")\n"
 "\n"
 "    def source(self):\n"
-"        download(self, \"https://developer.arm.com/GetEula?Id=37988a7c-"
-"c40e-4b78-9fd1-62c20b507aa8\", \"LICENSE\", verify=False)\n"
+"        # The ARM toolchain is distributed under GPL-3.0-only license\n"
+"        # Reference: https://developer.arm.com/downloads/-/arm-gnu-toolchain-"
+"downloads\n"
+"        save(self, \"LICENSE\", \"ARM GNU Toolchain\\n\"\n"
+"             \"License: GNU General Public License v3.0 (GPL-3.0-only)\\n\"\n"
+"             \"https://www.gnu.org/licenses/gpl-3.0.html\\n\\n\"\n"
+"             \"EULA: https://developer.arm.com/GetEula?Id=37988a7c-"
+"c40e-4b78-9fd1-62c20b507aa8\\n\")\n"
 "\n"
 "    def build(self):\n"
 "        toolchain, sha = self._get_toolchain(self.settings_target.arch)\n"
-"        get(self, f\"https://developer.arm.com/-/media/Files/downloads/"
-"gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-{toolchain}.tar."
-"xz\",\n"
+"        get(self, f\"https://armkeil.blob.core.windows.net/developer/Files/"
+"downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-"
+"{toolchain}.tar.xz\",\n"
 "            sha256=sha, strip_root=True)\n"
 "\n"
 "    def package_id(self):\n"
@@ -196,13 +202,13 @@ msgid ""
 "        })"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:131
+#: ../../../examples/cross_build/toolchain_packages.rst:136
 msgid ""
 "Validating the toolchain package: settings, settings_build and "
 "settings_target"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:133
+#: ../../../examples/cross_build/toolchain_packages.rst:138
 msgid ""
 "As you may recall, the :ref:`validate() "
 "method<reference_conanfile_methods_validate>` is used to indicate that a "
@@ -213,11 +219,11 @@ msgid ""
 "``validate()`` method and discuss the various types of settings involved:"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:140
+#: ../../../examples/cross_build/toolchain_packages.rst:145
 msgid "**Validating the build platform**"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:142
+#: ../../../examples/cross_build/toolchain_packages.rst:147
 msgid ""
 "...\n"
 "\n"
@@ -235,7 +241,7 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:157
+#: ../../../examples/cross_build/toolchain_packages.rst:162
 msgid ""
 "First, it's important to acknowledge that only the ``os`` and ``arch`` "
 "settings are declared. These settings represent the machine that will "
@@ -244,7 +250,7 @@ msgid ""
 "the toolchain binaries are intended."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:162
+#: ../../../examples/cross_build/toolchain_packages.rst:167
 msgid ""
 "It is important to note that for this package, which is to be used as a "
 "``tool_requires``, these settings do not relate to the ``host`` profile but "
@@ -254,11 +260,11 @@ msgid ""
 "of package creation."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:168
+#: ../../../examples/cross_build/toolchain_packages.rst:173
 msgid "**Validating the target platform**"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:170
+#: ../../../examples/cross_build/toolchain_packages.rst:175
 msgid ""
 "In scenarios involving cross-compilation, validations regarding the target "
 "platform, where the executable generated by the toolchain's compilers will "
@@ -270,7 +276,7 @@ msgid ""
 "build-require`` flag during package creation."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:178
+#: ../../../examples/cross_build/toolchain_packages.rst:183
 msgid ""
 "def validate(self):\n"
 "    ...\n"
@@ -320,7 +326,7 @@ msgstr ""
 "                                        \"Only 13.X versions are supported "
 "for the compiler.\")"
 
-#: ../../../examples/cross_build/toolchain_packages.rst:197
+#: ../../../examples/cross_build/toolchain_packages.rst:202
 msgid ""
 "As you can see, several verifications are made to ensure the validity of the "
 "operating system and architectures for the resulting binaries' execution "
@@ -328,17 +334,17 @@ msgid ""
 "align with the expectations for the ``host`` context."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:202
+#: ../../../examples/cross_build/toolchain_packages.rst:207
 msgid ""
 "Here, the diagram shows both profiles and which settings are picked for the "
 "**arm-toolchain** recipe that is in the *build* context."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:242
+#: ../../../examples/cross_build/toolchain_packages.rst:247
 msgid "Downloading the binaries for the toolchain and packaging it"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:244
+#: ../../../examples/cross_build/toolchain_packages.rst:249
 msgid ""
 "...\n"
 "\n"
@@ -357,13 +363,20 @@ msgid ""
 "                \"12fcdf13a7430655229b20438a49e8566e26551ba08759922cdaf4695b0d4e23\")\n"
 "\n"
 "def source(self):\n"
-"    download(self, \"https://developer.arm.com/GetEula?Id=37988a7c-"
-"c40e-4b78-9fd1-62c20b507aa8\", \"LICENSE\", verify=False)\n"
+"    # The ARM toolchain is distributed under GPL-3.0-only license\n"
+"    # Reference: https://developer.arm.com/downloads/-/arm-gnu-toolchain-"
+"downloads\n"
+"    save(self, \"LICENSE\", \"ARM GNU Toolchain\\n\"\n"
+"         \"License: GNU General Public License v3.0 (GPL-3.0-only)\\n\"\n"
+"         \"https://www.gnu.org/licenses/gpl-3.0.html\\n\\n\"\n"
+"         \"EULA: https://developer.arm.com/GetEula?Id=37988a7c-"
+"c40e-4b78-9fd1-62c20b507aa8\\n\")\n"
 "\n"
 "def build(self):\n"
 "    toolchain, sha = self._get_toolchain(self.settings_target.arch)\n"
-"    get(self, f\"https://developer.arm.com/-/media/Files/downloads/gnu/13.2."
-"rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-{toolchain}.tar.xz\",\n"
+"    get(self, f\"https://armkeil.blob.core.windows.net/developer/Files/"
+"downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-"
+"{toolchain}.tar.xz\",\n"
 "        sha256=sha, strip_root=True)\n"
 "\n"
 "def package(self):\n"
@@ -372,37 +385,37 @@ msgid ""
 "    for dir_name in dirs_to_copy:\n"
 "        copy(self, pattern=f\"{dir_name}/*\", src=self.build_folder, "
 "dst=self.package_folder, keep_path=True)\n"
-"    copy(self, \"LICENSE\", src=self.build_folder, dst=os.path.join(self."
+"    copy(self, \"LICENSE\", src=self.source_folder, dst=os.path.join(self."
 "package_folder, \"licenses\"), keep_path=False)\n"
 "\n"
 "..."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:279
+#: ../../../examples/cross_build/toolchain_packages.rst:289
 msgid ""
-"The `source()` method is used to download the recipe license, as it's found "
-"on the ARM toolchains' download page. However, this is the only action "
-"performed there. The actual toolchain binaries are fetched in the `build()` "
-"method. This approach is necessary because the toolchain package is designed "
-"to support both 32-bit and 64-bit architectures, requiring us to download "
-"two distinct sets of toolchain binaries. Which binary the package ends up "
-"with depends on the `settings_target` architecture. This conditional "
-"downloading process can't happen in the `source()` method, as it :ref:"
-"`caches the downloaded contents "
+"The `source()` method is used to download or reference the recipe license. "
+"In this case, we reference the ARM toolchain's GPL-3.0 license and EULA. "
+"However, this is the only action performed there. The actual toolchain "
+"binaries are fetched in the `build()` method. This approach is necessary "
+"because the toolchain package is designed to support both 32-bit and 64-bit "
+"architectures, requiring us to download two distinct sets of toolchain "
+"binaries. Which binary the package ends up with depends on the "
+"`settings_target` architecture. This conditional downloading process can't "
+"happen in the `source()` method, as it :ref:`caches the downloaded contents "
 "<reference_conanfile_methods_source_caching>`."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:288
+#: ../../../examples/cross_build/toolchain_packages.rst:299
 msgid ""
 "The `package()` method doesn't have anything out of the ordinary; it simply "
 "copies the downloaded files into the package folder, license included."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:293
+#: ../../../examples/cross_build/toolchain_packages.rst:304
 msgid "Adding ``settings_target`` to the Package ID information"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:295
+#: ../../../examples/cross_build/toolchain_packages.rst:306
 msgid ""
 "In recipes designed for cross-compiling scenarios, particularly those "
 "involving toolchains that target specific architectures or operating "
@@ -412,14 +425,14 @@ msgid ""
 "platform they are intended for."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:301
+#: ../../../examples/cross_build/toolchain_packages.rst:312
 msgid ""
 "In this case, we extend the ``package_id()`` method to include "
 "``settings_target``, which encapsulates the target platform's configuration "
 "(in this case if it's 32 or 64 bit):"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:305
+#: ../../../examples/cross_build/toolchain_packages.rst:316
 msgid ""
 "def package_id(self):\n"
 "    # Assign settings_target to the package ID to differentiate binaries by "
@@ -432,7 +445,7 @@ msgid ""
 "    self.info.settings_target.rm_safe(\"build_type\")"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:316
+#: ../../../examples/cross_build/toolchain_packages.rst:327
 msgid ""
 "By specifying ``self.info.settings_target = self.settings_target``, we "
 "explicitly instruct Conan to consider the target platform's settings when "
@@ -442,17 +455,17 @@ msgid ""
 "that will be used to decide if want to produce binaries for 32 or 64 bits."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:325
+#: ../../../examples/cross_build/toolchain_packages.rst:336
 msgid "Define information for consumers"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:327
+#: ../../../examples/cross_build/toolchain_packages.rst:338
 msgid ""
 "In the ``package_info()`` method we define all the information that "
 "consumers need to have available when using the toolchain:"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:330
+#: ../../../examples/cross_build/toolchain_packages.rst:341
 msgid ""
 "def package_info(self):\n"
 "    toolchain, _ = self._get_toolchain(self.settings_target.arch)\n"
@@ -476,11 +489,11 @@ msgstr ""
 "        \"asm\": f\"{toolchain}-as\"\n"
 "    })"
 
-#: ../../../examples/cross_build/toolchain_packages.rst:342
+#: ../../../examples/cross_build/toolchain_packages.rst:353
 msgid "In this case, we need to define the following information:"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:344
+#: ../../../examples/cross_build/toolchain_packages.rst:355
 msgid ""
 "Add directories containing toolchain tools that may be required during "
 "compilation. The toolchain we download will store its tools in both ``bin`` "
@@ -491,7 +504,7 @@ msgid ""
 "`VirtualRunEnv<conan_tools_env_virtualrunenv>`."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:351
+#: ../../../examples/cross_build/toolchain_packages.rst:362
 msgid ""
 "We define the ``tools.build:compiler_executables`` configuration. This "
 "configuration will be considered in several generators, like :ref:"
@@ -501,19 +514,19 @@ msgid ""
 "appropriate compiler binaries."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:360
+#: ../../../examples/cross_build/toolchain_packages.rst:371
 msgid "Testing the Conan toolchain package"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:362
+#: ../../../examples/cross_build/toolchain_packages.rst:373
 msgid "We also added a simple *test_package* to test the toolchain:"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:364
+#: ../../../examples/cross_build/toolchain_packages.rst:375
 msgid "test_package/conanfile.py"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:364
+#: ../../../examples/cross_build/toolchain_packages.rst:375
 msgid ""
 "import os\n"
 "from io import StringIO\n"
@@ -553,24 +566,24 @@ msgid ""
 "            assert \"ELF 32-bit\" in stdout.getvalue()"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:403
+#: ../../../examples/cross_build/toolchain_packages.rst:414
 msgid ""
 "This test package ensures that the toolchain is functional, building a "
 "minimal *hello world* program and that binaries produced with it are "
 "correctly targeted for the specified architecture."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:411
+#: ../../../examples/cross_build/toolchain_packages.rst:422
 msgid "Cross-build an application using the toolchain"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:413
+#: ../../../examples/cross_build/toolchain_packages.rst:424
 msgid ""
 "Having detailed the toolchain recipe, it's time to proceed with package "
 "creation:"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:415
+#: ../../../examples/cross_build/toolchain_packages.rst:426
 msgid ""
 "$ conan create . -pr:b=default -pr:h=../profiles/raspberry-64 --build-"
 "require\n"
@@ -642,11 +655,11 @@ msgstr ""
 "Copyright (C) 2023 Free Software Foundation, Inc.\n"
 "..."
 
-#: ../../../examples/cross_build/toolchain_packages.rst:452
+#: ../../../examples/cross_build/toolchain_packages.rst:463
 msgid "Use ``--build-require`` argument."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:454
+#: ../../../examples/cross_build/toolchain_packages.rst:465
 msgid ""
 "The ``conan create`` command by default creates packages for the \"host\" "
 "context, using the \"host\" profile. But if the package we are creating is "
@@ -654,7 +667,7 @@ msgid ""
 "built for the \"build\" context instead."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:458
+#: ../../../examples/cross_build/toolchain_packages.rst:469
 msgid ""
 "The ``--build-require`` argument specifies this. When this argument is "
 "provided, the current recipe binary will be built for the \"build\" context, "
@@ -665,13 +678,13 @@ msgid ""
 "RaspberryPI."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:464
+#: ../../../examples/cross_build/toolchain_packages.rst:475
 msgid ""
 "The ``--build-require`` argument is necessary to build the ``arm-toolchain`` "
 "package correctly as a build tool."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:468
+#: ../../../examples/cross_build/toolchain_packages.rst:479
 msgid ""
 "With the toolchain package prepared, we proceed to build an actual "
 "application. This will be the same application previously cross-compiled in "
@@ -681,7 +694,7 @@ msgid ""
 "and all its dependencies"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:474
+#: ../../../examples/cross_build/toolchain_packages.rst:485
 msgid ""
 "$ cd .. && cd consumer\n"
 "$ conan install . -pr:b=default -pr:h=../profiles/raspberry-64 -pr:h=../"
@@ -707,13 +720,13 @@ msgstr ""
 "debug_info,\n"
 "not stripped"
 
-#: ../../../examples/cross_build/toolchain_packages.rst:485
+#: ../../../examples/cross_build/toolchain_packages.rst:496
 msgid ""
 "We composed the already existing profile with another profile called ``arm-"
 "toolchain`` that just has the ``tool_requires`` added:"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:488
+#: ../../../examples/cross_build/toolchain_packages.rst:499
 msgid ""
 "[tool_requires]\n"
 "arm-toolchain/13.2"
@@ -721,7 +734,7 @@ msgstr ""
 "[tool_requires]\n"
 "arm-toolchain/13.2"
 
-#: ../../../examples/cross_build/toolchain_packages.rst:493
+#: ../../../examples/cross_build/toolchain_packages.rst:504
 msgid ""
 "During this procedure, the zlib dependency will also be compiled for ARM 64-"
 "bit architecture if it hasn't already been. Additionally, it's important to "
@@ -729,19 +742,19 @@ msgid ""
 "alignment with the targeted 64-bit architecture."
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:500
+#: ../../../examples/cross_build/toolchain_packages.rst:511
 msgid ""
 ":ref:`More info on "
 "settings_target<binary_model_extending_cross_build_target_settings>`"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:501
+#: ../../../examples/cross_build/toolchain_packages.rst:512
 msgid ""
 ":ref:`Cross-compile your applications using "
 "Conan<consuming_packages_cross_building_with_conan>`"
 msgstr ""
 
-#: ../../../examples/cross_build/toolchain_packages.rst:502
+#: ../../../examples/cross_build/toolchain_packages.rst:513
 msgid ""
 "`Another example of cross-compilation from Macos to Linux <https://github."
 "com/conan-io/examples2/tree/main/examples/cross_build/toolchain_packages/"

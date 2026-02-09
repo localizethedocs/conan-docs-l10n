@@ -242,7 +242,7 @@ msgstr ""
 
 #: ../../../versioning/lockfiles/configurations.rst:140
 msgid "Locked configuration"
-msgstr ""
+msgstr "鎖定的組態"
 
 #: ../../../versioning/lockfiles/configurations.rst:142
 msgid ""
@@ -298,6 +298,19 @@ msgid ""
 "HelloB Debug!\n"
 "Greetings Debug!"
 msgstr ""
+"$ conan install .. --lockfile=../locks/pkgb_deps_release.lock\n"
+"$ cmake ../src -G \"Visual Studio 15 Win64\"\n"
+"$ cmake --build . --config Release\n"
+"$ ./bin/greet\n"
+"HelloA 0.1 Release\n"
+"HelloB Release!\n"
+"Greetings Release!\n"
+"$ conan install .. --lockfile=../locks/pkgb_deps_debug.lock\n"
+"$ cmake --build . --config Debug\n"
+"$ ./bin/greet\n"
+"HelloA 0.1 Debug\n"
+"HelloB Debug!\n"
+"Greetings Debug!"
 
 #: ../../../versioning/lockfiles/configurations.rst:178
 msgid "We can create ``pkgb`` package again for both configurations:"
@@ -311,6 +324,11 @@ msgid ""
 "$ conan create . user/testing --lockfile=locks/pkgb_deps_debug.lock --"
 "lockfile-out=locks/pkgb_debug.lock"
 msgstr ""
+"$ cd ..\n"
+"$ conan create . user/testing --lockfile=locks/pkgb_deps_release.lock --"
+"lockfile-out=locks/pkgb_release.lock\n"
+"$ conan create . user/testing --lockfile=locks/pkgb_deps_debug.lock --"
+"lockfile-out=locks/pkgb_debug.lock"
 
 #: ../../../versioning/lockfiles/configurations.rst:187
 msgid ""

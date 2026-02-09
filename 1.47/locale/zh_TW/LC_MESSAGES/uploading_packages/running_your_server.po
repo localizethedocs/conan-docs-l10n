@@ -321,6 +321,17 @@ msgid ""
 "    ssl_certificate_key /etc/nginx/ssl/server.key;\n"
 "}"
 msgstr ""
+"server {\n"
+"    listen 443;\n"
+"    server_name myservername.mydomain.com;\n"
+"\n"
+"    location / {\n"
+"      proxy_pass http://0.0.0.0:9300;\n"
+"    }\n"
+"    ssl on;\n"
+"    ssl_certificate /etc/nginx/ssl/server.crt;\n"
+"    ssl_certificate_key /etc/nginx/ssl/server.key;\n"
+"}"
 
 #: ../../../uploading_packages/running_your_server.rst:204
 #: ../../../uploading_packages/running_your_server.rst:237

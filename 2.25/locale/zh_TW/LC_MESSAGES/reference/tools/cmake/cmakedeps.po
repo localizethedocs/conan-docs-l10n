@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:4
 msgid "CMakeDeps"
-msgstr ""
+msgstr "CMakeDeps"
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:8
 msgid ""
@@ -59,6 +59,12 @@ msgid ""
 "    requires = \"hello/0.1\"\n"
 "    generators = \"CMakeDeps\""
 msgstr ""
+"from conan import ConanFile\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"    generators = \"CMakeDeps\""
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:32
 msgid ""
@@ -82,7 +88,7 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:49
 msgid "**CMakeLists.txt**"
-msgstr ""
+msgstr "**CMakeLists.txt**"
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:49
 msgid ""
@@ -94,6 +100,13 @@ msgid ""
 "add_executable(${PROJECT_NAME} src/main.c)\n"
 "target_link_libraries(${PROJECT_NAME} hello::hello)"
 msgstr ""
+"cmake_minimum_required(VERSION 3.15)\n"
+"project(compressor C)\n"
+"\n"
+"find_package(hello REQUIRED)\n"
+"\n"
+"add_executable(${PROJECT_NAME} src/main.c)\n"
+"target_link_libraries(${PROJECT_NAME} hello::hello)"
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:62
 msgid ""
@@ -114,7 +127,7 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:74
 msgid "Generated files"
-msgstr ""
+msgstr "生成的檔案"
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:76
 msgid ""
@@ -219,7 +232,7 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:132
 msgid "build_context_suffix"
-msgstr ""
+msgstr "build_context_suffix"
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:134
 msgid ""
@@ -263,7 +276,7 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:163
 msgid "build_context_build_modules"
-msgstr ""
+msgstr "build_context_build_modules"
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:165
 msgid ""
@@ -302,7 +315,7 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:191
 msgid "check_components_exist"
-msgstr ""
+msgstr "check_components_exist"
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:195
 msgid ""
@@ -332,6 +345,14 @@ msgid ""
 "    deps.check_components_exist = True\n"
 "    deps.generate()"
 msgstr ""
+"requires = \"boost/1.81.0\"\n"
+"\n"
+"...\n"
+"\n"
+"def generate(self):\n"
+"    deps = CMakeDeps(self)\n"
+"    deps.check_components_exist = True\n"
+"    deps.generate()"
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:216
 msgid ""
@@ -346,6 +367,10 @@ msgid ""
 "find_package(Boost COMPONENTS random regex fakecomp REQUIRED)\n"
 "..."
 msgstr ""
+"cmake_minimum_required(VERSION 3.15)\n"
+"...\n"
+"find_package(Boost COMPONENTS random regex fakecomp REQUIRED)\n"
+"..."
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:228
 msgid "Reference"
@@ -374,7 +399,7 @@ msgstr ""
 #: conan.tools.cmake.cmakedeps.cmakedeps.CMakeDeps.get_find_mode:0
 #: conan.tools.cmake.cmakedeps.cmakedeps.CMakeDeps.set_property:0
 msgid "Parameters"
-msgstr ""
+msgstr "參數"
 
 #: ../../../conan_sources/conan/tools/cmake/cmakedeps/cmakedeps.py:docstring of
 #: conan.tools.cmake.cmakedeps.cmakedeps.CMakeDeps.set_property:7
@@ -640,6 +665,16 @@ msgid ""
 "        self.cpp_info.set_property(\"cmake_target_name\", \"ZLIB::ZLIB\")\n"
 "        ..."
 msgstr ""
+"class ZlibConan(ConanFile):\n"
+"    name = \"zlib\"\n"
+"\n"
+"    ...\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.set_property(\"cmake_find_mode\", \"both\")\n"
+"        self.cpp_info.set_property(\"cmake_file_name\", \"ZLIB\")\n"
+"        self.cpp_info.set_property(\"cmake_target_name\", \"ZLIB::ZLIB\")\n"
+"        ..."
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:335
 msgid ""
@@ -669,6 +704,17 @@ msgid ""
 "        deps.generate()\n"
 "        ..."
 msgstr ""
+"class Compressor(ConanFile):\n"
+"    name = \"compressor\"\n"
+"\n"
+"    requires = \"zlib/1.3.1\"\n"
+"    ...\n"
+"\n"
+"    def generate(self):\n"
+"        deps = CMakeDeps(self)\n"
+"        deps.set_property(\"zlib\", \"cmake_find_mode\", \"config\")\n"
+"        deps.generate()\n"
+"        ..."
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:356
 msgid ""
@@ -691,6 +737,17 @@ msgid ""
 "        deps.generate()\n"
 "        ..."
 msgstr ""
+"class Compressor(ConanFile):\n"
+"    name = \"compressor\"\n"
+"\n"
+"    requires = \"zlib/1.3.1\"\n"
+"    ...\n"
+"\n"
+"    def generate(self):\n"
+"        deps = CMakeDeps(self)\n"
+"        deps.set_property(\"zlib\", \"cmake_target_name\", None)\n"
+"        deps.generate()\n"
+"        ..."
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:375
 msgid ""
@@ -715,6 +772,12 @@ msgid ""
 "    deps.generate()\n"
 "    ..."
 msgstr ""
+"def generate(self):\n"
+"    deps = CMakeDeps(self)\n"
+"    deps.set_property(\"pkg::component\", \"cmake_target_name\", "
+"<new_component_target_name>)\n"
+"    deps.generate()\n"
+"    ..."
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:394
 msgid "Disable CMakeDeps For Installed CMake configuration files"
@@ -746,6 +809,14 @@ msgid ""
 "generate any files\n"
 "    self.cpp_info.builddirs.append(os.path.join(\"lib\", \"cmake\", \"foo\"))"
 msgstr ""
+"def package(self):\n"
+"    ...\n"
+"    cmake.install()\n"
+"\n"
+"def package_info(self):\n"
+"    self.cpp_info.set_property(\"cmake_find_mode\", \"none\") # 不要生成任何"
+"檔案。\n"
+"    self.cpp_info.builddirs.append(os.path.join(\"lib\", \"cmake\", \"foo\"))"
 
 #: ../../../reference/tools/cmake/cmakedeps.rst:415
 msgid "Map from project configuration to imported target's configuration"
@@ -777,3 +848,7 @@ msgid ""
 "cmake .. -DCMAKE_BUILD_TYPE=Coverage -DCMAKE_TOOLCHAIN_FILE=conan_toolchain."
 "cmake -DCMAKE_MAP_IMPORTED_CONFIG_COVERAGE=Debug"
 msgstr ""
+"cd build-coverage/\n"
+"conan install .. -s build_type=Debug\n"
+"cmake .. -DCMAKE_BUILD_TYPE=Coverage -DCMAKE_TOOLCHAIN_FILE=conan_toolchain."
+"cmake -DCMAKE_MAP_IMPORTED_CONFIG_COVERAGE=Debug"

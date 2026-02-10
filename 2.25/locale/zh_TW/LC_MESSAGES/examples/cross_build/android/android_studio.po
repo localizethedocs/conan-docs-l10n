@@ -32,7 +32,7 @@ msgstr ""
 
 #: ../../../examples/cross_build/android/android_studio.rst:14
 msgid "Creating a new project"
-msgstr ""
+msgstr "建立新專案"
 
 #: ../../../examples/cross_build/android/android_studio.rst:16
 msgid ""
@@ -93,6 +93,18 @@ msgid ""
 "     return env->NewStringUTF(hello.c_str());\n"
 " }"
 msgstr ""
+" #include <jni.h>\n"
+" #include <string>\n"
+" #include \"zlib.h\"\n"
+"\n"
+" extern \"C\" JNIEXPORT jstring JNICALL\n"
+" Java_com_example_myconanapp_MainActivity_stringFromJNI(\n"
+"         JNIEnv* env,\n"
+"         jobject /* this */) {\n"
+"     std::string hello = \"Hello from C++, zlib version: \";\n"
+"     hello.append(zlibVersion());\n"
+"     return env->NewStringUTF(hello.c_str());\n"
+" }"
 
 #: ../../../examples/cross_build/android/android_studio.rst:53
 msgid ""
@@ -107,7 +119,7 @@ msgstr ""
 #: ../../../examples/cross_build/android/android_studio.rst:59
 #: ../../../examples/cross_build/android/android_studio.rst:64
 msgid "conanfile.txt"
-msgstr ""
+msgstr "conanfile.txt"
 
 #: ../../../examples/cross_build/android/android_studio.rst:61
 msgid ""
@@ -128,6 +140,15 @@ msgid ""
 "[layout]\n"
 "cmake_layout"
 msgstr ""
+"[requires]\n"
+"zlib/1.2.12\n"
+"\n"
+"[generators]\n"
+"CMakeToolchain\n"
+"CMakeDeps\n"
+"\n"
+"[layout]\n"
+"cmake_layout"
 
 #: ../../../examples/cross_build/android/android_studio.rst:79
 #: ../../../examples/cross_build/android/android_studio.rst:88
@@ -284,6 +305,18 @@ msgid ""
 "[conf]\n"
 "tools.android:ndk_path=/opt/homebrew/share/android-ndk"
 msgstr ""
+"include(default)\n"
+"\n"
+"[settings]\n"
+"os=Android\n"
+"os.api_level=27\n"
+"compiler=clang\n"
+"compiler.version=18\n"
+"compiler.libcxx=c++_static\n"
+"compiler.cppstd=17\n"
+"\n"
+"[conf]\n"
+"tools.android:ndk_path=/opt/homebrew/share/android-ndk"
 
 #: ../../../examples/cross_build/android/android_studio.rst:211
 msgid ""
@@ -300,10 +333,22 @@ msgid ""
 "[tool_requires]\n"
 "*: android-ndk/r27"
 msgstr ""
+"include(default)\n"
+"\n"
+"[settings]\n"
+"os=Android\n"
+"os.api_level=27\n"
+"compiler=clang\n"
+"compiler.version=18\n"
+"compiler.libcxx=c++_static\n"
+"compiler.cppstd=17\n"
+"\n"
+"[tool_requires]\n"
+"*: android-ndk/r27"
 
 #: ../../../examples/cross_build/android/android_studio.rst:227
 msgid "You might need to modify:"
-msgstr ""
+msgstr "您可能需要修改："
 
 #: ../../../examples/cross_build/android/android_studio.rst:229
 msgid ""
@@ -378,7 +423,7 @@ msgstr ""
 #: ../../../examples/cross_build/android/android_studio.rst:270
 #: ../../../examples/cross_build/android/android_studio.rst:276
 msgid "conan_android_toolchain.cmake"
-msgstr ""
+msgstr "conan_android_toolchain.cmake"
 
 #: ../../../examples/cross_build/android/android_studio.rst:272
 msgid ""
@@ -418,7 +463,7 @@ msgstr ""
 #: ../../../examples/cross_build/android/android_studio.rst:300
 #: ../../../examples/cross_build/android/android_studio.rst:304
 msgid "CMakeLists.txt"
-msgstr ""
+msgstr "CMakeLists.txt"
 
 #: ../../../examples/cross_build/android/android_studio.rst:302
 msgid ""
@@ -438,10 +483,19 @@ msgid ""
 "\n"
 "target_link_libraries(myconanapp ${log-lib} ZLIB::ZLIB)"
 msgstr ""
+"cmake_minimum_required(VERSION 3.18.1)\n"
+"project(\"myconanapp\")\n"
+"add_library(myconanapp SHARED native-lib.cpp)\n"
+"\n"
+"find_library(log-lib log)\n"
+"\n"
+"find_package(ZLIB CONFIG)\n"
+"\n"
+"target_link_libraries(myconanapp ${log-lib} ZLIB::ZLIB)"
 
 #: ../../../examples/cross_build/android/android_studio.rst:320
 msgid "Building the application"
-msgstr ""
+msgstr "建置應用程式"
 
 #: ../../../examples/cross_build/android/android_studio.rst:322
 msgid ""

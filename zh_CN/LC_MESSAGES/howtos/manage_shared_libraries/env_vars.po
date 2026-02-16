@@ -1,0 +1,299 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2021, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.43\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:4
+msgid "Manage Shared Libraries with Environment Variables"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:6
+msgid ""
+"Shared libraries are loaded at runtime. The application executable needs to "
+"know where to find the required shared libraries when it runs."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:9
+msgid ""
+"Depending on the operating system, we can use environment variables to help "
+"the dynamic linker to find the shared libraries:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:13
+msgid "OPERATING SYSTEM"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:13
+msgid "ENVIRONMENT VARIABLE"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:15
+msgid "WINDOWS"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:15
+msgid "PATH"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:17
+msgid "LINUX"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:17
+msgid "LD_LIBRARY_PATH"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:19
+msgid "OSX"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:19
+msgid "DYLD_LIBRARY_PATH"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:22
+msgid ""
+"If your package recipe (A) is generating shared libraries you can declare "
+"the needed environment variables pointing to the package directory. This "
+"way, any other package depending on (A) will automatically have the right "
+"environment variable set, so they will be able to locate the (A) shared "
+"library."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:26
+msgid ""
+"Similarly if you use the :ref:`virtualenv "
+"generator<virtual_environment_generator>` and you activate it, you will get "
+"the paths needed to locate the shared libraries in your terminal."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:30
+msgid "Example"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:32
+msgid ""
+"We are packaging a tool called ``toolA`` with a library and an executable "
+"that will, for example, compress data."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:34
+msgid ""
+"The package offers two flavors, shared library or static library (embedded "
+"in the executable of the tool and available to link with). You can use the "
+"``toolA`` package library to develop another executable or library or you "
+"can just use the executable provided by the package. In both cases, if you "
+"choose to install the `shared` package of ``toolA`` you will need to have "
+"the shared library available."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:40
+msgid ""
+"import os\n"
+"from conans import tools, ConanFile\n"
+"\n"
+"class ToolA(ConanFile):\n"
+"    ....\n"
+"    name = \"tool_a\"\n"
+"    version = \"1.0\"\n"
+"    options = {\"shared\": [True, False]}\n"
+"    default_options = {\"shared\": False}\n"
+"\n"
+"    def build(self):\n"
+"        # build your shared library\n"
+"\n"
+"    def package(self):\n"
+"        # Copy the executable\n"
+"        self.copy(pattern=\"tool_a*\", dst=\"bin\", keep_path=False)\n"
+"\n"
+"        # Copy the libraries\n"
+"        if self.options.shared:\n"
+"            self.copy(pattern=\"*.dll\", dst=\"bin\", keep_path=False)\n"
+"            self.copy(pattern=\"*.dylib\", dst=\"lib\", keep_path=False)\n"
+"            self.copy(pattern=\"*.so*\", dst=\"lib\", keep_path=False)\n"
+"        else:\n"
+"            ..."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:68
+msgid "Using the tool from a different package"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:70
+msgid ""
+"If we are now creating a package that uses the ``tool_a`` executable to "
+"compress some data, we can execute directly ``tool_a`` using RunEnvironment "
+"build helper to set the environment variables accordingly:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:73
+msgid ""
+"import os\n"
+"from conans import tools, ConanFile\n"
+"\n"
+"class PackageB(ConanFile):\n"
+"    name = \"package_b\"\n"
+"    version = \"1.0\"\n"
+"    requires = \"tool_a/1.0@myuser/stable\"\n"
+"\n"
+"    def build(self):\n"
+"        exe_name = \"tool_a.exe\" if self.settings.os == \"Windows\" else "
+"\"tool_a\"\n"
+"        self.run([exe_name, \"--someparams\"], run_environment=True)\n"
+"        ..."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:89
+msgid "Building an application using the shared library from ``tool_a``"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:91
+msgid ""
+"As we are building a final application, we will probably want to distribute "
+"it together with the shared library from the ``tool_a``, so we can use the :"
+"ref:`Imports<imports_txt>` to import the required shared libraries to our "
+"user space."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:95
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:160
+msgid "*conanfile.txt*"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:95
+msgid ""
+" [requires]\n"
+" tool_a/1.0@myuser/stable\n"
+"\n"
+" [generators]\n"
+" cmake\n"
+"\n"
+" [options]\n"
+" tool_a:shared=True\n"
+"\n"
+" [imports]\n"
+" bin, *.dll -> ./bin # Copies all dll files from packages bin folder to my "
+"\"bin\" folder\n"
+" lib, *.dylib* -> ./bin # Copies all dylib files from packages lib folder to "
+"my \"bin\" folder\n"
+" lib, *.so* -> ./bin # Copies all so files from packages lib folder to my "
+"\"bin\" folder"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:112
+msgid "Now you can build the project:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:114
+msgid ""
+"$ mkdir build && cd build\n"
+"$ conan install ..\n"
+"$ cmake .. -G \"Visual Studio 14 Win64\"\n"
+"$ cmake --build . --config Release\n"
+"$ cd bin && mytool"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:122
+msgid ""
+"The previous example will work only in Windows and OSX (changing the CMake "
+"generator), because the dynamic linker will look in the current directory "
+"(the binary directory) where we copied the shared libraries too."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:126
+msgid ""
+"In Linux you still need to set the ``LD_LIBRARY_PATH``, or in OSX, the "
+"``DYLD_LIBRARY_PATH``:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:128
+msgid "$ cd bin && LD_LIBRARY_PATH=$(pwd) && ./mytool"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:133
+msgid "Using shared libraries from dependencies"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:135
+msgid ""
+"If you are executing something that depends on shared libraries belonging to "
+"your dependencies, those shared libraries have to be found at runtime. In "
+"Windows, it is enough if the package added its binary folder to the system "
+"``PATH``. In Linux and OSX, it is necessary that the ``LD_LIBRARY_PATH`` and "
+"``DYLD_LIBRARY_PATH`` environment variables are used."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:139
+msgid ""
+"Security restrictions might apply in OSX (`read this thread <https://"
+"stackoverflow.com/questions/35568122/why-isnt-dyld-library-path-being-"
+"propagated-here>`_), so the ``DYLD_LIBRARY_PATH`` and "
+"``DYLD_FRAMEWORK_PATH`` environment variables are not directly transferred "
+"to the child process. In that case, you have to use it explicitly in your "
+"*conanfile.py*:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:144
+msgid ""
+"def build(self):\n"
+"    env_build = RunEnvironment(self)\n"
+"    with tools.environment_append(env_build.vars):\n"
+"        # self.run(\"./myexetool\") # won't work, even if "
+"'DYLD_LIBRARY_PATH' and 'DYLD_FRAMEWORK_PATH' are in the env\n"
+"        self.run(\"DYLD_LIBRARY_PATH=%s DYLD_FRAMEWORK_PATH=%s ./myexetool\" "
+"% (os.environ['DYLD_LIBRARY_PATH'], os.environ['DYLD_FRAMEWORK_PATH']))"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:152
+msgid "Or you could use ``RunEnvironment`` helper described above."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:155
+msgid "Using ``virtualrunenv`` generator"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:157
+msgid ""
+":ref:`virtualrunenv generator<virtual_run_environment_generator>` will set "
+"the environment variables ``PATH``, ``LD_LIBRARY_PATH``, "
+"``DYLD_LIBRARY_PATH`` pointing to *lib* and *bin* folders automatically."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:160
+msgid ""
+" [requires]\n"
+" tool_a/1.0@myuser/stable\n"
+"\n"
+" [options]\n"
+" tool_a:shared=True\n"
+"\n"
+" [generators]\n"
+" virtualrunenv"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:172
+msgid "In the terminal window:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/env_vars.rst:174
+msgid ""
+"$ conan install .\n"
+"$ source activate_run\n"
+"$ tool_a --someparams\n"
+"# Only For Mac OS users to avoid restrictions:\n"
+"$ DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH toolA --someparams"
+msgstr ""

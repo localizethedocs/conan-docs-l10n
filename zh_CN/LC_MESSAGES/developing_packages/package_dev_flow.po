@@ -1,0 +1,445 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.36\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../developing_packages/package_dev_flow.rst:4
+msgid "Package development flow"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:6
+msgid ""
+"In the previous examples, we used the :command:`conan create` command to "
+"create a package of our library. Every time it is run, Conan performs the "
+"following costly operations:"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:9
+msgid "Copy the sources to a new and clean build folder."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:10
+msgid "Build the entire library from scratch."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:11
+msgid "Package the library once it is built."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:12
+msgid "Build the ``test_package`` example and test if it works."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:14
+msgid ""
+"But sometimes, especially with big libraries, while we are developing the "
+"recipe, **we cannot afford** to perform these operations every time."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:16
+msgid ""
+"The following section describes the local development flow, based on the "
+"`Bincrafters community blog <https://bincrafters.github.io>`_."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:21
+msgid ""
+"The local workflow encourages users to perform trial-and-error in a local "
+"sub-directory relative to their recipe, much like how developers typically "
+"test building their projects with other build tools. The strategy is to test "
+"the *conanfile.py* methods individually during this phase."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:25
+msgid ""
+"We will use this `conan flow example <https://github.com/memsharded/"
+"example_conan_flow>`_ to follow the steps in the order below."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:28
+msgid "conan source"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:30
+msgid ""
+"You will generally want to start off with the :command:`conan source` "
+"command. The strategy here is that you’re testing your source method in "
+"isolation, and downloading the files to a temporary sub-folder relative to "
+"the *conanfile.py*. This just makes it easier to get to the sources and "
+"validate them."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:34
+msgid "This method outputs the source files into the source-folder."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:37
+#: ../../../developing_packages/package_dev_flow.rst:61
+#: ../../../developing_packages/package_dev_flow.rst:87
+#: ../../../developing_packages/package_dev_flow.rst:119
+#: ../../../developing_packages/package_dev_flow.rst:148
+msgid "Input folders"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:37
+#: ../../../developing_packages/package_dev_flow.rst:61
+#: ../../../developing_packages/package_dev_flow.rst:87
+#: ../../../developing_packages/package_dev_flow.rst:119
+#: ../../../developing_packages/package_dev_flow.rst:148
+msgid "Output folders"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:39
+#: ../../../developing_packages/package_dev_flow.rst:63
+#: ../../../developing_packages/package_dev_flow.rst:150
+msgid "--"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:39
+#: ../../../developing_packages/package_dev_flow.rst:89
+#: ../../../developing_packages/package_dev_flow.rst:121
+#: ../../../developing_packages/package_dev_flow.rst:150
+msgid "``source-folder``"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:42
+msgid ""
+"$ cd example_conan_flow\n"
+"$ conan source . --source-folder=tmp/source\n"
+"\n"
+"PROJECT: Configuring sources in C:"
+"\\Users\\conan\\example_conan_flow\\tmp\\source\n"
+"Cloning into 'hello'...\n"
+"..."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:51
+msgid ""
+"Once you've got your source method right and it contains the files you "
+"expect, you can move on to testing the various attributes and methods "
+"related to downloading dependencies."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:55
+msgid "conan install"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:57
+msgid ""
+"Conan has multiple methods and attributes which relate to dependencies (all "
+"the ones with the word \"require\" in the name). The command :command:`conan "
+"install` activates all them."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:63
+#: ../../../developing_packages/package_dev_flow.rst:91
+#: ../../../developing_packages/package_dev_flow.rst:123
+#: ../../../developing_packages/package_dev_flow.rst:152
+msgid "``install-folder``"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:66
+msgid ""
+"$ conan install . --install-folder=tmp/build [--profile XXXX]\n"
+"\n"
+"PROJECT: Installing C:\\Users\\conan\\example_conan_flow\\conanfile.py\n"
+"Requirements\n"
+"Packages\n"
+"..."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:75
+msgid ""
+"This also generates the *conaninfo.txt* and *conanbuildinfo.xyz* files "
+"(extensions depends on the generator you've used) in the temp folder "
+"(``install-folder``), which will be needed for the next step. Once you've "
+"got this command working with no errors, you can move on to testing the "
+"``build()`` method."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:80
+msgid "conan build"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:82
+msgid ""
+"The build method takes a path to a folder that has sources and also to the "
+"install folder to get the information of the settings and dependencies. It "
+"uses a path to a folder where it will perform the build. In this case, as we "
+"are including the *conanbuildinfo.cmake* file, we will use the folder from "
+"the install step."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:89
+#: ../../../developing_packages/package_dev_flow.rst:125
+#: ../../../developing_packages/package_dev_flow.rst:154
+msgid "``build-folder``"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:94
+msgid ""
+"$ conan build . --source-folder=tmp/source --build-folder=tmp/build\n"
+"\n"
+"Project: Running build()\n"
+"...\n"
+"Build succeeded.\n"
+"    0 Warning(s)\n"
+"    0 Error(s)\n"
+"\n"
+"Time Elapsed 00:00:03.34"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:106
+msgid ""
+"Here we can avoid the repetition of ``--install-folder=tmp/build`` and it "
+"will be defaulted to the ``--build-folder`` value."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:108
+msgid ""
+"This is pretty straightforward, but it does add a very helpful new shortcut "
+"for people who are packaging their own library. Now, developers can make "
+"changes in their normal source directory and just pass that path as the ``--"
+"source-folder``."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:112
+msgid "conan package"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:114
+msgid ""
+"Just as it sounds, this command now simply runs the ``package()`` method of "
+"a recipe. It needs all the information of the other folders in order to "
+"collect the needed information for the package: header files from source "
+"folder, settings and dependency information from the install folder and "
+"built artifacts from the build folder."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:121
+#: ../../../developing_packages/package_dev_flow.rst:156
+msgid "``package-folder``"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:128
+msgid ""
+"$ conan package . --source-folder=tmp/source --build-folder=tmp/build --"
+"package-folder=tmp/package\n"
+"\n"
+"PROJECT: Generating the package\n"
+"PROJECT: Package folder C:\\Users\\conan\\example_conan_flow\\tmp\\package\n"
+"PROJECT: Calling package()\n"
+"PROJECT package(): Copied 1 '.h' files: hello.h\n"
+"PROJECT package(): Copied 2 '.lib' files: greet.lib, hello.lib\n"
+"PROJECT: Package 'package' created"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:140
+msgid "conan export-pkg"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:142
+msgid ""
+"When you have checked that the package is done correctly, you can generate "
+"the package in the local cache. Note that the package is generated again to "
+"make sure this step is always reproducible."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:145
+msgid "This parameters takes the same parameters as ``package()``."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:159
+msgid "There are 2 modes of operation:"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:161
+msgid ""
+"Using ``source-folder`` and ``build-folder`` will use the ``package()`` "
+"method to extract the artifacts from those folders and create the package, "
+"directly in the Conan local cache. Strictly speaking, it doesn't require "
+"executing a :command:`conan package` before, as it packages directly from "
+"these source and build folders, though :command:`conan package` is still "
+"recommended in the dev-flow to debug the ``package()`` method."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:165
+msgid ""
+"Using the ``package-folder`` argument (incompatible with the above 2), will "
+"not use the ``package()`` method, it will create an exact copy of the "
+"provided folder. It assumes the package has already been created by a "
+"previous :command:`conan package` command or with a :command:`conan build` "
+"command with a ``build()`` method running a ``cmake.install()``."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:169
+msgid ""
+"$ conan export-pkg . user/channel --source-folder=tmp/source --build-"
+"folder=tmp/build --profile=myprofile\n"
+"\n"
+"Packaging to 6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7\n"
+"hello/1.1@user/channel: Generating the package\n"
+"hello/1.1@user/channel: Package folder C:\\Users\\conan\\."
+"conan\\data\\hello\\1.1\\user\\channel\\package\\6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7\n"
+"hello/1.1@user/channel: Calling package()\n"
+"hello/1.1@user/channel package(): Copied 2 '.lib' files: greet.lib, hello."
+"lib\n"
+"hello/1.1@user/channel package(): Copied 2 '.lib' files: greet.lib, hello."
+"lib\n"
+"hello/1.1@user/channel: Package '6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7' "
+"created"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:182
+msgid "conan test"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:184
+msgid ""
+"The final step to test the package for consumers is the test command. This "
+"step is quite straight-forward:"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:186
+msgid ""
+"$ conan test test_package hello/1.1@user/channel\n"
+"\n"
+"hello/1.1@user/channel (test package): Installing C:"
+"\\Users\\conan\\repos\\example_conan_flow\\test_package\\conanfile.py\n"
+"Requirements\n"
+"    hello/1.1@user/channel from local\n"
+"Packages\n"
+"    hello/1.1@user/channel:6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7\n"
+"\n"
+"hello/1.1@user/channel: Already installed!\n"
+"hello/1.1@user/channel (test package): Generator cmake created "
+"conanbuildinfo.cmake\n"
+"hello/1.1@user/channel (test package): Generator txt created conanbuildinfo."
+"txt\n"
+"hello/1.1@user/channel (test package): Generated conaninfo.txt\n"
+"hello/1.1@user/channel (test package): Running build()\n"
+"..."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:203
+msgid ""
+"There is often a need to repeatedly re-run the test to check the package is "
+"well generated for consumers."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:205
+msgid ""
+"As a summary, you could use the default folders and the flow would be as "
+"simple as:"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:207
+msgid ""
+"$ git clone https://github.com/conan-io/examples.git\n"
+"$ cd features/package_development_flow\n"
+"$ conan source .\n"
+"$ conan install . -pr=default\n"
+"$ conan build .\n"
+"$ conan package .\n"
+"# So far, this is local. Now put the local binaries in cache\n"
+"$ conan export-pkg . hello/1.1@user/testing -pr=default\n"
+"# And test it, to check it is working in the local cache\n"
+"$ conan test test_package hello/1.1@user/testing\n"
+"...\n"
+"hello/1.1@user/testing (test package): Running test()\n"
+"Hello World Release!"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:224
+msgid "conan create"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:226
+msgid ""
+"Now we know we have all the steps of a recipe working. Thus, now is an "
+"appropriate time to try to run the recipe all the way through, and put it "
+"completely in the local cache."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:229
+msgid ""
+"The usual command for this is :command:`conan create` and it basically "
+"performs the previous commands with :command:`conan test` for the "
+"*test_package* folder:"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:232
+msgid "$ conan create . user/channel"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:236
+msgid ""
+"Even with this command, the package creator can iterate over the local cache "
+"if something does not work. This could be done with ``--keep-source`` and "
+"``--keep-build`` flags."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:239
+msgid ""
+"If you see in the traces that the ``source()`` method has been properly "
+"executed but the package creation finally failed, you can skip the "
+"``source()`` method the next time issue :command:`conan create` using :"
+"command:`--keep-source`:"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:242
+msgid ""
+"$ conan create . user/channel --keep-source\n"
+"\n"
+"hello/1.1@user/channel: A new conanfile.py version was exported\n"
+"hello/1.1@user/channel: Folder: C:\\Users\\conan\\."
+"conan\\data\\hello\\1.1\\user\\channel\\export\n"
+"hello/1.1@user/channel (test package): Installing C:"
+"\\Users\\conan\\repos\\features\\package_development_flow\\test_package\\conanfile."
+"py\n"
+"Requirements\n"
+"    hello/1.1@user/channel from local\n"
+"Packages\n"
+"    hello/1.1@user/channel:6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7\n"
+"\n"
+"hello/1.1@user/channel: WARN: Forced build from source\n"
+"hello/1.1@user/channel: Building your package in C:\\Users\\conan\\."
+"conan\\data\\hello\\1.1\\user\\channel\\build\\6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7\n"
+"hello/1.1@user/channel: Configuring sources in C:\\Users\\conan\\."
+"conan\\data\\hello\\1.1\\user\\channel\\source\n"
+"Cloning into 'hello'...\n"
+"remote: Counting objects: 17, done.\n"
+"remote: Total 17 (delta 0), reused 0 (delta 0), pack-reused 17\n"
+"Unpacking objects: 100% (17/17), done.\n"
+"Switched to a new branch 'static_shared'\n"
+"Branch 'static_shared' set up to track remote branch 'static_shared' from "
+"'origin'.\n"
+"hello/1.1@user/channel: Copying sources to build folder\n"
+"hello/1.1@user/channel: Generator cmake created conanbuildinfo.cmake\n"
+"hello/1.1@user/channel: Calling build()\n"
+"..."
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:268
+msgid ""
+"If you see that the library is also built correctly, you can also skip the "
+"``build()`` step with the ``--keep-build`` flag:"
+msgstr ""
+
+#: ../../../developing_packages/package_dev_flow.rst:270
+msgid "$ conan create . user/channel --keep-build"
+msgstr ""

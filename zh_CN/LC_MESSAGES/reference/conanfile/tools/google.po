@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.40\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/google.rst:4
+msgid "conan.tools.google"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:8
+msgid "These tools are **experimental** and subject to breaking changes."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:12
+msgid "BazelDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:14
+msgid "Available since: `1.37.0 <https://github.com/conan-io/conan/releases>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:16
+msgid ""
+"The ``BazelDeps`` helper will generate one **conandeps/xxxx/BUILD** file per "
+"dependency. This dependencies will be automatically added to the project by "
+"adding the following to the project's **WORKSPACE** file:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:20
+msgid ""
+"load(\"@//conandeps:dependencies.bzl\", \"load_conan_dependencies\")\n"
+"load_conan_dependencies()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:26
+msgid "The dependencies should be added to the **conanfile.py** file as usual:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:28
+msgid ""
+"class BazelExampleConan(ConanFile):\n"
+"    name = \"bazel-example\"\n"
+"    ...\n"
+"    generators = \"BazelDeps\", \"BazelToolchain\"\n"
+"    requires = \"boost/1.76.0\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:37
+msgid "Bazel"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:38
+msgid ""
+"The ``Bazel`` build helper is a wrapper around the command line invocation "
+"of bazel. It will abstract the calls like ``bazel build //main:hello-world`` "
+"into Python method calls."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:41
+msgid ""
+"The helper is intended to be used in the ``build()`` method, to call Bazel "
+"commands automatically when a package is being built directly by Conan "
+"(create, install)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:45
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.google import Bazel\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def build(self):\n"
+"        bazel = Bazel(self)\n"
+"        bazel.configure()\n"
+"        bazel.build(label=\"//main:hello-world\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:58
+msgid "It supports the following methods:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:61
+msgid "constructor"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:66
+msgid "def __init__(self, conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:67
+msgid "``conanfile``: the current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:71
+msgid "build()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:77
+msgid "def build(self, args=None, label=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google.rst:78
+msgid ""
+"Calls the build system. Equivalent to :command:`bazel build {label}` in the "
+"build folder."
+msgstr ""

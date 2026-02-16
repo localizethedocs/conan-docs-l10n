@@ -1,0 +1,366 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.35\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/visual_studio_packages.rst:4
+msgid "How to create and reuse packages based on Visual Studio"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:6
+msgid ""
+"Conan has different helpers to manage Visual Studio and MSBuild based "
+"projects. This how-to illustrates how to put them together to create and "
+"consume packages that are purely based on Visual Studio. This how-to is "
+"using VS2015, but other versions can be used too."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:12
+msgid "Creating packages"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:14
+msgid ""
+"Start cloning the existing example repository, containing a simple \"Hello "
+"World\" library, and application:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:16
+msgid ""
+"$ git clone https://github.com/memsharded/hello_vs\n"
+"$ cd hello_vs"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:21
+msgid ""
+"It contains a ``src`` folder with the source code and a ``build`` folder "
+"with a Visual Studio 2015 solution, containing 2 projects: the HelloLib "
+"static library, and the Greet application. Open it:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:24
+msgid "$ build\\HelloLib\\HelloLib.sln"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:28
+msgid ""
+"You should be able to select the ``Greet`` subproject -> ``Set as Startup "
+"Project``. Then build and run the app with Ctrl+F5. (Debug -> Start Without "
+"Debugging)"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:32
+msgid ""
+"$ Hello World Debug!\n"
+"# Switch IDE to Release mode, repeat\n"
+"$ Hello World Release!"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:38
+msgid ""
+"Because the ``hello.cpp`` file contains an ``#ifdef _DEBUG`` to switch "
+"between debug and release message."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:40
+msgid "In the repository, there is already a ``conanfile.py`` recipe:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:42
+msgid ""
+"from conans import ConanFile, MSBuild\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    name = \"hello\"\n"
+"    version = \"0.1\"\n"
+"    license = \"MIT\"\n"
+"    url = \"https://github.com/memsharded/hello_vs\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    exports_sources = \"src/*\", \"build/*\"\n"
+"\n"
+"    def build(self):\n"
+"        msbuild = MSBuild(self)\n"
+"        msbuild.build(\"build/HelloLib/HelloLib.sln\")\n"
+"\n"
+"    def package(self):\n"
+"        self.copy(\"*.h\", dst=\"include\", src=\"src\")\n"
+"        self.copy(\"*.lib\", dst=\"lib\", keep_path=False)\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.libs = [\"HelloLib\"]"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:66
+msgid ""
+"This recipe is using the :ref:`MSBuild() build helper <msbuild>` to build "
+"the ``sln`` project. If our recipe has ``requires``, the ``MSBUILD`` helper "
+"will also take care of inject all the needed information from the "
+"requirements, as include directories, library names, definitions, flags etc "
+"to allow our project to locate the declared dependencies."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:71
+msgid ""
+"The recipe contains also a ``test_package`` folder with a simple example "
+"consuming application. In this example, the consuming application is using "
+"CMake to build, but it could also use Visual Studio too. We have left the "
+"CMake one because it is the default generated with :command:`conan new`, and "
+"also to show that packages created from Visual Studio projects can also be "
+"consumed with other build systems like CMake."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:76
+msgid ""
+"Once we want to create a package, it is advised to close VS IDE, clean the "
+"temporary build files from VS to avoid problems, then create and test the "
+"package. Here it is using system defaults, assuming they are Visual Studio "
+"14, Release, x86_64:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:79
+msgid ""
+"# close VS\n"
+"$ git clean -xdf\n"
+"$ conan create . memsharded/testing\n"
+"...\n"
+"> Hello World Release!"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:87
+msgid ""
+"Instead of closing the IDE and running the command:`git clean` we could also "
+"configure a smarter filter in ``exports_sources`` field, so temporary build "
+"files are not exported into the recipe."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:90
+msgid ""
+"This process can be repeated to create and test packages for different "
+"configurations:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:92
+msgid ""
+"$ conan create . memsharded/testing -s arch=x86\n"
+"$ conan create . memsharded/testing -s compiler=\"Visual Studio\" -s "
+"compiler.runtime=MDd -s build_type=Debug\n"
+"$ conan create . memsharded/testing -s compiler=\"Visual Studio\" -s "
+"compiler.runtime=MDd -s build_type=Debug -s arch=x86"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:100
+msgid ""
+"It is not mandatory to specify the ``compiler.runtime`` setting. If it is "
+"not explicitly defined, Conan will automatically use ``runtime=MDd`` for "
+"``build_type==Debug`` and ``runtime=MD`` for ``build_type==Release``."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:104
+msgid "You can list the different created binary packages:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:106
+msgid "$ conan search hello/0.1@memsharded/testing"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:111
+msgid "Uploading binaries"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:113
+msgid ""
+"Your locally created packages can already be uploaded to a Conan remote. If "
+"you created them with the original username \"memsharded\", as from the git "
+"clone, you might want to do a :command:`conan copy` to put them on your own "
+"username. Of course, you can also directly use your user name in :command:"
+"`conan create`."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:117
+msgid ""
+"Another alternative is to configure the permissions in the remote, to allow "
+"uploading packages with different usernames. By default, Artifactory will do "
+"it but Conan server won't: Permissions must be given in the "
+"``[write_permissions]`` section of *server.conf* file."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:123
+msgid "Reusing packages"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:125
+msgid ""
+"To use existing packages directly from Visual Studio, Conan provides the "
+"``visual_studio`` generator. Let's clone an existing \"Chat\" project, "
+"consisting of a ChatLib static library that makes use of the previous "
+"\"Hello World\" package, and a MyChat application, calling the ChatLib "
+"library function."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:129
+msgid ""
+"$ git clone https://github.com/memsharded/chat_vs\n"
+"$ cd chat_vs"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:134
+msgid ""
+"As above, the repository contains a Visual Studio solution in the ``build`` "
+"folder. But if you try to open it, it will fail to load. This is because it "
+"is expecting to find a file with the required information about "
+"dependencies, so it is necessary to obtain that file first. Just run:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:139
+msgid "$ conan install ."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:143
+msgid ""
+"You will see that it created two files, a ``conaninfo.txt`` file, containing "
+"the current configuration of dependencies, and a ``conanbuildinfo.props`` "
+"file, containing the Visual Studio properties (like "
+"``<AdditionalIncludeDirectories>``), so it is able to find the installed "
+"dependencies."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:147
+msgid ""
+"Now you can open the IDE and build and run the app (by the way, the chat "
+"function is just calling the ``hello()`` function two or three times, "
+"depending on the build type):"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:150
+msgid ""
+"$  build\\ChatLib\\ChatLib.sln\n"
+"# Switch to Release\n"
+"# MyChat -> Set as Startup Project\n"
+"# Ctrl + F5 (Debug -> Run without debugging)\n"
+"> Hello World Release!\n"
+"> Hello World Release!"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:159
+msgid ""
+"If you wish to link with the debug version of Hello package, just install it "
+"and change IDE build type:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:161
+msgid ""
+"$ conan install . -s build_type=Debug -s compiler=\"Visual Studio\" -s "
+"compiler.runtime=MDd\n"
+"# Switch to Debug\n"
+"# Ctrl + F5 (Debug -> Run without debugging)\n"
+"> Hello World Debug!\n"
+"> Hello World Debug!\n"
+"> Hello World Debug!"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:170
+msgid "Now you can close the IDE and clean the temporary files:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:172
+msgid ""
+"# close VS IDE\n"
+"$ git clean -xdf"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:177
+msgid ""
+"Again, there is a ``conanfile.py`` package recipe in the repository, "
+"together with a ``test_package``. The recipe is almost identical to the "
+"above one, just with two minor differences:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:180
+msgid ""
+"requires = \"hello/0.1@memsharded/testing\"\n"
+"...\n"
+"generators = \"visual_studio\""
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:186
+msgid ""
+"This will allow us to create and test the package of the ChatLib library:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:188
+msgid ""
+"$ conan create . memsharded/testing\n"
+"> Hello World Release!\n"
+"> Hello World Release!"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:194
+msgid ""
+"You can also repeat the process for different build types and architectures."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:198
+msgid "Other configurations"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:200
+msgid ""
+"The above example works as-is for VS2017, because VS supports upgrading from "
+"previous versions. The ``MSBuild()`` already implements such functionality, "
+"so building and testing packages with VS2017 can be done."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:204
+msgid ""
+"$ conan create . demo/testing -s compiler=\"Visual Studio\" -s compiler."
+"version=15"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:209
+msgid ""
+"If you have to build for older versions of Visual Studio, it is also "
+"possible. In that case, you would probably have different solution projects "
+"inside your build folder. Then the recipe only has to select the correct "
+"one, something like:"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:214
+msgid ""
+"def build(self):\n"
+"    # assuming HelloLibVS12, HelloLibVS14 subfolders\n"
+"    sln_file = \"build/HelloLibVS%s/HelloLib.sln\" % self.settings.compiler."
+"version\n"
+"    msbuild = MSBuild(self)\n"
+"    msbuild.build(sln_file)"
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:223
+msgid ""
+"Finally, we used just one ``conanbuildinfo.props`` file, which the solution "
+"loaded at a global level. You could also define multiple ``conanbuildinfo."
+"props`` files, one per configuration (Release/Debug, x86/x86_64), and load "
+"them accordingly."
+msgstr ""
+
+#: ../../../howtos/visual_studio_packages.rst:229
+msgid ""
+"So far, the ``visual_studio`` generator is single-configuration (packages "
+"containing debug or release artifacts, the generally recommended approach). "
+"It does not support multi-config packages (packages containing both debug "
+"and release artifacts). Please report and provide feedback (submit an issue "
+"in github) to request this feature if necessary."
+msgstr ""

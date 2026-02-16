@@ -1,0 +1,276 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.63\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile_txt.rst:4
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:6
+msgid "Reference for *conanfile.txt* sections: requires, generators, etc."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:9
+msgid "Sections"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:12
+msgid "[requires]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:14
+msgid "List of requirements, specifying the full reference."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:16
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"zlib/1.2.11"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:23
+msgid ""
+"This section supports references with :ref:`version ranges<version_ranges>`:"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:25
+msgid ""
+"[requires]\n"
+"poco/[>1.0,<1.9]\n"
+"zlib/1.2.11"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:32
+msgid "[tool_requires]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:34
+msgid "List of tool requirements specifying the full reference."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:36
+msgid ""
+"[tool_requires]\n"
+"7zip/16.00"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:41
+msgid ""
+"This section supports references with :ref:`version ranges<version_ranges>`."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:43
+msgid ""
+"In practice the ``[tool_requires]`` will be always installed (same as "
+"``[requires]``) as installing from a *conanfile.txt* means that something is "
+"going to be built, so the tool requirements are indeed needed."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:46
+msgid ""
+"It is useful and conceptually cleaner to have them in separate sections, so "
+"users of this *conanfile.txt* might quickly identify some dev-tools that "
+"they have already installed on their machine, differentiating them from the "
+"required libraries to link with."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:50
+msgid "[generators]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:52
+msgid "List of :ref:`generators<generators_reference>`."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:54
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"zlib/1.2.11\n"
+"\n"
+"[generators]\n"
+"xcode\n"
+"cmake\n"
+"qmake"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:66
+msgid "[options]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:68
+msgid ""
+"List of :ref:`options<options_txt>` scoped for each package like "
+"**package_name:option = Value**."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:70
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"zlib/1.2.11\n"
+"\n"
+"[generators]\n"
+"cmake\n"
+"\n"
+"[options]\n"
+"poco:shared=True\n"
+"openssl:shared=True"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:84
+msgid "[imports]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:86
+msgid ""
+"List of files to be imported to a local directory. Read more: :ref:"
+"`imports<imports_txt>`."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:88
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"zlib/1.2.11\n"
+"\n"
+"[generators]\n"
+"cmake\n"
+"\n"
+"[options]\n"
+"poco:shared=True\n"
+"openssl:shared=True\n"
+"\n"
+"[imports]\n"
+"bin, *.dll -> ./bin # Copies all dll files from packages bin folder to my "
+"local \"bin\" folder\n"
+"lib, *.dylib* -> ./bin # Copies all dylib files from packages lib folder to "
+"my local \"bin\" folder"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:105
+msgid ""
+"The first item is the subfolder of the packages (could be the root \".\" "
+"one), the second is the pattern to match. Both relate to the local cache. "
+"The third (after the arrow) item, is the destination folder, living in user "
+"space, not in the local cache."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:108
+msgid ""
+"The ``[imports]`` section also support the same arguments as the equivalent "
+"``imports()`` method in *conanfile.py*, separated with an ``@``."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:112
+msgid ""
+"If your previous folders use an ``@`` in the path name, use a trailing (even "
+"if empty) ``@`` so the parser correctly gets the folders paths, e.g: ``lib, "
+"* -> /home/jenkins/workspace/conan_test@2/g/install/lib @``"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:116
+msgid ""
+"**root_package** (Optional, Defaulted to *all packages in deps*): fnmatch "
+"pattern of the package name (\"OpenCV\", \"Boost\") from which files will be "
+"copied."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:118
+msgid ""
+"**folder**: (Optional, Defaulted to ``False``). If enabled, it will copy the "
+"files from the local cache to a subfolder named as the package containing "
+"the files. Useful to avoid conflicting imports of files with the same name "
+"(e.g. License)."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:120
+msgid ""
+"**ignore_case**: (Optional, Defaulted to ``False``). If enabled will do a "
+"case-insensitive pattern matching."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:121
+msgid ""
+"**excludes**: (Optional, Defaulted to ``None``). Allows defining a list of "
+"patterns (even a single pattern) to be excluded from the copy, even if they "
+"match the main ``pattern``."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:123
+msgid ""
+"**keep_path** (Optional, Defaulted to ``True``): Means if you want to keep "
+"the relative path when you copy the files from the **src** folder to the "
+"**dst** one. Useful to ignore (``keep_path=False``) path of *library.dll* "
+"files in the package it is imported from."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:126
+msgid ""
+"Example to collect license files from dependencies into a *licenses* folder, "
+"excluding (just an example) *.html* and *.jpeg* files:"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:128
+msgid ""
+"[imports]\n"
+"., license* -> ./licenses @ folder=True, ignore_case=True, excludes=*.html *."
+"jpeg"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:135
+msgid "[layout]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:137
+msgid "This is a feature introduced in Conan 1.49"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:140
+msgid ""
+"You can specify one name of a predefined layout. The available values are:"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:142
+msgid ":ref:`cmake_layout<conan_tools_layout_predefined_layouts>`"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:143
+msgid ":ref:`vs_layout<conan_tools_layout_predefined_layouts>`"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:144
+msgid ":ref:`bazel_layout<conan_tools_layout_predefined_layouts>`"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:147
+msgid ""
+"[layout]\n"
+"cmake_layout"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:155
+msgid "Comments"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:157
+msgid ""
+"A comment starts with a hash character (`#`) and ends at the end of the "
+"physical line. Comments are ignored by the syntax; they are not tokens."
+msgstr ""

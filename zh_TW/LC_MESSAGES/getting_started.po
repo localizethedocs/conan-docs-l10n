@@ -1,0 +1,649 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.21\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../getting_started.rst:4
+msgid "Getting Started"
+msgstr ""
+
+#: ../../../getting_started.rst:6
+msgid ""
+"Let's get started with an example: We are going to create an MD5 hash "
+"calculator app that uses one of the most popular C++ libraries: Poco_."
+msgstr ""
+
+#: ../../../getting_started.rst:9
+msgid ""
+"We'll use CMake as build system in this case but keep in mind that Conan "
+"**works with any build system** and is not limited to using CMake."
+msgstr ""
+
+#: ../../../getting_started.rst:12
+msgid ""
+"Make sure you are running the latest Conan version. Read the :ref:`Conan "
+"update<conan_update>` section get more information."
+msgstr ""
+
+#: ../../../getting_started.rst:16
+msgid "An MD5 hash calculator using the Poco Libraries"
+msgstr ""
+
+#: ../../../getting_started.rst:20
+msgid ""
+"The source files to recreate this project are available in the `example "
+"repository`_ in GitHub. You can skip the manual creation of the folder and "
+"sources with this command:"
+msgstr ""
+
+#: ../../../getting_started.rst:23
+msgid ""
+"$ git clone https://github.com/conan-io/examples.git && cd examples/"
+"libraries/poco/md5"
+msgstr ""
+
+#: ../../../getting_started.rst:27
+msgid ""
+"Create the following source file inside a folder. This will be the source "
+"file of our application:"
+msgstr ""
+
+#: ../../../getting_started.rst:29
+msgid "**md5.cpp**"
+msgstr ""
+
+#: ../../../getting_started.rst:29
+msgid ""
+" #include \"Poco/MD5Engine.h\"\n"
+" #include \"Poco/DigestStream.h\"\n"
+"\n"
+" #include <iostream>\n"
+"\n"
+"\n"
+" int main(int argc, char** argv)\n"
+" {\n"
+"     Poco::MD5Engine md5;\n"
+"     Poco::DigestOutputStream ds(md5);\n"
+"     ds << \"abcdefghijklmnopqrstuvwxyz\";\n"
+"     ds.close();\n"
+"     std::cout << Poco::DigestEngine::digestToHex(md5.digest()) << std::"
+"endl;\n"
+"     return 0;\n"
+" }"
+msgstr ""
+
+#: ../../../getting_started.rst:48
+msgid ""
+"We know that our application relies on the Poco libraries. Let's look for it "
+"in the Conan Center remote:"
+msgstr ""
+
+#: ../../../getting_started.rst:50
+msgid ""
+"$ conan search poco --remote=conan-center\n"
+"Existing package recipes:\n"
+"\n"
+"poco/1.8.1\n"
+"poco/1.9.3\n"
+"poco/1.9.4"
+msgstr ""
+
+#: ../../../getting_started.rst:59
+msgid ""
+"Conan remotes must be specified in search. It will otherwise only search "
+"local cache."
+msgstr ""
+
+#: ../../../getting_started.rst:61
+msgid ""
+"We got some interesting references for Poco. Let's inspect the metadata of "
+"the 1.9.4 version:"
+msgstr ""
+
+#: ../../../getting_started.rst:63
+msgid ""
+"$ conan inspect poco/1.9.4\n"
+"name: poco\n"
+"version: 1.9.4\n"
+"url: https://github.com/conan-io/conan-center-index\n"
+"homepage: https://pocoproject.org\n"
+"license: BSL-1.0\n"
+"author: None\n"
+"description: Modern, powerful open source C++ class libraries for building "
+"network- and internet-based applications that run on desktop, server, mobile "
+"and embedded systems.\n"
+"topics: ('conan', 'poco', 'building', 'networking', 'server', 'mobile', "
+"'embedded')\n"
+"generators: cmake\n"
+"exports: None\n"
+"exports_sources: CMakeLists.txt\n"
+"short_paths: False\n"
+"apply_env: True\n"
+"build_policy: None\n"
+"revision_mode: hash\n"
+"settings: ('os', 'arch', 'compiler', 'build_type')\n"
+"options:\n"
+"    cxx_14: [True, False]\n"
+"    enable_apacheconnector: [True, False]\n"
+"    enable_cppparser: [True, False]\n"
+"    enable_crypto: [True, False]\n"
+"    [...]\n"
+"default_options:\n"
+"    cxx_14: False\n"
+"    enable_apacheconnector: False\n"
+"    enable_cppparser: False\n"
+"    enable_crypto: True\n"
+"    [...]"
+msgstr ""
+
+#: ../../../getting_started.rst:95
+msgid ""
+"Ok, it looks like this dependency could work with our hash calculator app. "
+"We should indicate which are the requirements and the generator for our "
+"build system. Let's create a *conanfile.txt* inside our project's folder "
+"with the following content:"
+msgstr ""
+
+#: ../../../getting_started.rst:99
+msgid "**conanfile.txt**"
+msgstr ""
+
+#: ../../../getting_started.rst:99
+msgid ""
+" [requires]\n"
+" poco/1.9.4\n"
+"\n"
+" [generators]\n"
+" cmake"
+msgstr ""
+
+#: ../../../getting_started.rst:108
+msgid ""
+"In this example we are using CMake to build the project, which is why the "
+"``cmake`` generator is specified. This generator creates a *conanbuildinfo."
+"cmake* file that defines CMake variables including paths and library names "
+"that can be used in our build. Read more about :ref:`generators_reference`."
+msgstr ""
+
+#: ../../../getting_started.rst:113
+msgid ""
+"Next step: We are going to install the required dependencies and generate "
+"the information for the build system:"
+msgstr ""
+
+#: ../../../getting_started.rst:117
+msgid ""
+"If you are using **GCC compiler >= 5.1**, Conan will set the ``compiler."
+"libcxx`` to the old ABI for backwards compatibility. You can change this "
+"with the following commands:"
+msgstr ""
+
+#: ../../../getting_started.rst:120
+msgid ""
+"$ conan profile new default --detect  # Generates default profile detecting "
+"GCC and sets old ABI\n"
+"$ conan profile update settings.compiler.libcxx=libstdc++11 default  # Sets "
+"libcxx to C++11 ABI"
+msgstr ""
+
+#: ../../../getting_started.rst:125
+msgid "You will find more information in :ref:`manage_gcc_abi`."
+msgstr ""
+
+#: ../../../getting_started.rst:127
+msgid ""
+"$ mkdir build && cd build\n"
+"$ conan install ..\n"
+"...\n"
+"Requirements\n"
+"    openssl/1.0.2t from 'conan-center' - Downloaded\n"
+"    poco/1.9.4 from 'conan-center' - Downloaded\n"
+"    zlib/1.2.11 from 'conan-center' - Downloaded\n"
+"Packages\n"
+"    openssl/1.0.2t:eb50d18a5a5d59bd0c332464a4c348ab65e353bf - Download\n"
+"    poco/1.9.4:645aaff0a79e6036c77803601e44677556109dd9 - Download\n"
+"    zlib/1.2.11:f74366f76f700cc6e991285892ad7a23c30e6d47 - Download\n"
+"\n"
+"zlib/1.2.11: Retrieving package f74366f76f700cc6e991285892ad7a23c30e6d47 "
+"from remote 'conan-center'\n"
+"Downloading conanmanifest.txt completed [0.25k]\n"
+"Downloading conaninfo.txt completed [0.44k]\n"
+"Downloading conan_package.tgz completed [83.15k]\n"
+"Decompressing conan_package.tgz completed [0.00k]\n"
+"zlib/1.2.11: Package installed f74366f76f700cc6e991285892ad7a23c30e6d47\n"
+"zlib/1.2.11: Downloaded package revision 0\n"
+"openssl/1.0.2t: Retrieving package eb50d18a5a5d59bd0c332464a4c348ab65e353bf "
+"from remote 'conan-center'\n"
+"Downloading conanmanifest.txt completed [4.92k]\n"
+"Downloading conaninfo.txt completed [1.28k]\n"
+"Downloading conan_package.tgz completed [3048.81k]\n"
+"Decompressing conan_package.tgz completed [0.00k]\n"
+"openssl/1.0.2t: Package installed eb50d18a5a5d59bd0c332464a4c348ab65e353bf\n"
+"openssl/1.0.2t: Downloaded package revision 0\n"
+"poco/1.9.4: Retrieving package 645aaff0a79e6036c77803601e44677556109dd9 from "
+"remote 'conan-center'\n"
+"Downloading conanmanifest.txt completed [48.75k]\n"
+"Downloading conaninfo.txt completed [2.44k]\n"
+"Downloading conan_package.tgz completed [5128.39k]\n"
+"Decompressing conan_package.tgz completed [0.00k]\n"
+"poco/1.9.4: Package installed 645aaff0a79e6036c77803601e44677556109dd9\n"
+"poco/1.9.4: Downloaded package revision 0\n"
+"conanfile.txt: Generator cmake created conanbuildinfo.cmake\n"
+"conanfile.txt: Generator txt created conanbuildinfo.txt\n"
+"conanfile.txt: Generated conaninfo.txt\n"
+"conanfile.txt: Generated graphinfo"
+msgstr ""
+
+#: ../../../getting_started.rst:168
+msgid ""
+"Conan installed our Poco dependency but also the **transitive dependencies** "
+"for it: OpenSSL and zlib. It has also generated a *conanbuildinfo.cmake* "
+"file for our build system."
+msgstr ""
+
+#: ../../../getting_started.rst:171
+msgid ""
+"Now let's create our build file. To inject the Conan information, include "
+"the generated *conanbuildinfo.cmake* file like this:"
+msgstr ""
+
+#: ../../../getting_started.rst:173
+msgid "**CMakeLists.txt**"
+msgstr ""
+
+#: ../../../getting_started.rst:173
+msgid ""
+" cmake_minimum_required(VERSION 2.8.12)\n"
+" project(MD5Encrypter)\n"
+"\n"
+" add_definitions(\"-std=c++11\")\n"
+"\n"
+" include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+" conan_basic_setup()\n"
+"\n"
+" add_executable(md5 md5.cpp)\n"
+" target_link_libraries(md5 ${CONAN_LIBS})"
+msgstr ""
+
+#: ../../../getting_started.rst:187
+msgid "Now we are ready to build and run our Encrypter app:"
+msgstr ""
+
+#: ../../../getting_started.rst:189
+msgid ""
+"(win)\n"
+"$ cmake .. -G \"Visual Studio 16\"\n"
+"$ cmake --build . --config Release\n"
+"\n"
+"(linux, mac)\n"
+"$ cmake .. -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Release\n"
+"$ cmake --build .\n"
+"...\n"
+"[100%] Built target md5\n"
+"$ ./bin/md5\n"
+"c3fcd3d76192e4007dfb496cca67e13b"
+msgstr ""
+
+#: ../../../getting_started.rst:204
+msgid "Installing Dependencies"
+msgstr ""
+
+#: ../../../getting_started.rst:206
+msgid ""
+"The :command:`conan install` command downloads the binary package required "
+"for your configuration (detected the first time you ran the command), "
+"**together with other (transitively required by Poco) libraries, like "
+"OpenSSL and Zlib**. It will also create the *conanbuildinfo.cmake* file in "
+"the current directory, in which you can see the CMake variables, and a "
+"*conaninfo.txt* in which the settings, requirements and optional information "
+"is saved."
+msgstr ""
+
+#: ../../../getting_started.rst:212
+msgid ""
+"Conan generates a :ref:`default profile <default_profile>` with your "
+"detected settings (OS, compiler, architecture...) and that configuration is "
+"printed at the top of every :command:`conan install` command. However, it is "
+"strongly recommended to review it and adjust the settings to accurately "
+"describe your system as shown in the :ref:"
+"`getting_started_other_configurations` section."
+msgstr ""
+
+#: ../../../getting_started.rst:216
+msgid ""
+"It is very important to understand the installation process. When the :"
+"command:`conan install` command runs, settings specified on the command line "
+"or taken from the defaults in *<userhome>/.conan/profiles/default* file are "
+"applied."
+msgstr ""
+
+#: ../../../getting_started.rst:224
+msgid ""
+"For example, the command :command:`conan install .. --settings os=\"Linux\" "
+"--settings compiler=\"gcc\"`, performs these steps:"
+msgstr ""
+
+#: ../../../getting_started.rst:226
+msgid ""
+"Checks if the package recipe (for ``poco/1.9.4`` package) exists in the "
+"local cache. If we are just starting, the cache is empty."
+msgstr ""
+
+#: ../../../getting_started.rst:228
+msgid ""
+"Looks for the package recipe in the defined remotes. Conan comes with `conan-"
+"center`_ Bintray remote as the default, but can be changed."
+msgstr ""
+
+#: ../../../getting_started.rst:229
+msgid ""
+"If the recipe exists, the Conan client fetches and stores it in your local "
+"cache."
+msgstr ""
+
+#: ../../../getting_started.rst:230
+msgid ""
+"With the package recipe and the input settings (Linux, GCC), Conan looks for "
+"the corresponding binary in the local cache."
+msgstr ""
+
+#: ../../../getting_started.rst:231
+msgid ""
+"Then Conan searches the corresponding binary package in the remote and "
+"fetches it."
+msgstr ""
+
+#: ../../../getting_started.rst:232
+msgid ""
+"Finally, it generates an appropriate file for the build system specified in "
+"the ``[generators]`` section."
+msgstr ""
+
+#: ../../../getting_started.rst:234
+msgid ""
+"There are binaries for several mainstream compilers and versions available "
+"in Conan Center repository in Bintray, such as Visual Studio 14, 15, Linux "
+"GCC 4.9 and Apple Clang 3.5... Conan will throw an error if the binary "
+"package required for specific settings doesn't exist. You can build the "
+"binary package from sources using :command:`conan install .. --"
+"build=missing`, it will succeed if your configuration is supported by the "
+"recipe. You will find more info in the :ref:"
+"`getting_started_other_configurations` section."
+msgstr ""
+
+#: ../../../getting_started.rst:240
+msgid "Inspecting Dependencies"
+msgstr ""
+
+#: ../../../getting_started.rst:242
+msgid ""
+"The retrieved packages are installed to your local user cache (typically *."
+"conan/data*), and can be reused from this location for other projects. This "
+"allows to clean your current project and continue working even without "
+"network connection. To search for packages in the local cache run:"
+msgstr ""
+
+#: ../../../getting_started.rst:246
+msgid ""
+"$ conan search \"*\"\n"
+"Existing package recipes:\n"
+"\n"
+"openssl/1.0.2t\n"
+"poco/1.9.4\n"
+"zlib/1.2.11"
+msgstr ""
+
+#: ../../../getting_started.rst:255
+msgid "To inspect the different binary packages of a reference run:"
+msgstr ""
+
+#: ../../../getting_started.rst:257
+msgid ""
+"$ conan search poco/1.9.4@\n"
+"Existing packages for recipe poco/1.9.4:\n"
+"\n"
+"Package_ID: 645aaff0a79e6036c77803601e44677556109dd9\n"
+"    [options]\n"
+"        cxx_14: False\n"
+"        enable_apacheconnector: False\n"
+"        enable_cppparser: False\n"
+"        enable_crypto: True\n"
+"        enable_data: True\n"
+"..."
+msgstr ""
+
+#: ../../../getting_started.rst:271
+msgid ""
+"The ``@`` symbol at the end of the package name is important to search for a "
+"specific package. If you don't add the ``@``, Conan will interpret the "
+"argument as a pattern search and return all the packages that match the "
+"``poco/1.9.4`` pattern and may have different :ref:`user and channel "
+"<user_channel>`."
+msgstr ""
+
+#: ../../../getting_started.rst:276
+msgid ""
+"To inspect all your current project's dependencies use the :command:`conan "
+"info` command by pointing it to the location of the *conanfile.txt* folder:"
+msgstr ""
+
+#: ../../../getting_started.rst:279
+msgid ""
+"$ conan info ..\n"
+"conanfile.txt\n"
+"    ID: db91af4811b080e02ebe5a626f1d256bb90d5223\n"
+"    BuildID: None\n"
+"    Requires:\n"
+"        poco/1.9.4\n"
+"openssl/1.0.2t\n"
+"    ID: eb50d18a5a5d59bd0c332464a4c348ab65e353bf\n"
+"    BuildID: None\n"
+"    Remote: conan-center=https://api.bintray.com/conan/conan/conan-center\n"
+"    URL: https://github.com/conan-io/conan-center-index\n"
+"    Homepage: https://github.com/openssl/openssl\n"
+"    License: OpenSSL\n"
+"    Topics: conan, openssl, ssl, tls, encryption, security\n"
+"    Recipe: Cache\n"
+"    Binary: Cache\n"
+"    Binary remote: conan-center\n"
+"    Creation date: 2019-11-13 23:14:37\n"
+"    Required by:\n"
+"        poco/1.9.4\n"
+"    Requires:\n"
+"        zlib/1.2.11\n"
+"poco/1.9.4\n"
+"    ID: 645aaff0a79e6036c77803601e44677556109dd9\n"
+"    BuildID: None\n"
+"    Remote: conan-center=https://api.bintray.com/conan/conan/conan-center\n"
+"    URL: https://github.com/conan-io/conan-center-index\n"
+"    Homepage: https://pocoproject.org\n"
+"    License: BSL-1.0\n"
+"    Topics: conan, poco, building, networking, server, mobile, embedded\n"
+"    Recipe: Cache\n"
+"    Binary: Cache\n"
+"    Binary remote: conan-center\n"
+"    Creation date: 2020-01-07 17:29:24\n"
+"    Required by:\n"
+"        conanfile.txt\n"
+"    Requires:\n"
+"        openssl/1.0.2t\n"
+"zlib/1.2.11\n"
+"    ID: f74366f76f700cc6e991285892ad7a23c30e6d47\n"
+"    BuildID: None\n"
+"    Remote: conan-center=https://api.bintray.com/conan/conan/conan-center\n"
+"    URL: https://github.com/conan-io/conan-center-index\n"
+"    Homepage: https://zlib.net\n"
+"    License: Zlib\n"
+"    Recipe: Cache\n"
+"    Binary: Cache\n"
+"    Binary remote: conan-center\n"
+"    Creation date: 2020-01-07 17:01:29\n"
+"    Required by:\n"
+"        openssl/1.0.2t"
+msgstr ""
+
+#: ../../../getting_started.rst:334
+msgid "Or generate a graph of your dependencies using Dot or HTML formats:"
+msgstr ""
+
+#: ../../../getting_started.rst:336
+msgid ""
+"$ conan info .. --graph=file.html\n"
+"$ file.html # or open the file, double-click"
+msgstr ""
+
+#: ../../../getting_started.rst:347
+msgid "Searching Packages"
+msgstr ""
+
+#: ../../../getting_started.rst:349
+msgid ""
+"The remote repository where packages are installed from is configured by "
+"default in Conan. It is called Conan Center (configured as :command:`conan-"
+"center` remote) and it is located in Bintray_."
+msgstr ""
+
+#: ../../../getting_started.rst:352
+msgid "You can search packages in Conan Center using this command:"
+msgstr ""
+
+#: ../../../getting_started.rst:354
+msgid ""
+"$ conan search open* --remote=conan-center\n"
+"Existing package recipes:\n"
+"\n"
+"openal/1.18.2@bincrafters/stable\n"
+"openal/1.19.0@bincrafters/stable\n"
+"openal/1.19.1\n"
+"opencv/2.4.13.5@conan/stable\n"
+"opencv/3.4.3@conan/stable\n"
+"opencv/3.4.5@conan/stable\n"
+"opencv/4.0.0@conan/stable\n"
+"opencv/4.0.1@conan/stable\n"
+"opencv/4.1.0@conan/stable\n"
+"opencv/4.1.1@conan/stable\n"
+"openexr/2.3.0\n"
+"openexr/2.3.0@conan/stable\n"
+"openexr/2.4.0\n"
+"openjpeg/2.3.0@bincrafters/stable\n"
+"openjpeg/2.3.1\n"
+"openjpeg/2.3.1@bincrafters/stable\n"
+"openssl/1.0.2s\n"
+"..."
+msgstr ""
+
+#: ../../../getting_started.rst:378
+msgid ""
+"As you can see, some of the libraries end with a ``@`` symbol followed by "
+"two strings separated by a slash. These fields are the :ref:`user and "
+"channel <user_channel>` for the Conan package, and they are useful if you "
+"want to make specific changes and disambiguate your modified recipe from the "
+"one in the Conan Center or any other remote."
+msgstr ""
+
+#: ../../../getting_started.rst:383
+msgid ""
+"There are additional community repositories that can be configured and used. "
+"See :ref:`Bintray Repositories <bintray_repositories>` for more information."
+msgstr ""
+
+#: ../../../getting_started.rst:389
+msgid "Building with Other Configurations"
+msgstr ""
+
+#: ../../../getting_started.rst:391
+msgid ""
+"In this example, we have built our project using the default configuration "
+"detected by Conan. This configuration is known as the :ref:`default profile "
+"<default_profile>`."
+msgstr ""
+
+#: ../../../getting_started.rst:394
+msgid ""
+"A profile needs to be available prior to running commands such as :command:"
+"`conan install`. When running the command, your settings are automatically "
+"detected (compiler, architecture...) and stored as the default profile. You "
+"can edit these settings *~/.conan/profiles/default* or create new profiles "
+"with your desired configuration."
+msgstr ""
+
+#: ../../../getting_started.rst:398
+msgid ""
+"For example, if we have a profile with a 32-bit GCC configuration in a "
+"profile called *gcc_x86*, we can run the following:"
+msgstr ""
+
+#: ../../../getting_started.rst:400
+msgid "$ conan install .. --profile=gcc_x86"
+msgstr ""
+
+#: ../../../getting_started.rst:406
+msgid ""
+"We strongly recommend using :ref:`profiles` and managing them with :ref:"
+"`conan_config_install`."
+msgstr ""
+
+#: ../../../getting_started.rst:408
+msgid ""
+"However, the user can always override the profile settings in the :command:"
+"`conan install` command using the :command:`--settings` parameter. As an "
+"exercise, try building the 32-bit version of the hash calculator project "
+"like this:"
+msgstr ""
+
+#: ../../../getting_started.rst:411
+msgid "$ conan install .. --settings arch=x86"
+msgstr ""
+
+#: ../../../getting_started.rst:415
+msgid ""
+"The above command installs a different package, using the :command:`--"
+"settings arch=x86` instead of the one of the default profile used previously."
+msgstr ""
+
+#: ../../../getting_started.rst:418
+msgid ""
+"To use the 32-bit binaries, you will also have to change your project build:"
+msgstr ""
+
+#: ../../../getting_started.rst:420
+msgid "In Windows, change the CMake invocation to ``Visual Studio 14``."
+msgstr ""
+
+#: ../../../getting_started.rst:421
+msgid ""
+"In Linux, you have to add the ``-m32`` flag to your ``CMakeLists.txt`` by "
+"running ``SET(CMAKE_CXX_FLAGS \"${CMAKE_CXX_FLAGS} -m32\")``, and the same "
+"applies to ``CMAKE_C_FLAGS, CMAKE_SHARED_LINK_FLAGS and "
+"CMAKE_EXE_LINKER_FLAGS``. This can also be done more easily, by "
+"automatically using Conan, as we'll show later."
+msgstr ""
+
+#: ../../../getting_started.rst:424
+msgid ""
+"In macOS, you need to add the definition ``-DCMAKE_OSX_ARCHITECTURES=i386``."
+msgstr ""
+
+#: ../../../getting_started.rst:426
+msgid ""
+"Got any doubts? Check our :ref:`faq`, |write_us| or join the community in "
+"`Cpplang Slack`_ ``#conan`` channel!"
+msgstr ""
+
+#: ../../../getting_started.rst:428
+msgid "<a href=\"mailto:info@conan.io\" target=\"_blank\">write us</a>"
+msgstr ""

@@ -1,0 +1,395 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.50\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../versioning/lockfiles/introduction.rst:4
+msgid "Introduction"
+msgstr "介紹"
+
+#: ../../../versioning/lockfiles/introduction.rst:8
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:11
+msgid ""
+"Let's introduce lockfiles by example, with 2 packages, package ``pkgb`` that "
+"depends on  package ``pkga``."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:15
+msgid ""
+"The code used in this section, including a *build.py* script to reproduce "
+"it, is in the examples repository: https://github.com/conan-io/examples. You "
+"can go step by step reproducing this example while reading the below "
+"documentation."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:None
+msgid ""
+"$ git clone https://github.com/conan-io/examples.git\n"
+"$ cd features/lockfiles/intro\n"
+"# $ python build.py only to run the full example, but better go step by step"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:26
+msgid "Locking dependencies"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:28
+msgid ""
+"This example uses ``full_version_mode``, that is, if a package changes any "
+"part of its version, its consumers will need to build a new binary because a "
+"new ``package_id`` will be computed. This example will use version ranges, "
+"and it is not necessary to have revisions enabled. It also does not require "
+"a server, everything can be reproduced locally."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:33
+msgid "$ conan config set general.default_package_id_mode=full_version_mode"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:38
+msgid ""
+"Let's start by creating from the recipe and source in the ``pkga`` folder, a "
+"first ``pkg/0.1@user/testing`` package in our local cache:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:41
+msgid "$ conan create pkga pkga/0.1@user/testing"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:46
+msgid ""
+"Now we want to start developing and testing the code for ``pkgb``, but we "
+"want to create a \"snapshot\" of the dependency graph, to isolate our "
+"development from possible changes (note that the recipe in *pkgb/conanfile."
+"py* contains a require like ``requires = \"pkga/[>0.0]@user/testing\"``)."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:51
+msgid ""
+"$ cd pkgb\n"
+"$ conan lock create conanfile.py --user=user --channel=testing --lockfile-"
+"out=locks/pkgb_deps.lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:57
+msgid ""
+"This will create a *pkgb_deps.lock* file in the *locks* folder. Note that we "
+"have passed the user and channel of the future package that we will create "
+"as ``--user=user --channel=testing``."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:60
+msgid "Let's have a look at the lockfile:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:62
+msgid ""
+"{\n"
+"    \"graph_lock\": {\n"
+"        \"nodes\": {\n"
+"            \"0\": {\n"
+"                \"ref\": \"pkgb/0.1@user/testing\",\n"
+"                \"options\": \"shared=False\",\n"
+"                \"requires\": [\"1\"],\n"
+"                \"path\": \"..\\\\conanfile.py\",\n"
+"                \"context\": \"host\"\n"
+"            },\n"
+"            \"1\": {\n"
+"                \"ref\": \"pkga/0.1@user/testing\",\n"
+"                \"options\": \"\",\n"
+"                \"package_id\": "
+"\"4024617540c4f240a6a5e8911b0de9ef38a11a72\",\n"
+"                \"prev\": \"0\",\n"
+"                \"context\": \"host\"\n"
+"            }\n"
+"        },\n"
+"        \"revisions_enabled\": false\n"
+"    },\n"
+"    \"version\": \"0.4\",\n"
+"    \"profile_host\": "
+"\"[settings]\\narch=x86_64\\narch_build=x86_64\\nbuild_type=Release\\ncompiler=Visual "
+"Studio\\ncompiler.runtime=MD\\ncompiler."
+"version=15\\nos=Windows\\nos_build=Windows\\n[options]\\n[tool_requires]\\n[env]\\n\"\n"
+"}"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:89
+msgid ""
+"We can see the ``pkga/0.1@user/testing`` dependency in the lockfile, "
+"together with its ``package_id``. This dependency is fully locked. The "
+"``pkgb/0.1@user/testing`` doesn't have a ``package_id`` yet, because so far "
+"it is just a local *conanfile.py* as a consumer, not a package. But the "
+"``user/testing`` user and channel are already defined."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:93
+msgid ""
+"It is important to note that the *pkgb_deps.lock* lockfile contains the "
+"current ``profile`` for the current configuration."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:95
+msgid ""
+"At this moment we have captured the dependency graph for ``pkgb``. Now, it "
+"would be possible that a new version of ``pkga`` is created:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:99
+msgid ""
+"$ cd ..\n"
+"# The recipe generates different package code depending on the version, "
+"automatically\n"
+"$ conan create pkga pkga/0.2@user/testing"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:105
+msgid "If now we install and build our code in ``pkgb`` we would get:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:107
+msgid ""
+"$ mkdir pkgb/build\n"
+"$ cd pkgb/build\n"
+"$ conan install ..\n"
+"> ... pkga/0.2@user/testing from local cache - Cache\n"
+"# Example for VS, use your compiler here\n"
+"$ cmake ../src -G \"Visual Studio 15 Win64\"\n"
+"$ cmake --build . --config Release\n"
+"$ ./bin/greet\n"
+"HelloA 0.2 Release\n"
+"HelloB Release!\n"
+"Greetings Release!"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:121
+msgid ""
+"But as explained above, the purpose of the lockfile is to capture the "
+"dependencies and use them later. Let's pass the lockfile as an argument to "
+"guarantee the usage of the locked ``pkga/0.1@user/testing`` dependency:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:124
+msgid ""
+"$ conan install .. --lockfile=../locks/pkgb_deps.lock\n"
+"> ... pkga/0.1@user/testing from local cache - Cache\n"
+"$ cmake ../src -G \"Visual Studio 15 Win64\"\n"
+"$ cmake --build . --config Release\n"
+"$ ./bin/greet\n"
+"HelloA 0.1 Release\n"
+"HelloB Release!\n"
+"Greetings Release!"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:135
+msgid ""
+"That's it. We managed to depend on ``pkga/0.1@user/testing`` instead of the "
+"``pkga/0.2@user/testing`` although the later satisfies the version range and "
+"is available in the cache. Using the same dependency was possible because we "
+"used the information stored in the lockfile."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:140
+msgid "Immutability"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:142
+msgid ""
+"A core concept of lockfiles is their immutability and the integrity of its "
+"data:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:146
+msgid ""
+"The information stored in a lockfile cannot be changed. Any attempt to "
+"modify locked data will result in an error."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:149
+msgid ""
+"For example, if now we try to do a :command:`conan install` that also builds "
+"``pkga`` from source:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:151
+msgid ""
+"$ conan install .. --lockfile=../locks/pkgb_deps.lock --build=pkga\n"
+"ERROR: Cannot build 'pkga/0.1@user/testing' because it is already locked in "
+"the input lockfile"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:156
+msgid ""
+"It is an error, because the ``pkga/0.1@user/testing`` dependency was fully "
+"locked. When the lockfile was created, the ``pkga/0.1@user/testing`` was "
+"found, including a binary, and that information was stored. Everytime this "
+"lockfile is used, it assumes this package and binary exist and it will try "
+"to get them, but it will never allow to re-build, because that can violate "
+"the integrity of the lockfile. For example, if we were using "
+"``package_revision_mode``, a new binary of ``pkga`` would produce new "
+"package-ids of all its consumers, that will not match the package-ids stored "
+"in the lockfile."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:162
+msgid ""
+"It is possible though to control what is being locked with the ``--build`` "
+"argument provided to the :command:`conan lock create` command."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:165
+msgid ""
+"The same principle applies if we try to create a package for ``pkgb`` and it "
+"tries to alter the user and channel ``user/testing`` that were provided at "
+"the time of the :command:`conan lock create` command used above."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:168
+msgid ""
+"$ cd ..\n"
+"$ conan create . user/stable --lockfile=locks/pkgb_deps.locked\n"
+"ERROR: Attempt to modify locked pkgb/0.1@user/testing to pkgb/0.1@user/stable"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:174
+msgid ""
+"Again, it is important to keep the integrity. Package recipes can have "
+"conditional or parameterized dependencies, based on user and channel for "
+"example. If we try to create the ``pkgb`` package with different user and "
+"channel, it could result in a different dependency graph, totally "
+"incompatible with the one captured in the lockfile. If ``pkgb/0.1@user/"
+"testing`` was stored in the lockfile, any command using this lockfile must "
+"respect and keep it without changes."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:181
+msgid ""
+"A package in a lockfile is fully locked if it contains a ``prev`` (package "
+"revision) field defined. Fully locked packages cannot be built from sources. "
+"Partially locked packages do not contain a ``prev`` defined. They lock the "
+"reference and the package-id, and they can be built from sources."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:187
+msgid "Reproducibility"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:189
+msgid ""
+"That doesn't mean that a lockfile cannot evolve at all. Using the :command:"
+"`--lockfile` argument, we are able to create ``pkgb/0.1@user/testing`` "
+"guaranteeing it is being created depending on ``pkga/0.1@user/testing``. "
+"Additionally, if we use the :command:`--lockfile-out` argument, we can "
+"obtain an updated version of the lockfile:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:193
+msgid ""
+"$ conan create . user/testing --lockfile=locks/pkgb_deps.lock --lockfile-"
+"out=locks/pkgb.lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:198
+msgid "And if we inspect the new *locks/pkgb.lock* file:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:200
+msgid ""
+"{\n"
+"    ...\n"
+"    \"0\": {\n"
+"        \"ref\": \"pkgb/0.1@user/testing\",\n"
+"        \"options\": \"shared=False\",\n"
+"        \"package_id\": \"2418b211603ca0a3858d9dd1fc1108d54a4cab99\",\n"
+"        \"prev\": \"0\",\n"
+"        \"modified\": true,\n"
+"        \"requires\": [\"1\"],\n"
+"        \"context\": \"host\"\n"
+"    }\n"
+"    ...\n"
+"}"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:216
+msgid ""
+"Note that some fields of the lockfile are now completed, as the modified "
+"flag, that indicates that ``pkgb`` was built in the conan create command. "
+"That information can be useful in the CI environment to know which packages "
+"were built by different jobs. Those modified flags can be reset using the :"
+"command:`conan lock clean-modified`. Also, it can be appreciated in *locks/"
+"pkgb.lock* that now ``pkgb/0.1@user/testing`` is fully locked, as a package "
+"(not a local *conanfile.py*), and contains a ``package_id``. So if we try to "
+"use this new file for creating the package again, it will error, as a "
+"package that is fully locked cannot be rebuilt:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:226
+msgid ""
+"$ conan create . user/testing --lockfile=locks/pkgb.lock\n"
+"ERROR: Attempt to modify locked pkgb/0.1@user/testing to pkgb/0.1@user/"
+"testing"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:232
+msgid ""
+"But we can reproduce the same set of dependencies and the creation of "
+"``pkgb``, using the *pkgb_deps.lock* lockfile:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:234
+msgid "$ conan create . user/testing --lockfile=locks/pkgb_deps.lock # OK"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:239
+msgid ""
+"The *pkgb.lock* can be used later in time to install the ``pkgb`` "
+"application (the ``pkgb`` *conanfile.py* contains a ``deploy()`` method for "
+"convenience for this example), and get the same package and dependencies:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:242
+msgid ""
+"$ cd ..\n"
+"$ mkdir consume\n"
+"$ cd consume\n"
+"$ conan install pkgb/0.1@user/testing --lockfile=../pkgb/locks/pkgb.lock\n"
+"$ ./bin/greet\n"
+"HelloA 0.1 Release\n"
+"HelloB Release!\n"
+"Greetings Release!"
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:253
+msgid ""
+"As long as we have the *pkgb.lock* lockfile, we will be able to robustly "
+"reproduce this install, even if the packages were uploaded to a server, if "
+"there are new versions that satisfy the version ranges, etc."
+msgstr ""
+
+#: ../../../versioning/lockfiles/introduction.rst:259
+msgid ""
+"All the examples and documentation of this section is done with version "
+"ranges and revisions disabled. Lockfiles also work and can lock both recipe "
+"and package revisions, with the same behavior as version-ranges. All is "
+"necessary is to enable revisions. The only current limitation is that the "
+"local cache cannot store more than one revision at a time, but that is a "
+"limitation of the cache and unrelated to lockfiles."
+msgstr ""

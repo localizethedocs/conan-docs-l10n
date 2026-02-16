@@ -1,0 +1,149 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.48\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:4
+msgid "cmake_layout"
+msgstr "cmake_layout"
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:8
+msgid ""
+"These tools are still **experimental** (so subject to breaking changes) but "
+"with very stable syntax. We encourage the usage of it to be prepared for "
+"Conan 2.0."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:12
+msgid "For example, this would implement the standard CMake project layout:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:21
+msgid ""
+"from conan.tools.cmake import cmake_layout\n"
+"\n"
+"def layout(self):\n"
+"    cmake_layout(self)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:22
+msgid ""
+"If you want to try it, use the ``conan new hello/0.1 --template=cmake_lib`` "
+"template."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:24
+msgid ""
+"It is very important to note that this ``cmake_layout()`` is just calling "
+"the ``folders`` and ``cpp`` attributes described in the (:ref:`layout "
+"reference <layout_folders_reference>`)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:27
+msgid "This is the implementation of ``cmake_layout()``:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:64
+msgid ""
+"def cmake_layout(conanfile, generator=None, src_folder=\".\"):\n"
+"    gen = conanfile.conf.get(\"tools.cmake.cmaketoolchain:generator\", "
+"default=generator)\n"
+"    if gen:\n"
+"        multi = \"Visual\" in gen or \"Xcode\" in gen or \"Multi-Config\" in "
+"gen\n"
+"    else:\n"
+"        compiler = conanfile.settings.get_safe(\"compiler\")\n"
+"        if compiler in (\"Visual Studio\", \"msvc\"):\n"
+"            multi = True\n"
+"        else:\n"
+"            multi = False\n"
+"\n"
+"    conanfile.folders.source = src_folder\n"
+"    try:\n"
+"        build_type = str(conanfile.settings.build_type)\n"
+"    except ConanException:\n"
+"        raise ConanException(\"'build_type' setting not defined, it is "
+"necessary for cmake_layout()\")\n"
+"    if multi:\n"
+"        conanfile.folders.build = \"build\"\n"
+"    else:\n"
+"        build_type = build_type.lower()\n"
+"        conanfile.folders.build = \"cmake-build-{}\".format(build_type)\n"
+"\n"
+"    conanfile.folders.generators = \"build/generators\"\n"
+"    conanfile.cpp.source.includedirs = [\"include\"]\n"
+"\n"
+"    if multi:\n"
+"        conanfile.cpp.build.libdirs = [\"{}\".format(build_type)]\n"
+"        conanfile.cpp.build.bindirs = [\"{}\".format(build_type)]\n"
+"    else:\n"
+"        conanfile.cpp.build.libdirs = [\".\"]\n"
+"        conanfile.cpp.build.bindirs = [\".\"]"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:65
+msgid ""
+"First, it is important to notice that the layout depends on the CMake "
+"generator that will be used. So if defined from ``[conf]``, that value will "
+"be used. If defined in recipe, then the recipe should pass it as "
+"``cmake_layout(self, cmake_generator)``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:69
+msgid ""
+"The definitions of the folders is different if it is a multi-config "
+"generator (like Visual Studio or Xcode), or a single-config generator (like "
+"Unix Makefiles). In the first case, the folder is the same irrespective of "
+"the build type, and the build system will manage the different build types "
+"inside that folder. But single-config generators like Unix Makefiles, must "
+"use a different folder for each different configuration (as a different "
+"build_type Release/Debug)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:75
+msgid ""
+"Nevertheless, the ``conanfile.folders.generators`` folder containing the "
+"saved files from the generators (CMakeDeps, CMakeToolchain...) is always at "
+"``build/generators`` because they support multi-configuration. That is, you "
+"can run :command:`conan install . -s build_type=Debug` and :command:`conan "
+"install . -s build_type=Release` and the generated files will coexist at the "
+"``build/generators`` without any issue."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:80
+msgid ""
+"Finally, the location where the libraries are created also depends. For "
+"multi-config, the respective libraries will be located in a dedicated folder "
+"inside the build folder, while for single-config, the libraries will be "
+"located directly in the build folder."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:84
+msgid ""
+"This helper defines a few things, for example that the source folder is "
+"called ``\".\"`` by default, meaning that Conan will expect the sources in "
+"the same directory were the conanfile is (most likely the project root). If "
+"you have a different folder where the ``CMakeLists.txt`` is located, for "
+"example, when creating a package for an external library, you can use the "
+"``src_folder`` argument:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake_layout.rst:94
+msgid ""
+"def layout(self):\n"
+"    cmake_layout(self, src_folder=\"subfolder\")"
+msgstr ""

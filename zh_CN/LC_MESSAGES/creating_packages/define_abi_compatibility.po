@@ -1,0 +1,1064 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.14\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../creating_packages/define_abi_compatibility.rst:4
+msgid "Defining Package ABI Compatibility"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:6
+msgid ""
+"Each package recipe can generate *N* binary packages from it, depending on "
+"these three items: ``settings``, ``options`` and ``requires``."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:9
+msgid ""
+"When any of the :ref:`settings_property` of a package recipe changes, it "
+"will reference a different binary:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:12
+msgid ""
+"class MyLibConanPackage(ConanFile):\n"
+"    name = \"MyLib\"\n"
+"    version = \"1.0\"\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\""
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:19
+msgid ""
+"When this package is installed by a *conanfile.txt*, another package "
+"*conanfile.py*, or directly:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:21
+msgid "$ conan install MyLib/1.0@user/channel -s arch=x86_64 -s ..."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:25
+msgid "The process is:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:27
+msgid ""
+"Conan gets the user input settings and options. Those settings and options "
+"can come from the command line, profiles or from the values cached in the "
+"latest :command:`conan install` execution."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:29
+msgid ""
+"Conan retrieves the ``MyLib/1.0@user/channel`` recipe, reads the "
+"``settings`` attribute, and assigns the necessary values."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:30
+msgid ""
+"With the current package values for ``settings`` (also ``options`` and "
+"``requires``), it will compute a SHA1 hash that will serve as the binary "
+"package ID, e.g., ``c6d75a933080ca17eb7f076813e7fb21aaa740f2``."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:32
+msgid ""
+"Conan will try to find the ``c6d75...`` binary package. If it exists, it "
+"will be retrieved. If it cannot be found, it will fail and indicate that it "
+"can be built from sources using :command:`conan install --build`."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:35
+msgid ""
+"If the package is installed again using different settings, for example, on "
+"a 32-bit architecture:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:37
+msgid "$ conan install MyLib/1.0@user/channel -s arch=x86 -s ..."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:41
+msgid ""
+"The process will be repeated with a different generated package ID, because "
+"the ``arch`` setting will have a different value. The same applies to "
+"different compilers, compiler versions, build types. When generating "
+"multiple binaries - a separate ID is generated for each configuration."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:45
+msgid ""
+"When developers using the package use the same settings as one of those "
+"uploaded binaries, the computed package ID will be identical causing the "
+"binary to be retrieved and reused without the need of rebuilding it from the "
+"sources."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:48
+msgid ""
+"The ``options`` behavior is very similar. The main difference is that "
+"``options`` can be more easily defined at the package level and they can be "
+"defaulted. Check the :ref:`conanfile_options` reference."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:51
+msgid ""
+"Note this simple scenario of a **header-only** library. The package does not "
+"need to be built, and it will not have any ABI issues at all. The recipe for "
+"such a package will be to generate a single binary package, no more. This is "
+"easily achieved by not declaring ``settings`` nor ``options`` in the recipe "
+"as follows:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:55
+msgid ""
+"class MyLibConanPackage(ConanFile):\n"
+"    name = \"MyLib\"\n"
+"    version = \"1.0\"\n"
+"    # no settings defined!"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:62
+msgid ""
+"No matter the settings are defined by the users, including the compiler or "
+"version, the package settings and options will always be the same (left "
+"empty) and they will hash to the same binary package ID. That package will "
+"typically contain just the header files."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:65
+msgid ""
+"What happens if we have a library that we can be built with GCC 4.8 and will "
+"preserve the ABI compatibility with GCC 4.9? (This kind of compatibility is "
+"easier to achieve for example for pure C libraries)."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:68
+msgid ""
+"Although it could be argued that it is worth rebuilding with 4.9 too -to get "
+"fixes and performance improvements-. Let's suppose that we don't want to "
+"create 2 different binaries, but just a single built with GCC 4.8 which also "
+"needs to be compatible for GCC 4.9 installations."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:74
+msgid "Defining a Custom package_id()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:76
+msgid ""
+"The default ``package_id()`` uses the ``settings`` and ``options`` directly "
+"as defined, and assumes the `semantic versioning <https://semver.org/>`_ for "
+"dependencies is defined in ``requires``."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:79
+msgid ""
+"This ``package_id()`` method can be overridden to control the package ID "
+"generation. Within the ``package_id()``, we have access to the ``self.info`` "
+"object, which is hashed to compute the binary ID and contains:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:82
+msgid ""
+"**self.info.settings**: Contains all the declared settings, always as string "
+"values. We can access/modify the settings, e.g., ``self.info.settings."
+"compiler.version``."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:85
+msgid ""
+"**self.info.options**: Contains all the declared options, always as string "
+"values too, e.g., ``self.info.options.shared``."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:87
+msgid ""
+"Initially this ``info`` object contains the original settings and options, "
+"but they can be changed without constraints to any other string value."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:90
+msgid ""
+"For example, if you are sure your package ABI compatibility is fine for GCC "
+"versions > 4.5 and < 5.0, you could do the following:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:92
+msgid ""
+"from conans import ConanFile, CMake, tools\n"
+"from conans.model.version import Version\n"
+"\n"
+"class PkgConan(ConanFile):\n"
+"    name = \"Pkg\"\n"
+"    version = \"1.0\"\n"
+"    settings = \"compiler\", \"build_type\"\n"
+"\n"
+"    def package_id(self):\n"
+"        v = Version(str(self.settings.compiler.version))\n"
+"        if self.settings.compiler == \"gcc\" and (v >= \"4.5\" and v < "
+"\"5.0\"):\n"
+"            self.info.settings.compiler.version = \"GCC version between 4.5 "
+"and 5.0\""
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:107
+msgid ""
+"We have set the ``self.info.settings.compiler.version`` with an arbitrary "
+"string, the value of which is not important (could be any string). The only "
+"important thing is that it is the same for any GCC version between 4.5 and "
+"5.0. For all those versions, the compiler version will always be hashed to "
+"the same ID."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:111
+msgid ""
+"Let's try and check that it works properly when installing the package for "
+"GCC 4.5:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:113
+msgid ""
+"$ conan create . Pkg/1.0@myuser/mychannel -s compiler=gcc -s compiler."
+"version=4.5 ...\n"
+"\n"
+"Requirements\n"
+"    Pkg/1.0@myuser/mychannel from local\n"
+"Packages\n"
+"    Pkg/1.0@myuser/mychannel:af044f9619574eceb8e1cca737a64bdad88246ad\n"
+"..."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:123
+msgid ""
+"We can see that the computed package ID is ``af04...46ad`` (not real). What "
+"happens if we specify GCC 4.6?"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:125
+msgid ""
+"$ conan install Pkg/1.0@myuser/mychannel -s compiler=gcc -s compiler."
+"version=4.6 ...\n"
+"\n"
+"Requirements\n"
+"    Pkg/1.0@myuser/mychannel from local\n"
+"Packages\n"
+"    Pkg/1.0@myuser/mychannel:af044f9619574eceb8e1cca737a64bdad88246ad"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:134
+msgid ""
+"The required package has the same result again ``af04...46ad``. Now we can "
+"try using GCC 4.4 (< 4.5):"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:136
+msgid ""
+"$ conan install Pkg/1.0@myuser/mychannel -s compiler=gcc -s compiler."
+"version=4.4 ...\n"
+"\n"
+"Requirements\n"
+"    Pkg/1.0@myuser/mychannel from local\n"
+"Packages\n"
+"    Pkg/1.0@myuser/mychannel:7d02dc01581029782b59dcc8c9783a73ab3c22dd"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:145
+msgid ""
+"The computed package ID is different which means that we need a different "
+"binary package for GCC 4.4."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:147
+msgid ""
+"The same way we have adjusted the ``self.info.settings``, we could set the "
+"``self.info.options`` values if needed."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:151
+msgid ""
+"Check :ref:`method_package_id` to see the available helper methods and "
+"change its behavior for things like:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:153
+msgid "Recipes packaging **header only** libraries."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:154
+msgid "Adjusting **Visual Studio toolsets** compatibility."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:159
+msgid "Dependency Issues"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:161
+msgid ""
+"Let's define a simple scenario whereby there are two packages: "
+"``MyOtherLib/2.0`` and ``MyLib/1.0`` which depends on ``MyOtherLib/2.0``. "
+"Let's assume that their recipes and binaries have already been created and "
+"uploaded to a Conan remote."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:164
+msgid ""
+"Now, a new release for ``MyOtherLib/2.1`` is released with an improved "
+"recipe and new binaries. The ``MyLib/1.0`` is modified and is required to be "
+"upgraded to ``MyOtherLib/2.1``."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:168
+msgid ""
+"This scenario will be the same in the case that a consuming project of "
+"``MyLib/1.0`` defines a dependency to ``MyOtherLib/2.1``, which takes "
+"precedence over the existing project in ``MyLib/1.0``."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:171
+msgid ""
+"The question is: **Is it necessary to build new MyLib/1.0 binary packages?** "
+"or are the existing packages still valid?"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:173
+msgid "The answer: **It depends**."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:175
+msgid ""
+"Let's assume that both packages are compiled as static libraries and that "
+"the API exposed by ``MyOtherLib`` to ``MyLib/1.0`` through the public "
+"headers, has not changed at all. In this case, it is not required to build "
+"new binaries for ``MyLib/1.0`` because the final consumer will link against "
+"both ``Mylib/1.0`` and ``MyOtherLib/2.1``."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:179
+msgid ""
+"On the other hand, it could happen that the API exposed by **MyOtherLib** in "
+"the public headers has changed, but without affecting the ``MyLib/1.0`` "
+"binary for any reason (like changes consisting on new functions not used by "
+"**MyLib**). The same reasoning would apply if **MyOtherLib** was only the "
+"header."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:182
+msgid ""
+"But what if a header file of ``MyOtherLib`` -named *myadd.h*- has changed "
+"from ``2.0`` to ``2.1``:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:184
+msgid "*myadd.h* header file in version 2.0"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:184
+msgid " int addition (int a, int b) { return a - b; }"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:189
+msgid "*myadd.h* header file in version 2.1"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:189
+msgid " int addition (int a, int b) { return a + b; }"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:194
+msgid ""
+"And the ``addition()`` function is called from the compiled *.cpp* files of "
+"``MyLib/1.0``?"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:196
+msgid ""
+"Then, **a new binary for MyLib/1.0 is required to be built for the new "
+"dependency version**. Otherwise it will maintain the old, buggy "
+"``addition()`` version. Even in the case that ``MyLib/1.0`` doesn't have any "
+"change in its code lines neither in the recipe, the resulting binary "
+"rebuilding ``MyLib`` requires ``MyOtherLib/2.1`` and the package to be "
+"different."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:203
+msgid "Using package_id() for Package Dependencies"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:205
+msgid ""
+"The ``self.info`` object has also a ``requires`` object. It is a dictionary "
+"containing the necessary information for each requirement, all direct and "
+"transitive dependencies. For example, ``self.info.requires[\"MyOtherLib\"]`` "
+"is a ``RequirementInfo`` object."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:208
+msgid ""
+"Each ``RequirementInfo`` has the following `read only` reference fields:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:210
+msgid "``full_name``: Full require's name, e.g., **MyOtherLib**"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:211
+msgid "``full_version``: Full require's version, e.g., **1.2**"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:212
+msgid "``full_user``: Full require's user, e.g., **my_user**"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:213
+msgid "``full_channel``: Full require's channel, e.g., **stable**"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:214
+msgid "``full_package_id``: Full require's package ID, e.g., **c6d75a...**"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:216
+msgid "The following fields are used in the ``package_id()`` evaluation:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:218
+msgid "``name``: By default same value as full_name, e.g., **MyOtherLib**."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:219
+msgid ""
+"``version``: By default the major version representation of the "
+"``full_version``. E.g., **1.Y** for a **1.2** ``full_version`` field and **1."
+"Y.Z** for a **1.2.3** ``full_version`` field."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:222
+msgid "``user``: By default ``None`` (doesn't affect the package ID)."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:223
+msgid "``channel``: By default ``None`` (doesn't affect the package ID)."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:224
+msgid "``package_id``: By default ``None`` (doesn't affect the package ID)."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:226
+msgid ""
+"When defining a package ID for model dependencies, it is necessary to take "
+"into account two factors:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:228
+msgid "The versioning schema followed by our requirements (semver?, custom?)."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:229
+msgid ""
+"The type of library being built or reused (shared (*.so*, *.dll*, *.dylib*), "
+"static)."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:232
+msgid "Versioning Schema"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:234
+msgid ""
+"By default Conan assumes `semver <https://semver.org/>`_ compatibility. For "
+"example, if a version changes from minor **2.0** to **2.1**, Conan will "
+"assume that the API is compatible (headers not changing), and that it is not "
+"necessary to build a new binary for it. This also applies to patches, "
+"whereby changing from **2.1.10** to **2.1.11** doesn't require a re-build."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:238
+msgid ""
+"If it is necessary to change the default behavior, the applied versioning "
+"schema can be customized within the ``package_id()`` method:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:240
+msgid ""
+"from conans import ConanFile, CMake, tools\n"
+"from conans.model.version import Version\n"
+"\n"
+"class PkgConan(ConanFile):\n"
+"    name = \"Mylib\"\n"
+"    version = \"1.0\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    requires = \"MyOtherLib/2.0@lasote/stable\"\n"
+"\n"
+"    def package_id(self):\n"
+"        myotherlib = self.info.requires[\"MyOtherLib\"]\n"
+"\n"
+"        # Any change in the MyOtherLib version will change current Package "
+"ID\n"
+"        myotherlib.version = myotherlib.full_version\n"
+"\n"
+"        # Changes in major and minor versions will change the Package ID "
+"but\n"
+"        # only a MyOtherLib patch won't. E.g., from 1.2.3 to 1.2.89 won't "
+"change.\n"
+"        myotherlib.version = myotherlib.full_version.minor()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:261
+msgid ""
+"Besides ``version``, there are additional helpers that can be used to "
+"determine whether the **channel** and **user** of one dependency also "
+"affects the binary package, or even the required package ID can change your "
+"own package ID."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:264
+msgid ""
+"You can determine if the following variables within any requirement change "
+"the ID of your binary package using the following modes:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:267
+msgid "**Modes / Variables**"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:267
+msgid "``name``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:267
+msgid "``version``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:267
+msgid "``user``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:267
+msgid "``channel``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:267
+msgid "``package_id``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:269
+msgid "``semver_direct_mode()``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:269
+#: ../../../creating_packages/define_abi_compatibility.rst:271
+#: ../../../creating_packages/define_abi_compatibility.rst:273
+#: ../../../creating_packages/define_abi_compatibility.rst:275
+#: ../../../creating_packages/define_abi_compatibility.rst:277
+#: ../../../creating_packages/define_abi_compatibility.rst:279
+#: ../../../creating_packages/define_abi_compatibility.rst:281
+#: ../../../creating_packages/define_abi_compatibility.rst:283
+#: ../../../creating_packages/define_abi_compatibility.rst:285
+msgid "Yes"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:269
+#: ../../../creating_packages/define_abi_compatibility.rst:271
+msgid "Yes, only > 1.0.0 (e.g., **1**.2.Z+b102)"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:269
+#: ../../../creating_packages/define_abi_compatibility.rst:271
+#: ../../../creating_packages/define_abi_compatibility.rst:273
+#: ../../../creating_packages/define_abi_compatibility.rst:275
+#: ../../../creating_packages/define_abi_compatibility.rst:277
+#: ../../../creating_packages/define_abi_compatibility.rst:279
+#: ../../../creating_packages/define_abi_compatibility.rst:281
+#: ../../../creating_packages/define_abi_compatibility.rst:283
+#: ../../../creating_packages/define_abi_compatibility.rst:287
+msgid "No"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:271
+msgid "``semver_mode()``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:273
+msgid "``major_mode()``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:273
+msgid "Yes (e.g., **1**.2.Z+b102)"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:275
+msgid "``minor_mode()``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:275
+msgid "Yes (e.g., **1.2**.Z+b102)"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:277
+msgid "``patch_mode()``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:277
+msgid "Yes (e.g., **1.2.3**\\+b102)"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:279
+msgid "``base_mode()``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:279
+msgid "Yes (e.g., **1.7**\\+b102)"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:281
+msgid "``full_version_mode()``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:281
+#: ../../../creating_packages/define_abi_compatibility.rst:283
+#: ../../../creating_packages/define_abi_compatibility.rst:285
+msgid "Yes (e.g., **1.2.3+b102**)"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:283
+msgid "``full_recipe_mode()``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:285
+msgid "``full_package_mode()``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:287
+msgid "``unrelated_mode()``"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:290
+msgid ""
+"All the modes can be applied to all dependencies, or to individual ones:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:292
+msgid ""
+"def package_id(self):\n"
+"    # apply semver_mode for all the dependencies of the package\n"
+"    self.info.requires.semver_mode()\n"
+"    # use semver_mode just for MyOtherLib\n"
+"    self.info.requires[\"MyOtherLib\"].semver_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:301
+msgid ""
+"``semver_direct_mode()``: This is the default mode. It uses "
+"``semver_mode()`` for direct dependencies (first level dependencies, "
+"directly declared by the package) and ``unrelated_mode()`` for indirect, "
+"transitive dependencies of the package. It assumes that the binary will be "
+"affected by the direct dependencies, which they will already encode how "
+"their transitive dependencies affect them. This might not always be true, as "
+"explained above, and that is the reason it is possible to customize it."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:307
+msgid ""
+"In this mode, if the package depends on \"MyLib\", which transitively "
+"depends on \"MyOtherLib\", the mode means:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:309
+msgid ""
+"MyLib/1.2.3@user/testing       => MyLib/1.Y.Z\n"
+"MyOtherLib/2.3.4@user/testing  =>"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:314
+msgid ""
+"So the direct dependencies are mapped to the major version only. Changing "
+"its channel, or using version ``MyLib/1.4.5`` will still produce ``MyLib/1.Y."
+"Z`` and thus the same package-id. The indirect, transitive dependency "
+"doesn't affect the package-id at all."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:318
+msgid ""
+"``semver_mode()``: In this mode, only a major release version (starting from "
+"**1.0.0**) changes the package ID. Every version change prior to 1.0.0 "
+"changes the package ID, but only major changes after 1.0.0 will be applied."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:321
+msgid ""
+"def package_id(self):\n"
+"  self.info.requires[\"MyOtherLib\"].semver_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:326
+msgid "This results in:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:328
+msgid ""
+"MyLib/1.2.3@user/testing       => MyLib/1.Y.Z\n"
+"MyOtherLib/2.3.4@user/testing  => MyOtherLib/2.Y.Z"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:333
+msgid ""
+"In this mode, versions starting with ``0`` are considered unstable and "
+"mapped to the full version:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:335
+msgid ""
+"MyLib/0.2.3@user/testing       => MyLib/0.2.3\n"
+"MyOtherLib/0.3.4@user/testing  => MyOtherLib/0.3.4"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:340
+msgid ""
+"``major_mode()``: Any change in the major release version (starting from "
+"**0.0.0**) changes the package ID."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:342
+msgid ""
+"def package_id(self):\n"
+"  self.info.requires[\"MyOtherLib\"].major_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:347
+msgid ""
+"This mode is basically the same as ``semver_mode``, but the only difference "
+"is that major versions ``0.Y.Z``, which are considered unstable by semver, "
+"are still mapped to only the major, dropping the minor and patch parts."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:350
+msgid ""
+"``minor_mode()``: Any change in major or minor (not patch nor build) version "
+"of the required dependency changes the package ID."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:352
+msgid ""
+"def package_id(self):\n"
+"    self.info.requires[\"MyOtherLib\"].minor_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:357
+msgid ""
+"``patch_mode()``: Any changes to major, minor or patch (not build) versions "
+"of the required dependency change the package ID."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:359
+msgid ""
+"def package_id(self):\n"
+"    self.info.requires[\"MyOtherLib\"].patch_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:364
+msgid ""
+"``base_mode()``: Any changes to the base of the version (not build) of the "
+"required dependency changes the package ID. Note that in the case of semver "
+"notation this may produce the same result as ``patch_mode()``, but it is "
+"actually intended to dismiss the build part of the version even without "
+"strict semver."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:368
+msgid ""
+"def package_id(self):\n"
+"    self.info.requires[\"MyOtherLib\"].base_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:373
+msgid ""
+"``full_version_mode()``: Any changes to the version of the required "
+"dependency changes the package ID."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:375
+msgid ""
+"def package_id(self):\n"
+"  self.info.requires[\"MyOtherLib\"].full_version_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:380
+msgid "MyOtherLib/1.3.4-a4+b3@user/testing  => MyOtherLib/1.3.4-a4+b3"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:384
+msgid ""
+"``full_recipe_mode()``: Any change in the reference of the requirement (user "
+"& channel too) changes the package ID."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:386
+msgid ""
+"def package_id(self):\n"
+"  self.info.requires[\"MyOtherLib\"].full_recipe_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:391
+msgid ""
+"This keeps the whole dependency reference, except the package-id of the "
+"dependency."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:393
+msgid ""
+"MyOtherLib/1.3.4-a4+b3@user/testing  => MyOtherLib/1.3.4-a4+b3@user/testing"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:397
+msgid ""
+"``full_package_mode()``: Any change in the required version, user, channel "
+"or package ID changes the package ID."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:399
+msgid ""
+"def package_id(self):\n"
+"  self.info.requires[\"MyOtherLib\"].full_package_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:404
+msgid ""
+"This is the stricter mode. Any change to the dependency, including its "
+"binary package-id, will in turn produce a new package-id for the consumer "
+"package."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:407
+msgid ""
+"MyOtherLib/1.3.4-a4+b3@user/testing:73b..fa56  => MyOtherLib/1.3.4-"
+"a4+b3@user/testing:73b..fa56"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:411
+msgid "``unrelated_mode()``: Requirements do not change the package ID."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:413
+msgid ""
+"def package_id(self):\n"
+"    self.info.requires[\"MyOtherLib\"].unrelated_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:418
+msgid "You can also adjust the individual properties manually:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:420
+msgid ""
+"def package_id(self):\n"
+"    myotherlib = self.info.requires[\"MyOtherLib\"]\n"
+"\n"
+"    # Same as myotherlib.semver_mode()\n"
+"    myotherlib.name = myotherlib.full_name\n"
+"    myotherlib.version = myotherlib.full_version.stable()  # major(), "
+"minor(), patch(), base, build\n"
+"    myotherlib.user = myotherlib.channel = myotherlib.package_id = None\n"
+"\n"
+"    # Only the channel (and the name) matters\n"
+"    myotherlib.name = myotherlib.full_name\n"
+"    myotherlib.user = myotherlib.package_id = myotherlib.version = None\n"
+"    myotherlib.channel = myotherlib.full_channel"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:435
+msgid ""
+"The result of the ``package_id()`` is the package ID hash, but the details "
+"can be checked in the generated *conaninfo.txt* file. The ``[requires]``, "
+"``[options]`` and ``[settings]`` are taken into account when generating the "
+"SHA1 hash for the package ID, while the ``[full_xxxx]`` fields show the "
+"complete reference information."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:440
+msgid "The default behavior produces a *conaninfo.txt* that looks like:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:442
+msgid ""
+"[requires]\n"
+"MyOtherLib/2.Y.Z\n"
+"\n"
+"[full_requires]\n"
+"MyOtherLib/2.2@demo/testing:73bce3fd7eb82b2eabc19fe11317d37da81afa56"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:451
+msgid "Changing the default package-id mode"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:452
+msgid ""
+"It is possible to change the default ``semver_direct_mode`` package-id mode, "
+"in the *conan.conf* file:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:455
+msgid "*conan.conf* configuration file"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:455
+msgid ""
+"[general]\n"
+"default_package_id_mode=full_package_mode"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:461
+msgid ""
+"Possible values are the names of the above methods: ``full_recipe_mode``, "
+"``semver_mode``, etc."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:463
+msgid ""
+"Note that the default package-id mode is the mode that is used when the "
+"package is initialized and **before** ``package_id()`` method is called. You "
+"can still define ``full_package_mode`` as default in *conan.conf*, but if a "
+"recipe declare that it is header-only, with:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:467
+msgid ""
+"def package_id(self):\n"
+"  self.info.header_only() # clears requires, but also settings if existing\n"
+"  # or if there are no settings/options, this would be equivalent\n"
+"  self.info.requires.clear() # or self.info.requires.unrelated_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:474
+msgid ""
+"That would still be executed, changing the \"default\" behavior, and leading "
+"to a package that only generates 1 package-id for all possible "
+"configurations and versions of dependencies."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:477
+msgid ""
+"Remember that *conan.conf* can be shared and installed with :ref:"
+"`conan_config_install`."
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:480
+msgid "Library Types: Shared, Static, Header-only"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:482
+msgid "Let's see some examples, corresponding to common scenarios:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:484
+msgid ""
+"``MyLib/1.0`` is a shared library that links with a static library "
+"``MyOtherLib/2.0`` package. When a new ``MyOtherLib/2.1`` version is "
+"released: Do I need to create a new binary for ``MyLib/1.0`` to link with it?"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:488
+msgid ""
+"Yes, always, as the implementation is embedded in the ``MyLib/1.0`` shared "
+"library. If we always want to rebuild our library, even if the channel "
+"changes (we assume a channel change could mean a source code change):"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:492
+msgid ""
+"def package_id(self):\n"
+"    # Any change in the MyOtherLib version, user or\n"
+"    # channel or Package ID will affect our package ID\n"
+"    self.info.requires[\"MyOtherLib\"].full_package_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:499
+msgid ""
+"``MyLib/1.0`` is a shared library, requiring another shared library "
+"``MyOtherLib/2.0`` package. When a new ``MyOtherLib/2.1`` version is "
+"released: Do I need to create a new binary for ``MyLib/1.0`` to link with it?"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:503
+msgid ""
+"It depends. If the public headers have not changed at all, it is not "
+"necessary. Actually it might be necessary to consider transitive "
+"dependencies that are shared among the public headers, how they are linked "
+"and if they cross the frontiers of the API, it might also lead to "
+"incompatibilities. If the public headers have changed, it would depend on "
+"what changes and how are they used in ``MyLib/1.0``. Adding new methods to "
+"the public headers will have no impact, but changing the implementation of "
+"some functions that will be inlined when compiled from ``MyLib/1.0`` will "
+"definitely require re-building. For this case, it could make sense to have "
+"this configuration:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:511
+msgid ""
+"def package_id(self):\n"
+"    # Any change in the MyOtherLib version, user or channel\n"
+"    # or Package ID will affect our package ID\n"
+"    self.info.requires[\"MyOtherLib\"].full_package_mode()\n"
+"\n"
+"    # Or any change in the MyOtherLib version, user or\n"
+"    # channel will affect our package ID\n"
+"    self.info.requires[\"MyOtherLib\"].full_recipe_mode()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:522
+msgid ""
+"``MyLib/1.0`` is a header-only library, linking with any kind (header, "
+"static, shared) of library in ``MyOtherLib/2.0`` package. When a new "
+"``MyOtherLib/2.1`` version is released: Do I need to create a new binary for "
+"``MyLib/1.0`` to link with it?"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:526
+msgid ""
+"Never. The package should always be the same as there are no settings, no "
+"options, and in any way a dependency can affect a binary, because there is "
+"no such binary. The default behavior should be changed to:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:530
+msgid ""
+"def package_id(self):\n"
+"    self.info.requires.clear()"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:535
+msgid ""
+"``MyLib/1.0`` is a static library linking to a header only library in "
+"``MyOtherLib/2.0`` package. When a new ``MyOtherLib/2.1`` version is "
+"released: Do I need to create a new binary for ``MyLib/1.0`` to link with "
+"it? It could happen that the ``MyOtherLib`` headers are strictly used in "
+"some ``MyLib`` headers, which are not compiled, but transitively included. "
+"But in general, it is more likely that ``MyOtherLib`` headers are used in "
+"``MyLib`` implementation files, so every change in them should imply a new "
+"binary to be built. If we know that changes in the channel never imply a "
+"source code change, as set in our workflow/lifecycle, we could write:"
+msgstr ""
+
+#: ../../../creating_packages/define_abi_compatibility.rst:544
+msgid ""
+"def package_id(self):\n"
+"    self.info.requires[\"MyOtherLib\"].full_package()\n"
+"    self.info.requires[\"MyOtherLib\"].channel = None # Channel doesn't "
+"change out package ID"
+msgstr ""

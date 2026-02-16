@@ -1,0 +1,163 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.14\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:5
+msgid "`cmake_find_package_multi`"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:9
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:13
+msgid ""
+"This is the reference page for ``cmake_find_package_multi`` generator. Go "
+"to :ref:`Integrations/CMake<cmake>` if you want to learn how to integrate "
+"your project or recipes with CMake."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:18
+msgid "Generated files"
+msgstr "生成的文件"
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:20
+msgid ""
+"For each conan package in your graph, it will generate 2 files and 1 more "
+"per different ``build_type``. Being {name} the package name:"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:24
+msgid "NAME"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:24
+msgid "CONTENTS"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:26
+msgid "{name}Config.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:26
+msgid ""
+"It includes the {name}Targets.cmake and call find_dependency for each dep"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:28
+msgid "{name}Targets.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:28
+msgid "It includes the following files"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:30
+msgid "{name}Targets-debug.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:30
+msgid "Specific information for the Debug configuration"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:32
+msgid "{name}Targets-release.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:32
+msgid "Specific information for the Release configuration"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:34
+msgid "{name}Targets-relwithdebinfo.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:34
+msgid "Specific information for the RelWithDebInfo configuration"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:36
+msgid "{name}Targets-minsizerel.cmake"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:36
+msgid "Specific information for the MinSizeRel configuration"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:40
+msgid "Targets"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:42
+msgid ""
+"A target named ``{name}::{name}`` target is generated with the following "
+"properties adjusted:"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:44
+msgid ""
+"``INTERFACE_INCLUDE_DIRECTORIES``: Containing all the include directories of "
+"the package."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:45
+msgid "``INTERFACE_LINK_LIBRARIES``: Library paths to link."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:46
+msgid "``INTERFACE_COMPILE_DEFINITIONS``: Definitions of the library."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:48
+msgid ""
+"The targets contains multi-configuration properties, for example, the "
+"compile options property is declared like this:"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:51
+msgid ""
+"set_property(TARGET {name}::{name}\n"
+"         PROPERTY INTERFACE_COMPILE_OPTIONS\n"
+"             $<$<CONFIG:Release>:${{{name}_COMPILE_OPTIONS_RELEASE_LIST}}>\n"
+"             $<$<CONFIG:RelWithDebInfo>:${{{name}"
+"_COMPILE_OPTIONS_RELWITHDEBINFO_LIST}}>\n"
+"             $<$<CONFIG:MinSizeRel>:${{{name}"
+"_COMPILE_OPTIONS_MINSIZEREL_LIST}}>\n"
+"             $<$<CONFIG:Debug>:${{{name}_COMPILE_OPTIONS_DEBUG_LIST}}>)"
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:60
+msgid ""
+"The targets are also transitive. So, if your project depends on a packages "
+"``A`` and ``B``, and at the same time ``A`` depends on ``C``, the ``A`` "
+"target will contain automatically the properties of the ``C`` dependency, so "
+"in your `CMakeLists.txt` file you only need to ``find_package(A)`` and "
+"``find_package(B)``."
+msgstr ""
+
+#: ../../../reference/generators/cmake_find_package_multi.rst:64
+msgid ""
+"You also need to adjust `CMAKE_PREFIX_PATH <https://cmake.org/cmake/help/"
+"v3.0/variable/CMAKE_PREFIX_PATH.html>`_ and `CMAKE_MODULE_PATH <https://"
+"cmake.org/cmake/help/v3.0/variable/CMAKE_MODULE_PATH.html>`_ so CMake can "
+"locate all the ``{name}Config.cmake`` files: The ``CMAKE_PREFIX_PATH`` is "
+"used by the ``find_package`` and the ``CMAKE_MODULE_PATH`` is used by the "
+"``find_dependency`` calls that locates the transitive dependencies."
+msgstr ""

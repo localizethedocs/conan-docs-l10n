@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.39\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../creating_packages/package_tools.rst:4
+msgid "Package Creator Tools"
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:6
+msgid ""
+"Using Python (or just pure shell or bash) scripting, allows you to easily "
+"automate the whole package creation and testing process, for many different "
+"configurations. For example you could put the following script in the "
+"package root folder. Name it *build.py*:"
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:10
+msgid ""
+"import os, sys\n"
+"import platform\n"
+"\n"
+"def system(command):\n"
+"    retcode = os.system(command)\n"
+"    if retcode != 0:\n"
+"        raise Exception(\"Error while executing:\\n\\t %s\" % command)\n"
+"\n"
+"if __name__ == \"__main__\":\n"
+"    params = \" \".join(sys.argv[1:])\n"
+"\n"
+"    if platform.system() == \"Windows\":\n"
+"        system('conan create . demo/testing -s compiler=\"Visual Studio\" -s "
+"compiler.version=14 %s' % params)\n"
+"        system('conan create . demo/testing -s compiler=\"Visual Studio\" -s "
+"compiler.version=12 %s' % params)\n"
+"        system('conan create . demo/testing -s compiler=\"gcc\" -s compiler."
+"version=4.8 %s' % params)\n"
+"    else:\n"
+"        pass"
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:30
+msgid ""
+"This is a pure Python script, not related to Conan, and should be run as "
+"such:"
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:35
+msgid "$ python build.py"
+msgstr "$ python build.py"
+
+#: ../../../creating_packages/package_tools.rst:36
+msgid ""
+"We have developed another FOSS tool for package creators, the **Conan "
+"Package Tools** to help you generate multiple binary packages from a package "
+"recipe. It offers a simple way to define the different configurations and to "
+"call :command:`conan test`. In addition to offering CI integration like "
+"**Travis CI, Appveyor and Bamboo**, for cloud-based automated binary package "
+"creation, testing, and uploading."
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:41
+msgid ""
+"This tool enables the creation of hundreds of binary packages in the cloud "
+"with a simple ``$ git push`` and supports:"
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:44
+msgid ""
+"Easy **generation of multiple Conan packages** with different configurations."
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:45
+msgid ""
+"Automated/remote package generation in **Travis/Appveyor** server with "
+"distributed builds in CI jobs for big/slow builds."
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:47
+msgid ""
+"**Docker**: Automatic generation of packages for several versions of ``gcc`` "
+"and ``clang`` in Linux, and in Travis CI."
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:49
+msgid "Automatic creation of OSX packages with apple-clang, and in Travis-CI."
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:50
+msgid ""
+"**Visual Studio**: Automatic configuration of the command line environment "
+"with detected settings."
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:52
+msgid "It's available in pypi:"
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:54
+msgid "$ pip install conan_package_tools"
+msgstr ""
+
+#: ../../../creating_packages/package_tools.rst:58
+msgid ""
+"For more information, read the README.md in the `Conan Package Tools "
+"repository <https://github.com/conan-io/conan-package-tools>`_."
+msgstr ""

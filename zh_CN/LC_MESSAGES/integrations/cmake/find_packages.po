@@ -1,0 +1,157 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/cmake/find_packages.rst:3
+msgid "Find Packages"
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:5
+msgid ""
+"If a FindXXX.cmake file for the library you are packaging is already "
+"available, it should work automatically."
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:7
+msgid ""
+"Variables **CMAKE_INCLUDE_PATH** and **CMAKE_LIBRARY_PATH** are set with the "
+"right requirements paths. CMake **find_library** function will be able to "
+"locate the libraries in the package's folders."
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:10
+msgid "So, you can use **find_package** normally:"
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:13
+msgid ""
+"project(MyHello)\n"
+"cmake_minimum_required(VERSION 2.8.12)\n"
+"\n"
+"include(conanbuildinfo.cmake)\n"
+"conan_basic_setup()\n"
+"\n"
+"find_package(\"ZLIB\")\n"
+"\n"
+"if(ZLIB_FOUND)\n"
+"    add_executable(enough enough.c)\n"
+"    include_directories(${ZLIB_INCLUDE_DIRS})\n"
+"    target_link_libraries(enough ${ZLIB_LIBRARIES})\n"
+"else()\n"
+"    message(FATAL_ERROR \"Zlib not found\")\n"
+"endif()"
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:32
+msgid ""
+"In addition to automatic **find_package** support, **CMAKE_MODULE_PATH** "
+"variable is set with your requirements root package paths. You can override "
+"the default behavior of any find_package() by creating a ``findXXX.cmake`` "
+"file in your package."
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:42
+msgid "Creating a custom FindXXX.cmake file"
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:44
+msgid ""
+"Sometimes the \"official\" CMake FindXXX.cmake scripts are not ready to find "
+"our libraries (not supported library names for specific settings, fixed "
+"installation directories like C:\\\\OpenSSL... etc) Or maybe there is no "
+"\"official\" CMake script for our library."
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:47
+msgid ""
+"So in these cases we can provide a custom **FindXXX.cmake** file in our "
+"conan packages."
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:49
+msgid ""
+"1. Create a file named FindXXX.cmake and save it in your conan package root "
+"folder. Where XXX is the name of the library that we will use in the "
+"**find_package** CMake function. For example, we create a ``FindZLIB.cmake`` "
+"and use ``find_package(ZLIB)``. We recommend to copy the original FindXXX."
+"cmake file from Kitware (folder Modules/FindXXX.cmake), if available, and "
+"modify it to help finding our library files, but it depends a lot, maybe you "
+"are interested in creating a new one."
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:53
+msgid ""
+"If it's not provided you can create a basic one, take a look at this example "
+"with the ZLIB library:"
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:55
+msgid "**FindZLIB.cmake**"
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:57
+msgid ""
+"find_path(ZLIB_INCLUDE_DIR NAMES zlib.h PATHS ${CONAN_INCLUDE_DIRS_ZLIB})\n"
+"find_library(ZLIB_LIBRARY NAMES ${CONAN_LIBS_ZLIB} PATHS "
+"${CONAN_LIB_DIRS_ZLIB})\n"
+"\n"
+"set(ZLIB_FOUND TRUE)\n"
+"set(ZLIB_INCLUDE_DIRS ${ZLIB_INCLUDE_DIR})\n"
+"set(ZLIB_LIBRARIES ${ZLIB_LIBRARY})\n"
+"mark_as_advanced(ZLIB_LIBRARY ZLIB_INCLUDE_DIR)"
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:68
+msgid ""
+"In the first line we are finding the path where our headers should be found, "
+"we suggest the CONAN_INCLUDE_DIRS_XXX. Then the same for the library names "
+"with CONAN_LIBS_XXX and the paths where the libs are CONAN_LIB_DIRS_XXX."
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:71
+msgid ""
+"In your conanfile.py file add the ``FindXXX.cmake`` to the "
+"``exports_sources`` field:"
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:74
+msgid ""
+"class HelloConan(ConanFile):\n"
+"    name = \"Hello\"\n"
+"    version = \"0.1\"\n"
+"    ...\n"
+"    exports_sources = [\"FindXXX.cmake\"]"
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:82
+msgid "In the package method, copy the ``FindXXX.cmake`` file to the root:"
+msgstr ""
+
+#: ../../../integrations/cmake/find_packages.rst:86
+msgid ""
+"class HelloConan(ConanFile):\n"
+"    name = \"Hello\"\n"
+"    version = \"0.1\"\n"
+"    ...\n"
+"    exports_sources = [\"FindXXX.cmake\"]\n"
+"\n"
+"\n"
+"    def package(self):\n"
+"        ...\n"
+"        self.copy(\"FindXXX.cmake\", \".\", \".\")"
+msgstr ""

@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.37\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:2
+msgid "AutotoolsGen"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:6
+msgid "These tools are **experimental** and subject to breaking changes."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:9
+msgid ""
+"The ``AutotoolsGen`` is a complete generator for the whole autotools system. "
+"It aggregates the functionality of ``AutotoolsDeps``, ``AutotoolsToolchain`` "
+"and ``VirtualEnv`` into a single generator."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:12
+msgid ""
+"It will generate shell scripts containing environment variable definitions "
+"that the autotools build system can understand."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:14
+msgid "The ``AutotoolsGen`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:16
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:16
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"AutotoolsGen\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:22
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:22
+msgid ""
+"[generators]\n"
+"AutotoolsGen"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:28
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:42
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.gnu import AutotoolsGen\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = AutotoolsGen(self)\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:43
+msgid "Its implementation is straightforward:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:52
+msgid ""
+"class AutotoolsGen:\n"
+"    def __init__(self, conanfile):\n"
+"        self.toolchain = AutotoolsToolchain(conanfile)\n"
+"        self.deps = AutotoolsDeps(conanfile)\n"
+"        self.env = VirtualEnv(conanfile)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:53
+msgid "And it will output the same files as ``VirtualEnv``:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:55
+msgid ""
+"*conanbuildenv* .bat or .sh scripts, that are automatically loaded if "
+"existing by the ``self.run()`` recipes methods"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:56
+msgid ""
+"*conanrunenv* .bat or .sh scripts, that can be explicitly opted-in in ``self."
+"run()`` recipes methods with ``self.run(..., env=[\"conanrunenv\"])``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsgen.rst:58
+msgid ""
+"These files will contain the necessary accumulated information from all the "
+"3 internal generators."
+msgstr ""

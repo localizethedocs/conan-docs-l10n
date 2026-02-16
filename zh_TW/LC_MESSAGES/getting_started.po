@@ -1,0 +1,469 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../getting_started.rst:4
+msgid "Getting started"
+msgstr ""
+
+#: ../../../getting_started.rst:6
+msgid ""
+"Let's start with an example using one of the most popular C++ libraries: "
+"POCO_. For convenience purposes we'll use CMake. Keep in mind that Conan "
+"**works with any build system** and does not depend on CMake."
+msgstr ""
+
+#: ../../../getting_started.rst:12
+msgid "A Timer using POCO libraries"
+msgstr ""
+
+#: ../../../getting_started.rst:14
+msgid "First, let's create a folder for our project:"
+msgstr ""
+
+#: ../../../getting_started.rst:16
+msgid ""
+"$ mkdir mytimer\n"
+"$ cd mytimer"
+msgstr ""
+
+#: ../../../getting_started.rst:23
+msgid ""
+"If your code is in a GitHub repository you can simply clone the project, "
+"instead of creating this folder, using the following command:"
+msgstr ""
+
+#: ../../../getting_started.rst:25
+msgid ""
+"$ git clone https://github.com/memsharded/example-poco-timer.git mytimer"
+msgstr ""
+
+#: ../../../getting_started.rst:29
+msgid "Next, create the following source files inside this folder:"
+msgstr ""
+
+#: ../../../getting_started.rst:31
+msgid "**timer.cpp**"
+msgstr ""
+
+#: ../../../getting_started.rst:31
+msgid ""
+" // $Id: //poco/1.4/Foundation/samples/Timer/src/Timer.cpp#1 $\n"
+" // This sample demonstrates the Timer and Stopwatch classes.\n"
+" // Copyright (c) 2004-2006, Applied Informatics Software Engineering GmbH.\n"
+" // and Contributors.\n"
+" // SPDX-License-Identifier:    BSL-1.0\n"
+"\n"
+" #include \"Poco/Timer.h\"\n"
+" #include \"Poco/Thread.h\"\n"
+" #include \"Poco/Stopwatch.h\"\n"
+" #include <iostream>\n"
+"\n"
+" using Poco::Timer;\n"
+" using Poco::TimerCallback;\n"
+" using Poco::Thread;\n"
+" using Poco::Stopwatch;\n"
+"\n"
+" class TimerExample{\n"
+" public:\n"
+"     TimerExample(){ _sw.start();}\n"
+"\n"
+"     void onTimer(Timer& timer){\n"
+"         std::cout << \"Callback called after \" << _sw.elapsed()/1000 << \" "
+"milliseconds.\" << std::endl;\n"
+"     }\n"
+" private:\n"
+"     Stopwatch _sw;\n"
+" };\n"
+"\n"
+" int main(int argc, char** argv){\n"
+"     TimerExample example;\n"
+"     Timer timer(250, 500);\n"
+"     timer.start(TimerCallback<TimerExample>(example, &TimerExample::"
+"onTimer));\n"
+"\n"
+"     Thread::sleep(5000);\n"
+"     timer.stop();\n"
+"     return 0;\n"
+" }"
+msgstr ""
+
+#: ../../../getting_started.rst:71
+msgid ""
+"Now create a *conanfile.txt* inside this folder with the following content:"
+msgstr ""
+
+#: ../../../getting_started.rst:73
+msgid "**conanfile.txt**"
+msgstr ""
+
+#: ../../../getting_started.rst:73
+msgid ""
+" [requires]\n"
+" Poco/1.9.0@pocoproject/stable\n"
+"\n"
+" [generators]\n"
+" cmake"
+msgstr ""
+
+#: ../../../getting_started.rst:82
+msgid ""
+"In this example we will use CMake to build the project, which is why the "
+"``cmake`` generator is specified. This generator will create a "
+"*conanbuildinfo.cmake* file that defines CMake variables as include paths "
+"and library names, that can be used in our build."
+msgstr ""
+
+#: ../../../getting_started.rst:87
+msgid ""
+"If you are not a CMake user, change the ``[generators]`` section of your "
+"*conanfile.txt* to ``gcc`` or a more generic one ``txt`` to handle "
+"requirements with any build system. Learn more in :ref:`Using "
+"packages<using_packages>`."
+msgstr ""
+
+#: ../../../getting_started.rst:90
+msgid ""
+"Just include the generated file and use these variables inside our "
+"*CMakeLists.txt*:"
+msgstr ""
+
+#: ../../../getting_started.rst:92
+msgid "**CMakeLists.txt**"
+msgstr ""
+
+#: ../../../getting_started.rst:92
+msgid ""
+" project(FoundationTimer)\n"
+" cmake_minimum_required(VERSION 2.8.12)\n"
+" add_definitions(\"-std=c++11\")\n"
+"\n"
+" include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+" conan_basic_setup()\n"
+"\n"
+" add_executable(timer timer.cpp)\n"
+" target_link_libraries(timer ${CONAN_LIBS})"
+msgstr ""
+
+#: ../../../getting_started.rst:106
+msgid "Installing dependencies"
+msgstr ""
+
+#: ../../../getting_started.rst:108
+msgid ""
+"If you have a terminal with light colors, like the default gnome terminal in "
+"Ubuntu, set ``CONAN_COLOR_DARK=1`` to have a better contrast. Then create a "
+"build folder, for temporary build files, and install the requirements "
+"(pointing to the parent directory, as it is where the *conanfile.txt* is):"
+msgstr ""
+
+#: ../../../getting_started.rst:112
+msgid ""
+"$ mkdir build && cd build\n"
+"$ conan install .."
+msgstr ""
+
+#: ../../../getting_started.rst:117
+msgid ""
+"This :command:`conan install` command will download the binary package "
+"required for your configuration (detected the first time that you ran the "
+"command), **together with other (transitively required by Poco) libraries, "
+"like OpenSSL and Zlib**. It will also create the *conanbuildinfo.cmake* file "
+"in the current directory, in which you can see the cmake defined variables, "
+"and a *conaninfo.txt* where information about settings, requirements and "
+"options is saved."
+msgstr ""
+
+#: ../../../getting_started.rst:122
+msgid ""
+"It is very important to understand the installation process. When :command:"
+"`conan install` command is issued, it will use some settings, specified on "
+"the command line or taken from the defaults in ``<userhome>/.conan/profiles/"
+"default`` file."
+msgstr ""
+
+#: ../../../getting_started.rst:130
+msgid ""
+"For a command like :command:`conan install . -s os=\"Linux\" -s "
+"compiler=\"gcc\"`, the steps are:"
+msgstr ""
+
+#: ../../../getting_started.rst:132
+msgid ""
+"Check if the package recipe (for ``Poco/1.9.0@pocoproject/stable`` package) "
+"exists in the local cache. If we are just starting, the cache will be empty."
+msgstr ""
+
+#: ../../../getting_started.rst:134
+msgid ""
+"Look for the package recipe in the defined remotes. Conan comes with `conan-"
+"center`_ Bintray remote by default (you can change that)."
+msgstr ""
+
+#: ../../../getting_started.rst:135
+msgid ""
+"If the recipe exists, Conan client will fetch and store it in your local "
+"cache."
+msgstr ""
+
+#: ../../../getting_started.rst:136
+msgid ""
+"With the package recipe and the input settings (Linux, gcc), Conan client "
+"will check in the local cache if the corresponding binary is there, if we "
+"are installing for the first time, it won't."
+msgstr ""
+
+#: ../../../getting_started.rst:138
+msgid ""
+"Conan client will search for the corresponding binary package in the remote, "
+"if it exists, it will be fetched."
+msgstr ""
+
+#: ../../../getting_started.rst:139
+msgid ""
+"Conan client will then finish generating the requested files specified in "
+"``generators``."
+msgstr ""
+
+#: ../../../getting_started.rst:141
+msgid ""
+"If the binary package necessary for some given settings doesn't exist, Conan "
+"client will throw an error. It is possible to try to build the binary "
+"package from sources with the ``--build=missing`` command line argument to "
+"install. A detailed description of how a binary package is built from "
+"sources will be given in a later section."
+msgstr ""
+
+#: ../../../getting_started.rst:147
+msgid ""
+"In the Bintray repositories there are binaries for several mainstream "
+"compilers and versions, such as Visual Studio 12, 14, linux-gcc 4.9 and "
+"apple-clang 3.5. If you are using another setup, the command might fail "
+"because of the missing package. You could try to change your settings or "
+"build the package from source, using the ``--build=missing`` option, instead "
+"of retrieving the binaries. Such a build might not have been tested and "
+"eventually fail."
+msgstr ""
+
+#: ../../../getting_started.rst:153
+msgid "Building the timer example"
+msgstr ""
+
+#: ../../../getting_started.rst:155
+msgid "Now you are ready to build and run your project:"
+msgstr ""
+
+#: ../../../getting_started.rst:157
+msgid ""
+"(win)\n"
+"$ cmake .. -G \"Visual Studio 14 Win64\"\n"
+"$ cmake --build . --config Release\n"
+"\n"
+"(linux, mac)\n"
+"$ cmake .. -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Release\n"
+"$ cmake --build .\n"
+"...\n"
+"[100%] Built target timer\n"
+"$ ./bin/timer\n"
+"Callback called after 250 milliseconds.\n"
+"..."
+msgstr ""
+
+#: ../../../getting_started.rst:173
+msgid "Inspecting dependencies"
+msgstr ""
+
+#: ../../../getting_started.rst:175
+msgid ""
+"The retrieved packages are installed to your local user cache (typically ``."
+"conan/data``), and can be reused from there in other projects. This allows "
+"to clean your current project and keep working even without network "
+"connection. Search packages in the local cache using:"
+msgstr ""
+
+#: ../../../getting_started.rst:178
+msgid "$ conan search"
+msgstr ""
+
+#: ../../../getting_started.rst:182
+msgid ""
+"Inspect binary package details (for different installed binaries for a given "
+"package recipe) using:"
+msgstr ""
+
+#: ../../../getting_started.rst:184
+msgid "$ conan search Poco/1.9.0@pocoproject/stable"
+msgstr ""
+
+#: ../../../getting_started.rst:188
+msgid ""
+"There is also the option to generate a table for all binaries from a given "
+"recipe with the ``--table`` option, even in remotes:"
+msgstr ""
+
+#: ../../../getting_started.rst:190
+msgid ""
+"$ conan search zlib/1.2.11@conan/stable --table=file.html -r=conan-center\n"
+"$ file.html # or open the file, double-click"
+msgstr ""
+
+#: ../../../getting_started.rst:200
+msgid ""
+"Check the reference for more information on how to search in remotes, how to "
+"remove or clean packages from the local cache, and how to define custom "
+"cache directory per user or per project."
+msgstr ""
+
+#: ../../../getting_started.rst:203
+msgid ""
+"Inspect your current project's dependencies with the ``info`` command, "
+"pointing it to the folder where the *conanfile.txt* is:"
+msgstr ""
+
+#: ../../../getting_started.rst:205
+msgid "$ conan info .."
+msgstr ""
+
+#: ../../../getting_started.rst:209
+msgid "Generate a graph of your dependencies in dot or html formats:"
+msgstr ""
+
+#: ../../../getting_started.rst:211
+msgid ""
+"$ conan info .. --graph=file.html\n"
+"$ file.html # or open the file, double-click"
+msgstr ""
+
+#: ../../../getting_started.rst:223
+msgid "Searching packages"
+msgstr ""
+
+#: ../../../getting_started.rst:224
+msgid ""
+"The packages that have been used are installed from the remote repository "
+"that is configured by default in the conan client, which is called \"conan-"
+"center\" and is in Bintray. You can search for existing packages there with:"
+msgstr ""
+
+#: ../../../getting_started.rst:226
+msgid "$ conan search \"zlib*\" -r=conan-center"
+msgstr ""
+
+#: ../../../getting_started.rst:230
+msgid ""
+"There are other community repositories that can be configured and used, "
+"check them in :ref:`this section about remotes<remotes>`."
+msgstr ""
+
+#: ../../../getting_started.rst:233
+msgid "Building with other configurations"
+msgstr ""
+
+#: ../../../getting_started.rst:235
+msgid ""
+"In this example we have built our project using the default configuration "
+"detected by conan, this configuration is known as the :ref:`default "
+"profile<default_profile>`."
+msgstr ""
+
+#: ../../../getting_started.rst:238
+msgid ""
+"The first time you run the command that requires a profile, such as :command:"
+"`conan install`, your settings are detected (compiler, architecture...) "
+"automatically and stored as default in a profile. You can change your those "
+"settings by editing ``~/.conan/profiles/default`` or create new profiles "
+"with the desired configuration."
+msgstr ""
+
+#: ../../../getting_started.rst:245
+msgid ""
+"It is strongly recommended to review the generated default profile and "
+"adjust the settings to describe accurately your system."
+msgstr ""
+
+#: ../../../getting_started.rst:247
+msgid ""
+"When a GCC **compiler >= 5.1** is detected, the setting modeling the c++ "
+"standard library: ``compiler.libcxx`` will be set to ``libstdc++`` that "
+"represent the old ABI compatibility for better compatibility. Your compiler "
+"default is likely the new ABI so you might want to change it to ``libstdc+"
+"+11`` to use the new ABI compliant with CXX11 directives. :ref:`Read more "
+"here<manage_gcc_abi>`."
+msgstr ""
+
+#: ../../../getting_started.rst:252
+msgid ""
+"For example, if we have a profile with a gcc configutarion for 32 bits in a "
+"profile called *gcc_x86*, we could issue the ``install`` command like this:"
+msgstr ""
+
+#: ../../../getting_started.rst:255
+msgid "$ conan install . -pr gcc_x86"
+msgstr ""
+
+#: ../../../getting_started.rst:261
+msgid ""
+"Using profiles is strongly recommended. Learn more about them :ref:"
+"`here<profiles>`."
+msgstr ""
+
+#: ../../../getting_started.rst:263
+msgid ""
+"However, the user can always override the default profile settings in "
+"``install`` command with the ``-s`` parameter. As an exercise, try building "
+"your timer project with a different configuration. For example, you could "
+"try building the 32 bits version:"
+msgstr ""
+
+#: ../../../getting_started.rst:266
+msgid "$ conan install . -s arch=x86"
+msgstr ""
+
+#: ../../../getting_started.rst:270
+msgid ""
+"This will install a different package, using the ``-s arch=x86`` setting, "
+"instead of the default used previously, that in most cases will be "
+"``x86_64``."
+msgstr ""
+
+#: ../../../getting_started.rst:273
+msgid ""
+"To use the 32 bits binaries you will also have to change your project build:"
+msgstr ""
+
+#: ../../../getting_started.rst:275
+msgid ""
+"In Windows, change the CMake invocation accordingly to ``Visual Studio 14``."
+msgstr ""
+
+#: ../../../getting_started.rst:276
+msgid ""
+"In Linux, you have to add the ``-m32`` flag to your ``CMakeLists.txt`` with "
+"``SET(CMAKE_CXX_FLAGS \"${CMAKE_CXX_FLAGS} -m32\")``, and the same to "
+"``CMAKE_C_FLAGS, CMAKE_SHARED_LINK_FLAGS and CMAKE_EXE_LINKER_FLAGS``. This "
+"can also be done more easily, automatically with Conan, as we'll see later. "
+"- In Mac, you need to add the definition ``-DCMAKE_OSX_ARCHITECTURES=i386``."
+msgstr ""
+
+#: ../../../getting_started.rst:281
+msgid "Got any doubts? Check out our :ref:`FAQ section <faq>` or |write_us|."
+msgstr ""
+
+#: ../../../getting_started.rst:283
+msgid "<a href=\"mailto:info@conan.io\" target=\"_blank\">write us</a>"
+msgstr ""

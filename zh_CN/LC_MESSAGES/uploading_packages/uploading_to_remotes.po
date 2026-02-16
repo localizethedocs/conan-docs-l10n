@@ -1,0 +1,124 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:2
+msgid "Uploading packages to remotes"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:4
+msgid ""
+"First, check if the remote you want to upload to is already in your current "
+"remote list:"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:6
+msgid "$ conan remote list"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:10
+msgid ""
+"You can add any remote easily. For a remote running in your machine, you "
+"could run:"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:12
+msgid "$ conan remote add my_local_server http://localhost:9300"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:16
+msgid ""
+"You can search any remote in the same way you search your computer. "
+"Actually, many conan commands can specify a specific remote."
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:19
+msgid "$ conan search -r=my_local_server"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:23
+msgid ""
+"Now, upload the package recipe and all the packages to your remote. In this "
+"example we are using our ``my_local_server`` remote, but you could use any "
+"other."
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:26
+msgid "$ conan upload Hello/0.1@demo/testing --all -r=my_local_server"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:30
+msgid ""
+"You might be prompted for a username and password. The default conan server "
+"remote has a **demo/demo** account we can use for testing."
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:33
+msgid ""
+"The ``--all`` option will upload the package recipe plus all the binary "
+"packages. Now try again to read the information from the remote (we refer to "
+"it as remote, even if it is running on your local machine, as it could be "
+"run on another server in your LAN):"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:37
+msgid "$ conan search Hello/0.1@demo/testing -r=my_local_server"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:43
+msgid ""
+"If package upload fails, you can try to upload it again. Conan keeps track "
+"of the upload integrity and will only upload missing files."
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:46
+msgid ""
+"Now we can check if we are able to download and use them in a project. For "
+"that purpose, we first have to **remove the local copies**, otherwise the "
+"remote packages will not be downloaded. Since we have just uploaded them, "
+"they are identical to the local ones."
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:50
+msgid ""
+"$ conan remove Hello*\n"
+"$ conan search"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:55
+msgid ""
+"Since we have our test setup from the previous section, we can just use it "
+"for our test. Go to your package folder and run the tests again, now saying "
+"that we don't want to build the sources again, we just want to check if we "
+"can download the binaries and use them:"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:59
+msgid "$ conan create . demo/testing --not-export --build=never"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:63
+msgid ""
+"You will see that the test is built, but the packages are not. The binaries "
+"are simply downloaded from your local server. You can check their existence "
+"on your local computer again with:"
+msgstr ""
+
+#: ../../../uploading_packages/uploading_to_remotes.rst:66
+msgid "$ conan search"
+msgstr ""

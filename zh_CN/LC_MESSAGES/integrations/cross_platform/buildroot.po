@@ -1,0 +1,350 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.54\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/cross_platform/buildroot.rst:5
+msgid "|buildroot_logo| Buildroot"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:7
+msgid ""
+"The `Buildroot Project`_ is a tool for automating the creation of Embedded "
+"Linux distributions. It builds the code for the architecture of the board so "
+"it was set up, all through an overview of Makefiles. In addition to being "
+"open-source, it is licensed under `GPL-2.0-or-later`_."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:12
+msgid "Integration with Conan"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:14
+msgid ""
+"Let's create a new file called **pkg-conan.mk** in the `package/` directory. "
+"At the same time, we need to add it in `package/Makefile.in` file in order "
+"to Buildroot be able to list it."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:17
+msgid "echo 'include package/pkg-conan.mk' >> package/Makefile.in"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:21
+msgid ""
+"For this development we will break it down into a few steps. Because it is a "
+"large file, we will only portray parts of it in this post, but the full "
+"version can be found in `pkg-conan.mk`_."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:24
+msgid ""
+"Buildroot defines its settings, including processor, compiler version, and "
+"build type through variables. However, these variables do not have directly "
+"valid values for Conan, so we need to parse most of them. Let's start with "
+"the compiler version, by default Buildroot uses a GCC-based toolchain, so we "
+"will only filter on its possible versions:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:29
+msgid ""
+"CONAN_SETTING_COMPILER_VERSION  ?=\n"
+"ifeq ($(BR2_GCC_VERSION_8_X),y)\n"
+"CONAN_SETTING_COMPILER_VERSION = 8\n"
+"else ifeq ($(BR2_GCC_VERSION_7_X),y)\n"
+"CONAN_SETTING_COMPILER_VERSION = 7\n"
+"else ifeq ($(BR2_GCC_VERSION_6_X),y)\n"
+"CONAN_SETTING_COMPILER_VERSION = 6\n"
+"else ifeq ($(BR2_GCC_VERSION_5_X),y)\n"
+"CONAN_SETTING_COMPILER_VERSION = 5\n"
+"else ifeq ($(BR2_GCC_VERSION_4_9_X),y)\n"
+"CONAN_SETTING_COMPILER_VERSION = 4.9\n"
+"endif"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:44
+msgid ""
+"This same process should be repeated for build_type, arch, and so on. For "
+"the Conan package installation step we will have the following routine:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:47
+msgid ""
+"define $(2)_BUILD_CMDS\n"
+"    $$(TARGET_MAKE_ENV) $$(CONAN_ENV) $$($$(PKG)_CONAN_ENV) \\\n"
+"        CC=$$(TARGET_CC) CXX=$$(TARGET_CXX) \\\n"
+"        $$(CONAN) install $$(CONAN_OPTS) $$($$(PKG)_CONAN_OPTS) \\\n"
+"        $$($$(PKG)_REFERENCE) \\\n"
+"        -s build_type=$$(CONAN_SETTING_BUILD_TYPE) \\\n"
+"        -s arch=$$(CONAN_SETTING_ARCH) \\\n"
+"        -s compiler=$$(CONAN_SETTING_COMPILER) \\\n"
+"        -s compiler.version=$$(CONAN_SETTING_COMPILER_VERSION) \\\n"
+"        -g deploy \\\n"
+"        --build $$(CONAN_BUILD_POLICY)\n"
+"endef"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:62
+msgid ""
+"The :command:`conan install` command will be executed as usual, but the "
+"settings and options are configured through what was previously collected "
+"from Buildroot, and accept new ones through the Buildroot package recipe. "
+"Because it was a scenario where previously all sources were compiled in the "
+"first moment, we will set Conan build policy to ``missing``, so any package "
+"will be built if not available."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:67
+msgid ""
+"Also, note that we are using the generator :ref:`deploy <deploy_generator>`, "
+"as we will need to copy all the artifacts into the Buildroot internal "
+"structure. Once built, we will copy the libraries, binaries and headers "
+"through the following routine:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:71
+msgid ""
+"define $(2)_INSTALL_CMDS\n"
+"    cp -f -a $$($$(PKG)_BUILDDIR)/bin/. /usr/bin 2>/dev/null || :\n"
+"    cp -f -a $$($$(PKG)_BUILDDIR)/lib/. /usr/lib 2>/dev/null || :\n"
+"    cp -f -a $$($$(PKG)_BUILDDIR)/include/. /usr/include 2>/dev/null || :\n"
+"endef"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:80
+msgid ""
+"With this script we will be able to install the vast majority of Conan "
+"packages, using only simpler information for each Buildroot recipe."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:84
+msgid "Creating Conan packages with Buildroot"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:87
+msgid "Installing Conan Zlib"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:89
+msgid ""
+"Once we have our script for installing Conan packages, now let's install a "
+"fairly simple and well-known project: `zlib <https://www.zlib.net>`_. For "
+"this case we will create a new recipe in the package directory. Let's start "
+"with the package configuration file:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:94
+msgid ""
+"mkdir package/conan-zlib\n"
+"touch package/conan-zlib/Config.in\n"
+"touch package/conan-zlib/conan-zlib.mk"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:100
+msgid "The contents of the file *Config.in* should be as follows:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:102
+msgid ""
+"config BR2_PACKAGE_CONAN_ZLIB\n"
+" bool \"conan-zlib\"\n"
+" help\n"
+"   Standard (de)compression library. Used by things like\n"
+"   gzip and libpng.\n"
+"\n"
+"   http://www.zlib.net"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:112
+msgid "Now let's go to the *conan-zlib.mk* that contains the Zlib data:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:114
+msgid ""
+"# conan-zlib.mk\n"
+"CONAN_ZLIB_VERSION = 1.2.11\n"
+"CONAN_ZLIB_LICENSE = Zlib\n"
+"CONAN_ZLIB_LICENSE_FILES = licenses/LICENSE\n"
+"CONAN_ZLIB_SITE = $(call github,conan-io,conan-center-"
+"index,134dd3b84d629d27ba3474e01b688e9c0f25b9c8)\n"
+"CONAN_ZLIB_REFERENCE = zlib/$(CONAN_ZLIB_VERSION)@\n"
+"CONAN_ZLIB_SUBDIR = recipes/zlib/1.2.11\n"
+"\n"
+"$(eval $(conan-package))"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:126
+msgid ""
+"An important note here is the fact that ``CONAN_ZLIB_SITE`` is required even "
+"if not used for our purpose. If it is not present, Buildroot will raise an "
+"error during its execution. The other variables are simple, just expressing "
+"the package reference, name, version and license. Note that in the end we "
+"are calling our script which should execute Conan."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:131
+msgid ""
+"Once created, we still need to add it to the Buildroot configuration list. "
+"To do so, let's update the list with a new menu named *Conan*. In *package/"
+"Config.in* file, let's add the following section:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:135
+msgid ""
+"menu \"Conan\"\n"
+"    source \"package/conan-zlib/Config.in\"\n"
+"endmenu"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:141
+msgid ""
+"Now just select the package through **menuconfig**: `Target Packages -> "
+"Conan -> conan-zlib`"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:143
+msgid "|buildroot_menuconfig_conan|"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:145
+msgid ""
+"Once configured and saved, simply run :command:`make` again to install the "
+"package."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:147
+msgid ""
+"As you can see, Conan is following the same profile used by Buildroot, which "
+"gives us the advantage of not having to create a profile manually."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:150
+msgid ""
+"At the end of the installation it will be copied to the output directory."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:153
+msgid "Customizing Conan remote"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:155
+msgid ""
+"Let's say we have an :ref:`Artifactory <artifactory_ce>` instance where all "
+"packages are available for download. How could we customize the remote used "
+"by Buildroot? We need to introduce a new option, where we can write the "
+"remote name and Conan will be able to consume such variable. First we need "
+"to create a new configuration file to insert new options in Conan's menu:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:160
+msgid ""
+"mkdir package/conan\n"
+"touch package/conan/Config.in"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:165
+msgid "The file *Config.in* should contain:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:167
+msgid ""
+"config CONAN_REMOTE_NAME\n"
+"        string \"Conan remote name\"\n"
+"    help\n"
+"          Look in the specified remote server."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:174
+msgid ""
+"Also, we need to parse the option ``CONAN_REMOTE_NAME`` in *pkg-conan.mk* "
+"and add it to Conan command line:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:177
+msgid ""
+"ifneq ($(CONAN_REMOTE_NAME),\"\")\n"
+"CONAN_REMOTE = -r $$(CONAN_REMOTE_NAME)\n"
+"endif\n"
+"\n"
+"define $(2)_BUILD_CMDS\n"
+"    $$(TARGET_MAKE_ENV) $$(CONAN_ENV) $$($$(PKG)_CONAN_ENV) \\\n"
+"        CC=$$(TARGET_CC) CXX=$$(TARGET_CXX) \\\n"
+"        $$(CONAN) install $$(CONAN_OPTS) $$($$(PKG)_CONAN_OPTS) \\\n"
+"        $$($$(PKG)_REFERENCE) \\\n"
+"        -s build_type=$$(CONAN_SETTING_BUILD_TYPE) \\\n"
+"        -s arch=$$(CONAN_SETTING_ARCH) \\\n"
+"        -s compiler=$$(CONAN_SETTING_COMPILER) \\\n"
+"        -s compiler.version=$$(CONAN_SETTING_COMPILER_VERSION) \\\n"
+"        -g deploy \\\n"
+"        --build $$(CONAN_BUILD_POLICY) \\\n"
+"        $$(CONAN_REMOTE)\n"
+"endef"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:198
+msgid ""
+"Now we are ready to set our specific remote name. We only need to run :"
+"command:`make menuconfig` and follow the path: `Target Packages -> Libraries "
+"-> Conan -> Conan remote name`"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:201
+msgid "And we will see:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:203
+msgid "|buildroot_custom_remote|"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:205
+msgid ""
+"Now Conan is configured to search for packages in the remote named "
+"*artifactory*. But we need to run :command:`make` again. Note that it will "
+"cost less time to build, since now we are using pre-built packages provided "
+"by Conan."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:209
+msgid ""
+"If no errors have occurred during the process we will have the following "
+"output folder:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:211
+msgid ""
+"ls output/images/\n"
+"    bcm2710-rpi-3-b.dtb bcm2710-rpi-3-b-plus.dtb bcm2710-rpi-cm3.dtb boot."
+"vfat rootfs.ext2 rootfs.ext4 rpi-firmware sdcard.img zImage\n"
+"\n"
+"ls -lh output/images/sdcard.img\n"
+"    -rw-r--r-- 1 conan conan 153M ago  6 11:43 output/images/sdcard.img"
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:219
+msgid ""
+"These artifacts are the final compilation of everything that was generated "
+"during the build process, here we will be interested in the *sdcard.img* "
+"file. This is the final image that we will use on our *RaspberryPi3* and it "
+"is only 153MB. Compared to other embedded distributions like *Raspbian*, it "
+"is much smaller."
+msgstr ""
+
+#: ../../../integrations/cross_platform/buildroot.rst:224
+msgid ""
+"If you are interested in knowing more, we have a complete `blog post`_ about "
+"Buildroot integration."
+msgstr ""

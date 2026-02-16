@@ -1,0 +1,484 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../creating_packages/getting_started.rst:4
+msgid "Getting Started"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:6
+msgid ""
+"To start learning about creating packages, we will create a package from the "
+"existing source code repository: https://github.com/memsharded/hello. You "
+"can check that project, it is a very simple \"hello world\" C++ library, "
+"using CMake as the build system to build a library and an executable. It "
+"does not contain any association with Conan."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:11
+msgid ""
+"We are using a similar GitHub repository as an example, but the same process "
+"also applies to other source code origins, like downloading a zip or tarball "
+"from the internet."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:16
+msgid ""
+"For this concrete example you will need, besides a C++ compiler, both "
+"*CMake* and *git* installed and in your path. They are not required by "
+"conan, so you could use your own build system and version control instead."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:21
+msgid "Creating the Package Recipe"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:23
+msgid ""
+"First, let's create a folder for our package recipe, and use the :command:"
+"`conan new` helper command that will create a working package recipe for us:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:26
+msgid ""
+"$ mkdir mypkg && cd mypkg\n"
+"$ conan new Hello/0.1 -t"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:31
+msgid "This will generate the following files:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:33
+msgid ""
+"conanfile.py\n"
+"test_package\n"
+"  CMakeLists.txt\n"
+"  conanfile.py\n"
+"  example.cpp"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:41
+msgid ""
+"On the root level, there is a *conanfile.py* which is the main recipe file, "
+"responsible for defining our package. Also, there is a *test_package* "
+"folder, which contains a simple example consuming project that will require "
+"and link with the created package. It is useful to make sure that our "
+"package is correctly created."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:46
+msgid "Let's have a look at the root package recipe *conanfile.py*:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:48
+msgid ""
+"from conans import ConanFile, CMake, tools\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    name = \"Hello\"\n"
+"    version = \"0.1\"\n"
+"    license = \"<Put the package license here>\"\n"
+"    url = \"<Package recipe repository url here, for issues about the "
+"package>\"\n"
+"    description = \"<Description of Hello here>\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    options = {\"shared\": [True, False]}\n"
+"    default_options = {\"shared\": False}\n"
+"    generators = \"cmake\"\n"
+"\n"
+"    def source(self):\n"
+"        self.run(\"git clone https://github.com/memsharded/hello.git\")\n"
+"        self.run(\"cd hello && git checkout static_shared\")\n"
+"        # This small hack might be useful to guarantee proper /MT /MD "
+"linkage\n"
+"        # in MSVC if the packaged project doesn't have variables to set it\n"
+"        # properly\n"
+"        tools.replace_in_file(\"hello/CMakeLists.txt\", "
+"\"PROJECT(MyHello)\",\n"
+"                              '''PROJECT(MyHello)\n"
+"include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+"conan_basic_setup()''')\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure(source_folder=\"hello\")\n"
+"        cmake.build()\n"
+"\n"
+"        # Explicit way:\n"
+"        # self.run('cmake %s/hello %s'\n"
+"        #          % (self.source_folder, cmake.command_line))\n"
+"        # self.run(\"cmake --build . %s\" % cmake.build_config)\n"
+"\n"
+"    def package(self):\n"
+"        self.copy(\"*.h\", dst=\"include\", src=\"hello\")\n"
+"        self.copy(\"*hello.lib\", dst=\"lib\", keep_path=False)\n"
+"        self.copy(\"*.dll\", dst=\"bin\", keep_path=False)\n"
+"        self.copy(\"*.so\", dst=\"lib\", keep_path=False)\n"
+"        self.copy(\"*.dylib\", dst=\"lib\", keep_path=False)\n"
+"        self.copy(\"*.a\", dst=\"lib\", keep_path=False)\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.libs = [\"hello\"]"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:95
+msgid ""
+"This is a complete package recipe. Without going into detail, these are the "
+"basics:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:98
+msgid ""
+"The ``settings`` field defines the configuration of the different binary "
+"packages. In this example, we defined that any change to the OS, compiler, "
+"architecture or build type will generate a different binary package. Please "
+"note that Conan generates different binary packages for different introduced "
+"configuration (in this case settings) for the same recipe."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:103
+msgid ""
+"Note that the platform on which the recipe is running and the package being "
+"built differ from the final platform where the code will be running (``self."
+"settings.os`` and ``self.settings.arch``) if the package is being cross-"
+"built. So if you want to apply a different build depending on the current "
+"build machine, you need to check it:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:108
+msgid ""
+"def build(self):\n"
+"    if platform.system() == \"Windows\":\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure(source_folder=\"hello\")\n"
+"        cmake.build()\n"
+"    else:\n"
+"        env_build = AutoToolsBuildEnvironment(self)\n"
+"        env_build.configure()\n"
+"        env_build.make()"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:120
+msgid "Learn more in the :ref:`Cross building <cross_building>` section."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:122
+msgid ""
+"This package recipe is also able to create different binary packages for "
+"static and shared libraries with the ``shared`` option, which is set by "
+"default to ``False`` (i.e. by default it will use static linkage)."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:126
+msgid ""
+"The ``source()`` method executes a :command:`git clone` to retrieve the "
+"sources from Github. Other origins, such as downloading a zip file are also "
+"available. As you can see, any manipulation of the code can be done, such as "
+"checking out any branch or tag, or patching the source code. In this "
+"example, we are adding two lines to the existing CMake code, to ensure "
+"binary compatibility. Don't worry about it now, we'll deal with it later."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:132
+msgid ""
+"The ``build()`` configures the project, and then proceeds to build it using "
+"standard CMake commands. The ``CMake`` object just assists to translate the "
+"Conan settings to CMake command line arguments. Please note that **CMake is "
+"not strictly required**. You can build packages directly by invoking "
+"**make**, **MSBuild**, **SCons** or any other build system."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:137
+msgid "Check the :ref:`existing build helpers <build_helpers>`."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:139
+msgid ""
+"The ``package()`` method copies artifacts (headers, libs) from the build "
+"folder to the final package folder."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:142
+msgid ""
+"Finally, the ``package_info()`` method defines that the consumer must link "
+"with the \"hello\" library when using this package. Other information as "
+"include or lib paths can be defined as well. This information is used for "
+"files created by generators to be used by consumers, as *conanbuildinfo."
+"cmake*."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:149
+msgid ""
+"When writing your own *conanfile.py* references, please bear in mind that "
+"you should follow the rules in :ref:`conanfile_reference`"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:153
+msgid "The test_package Folder"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:157
+msgid ""
+"The **test_package** differs from the library unit or integration tests, "
+"which should be more comprehensive. These tests are \"package\" tests, and "
+"validate that the package is properly created, and that the package "
+"consumers will be able to link against it and reuse it."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:161
+msgid ""
+"If you look at the ``test_package`` folder, you will realize that the "
+"``example.cpp`` and the ``CMakeLists.txt`` files don't have unique "
+"characteristics. The *test_package/conanfile.py* file is just another "
+"recipe, that can be perceived as a consumer *conanfile.txt* that has been "
+"displayed in previous sections:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:166
+msgid ""
+"from conans import ConanFile, CMake\n"
+"import os\n"
+"\n"
+"class HelloTestConan(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    generators = \"cmake\"\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure()\n"
+"        cmake.build()\n"
+"\n"
+"    def imports(self):\n"
+"        self.copy(\"*.dll\", dst=\"bin\", src=\"bin\")\n"
+"        self.copy(\"*.dylib*\", dst=\"bin\", src=\"lib\")\n"
+"\n"
+"    def test(self):\n"
+"        os.chdir(\"bin\")\n"
+"        self.run(\".%sexample\" % os.sep)"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:188
+msgid "The *conanfile.py* described above has the following characteristics:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:190
+msgid ""
+"It doesn't have a name and version, as we are not creating a package so they "
+"are not necessary."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:192
+msgid ""
+"The ``package()`` and ``package_info()`` methods are not required since we "
+"are not creating a package."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:194
+msgid "The ``test()`` method specifies which binaries need to run."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:195
+msgid ""
+"The ``imports()`` method is set to copy the shared libraries to the ``bin`` "
+"folder. When dynamic linking is applied, and the ``test()`` method launches "
+"the ``example`` executable, they are found causing the ``example`` to run."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:201
+msgid ""
+"An important difference with respect to standard package recipes is that you "
+"don't have to declare a ``requires`` attribute to depend on the tested "
+"``Hello/0.1@demo/testing`` package as the ``requires`` will automatically be "
+"injected by Conan during the run. However, if you choose to declare it "
+"explicitly, it will work, but you will have to remember to bump the version, "
+"and possibly also the user and channel if you decide to change them."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:210
+msgid "Creating and Testing Packages"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:212
+msgid ""
+"You can create and test the package with our default settings simply by "
+"running:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:214
+msgid ""
+"$ conan create . demo/testing\n"
+"...\n"
+"Hello world!"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:220
+msgid "If \"Hello world!\" is displayed, it worked."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:222
+msgid "The :command:`conan create` command does the following:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:224
+msgid ""
+"Copies (\"export\" in conan terms) the *conanfile.py* from the user folder "
+"into the **local cache**."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:225
+msgid "Installs the package, forcing it to be built from the sources."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:226
+msgid ""
+"Moves to the *test_package* folder and creates a temporary *build* folder."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:227
+msgid ""
+"Executes the :command:`conan install ..`, to install the requirements of the "
+"*test_package/conanfile.py*. Note that it will build \"Hello\" from the "
+"sources."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:229
+msgid ""
+"Builds and launches the *example* consuming application, calling the "
+"*test_package/conanfile.py* ``build()`` and ``test()`` methods respectively."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:232
+msgid ""
+"Using Conan commands, the :command:`conan create` command would be "
+"equivalent to:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:234
+msgid ""
+"$ conan export . demo/testing\n"
+"$ conan install Hello/0.1@demo/testing --build=Hello\n"
+"# package is created now, use test to test it\n"
+"$ conan test test_package Hello/0.1@demo/testing"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:241
+msgid ""
+"The :command:`conan create` command receives the same command line "
+"parameters as :command:`conan install` so you can pass to it the same "
+"settings, options, and command line switches. If you want to create and test "
+"packages for different configurations, you could:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:245
+msgid ""
+"$ conan create . demo/testing -s build_type=Debug\n"
+"$ conan create . demo/testing -o Hello:shared=True -s arch=x86\n"
+"$ conan create . demo/testing -pr my_gcc49_debug_profile\n"
+"...\n"
+"$ conan create ..."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:257
+msgid "Settings vs. Options"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:259
+msgid ""
+"We have used settings such as ``os``, ``arch`` and ``compiler``. Note the "
+"above package recipe also contains a ``shared`` option (defined as ``options "
+"= {\"shared\": [True, False]}``). What is the difference between settings "
+"and options?"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:263
+msgid ""
+"**Settings** are a project-wide configuration, something that typically "
+"affects the whole project that is being built. For example, the operating "
+"system or the architecture would be naturally the same for all packages in a "
+"dependency graph, linking a Linux library for a Windows app, or mixing "
+"architectures is impossible."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:268
+msgid ""
+"Settings cannot be defaulted in a package recipe. A recipe for a given "
+"library cannot say that its default is ``os=Windows``. The ``os`` will be "
+"given by the environment in which that recipe is processed. It is a "
+"mandatory input."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:272
+msgid ""
+"Settings are configurable. You can edit, add, remove settings or subsettings "
+"in your *settings.yml* file. See :ref:`the settings.yml reference "
+"<settings_yml>`."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:275
+msgid ""
+"On the other hand, **options** are a package-specific configuration. Static "
+"or shared library are not settings that apply to all packages. Some can be "
+"header only libraries while others packages can be just data, or package "
+"executables. Packages can contain a mixture of different artifacts. "
+"``shared`` is a common option, but packages can define and use any options "
+"they want."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:280
+msgid ""
+"Options are defined in the package recipe, including their supported values, "
+"while other can be defaulted by the package recipe itself. A package for a "
+"library can well define that by default it will be a static library (a "
+"typical default). If not specified other. the package will be static."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:284
+msgid ""
+"There are some exceptions to the above. For example, settings can be defined "
+"per-package using the command line:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:286
+msgid "$ conan install . -s MyPkg:compiler=gcc -s compiler=clang .."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:290
+msgid ""
+"This will use ``gcc`` for MyPkg and ``clang`` for the rest of the "
+"dependencies (extremely rare case)."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:292
+msgid ""
+"There are situations whereby many packages use the same option, thereby "
+"allowing you to set it's value once using patterns, like:"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:294
+msgid "$ conan install . -o *:shared=True"
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:298
+msgid ""
+"Any doubts? Please check out our :ref:`FAQ section <faq>` or |write_us|."
+msgstr ""
+
+#: ../../../creating_packages/getting_started.rst:300
+msgid "<a href=\"mailto:info@conan.io\" target=\"_blank\">write us</a>"
+msgstr ""

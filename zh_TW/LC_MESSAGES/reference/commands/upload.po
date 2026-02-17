@@ -1,0 +1,155 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.24\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-29 06:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/upload.rst:4
+msgid "conan upload"
+msgstr "conan upload"
+
+#: ../../../reference/commands/upload.rst:6
+msgid ""
+"Use this command to upload recipes and binaries to Conan repositories. For "
+"more information on how to work with Conan repositories, please check the :"
+"ref:`dedicated section <conan_repositories>`."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:-1
+msgid ""
+"$ conan upload -h\n"
+"usage: conan upload [-h] [-f FORMAT] [--out-file OUT_FILE]\n"
+"                    [-v [{quiet,error,warning,notice,status,verbose,debug,v,"
+"trace,vv}]]\n"
+"                    [-cc CORE_CONF] [-p PACKAGE_QUERY] -r REMOTE\n"
+"                    [--only-recipe] [--force] [--check] [-c] [--dry-run]\n"
+"                    [-l LIST] [-m METADATA]\n"
+"                    [pattern]\n"
+"\n"
+"Upload packages to a remote.\n"
+"\n"
+"By default, all the matching references are uploaded (all revisions).\n"
+"By default, if a recipe reference is specified, it will upload all the "
+"revisions for all the\n"
+"binary packages, unless --only-recipe is specified. You can use the "
+"\"latest\" placeholder at the\n"
+"\"reference\" argument to specify the latest revision of the recipe or the "
+"package.\n"
+"\n"
+"positional arguments:\n"
+"  pattern               A pattern in the form\n"
+"                        'pkg/version#revision:package_id#revision', e.g:\n"
+"                        \"zlib/1.2.13:*\" means all binaries for "
+"zlib/1.2.13. If\n"
+"                        revision is not specified, it is assumed latest "
+"one.\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -f FORMAT, --format FORMAT\n"
+"                        Select the output format: json\n"
+"  --out-file OUT_FILE   Write the output of the command to the specified "
+"file\n"
+"                        instead of stdout.\n"
+"  -v [{quiet,error,warning,notice,status,verbose,debug,v,trace,vv}]\n"
+"                        Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  -p PACKAGE_QUERY, --package-query PACKAGE_QUERY\n"
+"                        Only upload packages matching a specific query. e."
+"g:\n"
+"                        os=Windows AND (arch=x86 OR compiler=gcc)\n"
+"  -r REMOTE, --remote REMOTE\n"
+"                        Upload to this specific remote\n"
+"  --only-recipe         Upload only the recipe/s, not the binary packages.\n"
+"  --force               Force the upload of the artifacts even if the "
+"revision\n"
+"                        already exists in the server\n"
+"  --check               Perform an integrity check, using the manifests,\n"
+"                        before upload\n"
+"  -c, --confirm         Upload all matching recipes without confirmation\n"
+"  --dry-run             Do not execute the real upload (experimental)\n"
+"  -l LIST, --list LIST  Package list file\n"
+"  -m METADATA, --metadata METADATA\n"
+"                        Upload the metadata, even if the package is already "
+"in\n"
+"                        the server and not uploaded\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:14
+msgid ""
+"The ``conan upload`` command can upload packages to 1 server repository "
+"specified by the ``-r=myremote`` argument."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:16
+msgid ""
+"It has 2 possible and mutually exclusive inputs: - The ``conan upload "
+"<pattern>`` pattern-based matching of recipes, with a pattern similar to the "
+"``conan list <pattern>``. - The ``conan upload --list=<pkglist>`` that will "
+"upload the artifacts specified in the ``pkglist`` json file"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:21
+msgid ""
+"If the ``--format=json`` formatter is specified, the result will be a "
+"\"PackageList\", compatible with other Conan commands, for example the "
+"``conan remove`` command, so it is possible to concatenate different "
+"commands using the generated json file. The resulting \"PackageList\" also "
+"includes the URLs where each file has been or will be uploaded, providing "
+"additional context for automation or inspection purposes. See the :ref:"
+"`Packages Lists examples<examples_commands_pkglists>`."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:23
+msgid ""
+"The ``--dry-run`` argument will prepare the packages for upload, zip files "
+"if necessary, check in the server to see what needs to be uploaded and what "
+"is already in the server, but it will not execute the actual upload."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:25
+msgid ""
+"Using the ``core.upload:parallel`` conf, it is possible to upload packages "
+"in parallel. By default, or when set to a value less than ``2``, no "
+"parallelization will take place, and any other value will be the number of "
+"parallel threads to utilize."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:31
+msgid ":ref:`Uploading packages tutorial <uploading_packages>`"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:32
+msgid ":ref:`Working with Conan repositories <conan_repositories>`"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:33
+msgid ""
+":ref:`Managing remotes with conan remote command <reference_commands_remote>`"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:34
+msgid ":ref:`Uploading metadata files<devops_metadata>`."
+msgstr ""

@@ -1,0 +1,346 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/binary_model/custom_compatibility.rst:2
+msgid "Customizing the binary compatibility"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:4
+msgid ""
+"The default binary compatibility requires an almost exact match of settings "
+"and options, and a versioned match of dependencies versions, as explained in "
+"the :ref:`previous section about "
+"dependencies<reference_binary_model_dependencies>`."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:7
+msgid ""
+"In summary, the required binaries ``package_id`` when installing "
+"dependencies should match by default:"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:9
+msgid ""
+"All the settings in the ``package_id`` except ``compiler.cppstd`` should "
+"match exactly the ones provided in the input profiles, including the "
+"compiler version. So ``compiler.version=9`` is different than ``compiler."
+"version=9.1``."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:10
+msgid ""
+"The default behavior will assume binary compatibility among different "
+"``compiler.cppstd`` values for C++ packages, being able to fall back to "
+"other values rather than the one specified in the input profiles, if the "
+"``cppstd`` required by the input profile does not exist. This is controlled "
+"by the ``compatibility.py`` plugin, that can be customized by users."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:11
+msgid ""
+"All the options in the ``package_id`` should match exactly the ones provided "
+"in the input profiles."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:12
+msgid "The versions of the dependencies should match:"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:14
+msgid ""
+"In case of \"embedding dependencies\", should match the exact version, "
+"including the recipe-revision and the dependency ``package_id``. The "
+"``package_revision`` is never included as it is assumed to be ill-formed to "
+"have more than one ``package_revision`` for the same ``package_id``."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:15
+msgid ""
+"In case of \"non-embedding dependencies\", the versions of the dependencies "
+"should match down to the ``minor`` version, being the ``patch``, "
+"``recipe_revision`` and further information not taken into account."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:16
+msgid ""
+"In case of \"tool dependencies\", the versions of the dependencies do not "
+"affect at all by default to the consumer ``package_id``."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:19
+msgid ""
+"These rules can be customized and changed using different approaches, "
+"depending on the needs, as explained in following sections"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:22
+msgid "Customizing binary compatibility of settings and options"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:25
+msgid "Information erasure in package_id() method"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:27
+msgid ""
+"Recipes can **erase** information from their ``package_id`` using their "
+"``package_id()`` method. For example, a package containing only an "
+"executable can decide to remove the information from ``settings.compiler`` "
+"and ``settings.build_type`` from their ``package_id``, assuming that an "
+"executable built with any compiler will be valid, and that it is not "
+"necessary to store different binaries built with different compilers:"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:29
+msgid ""
+"def package_id(self):\n"
+"    del self.info.settings.compiler\n"
+"    del self.info.settings.build_type"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:35
+msgid ""
+"It is also possible to assign a value for a given setting, for example if we "
+"want to have one single binary for all gcc versions included in the [>=5 "
+"<7>] range, we could do:"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:37
+msgid ""
+"def package_id(self):\n"
+"    if self.info.settings.compiler == \"gcc\":\n"
+"        version = Version(self.info.settings.compiler.version)\n"
+"        if version >= \"5.0\" and version < \"7.0\":\n"
+"            self.info.settings.compiler.version = \"gcc5-6\""
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:48
+msgid "**Best practice**"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:50
+msgid ""
+"Note that information erasure in ``package_id()`` means that 1 single "
+"``package_id`` will represent a whole range of different settings, but the "
+"information of what exact setting was used to create the binary will be "
+"lost, and only 1 binary can be created for that range. Re-creating the "
+"package with different settings in the range, will create a new binary that "
+"overwrites the previous one (with a new package-revision)."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:52
+msgid ""
+"If we want to be able to create, store and manage different binaries for "
+"different input settings, information erasure can't be used, and using the "
+"below ``compatibility`` approaches is recommended."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:57
+msgid ":ref:`creating_packages_configure_options_settings`"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:58
+msgid ""
+":ref:`package_id() method reference<reference_conanfile_methods_package_id>`"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:62
+msgid "The compatibility() method"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:64
+msgid ""
+"Recipes can define their binary compatibility rules, using their "
+"``compatibility()`` method. For example, if we want that binaries built with "
+"gcc versions 4.8, 4.7 and 4.6 to be considered compatible with the ones "
+"compiled with 4.9 we could declare a ``compatibility()`` method like this:"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:69
+msgid ""
+"def compatibility(self):\n"
+"    if self.settings.compiler == \"gcc\" and self.settings.compiler.version "
+"== \"4.9\":\n"
+"        return [{\"settings\": [(\"compiler.version\", v)]}\n"
+"                for v in (\"4.8\", \"4.7\", \"4.6\")]"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:77
+msgid ""
+"Read more about the ``compatibility()`` method in :ref:`the compatibility() "
+"method reference<reference_conanfile_methods_compatibility>`"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:81
+msgid "The ``compatibility.py`` plugin"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:83
+msgid ""
+"Compatibility can be defined globally via the ``compatibility.py`` plugin, "
+"in the same way that the ``compatibility()`` method does for one recipe, but "
+"for all packages globally."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:85
+msgid ""
+"Check the binary compatibility :ref:`compatibility.py extension "
+"<reference_extensions_binary_compatibility>`."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:90
+msgid "Customizing binary compatibility of dependencies versions"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:93
+msgid "Global default package_id modes"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:95
+msgid ""
+"The ``core.package_id:default_xxx`` configurations defined in ``global."
+"conf`` can be used to globally change the defaults of how dependencies "
+"affect their consumers"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:97
+msgid ""
+"core.package_id:default_build_mode: By default, 'None'\n"
+"core.package_id:default_embed_mode: By default, 'full_mode'\n"
+"core.package_id:default_non_embed_mode: By default, 'minor_mode'\n"
+"core.package_id:default_python_mode: By default, 'minor_mode'\n"
+"core.package_id:default_unknown_mode: By default, 'semver_mode'"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:107
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:109
+msgid ""
+"It is strongly recommended that the ``core.package_id:default_xxx`` should "
+"be global, consistent and immutable accross organizations. It can be "
+"confusing to change these defaults for different projects or teams, because "
+"it will result in missing binaries."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:111
+msgid ""
+"It should also be consistent and shared with the consumers of generated "
+"packages if those packages are shared outside the organization, in that case "
+"sharing the ``global.conf`` file via ``conan config install`` could be "
+"recommended."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:115
+msgid ""
+"Consider using the Conan defaults, they should be a good balance between "
+"efficiency and safety, ensuring exact re-building for embed cases, and good "
+"control via versions for non-embed cases."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:119
+msgid "Custom package_id modes for recipe consumers"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:121
+msgid ""
+"Recipes can define their default effect to their consumers, via some "
+"``package_id_xxxx_mode`` attributes."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:123
+msgid ""
+"The ``package_id_embed_mode, package_id_non_embed_mode, "
+"package_id_unknown_mode`` are class attributes that can be defined in "
+"recipes to define the effect they have on their consumers ``package_id``. "
+"Can be declared as:"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:125
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    ...\n"
+"    package_id_embed_mode = \"full_mode\"\n"
+"    package_id_non_embed_mode = \"patch_mode\"\n"
+"    package_id_unknown_mode = \"minor_mode\""
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:136
+msgid "Read more in :ref:`reference_conanfile_attributes_package_id_modes`"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:139
+msgid "Custom package_id from recipe dependencies"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:141
+msgid ""
+"Recipes can define how their dependencies affect their ``package_id``, using "
+"the ``package_id_mode`` trait:"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:143
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    def requirements(self):\n"
+"        self.requires(\"mydep/1.0\", package_id_mode=\"patch_mode\")"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:152
+msgid ""
+"Using ``package_id_mode`` trait does not differentiate between the \"embed\" "
+"and \"non-embed\" cases, it is up to the user to define the correct value. "
+"It is likely that this approach should only be used for very special cases "
+"that do not have variability of shared/static libraries controlled via "
+"``options``."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:154
+msgid ""
+"Note that the ``requirements()`` method is evaluated while the graph is "
+"being expanded, the dependencies do not exist yet (haven't been computed), "
+"so it is not possible to know the dependencies options. In this case it "
+"might be preferred to use the ``package_id()`` method."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:157
+msgid ""
+"The ``package_id()`` method can define how the dependencies affect the "
+"current package with:"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:159
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    def package_id(self):\n"
+"        self.info.requires[\"mydep\"].major_mode()"
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:167
+msgid ""
+"The different modes that can be used are defined in :ref:"
+"`reference_conanfile_attributes_package_id_modes`"
+msgstr ""

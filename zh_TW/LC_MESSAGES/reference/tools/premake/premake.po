@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/premake/premake.rst:4
+msgid "Premake"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:9
+msgid ""
+"The ``Premake`` build helper is a wrapper around the command line invocation "
+"of Premake. It will abstract the project configuration command."
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:12
+msgid ""
+"The helper is intended to be used in the *conanfile.py* ``build()`` method, "
+"to call Premake commands automatically when a package is being built "
+"directly by Conan (create, install)"
+msgstr ""
+
+#: ../../../reference/tools/premake/premake.rst:16
+msgid ""
+"from conan.tools.premake import Premake\n"
+"from conan.tools.microsoft import MSBuild\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"    # The VCVars generator might be needed in Windows-MSVC\n"
+"    generators = \"VCVars\"\n"
+"\n"
+"    def build(self):\n"
+"        p = Premake(self)\n"
+"        p.configure()\n"
+"        # At the moment Premake does not contain .build() method\n"
+"        # report in Github issues your use cases and feedback to request it\n"
+"        build_type = str(self.settings.build_type)\n"
+"        if self.settings.os == \"Windows\":\n"
+"            msbuild = MSBuild(self)\n"
+"            msbuild.build(\"HelloWorld.sln\")\n"
+"        else:\n"
+"            self.run(f\"make config={build_type.lower()}_x86_64\")\n"
+"        p = os.path.join(self.build_folder, \"bin\", build_type, "
+"\"HelloWorld\")\n"
+"        self.run(f'\"{p}\"')"
+msgstr ""

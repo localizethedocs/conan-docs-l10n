@@ -1,0 +1,440 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../whatsnew.rst:4
+msgid "What's new in Conan 2"
+msgstr ""
+
+#: ../../../whatsnew.rst:6
+msgid ""
+"Conan 2 comes with many exciting improvements based on the lessons learned "
+"in the last years with Conan 1.X. Also, a lot of effort has been made to "
+"backport necessary things to Conan 1.X to make the upgrade easier: Recipes "
+"using latest 1.X integrations will be compatible with Conan 2, and binaries "
+"for both versions will not collide and be able to live in the same server "
+"repositories."
+msgstr ""
+
+#: ../../../whatsnew.rst:11
+msgid "Conan 2 migration guide"
+msgstr ""
+
+#: ../../../whatsnew.rst:12
+msgid ""
+"If you are using Conan 1.X, please read the `Conan 2 Migration guide "
+"<https://docs.conan.io/en/latest/conan_v2.html>`_ , to start preparing your "
+"package recipes to 2.0 and be aware of some changes while you still work in "
+"Conan 1.X. That guide summarizes the above mentioned backports to make the "
+"upgrade easier."
+msgstr ""
+
+#: ../../../whatsnew.rst:16
+msgid "New graph model"
+msgstr ""
+
+#: ../../../whatsnew.rst:17
+msgid ""
+"Conan 2 defines new requirement traits (headers, libs, build, run, test, "
+"package_id_mode, options, transitive_headers, transitive_libs) and package "
+"types (static, shared, application, header-only) to better represent the "
+"relations that happen with C and C++ binaries, like executables or shared "
+"libraries linking static libraries or shared libraries."
+msgstr ""
+
+#: ../../../whatsnew.rst:21
+msgid "https://www.youtube.com/watch?v=kKGglzm5ous"
+msgstr ""
+
+#: ../../../whatsnew.rst:22
+msgid ""
+"https://github.com/conan-io/tribe/blob/main/design/026-requirements_traits.md"
+msgstr ""
+
+#: ../../../whatsnew.rst:23
+msgid "https://github.com/conan-io/tribe/blob/main/design/027-package_types.md"
+msgstr ""
+
+#: ../../../whatsnew.rst:27
+msgid "New public Python API"
+msgstr ""
+
+#: ../../../whatsnew.rst:28
+msgid ""
+"A new modular Python API is made available, public and documented. This is a "
+"real API, with building blocks that are already used to build the Conan "
+"built-in commands, but that will allow further extensions. There are subapis "
+"for different functional groups, like ``api.list``, ``api.search``, ``api."
+"remove``, ``api.profile``, ``api.graph``, ``api.upload``, ``api.remotes``, "
+"etc. that will allow to implement advanced user flows, functionality and "
+"automation."
+msgstr ""
+
+#: ../../../whatsnew.rst:32
+msgid ":ref:`Python API reference <reference_python_api>`"
+msgstr ""
+
+#: ../../../whatsnew.rst:36
+msgid "New build system integrations"
+msgstr ""
+
+#: ../../../whatsnew.rst:37
+msgid ""
+"Introduced in latest Conan 1.X, Conan 2 will use modern build system "
+"integrations like ``CMakeDeps`` and ``CMakeToolchain`` that are fully "
+"transparent CMake integration (i.e. the consuming ``CMakeLists.txt`` doesn’t "
+"need to be aware at all about Conan). These integrations can also achieve a "
+"better IDE integration, for example via CMakePresets.json."
+msgstr ""
+
+#: ../../../whatsnew.rst:41
+msgid ":ref:`Tools reference <conan_tools>`"
+msgstr ""
+
+#: ../../../whatsnew.rst:45
+msgid "New custom user commands"
+msgstr ""
+
+#: ../../../whatsnew.rst:46
+msgid ""
+"Conan 2 allows extending Conan with custom user commands, written in python "
+"that can be called as ``conan xxxx``. These commands can be shared and "
+"installed with ``conan config install``, and have layers of commands and "
+"subcommands. The custom user commands use the new 2.0 public Python API to "
+"implement their functionality."
+msgstr ""
+
+#: ../../../whatsnew.rst:50
+msgid "New CLI"
+msgstr ""
+
+#: ../../../whatsnew.rst:51
+msgid ""
+"Conan 2 has redesigned the CLI for better consistency, removing ambiguities, "
+"and improving the user experience. The new CLI also sends all the "
+"information, warning, and error messages to stderr, while keeping the final "
+"result in stdout, allowing multiple output formats like ``--format=html`` or "
+"``--format=json`` and using redirects to create files ``--format=json > "
+"myfile.json``. The information provided by the CLI will be more structured "
+"and thorough so that it can be used more easily for automation, especially "
+"in CI/CD systems."
+msgstr ""
+
+#: ../../../whatsnew.rst:55
+msgid ":ref:`Commands reference <reference_commands>`"
+msgstr ""
+
+#: ../../../whatsnew.rst:59
+msgid "New deployers"
+msgstr ""
+
+#: ../../../whatsnew.rst:60
+msgid ""
+"Conan 2 implements “deployers”, which can be called in the command line as "
+"``conan install …. --deployer=mydeploy``, typically to perform copy "
+"operations from the Conan cache to user folders. Such deployers can be built-"
+"in (“full_deploy”, “direct_deploy” and \"runtime_deploy\" are provided so "
+"far), or user-defined, which can be shared and managed with ``conan config "
+"install``. Deployers run before generators, and they can change the target "
+"folders. For example, if the ``--deployer=full_deploy`` deployer runs before "
+"``CMakeDeps``, the files generated by ``CMakeDeps`` will point to the local "
+"copy in the user folder done by the ``full_deploy`` deployer, and not to the "
+"Conan cache."
+msgstr ""
+
+#: ../../../whatsnew.rst:62
+msgid ""
+"Deployers can be multi-configuration. Running ``conan install . --"
+"deployer=full_deploy`` repeatedly for different profiles, can achieve a "
+"fully self-contained project, including all the artifacts, binaries, and "
+"build files that is completely independent of Conan and no longer require "
+"Conan at all to build."
+msgstr ""
+
+#: ../../../whatsnew.rst:66
+msgid "New package_id"
+msgstr ""
+
+#: ../../../whatsnew.rst:67
+msgid ""
+"Conan 2 defines a new, dynamic ``package_id`` that is a great improvement "
+"over the limitations of Conan 1.X. This ``package_id`` will take into "
+"account the package types and types of requirements to implement a more "
+"meaningful strategy, depending on the scenario. For example, it is well "
+"known that when an application ``myapp`` is linking a static library "
+"``mylib``, any change in the binary of the static library ``mylib`` requires "
+"re-building the application ``myapp``. So Conan will default to a mode like "
+"``full_mode`` that will generate a new ``myapp`` ``package_id``, for every "
+"change in the ``mylib`` recipe or binary. While a dependency between a "
+"static library ``mylib_a`` that is used by ``mylib_b`` in general does not "
+"imply that a change in ``mylib_b`` always needs a rebuild of ``mylib_a``, "
+"and that relationship can default to a ``minor_mode`` mode. In Conan 2, the "
+"one doing modifications to ``mylib_a`` can better express whether the "
+"consumer ``mylib_b`` needs to rebuild or not, based on the version bump "
+"(patch version bump will not trigger a rebuild while a minor version bump "
+"will trigger it)"
+msgstr ""
+
+#: ../../../whatsnew.rst:69
+msgid ""
+"Furthermore the default versioning scheme in Conan has been generalized to "
+"any number of digits and letters, as opposed to the official “semver” that "
+"uses just 3 fields."
+msgstr ""
+
+#: ../../../whatsnew.rst:72
+msgid "compatibility.py"
+msgstr ""
+
+#: ../../../whatsnew.rst:73
+msgid ""
+"Conan 2 features a new extension mechanism to define binary compatibility at "
+"a global level. A ``compatibility.py`` file in the Conan cache will be used "
+"to define which fallbacks of binaries should be used in case there is some "
+"missing binary for a given package. Conan will provide a default one to "
+"account for ``cppstd`` compatibility, and executables compatibility, but "
+"this extension is fully configurable by the user (and can also be shared and "
+"managed with ``conan config install``)"
+msgstr ""
+
+#: ../../../whatsnew.rst:76
+msgid "New lockfiles"
+msgstr ""
+
+#: ../../../whatsnew.rst:77
+msgid ""
+"Lockfiles in Conan 2 have been greatly simplified and made way more "
+"flexible. Lockfiles are now modeled as lists of sorted references, which "
+"allow one single lockfile being used for multiple configurations, merging "
+"lockfiles, applying partially defined lockfiles, being strict or non-strict, "
+"adding user defined constraints to lockfiles, and much more."
+msgstr ""
+
+#: ../../../whatsnew.rst:81
+msgid ""
+":ref:`Tutorial introduction to lockfiles "
+"<tutorial_consuming_packages_versioning_lockfiles>`"
+msgstr ""
+
+#: ../../../whatsnew.rst:82
+msgid "https://github.com/conan-io/tribe/blob/main/design/034-new_lockfiles.md"
+msgstr ""
+
+#: ../../../whatsnew.rst:83
+msgid ""
+":ref:`Tutorial about versioning and lockfiles "
+"<tutorial_versioning_lockfiles>`"
+msgstr ""
+
+#: ../../../whatsnew.rst:87
+msgid "New configuration and environment management"
+msgstr ""
+
+#: ../../../whatsnew.rst:88
+msgid ""
+"The new configuration system called ``[conf]`` in profiles and command line, "
+"and introduced experimentally in Conan 1.X, is now the major mechanism to "
+"configure and control Conan behavior. The idea is that the configuration "
+"system is used to transmit information from Conan (a Conan profile) to Conan "
+"(A Conan recipe, or a Conan build system integration like "
+"``CMakeToolchain``). This new configuration system can define strings, "
+"boolean, lists, being cleaner, more structured and powerful than using "
+"environment variables. A better, more explicit environment management, also "
+"introduced in Conan 1.X is now the way to pass information from Conan "
+"(profiles) to tools (like compilers, build systems)."
+msgstr ""
+
+#: ../../../whatsnew.rst:93
+msgid ":ref:`Reference of enviroment tools <reference_tools_env>`"
+msgstr ""
+
+#: ../../../whatsnew.rst:97
+msgid "Multi-revision cache"
+msgstr ""
+
+#: ../../../whatsnew.rst:98
+msgid ""
+"The Conan cache has been completely redesigned to allow storing more than "
+"one revision at a time. It has also shortened the paths, using hashes, "
+"removing the need to use ``short_paths`` in Windows. Note that the cache is "
+"still not concurrent, so parallel jobs or tasks should use independent "
+"caches."
+msgstr ""
+
+#: ../../../whatsnew.rst:102
+msgid "New extensions plugins"
+msgstr ""
+
+#: ../../../whatsnew.rst:103
+msgid ""
+"Several extension points, named “plugins” have been added, to provide "
+"advanced and typically orthogonal functionality to what the Conan recipes "
+"implement. These plugins can be shared, managed and installed via ``conan "
+"config install``"
+msgstr ""
+
+#: ../../../whatsnew.rst:106
+msgid "Profile checker"
+msgstr ""
+
+#: ../../../whatsnew.rst:107
+msgid ""
+"A new ``profile.py`` extension point is provided that can be used to perform "
+"operations on the profile after it has been processed. A default "
+"implementation that checks that the given compiler version is capable of "
+"supporting the given compiler ``cppstd`` is provided, but this is fully "
+"customizable by the user."
+msgstr ""
+
+#: ../../../whatsnew.rst:110
+msgid "Command wrapper"
+msgstr ""
+
+#: ../../../whatsnew.rst:111
+msgid ""
+"A new ``cmd_wrapper.py`` extension provides a way to wrap any ``conanfile."
+"py`` command (i.e., anything that runs inside ``self.run()`` in a recipe), "
+"in a new command. This functionality can be useful for wrapping build "
+"commands in build optimization tools as IncrediBuild or compile caches."
+msgstr ""
+
+#: ../../../whatsnew.rst:114
+msgid "Package signing"
+msgstr ""
+
+#: ../../../whatsnew.rst:115
+msgid ""
+"A new ``sign.py`` extension has been added to implement signing and "
+"verifying of packages. As the awareness about the importance of software "
+"supply chain security grows, it is becoming more important the capability of "
+"being able to sign and verify software packages. This extension point will "
+"soon get a plugin implementation based on Sigstore."
+msgstr ""
+
+#: ../../../whatsnew.rst:118
+msgid "Package immutability optimizations"
+msgstr ""
+
+#: ../../../whatsnew.rst:119
+msgid ""
+"The thorough use of ``revisions`` (already introduced in Conan 1.X as opt-in "
+"in `<https://docs.conan.io/en/latest/versioning/revisions.html>`_) in Conan "
+"2, together with the declaration of artifacts **immutability** allows for "
+"improved processes, downloading, installing and updated dependencies as well "
+"as uploading dependencies."
+msgstr ""
+
+#: ../../../whatsnew.rst:121
+msgid ""
+"The ``revisions`` allow accurate traceability of artifacts, and thus allows "
+"better update flows. For example, it will be easier to get different "
+"binaries for different configurations from different repositories, as long "
+"as they were created from the same recipe revision."
+msgstr ""
+
+#: ../../../whatsnew.rst:123
+msgid ""
+"The package transfers, uploads, downloads, will also be more efficient, "
+"based on ``revisions``. As long as a given revision exists on the server or "
+"in the cache, Conan will not transfer artifacts at all for that package."
+msgstr ""
+
+#: ../../../whatsnew.rst:126
+msgid "Package lists"
+msgstr ""
+
+#: ../../../whatsnew.rst:128
+msgid ""
+"Conan 2 allows bulk operations over several recipes and packages with the "
+"\"Package Lists\" feature. This feature allows to upload, download, remove "
+"and list several recipes and packages with one single command."
+msgstr ""
+
+#: ../../../whatsnew.rst:131
+msgid ""
+"Package lists can also be created from a dependency graph resulting from a "
+"``conan create`` or ``conan install`` command, so it is possible to upload "
+"to a server all packages that belong to a given dependency graph just "
+"chaining 2 commands."
+msgstr ""
+
+#: ../../../whatsnew.rst:136
+msgid ":ref:`Read the example usages <examples_commands_pkglists>`"
+msgstr ""
+
+#: ../../../whatsnew.rst:137
+msgid ""
+"`Package lists blog post <https://blog.conan.io/2023/06/28/Conan-bulk-"
+"package-operations.html>`_"
+msgstr ""
+
+#: ../../../whatsnew.rst:141
+msgid "Metadata files"
+msgstr ""
+
+#: ../../../whatsnew.rst:143
+msgid ""
+"Conan 2 allows to store, upload, download, modify metadata files associated "
+"to recipes and packages. This feature can be very useful to manage build "
+"logs, tests executable, test results, coverage data and many other different "
+"files needed for traceability, compliance and business purposes."
+msgstr ""
+
+#: ../../../whatsnew.rst:149
+msgid ""
+"`Metadata files blog post <https://blog.conan.io/2023/10/24/Conan-launches-"
+"metadata-files.html>`_"
+msgstr ""
+
+#: ../../../whatsnew.rst:153
+msgid "Third party backup sources"
+msgstr ""
+
+#: ../../../whatsnew.rst:155
+msgid ""
+"When building packages for third parties with sources in the internet, those "
+"sources can be removed or changed. The \"backup sources\" can automatically "
+"store a copy of those sources in your own server, so your builds are always "
+"fully reproducible, no matter what happens to the original internet sources."
+msgstr ""
+
+#: ../../../whatsnew.rst:161
+msgid ""
+"`the backup-sources blog post <https://blog.conan.io/2023/10/03/backup-"
+"sources-feature.html>`_"
+msgstr ""
+
+#: ../../../whatsnew.rst:165
+msgid "Installing configuration from Conan packages"
+msgstr ""
+
+#: ../../../whatsnew.rst:167
+msgid ""
+"From Conan 2.2 it is possible to install configuration not only from git "
+"repos and http servers, but also from Conan packages. Doing ``conan config "
+"install-pkg myconf/myversion`` over a Conan package ``myconf/myversion`` "
+"stored in a a Conan server, allows to install the configuration files inside "
+"that package. It also allows to use version ranges to update easily to the "
+"latest one within the range, and lockfiles to achieve reproducibility."
+msgstr ""
+
+#: ../../../whatsnew.rst:174
+msgid ""
+":ref:`Read the conan config install-pkg command reference "
+"<reference_commands_conan_config_install_pkg>`"
+msgstr ""

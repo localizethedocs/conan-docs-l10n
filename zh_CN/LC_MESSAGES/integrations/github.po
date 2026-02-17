@@ -1,0 +1,213 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/github.rst:4
+msgid "|github_logo| GitHub"
+msgstr ""
+
+#: ../../../integrations/github.rst:110
+msgid "github_logo"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../integrations/github.rst:8
+msgid ""
+"The Conan `GitHub Actions <https://github.com/features/actions>`_ "
+"integration allows you to setup Conan client in your GitHub Actions "
+"workflows in a simple and effective way."
+msgstr ""
+
+#: ../../../integrations/github.rst:11
+msgid ""
+"The project can be found on its `GitHub marketplace page <https://github.com/"
+"marketplace/actions/setup-conan-client>`_, or its `GitHub source page "
+"<https://github.com/conan-io/setup-conan>`_ directly."
+msgstr ""
+
+#: ../../../integrations/github.rst:14
+msgid ""
+"To use the integration, add a step in your workflow YAML file. The "
+"integration will install the Conan client and set up the environment for you."
+msgstr ""
+
+#: ../../../integrations/github.rst:17
+msgid "You can customize the following parameters:"
+msgstr ""
+
+#: ../../../integrations/github.rst:19
+msgid ""
+"**Conan version**: Specify the Conan version to install (e.g., `2.15.1`). "
+"Default: latest stable."
+msgstr ""
+
+#: ../../../integrations/github.rst:20
+msgid ""
+"**Configuration URLs**: A list of configuration URLs to download and install "
+"in Conan home. By default, no configuration is installed."
+msgstr ""
+
+#: ../../../integrations/github.rst:21
+msgid ""
+"**Conan Audit Token**: The :ref:`audit<devops_audit>` token used for the "
+"audit command to scan vulnerabilities in packages. By default, no token is "
+"used."
+msgstr ""
+
+#: ../../../integrations/github.rst:22
+msgid ""
+"**Conan home path**: Set a custom location for the Conan home folder. By "
+"default, no custom path is used."
+msgstr ""
+
+#: ../../../integrations/github.rst:23
+msgid ""
+"**Cache Conan packages**: Cache all packages in your Conan cache "
+"automatically and re-use them in a next build. By default, no cache is used."
+msgstr ""
+
+#: ../../../integrations/github.rst:24
+msgid ""
+"**Python version**: You can specify the Python version to be installed with "
+"Conan, the same will be available in the environment. By default, Python "
+"3.10 is installed."
+msgstr ""
+
+#: ../../../integrations/github.rst:26
+msgid ""
+"The integration is available for all platforms supported by GitHub Actions, "
+"including Linux, Windows, and macOS."
+msgstr ""
+
+#: ../../../integrations/github.rst:29
+msgid "Examples"
+msgstr ""
+
+#: ../../../integrations/github.rst:31
+msgid ""
+"This section provides some examples of how to use the integration in your "
+"GitHub Actions workflows."
+msgstr ""
+
+#: ../../../integrations/github.rst:34
+msgid "Scanning Packages for Vulnerabilities in a Nightly Build"
+msgstr ""
+
+#: ../../../integrations/github.rst:38
+msgid ""
+"Do not share your Conan audit token or expose it in your code. Always use "
+"GitHub secrets for sensitive data."
+msgstr ""
+
+#: ../../../integrations/github.rst:40
+msgid ""
+"First, you need to set up the Conan audit token in your `GitHub secrets`_. "
+"Then, use the following example to scan for vulnerabilities in a package and "
+"its dependencies:"
+msgstr ""
+
+#: ../../../integrations/github.rst:43 ../../../integrations/github.rst:77
+msgid ".github/workflows/ci.yml"
+msgstr ""
+
+#: ../../../integrations/github.rst:43
+msgid ""
+"name: Nightly security scan\n"
+"on:\n"
+"  schedule:\n"
+"    - cron: \"0 0 * * *\"\n"
+"\n"
+"jobs:\n"
+"  scan-vulnerabilities:\n"
+"    runs-on: ubuntu-latest\n"
+"    steps:\n"
+"      - name: Checkout code\n"
+"        uses: actions/checkout@v4\n"
+"\n"
+"      - name: Install and setup Conan\n"
+"        uses: conan-io/setup-conan@v1\n"
+"        with:\n"
+"          audit_token: ${{ secrets.MY_CONAN_AUDIT_TOKEN }}\n"
+"\n"
+"      - name: Scan for vulnerabilities with Conan Audit\n"
+"        run: |\n"
+"          conan audit scan ."
+msgstr ""
+
+#: ../../../integrations/github.rst:67
+msgid ""
+"This example scans all dependencies in a ``conanfile.py`` in the current "
+"directory. Note that it uses a `GitHub schedule`_ to run the scan every day "
+"at midnight, this is in the case of using the free service token, to avoid "
+"hitting the daily limits, but still having security checks every day."
+msgstr ""
+
+#: ../../../integrations/github.rst:72
+msgid "Installing Conan configuration and building packages"
+msgstr ""
+
+#: ../../../integrations/github.rst:74
+msgid ""
+"This example installs a custom Conan configuration from a URL, restores "
+"cached packages from previous builds, builds the package defined in the "
+"``conanfile.py``, and uploads it to the Conan server."
+msgstr ""
+
+#: ../../../integrations/github.rst:77
+msgid ""
+"name: Build and upload Conan package\n"
+"on:\n"
+"  push:\n"
+"    branches:\n"
+"      - 'main'\n"
+"\n"
+"jobs:\n"
+"  build:\n"
+"    runs-on: ubuntu-latest\n"
+"    steps:\n"
+"      - name: Checkout code\n"
+"        uses: actions/checkout@v4\n"
+"\n"
+"      - name: Install and setup Conan\n"
+"        uses: conan-io/setup-conan@v1\n"
+"        with:\n"
+"          config_urls: https://mycompany.com/conan/configs.git\n"
+"          cache_packages: true\n"
+"\n"
+"      - name: Build and upload package\n"
+"        run: |\n"
+"          conan create . -pr:a myprofile --build=missing\n"
+"          conan remote login artifactory developer -p ${{ secrets."
+"MY_CONAN_PASSWORD }}\n"
+"          conan upload \"*\" --confirm --remote artifactory"
+msgstr ""
+
+#: ../../../integrations/github.rst:105
+msgid ""
+"In this example, the action's option ``cache_packages`` is set to true, so "
+"all packages in the Conan cache are cached for the next build. Remote "
+"information is expected from the configuration installed from the URL "
+"pointed by the option ``config_urls``. Remote authentication uses GitHub "
+"secrets for security. The remote authentication is done using the GitHub "
+"secrets, which is a secure way to store sensitive information."
+msgstr ""

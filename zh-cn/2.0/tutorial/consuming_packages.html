@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consuming packages &mdash; conan 2.0.17 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=2da93098" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/conan.css?v=7d9e9f1e" />
+
+  
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/tutorial/consuming_packages.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fc265b1e"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Build a simple CMake project using Conan" href="consuming_packages/build_simple_cmake_project.html" />
+    <link rel="prev" title="Tutorial" href="../tutorial.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/conan-docs-logo-2.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Conan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Install</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Consuming packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="consuming_packages/build_simple_cmake_project.html">Build a simple CMake project using Conan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="consuming_packages/use_tools_as_conan_packages.html">Using build tools as Conan packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="consuming_packages/different_configurations.html">Building for multiple configurations: Release, Debug, Static and Shared</a></li>
+<li class="toctree-l3"><a class="reference internal" href="consuming_packages/the_flexibility_of_conanfile_py.html">Understanding the flexibility of using conanfile.py vs conanfile.txt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="consuming_packages/cross_building_with_conan.html">How to cross-compile your applications using Conan: host and build contexts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="consuming_packages/intro_to_versioning.html">Introduction to versioning</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages.html">Creating packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conan_repositories.html">Working with Conan repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developing_packages.html">Developing packages locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioning.html">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other_features.html">Other important Conan features</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../devops.html">Devops guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">Consuming packages</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/develop2/tutorial/consuming_packages.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="consuming-packages">
+<span id="tutorial-consuming-packages"></span><h1>Consuming packages<a class="headerlink" href="#consuming-packages" title="Link to this heading">¶</a></h1>
+<p>This section shows how to build your projects using Conan to manage your dependencies. We
+will begin with a basic example of a C project that uses CMake and depends on the <strong>zlib</strong>
+library. This project will use a <em>conanfile.txt</em> file to declare its dependencies.</p>
+<p>We will also cover how you can not only use ‘regular’ libraries with Conan but also manage
+tools you may need to use while building: like CMake, msys2, MinGW, etc.</p>
+<p>Then, we will explain different Conan concepts like settings and options and how you can
+use them to build your projects for different configurations like Debug, Release, with
+static or shared libraries, etc.</p>
+<p>Also, we will explain how to transition from the <em>conanfile.txt</em> file we used in the first
+example to a more powerful <em>conanfile.py</em>.</p>
+<p>After that, we will introduce the concept of Conan build and host profiles and explain how
+you can use them to cross-compile your application to different platforms.</p>
+<p>Then, in the “Introduction to versioning” we will learn about using different versions,
+defining requirements with version ranges, the concept of revisions and a brief introduction
+to lockfiles to achieve reproducibility of the dependency graph.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Table of contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="consuming_packages/build_simple_cmake_project.html">Build a simple CMake project using Conan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/build_simple_cmake_project.html#read-more">Read more</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="consuming_packages/use_tools_as_conan_packages.html">Using build tools as Conan packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/use_tools_as_conan_packages.html#read-more">Read more</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="consuming_packages/different_configurations.html">Building for multiple configurations: Release, Debug, Static and Shared</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/different_configurations.html#modifying-settings-use-debug-configuration-for-the-application-and-its-dependencies">Modifying settings: use Debug configuration for the application and its dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/different_configurations.html#modifying-options-linking-the-application-dependencies-as-shared-libraries">Modifying options: linking the application dependencies as shared libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/different_configurations.html#difference-between-settings-and-options">Difference between settings and options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/different_configurations.html#introducing-the-concept-of-package-id">Introducing the concept of Package ID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/different_configurations.html#read-more">Read more</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="consuming_packages/the_flexibility_of_conanfile_py.html">Understanding the flexibility of using conanfile.py vs conanfile.txt</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/the_flexibility_of_conanfile_py.html#use-the-layout-method">Use the layout() method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/the_flexibility_of_conanfile_py.html#use-the-validate-method-to-raise-an-error-for-non-supported-configurations">Use the validate() method to raise an error for non-supported configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/the_flexibility_of_conanfile_py.html#conditional-requirements-using-a-conanfile-py">Conditional requirements using a conanfile.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/the_flexibility_of_conanfile_py.html#read-more">Read more</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="consuming_packages/cross_building_with_conan.html">How to cross-compile your applications using Conan: host and build contexts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/cross_building_with_conan.html#conan-two-profiles-model-build-and-host-profiles">Conan two profiles model: build and host profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/cross_building_with_conan.html#read-more">Read more</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="consuming_packages/intro_to_versioning.html">Introduction to versioning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/intro_to_versioning.html#version-ranges">Version ranges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/intro_to_versioning.html#revisions">Revisions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/intro_to_versioning.html#lockfiles">Lockfiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="consuming_packages/intro_to_versioning.html#read-more">Read more</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tutorial.html" class="btn btn-neutral float-left" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="consuming_packages/build_simple_cmake_project.html" class="btn btn-neutral float-right" title="Build a simple CMake project using Conan" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, JFrog.
+      <span class="lastupdated">最后更新于 2月 17, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

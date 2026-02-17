@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-TW" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vendoring dependencies in Conan packages &mdash; conan 2.24.0 說明文件</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=2da93098" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/conan.css?v=7d9e9f1e" />
+
+  
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/devops/vendoring.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=983ed7b0"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=d9a6981e"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜尋" href="../search.html" />
+    <link rel="next" title="Package promotions" href="package_promotions.html" />
+    <link rel="prev" title="Save and restore packages from/to the cache" href="save_restore.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/conan-docs-logo-2.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2.24
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安裝</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">教學</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci_tutorial/tutorial.html">CI 教學</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="devops.html">開發運維指南</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="using_conancenter.html">在生產環境中使用 ConanCenter 軟體包</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devops_local_recipes_index.html">Local Recipes Index Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup_sources/sources_backup.html">使用 Conan 備份第三方來源碼</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html">Managing package metadata files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioning/versioning.html">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="save_restore.html">Save and restore packages from/to the cache</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Vendoring dependencies in Conan packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_promotions.html">Package promotions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audit.html">Checking package vulnerabilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../security/security.html">安全性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">範例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../incubating.html">孵化中的功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Conan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">變更日誌</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="devops.html">開發運維指南</a></li>
+      <li class="breadcrumb-item active">Vendoring dependencies in Conan packages</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/develop2/devops/vendoring.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vendoring-dependencies-in-conan-packages">
+<span id="devops-vendoring"></span><h1>Vendoring dependencies in Conan packages<a class="headerlink" href="#vendoring-dependencies-in-conan-packages" title="Link to this heading">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>This feature is experimental and subject to breaking changes.
+See <a class="reference internal" href="../introduction.html#stability"><span class="std std-ref">the Conan stability</span></a> section for more information.</p>
+</div>
+<p>From Conan 2.4 it is possible to create and use Conan packages that completely vendor their dependencies,
+that is, they completely hide and isolate their dependencies from their consumers. This can be useful
+in some different cases:</p>
+<ul class="simple">
+<li><p>When sharing Conan packages with other organizations which vendor (copy, embed or link) the dependencies,
+so it is not necessary for the consumers of their packages to have access to those dependencies and the
+intention is that they always use the shared precompiled binaries.</p></li>
+<li><p>To introduce a hard decoupling between parts of a project.</p></li>
+</ul>
+<p>To make a package vendor its dependencies, define in its recipe the following attribute:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>class<span class="w"> </span>MyPkg<span class="o">(</span>ConanFile<span class="o">)</span>:
+<span class="w">   </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mypkg&quot;</span>
+<span class="w">   </span><span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1&quot;</span>
+
+<span class="w">   </span><span class="nv">vendor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
+
+<span class="w">   </span><span class="nv">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;somedep/1.2&quot;</span>
+</pre></div>
+</div>
+<p>When we have this recipe, we can create its binaries with a normal <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span> <span class="pre">.</span></code>.
+But when we use this package as a requirement for other packages, its dependencies will be fully invisible.
+The graph will not even expand the <code class="docutils literal notranslate"><span class="pre">somedep/1.2</span></code> requirement. This dependency doesn’t even need to be available
+in the remotes for the consumers, it will not be checked.</p>
+<p>Some important notes:</p>
+<ul class="simple">
+<li><p>A package that vendors its dependencies is intended to be consumed always in binary form.</p></li>
+<li><p>The dependencies of a vendoring package always form a fully private and isolated dependency graph, decoupled from
+the rest of the dependency graph that uses this package.</p></li>
+<li><p>It is the responsibility of the vendoring package and its users to guarantee that vendored dependencies do not
+collide. If a vendoring package vendors for example <code class="docutils literal notranslate"><span class="pre">libssl.a</span></code> as a static library doing a regular copy of
+it in its package, and there is another package in the graph that also provides <code class="docutils literal notranslate"><span class="pre">libssl</span></code>, there will be a
+conflict that Conan cannot detect as <code class="docutils literal notranslate"><span class="pre">libssl.a</span></code> is vendored as an internal implementation detail of the package,
+but not explicitly modeled. Mechanisms like <code class="docutils literal notranslate"><span class="pre">provides</span></code> can be used for this purpose, but it is the responsibility
+of the recipe authors to take it into account.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">package_id</span></code> of a package that defines <code class="docutils literal notranslate"><span class="pre">vendor=True</span></code> is fully independent of its dependencies. The
+dependencies versions will never affect the <code class="docutils literal notranslate"><span class="pre">package_id</span></code> of the vendoring package, so it is important
+to note that the version of the vendoring package represents a full private dependency graph.</p></li>
+<li><p>The regular <code class="docutils literal notranslate"><span class="pre">default_options</span></code> or options values definitions from consumer <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> recipes do not
+propagate over vendoring packages, as they don’t even expand their dependencies.</p></li>
+<li><p>If a vendoring package binary is missing and/or the user request to build such a package from sources, Conan
+will fail, raising an error that it is not possible to build it.</p></li>
+<li><p>To allow the expansion of the private dependency the <code class="docutils literal notranslate"><span class="pre">tools.graph:vendor=build</span></code> configuration can be activated.
+If that is the case, the private dependency graph of the package will be computed and expanded and the package
+will be allowed to build.</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="save_restore.html" class="btn btn-neutral float-left" title="Save and restore packages from/to the cache" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="package_promotions.html" class="btn btn-neutral float-right" title="Package promotions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, JFrog.
+      <span class="lastupdated">最後更新於 2月 17, 2026。
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

@@ -1,0 +1,604 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Package layout &mdash; conan 1.37.2 文档</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜索" href="../search.html"/>
+    <link rel="top" title="conan 1.37.2 文档" href="../index.html"/>
+        <link rel="up" title="Developing packages" href="../developing_packages.html"/>
+        <link rel="next" title="Packages in editable mode" href="editable_packages.html"/>
+        <link rel="prev" title="Package development flow" href="package_dev_flow.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_packages.html">Using packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../developing_packages.html">Developing packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="package_dev_flow.html">Package development flow</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Package layout</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#self-folders">self.folders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#self-cpp">self.cpp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#self-patterns">self.patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-everything-together">Example: Everything together</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="editable_packages.html">Packages in editable mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workspaces.html">Workspaces</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howtos.html">Howtos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conan_v2.html">Road to Conan 2.0</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../developing_packages.html">Developing packages</a> &raquo;</li>
+        
+      <li>Package layout</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/developing_packages/package_layout.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>JFrog Bintray is being sunset. <a
+            href=https://blog.conan.io/2021/03/31/Bintray-sunset-timeline.html> Please refer this blog post for more detail.</a>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="package-layout-1">
+<span id="package-layout"></span><h1>Package layout<a class="headerlink" href="#package-layout-1" title="永久链接至标题">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases">1.37.0</a></p>
+<p>You can declare a <code class="docutils literal notranslate"><span class="pre">layout()</span></code> method in the recipe to describe the package contents,
+not only the final package in the cache but also the package while developing.
+As the package will have the same structure in the cache and in our local directory, the recipe development becomes easier.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">layout()</span></code> method you can adjust 3 different things:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">self.folders</span></code>: Specify the location of several things, like the sources, the build folder or even the folder where
+the generators files (e.g the <cite>xx-config.cmake</cite> files from the <code class="docutils literal notranslate"><span class="pre">CMakeDeps</span></code>) will be created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">self.patterns</span></code>: Describe the file patterns of your <strong>source</strong> and <strong>build</strong> folders. It will ease the process of
+packaging the files in the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method.</li>
+<li><code class="docutils literal notranslate"><span class="pre">self.cpp</span></code>: The same you could adjust the <code class="docutils literal notranslate"><span class="pre">self.cpp_info</span></code> in the <a class="reference internal" href="../reference/conanfile/methods.html#method-package-info"><span class="std std-ref">package_info()</span></a> for the
+package in the cache, you can do the same for the <cite>source</cite> and <cite>build</cite> folders while developing the package. This feature
+enables an easier way to use <a class="reference internal" href="editable_packages.html#editable-packages"><span class="std std-ref">editable packages</span></a>.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="self-folders">
+<h2>self.folders<a class="headerlink" href="#self-folders" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><strong>self.folders.source</strong>: To specify a folder where your sources are.</li>
+<li><strong>self.folders.build</strong>: To specify a subfolder where the files from the build are (or will be).</li>
+<li><strong>self.folders.generators</strong>: To specify a subfolder where to write the files from the generators and the toolchains.</li>
+<li><strong>self.folders.imports</strong>: To specify a subfolder where to write the files copied when using the <code class="docutils literal notranslate"><span class="pre">imports(self)</span></code>
+method in a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>.</li>
+<li><strong>self.folders.package</strong>: To specify a subfolder where to write the package files when running the <strong class="command">conan package</strong>
+command.</li>
+</ul>
+<p>Check the <a class="reference internal" href="../reference/conanfile/methods.html#layout-folders-reference"><span class="std std-ref">complete reference</span></a> of the folders attribute.</p>
+<p>In the following example we are declaring a layout that follows the standard CLion one, where the build directory is <code class="docutils literal notranslate"><span class="pre">cmake-build-release</span></code>
+or <code class="docutils literal notranslate"><span class="pre">cmake-build-debug</span></code> depending on the declared <code class="docutils literal notranslate"><span class="pre">build_type</span></code> setting. The sources of the project are in the <code class="docutils literal notranslate"><span class="pre">src</span></code> folder.
+Also the generators folders inside the build folder is quite convenient to include the <a class="reference internal" href="../reference/conanfile/tools/cmake/cmaketoolchain.html#conan-cmake-toolchain"><span class="std std-ref">conan_toolchain.cmake</span></a>
+file when using the <a class="reference internal" href="../reference/conanfile/tools/cmake.html#conan-tools-cmake"><span class="std std-ref">CMakeDeps</span></a> generator because it will be always in the same relative path to the build folder.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;my_project_folder&gt;
+  | - conanfile.py
+  | - src
+      | - CMakeLists.txt
+      | - hello.cpp
+      | - hello.h
+</pre></div>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">CMake</span>
+
+<span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;zlib/1.2.11&quot;</span>
+    <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;CMakeDeps&quot;</span><span class="p">,</span> <span class="s2">&quot;CMakeToolchain&quot;</span>
+    <span class="n">exports_sources</span> <span class="o">=</span> <span class="s2">&quot;src*&quot;</span>
+
+    <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">build</span> <span class="o">=</span> <span class="s2">&quot;cmake-build-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">build_type</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">generators</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">build</span><span class="p">,</span> <span class="s2">&quot;generators&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">imports</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">build</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;src&quot;</span>
+
+    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># In the source method, the current directory == self.source_folder</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_folder</span> <span class="o">==</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># We are at a folder like &quot;myproject/cmake-build-debug&quot;</span>
+        <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">cmake</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+        <span class="n">cmake</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Given the previous example we can run the conan local methods without taking much care of the directories where the
+files are or the build files should be:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span># This will write the toolchains and generator files from the dependencies to the ``cmake-build-debug/generators``
+$ conan install . -if=my_install -s build_type=Debug
+
+# In case we needed it, this will fetch the sources to the ./src folder.
+$ conan source . -if=my_install
+
+# This will build the project using the declared source folder and ``cmake-build-debug`` as the build folder
+$ conan build . -if=my_install
+
+# This will import, if declared imports(self) method, the files to the ``cmake-build-debug`` folder
+$ conan imports . -if=my_install
+</pre></div>
+</div>
+<p>Of course we could open the <strong>Clion IDE</strong> and build from there and the artifacts will be created at the same  <code class="docutils literal notranslate"><span class="pre">cmake-build-debug</span></code>
+folder.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Maybe you are wondering why the <strong>install folder</strong> is not parametrized and has to be specified with the <code class="docutils literal notranslate"><span class="pre">-if</span></code>
+argument.
+Currently, Conan generates several files like the <code class="docutils literal notranslate"><span class="pre">graph_info.json</span></code> and the <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.txt</span></code> that
+are read to restore the configuration saved (settings, options, etc) to be applied in the local commands.
+That configuration is needed before running the <code class="docutils literal notranslate"><span class="pre">layout()</span></code> method because the folders might depend on the settings
+like in the previous example. It is a kind of a chicken-egg issue. In Conan 2.0, likely, the
+configuration won’t be stored, and the local methods like <strong class="command">conan build .</strong> will compute the graph
+from arguments (–profile, -s, -o…) and won’t need the <code class="docutils literal notranslate"><span class="pre">--if</span></code> argument anymore, being always trivial to run.</p>
+</div>
+</div>
+<div class="section" id="self-cpp">
+<span id="package-layout-cpp"></span><h2>self.cpp<a class="headerlink" href="#self-cpp" title="永久链接至标题">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">layout()</span></code> method allows to declare <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> objects not only for the final package (like the classic approach with
+the <code class="docutils literal notranslate"><span class="pre">self.cpp_info</span></code> in the <code class="docutils literal notranslate"><span class="pre">package_info(self)</span></code> method) but for the <code class="docutils literal notranslate"><span class="pre">self.source_folder</span></code> and <code class="docutils literal notranslate"><span class="pre">self.build_folder</span></code>.
+This is useful when a package is in <a class="reference internal" href="editable_packages.html#editable-packages"><span class="std std-ref">editable mode</span></a> to automatically propagate to the consumers
+all the needed information (library names, include directories…) but pointing to the local project directories while developing,
+whether you are calling directly your build-system, using an IDE or executing the <strong class="command">conan build</strong> command to build
+your code.</p>
+<p>Example:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">includedirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;include&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">libdirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mylib&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">includedirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gen_include&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">package</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mylib&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The fields of the cpp_info objects at <code class="docutils literal notranslate"><span class="pre">self.info.build</span></code> and <code class="docutils literal notranslate"><span class="pre">self.info.source</span></code> are the same described <a class="reference internal" href="../reference/conanfile/attributes.html#cpp-info-attributes-reference"><span class="std std-ref">here</span></a>.
+Components are also supported.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">You can still use the <code class="docutils literal notranslate"><span class="pre">package_info(self)</span></code> method. The received <cite>self.cpp_info</cite> object will be populated with the information explicitly declared
+in the <code class="docutils literal notranslate"><span class="pre">self.cpp.package</span></code> object, so you can complete it or modify it later.</p>
+</div>
+<p>Once you have your <code class="docutils literal notranslate"><span class="pre">self.cpp.source</span></code> and <code class="docutils literal notranslate"><span class="pre">self.cpp.build</span></code> objects declared you can put the package in
+<a class="reference internal" href="editable_packages.html#editable-packages"><span class="std std-ref">editable mode</span></a> and keep working on the code development with your IDE. Other packages
+depending on this one, will locate the libraries being developed instead of the Conan package in the cache.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan editable add .  hello/1.0
+</pre></div>
+</div>
+</div>
+<div class="section" id="self-patterns">
+<h2>self.patterns<a class="headerlink" href="#self-patterns" title="永久链接至标题">¶</a></h2>
+<p>You can fill the <code class="docutils literal notranslate"><span class="pre">self.patterns.source</span></code> and <code class="docutils literal notranslate"><span class="pre">self.patterns.build</span></code> objects describing the patterns of the files that are at the <code class="docutils literal notranslate"><span class="pre">self.folders.source</span></code> and <code class="docutils literal notranslate"><span class="pre">self.folders.build</span></code>
+to automate the <code class="docutils literal notranslate"><span class="pre">package(self)</span></code> method with the <strong>LayoutPackager()</strong> tool (see the <a class="reference internal" href="#layout-example"><span class="std std-ref">example below</span></a>).</p>
+<p>The defaults are the following but you can customize anything based on the configuration (<code class="docutils literal notranslate"><span class="pre">self.settings</span></code>, <code class="docutils literal notranslate"><span class="pre">self.options</span></code>…):</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">include</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="s2">&quot;*.hpp&quot;</span><span class="p">,</span> <span class="s2">&quot;*.hxx&quot;</span><span class="p">]</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">lib</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">bin</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">include</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="s2">&quot;*.hpp&quot;</span><span class="p">,</span> <span class="s2">&quot;*.hxx&quot;</span><span class="p">]</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">lib</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;*.so&quot;</span><span class="p">,</span> <span class="s2">&quot;*.so.*&quot;</span><span class="p">,</span> <span class="s2">&quot;*.a&quot;</span><span class="p">,</span> <span class="s2">&quot;*.lib&quot;</span><span class="p">,</span> <span class="s2">&quot;*.dylib&quot;</span><span class="p">]</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">bin</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;*.exe&quot;</span><span class="p">,</span> <span class="s2">&quot;*.dll&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>These are all the fields that can be adjusted, both in <code class="docutils literal notranslate"><span class="pre">self.patterns.source</span></code> and <code class="docutils literal notranslate"><span class="pre">self.patterns.build</span></code>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">NAME</th>
+<th class="head">DESCRIPTION (xxx can be either <code class="docutils literal notranslate"><span class="pre">build</span></code> or <code class="docutils literal notranslate"><span class="pre">source</span></code>)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>include</td>
+<td>Patterns of the files from the folders: <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.includedirs</span></code></td>
+</tr>
+<tr class="row-odd"><td>lib</td>
+<td>Patterns of the files from the folders: <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.libdirs</span></code></td>
+</tr>
+<tr class="row-even"><td>bin</td>
+<td>Patterns of the files from the folders: <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.bindirs</span></code></td>
+</tr>
+<tr class="row-odd"><td>src</td>
+<td>Patterns of the files from the folders: <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.srcdirs</span></code></td>
+</tr>
+<tr class="row-even"><td>build</td>
+<td>Patterns of the files from the folders: <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.builddirs</span></code></td>
+</tr>
+<tr class="row-odd"><td>res</td>
+<td>Patterns of the files from the folders: <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.resdirs</span></code></td>
+</tr>
+<tr class="row-even"><td>framework</td>
+<td>Patterns of the files from the folders: <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.frameworkdirs</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="example-everything-together">
+<span id="layout-example"></span><h2>Example: Everything together<a class="headerlink" href="#example-everything-together" title="永久链接至标题">¶</a></h2>
+<p>Let’s see how we can use the <code class="docutils literal notranslate"><span class="pre">layout()</span></code> method to both write simpler recipes, improve the local methods and the integration
+with the IDE and develop the package as an <a class="reference internal" href="editable_packages.html#editable-packages"><span class="std std-ref">editable package</span></a>.</p>
+<p>This is the project structure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;project_folder&gt;
+  | - CMakeLists.txt
+  | - hello.cpp
+  | - include
+      | - hello.h
+  | - res
+      | - myasset.jpg
+</pre></div>
+</div>
+<p>We want to use CLion to build the project so we open the project (using both <strong>Release</strong> and <strong>Debug</strong> configurations).
+After building the project we have this layout:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;project_folder&gt;
+  | - cmake-build-debug
+      | - CMakeFiles
+      | - ... other CMake stuff...
+      | - libhello.a
+      | - gen.h
+  | - cmake-build-release
+      | - CMakeFiles
+      | - ... other CMake stuff...
+      | - libhello.a
+      | - gen.h
+  | - CMakeLists.txt
+  | - hello.cpp
+  | - include
+      | - hello.h
+  | - res
+      | - myasset.jpeg
+</pre></div>
+</div>
+<p>We can write a <code class="docutils literal notranslate"><span class="pre">layout()</span></code> method describing it:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span> <span class="nn">conan.tools.layout</span> <span class="kn">import</span> <span class="n">LayoutPackager</span>
+
+<span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># ###### FOLDERS</span>
+        <span class="c1"># The sources can be found in the root dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
+
+        <span class="c1"># The build folder is created with the CLion way</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">build</span> <span class="o">=</span> <span class="s2">&quot;cmake-build-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">build_type</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+        <span class="c1"># We want to have the toolchains in the build folder so we can always pass</span>
+        <span class="c1"># `-DCMAKE_TOOLCHAIN_FILE=generators/conan_toolchain.cmake` to CMake</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">generators</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">build</span><span class="p">,</span> <span class="s2">&quot;generators&quot;</span><span class="p">)</span>
+
+        <span class="c1"># In case we use &quot;conan package&quot; we declare an output directory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">package</span> <span class="o">=</span> <span class="s2">&quot;package-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">build_type</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+        <span class="c1"># ###### INFOS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">includedirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;include&quot;</span><span class="p">]</span> <span class="c1"># Relative to [&quot;.&quot;] (self.folders.source)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">libdirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">]</span>  <span class="c1"># Relative to (self.folders.build)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">includedirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">]</span> <span class="c1"># Relative to (self.folders.build)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">package</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">]</span>
+
+        <span class="c1"># ###### PATTERNS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;*.jpeg&quot;</span><span class="p">]</span> <span class="c1"># To package automatically the myasset.jpeg</span>
+
+    <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">LayoutPackager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">package</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">There is no need to declare the <code class="docutils literal notranslate"><span class="pre">package_info(self)</span></code> method, we declared the needed information at <code class="docutils literal notranslate"><span class="pre">self.cpp.package</span></code>.</p>
+</li>
+<li><p class="first">The <code class="docutils literal notranslate"><span class="pre">package(self)</span></code> method is quite simple using the <code class="docutils literal notranslate"><span class="pre">LayoutPackager(self).package()</span></code></p>
+</li>
+<li><p class="first">We can easily put the package in editable mode and keep using the CLion IDE to build the libraries:</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan editable add . hello/1.0
+</pre></div>
+</div>
+<p>The packages requiring “hello/1.0” will find the headers and libraries in the right CLion output directories automatically.</p>
+</div></blockquote>
+</li>
+<li><p class="first">If we want to verify the that the Conan recipe is totally correct we can use the Conan local methods always with the same syntax:</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan install . -if=my_install
+$ conan imports . -if=my_install
+$ conan build . -if=my_install
+$ conan package . -if=my_install
+</pre></div>
+</div>
+<p>The conan commands will follow the same directory layout while building, and the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">package</span></code> command will
+create an additional <code class="docutils literal notranslate"><span class="pre">package-release</span></code> folder with the packaged artifacts.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="editable_packages.html" class="btn btn-neutral float-right" title="Packages in editable mode" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="package_dev_flow.html" class="btn btn-neutral" title="Package development flow" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, JFrog.
+      最后更新于 2月 16, 2026.
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.37.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.37");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

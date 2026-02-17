@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-TW" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>init() &mdash; conan 2.22.2 說明文件</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=2da93098" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/conan.css?v=7d9e9f1e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/reference/conanfile/methods/init.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=48dfd85a"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/translations.js?v=d9a6981e"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜尋" href="../../../search.html" />
+    <link rel="next" title="layout()" href="layout.html" />
+    <link rel="prev" title="generate()" href="generate.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/conan-docs-logo-2.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2.22
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">安裝</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">教學</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ci_tutorial/tutorial.html">CI 教學</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devops/devops.html">開發運維指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/security.html">安全性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">範例</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../binary_model.html">Binary model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../commands.html">命令</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../attributes.html">Attributes</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../methods.html">Methods</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="build.html">build()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_id.html">build_id()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_requirements.html">build_requirements()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="compatibility.html">compatibility()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure.html">configure()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="config_options.html">config_options()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deploy.html">deploy()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="export.html">export()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="export_sources.html">export_sources()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="finalize.html">finalize()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate.html">generate()</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">init()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="layout.html">layout()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package.html">package()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package_id.html">package_id()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package_info.html">package_info()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements.html">requirements()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="set_name.html">set_name()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="set_version.html">set_version()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="source.html">source()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="system_requirements.html">system_requirements()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.html">test()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="validate.html">validate()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="validate_build.html">validate_build()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../running_and_output.html">Running and output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../conan_server.html">Conan Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config_files.html">組態檔</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../environment.html">環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions.html">擴充功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools.html">Recipe tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runners.html">執行器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../workspace_files.html">工作空間檔案</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../incubating.html">孵化中的功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../whatsnew.html">What’s new in Conan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">變更日誌</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../reference.html">Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../conanfile.html">conanfile.py</a></li>
+          <li class="breadcrumb-item"><a href="../methods.html">Methods</a></li>
+      <li class="breadcrumb-item active">init()</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/develop2/reference/conanfile/methods/init.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="init">
+<span id="reference-conanfile-methods-init"></span><h1>init()<a class="headerlink" href="#init" title="Link to this heading">¶</a></h1>
+<p>This is an optional method for initializing conanfile values, designed for inheritance from <code class="docutils literal notranslate"><span class="pre">python_requires</span></code>.
+Assuming we have a <code class="docutils literal notranslate"><span class="pre">base/1.1</span></code> recipe:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">base/conanfile.py</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyConanfileBase</span><span class="p">:</span>
+    <span class="n">license</span> <span class="o">=</span> <span class="s2">&quot;MyLicense&quot;</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="c1"># tuple!</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PyReq</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;base&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.1&quot;</span>
+    <span class="n">package_type</span> <span class="o">=</span> <span class="s2">&quot;python-require&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>We could reuse and inherit from it with:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">pkg/conanfile.py</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">license</span> <span class="o">=</span> <span class="s2">&quot;MIT&quot;</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="c1"># tuple!</span>
+    <span class="n">python_requires</span> <span class="o">=</span> <span class="s2">&quot;base/1.1&quot;</span>
+    <span class="n">python_requires_extend</span> <span class="o">=</span> <span class="s2">&quot;base.MyConanfileBase&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_requires</span><span class="p">[</span><span class="s2">&quot;base&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">MyConanfileBase</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">settings</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span>  <span class="c1"># Note, adding 2 tuples = tuple</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">license</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">license</span>  <span class="c1"># License is overwritten</span>
+</pre></div>
+</div>
+</div>
+<p>The final <code class="docutils literal notranslate"><span class="pre">Pkg</span></code> conanfile will have both <code class="docutils literal notranslate"><span class="pre">os</span></code> and <code class="docutils literal notranslate"><span class="pre">arch</span></code> as settings, and <code class="docutils literal notranslate"><span class="pre">MyLicense</span></code> as license.</p>
+<p>To extend the <code class="docutils literal notranslate"><span class="pre">options</span></code> of the base class, it is necessary to call the <code class="docutils literal notranslate"><span class="pre">self.options.update()</span></code> method:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">base/conanfile.py</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseConan</span><span class="p">:</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]}</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PyReq</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;base&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0.0&quot;</span>
+    <span class="n">package_type</span> <span class="o">=</span> <span class="s2">&quot;python-require&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>When the <code class="docutils literal notranslate"><span class="pre">init()</span></code> is called, the <code class="docutils literal notranslate"><span class="pre">self.options</span></code> object is already initialized. Then, updating the
+<code class="docutils literal notranslate"><span class="pre">self.default_options</span></code> is useless, and it is necessary to update the <code class="docutils literal notranslate"><span class="pre">self.options</span></code> with both the
+base class options and the base class default options values:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">pkg/conanfile.py</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DerivedConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;derived&quot;</span>
+    <span class="n">python_requires</span> <span class="o">=</span> <span class="s2">&quot;base/1.0.0&quot;</span>
+    <span class="n">python_requires_extend</span> <span class="o">=</span> <span class="s2">&quot;base.BaseConan&quot;</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;derived&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]}</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;derived&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_requires</span><span class="p">[</span><span class="s2">&quot;base&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">BaseConan</span>
+        <span class="c1"># Note we pass the base options and default_options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">options</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">default_options</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This method can also be useful if you need to unconditionally initialize class attributes like
+<code class="docutils literal notranslate"><span class="pre">license</span></code> or <code class="docutils literal notranslate"><span class="pre">description</span></code> or any other from datafiles other than
+<cite>conandata.yml</cite>. For example, you can have a <cite>json</cite> file containing the information about the
+<code class="docutils literal notranslate"><span class="pre">license</span></code>, <code class="docutils literal notranslate"><span class="pre">description</span></code> and <code class="docutils literal notranslate"><span class="pre">author</span></code> for the library:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">data.json</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;license&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MIT&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This is my awesome library.&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;author&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Me&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Then, you can load that information from the <code class="docutils literal notranslate"><span class="pre">init()</span></code>  method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.files</span><span class="w"> </span><span class="kn">import</span> <span class="n">load</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">exports</span> <span class="o">=</span> <span class="s2">&quot;data.json&quot;</span> <span class="c1"># Important that it is exported with the recipe</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recipe_folder</span><span class="p">,</span> <span class="s2">&quot;data.json&quot;</span><span class="p">))</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">license</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;license&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;author&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">備註</p>
+<p><strong>最佳實踐</strong></p>
+<ul class="simple">
+<li><p>Try to keep your <code class="docutils literal notranslate"><span class="pre">python_requires</span></code> as simple as possible, and do not reuse attributes from them (the main need for the <code class="docutils literal notranslate"><span class="pre">init()</span></code> method), trying to avoid the complexity of this <code class="docutils literal notranslate"><span class="pre">init()</span></code> method. In general inheritance can have more issues than composition (or in other words 「use composition over inheritance」 as a general programming good practice), so try to avoid it if possible.</p></li>
+<li><p>Do not abuse <code class="docutils literal notranslate"><span class="pre">init()</span></code> for other purposes other than listed here, nor use the Python private <code class="docutils literal notranslate"><span class="pre">ConanFile.__init__</span></code> constructor.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">init()</span></code> method executes at recipe load time. It cannot contain conditionals on settings, options, conf, or use any dependencies information other than the above <code class="docutils literal notranslate"><span class="pre">python_requires</span></code>.</p></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generate.html" class="btn btn-neutral float-left" title="generate()" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="layout.html" class="btn btn-neutral float-right" title="layout()" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, JFrog.
+      <span class="lastupdated">最後更新於 2月 17, 2026。
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

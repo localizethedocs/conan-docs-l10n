@@ -1,0 +1,1068 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>conan.tools.microsoft &mdash; conan 1.61.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../../_static/css/search.css" type="text/css" />
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="conan 1.61.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="tools" href="../tools.html"/>
+        <link rel="next" title="conan.tools.qbs" href="qbs.html"/>
+        <link rel="prev" title="conan.tools.intel" href="intel.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../conan_v2.html">Conan migration guide to 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../using_packages.html">Using packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mastering.html">Mastering Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howtos.html">Howtos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../commands.html">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../attributes.html">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../methods.html">Methods</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../tools.html">tools</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="cmake.html">conan.tools.cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gnu.html">conan.tools.gnu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="google.html">conan.tools.google</a></li>
+<li class="toctree-l4"><a class="reference internal" href="apple.html">conan.tools.apple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="meson.html">conan.tools.meson</a></li>
+<li class="toctree-l4"><a class="reference internal" href="intel.html">conan.tools.intel</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">conan.tools.microsoft</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qbs.html">conan.tools.qbs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="env.html">conan.tools.env</a></li>
+<li class="toctree-l4"><a class="reference internal" href="system.html">conan.tools.system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="files.html">conan.tools.files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="layout.html">conan.tools.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scm.html">conan.tools.scm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build.html">conan.tools.build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="android.html">conan.tools.android</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scons.html">conan.tools.scons</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../dependencies.html">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../other.html">Python requires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../other.html#output-and-running">Output and Running</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../generators.html">Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../build_helpers.html">Build helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../env_vars.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hooks.html">Hooks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p><a href="https://conan.io/#signUp" target="_blank">Sign up for release updates</a></p>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../../../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div class="admonition warning wy-text-center">
+            <p>This document is for a <b>"1.X" legacy</b> Conan version. <a href="https://docs.conan.io/2/">Click here to read the <b>Conan 2.0</b> documentation</a></p>
+          </div>
+                 
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../reference.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../../conanfile.html">conanfile.py</a> &raquo;</li>
+        
+          <li><a href="../tools.html">tools</a> &raquo;</li>
+        
+      <li>conan.tools.microsoft</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/reference/conanfile/tools/microsoft.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>Recipe Hacking no. 2! Building on what we learnt during the first installment we will be working on more Conan 2.0 Migration! We'll start by reviewing some open pull requests and hopefully tackle a CMake example. <a
+            href=https://jfrog.zoom.us/webinar/register/WN_grFhqH0yRBeIfJmBvQoPJw> Register here to attend.</a></p>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="conan-tools-microsoft">
+<span id="id1"></span><h1>conan.tools.microsoft<a class="headerlink" href="#conan-tools-microsoft" title="Permalink to this headline">¶</a></h1>
+<p>These tools allow a native integration for Microsoft Visual Studio, natively (without using CMake,
+but using directly Visual Studio solutions, projects and property files).</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Some of the features used in this section are still <strong>under development</strong>, while they are
+recommended and usable and we will try not to break them in future releases, some breaking
+changes might still happen if necessary to prepare for the <em>Conan 2.0 release</em>.</p>
+</div>
+<div class="section" id="msbuilddeps">
+<span id="conan-tools-microsoft-msbuilddeps"></span><h2>MSBuildDeps<a class="headerlink" href="#msbuilddeps" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.32.0">1.32.0</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">MSBuildDeps</span></code> is the dependency information generator for Microsoft MSBuild build system.
+It will generate multiple <em>xxxx.props</em> properties files one per dependency of a package,
+to be used by consumers using MSBuild or Visual Studio, just adding the generated properties files
+to the solution and projects.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">This class will require very soon to define both the “host” and “build” profiles. It is very recommended to
+start defining both profiles immediately to avoid future breaking. Furthermore, some features, like trying to
+cross-compile might not work at all if the “build” profile is not provided.</p>
+</div>
+<p>It is important to highlight that this one is a <strong>dependencies generator</strong> and it is focused
+on the <strong>dependencies</strong> of a conanfile, not the current build.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">MSBuildDeps</span></code> generator can be used by name in conanfiles:</p>
+<div class="literal-block-wrapper docutils container" id="id26">
+<div class="code-block-caption"><span class="caption-text">conanfile.py</span><a class="headerlink" href="#id26" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;MSBuildDeps&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id27">
+<div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id27" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[generators]
+MSBuildDeps
+</pre></div>
+</div>
+</div>
+<p>And it can also be fully instantiated in the conanfile <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method:</p>
+<div class="literal-block-wrapper docutils container" id="id28">
+<div class="code-block-caption"><span class="caption-text">conanfile.py</span><a class="headerlink" href="#id28" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">MSBuildDeps</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;zlib/1.2.11&quot;</span><span class="p">,</span> <span class="s2">&quot;bzip2/1.0.8&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ms</span> <span class="o">=</span> <span class="n">MSBuildDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">ms</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>When the <code class="docutils literal notranslate"><span class="pre">MSBuildDeps</span></code> generator is used, every invocation of <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> will
+generate properties files, one per dependency and per configuration. For the last <em>conanfile.py</em>
+above:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>conanfile.py<span class="w"> </span><span class="c1"># default is Release</span>
+$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>conanfile.py<span class="w"> </span>-s<span class="w"> </span><span class="nv">build_type</span><span class="o">=</span>Debug
+</pre></div>
+</div>
+<p>This is a multi-configuration generator, and will generate different files for the different Debug/Release
+configuration. The above commands the following files will be generated:</p>
+<ul class="simple">
+<li><em>conan_zlib_vars_release_x64.props</em>: <code class="docutils literal notranslate"><span class="pre">Conanzlibxxxx</span></code> variables definitions for the <code class="docutils literal notranslate"><span class="pre">zlib</span></code> dependency, Release config, like <code class="docutils literal notranslate"><span class="pre">ConanzlibIncludeDirs</span></code>, <code class="docutils literal notranslate"><span class="pre">ConanzlibLibs</span></code>, etc.</li>
+<li><em>conan_zlib_vars_debug_x64.props</em>: Same <code class="docutils literal notranslate"><span class="pre">Conanzlib``variables</span> <span class="pre">for</span> <span class="pre">``zlib</span></code> dependency, Debug config</li>
+<li><em>conan_zlib_release_x64.props</em>: Activation of <code class="docutils literal notranslate"><span class="pre">Conanzlibxxxx</span></code> variables in the current build as standard C/C++ build configuration, Release config. This file contains also the transitive dependencies definitions.</li>
+<li><em>conan_zlib_debug_x64.props</em>: Same activation of <code class="docutils literal notranslate"><span class="pre">Conanzlibxxxx</span></code> variables, Debug config, also inclusion of transitive dependencies.</li>
+<li><em>conan_zlib.props</em>: Properties file for <code class="docutils literal notranslate"><span class="pre">zlib</span></code>. It conditionally includes, depending on the configuration,
+one of the two immediately above Release/Debug properties files.</li>
+<li>Same 5 files will be generated for every dependency in the graph, in this case <code class="docutils literal notranslate"><span class="pre">conan_bzip.props</span></code> too, which
+will conditionally include the Release/Debug bzip properties files.</li>
+<li><em>conandeps.props</em>: Properties files including all direct dependencies, in this case, it includes <code class="docutils literal notranslate"><span class="pre">conan_zlib.props</span></code>
+and <code class="docutils literal notranslate"><span class="pre">conan_bzip2.props</span></code></li>
+</ul>
+<p>The above files are generated when the package doesn’t have components. If the package has defined components, the following files
+will be generated:</p>
+<ul class="simple">
+<li><em>conan_pkgname_compname_vars_release_x64.props</em>: Definition of variables for the component <code class="docutils literal notranslate"><span class="pre">compname</span></code> of the package <code class="docutils literal notranslate"><span class="pre">pkgname</span></code></li>
+<li><em>conan_pkgname_compname_release_x64.props</em>: Activation of the above variables into VS effective variables to be used in the build</li>
+<li><em>conan_pkgname_compname.props</em>: Properties file for component <code class="docutils literal notranslate"><span class="pre">compname</span></code> of package <code class="docutils literal notranslate"><span class="pre">pkgname</span></code>. It conditionally includes, depending on the configuration,
+the specific activation property files.</li>
+<li><em>conan_pkgname.props</em>: Properties file for package <code class="docutils literal notranslate"><span class="pre">pkgname</span></code>. It includes and aggregates all the components of the package.</li>
+<li><em>conandeps.props</em>: Same as above, aggregates all the direct dependencies property files for the packages (like <code class="docutils literal notranslate"><span class="pre">conan_pkgname.props</span></code>)</li>
+</ul>
+<p>You will be adding the <em>conandeps.props</em> to your solution project files if you want to depend on all the declared
+dependencies. For single project solutions, this is probably the way to go. For multi-project solutions, you might
+be more efficient and add properties files per project. You could add <em>conan_zlib.props</em> properties to “project1”
+in the solution and <em>conan_bzip2.props</em> to “project2” in the solution for example. If the package has components, you
+can also add to your solution the specific components you depend on, and not all of them.</p>
+<div class="section" id="custom-configurations">
+<h3>Custom configurations<a class="headerlink" href="#custom-configurations" title="Permalink to this headline">¶</a></h3>
+<p>If your Visual Studio project defines custom configurations, like <code class="docutils literal notranslate"><span class="pre">ReleaseShared</span></code>, or <code class="docutils literal notranslate"><span class="pre">MyCustomConfig</span></code>,
+it is possible to define it into the <code class="docutils literal notranslate"><span class="pre">MSBuildDeps</span></code> generator, so different project configurations can
+use different set of dependencies. Let’s say that our current project can be built as a shared library,
+with the custom configuration <code class="docutils literal notranslate"><span class="pre">ReleaseShared</span></code>, and the package also controls this with the <code class="docutils literal notranslate"><span class="pre">shared</span></code>
+option:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">MSBuildDeps</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]}</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;zlib/1.2.11&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ms</span> <span class="o">=</span> <span class="n">MSBuildDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c1"># We assume that -o *:shared=True is used to install all shared deps too</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">shared</span><span class="p">:</span>
+            <span class="n">ms</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">build_type</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;Shared&quot;</span>
+        <span class="n">ms</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This will manage to generate new properties files for this custom configuration, and switching it
+in the IDE allows to be switching dependencies configuration like Debug/Release, it could be also
+switching dependencies from static to shared libraries.</p>
+</div>
+<div class="section" id="included-dependencies">
+<h3>Included dependencies<a class="headerlink" href="#included-dependencies" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">MSBuildDeps</span></code> uses the new <code class="docutils literal notranslate"><span class="pre">self.dependencies</span></code> access to dependencies. The following
+dependencies will be translated to properties files:</p>
+<ul class="simple">
+<li>All direct dependencies, that is, the ones declared by the current <code class="docutils literal notranslate"><span class="pre">conanfile</span></code>, that lives in the
+host context: all regular <code class="docutils literal notranslate"><span class="pre">requires</span></code>, plus the <code class="docutils literal notranslate"><span class="pre">tool_requires</span></code> that are in the host context,
+for example test frameworks as <code class="docutils literal notranslate"><span class="pre">gtest</span></code> or <code class="docutils literal notranslate"><span class="pre">catch</span></code>.</li>
+<li>All transitive <code class="docutils literal notranslate"><span class="pre">requires</span></code> of those direct dependencies (all in the host context)</li>
+<li>Tool requires, in the build context, that is, application and executables that run in the build
+machine irrespective of the destination platform, are added exclusively to the <code class="docutils literal notranslate"><span class="pre">&lt;ExecutablePath&gt;</span></code>
+property, taking the value from <code class="docutils literal notranslate"><span class="pre">$(Conan{{name}}BinaryDirectories)</span></code> defined properties. This
+allows to define custom build commands, invoke code generation tools, with the <code class="docutils literal notranslate"><span class="pre">&lt;CustomBuild&gt;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">&lt;Command&gt;</span></code> elements.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="msbuildtoolchain">
+<span id="conan-tools-microsoft-msbuildtoolchain"></span><h2>MSBuildToolchain<a class="headerlink" href="#msbuildtoolchain" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.32.0">1.32.0</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">MSBuildToolchain</span></code> is the toolchain generator for MSBuild. It will generate MSBuild properties files
+that can be added to the Visual Studio solution projects. This generator translates
+the current package configuration, settings, and options, into MSBuild properties files syntax.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">This class will require very soon to define both the “host” and “build” profiles. It is very recommended to
+start defining both profiles immediately to avoid future breaking. Furthermore, some features, like trying to
+cross-compile might not work at all if the “build” profile is not provided.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">MSBuildToolchain</span></code> generator can be used by name in conanfiles:</p>
+<div class="literal-block-wrapper docutils container" id="id29">
+<div class="code-block-caption"><span class="caption-text">conanfile.py</span><a class="headerlink" href="#id29" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;MSBuildToolchain&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id30">
+<div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id30" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[generators]
+MSBuildToolchain
+</pre></div>
+</div>
+</div>
+<p>And it can also be fully instantiated in the conanfile <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">MSBuildToolchain</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">App</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">tc</span> <span class="o">=</span> <span class="n">MSBuildToolchain</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">tc</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">MSBuildToolchain</span></code> will generate three files after a <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>conanfile.py<span class="w"> </span><span class="c1"># default is Release</span>
+$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>conanfile.py<span class="w"> </span>-s<span class="w"> </span><span class="nv">build_type</span><span class="o">=</span>Debug
+</pre></div>
+</div>
+<ul class="simple">
+<li>The main <em>conantoolchain.props</em> file, to be added to the project.</li>
+<li>A <em>conantoolchain_&lt;config&gt;.props</em> file, that will be conditionally included from the previous
+<em>conantoolchain.props</em> file based on the configuration and platform, e.g.:
+<em>conantoolchain_release_x86.props</em></li>
+<li>A <em>conanvcvars.bat</em> file with the necessary <code class="docutils literal notranslate"><span class="pre">vcvars</span></code> invocation to define the build environment if necessary
+to build from the command line or from automated tools (might not be necessary if opening the IDE). This file
+will be automatically called by the <code class="docutils literal notranslate"><span class="pre">tools.microsoft.MSBuild</span></code> helper <code class="docutils literal notranslate"><span class="pre">build()</span></code> method. This file generation
+can be avoided by defining an empty string <code class="docutils literal notranslate"><span class="pre">conf</span></code> item <code class="docutils literal notranslate"><span class="pre">tools.microsoft.msbuild:installation_path=&quot;&quot;</span></code>.</li>
+</ul>
+<p>Every invocation to <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> with different configuration will create a new properties <code class="docutils literal notranslate"><span class="pre">.props</span></code>
+file, that will also be conditionally included. This allows to install different configurations,
+then switch among them directly from the Visual Studio IDE.</p>
+<p>The MSBuildToolchain files can configure:</p>
+<ul class="simple">
+<li>The Visual Studio runtime (MT/MD/MTd/MDd), obtained from Conan input settings</li>
+<li>The C++ standard, obtained from Conan input settings</li>
+</ul>
+<p>One of the advantages of using toolchains is that they can help to achieve the exact same build
+with local development flows, than when the package is created in the cache.</p>
+<div class="section" id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>properties</strong> (available since <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.53.0">Conan 1.53</a>): Additional properties added
+to the generated <code class="docutils literal notranslate"><span class="pre">.props</span></code> files. You can define the properties in a key-value syntax
+like:</li>
+</ul>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">MSBuildToolchain</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">App</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msbuild</span> <span class="o">=</span> <span class="n">MSBuildToolchain</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">msbuild</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;IncludeExternals&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;true&quot;</span>
+        <span class="n">msbuild</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then, the generated <em>conantoolchain_&lt;config&gt;.props</em> file will contain the defined property
+in its contents:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;Project</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://schemas.microsoft.com/developer/msbuild/2003&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;ItemDefinitionGroup&gt;</span>
+...
+<span class="nt">&lt;/ItemDefinitionGroup&gt;</span>
+<span class="nt">&lt;PropertyGroup</span><span class="w"> </span><span class="na">Label=</span><span class="s">&quot;Configuration&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span>...
+<span class="hll"><span class="w">    </span><span class="nt">&lt;IncludeExternals&gt;</span>true<span class="nt">&lt;/IncludeExternals&gt;</span>
+</span><span class="w">    </span>...
+<span class="nt">&lt;/PropertyGroup&gt;</span>
+<span class="nt">&lt;/Project&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conf">
+<h3>conf<a class="headerlink" href="#conf" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">MSBuildToolchain</span></code> is affected by these <a class="reference internal" href="../../config_files/global_conf.html#global-conf"><span class="std std-ref">[conf]</span></a> variables:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">tools.microsoft.msbuildtoolchain:compile_options</span></code> dict-like object of extra compile options to be added to <code class="docutils literal notranslate"><span class="pre">&lt;ClCompile&gt;</span></code> section.
+The dict will be translated as follows: <code class="docutils literal notranslate"><span class="pre">&lt;[KEY]&gt;[VALUE]&lt;/[KEY]&gt;</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:cxxflags</span></code> list of extra C++ flags that will be appended to <code class="docutils literal notranslate"><span class="pre">&lt;AdditionalOptions&gt;</span></code> section from <code class="docutils literal notranslate"><span class="pre">&lt;ClCompile&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;ResourceCompile&gt;</span></code> one.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:cflags</span></code> list of extra of pure C flags that will be appended to <code class="docutils literal notranslate"><span class="pre">&lt;AdditionalOptions&gt;</span></code> section from <code class="docutils literal notranslate"><span class="pre">&lt;ClCompile&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;ResourceCompile&gt;</span></code> one.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:sharedlinkflags</span></code> list of extra linker flags that will be appended to <code class="docutils literal notranslate"><span class="pre">&lt;AdditionalOptions&gt;</span></code> section from <code class="docutils literal notranslate"><span class="pre">&lt;Link&gt;</span></code> one.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:exelinkflags</span></code> list of extra linker flags that will be appended to <code class="docutils literal notranslate"><span class="pre">&lt;AdditionalOptions&gt;</span></code> section from <code class="docutils literal notranslate"><span class="pre">&lt;Link&gt;</span></code> one.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:defines</span></code> list of preprocessor definitions that will be appended to <code class="docutils literal notranslate"><span class="pre">&lt;PreprocessorDefinitions&gt;</span></code> section from <code class="docutils literal notranslate"><span class="pre">&lt;ResourceCompile&gt;</span></code> one.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="msbuild">
+<h2>MSBuild<a class="headerlink" href="#msbuild" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.32.0">1.32.0</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> build helper is a wrapper around the command line invocation of MSBuild. It will abstract the
+calls like <code class="docutils literal notranslate"><span class="pre">msbuild</span> <span class="pre">&quot;MyProject.sln&quot;</span> <span class="pre">/p:Configuration=&lt;conf&gt;</span> <span class="pre">/p:Platform=&lt;platform&gt;</span></code> into Python method calls.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> helper can be used like:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">MSBuild</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">App</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msbuild</span> <span class="o">=</span> <span class="n">MSBuild</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">msbuild</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="s2">&quot;MyProject.sln&quot;</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mytarget&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">MSBuild.build()</span></code> method internally implements a call to <code class="docutils literal notranslate"><span class="pre">msbuild</span></code> like:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ &lt;vcvars-cmd&gt; &amp;&amp; msbuild &quot;MyProject.sln&quot; /p:Configuration=&lt;configuration&gt; /p:Platform=&lt;platform&gt; /target=mytarget
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">vcvars-cmd</span></code> is calling the Visual Studio prompt that matches the current recipe <code class="docutils literal notranslate"><span class="pre">settings</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">configuration</span></code>, typically Release, Debug, which will be obtained from <code class="docutils literal notranslate"><span class="pre">settings.build_type</span></code>
+but this will be configurable with <code class="docutils literal notranslate"><span class="pre">msbuild.build_type</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">platform</span></code> is the architecture, a mapping from the <code class="docutils literal notranslate"><span class="pre">settings.arch</span></code> to the common ‘x86’, ‘x64’, ‘ARM’, ‘ARM64’.
+This is configurable with <code class="docutils literal notranslate"><span class="pre">msbuild.platform</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">targets</span></code> (since <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.52.0">1.52.0</a>) is an optional argument,
+defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>, and otherwise it is a list of targets to build</li>
+</ul>
+<div class="section" id="id6">
+<h3>attributes<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>You can customize the following attributes in case you need to change them:</p>
+<ul class="simple">
+<li><strong>build_type</strong> (default <code class="docutils literal notranslate"><span class="pre">settings.build_type</span></code>): Value for the <code class="docutils literal notranslate"><span class="pre">/p:Configuration</span></code>.</li>
+<li><strong>platform</strong> (default based on <code class="docutils literal notranslate"><span class="pre">settings.arch</span></code> to select one of these values: (<code class="docutils literal notranslate"><span class="pre">'x86',</span> <span class="pre">'x64',</span> <span class="pre">'ARM',</span> <span class="pre">'ARM64'</span></code>):
+Value for the <code class="docutils literal notranslate"><span class="pre">/p:Platform</span></code>.</li>
+</ul>
+<p>Example:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">MSBuild</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">App</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msbuild</span> <span class="o">=</span> <span class="n">MSBuild</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">msbuild</span><span class="o">.</span><span class="n">build_type</span> <span class="o">=</span> <span class="s2">&quot;MyRelease&quot;</span>
+        <span class="n">msbuild</span><span class="o">.</span><span class="n">platform</span> <span class="o">=</span> <span class="s2">&quot;MyPlatform&quot;</span>
+        <span class="n">msbuild</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="s2">&quot;MyProject.sln&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>conf<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> is affected by these <a class="reference internal" href="../../config_files/global_conf.html#global-conf"><span class="std std-ref">[conf]</span></a> variables:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">tools.microsoft.msbuild:verbosity</span></code> will accept one of <code class="docutils literal notranslate"><span class="pre">&quot;Quiet&quot;,</span> <span class="pre">&quot;Minimal&quot;,</span> <span class="pre">&quot;Normal&quot;,</span> <span class="pre">&quot;Detailed&quot;,</span> <span class="pre">&quot;Diagnostic&quot;</span></code> to be passed
+to the <code class="docutils literal notranslate"><span class="pre">MSBuild.build()</span></code> call as <code class="docutils literal notranslate"><span class="pre">msbuild</span> <span class="pre">....</span> <span class="pre">/verbosity:XXX</span></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="vcvars">
+<h2>VCVars<a class="headerlink" href="#vcvars" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.39.0">1.39.0</a></p>
+<p>Generates a file called <code class="docutils literal notranslate"><span class="pre">conanvcvars.bat</span></code> that activate the Visual Studio developer command prompt according
+to the current settings by wrapping the <a class="reference external" href="https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=vs-2017">vcvarsall</a>
+Microsoft bash script.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">VCVars</span></code> generator can be used by name in conanfiles:</p>
+<div class="literal-block-wrapper docutils container" id="id31">
+<div class="code-block-caption"><span class="caption-text">conanfile.py</span><a class="headerlink" href="#id31" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;VCVars&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id32">
+<div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id32" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[generators]
+VCVars
+</pre></div>
+</div>
+</div>
+<p>And it can also be fully instantiated in the conanfile <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method:</p>
+<div class="literal-block-wrapper docutils container" id="id33">
+<div class="code-block-caption"><span class="caption-text">conanfile.py</span><a class="headerlink" href="#id33" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">VCVars</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;zlib/1.2.11&quot;</span><span class="p">,</span> <span class="s2">&quot;bzip2/1.0.8&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ms</span> <span class="o">=</span> <span class="n">VCVars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">ms</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="constructor">
+<h3>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">):</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">conanfile</span></code>: the current recipe object. Always use <code class="docutils literal notranslate"><span class="pre">self</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="generate">
+<h3>generate()<a class="headerlink" href="#generate" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;build&quot;</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>scope</strong> (Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;build&quot;</span></code>): Add the launcher automatically to the <code class="docutils literal notranslate"><span class="pre">conanbuild</span></code> launcher. Read more
+in the <a class="reference internal" href="env/environment.html#conan-tools-env-environment-model"><span class="std std-ref">Environment documentation</span></a>.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id9">
+<h3>conf<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">tools.microsoft.msbuild:installation_path</span></code> allows defining a path to the VS installation. In most cases it is not
+necessary, because it can be automatically obtained calling <code class="docutils literal notranslate"><span class="pre">vswhere</span></code>, but in case it is necessary to customize it,
+define it to the full path. If it takes an empty string value, it will disable the generation of the <code class="docutils literal notranslate"><span class="pre">conanvcvars.bat</span></code>
+completely, and the environment will not be automatically set by Conan.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="conan-tools-microsoft-is-msvc">
+<h2>conan.tools.microsoft.is_msvc()<a class="headerlink" href="#conan-tools-microsoft-is-msvc" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.45.0">1.45.0</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_msvc</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">build_context</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Validate <code class="docutils literal notranslate"><span class="pre">self.settings.compiler</span></code> for which compiler is being used.
+It returns <code class="docutils literal notranslate"><span class="pre">True</span></code> when the host compiler is <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span></code> or <code class="docutils literal notranslate"><span class="pre">msvc</span></code>, otherwise, returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+When the <code class="docutils literal notranslate"><span class="pre">compiler</span></code> is empty, it returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><strong>conanfile</strong>: ConanFile instance.</li>
+<li><strong>build_context</strong> (since <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.52.0">1.52.0</a>): (default=False). If this
+argument is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the method will check the compiler of the <code class="docutils literal notranslate"><span class="pre">build</span></code> context, not the <code class="docutils literal notranslate"><span class="pre">host</span></code> one.</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_msvc</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_msvc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ConanInvalidConfiguration</span><span class="p">(</span><span class="s2">&quot;Only supported by Visual Studio and msvc.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conan-tools-microsoft-is-msvc-static-runtime">
+<h2>conan.tools.microsoft.is_msvc_static_runtime()<a class="headerlink" href="#conan-tools-microsoft-is-msvc-static-runtime" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.45.0">1.45.0</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_msvc_static_runtime</span><span class="p">(</span><span class="n">conanfile</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Validate <code class="docutils literal notranslate"><span class="pre">self.settings.compiler.runtime</span></code> for which compiler is being used.
+It returns <code class="docutils literal notranslate"><span class="pre">True</span></code> when the host compiler is <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span></code> or <code class="docutils literal notranslate"><span class="pre">msvc</span></code>, and its runtime is <code class="docutils literal notranslate"><span class="pre">MT</span></code>, <code class="docutils literal notranslate"><span class="pre">MTd</span></code> or <code class="docutils literal notranslate"><span class="pre">static</span></code>.
+When the <code class="docutils literal notranslate"><span class="pre">compiler</span></code> is empty, it returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><strong>conanfile</strong>: ConanFile instance.</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_msvc_static_runtime</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">is_msvc_static_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">shared</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ConanInvalidConfiguration</span><span class="p">(</span><span class="s2">&quot;This project does not support shared and static runtime together.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conan-tools-microsoft-msvc-runtime-flag">
+<span id="id13"></span><h2>conan.tools.microsoft.msvc_runtime_flag()<a class="headerlink" href="#conan-tools-microsoft-msvc-runtime-flag" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.33.0">1.33.0</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">msvc_runtime_flag</span><span class="p">(</span><span class="n">conanfile</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>If the current compiler is <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span></code>, <code class="docutils literal notranslate"><span class="pre">msvc</span></code>, <code class="docutils literal notranslate"><span class="pre">clang</span> <span class="pre">``</span> <span class="pre">or</span> <span class="pre">``intel-cc</span></code>, then
+detects the runtime type and returns between <code class="docutils literal notranslate"><span class="pre">MD</span></code>, <code class="docutils literal notranslate"><span class="pre">MT</span></code>, <code class="docutils literal notranslate"><span class="pre">MDd</span></code> or <code class="docutils literal notranslate"><span class="pre">MTd</span></code>,
+otherwise, returns <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (empty string). When the runtime type is <code class="docutils literal notranslate"><span class="pre">static</span></code>, it returns
+<code class="docutils literal notranslate"><span class="pre">MT</span></code>, otherwise, <code class="docutils literal notranslate"><span class="pre">MD</span></code>. The suffix <code class="docutils literal notranslate"><span class="pre">d</span></code> is added when running on Debug mode.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><strong>conanfile</strong>: Conanfile instance.</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">msvc_runtime_flag</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="k">if</span> <span class="s2">&quot;MT&quot;</span> <span class="ow">in</span> <span class="n">msvc_runtime_flag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Runtime MT/MTd is not well tested.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conan-tools-microsoft-unix-path">
+<span id="id15"></span><h2>conan.tools.microsoft.unix_path()<a class="headerlink" href="#conan-tools-microsoft-unix-path" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.47.0">1.47.0</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unix_path</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Transforms the specified path into the correct one according to the subsystem.
+To determine the subsystem:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">settings_build.os</span></code> is checked to verify that we are running on “Windows” otherwise, the path is returned
+without changes.</li>
+<li>If <code class="docutils literal notranslate"><span class="pre">settings_build.os.subsystem</span></code> is specified (meaning we are running Conan under that subsystem) it will be
+returned.</li>
+<li>If <code class="docutils literal notranslate"><span class="pre">conanfile.win_bash==True</span></code> (meaning we have to run the commands inside the subsystem), the conf
+<code class="docutils literal notranslate"><span class="pre">tools.microsoft.bash:subsystem</span></code> has to be declared or it will raise an Exception.</li>
+<li>Otherwise the path is returned without changes.</li>
+</ul>
+</div></blockquote>
+<p>Parameters:</p>
+<ul class="simple">
+<li><strong>conanfile</strong>: ConanFile instance.</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">unix_path</span>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">adjusted_path</span> <span class="o">=</span> <span class="n">unix_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">stuff&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>In the example above, <code class="docutils literal notranslate"><span class="pre">adjusted_path</span></code> will be:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">/c/path/to/stuff</span></code> if msys2 or msys</li>
+<li><code class="docutils literal notranslate"><span class="pre">/cygdrive/c/path/to/stuff</span></code> if cygwin</li>
+<li><code class="docutils literal notranslate"><span class="pre">/mnt/c/path/to/stuff</span></code> if wsl</li>
+<li><code class="docutils literal notranslate"><span class="pre">/dev/fs/C/path/to/stuff</span></code> if sfu</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="conan-tools-microsoft-unix-path-package-info-legacy">
+<span id="id17"></span><h2>conan.tools.microsoft.unix_path_package_info_legacy()<a class="headerlink" href="#conan-tools-microsoft-unix-path-package-info-legacy" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.57.0">1.57.0</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unix_path_package_info_legacy</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">path_flavor</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>This function is provided for compatibility with the legacy <a class="reference internal" href="../../tools.html#tools-unix-path"><span class="std std-ref">tools.unix_path()</span></a> in those
+cases in which it is used inside the <cite>package_info()</cite> block, and compatibility needs
+to be retained for downstream consumers that are still using Conan 1.x integrations.
+All other uses are discouraged. In Conan 2, this function returns the provided path
+without performing any transformations.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><strong>conanfile</strong>: ConanFile instance.</li>
+<li><strong>path</strong>: Filesystem path in Windows format to transform.</li>
+<li><strong>path_flavor</strong>: see <a class="reference internal" href="../../tools.html#tools-unix-path"><span class="std std-ref">tools.unix_path()</span></a> for list of accepted values.</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">unix_path_package_info_legacy</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">package_resources</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;res&quot;</span><span class="p">,</span> <span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
+
+    <span class="c1"># No path transformation is required for consumers using new integrations</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">buildenv_info</span><span class="o">.</span><span class="n">define_path</span><span class="p">(</span><span class="s2">&quot;FOOBAR_RESDIR&quot;</span><span class="p">,</span> <span class="n">package_resources</span><span class="p">)</span>
+
+    <span class="c1"># For compatibility with legacy dowstream consumers that are known to</span>
+    <span class="c1"># only consume this variable from a bash environment on Windows</span>
+    <span class="c1"># Note: env_info is ignored in Conan 2 altogether.</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">env_info</span><span class="o">.</span><span class="n">FOOBAR_RESDIR</span> <span class="o">=</span> <span class="n">unix_path_package_info_legacy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_resources</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="check-min-vs">
+<h2>check_min_vs()<a class="headerlink" href="#check-min-vs" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.49.0">1.49.0</a></p>
+<p>Helper method to allow the migration to 2.0 more easily. It will handle internally both <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span></code>
+and <code class="docutils literal notranslate"><span class="pre">msvc</span></code> compiler settings, by default raising a <code class="docutils literal notranslate"><span class="pre">ConanInvalidConfiguration</span></code> error if the minimum version
+is not satisfied, or returning a boolean result with the check result if called with <code class="docutils literal notranslate"><span class="pre">throw=False</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">check_min_vs</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">raise_invalid</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">conanfile</span></code>: Always use <code class="docutils literal notranslate"><span class="pre">self</span></code>, the current recipe</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code>: Minimum version that will be accepted. Use a version number following the MSVC compiler version (or <code class="docutils literal notranslate"><span class="pre">msvc</span></code> setting),
+that is, <code class="docutils literal notranslate"><span class="pre">191</span></code>, <code class="docutils literal notranslate"><span class="pre">192</span></code>, etc (updates like <code class="docutils literal notranslate"><span class="pre">193.1</span></code> are also acceptable)</li>
+<li><code class="docutils literal notranslate"><span class="pre">raise_invalid</span></code>: Whether to raise or return False if the version check fails. Defaults to <code class="docutils literal notranslate"><span class="pre">`True</span></code></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">check_min_vs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;192&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="msvs-toolset">
+<span id="conan-tools-microsoft-msvs-toolset"></span><h2>msvs_toolset()<a class="headerlink" href="#msvs-toolset" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.59.0">1.59.0</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">msvs_toolset</span><span class="p">(</span><span class="n">conanfile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns the corresponding Visual Studio or msvs platform toolset based on the settings of the given <code class="docutils literal notranslate"><span class="pre">conanfile</span></code>. For instance, it may return <code class="docutils literal notranslate"><span class="pre">v143</span></code>
+for <code class="docutils literal notranslate"><span class="pre">compiler=Visual</span> <span class="pre">Studio</span></code> with <code class="docutils literal notranslate"><span class="pre">compiler.version=17</span></code>. If <code class="docutils literal notranslate"><span class="pre">compiler.toolset</span></code> was set in settings, it has a priority and always returned.
+In case of invalid compiler or invalid version, <code class="docutils literal notranslate"><span class="pre">msvs_toolset</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">conanfile</span></code>: Always use <code class="docutils literal notranslate"><span class="pre">self</span></code>, the current recipe</li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">msvs_toolset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.scm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Version</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanInvalidConfiguration</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">toolset</span> <span class="o">=</span> <span class="n">msvs_toolset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Version</span><span class="p">(</span><span class="n">toolset</span><span class="p">)</span> <span class="o">&lt;</span> <span class="s2">&quot;v110&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ConanInvalidConfiguration</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ref</span><span class="si">}</span><span class="s2"> requires Microsoft compiler toolset v110 at least.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="nmakedeps">
+<h2>NMakeDeps<a class="headerlink" href="#nmakedeps" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.55.0">1.55.0</a></p>
+<p>This generator can be used as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;mydep/1.0&quot;</span>
+    <span class="c1"># attribute declaration</span>
+    <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;NMakeDeps&quot;</span>
+
+    <span class="c1"># OR explicit usage in the generate() method</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">deps</span> <span class="o">=</span> <span class="n">NMakeDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">deps</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;nmake /f makefile&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The generator will create a <code class="docutils literal notranslate"><span class="pre">conannmakedeps.bat</span></code> environment script that defines
+<code class="docutils literal notranslate"><span class="pre">CL</span></code>, <code class="docutils literal notranslate"><span class="pre">LIB</span></code> and <code class="docutils literal notranslate"><span class="pre">_LINK_</span></code> environment variables, injecting necessary flags
+to locate and link the dependencies declared in <code class="docutils literal notranslate"><span class="pre">requires</span></code>.
+This generator should most likely be used together with <code class="docutils literal notranslate"><span class="pre">NMakeToolchain</span></code> one.</p>
+</div>
+<div class="section" id="nmaketoolchain">
+<h2>NMakeToolchain<a class="headerlink" href="#nmaketoolchain" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.55.0">1.55.0</a></p>
+<p>This generator can be used as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
+    <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;NMakeToolchain&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;nmake /f makefile&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or it can be fully instantiated in the conanfile <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">NMakeToolchain</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">tc</span> <span class="o">=</span> <span class="n">NMakeToolchain</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">tc</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;nmake /f makefile&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>NMakeToolchain generator will create a <code class="docutils literal notranslate"><span class="pre">conannmaketoolchain.bat</span></code> environment script injecting flags
+deduced from profile (build_type, runtime, cppstd, build flags from conf) into environment variables
+NMake can understand: <code class="docutils literal notranslate"><span class="pre">CL</span></code> and <code class="docutils literal notranslate"><span class="pre">_LINK_</span></code>.
+It will also generate a <code class="docutils literal notranslate"><span class="pre">conanvcvars.bat</span></code> script that activates the correct VS prompt matching the
+Conan host settings <code class="docutils literal notranslate"><span class="pre">arch</span></code>, <code class="docutils literal notranslate"><span class="pre">compiler</span></code> and <code class="docutils literal notranslate"><span class="pre">compiler.version</span></code>, and build settings <code class="docutils literal notranslate"><span class="pre">arch</span></code>.</p>
+<div class="section" id="id23">
+<h3>constructor<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">):</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">conanfile</span></code>: the current recipe object. Always use <code class="docutils literal notranslate"><span class="pre">self</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="id24">
+<h3>Attributes<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<p>You can change some attributes before calling the <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method if you want to inject more flags:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">NMakeToolchain</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">tc</span> <span class="o">=</span> <span class="n">NMakeToolchain</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">tc</span><span class="o">.</span><span class="n">extra_cflags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/my_flag&quot;</span><span class="p">)</span>
+        <span class="n">tc</span><span class="o">.</span><span class="n">extra_defines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;FOO=BAR&quot;</span><span class="p">)</span>
+        <span class="n">tc</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong>extra_cflags</strong> (Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code>): Additional cflags.</li>
+<li><strong>extra_cxxflags</strong> (Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code>): Additional cxxflags.</li>
+<li><strong>extra_defines</strong> (Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code>): Additional defines.</li>
+<li><strong>extra_ldflags</strong> (Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code>): Additional ldflags.</li>
+</ul>
+</div>
+<div class="section" id="id25">
+<h3>conf<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">NMaketoolchain</span></code> is affected by these <a class="reference internal" href="../../config_files/global_conf.html#global-conf"><span class="std std-ref">[conf]</span></a> variables:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:cflags</span></code> list of extra pure C flags that will be used by <code class="docutils literal notranslate"><span class="pre">CL</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:cxxflags</span></code> list of extra C++ flags that will be used by <code class="docutils literal notranslate"><span class="pre">CL</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:defines</span></code> list of preprocessor definitions that will be used by <code class="docutils literal notranslate"><span class="pre">CL</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:sharedlinkflags</span></code> list of extra linker flags that will be used by <code class="docutils literal notranslate"><span class="pre">_LINK_</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:exelinkflags</span></code> list of extra linker flags that will be used by <code class="docutils literal notranslate"><span class="pre">_LINK_</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:compiler_executables</span></code> dict-like Python object which specifies the compiler as key
+and the compiler executable path as value. Those keys will be mapped as follows:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">asm</span></code>: will set <code class="docutils literal notranslate"><span class="pre">AS</span></code> in <em>conannmaketoolchain.sh|bat</em> script.</li>
+<li><code class="docutils literal notranslate"><span class="pre">c</span></code>: will set <code class="docutils literal notranslate"><span class="pre">CC</span></code> in <em>conannmaketoolchain.sh|bat</em> script.</li>
+<li><code class="docutils literal notranslate"><span class="pre">cpp</span></code>: will set <code class="docutils literal notranslate"><span class="pre">CPP</span></code> and <code class="docutils literal notranslate"><span class="pre">CXX</span></code> in <em>conannmaketoolchain.sh|bat</em> script.</li>
+<li><code class="docutils literal notranslate"><span class="pre">rc</span></code>: will set <code class="docutils literal notranslate"><span class="pre">RC</span></code> in <em>conannmaketoolchain.sh|bat</em> script.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="customizing-the-environment">
+<h3>Customizing the environment<a class="headerlink" href="#customizing-the-environment" title="Permalink to this headline">¶</a></h3>
+<p>If your <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> script needs some other environment variable rather than <code class="docutils literal notranslate"><span class="pre">CL</span></code> and <code class="docutils literal notranslate"><span class="pre">_LINK_</span></code>, you can customize
+it before calling the <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method.
+Call the <code class="docutils literal notranslate"><span class="pre">environment()</span></code> method to calculate the mentioned variables and then add the variables that you need.
+The <code class="docutils literal notranslate"><span class="pre">environment()</span></code> method returns an <a class="reference internal" href="env/environment.html#conan-tools-env-environment-model"><span class="std std-ref">Environment</span></a> object:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">NMakeToolchain</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">tc</span> <span class="o">=</span> <span class="n">NMakeToolchain</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">environment</span><span class="p">()</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="s2">&quot;FOO&quot;</span><span class="p">,</span> <span class="s2">&quot;BAR&quot;</span><span class="p">)</span>
+        <span class="n">tc</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also inspect default environment variables NMakeToolchain will inject in <em>conannmaketoolchain.sh|bat</em> script:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.microsoft</span><span class="w"> </span><span class="kn">import</span> <span class="n">NMakeToolchain</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">tc</span> <span class="o">=</span> <span class="n">NMakeToolchain</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">env_vars</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">vars</span><span class="p">()</span>
+        <span class="n">cl_env_var</span> <span class="o">=</span> <span class="n">env_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;CL&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="qbs.html" class="btn btn-neutral float-right" title="conan.tools.qbs" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="intel.html" class="btn btn-neutral" title="conan.tools.intel" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2022, JFrog.
+      Last updated on Feb 16, 2026.
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.61.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../../../_static/js/modernizr.min.js"></script>
+  <script src="../../../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.61");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

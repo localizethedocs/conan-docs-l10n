@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>conan.tools.premake &mdash; conan 2.18.1 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=2da93098" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/conan.css?v=7d9e9f1e" />
+
+  
+    <link rel="shortcut icon" href="../../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/reference/tools/premake.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=fb836bf2"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="PremakeDeps" href="premake/premakedeps.html" />
+    <link rel="prev" title="conan.tools.scons" href="scons.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/conan-docs-logo-2.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2.18
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew.html">What’s new in Conan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ci_tutorial/tutorial.html">CI 教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devops/devops.html">Devops guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../commands.html">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conanfile.html">conanfile.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workspace_files.html">Workspace files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tools.html">Recipe tools</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="android.html">conan.tools.android</a></li>
+<li class="toctree-l3"><a class="reference internal" href="apple.html">conan.tools.apple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html">conan.tools.build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake.html">conan.tools.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpp_info.html">conan.tools.CppInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="env.html">conan.tools.env</a></li>
+<li class="toctree-l3"><a class="reference internal" href="files.html">conan.tools.files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnu.html">conan.tools.gnu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="google.html">conan.tools.google</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intel.html">conan.tools.intel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layout.html">conan.tools.layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meson.html">conan.tools.meson</a></li>
+<li class="toctree-l3"><a class="reference internal" href="microsoft.html">conan.tools.microsoft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qbs.html">conan.tools.qbs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ros.html">conan.tools.ros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sbom.html">conan.tools.sbom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scm.html">conan.tools.scm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scons.html">conan.tools.scons</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">conan.tools.premake</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="premake/premakedeps.html">PremakeDeps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="premake/premaketoolchain.html">PremakeToolchain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="premake/premake.html">Premake</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="system.html">conan.tools.system</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../config_files.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions.html">Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../binary_model.html">The binary model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conan_server.html">Conan Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runners.html">Runners</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../incubating.html">Incubating features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../reference.html">Reference</a></li>
+          <li class="breadcrumb-item"><a href="../tools.html">Recipe tools</a></li>
+      <li class="breadcrumb-item active">conan.tools.premake</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/develop2/reference/tools/premake.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="conan-tools-premake">
+<span id="id1"></span><h1>conan.tools.premake<a class="headerlink" href="#conan-tools-premake" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="premake/premakedeps.html">PremakeDeps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="premake/premakedeps.html#generated-files">生成的文件</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="premake/premaketoolchain.html">PremakeToolchain</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="premake/premaketoolchain.html#generated-files">生成的文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="premake/premaketoolchain.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="premake/premake.html">Premake</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="premake/premake.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="premake/premake.html#conf">conf</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scons.html" class="btn btn-neutral float-left" title="conan.tools.scons" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="premake/premakedeps.html" class="btn btn-neutral float-right" title="PremakeDeps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, JFrog.
+      <span class="lastupdated">最后更新于 2月 17, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

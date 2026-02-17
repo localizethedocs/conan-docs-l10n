@@ -1,0 +1,392 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Toolchains &mdash; conan 1.38.0 說明文件</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜尋" href="../search.html"/>
+    <link rel="top" title="conan 1.38.0 說明文件" href="../index.html"/>
+        <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
+        <link rel="next" title="Inspecting Packages" href="inspecting_packages.html"/>
+        <link rel="prev" title="定義軟體包資訊" href="package_information.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_packages.html">使用軟體包</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and Sources in a Different Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and Sources in the Same Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging Existing Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understand_packaging.html">Understanding Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="define_abi_compatibility.html">定義軟體包 ABI 相容性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_information.html">定義軟體包資訊</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Toolchains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging Approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_tools.html">Package Creator Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">上傳軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mastering.html">精通 Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howtos.html">Howtos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">變更日誌</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conan_v2.html">Road to Conan 2.0</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../creating_packages.html">Creating Packages</a> &raquo;</li>
+        
+      <li>Toolchains</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/creating_packages/toolchains.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>JFrog Bintray is being sunset. <a
+            href=https://blog.conan.io/2021/03/31/Bintray-sunset-timeline.html> Please refer this blog post for more detail.</a>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="toolchains">
+<h1>Toolchains<a class="headerlink" href="#toolchains" title="本標題的永久連結">¶</a></h1>
+<p>Toolchains are the new, experimental way to integrate with build systems in Conan.
+Recipes can define a <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method that will return an object which
+can generate files from the current configuration that can be used by the build systems.
+Conan <em>generators</em> provide information about dependencies, while toolchains provide a
+「translation」 from the Conan settings and options, and the recipe defined configuration
+to something that the build system can understand. A recipe that does not have dependencies
+does not need a generator, but can still use a toolchain.</p>
+<p>A toolchain can be defined, among the built-ins toolchains, with an attribute with the name of the
+toolchain class to use.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;&lt;ToolChainClassName&gt;&quot;</span>
+</pre></div>
+</div>
+<p>For example, for using the CMake toolchain this should be declared in the recipe:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;CMakeToolchain&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">備註</p>
+<p class="last">At the moment (Conan 1.32), the available built-in toolchains are <code class="docutils literal notranslate"><span class="pre">CMakeToolchain</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MSBuildToolchain</span></code> and <code class="docutils literal notranslate"><span class="pre">MesonToolchain</span></code>.</p>
+</div>
+<p>But in the more general case, and if it needs any specific configuration beyond the default
+one:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan.tools.cmake</span> <span class="kn">import</span> <span class="n">CMakeToolchain</span>
+
+<span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">tc</span> <span class="o">=</span> <span class="n">CMakeToolchain</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="c1"># customize toolchain &quot;tc&quot;</span>
+    <span class="n">tc</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It is possible to use the <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method to create your own files, which will typically be
+deduced from the current configuration of <code class="docutils literal notranslate"><span class="pre">self.settings</span></code> and <code class="docutils literal notranslate"><span class="pre">self.options</span></code>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans.tools</span> <span class="kn">import</span> <span class="n">save</span>
+
+<span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># Based on the self.settings, self.options, the user</span>
+    <span class="c1"># can generate their own files:</span>
+    <span class="n">save</span><span class="p">(</span><span class="s2">&quot;mytoolchain.tool&quot;</span><span class="p">,</span> <span class="s2">&quot;my own toolchain contents, deduced from the settings and options&quot;</span><span class="p">)</span>
+    <span class="c1"># The &quot;mytoolchain.tool&quot; file can be used by the build system to</span>
+    <span class="c1"># define the build</span>
+</pre></div>
+</div>
+<p>And as usual, you can create your own toolchain helpers, put them in a <code class="docutils literal notranslate"><span class="pre">python_requires</span></code> package and reuse them in all
+your recipes.</p>
+<p>Toolchains have some important advantages:</p>
+<ul class="simple">
+<li>They execute at <strong class="command">conan install</strong> time. They generate files, not command line
+arguments, providing better reproducibility and debugging of builds.</li>
+<li>They provide a better developer experience. The command line used by developers locally, like
+<code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">...</span></code> will achieve the same build, with the same flags, as the <strong class="command">conan build</strong> or
+the build that is done in the cache with a <strong class="command">conan create</strong>.</li>
+<li>They are more extensible and configurable.</li>
+</ul>
+<p>The toolchains implement most of the build system logic, leaving the build helpers, like <code class="docutils literal notranslate"><span class="pre">CMake()</span></code>,
+doing less work, and acting basically as a high level wrapper of the build system. Many of the
+existing arguments, attributes or methds of those build helpers will not be available. Check
+the documentation of each toolchain to check the associated build helper available functionality.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan.tools.cmake</span> <span class="kn">import</span> <span class="n">CMakeToolchain</span><span class="p">,</span> <span class="n">CMake</span>
+
+<span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">tc</span> <span class="o">=</span> <span class="n">CMakeToolchain</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="c1"># customize toolchain &quot;tc&quot;</span>
+    <span class="n">tc</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># NOTE: This is a simplified helper</span>
+    <span class="c1"># Not all arguments attributes and methods might be available</span>
+    <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To learn more about existing built-in toolchains, read the reference in <a class="reference internal" href="../reference/conanfile/tools.html#conan-tools"><span class="std std-ref">tools</span></a>.</p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="inspecting_packages.html" class="btn btn-neutral float-right" title="Inspecting Packages" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="package_information.html" class="btn btn-neutral" title="定義軟體包資訊" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, JFrog.
+      最後更新於 2月 16, 2026。
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.38.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.38");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

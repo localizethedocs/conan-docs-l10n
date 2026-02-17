@@ -1,0 +1,673 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CMakeDeps &mdash; conan 1.62.0 說明文件</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../../../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="搜尋" href="../../../../search.html"/>
+    <link rel="top" title="conan 1.62.0 說明文件" href="../../../../index.html"/>
+        <link rel="up" title="conan.tools.cmake" href="../cmake.html"/>
+        <link rel="next" title="CMakeToolchain" href="cmaketoolchain.html"/>
+        <link rel="prev" title="conan.tools.cmake" href="../cmake.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../conan_v2.html">Conan migration guide to 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using_packages.html">使用軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uploading_packages.html">上傳軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mastering.html">精通 Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../howtos.html">Howtos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../commands.html">命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../attributes.html">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html">Methods</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../tools.html">tools</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../cmake.html">conan.tools.cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gnu.html">conan.tools.gnu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../google.html">conan.tools.google</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apple.html">conan.tools.apple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meson.html">conan.tools.meson</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../microsoft.html">conan.tools.microsoft</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qbs.html">conan.tools.qbs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../env.html">conan.tools.env</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../system.html">conan.tools.system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../files.html">conan.tools.files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../layout.html">conan.tools.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scm.html">conan.tools.scm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build.html">conan.tools.build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../android.html">conan.tools.android</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scons.html">conan.tools.scons</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../dependencies.html">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html">Python requires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html#output-and-running">輸出與執行</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators.html">生成器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../build_helpers.html">Build helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../config_files.html">組態檔</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../env_vars.html">環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../hooks.html">Hooks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">變更日誌</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p><a href="https://conan.io/#signUp" target="_blank">Sign up for release updates</a></p>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../../../../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div class="admonition warning wy-text-center">
+            <p>This document is for a <b>"1.X" legacy</b> Conan version. <a href="https://docs.conan.io/2/">Click here to read the <b>Conan 2.0</b> documentation</a></p>
+          </div>
+                 
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../reference.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../../../conanfile.html">conanfile.py</a> &raquo;</li>
+        
+          <li><a href="../../tools.html">tools</a> &raquo;</li>
+        
+          <li><a href="../cmake.html">conan.tools.cmake</a> &raquo;</li>
+        
+      <li>CMakeDeps</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/reference/conanfile/tools/cmake/cmakedeps.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>Recipe Hacking no. 2! Building on what we learnt during the first installment we will be working on more Conan 2.0 Migration! We'll start by reviewing some open pull requests and hopefully tackle a CMake example. <a
+            href=https://jfrog.zoom.us/webinar/register/WN_grFhqH0yRBeIfJmBvQoPJw> Register here to attend.</a></p>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cmakedeps">
+<span id="id1"></span><h1>CMakeDeps<a class="headerlink" href="#cmakedeps" title="本標題的永久連結">¶</a></h1>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last">Some of the features used in this section are still <strong>under development</strong>, while they are
+recommended and usable and we will try not to break them in future releases, some breaking
+changes might still happen if necessary to prepare for the <em>Conan 2.0 release</em>.</p>
+</div>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.33.0">1.33.0</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">CMakeDeps</span></code> helper will generate one <strong>xxxx-config.cmake</strong> file per dependency, together with other necessary <em>.cmake</em> files
+like version, flags and directory data or configuration. It can be used like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">App</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;hello/0.1&quot;</span>
+    <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;CMakeDeps&quot;</span>
+</pre></div>
+</div>
+<p>The full instantiation, that allows custom configuration can be done in the <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.cmake</span><span class="w"> </span><span class="kn">import</span> <span class="n">CMakeDeps</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">App</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;hello/0.1&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMakeDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">cmake</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last">This class will require very soon to define both the 「host」 and 「build」 profiles. It is very recommended to
+start defining both profiles immediately to avoid future breaking. Furthermore, some features, like trying to
+cross-compile might not work at all if the 「build」 profile is not provided.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">CMakeDeps</span></code> is a <em>multi-configuration</em> generator, it can correctly create files for Release/Debug configurations
+to be simultaneously used by IDEs like Visual Studio. In single configuration environments, it is necessary to have
+a configuration defined, which must be provided via the <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">...</span> <span class="pre">-DCMAKE_BUILD_TYPE=&lt;build-type&gt;</span></code> argument in command line
+(Conan will do it automatically when necessary, in the <code class="docutils literal notranslate"><span class="pre">CMake.configure()</span></code> helper).</p>
+<p>There are some attributes you can adjust in the created <code class="docutils literal notranslate"><span class="pre">CMakeDeps</span></code> object to change the default behavior:</p>
+<div class="section" id="configuration">
+<h2>configuration<a class="headerlink" href="#configuration" title="本標題的永久連結">¶</a></h2>
+<p>Allows to define custom user CMake configuration besides the standard Release, Debug, etc ones.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">deps</span> <span class="o">=</span> <span class="n">CMakeDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="c1"># By default, ``deps.configuration`` will be ``self.settings.build_type``</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shared</span><span class="p">:</span>
+        <span class="c1"># Assuming the current project ``CMakeLists.txt`` defines the ReleasedShared configuration.</span>
+        <span class="n">deps</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="s2">&quot;ReleaseShared&quot;</span>
+    <span class="n">deps</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-context-activated">
+<h2>build_context_activated<a class="headerlink" href="#build-context-activated" title="本標題的永久連結">¶</a></h2>
+<p>When you have a <strong>build-require</strong>, by default, the config files (<cite>xxx-config.cmake</cite>) files are not generated.
+But you can activate it using the <strong>build_context_activated</strong> attribute:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tool_requires</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;my_tool/0.0.1&quot;</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMakeDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="c1"># generate the config files for the tool require</span>
+    <span class="n">cmake</span><span class="o">.</span><span class="n">build_context_activated</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;my_tool&quot;</span><span class="p">]</span>
+    <span class="n">cmake</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">build_context_activated</span></code> feature will fail if no 「build」 profile is used. This feature only work when using
+the two host and build profiles.</p>
+</div>
+</div>
+<div class="section" id="build-context-suffix">
+<h2>build_context_suffix<a class="headerlink" href="#build-context-suffix" title="本標題的永久連結">¶</a></h2>
+<p>When you have the same package as a <strong>build-require</strong> and as a <strong>regular require</strong> it will cause a conflict in the generator
+because the file names of the config files will collide as well as the targets names, variables names etc.</p>
+<p>For example, this is a typical situation with some requirements (capnproto, protobuf…) that contain
+a tool used to generate source code at build time (so it is a <strong>build_require</strong>),
+but also providing a library to link to the final application, so you also have a <strong>regular require</strong>.
+Solving this conflict is specially important when we are cross-building because the tool
+(that will run in the building machine) belongs to a different binary package than the library, that will 「run」 in the
+host machine.</p>
+<p>You can use the <strong>build_context_suffix</strong> attribute to specify a suffix for a requirement,
+so the files/targets/variables of the requirement in the build context (tool require) will be renamed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tool_requires</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;my_tool/0.0.1&quot;</span><span class="p">]</span>
+<span class="n">requires</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;my_tool/0.0.1&quot;</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMakeDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="c1"># generate the config files for the tool require</span>
+    <span class="n">cmake</span><span class="o">.</span><span class="n">build_context_activated</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;my_tool&quot;</span><span class="p">]</span>
+    <span class="c1"># disambiguate the files, targets, etc</span>
+    <span class="n">cmake</span><span class="o">.</span><span class="n">build_context_suffix</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;my_tool&quot;</span><span class="p">:</span> <span class="s2">&quot;_BUILD&quot;</span><span class="p">}</span>
+    <span class="n">cmake</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">build_context_suffix</span></code> feature will fail if no 「build」 profile is used. This feature only work when using
+the two host and build profiles.</p>
+</div>
+</div>
+<div class="section" id="build-context-build-modules">
+<h2>build_context_build_modules<a class="headerlink" href="#build-context-build-modules" title="本標題的永久連結">¶</a></h2>
+<p>Also there is another issue with the <strong>build_modules</strong>. As you may know, the recipes of the requirements can declare a
+<cite>cppinfo.build_modules</cite> entry containing one or more <strong>.cmake</strong> files.
+When the requirement is found by the cmake <code class="docutils literal notranslate"><span class="pre">find_package()</span></code>
+function, Conan will include automatically these files.</p>
+<p>By default, Conan will include only the build modules from the
+<code class="docutils literal notranslate"><span class="pre">host</span></code> context (regular requires) to avoid the collision, but you can change the default behavior.</p>
+<p>Use the <strong>build_context_build_modules</strong> attribute to specify require names to include the <strong>build_modules</strong> from
+<strong>tool_requires</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tool_requires</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;my_tool/0.0.1&quot;</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMakeDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="c1"># generate the config files for the tool require</span>
+    <span class="n">cmake</span><span class="o">.</span><span class="n">build_context_activated</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;my_tool&quot;</span><span class="p">]</span>
+    <span class="c1"># Choose the build modules from &quot;build&quot; context</span>
+    <span class="n">cmake</span><span class="o">.</span><span class="n">build_context_build_modules</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;my_tool&quot;</span><span class="p">]</span>
+    <span class="n">cmake</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">build_context_build_modules</span></code> feature will fail if no 「build」 profile is used. This feature only work when using
+the two host and build profiles.</p>
+</div>
+</div>
+<div class="section" id="check-components-exist">
+<h2>check_components_exist<a class="headerlink" href="#check-components-exist" title="本標題的永久連結">¶</a></h2>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last">This attribute is experimental and subject to breaking changes.</p>
+</div>
+<p>This property is <code class="docutils literal notranslate"><span class="pre">False</span></code> by default. Use this property if you want to add a check when
+you require specifying components in the consumers』 <code class="docutils literal notranslate"><span class="pre">find_package()</span></code>. For example, if we
+are consuming a Conan package like Boost that declares several components. If we set the
+attribute to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the <code class="docutils literal notranslate"><span class="pre">find_package()</span></code> call of the consumer, will check that the
+required components exist and raise an error otherwise. You can set this attribute in the
+<code class="docutils literal notranslate"><span class="pre">generate()</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;boost/1.81.0&quot;</span>
+
+<span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">deps</span> <span class="o">=</span> <span class="n">CMakeDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="n">deps</span><span class="o">.</span><span class="n">check_components_exist</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">deps</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then, when consuming Boost the <code class="docutils literal notranslate"><span class="pre">find_package()</span></code> will raise an error as <cite>fakecomp</cite> does
+not exist:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cmake_minimum_required(VERSION 3.15)
+...
+find_package(Boost COMPONENTS random regex fakecomp REQUIRED)
+...
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-property">
+<h2>set_property()<a class="headerlink" href="#set-property" title="本標題的永久連結">¶</a></h2>
+<p>Since <a class="reference external" href="https://github.com/conan-io/conan/releases">Conan 1.55.0</a> .</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">set_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dep</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">build_context</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">dep</span></code>: Name of the dependency to set the <a class="reference internal" href="#cmakedeps-properties"><span class="std std-ref">property</span></a>. For
+components use the syntax: <code class="docutils literal notranslate"><span class="pre">dep_name::component_name</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">prop</span></code>: Name of the <a class="reference internal" href="#cmakedeps-properties"><span class="std std-ref">property</span></a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code>: Value of the property. Use <code class="docutils literal notranslate"><span class="pre">None</span></code> to invalidate any value set by the
+upstream recipe.</li>
+<li><code class="docutils literal notranslate"><span class="pre">build_context</span></code>: Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if you want to set the property for a dependency that
+belongs to the build context (<code class="docutils literal notranslate"><span class="pre">False</span></code> by default).</li>
+</ul>
+<p>Using this method you can overwrite the property values set by the Conan recipes from the
+consumer. This can be done for <cite>cmake_file_name</cite>, <cite>cmake_target_name</cite>, <cite>cmake_find_mode</cite>,
+<cite>cmake_module_file_name</cite> and <cite>cmake_module_target_name</cite> properties. Let’s see an example
+of how this works:</p>
+<p>Imagine we have a <em>compressor/1.0</em> package that depends on <em>zlib/1.2.11</em>. The <em>zlib</em> recipe
+defines some properties:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">Zlib conanfile.py</span><a class="headerlink" href="#id3" title="本原始碼的永久連結">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ZlibConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;zlib&quot;</span>
+
+    <span class="o">...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_find_mode&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_file_name&quot;</span><span class="p">,</span> <span class="s2">&quot;ZLIB&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_target_name&quot;</span><span class="p">,</span> <span class="s2">&quot;ZLIB::ZLIB&quot;</span><span class="p">)</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<p>This recipe defines several properties. For example the <code class="docutils literal notranslate"><span class="pre">cmake_find_mode</span></code> property is
+set to <code class="docutils literal notranslate"><span class="pre">both</span></code>. That means that module and config files are generated for Zlib. Maybe we
+need to alter this behaviour and just generate config files. You could do that in the
+compressor recipe using the <code class="docutils literal notranslate"><span class="pre">CMakeDeps.set_property()</span></code> method:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">compressor conanfile.py</span><a class="headerlink" href="#id4" title="本原始碼的永久連結">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Compressor</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;compressor&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;zlib/1.2.11&quot;</span>
+    <span class="o">...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">deps</span> <span class="o">=</span> <span class="n">CMakeDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">deps</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;zlib&quot;</span><span class="p">,</span> <span class="s2">&quot;cmake_find_mode&quot;</span><span class="p">,</span> <span class="s2">&quot;config&quot;</span><span class="p">)</span>
+        <span class="n">deps</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">set_property()</span></code> method to invalidate the property values set by
+the upstream recipe and use the values that Conan assigns by default. To do so, set the
+value <code class="docutils literal notranslate"><span class="pre">None</span></code> to the property like this:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">compressor conanfile.py</span><a class="headerlink" href="#id5" title="本原始碼的永久連結">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Compressor</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;compressor&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;zlib/1.2.11&quot;</span>
+    <span class="o">...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">deps</span> <span class="o">=</span> <span class="n">CMakeDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">deps</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;zlib&quot;</span><span class="p">,</span> <span class="s2">&quot;cmake_target_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">deps</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<p>After doing this the generated target name for the Zlib library will be <code class="docutils literal notranslate"><span class="pre">zlib::zlib</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">ZLIB::ZLIB</span></code></p>
+</div>
+<div class="section" id="properties">
+<span id="cmakedeps-properties"></span><h2>Properties<a class="headerlink" href="#properties" title="本標題的永久連結">¶</a></h2>
+<p>The following properties affect the CMakeDeps generator:</p>
+<ul class="simple">
+<li><strong>cmake_file_name</strong>: The config file generated for the current package will follow the <code class="docutils literal notranslate"><span class="pre">&lt;VALUE&gt;-config.cmake</span></code> pattern,
+so to find the package you write <code class="docutils literal notranslate"><span class="pre">find_package(&lt;VALUE&gt;)</span></code>.</li>
+<li><strong>cmake_target_name</strong>: Name of the target to be consumed.</li>
+<li><strong>cmake_target_aliases</strong>: List of aliases that Conan will create for an already existing target.</li>
+<li><strong>cmake_find_mode</strong>: Defaulted to <code class="docutils literal notranslate"><span class="pre">config</span></code>. Possible values are:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">config</span></code>: The CMakeDeps generator will create config scripts for the dependency.</li>
+<li><code class="docutils literal notranslate"><span class="pre">module</span></code>: Will create module config (FindXXX.cmake) scripts for the dependency.</li>
+<li><code class="docutils literal notranslate"><span class="pre">both</span></code>: Will generate both config and modules.</li>
+<li><code class="docutils literal notranslate"><span class="pre">none</span></code>: Won’t generate any file. It can be used, for instance, to create a system wrapper package so the consumers find the config files in the CMake installation config path and not in the generated by Conan (because it has been skipped).</li>
+</ul>
+</li>
+<li><strong>cmake_module_file_name</strong>: Same as <strong>cmake_file_name</strong> but when generating modules with <code class="docutils literal notranslate"><span class="pre">cmake_find_mode=module/both</span></code>. If not specified it will default to <strong>cmake_file_name</strong>.</li>
+<li><strong>cmake_module_target_name</strong>: Same as <strong>cmake_target_name</strong>  but when generating modules with <code class="docutils literal notranslate"><span class="pre">cmake_find_mode=module/both</span></code>.  If not specified it will default to <strong>cmake_target_name</strong>.</li>
+<li><strong>cmake_build_modules</strong>: List of <code class="docutils literal notranslate"><span class="pre">.cmake</span></code> files (route relative to root package folder) that are automatically
+included when the consumer run the <code class="docutils literal notranslate"><span class="pre">find_package()</span></code>. This property can’t be declared in a component, do it in the global <code class="docutils literal notranslate"><span class="pre">self.cpp_info</span></code>.</li>
+<li><strong>cmake_set_interface_link_directories</strong>: boolean value that should be only used by dependencies that don’t declare <cite>self.cpp_info.libs</cite> but have <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">comment(lib,</span> <span class="pre">&quot;foo&quot;)</span></code> (automatic link) declared at the public headers. Those dependencies should
+add this property to their <em>conanfile.py</em> files at root <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> level (components not supported for now).</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="c1"># MyFileName-config.cmake</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_file_name&quot;</span><span class="p">,</span> <span class="s2">&quot;MyFileName&quot;</span><span class="p">)</span>
+    <span class="c1"># Names for targets are absolute, Conan won&#39;t add any namespace to the target names automatically</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_target_name&quot;</span><span class="p">,</span> <span class="s2">&quot;Foo::Foo&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create a new target &quot;MyFooAlias&quot; that is an alias to the &quot;Foo::Foo&quot; target</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_target_aliases&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;MyFooAlias&quot;</span><span class="p">])</span>
+    <span class="c1"># The property &quot;cmake_build_modules&quot; can&#39;t be declared in a component, do it in self.cpp_info</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_build_modules&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="s2">&quot;mypkg.cmake&quot;</span><span class="p">)])</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_target_name&quot;</span><span class="p">,</span> <span class="s2">&quot;Foo::Var&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create a new target &quot;VarComponent&quot; that is an alias to the &quot;Foo::Var&quot; component target</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_target_aliases&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;VarComponent&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Skip this package when generating the files for the whole dependency tree in the consumer</span>
+    <span class="c1"># note: it will make useless the previous adjustments.</span>
+    <span class="c1"># self.cpp_info.set_property(&quot;cmake_find_mode&quot;, &quot;none&quot;)</span>
+
+    <span class="c1"># Generate both MyFileNameConfig.cmake and FindMyFileName.cmake</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_find_mode&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="disable-cmakedeps-for-installed-cmake-configuration-files">
+<span id="disable-cmakedeps-for-installed-cmake-imports"></span><h2>Disable CMakeDeps For Installed CMake configuration files<a class="headerlink" href="#disable-cmakedeps-for-installed-cmake-configuration-files" title="本標題的永久連結">¶</a></h2>
+<p>Some projects may want to disable the <code class="docutils literal notranslate"><span class="pre">CMakeDeps</span></code> generator for downstream consumers. This can be done by settings <code class="docutils literal notranslate"><span class="pre">cmake_find_mode</span></code> to <code class="docutils literal notranslate"><span class="pre">none</span></code>.
+If the project wants to provide it’s own configuration targets, it should append them to the <code class="docutils literal notranslate"><span class="pre">buildirs</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code>.</p>
+<p>This method is intended to work with downstream consumers using the <code class="docutils literal notranslate"><span class="pre">CMakeToolchain</span></code> generator, which will be populated with the <code class="docutils literal notranslate"><span class="pre">builddirs</span></code> attribute.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">cmake</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_find_mode&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">)</span> <span class="c1"># Do NOT generate anyfiles</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">builddirs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="s2">&quot;cmake&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="map-from-project-configuration-to-imported-target-s-configuration">
+<h2>Map from project configuration to imported target’s configuration<a class="headerlink" href="#map-from-project-configuration-to-imported-target-s-configuration" title="本標題的永久連結">¶</a></h2>
+<p>As mentioned above, <code class="docutils literal notranslate"><span class="pre">CMakeDeps</span></code> provides support for multiple configuration environments (Debug, Release, etc.)
+This is achieved by populating properties on the imported targets according to the <code class="docutils literal notranslate"><span class="pre">build_type</span></code> setting
+when installing dependencies. When a consumer project is configured with a single-configuration CMake generator, however,
+it is necessary to define the <code class="docutils literal notranslate"><span class="pre">CMAKE_BUILD_TYPE</span></code> with a value that matches that of the installed dependencies.</p>
+<p>If the consumer CMake project is configured with a different build type than the dependencies, it is necessary to
+tell CMake how to map the configurations from the current project to the imported targets by setting the
+<code class="docutils literal notranslate"><span class="pre">CMAKE_MAP_IMPORTED_CONFIG_&lt;CONFIG&gt;</span></code> CMake variable.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>build-coverage/
+conan<span class="w"> </span>install<span class="w"> </span>..<span class="w"> </span>-s<span class="w"> </span><span class="nv">build_type</span><span class="o">=</span>Debug
+cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Coverage<span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>&lt;path&gt;/conan_toolchain.cmake<span class="w"> </span>-DCMAKE_MAP_IMPORTED_CONFIG_COVERAGE<span class="o">=</span>Debug
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cmaketoolchain.html" class="btn btn-neutral float-right" title="CMakeToolchain" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../cmake.html" class="btn btn-neutral" title="conan.tools.cmake" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2022, JFrog.
+      最後更新於 2月 16, 2026。
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.62.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="../../../../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+  <script src="../../../../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.62");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

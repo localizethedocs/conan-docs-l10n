@@ -1,0 +1,427 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>conan.tools.files patches &mdash; conan 1.49.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../../../_static/css/search.css" type="text/css" />
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="conan 1.49.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="conan.tools.files" href="../files.html"/>
+        <link rel="next" title="conan.tools.files checksums" href="checksum.html"/>
+        <link rel="prev" title="conan.tools.files downloads" href="downloads.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../../../../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using_packages.html">Using packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mastering.html">Mastering Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../howtos.html">Howtos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../commands.html">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../attributes.html">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html">Methods</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../tools.html">tools</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../cmake.html">conan.tools.cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gnu.html">conan.tools.gnu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../google.html">conan.tools.google</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apple.html">conan.tools.apple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meson.html">conan.tools.meson</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../microsoft.html">conan.tools.microsoft</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qbs.html">conan.tools.qbs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../env.html">conan.tools.env</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../system.html">conan.tools.system</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../files.html">conan.tools.files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../layout.html">conan.tools.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scm.html">conan.tools.scm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build.html">conan.tools.build</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../dependencies.html">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html">Python requires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html#output-and-running">Output and Running</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators.html">Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../build_helpers.html">Build helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../config_files.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../env_vars.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../hooks.html">Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../conan_v2_mode.html">CONAN_V2_MODE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../conan_v2.html">Conan migration guide to 2.0</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../../../../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../reference.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../../../conanfile.html">conanfile.py</a> &raquo;</li>
+        
+          <li><a href="../../tools.html">tools</a> &raquo;</li>
+        
+          <li><a href="../files.html">conan.tools.files</a> &raquo;</li>
+        
+      <li>conan.tools.files patches</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/reference/conanfile/tools/files/patches.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>JFrog Bintray is being sunset. <a
+            href=https://blog.conan.io/2021/03/31/Bintray-sunset-timeline.html> Please refer this blog post for more detail.</a>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="conan-tools-files-patches">
+<h1>conan.tools.files patches<a class="headerlink" href="#conan-tools-files-patches" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="conan-tools-files-patch">
+<span id="id1"></span><h2>conan.tools.files.patch()<a class="headerlink" href="#conan-tools-files-patch" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">patch</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">patch_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">patch_string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fuzz</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Applies a diff from file (<em>patch_file</em>) or string (<em>patch_string</em>) in the <code class="docutils literal notranslate"><span class="pre">conanfile.source_folder</span></code> directory.
+The folder containing the sources can be customized with the <code class="docutils literal notranslate"><span class="pre">self.folders</span></code> attribute in the <a class="reference internal" href="../../methods.html#layout-folders-reference"><span class="std std-ref">layout(self)
+method</span></a>.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><strong>patch_file</strong>: Patch file that should be applied. The path is relative to the <strong>conanfile.source_folder</strong> unless
+an absolute path is provided.</li>
+<li><strong>base_path</strong>: The path is a relative path to <strong>conanfile.export_sources_folder</strong> unless an absolute path is provided.</li>
+<li><strong>patch_string</strong>: Patch string that should be applied.</li>
+<li><strong>strip</strong>: Number of folders to be stripped from the path.</li>
+<li><strong>output</strong>: Stream object.</li>
+<li><strong>fuzz</strong>: Should accept fuzzy patches.</li>
+<li><strong>kwargs</strong>: Extra parameters that can be added and will contribute to output information.</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.files</span><span class="w"> </span><span class="kn">import</span> <span class="n">patch</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">conan_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;patches&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="n">patch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">it</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conan-tools-files-apply-conandata-patches">
+<span id="id2"></span><h2>conan.tools.files.apply_conandata_patches()<a class="headerlink" href="#conan-tools-files-apply-conandata-patches" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">apply_conandata_patches</span><span class="p">(</span><span class="n">conanfile</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Applies patches stored in <code class="docutils literal notranslate"><span class="pre">conanfile.conan_data</span></code> (read from <code class="docutils literal notranslate"><span class="pre">conandata.yml</span></code> file). It will apply
+all the patches under <code class="docutils literal notranslate"><span class="pre">patches</span></code> entry that matches the given <code class="docutils literal notranslate"><span class="pre">conanfile.version</span></code>. If versions are
+not defined in <code class="docutils literal notranslate"><span class="pre">conandata.yml</span></code> it will apply all the patches directly under <code class="docutils literal notranslate"><span class="pre">patches</span></code> keyword.</p>
+<p>The key entries will be passed as kwargs to the <a class="reference internal" href="#conan-tools-files-patch"><span class="std std-ref">patch</span></a> function.</p>
+<p>Example of <code class="docutils literal notranslate"><span class="pre">conandata.yml</span></code> without versions defined:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.files</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_conandata_patches</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">apply_conandata_patches</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">patches</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">patch_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;patches/0001-buildflatbuffers-cmake.patch&quot;</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">patch_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;patches/0002-implicit-copy-constructor.patch&quot;</span>
+<span class="w">  </span><span class="nt">base_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;subfolder&quot;</span>
+<span class="w">  </span><span class="nt">patch_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backport</span>
+<span class="w">  </span><span class="nt">patch_source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/google/flatbuffers/pull/5650</span>
+<span class="w">  </span><span class="nt">patch_description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Needed to build with modern clang compilers.</span>
+</pre></div>
+</div>
+<p>Example of <code class="docutils literal notranslate"><span class="pre">conandata.yml</span></code> with different patches for different versions:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">patches</span><span class="p">:</span>
+<span class="w">  </span><span class="s">&quot;1.11.0&quot;</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">patch_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;patches/0001-buildflatbuffers-cmake.patch&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">patch_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;patches/0002-implicit-copy-constructor.patch&quot;</span>
+<span class="w">      </span><span class="nt">base_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;subfolder&quot;</span>
+<span class="w">      </span><span class="nt">patch_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backport</span>
+<span class="w">      </span><span class="nt">patch_source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/google/flatbuffers/pull/5650</span>
+<span class="w">      </span><span class="nt">patch_description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Needed to build with modern clang compilers.</span>
+<span class="w">  </span><span class="s">&quot;1.12.0&quot;</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">patch_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;patches/0001-buildflatbuffers-cmake.patch&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">patch_string</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">--- a/tests/misc-test.c</span>
+<span class="w">        </span><span class="no">+++ b/tests/misc-test.c</span>
+<span class="w">        </span><span class="no">@@ -1232,6 +1292,8 @@ main (int argc, char **argv)</span>
+<span class="w">              </span><span class="no">g_test_add_func (&quot;/misc/pause-cancel&quot;, do_pause_cancel_test);</span>
+<span class="w">              </span><span class="no">g_test_add_data_func (&quot;/misc/stealing/async&quot;, GINT_TO_POINTER (FALSE), do_stealing_test);</span>
+<span class="w">              </span><span class="no">g_test_add_data_func (&quot;/misc/stealing/sync&quot;, GINT_TO_POINTER (TRUE), do_stealing_test);</span>
+<span class="w">        </span><span class="no">+     g_test_add_func (&quot;/misc/response/informational/content-length&quot;, do_response_informational_content_length_test);</span>
+<span class="w">        </span><span class="no">+</span>
+
+<span class="w">        </span><span class="no">ret = g_test_run ();</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">patch_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;patches/0003-fix-content-length-calculation.patch&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="checksum.html" class="btn btn-neutral float-right" title="conan.tools.files checksums" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="downloads.html" class="btn btn-neutral" title="conan.tools.files downloads" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2022, JFrog.
+      Last updated on Feb 16, 2026.
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.49.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+  <script src="../../../../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.49");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

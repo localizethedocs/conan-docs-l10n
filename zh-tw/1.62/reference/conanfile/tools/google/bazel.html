@@ -1,0 +1,425 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bazel &mdash; conan 1.62.0 說明文件</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../../../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="搜尋" href="../../../../search.html"/>
+    <link rel="top" title="conan 1.62.0 說明文件" href="../../../../index.html"/>
+        <link rel="up" title="conan.tools.google" href="../google.html"/>
+        <link rel="next" title="conan.tools.apple" href="../apple.html"/>
+        <link rel="prev" title="BazelToolchain" href="bazeltoolchain.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../conan_v2.html">Conan migration guide to 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using_packages.html">使用軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uploading_packages.html">上傳軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mastering.html">精通 Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../howtos.html">Howtos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../commands.html">命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../attributes.html">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html">Methods</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../tools.html">tools</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../cmake.html">conan.tools.cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gnu.html">conan.tools.gnu</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../google.html">conan.tools.google</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apple.html">conan.tools.apple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meson.html">conan.tools.meson</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../microsoft.html">conan.tools.microsoft</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qbs.html">conan.tools.qbs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../env.html">conan.tools.env</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../system.html">conan.tools.system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../files.html">conan.tools.files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../layout.html">conan.tools.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scm.html">conan.tools.scm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build.html">conan.tools.build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../android.html">conan.tools.android</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scons.html">conan.tools.scons</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../dependencies.html">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html">Python requires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html#output-and-running">輸出與執行</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators.html">生成器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../build_helpers.html">Build helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../config_files.html">組態檔</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../env_vars.html">環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../hooks.html">Hooks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">變更日誌</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p><a href="https://conan.io/#signUp" target="_blank">Sign up for release updates</a></p>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../../../../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div class="admonition warning wy-text-center">
+            <p>This document is for a <b>"1.X" legacy</b> Conan version. <a href="https://docs.conan.io/2/">Click here to read the <b>Conan 2.0</b> documentation</a></p>
+          </div>
+                 
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../reference.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../../../conanfile.html">conanfile.py</a> &raquo;</li>
+        
+          <li><a href="../../tools.html">tools</a> &raquo;</li>
+        
+          <li><a href="../google.html">conan.tools.google</a> &raquo;</li>
+        
+      <li>Bazel</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/reference/conanfile/tools/google/bazel.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>Recipe Hacking no. 2! Building on what we learnt during the first installment we will be working on more Conan 2.0 Migration! We'll start by reviewing some open pull requests and hopefully tackle a CMake example. <a
+            href=https://jfrog.zoom.us/webinar/register/WN_grFhqH0yRBeIfJmBvQoPJw> Register here to attend.</a></p>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bazel">
+<span id="conan-tools-google-bazel"></span><h1>Bazel<a class="headerlink" href="#bazel" title="本標題的永久連結">¶</a></h1>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.37.0">1.37.0</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Bazel</span></code> build helper is a wrapper around the command line invocation of bazel. It will abstract the
+calls like <code class="docutils literal notranslate"><span class="pre">bazel</span> <span class="pre">&lt;rcpaths&gt;</span> <span class="pre">build</span> <span class="pre">&lt;configs&gt;</span> <span class="pre">&lt;targets&gt;</span></code> into Python method calls.</p>
+<p>The helper is intended to be used in the <em>conanfile.py</em> <code class="docutils literal notranslate"><span class="pre">build()</span></code> method, to call Bazel commands automatically
+when a package is being built directly by Conan (create, install)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.google</span><span class="w"> </span><span class="kn">import</span> <span class="n">Bazel</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">App</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">bz</span> <span class="o">=</span> <span class="n">Bazel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">bz</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="s2">&quot;//main:hello-world&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It supports the following methods:</p>
+<div class="section" id="constructor">
+<h2>constructor<a class="headerlink" href="#constructor" title="本標題的永久連結">¶</a></h2>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">conanfile</span></code>: the current recipe object. Always use <code class="docutils literal notranslate"><span class="pre">self</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">namespace</span></code>: Deprecated since Conan 1.62. It only keeps backward compatibility.</li>
+</ul>
+</div>
+<div class="section" id="build">
+<h2>build()<a class="headerlink" href="#build" title="本標題的永久連結">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;//...&quot;</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Equivalent to run the <strong class="command">bazel &lt;rcpaths&gt; build &lt;configs&gt; &lt;args&gt; &lt;targets&gt;</strong> command in the build folder.</p>
+<p>The parameters are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">args</span></code> (defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): List of extra arguments to add to the Bazel build command.</li>
+<li><code class="docutils literal notranslate"><span class="pre">label</span></code> (defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Deprecated since Conan 1.62, superseded by <code class="docutils literal notranslate"><span class="pre">target</span></code> one. The Bazel target name.</li>
+<li><code class="docutils literal notranslate"><span class="pre">target</span></code> (defaulted to <code class="docutils literal notranslate"><span class="pre">//...</span></code>): The Bazel target name. By default, it runs all the targets under your WORKSPACE.</li>
+<li><code class="docutils literal notranslate"><span class="pre">clean</span></code> (defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Runs a <strong class="command">bazel clean</strong> command before running every <strong class="command">bazel build</strong>.
+It helps to keep your Bazel cache up to date.</li>
+</ul>
+</div>
+<div class="section" id="test">
+<h2>test()<a class="headerlink" href="#test" title="本標題的永久連結">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.62.0">1.62.0</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Equivalent to <strong class="command">bazel test &lt;target&gt;</strong> in the build folder.</p>
+<p>The parameters are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">args</span></code> (defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): List of extra arguments to add to the Bazel build command.</li>
+<li><code class="docutils literal notranslate"><span class="pre">target</span></code> (defaulted to <code class="docutils literal notranslate"><span class="pre">//...</span></code>): The Bazel target name. By default, it runs all the targets under your WORKSPACE.</li>
+</ul>
+</div>
+<div class="section" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="本標題的永久連結">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.62.0">1.62.0</a></p>
+<p>The following properties affect the <code class="docutils literal notranslate"><span class="pre">Bazel</span></code> build helper:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:skip_test=&lt;bool&gt;</span></code> (boolean) if <code class="docutils literal notranslate"><span class="pre">True</span></code>, it runs the <code class="docutils literal notranslate"><span class="pre">bazel</span> <span class="pre">test</span> <span class="pre">&lt;target&gt;</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="conf">
+<h2>conf<a class="headerlink" href="#conf" title="本標題的永久連結">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Bazel</span></code> is affected by these <a class="reference internal" href="../../../config_files/global_conf.html#global-conf"><span class="std std-ref">[conf]</span></a> variables:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">tools.google.bazel:bazelrc_path</span></code>: List of paths to other bazelrc files to be used as <strong class="command">bazel --bazelrc=rcpath1 ... build</strong>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.google.bazel:configs</span></code>: List of Bazel configurations to be used as <strong class="command">bazel build --config=config1 ...</strong>.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../apple.html" class="btn btn-neutral float-right" title="conan.tools.apple" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bazeltoolchain.html" class="btn btn-neutral" title="BazelToolchain" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2022, JFrog.
+      最後更新於 2月 16, 2026。
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.62.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="../../../../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+  <script src="../../../../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.62");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

@@ -1,0 +1,512 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting started &mdash; conan 1.44.1 文档</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜索" href="../search.html"/>
+    <link rel="top" title="conan 1.44.1 文档" href="../index.html"/>
+        <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
+        <link rel="next" title="Recipe and Sources in a Different Repo" href="external_repo.html"/>
+        <link rel="prev" title="Creating Packages" href="../creating_packages.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_packages.html">Using packages</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating Packages</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and Sources in a Different Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and Sources in the Same Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging Existing Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understand_packaging.html">Understanding Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="define_abi_compatibility.html">Defining Package ABI Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_information.html">Define the package information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toolchains.html">Toolchains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging Approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_tools.html">Package Creator Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howtos.html">Howtos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conan_v2.html">Conan migration guide to 2.0</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../creating_packages.html">Creating Packages</a> &raquo;</li>
+        
+      <li>Getting started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/creating_packages/getting_started.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>JFrog Bintray is being sunset. <a
+            href=https://blog.conan.io/2021/03/31/Bintray-sunset-timeline.html> Please refer this blog post for more detail.</a>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<span id="packaging-getting-started"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="永久链接至标题">¶</a></h1>
+<p>This section introduces how to create your own Conan packages, explain <em>conanfile.py</em> recipes and the commands to build
+packages from sources in your computer.</p>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last">This is a <strong>tutorial</strong> section. You are encouraged to execute these commands.
+For this concrete example, you will need <strong>CMake</strong> installed  in your path.
+It is not strictly required by Conan to create packages, you can use
+other build systems (as VS, Meson, Autotools and even your own) to do that, without any dependency
+to CMake.
+Some of the features used in this section are <strong>experimental</strong>, like <code class="docutils literal notranslate"><span class="pre">CMakeToolchain</span></code> or <code class="docutils literal notranslate"><span class="pre">cmake_layout()</span></code>,
+and they might change in future releases. There are other alternative tools that are stable, please check
+the <a class="reference internal" href="../reference.html#references"><span class="std std-ref">reference section</span></a> for more information.</p>
+</div>
+<p>Using the <strong class="command">conan new</strong> command will create a “Hello World” C++ library example project for us:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mkdir<span class="w"> </span>hellopkg<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>hellopkg
+$<span class="w"> </span>conan<span class="w"> </span>new<span class="w"> </span>hello/0.1<span class="w"> </span>--template<span class="o">=</span>cmake_lib
+File<span class="w"> </span>saved:<span class="w"> </span>conanfile.py
+File<span class="w"> </span>saved:<span class="w"> </span>CMakeLists.txt
+File<span class="w"> </span>saved:<span class="w"> </span>src/hello.cpp
+File<span class="w"> </span>saved:<span class="w"> </span>src/hello.h
+File<span class="w"> </span>saved:<span class="w"> </span>test_package/conanfile.py
+File<span class="w"> </span>saved:<span class="w"> </span>test_package/CMakeLists.txt
+File<span class="w"> </span>saved:<span class="w"> </span>test_package/src/example.cpp
+</pre></div>
+</div>
+<p>The generated files are:</p>
+<ul class="simple">
+<li><strong>conanfile.py</strong>: On the root folder, there is a <em>conanfile.py</em> which is the main recipe file, responsible for defining how the package is built and consumed.</li>
+<li><strong>CMakeLists.txt</strong>: A simple generic <em>CMakeLists.txt</em>, with nothing specific about Conan in it.</li>
+<li><strong>src</strong> folder: the <em>src</em> folder that contains the simple C++ “hello” library.</li>
+<li>(optional) <strong>test_package</strong> folder: contains an <em>example</em> application that will require and link with the created package.
+It is not mandatory, but it is useful to check that our package is correctly created.</li>
+</ul>
+<p>Let’s have a look at the package recipe <em>conanfile.py</em>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span> <span class="nn">conan.tools.cmake</span> <span class="kn">import</span> <span class="n">CMakeToolchain</span><span class="p">,</span> <span class="n">CMake</span>
+<span class="kn">from</span> <span class="nn">conan.tools.layout</span> <span class="kn">import</span> <span class="n">cmake_layout</span>
+
+<span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
+
+    <span class="c1"># Binary configuration</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="s2">&quot;fPIC&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]}</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;fPIC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+    <span class="c1"># Sources are located in the same place as this recipe, copy them to the recipe</span>
+    <span class="n">exports_sources</span> <span class="o">=</span> <span class="s2">&quot;CMakeLists.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;src/*&quot;</span>
+
+    <span class="k">def</span> <span class="nf">config_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">fPIC</span>
+
+    <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cmake_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">tc</span> <span class="o">=</span> <span class="n">CMakeToolchain</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">tc</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">cmake</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+        <span class="n">cmake</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">cmake</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Let’s explain a little bit about this recipe:</p>
+<ul class="simple">
+<li>The binary configuration is composed by <code class="docutils literal notranslate"><span class="pre">settings</span></code> and <code class="docutils literal notranslate"><span class="pre">options</span></code>. See more in <a class="reference internal" href="../faq/using.html#settings-vs-options"><span class="std std-ref">this section</span></a>.
+When something changes in the configuration, the resulting binary built and packaged will be different:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">settings</span></code> are project wide configuration, that cannot be defaulted in recipes, like the OS or the
+architecture.</li>
+<li><code class="docutils literal notranslate"><span class="pre">options</span></code> are package specific configuration and can be defaulted in recipes, in this case we
+have the option of creating the package as a shared or static library, being static the default.</li>
+</ul>
+</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">exports_sources</span></code> attribute defines which sources are exported together with the recipe, these
+sources become part of the package recipe (there are other mechanisms that don’t do this, will be explained
+later.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">config_options()</span></code> method (together with <code class="docutils literal notranslate"><span class="pre">configure()</span></code> one) allows to fine tune the binary configuration
+model, for example, in Windows there is no <code class="docutils literal notranslate"><span class="pre">fPIC</span></code> option, so it can be removed.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method prepares the build of the package from source. In this case, it could be simplified
+to an attribute <code class="docutils literal notranslate"><span class="pre">generators</span> <span class="pre">=</span> <span class="pre">&quot;CMakeToolchain&quot;</span></code>, but it is left to show this important method. In this case,
+the execution of <code class="docutils literal notranslate"><span class="pre">CMakeToolchain</span></code> <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method will create a <em>conan_toolchain.cmake</em> file that maps
+the Conan <code class="docutils literal notranslate"><span class="pre">settings</span></code> and <code class="docutils literal notranslate"><span class="pre">options</span></code> to CMake syntax.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">build()</span></code> method uses the <code class="docutils literal notranslate"><span class="pre">CMake</span></code> wrapper to call CMake commands, it is a thin layer that will manage
+to pass in this case the <code class="docutils literal notranslate"><span class="pre">-DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake</span></code> argument. It will configure the
+project and build it from source.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">package()</span></code> method copies artifacts (headers, libs) from the build folder to the final
+package folder. It can be done with bare “copy” commands, but in this case it is leveraging the already
+existing CMake install functionality (if the CMakeLists.txt didn’t implement it, it is easy to write <code class="docutils literal notranslate"><span class="pre">self.copy()</span></code>
+commands in this <code class="docutils literal notranslate"><span class="pre">package()</span></code> method.</li>
+<li>Finally, the <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method defines that consumers must link with a “hello” library
+when using this package. Other information as include or lib paths can be defined as well. This
+information is used for files created by generators (as <code class="docutils literal notranslate"><span class="pre">CMakeDeps</span></code>) to be used by consumers. Although
+this method implies some potential duplication with the build system output (CMake could generate xxx-config.cmake files),
+it is important to define this, as Conan packages can be consumed by any other build system, not only CMake.</li>
+</ul>
+<p>The contents of the <code class="docutils literal notranslate"><span class="pre">test_package</span></code> folder is not critical now for understanding how packages are created, the important
+bits are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">test_package</span></code> folder is different from unit or integration tests. These tests are “package” tests, and validate that the package is properly
+created, and that the package consumers will be able to link against it and reuse it.</li>
+<li>It is a small Conan project itself, it contains its own <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>, and its source code including build scripts, that depends on
+the package being created, and builds and execute a small application that requires the library in the package.</li>
+<li>It doesn’t belong to the package. It only exist in the source repository, not in the package.</li>
+</ul>
+<p>Let’s build the package from sources with the current default configuration (default profile), and then let the <code class="docutils literal notranslate"><span class="pre">test_package</span></code> folder test the package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>create<span class="w"> </span>.<span class="w"> </span>demo/testing
+...
+hello/0.1:<span class="w"> </span>Hello<span class="w"> </span>World<span class="w"> </span>Release!
+<span class="w">  </span>hello/0.1:<span class="w"> </span>_M_X64<span class="w"> </span>defined
+<span class="w">  </span>...
+</pre></div>
+</div>
+<p>If “Hello world Release!” is displayed, it worked. This is what has happened:</p>
+<ul class="simple">
+<li>The <em>conanfile.py</em> together with the contents of the <em>src</em> folder have been copied (exported in Conan terms) to the
+local Conan cache.</li>
+<li>A new build from source for the <code class="docutils literal notranslate"><span class="pre">hello/0.1&#64;demo/testing</span></code> package starts, calling the <code class="docutils literal notranslate"><span class="pre">generate()</span></code>, <code class="docutils literal notranslate"><span class="pre">build()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">package()</span></code> methods. This creates the binary package in the Conan cache.</li>
+<li>Moves to the <em>test_package</em> folder and executes a <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> + <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">build</span></code> + <code class="docutils literal notranslate"><span class="pre">test()</span></code> method, to check if
+the package was correctly created.</li>
+</ul>
+<p>We can now validate that the recipe and the package binary are in the cache:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>search
+Existing<span class="w"> </span>package<span class="w"> </span>recipes:
+
+hello/0.1@demo/testing
+
+$<span class="w"> </span>conan<span class="w"> </span>search<span class="w"> </span>hello/0.1@demo/testing
+Existing<span class="w"> </span>packages<span class="w"> </span><span class="k">for</span><span class="w"> </span>recipe<span class="w"> </span>hello/0.1@demo/testing:
+
+Package_ID:<span class="w"> </span>3fb49604f9c2f729b85ba3115852006824e72cab
+<span class="w">    </span><span class="o">[</span>options<span class="o">]</span>
+<span class="w">        </span>shared:<span class="w"> </span>False
+<span class="w">    </span><span class="o">[</span>settings<span class="o">]</span>
+<span class="w">        </span>arch:<span class="w"> </span>x86_64
+<span class="w">        </span>build_type:<span class="w"> </span>Release
+<span class="w">        </span>...
+</pre></div>
+</div>
+<p>The <strong class="command">conan create</strong> command receives the same command line parameters as <strong class="command">conan install</strong> so
+you can pass to it the same settings and options. If we execute the following lines, we will create new package
+binaries for those configurations:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>create<span class="w"> </span>.<span class="w"> </span>demo/testing<span class="w"> </span>-s<span class="w"> </span><span class="nv">build_type</span><span class="o">=</span>Debug
+...
+hello/0.1:<span class="w"> </span>Hello<span class="w"> </span>World<span class="w"> </span>Debug!
+
+$<span class="w"> </span>conan<span class="w"> </span>create<span class="w"> </span>.<span class="w"> </span>demo/testing<span class="w"> </span>-o<span class="w"> </span>hello:shared<span class="o">=</span>True
+...
+hello/0.1:<span class="w"> </span>Hello<span class="w"> </span>World<span class="w"> </span>Release!
+</pre></div>
+</div>
+<p>These new package binaries will be also stored in the Conan cache, ready to be used by any project in this computer,
+we can see them with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>search<span class="w"> </span>hello/0.1@demo/testing
+Existing<span class="w"> </span>packages<span class="w"> </span><span class="k">for</span><span class="w"> </span>recipe<span class="w"> </span>hello/0.1@demo/testing:
+
+<span class="w">    </span>Package_ID:<span class="w"> </span>127af201a4cdf8111e2e08540525c245c9b3b99e
+<span class="w">        </span><span class="o">[</span>options<span class="o">]</span>
+<span class="w">            </span>shared:<span class="w"> </span>True
+<span class="w">        </span><span class="o">[</span>settings<span class="o">]</span>
+<span class="w">            </span>arch:<span class="w"> </span>x86_64
+<span class="w">            </span>build_type:<span class="w"> </span>Release
+<span class="w">            </span>...
+<span class="w">    </span>Package_ID:<span class="w"> </span>3fb49604f9c2f729b85ba3115852006824e72cab
+<span class="w">        </span><span class="o">[</span>options<span class="o">]</span>
+<span class="w">            </span>shared:<span class="w"> </span>False
+<span class="w">        </span><span class="o">[</span>settings<span class="o">]</span>
+<span class="w">            </span>arch:<span class="w"> </span>x86_64
+<span class="w">            </span>build_type:<span class="w"> </span>Release
+<span class="w">            </span>...
+
+<span class="w">    </span>Package_ID:<span class="w"> </span>d057732059ea44a47760900cb5e4855d2bea8714
+<span class="w">        </span><span class="o">[</span>options<span class="o">]</span>
+<span class="w">            </span>shared:<span class="w"> </span>False
+<span class="w">        </span><span class="o">[</span>settings<span class="o">]</span>
+<span class="w">            </span>arch:<span class="w"> </span>x86_64
+<span class="w">            </span>build_type:<span class="w"> </span>Debug
+<span class="w">            </span>...
+</pre></div>
+</div>
+<p>Any doubts? Please check out our <a class="reference internal" href="../faq.html#faq"><span class="std std-ref">FAQ section</span></a> or open a <a class="reference external" href="https://github.com/conan-io/conan/issues">Github issue</a></p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="external_repo.html" class="btn btn-neutral float-right" title="Recipe and Sources in a Different Repo" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../creating_packages.html" class="btn btn-neutral" title="Creating Packages" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2022, JFrog.
+      最后更新于 2月 16, 2026.
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.44.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.44");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

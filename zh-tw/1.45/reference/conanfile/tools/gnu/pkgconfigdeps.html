@@ -1,0 +1,588 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PkgConfigDeps &mdash; conan 1.45.0 說明文件</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../../../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="搜尋" href="../../../../search.html"/>
+    <link rel="top" title="conan 1.45.0 說明文件" href="../../../../index.html"/>
+        <link rel="up" title="conan.tools.gnu" href="../gnu.html"/>
+        <link rel="next" title="PkgConfig" href="pkgconfig.html"/>
+        <link rel="prev" title="Autotools" href="autotools.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../../../../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using_packages.html">使用軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uploading_packages.html">上傳軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mastering.html">精通 Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../howtos.html">Howtos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../commands.html">命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../attributes.html">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html">Methods</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../tools.html">tools</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../cmake.html">conan.tools.cmake</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../gnu.html">conan.tools.gnu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../google.html">conan.tools.google</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apple.html">conan.tools.apple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meson.html">conan.tools.meson</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../microsoft.html">conan.tools.microsoft</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qbs.html">conan.tools.qbs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../env.html">conan.tools.env</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../system/package_manager.html">conan.tools.system.package_manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../files.html">conan.tools.files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../files/symlinks.html">conan.tools.files.symlinks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../layout.html">conan.tools.layout</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../dependencies.html">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html">Python requires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html#output-and-running">輸出與執行</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators.html">生成器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../build_helpers.html">Build helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../config_files.html">組態檔</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../env_vars.html">環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../hooks.html">Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../conan_v2_mode.html">CONAN_V2_MODE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">變更日誌</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../conan_v2.html">Conan migration guide to 2.0</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../../../../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../reference.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../../../conanfile.html">conanfile.py</a> &raquo;</li>
+        
+          <li><a href="../../tools.html">tools</a> &raquo;</li>
+        
+          <li><a href="../gnu.html">conan.tools.gnu</a> &raquo;</li>
+        
+      <li>PkgConfigDeps</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/reference/conanfile/tools/gnu/pkgconfigdeps.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>JFrog Bintray is being sunset. <a
+            href=https://blog.conan.io/2021/03/31/Bintray-sunset-timeline.html> Please refer this blog post for more detail.</a>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pkgconfigdeps">
+<span id="conan-tools-pkgconfig"></span><h1>PkgConfigDeps<a class="headerlink" href="#pkgconfigdeps" title="本標題的永久連結">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">These tools are <strong>experimental</strong> and subject to breaking changes.</p>
+</div>
+<div class="section" id="id1">
+<span id="id2"></span><h2>PkgConfigDeps<a class="headerlink" href="#id1" title="本標題的永久連結">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases">1.38.0</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">PkgConfigDeps</span></code> is the dependencies generator for pkg-config. Generates pkg-config files named <em>&lt;PKG-NAME&gt;.pc</em>
+(where <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME</span></code> is the name declared by dependencies in <code class="docutils literal notranslate"><span class="pre">cpp_info.name</span></code> or in <code class="docutils literal notranslate"><span class="pre">cpp_info.names[&quot;pkg_config&quot;]</span></code>
+if specified), containing a valid pkg-config file syntax. Indeed, it can also be defined using <code class="docutils literal notranslate"><span class="pre">set_property</span></code> and the
+property <code class="docutils literal notranslate"><span class="pre">pkg_config_name</span></code> (available since Conan 1.36), for instance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;mypkg-config-name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">備註</p>
+<p class="last">In Conan 2.0 that will be the default way of setting those properties and also passing custom properties to generators.
+Check the <a class="reference internal" href="../../attributes.html#cpp-info-attributes-reference"><span class="std std-ref">cpp_info attributes reference</span></a> for more information.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">prefix</span></code> variable is automatically adjusted to the <code class="docutils literal notranslate"><span class="pre">package_folder</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">PkgConfigDeps</span></code> generator can be used by name in conanfiles:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">conanfile.py</span><a class="headerlink" href="#id5" title="本原始碼的永久連結">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;PkgConfigDeps&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id6" title="本原始碼的永久連結">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[generators]
+PkgConfigDeps
+</pre></div>
+</div>
+</div>
+<p>And it can also be fully instantiated in the conanfile <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span> <span class="nn">conan.tools.gnu</span> <span class="kn">import</span> <span class="n">PkgConfigDeps</span>
+
+<span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;zlib/1.2.11&quot;</span>
+
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">pc</span> <span class="o">=</span> <span class="n">PkgConfigDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">pc</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">PkgConfigDeps</span></code> will generate the <code class="docutils literal notranslate"><span class="pre">*.pc</span></code> file after a <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.
+<span class="c1"># Check the [PC_FILE_NAME].pc created in your current folder</span>
+</pre></div>
+</div>
+<p>Now, running this command using the previous <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>, you can check the <code class="docutils literal notranslate"><span class="pre">zlib.pc</span></code> file created into your current folder:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>prefix=/Users/YOUR_USER/.conan/data/zlib/1.2.11/_/_/package/647afeb69d3b0a2d3d316e80b24d38c714cc6900
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: zlib
+Description: Conan package: zlib
+Version: 1.2.11
+Libs: -L&quot;${libdir}&quot; -lz -F Frameworks
+Cflags: -I&quot;${includedir}&quot;
+</pre></div>
+</div>
+<div class="section" id="components">
+<h3>Components<a class="headerlink" href="#components" title="本標題的永久連結">¶</a></h3>
+<p>If a recipe uses <a class="reference internal" href="../../../../creating_packages/package_information.html#package-information-components"><span class="std std-ref">components</span></a>, the files generated will be <em>&lt;[PKG-NAME]-[COMP-NAME]&gt;.pc</em> with their corresponding
+flags and require relations.</p>
+<p>Additionally, a <em>&lt;PKG-NAME&gt;.pc</em> is generated to maintain compatibility for consumers with recipes that start supporting components. This
+<em>&lt;PKG-NAME&gt;.pc</em> file will declare all the components of the package as requires while the rest of the fields will be empty, relying on
+the propagation of flags coming from the components <em>&lt;[PKG-NAME]-[COMP-NAME]&gt;.pc</em> files.</p>
+</div>
+<div class="section" id="properties">
+<span id="pkgconfigdeps-properties"></span><h3>Properties<a class="headerlink" href="#properties" title="本標題的永久連結">¶</a></h3>
+<p>The following properties affect the <code class="docutils literal notranslate"><span class="pre">PkgConfigDeps</span></code> generator:</p>
+<ul class="simple">
+<li><strong>pkg_config_name</strong> property sets the <code class="docutils literal notranslate"><span class="pre">names</span></code> property for <em>pkg_config</em> generator.</li>
+<li><strong>pkg_config_aliases</strong> property sets some aliases of any package/component name for <em>pkg_config</em> generator. This property only accepts list-like Python objects.</li>
+<li><strong>pkg_config_custom_content</strong> property supported by the <em>pkg_config</em> generator that will add user
+defined content to the <em>.pc</em> files created by this generator.</li>
+</ul>
+<p>These properties can be defined at global <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> level or at component level.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">custom_content</span> <span class="o">=</span> <span class="s2">&quot;datadir=$</span><span class="si">{prefix}</span><span class="s2">/share&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_custom_content&quot;</span><span class="p">,</span> <span class="n">custom_content</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;myname&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;componentname&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_aliases&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;alias1&quot;</span><span class="p">,</span> <span class="s2">&quot;alias2&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="names-and-aliases">
+<h3>Names and aliases<a class="headerlink" href="#names-and-aliases" title="本標題的永久連結">¶</a></h3>
+<p>Aliases are available since: <a class="reference external" href="https://github.com/conan-io/conan/releases">1.43.0</a></p>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">*.pc</span></code> files will be named following these rules:</p>
+<ul class="simple">
+<li>For packages, it uses the package name, e.g., package <code class="docutils literal notranslate"><span class="pre">zlib/1.2.11</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">zlib.pc</span></code>.</li>
+<li>For components, the package name + hyphen + component name, e.g., <code class="docutils literal notranslate"><span class="pre">openssl/3.0.0</span></code> with <code class="docutils literal notranslate"><span class="pre">self.cpp_info.components[&quot;crytpo&quot;]</span></code>  -&gt; <code class="docutils literal notranslate"><span class="pre">openssl-crypto.pc</span></code>.</li>
+</ul>
+<p>You can change that default behavior with the <code class="docutils literal notranslate"><span class="pre">pkg_config_name</span></code> and <code class="docutils literal notranslate"><span class="pre">pkg_config_aliases</span></code> properties. For instance, <code class="docutils literal notranslate"><span class="pre">openssl/3.0.0`</span></code> recipe has these <code class="docutils literal notranslate"><span class="pre">pkg_config_name</span></code> properties already declared:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">OpenSSLConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;openssl&quot;</span>
+
+    <span class="c1"># any code here</span>
+
+    <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;openssl&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;crypto&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;libcrypto&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;ssl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;libssl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run <strong class="command">conan install openssl/3.0.0&#64; -g PkgConfigDeps</strong> and check the <code class="docutils literal notranslate"><span class="pre">*.pc</span></code> files created:</p>
+<ul class="simple">
+<li>libcrypto.pc</li>
+<li>libssl.pc</li>
+<li>openssl.pc</li>
+<li>zlib.pc <em>(openssl requires zlib)</em></li>
+</ul>
+<p>Their <code class="docutils literal notranslate"><span class="pre">pkg_config_name</span></code> properties are used as the final <code class="docutils literal notranslate"><span class="pre">*.pc</span></code> file names:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">openssl.pc</span><a class="headerlink" href="#id7" title="本原始碼的永久連結">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Name: openssl
+Description: Conan package: openssl
+Version: 3.0.0
+Requires: libcrypto libssl
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">libcrypto.pc</span><a class="headerlink" href="#id8" title="本原始碼的永久連結">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>prefix=/Users/conan_user/.conan/data/openssl/3.0.0/_/_/package/88955cec2844f731470e07bd44ce5a3a24ec88b7
+libdir1=${prefix}/lib
+includedir1=${prefix}/include
+
+Name: libcrypto
+Description: Conan component: libcrypto
+Version: 3.0.0
+Libs: -L&quot;${libdir1}&quot; -lcrypto -F Frameworks
+Cflags: -I&quot;${includedir1}&quot;
+Requires: zlib
+</pre></div>
+</div>
+</div>
+<p>A special mention when a component shares the same <code class="docutils literal notranslate"><span class="pre">*.pc</span></code> file name as the root package one:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">OpenCLConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+
+    <span class="c1"># ...</span>
+
+    <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;OpenCL&quot;</span><span class="p">)</span>  <span class="c1"># -&gt; OpenCL.pc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;_opencl-headers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;OpenCL&quot;</span><span class="p">)</span>  <span class="c1"># -&gt; OpenCL.pc</span>
+</pre></div>
+</div>
+<p>The only <code class="docutils literal notranslate"><span class="pre">*.pc</span></code> file created will be the one belonging to the component:</p>
+<ul class="simple">
+<li>OpenCL.pc (from component)</li>
+</ul>
+<p>Now, let’s see how <code class="docutils literal notranslate"><span class="pre">pkg_config_aliases</span></code> property works step by step.</p>
+<p>Let’s create our own <code class="docutils literal notranslate"><span class="pre">myopenssl/1.0.0</span></code> recipe and define several aliases like the following:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">MyOpenSSLConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;myopenssl&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0.0&quot;</span>
+
+    <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Aliases</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_aliases&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;myopenssl_alias&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycrypto&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_aliases&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;mycrypto&quot;</span><span class="p">,</span> <span class="s2">&quot;crp&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;myssl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_aliases&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;myssl&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Then, after creating the package locally with <strong class="command">conan create .</strong> and consuming it <strong class="command">conan install myopenssl/1.0.0&#64; -g PkgConfigDeps</strong>, the files created will be:</p>
+<ul class="simple">
+<li>myopenssl-mycrypto.pc</li>
+<li>myopenssl-myssl.pc</li>
+<li>myopenssl.pc</li>
+<li>crp.pc <em>(alias of myopenssl-mycrypto)</em></li>
+<li>mycrypto.pc <em>(alias of myopenssl-mycrypto)</em></li>
+<li>myssl.pc <em>(alias of myopenssl-myssl)</em></li>
+<li>myopenssl_alias.pc <em>(alias of myopenssl)</em></li>
+</ul>
+<p>Where any of those aliases files contains something like this:</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">mycrypto.pc</span><a class="headerlink" href="#id9" title="本原始碼的永久連結">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Name: mycrypto
+Description: Alias mycrypto for myopenssl-mycrypto
+Version: 1.0.0
+Requires: myopenssl-mycrypto
+</pre></div>
+</div>
+</div>
+<p>It’s also possible to use both properties together:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">MyOpenSSLConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;myopenssl&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0.0&quot;</span>
+
+    <span class="c1"># any code here</span>
+
+    <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;myopenssl&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycrypto&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;libmycrypto&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;myssl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;libmyssl&quot;</span><span class="p">)</span>
+        <span class="c1"># Aliases</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_aliases&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;myopenssl_alias&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycrypto&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_aliases&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;mycrypto&quot;</span><span class="p">,</span> <span class="s2">&quot;crp&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;myssl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_aliases&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;myssl&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>After executing the commands mentioned above, the files are:</p>
+<ul class="simple">
+<li>libmycrypto.pc</li>
+<li>libmyssl.pc</li>
+<li>myopenssl.pc</li>
+<li>crp.pc <em>(alias of libmycrypto)</em></li>
+<li>mycrypto.pc <em>(alias of libmycrypto)</em></li>
+<li>myssl.pc <em>(alias of libmyssl)</em></li>
+<li>myopenssl_alias.pc <em>(alias of myopenssl)</em></li>
+</ul>
+<p>The only change is which name the alias is pointing to:</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">mycrypto.pc</span><a class="headerlink" href="#id10" title="本原始碼的永久連結">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Name: mycrypto
+Description: Alias mycrypto for libmycrypto
+Version: 1.0.0
+Requires: libmycrypto
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pkgconfig.html" class="btn btn-neutral float-right" title="PkgConfig" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="autotools.html" class="btn btn-neutral" title="Autotools" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2022, JFrog.
+      最後更新於 2月 16, 2026。
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.45.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+  <script src="../../../../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.45");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

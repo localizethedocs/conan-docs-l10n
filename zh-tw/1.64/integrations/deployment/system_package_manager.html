@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-TW" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System package manager &mdash; conan 1.64.1 說明文件</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/conan.css?v=2e89a5c2" />
+
+  
+    <link rel="shortcut icon" href="../../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/integrations/deployment/system_package_manager.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4c61febf"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=d9a6981e"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜尋" href="../../search.html" />
+    <link rel="next" title="Makeself" href="makeself.html" />
+    <link rel="prev" title="Deployment" href="../deployment.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/conan-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.64
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conan_v2.html">Conan migration guide to 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using_packages.html">使用軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uploading_packages.html">上傳軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">精通 Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../integrations.html">Integrations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../compilers.html">Compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_system.html">Build systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ides.html">IDEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ci.html">CI Platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cross_platform.html">Other Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs.html">版本控制系統</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../custom.html">Custom integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linting.html">Linting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../deployment.html">Deployment</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">System package manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="makeself.html">Makeself</a></li>
+<li class="toctree-l3"><a class="reference internal" href="appimage.html">AppImage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snap.html">Snap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flatpak.html">Flatpak</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howtos.html">Howtos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">變更日誌</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+            <div class="admonition warning wy-text-center" style="position:sticky;top:0;border: 1px solid orange">
+              <p>This document is for a <b>"1.X" legacy</b> Conan version. <a href="https://docs.conan.io/2/">Click here to read the <b>Conan 2.0</b> documentation</a></p>
+            </div>
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../integrations.html">Integrations</a></li>
+          <li class="breadcrumb-item"><a href="../deployment.html">Deployment</a></li>
+      <li class="breadcrumb-item active">System package manager</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/master/integrations/deployment/system_package_manager.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="system-package-manager">
+<h1>System package manager<a class="headerlink" href="#system-package-manager" title="Link to this heading"></a></h1>
+<p>The Conan packages can be deployed using a system package manager. Usually this process is done by creating a folder structure with the
+needed files and bundling all of them into the file format specific to the system package manager of choice, like <em>.rpm</em> or <em>.deb</em>. This
+method is very convenient for deployment and distribution as it is natively integrated in the system. However, there are some limitations:</p>
+<ul class="simple">
+<li><p>It might require to create a specific package for each of supported distro, or at least use the lowest version (see concerns about
+<code class="docutils literal notranslate"><span class="pre">glibc</span></code> below), see the section <a class="reference internal" href="../../extending/custom_settings.html#custom-settings"><span class="std std-ref">Customizing settings</span></a>, which explains how to customize Conan settings to model different Linux
+distributions in order to create different packages for them.</p></li>
+<li><p>If you want to target different distros, then you need to create one package per supported distro (likely one for
+<a class="reference external" href="https://ubuntu.com">Ubuntu</a>, one for <a class="reference external" href="https://www.archlinux.org">Arch Linux</a>, etc.), and formats or guidelines for each distro might differ significantly</p></li>
+</ul>
+<p>Check out the sections <a class="reference internal" href="makeself.html#deployment-makeself"><span class="std std-ref">makeself</span></a>, <a class="reference internal" href="appimage.html#deployment-appimage"><span class="std std-ref">AppImage</span></a>,
+<a class="reference internal" href="flatpak.html#deployment-flatpak"><span class="std std-ref">Flatpak</span></a> and <a class="reference internal" href="snap.html#deployment-snap"><span class="std std-ref">Snap</span></a> for information on how to create distribution-agnostic packages.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../deployment.html" class="btn btn-neutral float-left" title="Deployment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="makeself.html" class="btn btn-neutral float-right" title="Makeself" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, JFrog.
+      <span class="lastupdated">最後更新於 2月 16, 2026。
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

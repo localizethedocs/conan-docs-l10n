@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-TW" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>system_requirements() &mdash; conan 2.12.2 說明文件</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=2da93098" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/conan.css?v=7d9e9f1e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/reference/conanfile/methods/system_requirements.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=78109108"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/translations.js?v=d9a6981e"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜尋" href="../../../search.html" />
+    <link rel="next" title="test()" href="test.html" />
+    <link rel="prev" title="source()" href="source.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/conan-docs-logo-2.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../whatsnew.html">What’s new in Conan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">教學</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ci_tutorial/tutorial.html">CI 教學</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devops/devops.html">開發運維指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">範例</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../commands.html">命令</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../attributes.html">Attributes</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../methods.html">Methods</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="build.html">build()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_id.html">build_id()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_requirements.html">build_requirements()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="compatibility.html">compatibility()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure.html">configure()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="config_options.html">config_options()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deploy.html">deploy()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="export.html">export()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="export_sources.html">export_sources()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="finalize.html">finalize()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate.html">generate()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="init.html">init()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="layout.html">layout()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package.html">package()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package_id.html">package_id()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package_info.html">package_info()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements.html">requirements()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements.html#package-type-trait-inferring">package_type trait inferring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements.html#default-traits-for-each-kind-of-requires">Default traits for each kind of requires</a></li>
+<li class="toctree-l4"><a class="reference internal" href="set_name.html">set_name()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="set_version.html">set_version()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="source.html">source()</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">system_requirements()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.html">test()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="validate.html">validate()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="validate_build.html">validate_build()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../running_and_output.html">Running and output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools.html">Recipe tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config_files.html">組態檔</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions.html">擴充功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../environment.html">環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../binary_model.html">The binary model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../conan_server.html">Conan Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runners.html">執行器</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../incubating.html">孵化中的功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">變更日誌</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../reference.html">Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../conanfile.html">conanfile.py</a></li>
+          <li class="breadcrumb-item"><a href="../methods.html">Methods</a></li>
+      <li class="breadcrumb-item active">system_requirements()</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/develop2/reference/conanfile/methods/system_requirements.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="system-requirements">
+<span id="reference-conanfile-methods-system-requirements"></span><h1>system_requirements()<a class="headerlink" href="#system-requirements" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">system_requirements()</span></code> method can be used to call the system package managers to install packages at the system level. In general, this should be reduced to a minimum, system packages are not modeled dependencies, but it can be sometimes convenient to automate the installation of some system packages that are necessary for some Conan packages. For example, when creating a recipe to package the <code class="docutils literal notranslate"><span class="pre">opencv</span></code> library, we could realize that it needs in Linux the <code class="docutils literal notranslate"><span class="pre">gtk</span></code> libraries, but it might be undesired to create a package for them, because we want to make sure we use the system ones. We code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.system.package_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">Apt</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OpenCV</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;opencv&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;4.0&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">system_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">apt</span> <span class="o">=</span> <span class="n">Apt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">apt</span><span class="o">.</span><span class="n">install</span><span class="p">([</span><span class="s2">&quot;libgtk-3-dev&quot;</span><span class="p">],</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For full reference of the built-in helpers for different system package managers read the <a class="reference internal" href="../../tools/system/package_manager.html#conan-tools-system-package-manager"><span class="std std-ref">tools.system.package_manager documentation</span></a>.</p>
+<section id="collecting-system-requirements">
+<h2>Collecting system requirements<a class="headerlink" href="#collecting-system-requirements" title="Link to this heading">¶</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">system_requirements()</span></code> uses some built-in <code class="docutils literal notranslate"><span class="pre">package_manager</span></code> helpers, it is possible to collect information about the installed or required system requirements.
+If we have the following <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.system.package_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">Apt</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;arch&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">system_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">apt</span> <span class="o">=</span> <span class="n">Apt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">apt</span><span class="o">.</span><span class="n">install</span><span class="p">([</span><span class="s2">&quot;pkg1&quot;</span><span class="p">,</span> <span class="s2">&quot;pkg2&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>It is possible to display the installed system packages (with the default <code class="docutils literal notranslate"><span class="pre">tools.system.package_manager:mode</span></code> requirements will be checked, but not installed) with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="c1"># Assuming apt is the default or using explicitly</span>
+<span class="w"> </span><span class="c1">#   -c tools.system.package_manager:tool=apt-get</span>
+<span class="w"> </span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--format<span class="o">=</span>json
+<span class="s2">&quot;graph&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">     </span><span class="s2">&quot;nodes&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">         </span><span class="o">{</span>
+<span class="w">             </span><span class="s2">&quot;ref&quot;</span>:<span class="w"> </span><span class="s2">&quot;&quot;</span>,
+<span class="w">             </span><span class="s2">&quot;id&quot;</span>:<span class="w"> </span><span class="m">0</span>,
+<span class="w">             </span><span class="s2">&quot;settings&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">                 </span><span class="s2">&quot;arch&quot;</span>:<span class="w"> </span><span class="s2">&quot;x86_64&quot;</span>
+<span class="w">             </span><span class="o">}</span>,
+<span class="w">             </span><span class="s2">&quot;system_requires&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">                 </span><span class="s2">&quot;apt-get&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">                     </span><span class="s2">&quot;install&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">                         </span><span class="s2">&quot;pkg1&quot;</span>,
+<span class="w">                         </span><span class="s2">&quot;pkg2&quot;</span>
+<span class="w">                     </span><span class="o">]</span>,
+<span class="w">                     </span><span class="s2">&quot;missing&quot;</span>:<span class="w"> </span><span class="o">[]</span>
+<span class="w">                 </span><span class="o">}</span>
+<span class="w">             </span><span class="o">}</span>,
+</pre></div>
+</div>
+<p>A similar result can be obtained without even installing binaries, we could use the <code class="docutils literal notranslate"><span class="pre">report</span></code> or <code class="docutils literal notranslate"><span class="pre">report-installed</span></code> modes. The <code class="docutils literal notranslate"><span class="pre">report</span></code> mode displays the <code class="docutils literal notranslate"><span class="pre">install</span></code>
+packages, those are the packages that are required to be installed, irrespective of whether they are actually installed or not. The <code class="docutils literal notranslate"><span class="pre">report</span></code> mode does not check the system for those package, so it could even be ran in another OS:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>.<span class="w"> </span>-c<span class="w"> </span>tools.system.package_manager:mode<span class="o">=</span>report<span class="w"> </span>--format<span class="o">=</span>json
+...
+<span class="s2">&quot;system_requires&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;apt-get&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="s2">&quot;install&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">            </span><span class="s2">&quot;pkg1&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;pkg2&quot;</span>
+<span class="w">        </span><span class="o">]</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>On the other hand, the <code class="docutils literal notranslate"><span class="pre">report-installed</span></code> mode will do a check if the package is installed in the system or not, but not failing nor raising any error if it is not found:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>.<span class="w"> </span>-c<span class="w"> </span>tools.system.package_manager:mode<span class="o">=</span>report-installed<span class="w"> </span>--format<span class="o">=</span>json
+...
+<span class="s2">&quot;system_requires&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;apt-get&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="s2">&quot;install&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">            </span><span class="s2">&quot;pkg1&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;pkg2&quot;</span>
+<span class="w">        </span><span class="o">]</span>,
+<span class="w">        </span><span class="s2">&quot;missing&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">            </span><span class="s2">&quot;pkg1&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;pkg2&quot;</span>
+<span class="w">        </span><span class="o">]</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="source.html" class="btn btn-neutral float-left" title="source()" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test.html" class="btn btn-neutral float-right" title="test()" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, JFrog.
+      <span class="lastupdated">最後更新於 2月 17, 2026。
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

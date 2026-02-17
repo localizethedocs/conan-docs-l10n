@@ -1,0 +1,484 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Migrating legacy cpp_info attributes to set_property() &mdash; conan 1.55.0 說明文件</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜尋" href="../search.html"/>
+    <link rel="top" title="conan 1.55.0 說明文件" href="../index.html"/>
+        <link rel="up" title="Migrating the recipes" href="recipes.html"/>
+        <link rel="next" title="命令" href="commands.html"/>
+        <link rel="prev" title="Migrating the recipes" href="recipes.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">介紹</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../conan_v2.html">Conan migration guide to 2.0</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="recipes.html">Migrating the recipes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#python-import-statements">Python import statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#settings">設定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#the-validate-method">The validate() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#the-layout-method">The layout() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#the-scm-attribute">The scm attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#the-export-sources-method">The export_sources() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#the-generate-method">The generate() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#the-build-method">The build() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#the-package-method">The package() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#the-package-info-method">The package_info() method</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="recipes.html#the-package-id-method">The package_id() method</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="recipes.html#new-properties-model">New properties model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#removed-imports-method">Removed imports() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#migrate-conanfile-compatible-packages-to-the-new-compatibility-method">Migrate conanfile.compatible_packages to the new compatibility() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#changes-in-the-test-package-recipe">Changes in the test_package recipe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html#other-recipe-changes">Other recipe changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html">命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html">General changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_packages.html">使用軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">上傳軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mastering.html">精通 Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howtos.html">Howtos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">變更日誌</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../conan_v2.html">Conan migration guide to 2.0</a> &raquo;</li>
+        
+          <li><a href="recipes.html">Migrating the recipes</a> &raquo;</li>
+        
+      <li>Migrating legacy cpp_info attributes to set_property()</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/migrating_to_2.0/properties.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>Recipe Hacking no. 2! Building on what we learnt during the first installment we will be working on more Conan 2.0 Migration! We'll start by reviewing some open pull requests and hopefully tackle a CMake example. <a
+            href=https://jfrog.zoom.us/webinar/register/WN_grFhqH0yRBeIfJmBvQoPJw> Register here to attend.</a></p>
+          </div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="migrating-legacy-cpp-info-attributes-to-set-property">
+<span id="properties-migration"></span><h1>Migrating legacy cpp_info attributes to set_property()<a class="headerlink" href="#migrating-legacy-cpp-info-attributes-to-set-property" title="本標題的永久連結">¶</a></h1>
+<p>Migrating from <cite>.names</cite>, <cite>.filenams</cite> and <cite>.build_modules</cite> to <code class="docutils literal notranslate"><span class="pre">set_property()</span></code> is easy,
+but there are some details to take into account for properties like <code class="docutils literal notranslate"><span class="pre">cmake_target_name</span></code>
+and <code class="docutils literal notranslate"><span class="pre">cmake_file_name</span></code>. Let’s see some examples.</p>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p>The 2 mechanisms are completely independent:</p>
+<ul class="last simple">
+<li>Old way using <code class="docutils literal notranslate"><span class="pre">.names</span></code>, <code class="docutils literal notranslate"><span class="pre">.filenames</span></code> will work exclusively for legacy generators like <code class="docutils literal notranslate"><span class="pre">cmake_find_package</span></code></li>
+<li>New properties, like <code class="docutils literal notranslate"><span class="pre">set_property(&quot;cmake_target_name&quot;)</span></code> will work exclusively for new generators
+like <code class="docutils literal notranslate"><span class="pre">CMakeDeps</span></code>. They have changed to be absolute, and that would break legacy generators.</li>
+<li>Recipes that want to provide support for both generators need to provide the 2 definitions in their
+<code class="docutils literal notranslate"><span class="pre">package_info()</span></code></li>
+</ul>
+</div>
+<div class="section" id="migrating-from-names-to-cmake-target-name">
+<h2>Migrating from .names to cmake_target_name<a class="headerlink" href="#migrating-from-names-to-cmake-target-name" title="本標題的永久連結">¶</a></h2>
+<p>It is important to note that <code class="docutils literal notranslate"><span class="pre">cmake_target_name</span></code> is <strong>not</strong> going to take the same value
+as the <code class="docutils literal notranslate"><span class="pre">.names</span></code> attribute did. With the <code class="docutils literal notranslate"><span class="pre">.names</span></code> attribute, if you set a name for the
+target in CMake, Conan would automatically create a 「namespaced」 target name with that
+name. This code, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">filenames</span><span class="p">[</span><span class="s2">&quot;cmake_find_package&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;myname&quot;</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>將會建立一個名為 <code class="docutils literal notranslate"><span class="pre">myname::myname</span></code> 的 CMake 目標。</p>
+<p>The property <code class="docutils literal notranslate"><span class="pre">cmake_target_name</span></code> accepts <strong>complete</strong> target names. That means that the
+name you set with this property will be the one added to the CMake generated
+files without appending any more information to it.
+To translate the last example to the set_property model you should add the following
+declaration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_target_name&quot;</span><span class="p">,</span> <span class="s2">&quot;myname::myname&quot;</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Note that you can use whatever name you want, it can have a different namespace, like
+<code class="docutils literal notranslate"><span class="pre">mynamespace::myname</span></code> or use a name with no namespace at all.</p>
+<p>Also, please note that you may want to have different target names
+for both <a class="reference external" href="https://cmake.org/cmake/help/v3.15/command/find_package.html#full-signature-and-config-mode">config</a>
+and <a class="reference external" href="https://cmake.org/cmake/help/v3.15/command/find_package.html#basic-signature-and-module-mode">module</a> CMake generated files.
+For example, you have a package named <code class="docutils literal notranslate"><span class="pre">myssl</span></code> and you want to generate a <code class="docutils literal notranslate"><span class="pre">Findmyssl.cmake</span></code>
+module that declares the target <code class="docutils literal notranslate"><span class="pre">MySSL::SSL</span></code>, but for config mode you
+want to declare the target <code class="docutils literal notranslate"><span class="pre">MySSL</span></code> without namespaces. You can do that using the
+<code class="docutils literal notranslate"><span class="pre">cmake_module_target_name</span></code> property. Also, when setting this property, remember to set
+<code class="docutils literal notranslate"><span class="pre">cmake_find_mode</span></code> so that <cite>CMakeDeps</cite> generates those module files. Let’s see an
+example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MySSL</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;myssl&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_target_name&quot;</span><span class="p">,</span> <span class="s2">&quot;MySSL&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_module_target_name&quot;</span><span class="p">,</span> <span class="s2">&quot;MySSL::SSL&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_find_mode&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="migrating-from-filenames-to-cmake-file-name">
+<h2>Migrating from .filenames to cmake_file_name<a class="headerlink" href="#migrating-from-filenames-to-cmake-file-name" title="本標題的永久連結">¶</a></h2>
+<p>To migrate from <code class="docutils literal notranslate"><span class="pre">.filenames</span></code> to names just use the same <code class="docutils literal notranslate"><span class="pre">.filenames</span></code> value for the
+property <code class="docutils literal notranslate"><span class="pre">cmake_file_name</span></code>. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">filenames</span><span class="p">[</span><span class="s2">&quot;cmake_find_package&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;MyFileName&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">filenames</span><span class="p">[</span><span class="s2">&quot;cmake_find_package_multi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;MyFileName&quot;</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Could be declared like this with <code class="docutils literal notranslate"><span class="pre">set_property()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_file_name&quot;</span><span class="p">,</span> <span class="s2">&quot;MyFileName&quot;</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Please note that for the legacy <code class="docutils literal notranslate"><span class="pre">.names</span></code> and <code class="docutils literal notranslate"><span class="pre">.filenames</span></code> model, if <code class="docutils literal notranslate"><span class="pre">.filenames</span></code> is
+not declared but <code class="docutils literal notranslate"><span class="pre">.names</span></code> is, then Conan will automatically set the value of
+<code class="docutils literal notranslate"><span class="pre">.filenames</span></code> to the value of <code class="docutils literal notranslate"><span class="pre">.names</span></code>. So for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="s2">&quot;cmake_find_package&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;SomeName&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="s2">&quot;cmake_find_package_multi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;SomeName&quot;</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>This will use 「SomeName」 to compose the generated filenames. In this case you should set <code class="docutils literal notranslate"><span class="pre">cmake_file_name</span></code> to 「SomeName」:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_file_name&quot;</span><span class="p">,</span> <span class="s2">&quot;SomeName&quot;</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Also, please note that you may want to use different file names
+for both <a class="reference external" href="https://cmake.org/cmake/help/v3.15/command/find_package.html#full-signature-and-config-mode">config</a>
+and <a class="reference external" href="https://cmake.org/cmake/help/v3.15/command/find_package.html#basic-signature-and-module-mode">module</a> CMake generated files.
+If we take the previous example of the <code class="docutils literal notranslate"><span class="pre">myssl</span></code> and you want to generate a <code class="docutils literal notranslate"><span class="pre">FindMySSL.cmake</span></code> for module mode and
+<code class="docutils literal notranslate"><span class="pre">myssl-config.cmake</span></code> for config mode, you can set the <code class="docutils literal notranslate"><span class="pre">cmake_module_file_name</span></code> to set the value for the module file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MySSL</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;myssl&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_file_name&quot;</span><span class="p">,</span> <span class="s2">&quot;myssl&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_module_file_name&quot;</span><span class="p">,</span> <span class="s2">&quot;MySSL&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_find_mode&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>You can read more about this properties in the <a class="reference internal" href="../reference/conanfile/tools/cmake/cmakedeps.html#cmakedeps-properties"><span class="std std-ref">CMakeDeps</span></a> properties reference.</p>
+</div>
+<div class="section" id="migrating-components-information">
+<h2>Migrating components information<a class="headerlink" href="#migrating-components-information" title="本標題的永久連結">¶</a></h2>
+<p>As we said, all these properties but <code class="docutils literal notranslate"><span class="pre">cmake_file_name</span></code> and <code class="docutils literal notranslate"><span class="pre">cmake_module_file_name</span></code> have components
+support, so for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="s2">&quot;cmake_find_package&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;mycomponent-name&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="s2">&quot;cmake_find_package_multi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;mycomponent-name&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="s2">&quot;pkg_config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;mypkg-config-name&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">build_modules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="s2">&quot;mypkg_bm.cmake&quot;</span><span class="p">))</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Could be declared like this with the properties model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_target_name&quot;</span><span class="p">,</span> <span class="s2">&quot;component_namespace::mycomponent-name&quot;</span><span class="p">)</span>
+    <span class="c1"># The property &quot;cmake_build_modules&quot; can&#39;t be declared in a component, do it in self.cpp_info</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;cmake_build_modules&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="s2">&quot;mypkg_bm.cmake&quot;</span><span class="p">)])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;mypkg-config-name&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;custom_name&quot;</span><span class="p">,</span> <span class="s2">&quot;mycomponent-name&quot;</span><span class="p">,</span> <span class="s2">&quot;custom_generator&quot;</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Please <strong>note</strong> that most of the legacy generators like <cite>cmake</cite>, <cite>cmake_multi</cite>,
+<cite>cmake_find_package</cite>, <cite>cmake_find_package_multi</cite> and <cite>cmake_paths</cite> do not listen to these
+properties at all, so if you want to maintain compatibility with consumers that use those
+generators and also that information for new generators like
+<cite>CMakeDeps</cite> you need both models living together in the same recipe.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">也參考</p>
+<p class="last">Read <a class="reference internal" href="../creating_packages/package_information.html#package-information-components"><span class="std std-ref">Using Components</span></a> and <a class="reference internal" href="../reference/conanfile/methods.html#method-package-info"><span class="std std-ref">package_info()</span></a> to learn more.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="commands.html" class="btn btn-neutral float-right" title="命令" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="recipes.html" class="btn btn-neutral" title="Migrating the recipes" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2022, JFrog.
+      最後更新於 2月 16, 2026。
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.55.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.55");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

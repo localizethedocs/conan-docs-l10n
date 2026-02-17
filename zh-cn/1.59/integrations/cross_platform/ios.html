@@ -1,0 +1,412 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iOS, tvOS, watchOS &mdash; conan 1.59.0 文档</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../../genindex.html"/>
+        <link rel="search" title="搜索" href="../../search.html"/>
+    <link rel="top" title="conan 1.59.0 文档" href="../../index.html"/>
+        <link rel="up" title="Other Systems" href="../cross_platform.html"/>
+        <link rel="next" title="VxWorks" href="vxworks.html"/>
+        <link rel="prev" title="Android" href="android.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conan_v2.html">Conan migration guide to 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using_packages.html">Using packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../integrations.html">Integrations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../compilers.html">Compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_system.html">Build systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ides.html">IDEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ci.html">CI Platforms</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../cross_platform.html">Other Systems</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="buildroot.html"> Buildroot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html"> Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="emscripten.html"> Emscripten</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qnx_neutrino.html"> QNX Neutrino</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yocto.html"> Yocto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="android.html"> Android</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">iOS, tvOS, watchOS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-darwin-toolchain-package-tool-require">Using Darwin toolchain package (tool require)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-built-in-conan-toolchain">Use built-in Conan toolchain</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vxworks.html"> VxWorks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs.html">Version Control System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../custom.html">Custom integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linting.html">Linting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howtos.html">Howtos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../integrations.html">Integrations</a> &raquo;</li>
+        
+          <li><a href="../cross_platform.html">Other Systems</a> &raquo;</li>
+        
+      <li>iOS, tvOS, watchOS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/integrations/cross_platform/ios.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>Recipe Hacking no. 2! Building on what we learnt during the first installment we will be working on more Conan 2.0 Migration! We'll start by reviewing some open pull requests and hopefully tackle a CMake example. <a
+            href=https://jfrog.zoom.us/webinar/register/WN_grFhqH0yRBeIfJmBvQoPJw> Register here to attend.</a></p>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ios-tvos-watchos">
+<span id="ios"></span><h1>iOS, tvOS, watchOS<a class="headerlink" href="#ios-tvos-watchos" title="永久链接至标题">¶</a></h1>
+<div class="section" id="using-darwin-toolchain-package-tool-require">
+<span id="darwin-toolchain"></span><h2>Using Darwin toolchain package (tool require)<a class="headerlink" href="#using-darwin-toolchain-package-tool-require" title="永久链接至标题">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
+<p>One example of a tool requires implementing a toolchain to cross-compile to iOS, tvOS or watchOS, is
+the <a class="reference external" href="https://github.com/theodelrieu/conan-darwin-toolchain">Darwin Toolchain</a>  package. Although
+this package is not in Conan Center Index you can check it to see an example of how to use a
+toolchain for cross-compilation by using a tool requires. You can use a profile like the following
+to cross-build your packages for <code class="docutils literal notranslate"><span class="pre">iOS</span></code>,  <code class="docutils literal notranslate"><span class="pre">watchOS</span></code> and <code class="docutils literal notranslate"><span class="pre">tvOS</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">ios_profile</span><a class="headerlink" href="#id2" title="永久链接至代码">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>include(default)
+
+[settings]
+os=iOS
+os.version=9.0
+arch=armv7
+
+[tool_requires]
+darwin-toolchain/1.0@theodelrieu/stable
+</pre></div>
+</div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--profile<span class="w"> </span>ios_profile
+</pre></div>
+</div>
+</div>
+<div class="section" id="use-built-in-conan-toolchain">
+<span id="conan-cmake-toolchain-ios"></span><h2>Use built-in Conan toolchain<a class="headerlink" href="#use-built-in-conan-toolchain" title="永久链接至标题">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
+<p>Conan will generate a toolchain for iOS if the recipe is using a <a class="reference internal" href="../../reference/conanfile/tools/cmake/cmaketoolchain.html#conan-cmake-toolchain"><span class="std std-ref">CMakeToolchain</span></a>. This
+toolchain provides a minimal implementation supporting only the CMake XCode generator. It will be
+extended in the future but at the current version (1.31.0) is just for testing purposes.</p>
+<p>For using it, create a regular profile for the <em>host</em> context:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><strong>profile_host_ios</strong></span><a class="headerlink" href="#id3" title="永久链接至代码">¶</a></div>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[settings]</span>
+<span class="w"> </span><span class="na">os</span><span class="o">=</span><span class="s">iOS</span>
+<span class="w"> </span><span class="na">os.version</span><span class="o">=</span><span class="s">12.0</span>
+<span class="w"> </span><span class="na">arch</span><span class="o">=</span><span class="s">armv8</span>
+<span class="w"> </span><span class="na">compiler</span><span class="o">=</span><span class="s">apple-clang</span>
+<span class="w"> </span><span class="na">compiler.version</span><span class="o">=</span><span class="s">12.0</span>
+<span class="w"> </span><span class="na">compiler.libcxx</span><span class="o">=</span><span class="s">libc++</span>
+<span class="w"> </span><span class="na">build_type</span><span class="o">=</span><span class="s">Release</span>
+</pre></div>
+</div>
+</div>
+<p>Together with the files created by the generators that make it possible to find and link the
+requirements, <strong class="command">conan install</strong> command will generate a toolchain file like the following one:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><strong>conan_toolchain.cmake</strong> (some parts are stripped)</span><a class="headerlink" href="#id4" title="永久链接至代码">¶</a></div>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_BUILD_TYPE</span><span class="w"> </span><span class="s2">&quot;Release&quot;</span><span class="w"> </span><span class="s">CACHE</span><span class="w"> </span><span class="s">STRING</span><span class="w"> </span><span class="s2">&quot;Choose the type of build.&quot;</span><span class="w"> </span><span class="s">FORCE</span><span class="p">)</span>
+
+<span class="w"> </span><span class="c"># set cmake vars</span>
+<span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_SYSTEM_NAME</span><span class="w"> </span><span class="s">iOS</span><span class="p">)</span>
+<span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_SYSTEM_VERSION</span><span class="w"> </span><span class="s">12.0</span><span class="p">)</span>
+<span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="s">DEPLOYMENT_TARGET</span><span class="w"> </span><span class="o">${</span><span class="nv">CONAN_SETTINGS_HOST_MIN_OS_VERSION</span><span class="o">}</span><span class="p">)</span>
+<span class="w"> </span><span class="c"># Set the architectures for which to build.</span>
+<span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_OSX_ARCHITECTURES</span><span class="w"> </span><span class="s">arm64</span><span class="p">)</span>
+<span class="w"> </span><span class="c"># Setting CMAKE_OSX_SYSROOT SDK, when using Xcode generator the name is enough</span>
+<span class="w"> </span><span class="c"># but full path is necessary for others</span>
+<span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_OSX_SYSROOT</span><span class="w"> </span><span class="s">iphoneos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>With this toolchain file you can execute CMake’s command to generate the binaries:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan<span class="w"> </span>install<span class="w"> </span>&lt;conanfile&gt;<span class="w"> </span>--profile:host<span class="o">=</span>profile_host_ios<span class="w"> </span>--profile:build<span class="o">=</span>default
+cmake<span class="w"> </span>.<span class="w"> </span>-GXcode<span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>conan_toolchain.cmake
+cmake<span class="w"> </span>--build<span class="w"> </span>.<span class="w"> </span>--config<span class="w"> </span>Release
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="vxworks.html" class="btn btn-neutral float-right" title="VxWorks" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="android.html" class="btn btn-neutral" title="Android" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2022, JFrog.
+      最后更新于 2月 16, 2026.
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.59.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="../../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.59");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

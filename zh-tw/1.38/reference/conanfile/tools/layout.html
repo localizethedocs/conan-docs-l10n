@@ -1,0 +1,438 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>conan.tools.layout &mdash; conan 1.38.0 說明文件</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../../../genindex.html"/>
+        <link rel="search" title="搜尋" href="../../../search.html"/>
+    <link rel="top" title="conan 1.38.0 說明文件" href="../../../index.html"/>
+        <link rel="up" title="tools" href="../tools.html"/>
+        <link rel="next" title="Dependencies" href="../dependencies.html"/>
+        <link rel="prev" title="conan.tools.files" href="files.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../../../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../using_packages.html">使用軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../uploading_packages.html">上傳軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mastering.html">精通 Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howtos.html">Howtos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../commands.html">命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../attributes.html">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../methods.html">Methods</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../tools.html">tools</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="cmake.html">conan.tools.cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gnu.html">conan.tools.gnu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="google.html">conan.tools.google</a></li>
+<li class="toctree-l4"><a class="reference internal" href="meson.html">conan.tools.meson</a></li>
+<li class="toctree-l4"><a class="reference internal" href="microsoft.html">conan.tools.microsoft</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qbs.html">conan.tools.qbs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="env.html">conan.tools.env</a></li>
+<li class="toctree-l4"><a class="reference internal" href="files.html">conan.tools.files</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">conan.tools.layout</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../dependencies.html">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../other.html">Python requires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../other.html#output-and-running">輸出與執行</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../generators.html">生成器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../build_helpers.html">Build helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config_files.html">組態檔</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../env_vars.html">環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hooks.html">Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../conan_v2_mode.html">CONAN_V2_MODE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">變更日誌</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../conan_v2.html">Road to Conan 2.0</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../../../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../reference.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../../conanfile.html">conanfile.py</a> &raquo;</li>
+        
+          <li><a href="../tools.html">tools</a> &raquo;</li>
+        
+      <li>conan.tools.layout</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/reference/conanfile/tools/layout.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>JFrog Bintray is being sunset. <a
+            href=https://blog.conan.io/2021/03/31/Bintray-sunset-timeline.html> Please refer this blog post for more detail.</a>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="conan-tools-layout-1">
+<span id="conan-tools-layout"></span><h1>conan.tools.layout<a class="headerlink" href="#conan-tools-layout-1" title="本標題的永久連結">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases">1.37.0</a></p>
+<div class="section" id="layoutpackager">
+<h2>LayoutPackager<a class="headerlink" href="#layoutpackager" title="本標題的永久連結">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">LayoutPackager</span></code> together with the <a class="reference internal" href="../../../developing_packages/package_layout.html#package-layout"><span class="std std-ref">package layouts</span></a> feature, allow to automatically
+package the files following the declared information in the <code class="docutils literal notranslate"><span class="pre">layout()</span></code> method:</p>
+<p>It will copy (being xxx =&gt; <code class="docutils literal notranslate"><span class="pre">build</span></code> and <code class="docutils literal notranslate"><span class="pre">source</span></code> (if destination is only one dir):</p>
+<ul class="simple">
+<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.includedirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.includedirs</span></code> matching <code class="docutils literal notranslate"><span class="pre">self.patterns.xxx.include</span></code> patterns.</li>
+<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.libdirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.libdirs</span></code> matching <code class="docutils literal notranslate"><span class="pre">self.patterns.xxx.lib</span></code> patterns.</li>
+<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.bindirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.bindirs</span></code> matching <code class="docutils literal notranslate"><span class="pre">self.patterns.xxx.bin</span></code> patterns.</li>
+<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.srcdirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.srcdirs</span></code> matching <code class="docutils literal notranslate"><span class="pre">self.patterns.xxx.src</span></code> patterns.</li>
+<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.builddirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.builddirs</span></code> matching <code class="docutils literal notranslate"><span class="pre">self.patterns.xxx.build</span></code> patterns.</li>
+<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.resdirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.resdirs</span></code> matching <code class="docutils literal notranslate"><span class="pre">self.patterns.xxx.res</span></code> patterns.</li>
+<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.xxx.frameworkdirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.frameworkdirs</span></code> matching <code class="docutils literal notranslate"><span class="pre">self.patterns.xxx.framework</span></code> patterns.</li>
+</ul>
+<p>Usage:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span> <span class="nn">conan.tools.layout</span> <span class="kn">import</span> <span class="n">LayoutPackager</span>
+
+<span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">LayoutPackager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">package</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="predefined-layouts">
+<h2>Predefined layouts<a class="headerlink" href="#predefined-layouts" title="本標題的永久連結">¶</a></h2>
+<p>There are some pre-defined common layouts, ready to be simply used in recipes.</p>
+<p>For example, this would implement the standard CMake project layout:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan.tools.layout</span> <span class="kn">import</span> <span class="n">cmake_layout</span>
+
+<span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">cmake_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you want to try it, use the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">new</span> <span class="pre">hello/0.1</span> <span class="pre">-m</span> <span class="pre">v2_cmake</span></code> template.</p>
+<p>It is very important to note that this <code class="docutils literal notranslate"><span class="pre">cmake_layout()</span></code> is just calling the <code class="docutils literal notranslate"><span class="pre">folders</span></code> and <code class="docutils literal notranslate"><span class="pre">cpp</span></code>
+attributes described before:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cmake_layout</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">gen</span> <span class="o">=</span> <span class="n">conanfile</span><span class="o">.</span><span class="n">conf</span><span class="p">[</span><span class="s2">&quot;tools.cmake.cmaketoolchain:generator&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">generator</span>
+    <span class="k">if</span> <span class="n">gen</span><span class="p">:</span>
+        <span class="n">multi</span> <span class="o">=</span> <span class="s2">&quot;Visual&quot;</span> <span class="ow">in</span> <span class="n">gen</span> <span class="ow">or</span> <span class="s2">&quot;Xcode&quot;</span> <span class="ow">in</span> <span class="n">gen</span> <span class="ow">or</span> <span class="s2">&quot;Multi-Config&quot;</span> <span class="ow">in</span> <span class="n">gen</span>
+    <span class="k">elif</span> <span class="n">conanfile</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span> <span class="o">==</span> <span class="s2">&quot;Visual Studio&quot;</span> <span class="ow">or</span> <span class="n">conanfile</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span> <span class="o">==</span> <span class="s2">&quot;msvc&quot;</span><span class="p">:</span>
+        <span class="n">multi</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">multi</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">conanfile</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;src&quot;</span>
+    <span class="k">if</span> <span class="n">multi</span><span class="p">:</span>
+        <span class="n">conanfile</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">build</span> <span class="o">=</span> <span class="s2">&quot;build&quot;</span>
+        <span class="n">conanfile</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;build/conan&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">build_type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">conanfile</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">build_type</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">conanfile</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">build</span> <span class="o">=</span> <span class="s2">&quot;cmake-build-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">build_type</span><span class="p">)</span>
+        <span class="n">conanfile</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">generators</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conanfile</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">build</span><span class="p">,</span> <span class="s2">&quot;conan&quot;</span><span class="p">)</span>
+
+    <span class="n">conanfile</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">includedirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">multi</span><span class="p">:</span>
+        <span class="n">conanfile</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">libdirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">conanfile</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">build_type</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">conanfile</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">libdirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>First, it is important to notice that the layout depends on the CMake generator that will be used.
+So if defined from <code class="docutils literal notranslate"><span class="pre">[conf]</span></code>, that value will be used. If defined in recipe, then the recipe should
+pass it as <code class="docutils literal notranslate"><span class="pre">cmake_layout(self,</span> <span class="pre">cmake_generator)</span></code>.</p>
+<p>The definitions of the folders is different if it is a multi-config generator (like Visual Studio or Xcode),
+or a single-config generator (like Unix Makefiles). In the first case, the folder is the same irrespective
+of the build type, and the build system will manage the different build types inside that folder. But
+single-config generators like Unix Makefiles, must use a different folder for each different configuration
+(as a different build_type Release/Debug).</p>
+<p>Finally, the location where the libraries are created also depends. For multi-config, the respective libraries
+will be located in a dedicated folder inside the build folder, while for single-config, the libraries will
+be located directly in the build folder.</p>
+<p>This helper defines a few things, for example that the source folder is called <code class="docutils literal notranslate"><span class="pre">&quot;src&quot;</span></code>. This could be customized
+without fully changing the layout:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>def layout(self):</dt>
+<dd>cmake_layout(self)
+self.folders.source = 「mysrcfolder」</dd>
+</dl>
+</div></blockquote>
+<p>Even if this pre-defined layout doesn’t suit your specific projects layout, it is a good example how you could
+implement your own logic (and probably put it in a common <code class="docutils literal notranslate"><span class="pre">python_require</span></code> if you are going to use it in multiple
+packages).</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../dependencies.html" class="btn btn-neutral float-right" title="Dependencies" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="files.html" class="btn btn-neutral" title="conan.tools.files" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, JFrog.
+      最後更新於 2月 16, 2026。
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.38.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../../../_static/js/modernizr.min.js"></script>
+  <script src="../../../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.38");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

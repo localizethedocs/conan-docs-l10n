@@ -1,0 +1,487 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Lockfile bundles &mdash; conan 1.50.2 文档</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../../genindex.html"/>
+        <link rel="search" title="搜索" href="../../search.html"/>
+    <link rel="top" title="conan 1.50.2 文档" href="../../index.html"/>
+        <link rel="up" title="Lockfiles" href="../lockfiles.html"/>
+        <link rel="next" title="Lockfiles in Continuous Integration" href="ci.html"/>
+        <link rel="prev" title="Build order in lockfiles" href="build_order.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conan_v2.html">Conan migration guide to 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using_packages.html">Using packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../versioning.html">Versioning</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">Introduction to versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../version_ranges.html">Version ranges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../revisions.html">Package Revisions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../lockfiles.html">Lockfiles</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configurations.html">Multiple configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evolving.html">Evolving lockfiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build_order.html">Build order in lockfiles</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Lockfile bundles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-lockfile-bundle">Creating a lockfile bundle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-a-lockfile-bundle-to-build">Using a lockfile bundle to build</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ci.html">Lockfiles in Continuous Integration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howtos.html">Howtos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../versioning.html">Versioning</a> &raquo;</li>
+        
+          <li><a href="../lockfiles.html">Lockfiles</a> &raquo;</li>
+        
+      <li>Lockfile bundles</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/versioning/lockfiles/bundle.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>JFrog Bintray is being sunset. <a
+            href=https://blog.conan.io/2021/03/31/Bintray-sunset-timeline.html> Please refer this blog post for more detail.</a>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lockfile-bundles">
+<span id="versioning-lockfiles-bundle"></span><h1>Lockfile bundles<a class="headerlink" href="#lockfile-bundles" title="永久链接至标题">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
+<p>Every package build using lockfiles requires a given configuration-specific lockfile, and after the build, that lockfile is
+updated to include the built package revision. If we have different configurations for different variants as different architectures,
+compiler versions or Debug/Release, a build will be typically necessary for each one.</p>
+<p>In real life, it is also likely that we might want to build together different applications or products, that could be even disconnected,
+and we want to do it as efficiently and fast (in parallel) as possible. We could have the following situation:</p>
+<a class="reference internal image-reference" href="../../_images/conan_lock_bundle.png"><img alt="../../_images/conan_lock_bundle.png" class="align-center" src="../../_images/conan_lock_bundle.png" style="width: 400px; height: 200px;" /></a>
+<p>In this diagram we see that we are building and releasing 2 different products in our team: <code class="docutils literal notranslate"><span class="pre">app1/1.1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">app2/2.3</span></code>. <code class="docutils literal notranslate"><span class="pre">app1</span></code> depends on <code class="docutils literal notranslate"><span class="pre">pkgb/0.1</span></code> (omitting <code class="docutils literal notranslate"><span class="pre">user/channel</span></code> for brevity, but please use it) and
+<code class="docutils literal notranslate"><span class="pre">app2</span></code> depends on <code class="docutils literal notranslate"><span class="pre">pkgb/0.2</span></code>. In turn, both versions of <code class="docutils literal notranslate"><span class="pre">pkgb</span></code> depend on the same <code class="docutils literal notranslate"><span class="pre">pkga/0.1</span></code> version.</p>
+<p>If we are building both products for 2 different configurations each (lets say Windows and Linux), we could capture 4
+different lockfiles:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan lock create --ref=app1/1.1 --base --lockfile-out=app1_base.lock
+$ conan lock create --ref=app2/2.3 --base --lockfile-out=app2_base.lock
+
+$ conan lock create --ref=app1/1.1 -s os=Windows --lockfile=app1_base.lock --lockfile-out=app1_windows.lock
+$ conan lock create --ref=app1/1.1 -s os=Linux  --lockfile=app1_base.lock --lockfile-out=app1_linux.lock
+$ conan lock create --ref=app2/2.3 -s os=Windows  --lockfile=app2_base.lock --lockfile-out=app2_windows.lock
+$ conan lock create --ref=app2/2.3 -s os=Linux  --lockfile=app2_base.lock --lockfile-out=app2_linux.lock
+</pre></div>
+</div>
+<p>If we launched these 4 lockfiles builds in parallel, we can see that <code class="docutils literal notranslate"><span class="pre">pkga/0.1</span></code> will be built 4 times, 2 times
+in Windows and 2 times in Linux. The extra build in each OS is redundant and can be avoided. But we need a way
+to orchestrate it, that is what a lockfile bundle is for.</p>
+<div class="section" id="creating-a-lockfile-bundle">
+<h2>Creating a lockfile bundle<a class="headerlink" href="#creating-a-lockfile-bundle" title="永久链接至标题">¶</a></h2>
+<p>Creating a lockfile bundle can be done with the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">bundle</span> <span class="pre">create</span></code> command, passing the list of all lockfiles
+for all configurations and products, and obtaining one single output bundle:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan lock bundle create app1_windows.lock app1_linux.lock app2_windows.lock app2_linux.lock --bundle-out=lock.bundle
+</pre></div>
+</div>
+<p>Inspecting the resulting lockfile bundle file, we can see it is a json file with the following structure:</p>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;lock_bundle&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;app1/1.1@#584778f98ba1d0eb7c80a5ae1fe12fe2&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;packages&quot;</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="s2">&quot;package_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3bcd6800847f779e0883ee91b411aad9ddd8e83c&quot;</span> <span class="p">,</span>
+                <span class="s2">&quot;lockfiles&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;app1_windows.lock&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="s2">&quot;1&quot;</span>
+                    <span class="p">]</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;prev&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="n">null</span>
+            <span class="p">},</span> <span class="p">{</span>
+                <span class="s2">&quot;package_id&quot;</span><span class="p">:</span> <span class="s2">&quot;60fbb0a22359b4888f7ecad69bcdfcd6e70e2784&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;lockfiles&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;app1_linux.lock&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="s2">&quot;1&quot;</span>
+                    <span class="p">]</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;prev&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="n">null</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;requires&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;pkgb/0.1@#cd8f22d6f264f65398d8c534046e8e20&quot;</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The bundle groups items per “recipe reference”, included the recipe revision, like <code class="docutils literal notranslate"><span class="pre">app1/1.1&#64;#584778f98ba1d0eb7c80a5ae1fe12fe2</span></code>.
+For each one, it will list all different binaries, identified by their <code class="docutils literal notranslate"><span class="pre">package_id</span></code> that are involved in the different
+lockfiles, listing all lockfiles for each <code class="docutils literal notranslate"><span class="pre">package_id</span></code>. In this case, as <code class="docutils literal notranslate"><span class="pre">app1</span></code> only belongs to app1 lockfiles, only
+one lockfile <code class="docutils literal notranslate"><span class="pre">app1_windows.lock</span></code>, <code class="docutils literal notranslate"><span class="pre">app1_linux.lock</span></code> is in each <code class="docutils literal notranslate"><span class="pre">package_id</span></code>. Also, the package revision <code class="docutils literal notranslate"><span class="pre">prev</span></code> is listed,
+in this case being <code class="docutils literal notranslate"><span class="pre">null</span></code>, because there is no locked binary in the lockfiles, but is going to be built.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The relative path between the bundle file and the lockfile files need to be maintained. In the example
+<code class="docutils literal notranslate"><span class="pre">app1_linux.lock</span></code> means that the lockfile is located in the same folder as the bundle file itself. If
+moving the bundle to a different machine, the lockfiles should be moved too, maintaining the same relative
+layout.</p>
+</div>
+<p>The interesting part is in the <code class="docutils literal notranslate"><span class="pre">pkga/0.1</span></code> information in the bundle:</p>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;pkga/0.1@#f096d7d54098b7ad7012f9435d9c33f3&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;packages&quot;</span><span class="p">:</span> <span class="p">[{</span>
+            <span class="s2">&quot;package_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3475bd55b91ae904ac96fde0f106a136ab951a5e&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lockfiles&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;app1_windows.lock&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;3&quot;</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;app2_windows.lock&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;3&quot;</span>
+                <span class="p">]</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;prev&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now we can see that for one <code class="docutils literal notranslate"><span class="pre">package_id</span></code> there are actually 2 different lockfiles that require it. Both <code class="docutils literal notranslate"><span class="pre">app1</span></code> and <code class="docutils literal notranslate"><span class="pre">app2</span></code>
+depend in this case on <code class="docutils literal notranslate"><span class="pre">pkga/0.1</span></code>.
+This is the information that can be used to avoid duplicated builds.</p>
+</div>
+<div class="section" id="using-a-lockfile-bundle-to-build">
+<h2>Using a lockfile bundle to build<a class="headerlink" href="#using-a-lockfile-bundle-to-build" title="永久链接至标题">¶</a></h2>
+<p>The lockfile bundles also can compute a “build order” over the bundle, that will give an ordered list of lists of the
+package references that need to be built. In our case we could do:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan lock bundle build-order lock.bundle --json=build_order.json
+[
+    [&quot;pkga/0.1@#f096d7d54098b7ad7012f9435d9c33f3&quot;],
+    [&quot;pkgb/0.1@#cd8f22d6f264f65398d8c534046e8e20&quot;, &quot;pkgb/0.2@#cd8f22d6f264f65398d8c534046e8e20&quot;],
+    [&quot;app1/0.1@#584778f98ba1d0eb7c80a5ae1fe12fe2&quot;, &quot;app2/0.1@#3850895c1eac8223c43c71d525348019&quot;]
+]
+</pre></div>
+</div>
+<p>The result is a list of lists. Every inner list is a “level”, it is formed by mutually independent references that
+can be built in parallel, because they don’t depend on each other. But every level will have dependencies to the
+previous levels, so it is necessary to build those levels in order.</p>
+<p>The build order list can be iterated, building the packages in order. The necessary information is in the bundle
+file itself, so we can read it and use it, something like:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the build order</span>
+<span class="n">build_order</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;build_order.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="c1"># Read the bundle</span>
+<span class="n">bundle</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;lock.bundle&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">bundle</span> <span class="o">=</span> <span class="n">bundle</span><span class="p">[</span><span class="s2">&quot;lock_bundle&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">build_order</span><span class="p">:</span>  <span class="c1"># iterate the build_order</span>
+    <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">level</span><span class="p">:</span>  <span class="c1"># All refs in this level could be built in parallel</span>
+        <span class="c1"># Now get the package_ids and lockfile information</span>
+        <span class="n">package_ids</span> <span class="o">=</span> <span class="n">bundle</span><span class="p">[</span><span class="n">ref</span><span class="p">][</span><span class="s2">&quot;package_id&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">pkg_id</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">package_ids</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">lockfiles</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;lockfiles&quot;</span><span class="p">]</span>
+            <span class="n">lockfile</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">lockfiles</span><span class="p">)))</span>  <span class="c1"># Get the first one, all should be valid to build same packag_id</span>
+
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;conan install </span><span class="si">{ref}</span><span class="s2"> --build=</span><span class="si">{ref}</span><span class="s2"> --lockfile=</span><span class="si">{lockfile}</span><span class="s2"> &quot;</span>
+                      <span class="s2">&quot;--lockfile-out=</span><span class="si">{lockfile}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ref</span><span class="o">=</span><span class="n">ref</span><span class="p">,</span> <span class="n">lockfile</span><span class="o">=</span><span class="n">lockfile</span><span class="p">))</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;conan lock bundle update lock.bundle&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This works under the hypothesis that the same binary, identified by the same <code class="docutils literal notranslate"><span class="pre">package_id</span></code> will be obtained irrespective
+of which lockfile or final product is used to build it. If this doesn’t hold true, then the <code class="docutils literal notranslate"><span class="pre">package_id</span></code> policies should
+be revised until this condition is met.</p>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last">Recall that this is an orchestration mechanism, that can be used to distribute the actual <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> tasks
+to different agents, based on the lockfile itself, we might need some logic to send that build to one or another
+build server. If we didn’t want to orchestrate and everything can be built in this machine a
+<code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span> <span class="pre">app1/1.1&#64;</span> <span class="pre">--lockfile={lockfile}</span> <span class="pre">--build=missing</span></code> would build all the necessary dependencies in the
+graph, in the current agent.</p>
+</div>
+<p>Note that the builds themselves are using regular lockfiles. The bundle does not contain the necessary information to
+reproduce the dependency graph that is needed to create packages.</p>
+<p>The command <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">bundle</span> <span class="pre">update</span> <span class="pre">lock.bundle</span></code> manages to update all the connected lockfiles after a reference has been
+built. When the build is fired, it is done using 1 of the lockfiles, for a given configuration. That lockfile will get the
+updated package revision and status. The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">bundle</span> <span class="pre">update</span></code> does this process in 2 steps:</p>
+<ul class="simple">
+<li>Scan all connected lockfiles for every <code class="docutils literal notranslate"><span class="pre">ref</span></code> recipe reference and <code class="docutils literal notranslate"><span class="pre">package_id</span></code>, and collect those that have been modified.</li>
+<li>Propagate the modified information to all the other connected lockfiles.</li>
+</ul>
+<p>After <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">bundle</span> <span class="pre">update</span></code>, all packages sharing the same reference and <code class="docutils literal notranslate"><span class="pre">package_id</span></code> should
+have the same status (marked “modified” and same package revision). The “modified” state for the
+lockfile bundles can be cleaned using the command <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">bundle</span> <span class="pre">clean-modified</span></code> that will
+clean that flag from both the <em>.bundle</em> file and the individual <em>.lock</em> files.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ci.html" class="btn btn-neutral float-right" title="Lockfiles in Continuous Integration" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="build_order.html" class="btn btn-neutral" title="Build order in lockfiles" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2022, JFrog.
+      最后更新于 2月 16, 2026.
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.50.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.50");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

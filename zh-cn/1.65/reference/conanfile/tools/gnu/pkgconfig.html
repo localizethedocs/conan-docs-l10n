@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PkgConfig &mdash; conan 1.65.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/conan.css?v=f9087e22" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/reference/conanfile/tools/gnu/pkgconfig.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=b1fa76c8"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../search.html" />
+    <link rel="next" title="conan.tools.google" href="../google.html" />
+    <link rel="prev" title="PkgConfigDeps" href="pkgconfigdeps.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/conan-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.65
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../conan_v2.html">Conan migration guide to 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using_packages.html">Using packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mastering.html">Mastering Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../howtos.html">Howtos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../commands.html">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../attributes.html">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html">Methods</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../tools.html">tools</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../cmake.html">conan.tools.cmake</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../gnu.html">conan.tools.gnu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../google.html">conan.tools.google</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apple.html">conan.tools.apple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meson.html">conan.tools.meson</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../microsoft.html">conan.tools.microsoft</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qbs.html">conan.tools.qbs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../env.html">conan.tools.env</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../system.html">conan.tools.system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../files.html">conan.tools.files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../layout.html">conan.tools.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scm.html">conan.tools.scm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build.html">conan.tools.build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../android.html">conan.tools.android</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scons.html">conan.tools.scons</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../dependencies.html">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html">Python requires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html#output-and-running">Output and Running</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators.html">Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../build_helpers.html">Build helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../config_files.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../env_vars.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../hooks.html">Hooks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div class="admonition warning wy-text-center" style="position:sticky;top:0;border: 2px solid red;background-color: #ffcaca;">
+            <p>This document is for a <b>"1.X" legacy</b> Conan version, <b>which is no longer recommended</b>. Please update to Conan 2, <a href="https://docs.conan.io/2/">click here to read the <b>Conan 2</b> documentation</a></p>
+          </div>
+          
+          <!--@ OUTDATED_VERSION_PLACEHOLDER_BEGIN @
+          <div>
+            <div class="admonition warning wy-text-center" style="position:sticky">
+              <p>This document is for an <b>outdated</b> Conan version.
+              <a href="https://docs.conan.io/2/@LATEST_DOC_PAGE_URL@">Click here to read the <b>latest</b> documentation</a></p>
+             </div>
+          </div>
+          @ OUTDATED_VERSION_PLACEHOLDER_END @-->
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../reference.html">Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../../conanfile.html">conanfile.py</a></li>
+          <li class="breadcrumb-item"><a href="../../tools.html">tools</a></li>
+          <li class="breadcrumb-item"><a href="../gnu.html">conan.tools.gnu</a></li>
+      <li class="breadcrumb-item active">PkgConfig</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/master/reference/conanfile/tools/gnu/pkgconfig.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pkgconfig">
+<h1>PkgConfig<a class="headerlink" href="#pkgconfig" title="Link to this heading"></a></h1>
+<div class="admonition important">
+<p class="admonition-title">重要</p>
+<p>This feature is still <strong>under development</strong>, while it is recommended and usable and we will try not to break them in future releases,
+some breaking changes might still happen if necessary to prepare for the <em>Conan 2.0 release</em>.</p>
+</div>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.45.0">1.45.0</a></p>
+<p>This tool can execute <code class="docutils literal notranslate"><span class="pre">pkg_config</span></code> executable to extract information from existing <code class="docutils literal notranslate"><span class="pre">.pc</span></code> files.
+This can be useful for example to create a “system” package recipe over some system installed library,
+as a way to automatically extract the <code class="docutils literal notranslate"><span class="pre">.pc</span></code> information from the system. Or if some proprietary package
+has a build system that only outputs <code class="docutils literal notranslate"><span class="pre">.pc</span></code> files.</p>
+<p>The constructor is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">,</span> <span class="n">library</span><span class="p">,</span> <span class="n">pkg_config_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">conanfile</span></code>: The current <code class="docutils literal notranslate"><span class="pre">self</span></code> instance of the conanfile using the tool</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">library</span></code>: The library which <code class="docutils literal notranslate"><span class="pre">.pc</span></code> file is to be parsed. It must exist in the pkg_config path</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pkg_config_path</span></code>: If defined it will be prepended to <code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_PATH</span></code> environment variable, so
+the execution finds the required files.</p></li>
+</ul>
+<p>It can be used as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pkg_config</span> <span class="o">=</span> <span class="n">PkgConfig</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="s2">&quot;libastral&quot;</span><span class="p">,</span> <span class="n">pkg_config_path</span><span class="o">=&lt;</span><span class="n">somedir</span><span class="o">&gt;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pkg_config</span><span class="o">.</span><span class="n">provides</span><span class="p">)</span> <span class="c1"># something like&quot;libastral = 6.6.6&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pkg_config</span><span class="o">.</span><span class="n">version</span><span class="p">)</span> <span class="c1"># something like&quot;6.6.6&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pkg_config</span><span class="o">.</span><span class="n">includedirs</span><span class="p">)</span> <span class="c1"># something like[&#39;/usr/local/include/libastral&#39;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pkg_config</span><span class="o">.</span><span class="n">defines</span><span class="p">)</span> <span class="c1"># something like[&#39;_USE_LIBASTRAL&#39;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pkg_config</span><span class="o">.</span><span class="n">libs</span><span class="p">)</span> <span class="c1"># something like[&#39;astral&#39;, &#39;m&#39;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pkg_config</span><span class="o">.</span><span class="n">libdirs</span><span class="p">)</span> <span class="c1"># something like[&#39;/usr/local/lib/libastral&#39;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pkg_config</span><span class="o">.</span><span class="n">linkflags</span><span class="p">)</span> <span class="c1"># something like[&#39;-Wl,--whole-archive&#39;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pkg_config</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;prefix&#39;</span><span class="p">])</span> <span class="c1"># something like&#39;/usr/local&#39;</span>
+</pre></div>
+</div>
+<p>There is a convenience method <code class="docutils literal notranslate"><span class="pre">fill_cpp_info()</span></code>, that can be used in the <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">pkg_config</span> <span class="o">=</span> <span class="n">PkgConfig</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="s2">&quot;libastral&quot;</span><span class="p">,</span> <span class="n">pkg_config_path</span><span class="o">=</span><span class="n">tmp_dir</span><span class="p">)</span>
+    <span class="n">pkg_config</span><span class="o">.</span><span class="n">fill_cpp_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="p">,</span> <span class="n">is_system</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">system_libs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> first argument could be the global one or a component one.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_system</span></code>: if <code class="docutils literal notranslate"><span class="pre">True</span></code>, all detected libraries will be assigned to <code class="docutils literal notranslate"><span class="pre">cpp_info.system_libs</span></code>, and none to <code class="docutils literal notranslate"><span class="pre">cpp_info.libs</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">system_libs</span></code>: If <code class="docutils literal notranslate"><span class="pre">is_system=False</span></code>, this argument allows defining some potential system libraries found that would be assigned to <code class="docutils literal notranslate"><span class="pre">cpp_info.system_libs</span></code>.
+The remaining detected libs will be assigned to <code class="docutils literal notranslate"><span class="pre">cpp_info.libs</span></code>.</p></li>
+</ul>
+<section id="conf">
+<h2>conf<a class="headerlink" href="#conf" title="Link to this heading"></a></h2>
+<p>This helper will listen to <code class="docutils literal notranslate"><span class="pre">tools.gnu:pkg_config</span></code> <a class="reference internal" href="../../../config_files/global_conf.html#global-conf"><span class="std std-ref">configuration</span></a> to define the <code class="docutils literal notranslate"><span class="pre">pkg_config</span></code> executable name or full path.
+It will by default it is <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pkgconfigdeps.html" class="btn btn-neutral float-left" title="PkgConfigDeps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../google.html" class="btn btn-neutral float-right" title="conan.tools.google" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, JFrog.
+      <span class="lastupdated">最后更新于 2月 16, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

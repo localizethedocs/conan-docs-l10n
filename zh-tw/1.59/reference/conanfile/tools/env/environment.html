@@ -1,0 +1,449 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Environment &mdash; conan 1.59.0 說明文件</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../../../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="搜尋" href="../../../../search.html"/>
+    <link rel="top" title="conan 1.59.0 說明文件" href="../../../../index.html"/>
+        <link rel="up" title="conan.tools.env" href="../env.html"/>
+        <link rel="next" title="EnvVars" href="envvars.html"/>
+        <link rel="prev" title="conan.tools.env" href="../env.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../../../../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../conan_v2.html">Conan migration guide to 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using_packages.html">使用軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uploading_packages.html">上傳軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mastering.html">精通 Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../howtos.html">Howtos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../commands.html">命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../attributes.html">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html">Methods</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../tools.html">tools</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../cmake.html">conan.tools.cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gnu.html">conan.tools.gnu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../google.html">conan.tools.google</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apple.html">conan.tools.apple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meson.html">conan.tools.meson</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../microsoft.html">conan.tools.microsoft</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qbs.html">conan.tools.qbs</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../env.html">conan.tools.env</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../system.html">conan.tools.system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../files.html">conan.tools.files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../layout.html">conan.tools.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scm.html">conan.tools.scm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build.html">conan.tools.build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../android.html">conan.tools.android</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../dependencies.html">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html">Python requires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html#output-and-running">輸出與執行</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators.html">生成器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../build_helpers.html">Build helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../config_files.html">組態檔</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../env_vars.html">環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../hooks.html">Hooks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">變更日誌</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../../../../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../reference.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../../../conanfile.html">conanfile.py</a> &raquo;</li>
+        
+          <li><a href="../../tools.html">tools</a> &raquo;</li>
+        
+          <li><a href="../env.html">conan.tools.env</a> &raquo;</li>
+        
+      <li>Environment</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/reference/conanfile/tools/env/environment.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>Recipe Hacking no. 2! Building on what we learnt during the first installment we will be working on more Conan 2.0 Migration! We'll start by reviewing some open pull requests and hopefully tackle a CMake example. <a
+            href=https://jfrog.zoom.us/webinar/register/WN_grFhqH0yRBeIfJmBvQoPJw> Register here to attend.</a></p>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="environment">
+<span id="conan-tools-env-environment-model"></span><h1>Environment<a class="headerlink" href="#environment" title="本標題的永久連結">¶</a></h1>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last">Some of the features used in this section are still <strong>under development</strong>, while they are
+recommended and usable and we will try not to break them in future releases, some breaking
+changes might still happen if necessary to prepare for the <em>Conan 2.0 release</em>.</p>
+</div>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.35.0">1.35.0</a></p>
+<p><code class="docutils literal notranslate"><span class="pre">Environment</span></code> is a generic class that helps defining modifications to the environment variables.
+This class is used by other tools like the <a class="reference internal" href="../gnu.html#conan-tools-gnu"><span class="std std-ref">conan.tools.gnu</span></a> autotools helpers and
+the <a class="reference internal" href="virtualbuildenv.html#conan-tools-env-virtualbuildenv"><span class="std std-ref">VirtualBuildEnv</span></a> and <a class="reference internal" href="virtualrunenv.html#conan-tools-env-virtualrunenv"><span class="std std-ref">VirtualRunEnv</span></a>
+generator. It is important to highlight that this is a generic class, to be able to use it, a specialization
+for the current context (shell script, bat file, path separators, etc), a <code class="docutils literal notranslate"><span class="pre">EnvVars</span></code> object needs to be obtained
+from it.</p>
+<div class="section" id="variable-declaration">
+<h2>變數宣告<a class="headerlink" href="#variable-declaration" title="本標題的永久連結">¶</a></h2>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.env</span><span class="w"> </span><span class="kn">import</span> <span class="n">Environment</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">()</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="s2">&quot;MYVAR1&quot;</span><span class="p">,</span> <span class="s2">&quot;MyValue1&quot;</span><span class="p">)</span>  <span class="c1"># Overwrite previously existing MYVAR1 with new value</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;MYVAR2&quot;</span><span class="p">,</span> <span class="s2">&quot;MyValue2&quot;</span><span class="p">)</span>  <span class="c1"># Append to existing MYVAR2 the new value</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="s2">&quot;MYVAR3&quot;</span><span class="p">,</span> <span class="s2">&quot;MyValue3&quot;</span><span class="p">)</span> <span class="c1"># Prepend to existing MYVAR3 the new value</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;MYVAR3&quot;</span><span class="p">,</span> <span class="s2">&quot;MyValue3&quot;</span><span class="p">)</span>  <span class="c1"># Remove the MyValue3 from MYVAR3</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">unset</span><span class="p">(</span><span class="s2">&quot;MYVAR4&quot;</span><span class="p">)</span>               <span class="c1"># Remove MYVAR4 definition from environment</span>
+
+    <span class="c1"># And the equivalent with paths</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">define_path</span><span class="p">(</span><span class="s2">&quot;MYPATH1&quot;</span><span class="p">,</span> <span class="s2">&quot;path/one&quot;</span><span class="p">)</span>  <span class="c1"># Overwrite previously existing MYPATH1 with new value</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">append_path</span><span class="p">(</span><span class="s2">&quot;MYPATH2&quot;</span><span class="p">,</span> <span class="s2">&quot;path/two&quot;</span><span class="p">)</span>  <span class="c1"># Append to existing MYPATH2 the new value</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">prepend_path</span><span class="p">(</span><span class="s2">&quot;MYPATH3&quot;</span><span class="p">,</span> <span class="s2">&quot;path/three&quot;</span><span class="p">)</span> <span class="c1"># Prepend to existing MYPATH3 the new value</span>
+</pre></div>
+</div>
+<p>「普通」變數（即使用 <code class="docutils literal notranslate"><span class="pre">define</span></code>、<code class="docutils literal notranslate"><span class="pre">append</span></code> 和 <code class="docutils literal notranslate"><span class="pre">prepend</span></code> 宣告的變數）預設會以空格進行追加，但也可以提供 <code class="docutils literal notranslate"><span class="pre">separator</span></code> 引數來定義自訂的分隔符號。</p>
+<p>The 「path」 variables (the ones declared with <code class="docutils literal notranslate"><span class="pre">define_path</span></code>, <code class="docutils literal notranslate"><span class="pre">append_path</span></code> and <code class="docutils literal notranslate"><span class="pre">prepend_path</span></code>) will be appended
+with the default system path separator, either <code class="docutils literal notranslate"><span class="pre">:</span></code> or <code class="docutils literal notranslate"><span class="pre">;</span></code>, but it also allows defining which one.</p>
+</div>
+<div class="section" id="composition">
+<h2>Composition<a class="headerlink" href="#composition" title="本標題的永久連結">¶</a></h2>
+<p>Environments can be composed:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.env</span><span class="w"> </span><span class="kn">import</span> <span class="n">Environment</span>
+
+<span class="n">env1</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">()</span>
+<span class="n">env1</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">env2</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">()</span>
+<span class="n">env2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">env1</span><span class="o">.</span><span class="n">compose_env</span><span class="p">(</span><span class="n">env2</span><span class="p">)</span> <span class="c1"># env1 has priority, and its modifications will prevail</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="obtaining-environment-variables">
+<h2>獲取環境變數<a class="headerlink" href="#obtaining-environment-variables" title="本標題的永久連結">¶</a></h2>
+<p>You can obtain an <code class="docutils literal notranslate"><span class="pre">EnvVars</span></code> object with the <code class="docutils literal notranslate"><span class="pre">vars()</span></code> method like this:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.env</span><span class="w"> </span><span class="kn">import</span> <span class="n">Environment</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">()</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="s2">&quot;MYVAR1&quot;</span><span class="p">,</span> <span class="s2">&quot;MyValue1&quot;</span><span class="p">)</span>
+    <span class="n">envvars</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;build&quot;</span><span class="p">)</span>
+    <span class="c1"># use the envvars object</span>
+</pre></div>
+</div>
+<p>The default <code class="docutils literal notranslate"><span class="pre">scope</span></code> is equal <code class="docutils literal notranslate"><span class="pre">&quot;build&quot;</span></code>, which means that if this <code class="docutils literal notranslate"><span class="pre">envvars</span></code> generate a script to
+activate the variables, such script will be automatically added to the <code class="docutils literal notranslate"><span class="pre">conanbuild.sh|bat</span></code> one, for
+users and recipes convenience. Conan generators use <code class="docutils literal notranslate"><span class="pre">build</span></code> and <code class="docutils literal notranslate"><span class="pre">run</span></code> scope, but it might be possible
+to manage other scopes too.</p>
+</div>
+<div class="section" id="environment-definition">
+<h2>Environment 定義<a class="headerlink" href="#environment-definition" title="本標題的永久連結">¶</a></h2>
+<p>還有其他一些地方可以定義和使用 <code class="docutils literal notranslate"><span class="pre">Environment</span></code>：</p>
+<ul class="simple">
+<li>In recipes <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method, in new <code class="docutils literal notranslate"><span class="pre">self.buildenv_info</span></code> and <code class="docutils literal notranslate"><span class="pre">self.runenv_info</span></code>, this
+environment will be propagated via <code class="docutils literal notranslate"><span class="pre">VirtualBuildEnv</span></code> and <code class="docutils literal notranslate"><span class="pre">VirtualRunEnv</span></code> respectively to packages
+depending on this recipe.</li>
+<li>In generators like <code class="docutils literal notranslate"><span class="pre">AutootoolsDeps</span></code>, <code class="docutils literal notranslate"><span class="pre">AutotoolsToolchain</span></code>, that need to define environment for the
+current recipe.</li>
+<li>In profiles new <a class="reference internal" href="../../../profiles.html#profiles-buildenv"><span class="std std-ref">[buildenv]</span></a> section.</li>
+</ul>
+<p>The definition in <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> is as follow, taking into account that both <code class="docutils literal notranslate"><span class="pre">self.buildenv_info</span></code> and <code class="docutils literal notranslate"><span class="pre">self.runenv_info</span></code>
+are objects of <code class="docutils literal notranslate"><span class="pre">Environment()</span></code> class.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">App</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;mypkg&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># This is information needed by consumers to build using this package</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buildenv_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;MYVAR&quot;</span><span class="p">,</span> <span class="s2">&quot;MyValue&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buildenv_info</span><span class="o">.</span><span class="n">prepend_path</span><span class="p">(</span><span class="s2">&quot;MYPATH&quot;</span><span class="p">,</span> <span class="s2">&quot;some/path/folder&quot;</span><span class="p">)</span>
+
+        <span class="c1"># This is information needed by consumers to run apps that depends on this package</span>
+        <span class="c1"># at runtime</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runenv_info</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="s2">&quot;MYPKG_DATA_DIR&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span>
+                                                               <span class="s2">&quot;datadir&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="envvars.html" class="btn btn-neutral float-right" title="EnvVars" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../env.html" class="btn btn-neutral" title="conan.tools.env" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2022, JFrog.
+      最後更新於 2月 16, 2026。
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.59.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="../../../../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+  <script src="../../../../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.59");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

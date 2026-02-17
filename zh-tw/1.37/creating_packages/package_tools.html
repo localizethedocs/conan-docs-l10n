@@ -1,0 +1,366 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Package Creator Tools &mdash; conan 1.37.2 說明文件</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../_static/css/search.css" type="text/css" />
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜尋" href="../search.html"/>
+    <link rel="top" title="conan 1.37.2 說明文件" href="../index.html"/>
+        <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
+        <link rel="next" title="上傳軟體包" href="../uploading_packages.html"/>
+        <link rel="prev" title="Packaging Approaches" href="package_approaches.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_packages.html">使用軟體包</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and Sources in a Different Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and Sources in the Same Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging Existing Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understand_packaging.html">Understanding Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="define_abi_compatibility.html">定義軟體包 ABI 相容性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_information.html">定義軟體包資訊</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toolchains.html">Toolchains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging Approaches</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Package Creator Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">上傳軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mastering.html">精通 Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howtos.html">Howtos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">變更日誌</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conan_v2.html">Road to Conan 2.0</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../creating_packages.html">Creating Packages</a> &raquo;</li>
+        
+      <li>Package Creator Tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/creating_packages/package_tools.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>JFrog Bintray is being sunset. <a
+            href=https://blog.conan.io/2021/03/31/Bintray-sunset-timeline.html> Please refer this blog post for more detail.</a>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="package-creator-tools">
+<span id="package-tools"></span><h1>Package Creator Tools<a class="headerlink" href="#package-creator-tools" title="本標題的永久連結">¶</a></h1>
+<p>Using Python (or just pure shell or bash) scripting, allows you to easily automate the whole package
+creation and testing process, for many different configurations. For example you could put the
+following script in the package root folder. Name it <em>build.py</em>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="k">def</span> <span class="nf">system</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+    <span class="n">retcode</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">retcode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error while executing:</span><span class="se">\n\t</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">command</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+    <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+        <span class="n">system</span><span class="p">(</span><span class="s1">&#39;conan create . demo/testing -s compiler=&quot;Visual Studio&quot; -s compiler.version=14 </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">params</span><span class="p">)</span>
+        <span class="n">system</span><span class="p">(</span><span class="s1">&#39;conan create . demo/testing -s compiler=&quot;Visual Studio&quot; -s compiler.version=12 </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">params</span><span class="p">)</span>
+        <span class="n">system</span><span class="p">(</span><span class="s1">&#39;conan create . demo/testing -s compiler=&quot;gcc&quot; -s compiler.version=4.8 </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">params</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p>This is a pure Python script, not related to Conan, and should be run as such:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ python build.py
+</pre></div>
+</div>
+<p>We have developed another FOSS tool for package creators, the <strong>Conan Package Tools</strong> to help you generate multiple binary packages from a package recipe.
+It offers a simple way to define the different configurations and to call <strong class="command">conan test</strong>.
+In addition to offering CI integration like <strong>Travis CI, Appveyor and Bamboo</strong>, for cloud-based automated
+binary package creation, testing, and uploading.</p>
+<p>This tool enables the creation of hundreds of binary packages in the cloud with a simple
+<code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">git</span> <span class="pre">push</span></code> and supports:</p>
+<ul class="simple">
+<li>Easy <strong>generation of multiple Conan packages</strong> with different configurations.</li>
+<li>Automated/remote package generation in <strong>Travis/Appveyor</strong> server with distributed builds in CI
+jobs for big/slow builds.</li>
+<li><strong>Docker</strong>: Automatic generation of packages for several versions of <code class="docutils literal notranslate"><span class="pre">gcc</span></code> and <code class="docutils literal notranslate"><span class="pre">clang</span></code> in
+Linux, and in Travis CI.</li>
+<li>Automatic creation of OSX packages with apple-clang, and in Travis-CI.</li>
+<li><strong>Visual Studio</strong>: Automatic configuration of the command line environment with detected settings.</li>
+</ul>
+<p>It’s available in pypi:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>conan_package_tools
+</pre></div>
+</div>
+<p>For more information, read the README.md in the <a class="reference external" href="https://github.com/conan-io/conan-package-tools">Conan Package Tools repository</a>.</p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../uploading_packages.html" class="btn btn-neutral float-right" title="上傳軟體包" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="package_approaches.html" class="btn btn-neutral" title="Packaging Approaches" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, JFrog.
+      最後更新於 2月 16, 2026。
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.37.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.37");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

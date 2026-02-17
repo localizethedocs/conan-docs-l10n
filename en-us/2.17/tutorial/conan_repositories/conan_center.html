@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en-US" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing to Conan Center &mdash; conan 2.17.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=2da93098" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/conan.css?v=7d9e9f1e" />
+
+  
+    <link rel="shortcut icon" href="../../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/tutorial/conan_repositories/conan_center.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=01c97be3"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Local Recipes Index Repository" href="setup_local_recipes_index.html" />
+    <link rel="prev" title="Uploading Packages" href="uploading_packages.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/conan-docs-logo-2.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2.17
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew.html">What’s new in Conan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../consuming_packages.html">Consuming packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../creating_packages.html">Creating packages</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../conan_repositories.html">Working with Conan repositories</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="setting_up_conan_remotes.html">Setting up a Conan remote</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Contributing to Conan Center</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup_local_recipes_index.html">Local Recipes Index Repository</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing_packages.html">Developing packages locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../versioning.html">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../other_features.html">Other important Conan features</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ci_tutorial/tutorial.html">CI Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devops/devops.html">Devops guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../incubating.html">Incubating features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../tutorial.html">Tutorial</a></li>
+          <li class="breadcrumb-item"><a href="../conan_repositories.html">Working with Conan repositories</a></li>
+      <li class="breadcrumb-item active">Contributing to Conan Center</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/develop2/tutorial/conan_repositories/conan_center.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contributing-to-conan-center">
+<span id="contribute-conancenter"></span><h1>Contributing to Conan Center<a class="headerlink" href="#contributing-to-conan-center" title="Link to this heading">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Default Remote Update in Conan 2.9.2</strong></p>
+<p>Starting from <strong>Conan version 2.9.2</strong>, the default remote has been changed to
+<cite>https://center2.conan.io</cite>. The previous default remote <cite>https://center.conan.io</cite> is
+now frozen and will no longer receive updates. It is recommended to update your remote
+configuration to use the new default remote to ensure access to the latest recipes and
+package updates (for more information, please read this <a class="reference external" href="https://blog.conan.io/2024/09/30/Conan-Center-will-stop-receiving-updates-for-Conan-1.html">post</a>).</p>
+<p>If you still have the deprecated remote configured as the default, please update using
+the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan<span class="w"> </span>remote<span class="w"> </span>update<span class="w"> </span>conancenter<span class="w"> </span>--url<span class="o">=</span><span class="s2">&quot;https://center2.conan.io&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Contribution of packages to ConanCenter is done via pull requests to the Github repository
+in <a class="reference external" href="https://github.com/conan-io/conan-center-index">https://github.com/conan-io/conan-center-index</a>. The C3I (ConanCenter Continuous
+Integration) service will build binaries automatically from those pull requests, and once
+merged, will upload them to ConanCenter package repository.</p>
+<p>Read more about how to <a class="reference external" href="https://github.com/conan-io/conan-center-index/tree/master/docs/adding_packages">submit a pull request to conan-center-index</a> source
+repository.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="uploading_packages.html" class="btn btn-neutral float-left" title="Uploading Packages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="setup_local_recipes_index.html" class="btn btn-neutral float-right" title="Local Recipes Index Repository" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, JFrog.
+      <span class="lastupdated">Last updated on Feb 17, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

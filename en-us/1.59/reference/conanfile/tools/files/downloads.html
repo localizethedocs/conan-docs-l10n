@@ -1,0 +1,475 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>conan.tools.files downloads &mdash; conan 1.59.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../../../_static/css/search.css" type="text/css" />
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="conan 1.59.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="conan.tools.files" href="../files.html"/>
+        <link rel="next" title="conan.tools.files patches" href="patches.html"/>
+        <link rel="prev" title="conan.tools.files basic operations" href="basic.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-flyout.js"></script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../../../../_static/conan-logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../conan_v2.html">Conan migration guide to 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../training_courses.html">Training Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using_packages.html">Using packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mastering.html">Mastering Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../extending.html">Extending Conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../howtos.html">Howtos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../commands.html">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../attributes.html">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html">Methods</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../tools.html">tools</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../cmake.html">conan.tools.cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gnu.html">conan.tools.gnu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../google.html">conan.tools.google</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apple.html">conan.tools.apple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meson.html">conan.tools.meson</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../microsoft.html">conan.tools.microsoft</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qbs.html">conan.tools.qbs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../env.html">conan.tools.env</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../system.html">conan.tools.system</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../files.html">conan.tools.files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../layout.html">conan.tools.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scm.html">conan.tools.scm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build.html">conan.tools.build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../android.html">conan.tools.android</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../dependencies.html">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html">Python requires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../other.html#output-and-running">Output and Running</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators.html">Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../build_helpers.html">Build helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../config_files.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../env_vars.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../hooks.html">Hooks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../../../../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../reference.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../../../conanfile.html">conanfile.py</a> &raquo;</li>
+        
+          <li><a href="../../tools.html">tools</a> &raquo;</li>
+        
+          <li><a href="../files.html">conan.tools.files</a> &raquo;</li>
+        
+      <li>conan.tools.files downloads</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/master/reference/conanfile/tools/files/downloads.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>Recipe Hacking no. 2! Building on what we learnt during the first installment we will be working on more Conan 2.0 Migration! We'll start by reviewing some open pull requests and hopefully tackle a CMake example. <a
+            href=https://jfrog.zoom.us/webinar/register/WN_grFhqH0yRBeIfJmBvQoPJw> Register here to attend.</a></p>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="conan-tools-files-downloads">
+<h1>conan.tools.files downloads<a class="headerlink" href="#conan-tools-files-downloads" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Some of the features used in this section are still <strong>under development</strong>, while they are
+recommended and usable and we will try not to break them in future releases, some breaking
+changes might still happen if necessary to prepare for the <em>Conan 2.0 release</em>.</p>
+</div>
+<div class="section" id="conan-tools-files-get">
+<h2>conan.tools.files.get()<a class="headerlink" href="#conan-tools-files-get" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.35.0">1.35.0</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">md5</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sha1</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sha256</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">keep_permissions</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry_wait</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">auth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strip_root</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>High level download and decompressing of a tgz, zip or other compressed format file.
+Just a high level wrapper for download, unzip, and remove the temporary zip file once unzipped. You can pass hash checking parameters:
+<code class="docutils literal notranslate"><span class="pre">md5</span></code>, <code class="docutils literal notranslate"><span class="pre">sha1</span></code>, <code class="docutils literal notranslate"><span class="pre">sha256</span></code>. All the specified algorithms will be checked. If any of them doesn’t match, it will raise a
+<code class="docutils literal notranslate"><span class="pre">ConanException</span></code>.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><strong>url</strong>, <strong>filename</strong>, <strong>md5</strong>, <strong>sha1</strong>, <strong>sha256</strong>, <strong>verify</strong>, <strong>retry</strong>, <strong>retry_wait</strong>, <strong>auth</strong>, <strong>headers</strong>: forwarded to <code class="docutils literal notranslate"><span class="pre">download()</span></code></li>
+<li><strong>keep_permissions</strong>, <strong>pattern</strong>, <strong>strip_root</strong>: forwarded to <code class="docutils literal notranslate"><span class="pre">tools.unzip()</span></code> (legacy, will be updated).</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.files</span><span class="w"> </span><span class="kn">import</span> <span class="n">get</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;http://url/file&quot;</span><span class="p">,</span> <span class="n">md5</span><span class="o">=</span><span class="s1">&#39;d2da0cd0756cd9da6560b9a56016a0cb&#39;</span><span class="p">)</span>
+    <span class="c1"># also, specify a destination folder</span>
+    <span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;http://url/file&quot;</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="s2">&quot;subfolder&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conan-tools-files-ftp-download">
+<h2>conan.tools.files.ftp_download()<a class="headerlink" href="#conan-tools-files-ftp-download" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.35.0">1.35.0</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ftp_download</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">login</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ftp download of a file. Retrieves a file from an FTP server. This doesn’t support SSL,
+but you might implement it yourself using the standard Python FTP library.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><strong>conanfile</strong>: Conanfile object, use always <code class="docutils literal notranslate"><span class="pre">self</span></code></li>
+<li><strong>ip</strong> (Required): The IP or address of the ftp server.</li>
+<li><strong>filename</strong> (Required): The filename, including the path/folder where it is located.</li>
+<li><strong>login</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>): Login credentials for the ftp server.</li>
+<li><strong>password</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>): Password credentials for the ftp server.</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.files</span><span class="w"> </span><span class="kn">import</span> <span class="n">ftp_download</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">ftp_download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;ftp.debian.org&#39;</span><span class="p">,</span> <span class="s2">&quot;debian/README&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;README&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conan-tools-files-download">
+<h2>conan.tools.files.download()<a class="headerlink" href="#conan-tools-files-download" title="Permalink to this headline">¶</a></h2>
+<p>Available since: <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.35.0">1.35.0</a></p>
+<p>Download a file</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry_wait</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">auth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">md5</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sha1</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sha256</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Retrieves a file from a given URL into a file with a given filename. It uses certificates from a list of known verifiers for https
+downloads, but this can be optionally disabled.</p>
+<p>You can pass hash checking parameters: <code class="docutils literal notranslate"><span class="pre">md5</span></code>, <code class="docutils literal notranslate"><span class="pre">sha1</span></code>, <code class="docutils literal notranslate"><span class="pre">sha256</span></code>. All the specified algorithms will be checked.
+If any of them doesn’t match, the downloaded file will be removed and it will raise a <code class="docutils literal notranslate"><span class="pre">ConanException</span></code>.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><strong>conanfile</strong> (Required): Conanfile object, use <code class="docutils literal notranslate"><span class="pre">self</span></code> always</li>
+<li><dl class="first docutils">
+<dt><strong>url</strong> (Required): URL to download. It can be a list, which only the first one will be downloaded, and the follow URLs will be used as mirror in case of download error.</dt>
+<dd>Since Conan <a class="reference external" href="https://github.com/conan-io/conan/releases/tag/1.51.0">1.51.0</a>, files accessible in the local filesystem can be referenced with a URL starting with <code class="docutils literal notranslate"><span class="pre">file:///</span></code> followed by an absolute path to a file
+(where the third <code class="docutils literal notranslate"><span class="pre">/</span></code> implies <code class="docutils literal notranslate"><span class="pre">localhost</span></code>).</dd>
+</dl>
+</li>
+<li><strong>filename</strong> (Required): Name of the file to be created in the local storage</li>
+<li><strong>verify</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): When False, disables https certificate validation.</li>
+<li><strong>retry</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">1</span></code>): Number of retries in case of failure.</li>
+<li><strong>retry_wait</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">5</span></code>): Seconds to wait between download attempts.</li>
+<li><strong>auth</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): A tuple of user and password to use HTTPBasic authentication. This is used directly in the <code class="docutils literal notranslate"><span class="pre">requests</span></code> Python library. Check other uses here: <a class="reference external" href="https://requests.readthedocs.io/en/master/user/authentication/#basic-authentication">https://requests.readthedocs.io/en/master/user/authentication/#basic-authentication</a></li>
+<li><strong>headers</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): A dictionary with additional headers.</li>
+<li><strong>md5</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>): MD5 hash code to check the downloaded file.</li>
+<li><strong>sha1</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>): SHA-1 hash code to check the downloaded file.</li>
+<li><strong>sha256</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>): SHA-256 hash code to check the downloaded file.</li>
+</ul>
+<p>Configuration:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">tools.files.download:retry</span></code>: number of retries in case some error occurs.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.files.download:retry_wait</span></code>: seconds to wait between retries.</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;http://someurl/somefile.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;myfilename.zip&quot;</span><span class="p">)</span>
+
+<span class="c1"># to disable verification:</span>
+<span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;http://someurl/somefile.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;myfilename.zip&quot;</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># to retry the download 2 times waiting 5 seconds between them</span>
+<span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;http://someurl/somefile.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;myfilename.zip&quot;</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">retry_wait</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Use https basic authentication</span>
+<span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;http://someurl/somefile.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;myfilename.zip&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">))</span>
+
+<span class="c1"># Pass some header</span>
+<span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;http://someurl/somefile.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;myfilename.zip&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Myheader&quot;</span><span class="p">:</span> <span class="s2">&quot;My value&quot;</span><span class="p">})</span>
+
+<span class="c1"># Download and check file checksum</span>
+<span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;http://someurl/somefile.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;myfilename.zip&quot;</span><span class="p">,</span> <span class="n">md5</span><span class="o">=</span><span class="s2">&quot;e5d695597e9fa520209d1b41edad2a27&quot;</span><span class="p">)</span>
+
+<span class="c1"># Retrieve file that is visible in the local filesystem</span>
+<span class="n">tools</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;file:///C:/Users/MyUser/Downloads/somefile.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;myfilename.zip&quot;</span><span class="p">,</span> <span class="n">md5</span><span class="o">=</span><span class="s2">&quot;e5d695597e9fa520209d1b41edad2a27&quot;</span><span class="p">)</span>
+<span class="n">tools</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;file:///home/myuser/downloads/somefile.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;myfilename.zip&quot;</span><span class="p">,</span> <span class="n">md5</span><span class="o">=</span><span class="s2">&quot;e5d695597e9fa520209d1b41edad2a27&quot;</span><span class="p">)</span>
+
+<span class="c1"># to add mirrors</span>
+<span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;https://ftp.gnu.org/gnu/gcc/gcc-9.3.0/gcc-9.3.0.tar.gz&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;http://mirror.linux-ia64.org/gnu/gcc/releases/gcc-9.3.0/gcc-9.3.0.tar.gz&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;file:///home/myuser/localmirror/gcc-9.3.0/gcc-9.3.0.tar.gz&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;gcc-9.3.0.tar.gz&quot;</span><span class="p">,</span>
+               <span class="n">sha256</span><span class="o">=</span><span class="s2">&quot;5258a9b6afe9463c2e56b9e8355b1a4bee125ca828b8078f910303bc2ef91fa6&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="patches.html" class="btn btn-neutral float-right" title="conan.tools.files patches" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="basic.html" class="btn btn-neutral" title="conan.tools.files basic operations" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2022, JFrog.
+      Last updated on Feb 16, 2026.
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.59.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+  <script src="../../../../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("1.59");
+  </script>
+
+
+ 
+
+
+</body>
+</html>

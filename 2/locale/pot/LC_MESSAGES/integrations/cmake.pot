@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-02-17 08:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "|cmake_logo| CMake"
 msgstr ""
 
-#: ../../../integrations/cmake.rst:38
+#: ../../../integrations/cmake.rst:68
 msgid "cmake_logo"
 msgstr ""
 
@@ -48,40 +48,94 @@ msgstr ""
 
 #: ../../../integrations/cmake.rst:15
 msgid ""
-"`CMakeDeps`: responsible for generating the CMake config files for all the "
+"``CMakeDeps``: responsible for generating the CMake config files for all the "
 "required dependencies of a package."
 msgstr ""
 
 #: ../../../integrations/cmake.rst:18
 msgid ""
-"`CMakeToolchain`: generates all the information needed for CMake to build "
-"the packages according to the information passed to Conan about things like "
-"the operating system, the compiler to use, architecture, etc. It will also "
-"generate `cmake-presets` files for easy integration with some IDEs that "
-"support this CMake feature off-the-shelf."
+"``CMakeConfigDeps``: A modern and better alternative to ``CMakeDeps``, "
+"released in Conan 2.25 that has several improvements and fixes."
 msgstr ""
 
-#: ../../../integrations/cmake.rst:23
+#: ../../../integrations/cmake.rst:21
 msgid ""
-"`CMake` build helper is the tool used by Conan to run CMake and will pass "
-"all the arguments that CMake needs to build successfully, such as the "
-"toolchain file, build type file, and all the CMake definitions set in the "
-"recipe."
+"``CMakeToolchain``: generates all the information needed for CMake to build "
+"the packages according to the information passed to Conan about things like "
+"the operating system, the compiler to use, architecture, etc. in a "
+"``conan_toolchain.cmake`` toolchain file. It will also generate `cmake-"
+"presets` files for easy integration with some IDEs that support this CMake "
+"feature off-the-shelf."
 msgstr ""
 
-#: ../../../integrations/cmake.rst:30
+#: ../../../integrations/cmake.rst:27
+msgid ""
+"``CMake`` build helper is the tool used by Conan ``conanfile.py`` recipes to "
+"run CMake and will pass all the arguments that CMake needs to build "
+"successfully, such as the toolchain file, build type file, and all the CMake "
+"definitions set in the recipe."
+msgstr ""
+
+#: ../../../integrations/cmake.rst:32
+msgid ""
+"The ``CMakeDeps`` and ``CMakeConfigDeps``, together with ``CMakeToolchain`` "
+"follow for the classic consumption flow described along the tutorial and "
+"many other sections in this documentation:"
+msgstr ""
+
+#: ../../../integrations/cmake.rst:35
+msgid ""
+"$ conan install ...\n"
+"$ cmake --preset conan-xxxx\n"
+"# or use the -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake"
+msgstr ""
+
+#: ../../../integrations/cmake.rst:41
+msgid ""
+"This flow is important, the ``conan install`` command generates CMake "
+"presets and ``conan_toolchain.cmake`` toolchain files that helps locating "
+"the dependencies, besides trying to align as best as possible with the "
+"profile information. This is the recommended flow for most cases."
+msgstr ""
+
+#: ../../../integrations/cmake.rst:45
+msgid ""
+"In extraordinary and exceptional scenarios, it might be desired for the "
+"``CMake`` execution to call ``conan install`` to simplify the flow, for "
+"example for some IDE integrations like the CLion one, so the users don't "
+"need to call ``conan install`` themselves."
+msgstr ""
+
+#: ../../../integrations/cmake.rst:49
+msgid ""
+"For this purpose, the  `cmake-conan integration <https://github.com/conan-io/"
+"cmake-conan>`_ exists. It uses the CMake \"dependency providers\" feature to "
+"intercept the first ``find_package()`` and do a call to ``conan install`` to "
+"fetch the dependencies at that point."
+msgstr ""
+
+#: ../../../integrations/cmake.rst:53
+msgid ""
+"This ``cmake-conan`` project stability is not guaranteed, and it has some "
+"known issues and limitations. Refer to the Github repository for more "
+"details. And note that calling ``conan install`` explicitly before calling "
+"``cmake`` is still the preferred and most recommended flow for most cases."
+msgstr ""
+
+#: ../../../integrations/cmake.rst:60
 msgid ""
 "Check the :ref:`Building your project using CMakePresets <examples-tools-"
 "cmake-toolchain-build-project-presets>` example"
 msgstr ""
 
-#: ../../../integrations/cmake.rst:32
+#: ../../../integrations/cmake.rst:62
 msgid ""
-"Reference for :ref:`CMakeDeps <conan_tools_cmakedeps>`, :ref:`CMakeToolchain "
-"<conan_tools_cmaketoolchain>` and :ref:`CMake build helper "
+"Reference for :ref:`CMakeDeps <conan_tools_cmakedeps>`, :ref:"
+"`CMakeConfigDeps generator <conan_tools_cmakeconfigdeps>`, :ref:"
+"`CMakeToolchain <conan_tools_cmaketoolchain>` and :ref:`CMake build helper "
 "<conan_tools_cmake_helper>`"
 msgstr ""
 
-#: ../../../integrations/cmake.rst:35
+#: ../../../integrations/cmake.rst:65
 msgid ":ref:`Conan tutorial <tutorial>`"
 msgstr ""

@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/lock/update.rst:2
+msgid "conan lock update"
+msgstr ""
+
+#: ../../../reference/commands/lock/update.rst:-1
+msgid ""
+"$ conan lock update -h\n"
+"usage: conan lock update [-h] [-v [V]] [-cc CORE_CONF] [--requires "
+"REQUIRES]\n"
+"                         [--build-requires BUILD_REQUIRES]\n"
+"                         [--python-requires PYTHON_REQUIRES]\n"
+"                         [--config-requires CONFIG_REQUIRES]\n"
+"                         [--lockfile-out LOCKFILE_OUT] [--lockfile "
+"LOCKFILE]\n"
+"\n"
+"Update requires, build-requires or python-requires from an existing "
+"lockfile.\n"
+"References that matches the arguments package names will be replaced by the\n"
+"arguments. References can be supplied with and without revisions like \"--\n"
+"requires=pkg/version\",\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  --requires REQUIRES   Update references to lockfile.\n"
+"  --build-requires BUILD_REQUIRES\n"
+"                        Update build-requires from lockfile\n"
+"  --python-requires PYTHON_REQUIRES\n"
+"                        Update python-requires from lockfile\n"
+"  --config-requires CONFIG_REQUIRES\n"
+"                        Update config-requires from lockfile\n"
+"  --lockfile-out LOCKFILE_OUT\n"
+"                        Filename of the created lockfile\n"
+"  --lockfile LOCKFILE   Filename of the input lockfile\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/lock/update.rst:8
+msgid ""
+"The ``conan lock update`` command is able to update ``requires``, "
+"``build_requires``, ``python_requires`` or ``config_requires`` items from an "
+"existing lockfile."
+msgstr ""
+
+#: ../../../reference/commands/lock/update.rst:10
+msgid "For example, if we have the following ``conan.lock``:"
+msgstr ""
+
+#: ../../../reference/commands/lock/update.rst:12
+msgid ""
+"$ cat conan.lock\n"
+"{\n"
+"    \"version\": \"0.5\",\n"
+"    \"requires\": [\n"
+"        \"math/1.0#85d927a4a067a531b1a9c7619522c015%1702683583.3411012\",\n"
+"        \"engine/1.0#fd2b006646a54397c16a1478ac4111ac%1702683583.3544693\"\n"
+"    ],\n"
+"    \"build_requires\": [\n"
+"        \"cmake/1.0#85d927a4a067a531b1a9c7619522c015%1702683583.3411012\",\n"
+"        \"ninja/1.0#fd2b006646a54397c16a1478ac4111ac%1702683583.3544693\"\n"
+"    ],\n"
+"    \"python_requires\": [\n"
+"        \"mytool/1.0#85d927a4a067a531b1a9c7619522c015%1702683583.3411012\",\n"
+"        \"othertool/1.0#fd2b006646a54397c16a1478ac4111ac%1702683583.3544693\"\n"
+"    ]\n"
+"}"
+msgstr ""
+
+#: ../../../reference/commands/lock/update.rst:33
+msgid "The ``conan lock update`` command:"
+msgstr ""
+
+#: ../../../reference/commands/lock/update.rst:35
+msgid "$ conan lock update --requires=math/1.1 --build-requires=cmake/1.1"
+msgstr ""
+
+#: ../../../reference/commands/lock/update.rst:39
+msgid "Will result in the following ``conan.lock``:"
+msgstr ""
+
+#: ../../../reference/commands/lock/update.rst:41
+msgid ""
+"$ cat conan.lock\n"
+"{\n"
+"    \"version\": \"0.5\",\n"
+"    \"requires\": [\n"
+"        \"math/1.1\",\n"
+"        \"engine/1.0#fd2b006646a54397c16a1478ac4111ac%1702683583.3544693\"\n"
+"    ],\n"
+"    \"build_requires\": [\n"
+"        \"cmake/1.1\",\n"
+"        \"ninja/1.0#fd2b006646a54397c16a1478ac4111ac%1702683583.3544693\"\n"
+"    ],\n"
+"    \"python_requires\": [\n"
+"        \"mytool/1.0#85d927a4a067a531b1a9c7619522c015%1702683583.3411012\",\n"
+"        \"othertool/1.0#fd2b006646a54397c16a1478ac4111ac%1702683583.3544693\"\n"
+"    ]\n"
+"}"
+msgstr ""
+
+#: ../../../reference/commands/lock/update.rst:61
+msgid ""
+"The command will replace existing locked references that matches the same "
+"package name with the provided argument values. If the provided references "
+"does not exist in the lockfile, they will be added (same as ``conan lock "
+"add`` command)."
+msgstr ""
+
+#: ../../../reference/commands/lock/update.rst:64
+msgid ""
+"This command is similar to do a ``conan lock remove`` followed by a ``conan "
+"lock add`` command."
+msgstr ""

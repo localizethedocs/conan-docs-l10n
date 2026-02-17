@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/microsoft/msbuild.rst:5
+msgid "MSBuild"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:7
+msgid ""
+"The ``MSBuild`` build helper is a wrapper around the command line invocation "
+"of MSBuild. It abstracts the calls like ``msbuild \"MyProject.sln\" /p:"
+"Configuration=<conf> /p:Platform=<platform>`` into Python method ones."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:10
+msgid "This helper can be used like:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:12
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.microsoft import MSBuild\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def build(self):\n"
+"        msbuild = MSBuild(self)\n"
+"        msbuild.build(\"MyProject.sln\")"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:25
+msgid ""
+"The ``MSBuild.build()`` method internally implements a call to ``msbuild`` "
+"like:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:27
+msgid ""
+"$ <vcvars-cmd> && msbuild \"MyProject.sln\" /p:"
+"Configuration=<configuration> /p:Platform=<platform>"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:31
+msgid "Where:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:33
+msgid ""
+"``<vcvars-cmd>`` calls the Visual Studio prompt that matches the current "
+"recipe ``settings``."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:34
+msgid ""
+"``configuration``, typically Release, Debug, which will be obtained from "
+"``settings.build_type`` but this can be customized with the ``build_type`` "
+"attribute."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:36
+msgid ""
+"``<platform>`` is the architecture, a mapping from the ``settings.arch`` to "
+"the common 'x86', 'x64', 'ARM', 'ARM64'. This can be customized with the "
+"``platform`` attribute."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:41
+msgid "Customization"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:44
+msgid "attributes"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:46
+msgid ""
+"You can customize the following attributes in case you need to change them:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:48
+msgid ""
+"**build_type** (default ``settings.build_type``): Value for the ``/p:"
+"Configuration``."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:49
+msgid ""
+"**platform** (default based on ``settings.arch`` to select one of these "
+"values: (``'x86', 'x64', 'ARM', 'ARM64'``): Value for the ``/p:Platform``."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:52
+msgid "Example:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:54
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.microsoft import MSBuild\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    def build(self):\n"
+"        msbuild = MSBuild(self)\n"
+"        msbuild.build_type = \"MyRelease\"\n"
+"        msbuild.platform = \"MyPlatform\"\n"
+"        msbuild.build(\"MyProject.sln\")"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:68
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:70
+msgid "``MSBuild`` is affected by these ``[conf]`` variables:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:72
+msgid ""
+"``tools.build:verbosity`` accepts one of ``quiet`` or ``verbose`` to be "
+"passed to the ``MSBuild.build()`` call as ``msbuild .... /verbosity:{Quiet,"
+"Detailed}``."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:74
+msgid ""
+"``tools.microsoft.msbuild:max_cpu_count`` maximum number of CPUs to be "
+"passed to the ``MSBuild.build()`` call as ``msbuild .... /m:N``. If "
+"``max_cpu_count=0``, then it will use ``/m`` without arguments, which means "
+"use all available cpus."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuild.rst:80
+msgid "Reference"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/msbuild.py:docstring of
+#: conan.tools.microsoft.msbuild.MSBuild:1
+msgid "MSBuild build helper class"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/msbuild.py:docstring of
+#: conan.tools.microsoft.msbuild.MSBuild:0
+#: conan.tools.microsoft.msbuild.MSBuild.build:0
+#: conan.tools.microsoft.msbuild.MSBuild.command:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/msbuild.py:docstring of
+#: conan.tools.microsoft.msbuild.MSBuild:3
+msgid ""
+"``< ConanFile object >`` The current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/msbuild.py:docstring of
+#: conan.tools.microsoft.msbuild.MSBuild.command:1
+msgid ""
+"Gets the ``msbuild`` command line. For instance, :command:`msbuild "
+"\"MyProject.sln\" /p:Configuration=<conf> /p:Platform=<platform>`."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/msbuild.py:docstring of
+#: conan.tools.microsoft.msbuild.MSBuild.build:3
+#: conan.tools.microsoft.msbuild.MSBuild.command:4
+msgid "``str`` name of Visual Studio ``*.sln`` file"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/msbuild.py:docstring of
+#: conan.tools.microsoft.msbuild.MSBuild.build:4
+#: conan.tools.microsoft.msbuild.MSBuild.command:5
+msgid ""
+"``targets`` is an optional argument, defaults to ``None``, and otherwise it "
+"is a list of targets to build"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/msbuild.py:docstring of
+#: conan.tools.microsoft.msbuild.MSBuild.command:0
+msgid "Returns"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/msbuild.py:docstring of
+#: conan.tools.microsoft.msbuild.MSBuild.command:6
+msgid "``str`` msbuild command line."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/msbuild.py:docstring of
+#: conan.tools.microsoft.msbuild.MSBuild.build:1
+msgid "Runs the ``msbuild`` command line obtained from ``self.command(sln)``."
+msgstr ""

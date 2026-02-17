@@ -1,0 +1,338 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.19\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devops/audit.rst:4
+msgid "Checking package vulnerabilities"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../devops/audit.rst:8
+msgid ""
+"The ``conan audit`` command (introduced in Conan 2.14.0) is used to check "
+"for known vulnerabilities in your Conan packages."
+msgstr ""
+
+#: ../../../devops/audit.rst:11
+msgid ""
+"By default, Conan provides access to a ConanCenter provider, which is a "
+"public provider that checks for vulnerabilities in ConanCenter packages, "
+"which uses JFrog Advanced Security to scan packages."
+msgstr ""
+
+#: ../../../devops/audit.rst:16
+msgid "Requesting a token"
+msgstr ""
+
+#: ../../../devops/audit.rst:18
+msgid ""
+"To use the command, you will first need to register for the free service at "
+"https://audit.conan.io/register. After registering, you will receive an "
+"email with an activation link. Clicking this link will take you to a page "
+"where your personal access token is displayed."
+msgstr ""
+
+#: ../../../devops/audit.rst:23
+msgid ""
+"Once you have your token, you can authenticate the ``conancenter`` provider "
+"with it:"
+msgstr ""
+
+#: ../../../devops/audit.rst:26
+msgid "$ conan audit provider auth conancenter --token=<your_token>"
+msgstr "$ conan audit provider auth conancenter --token=<your_token>"
+
+#: ../../../devops/audit.rst:32
+msgid ""
+"Using ``--token`` in the command line may expose your token in the shell "
+"history. To prevent this, set it as an environment variable named after the "
+"provider in uppercase. For example, for `conancenter`, use: "
+"``CONAN_AUDIT_PROVIDER_TOKEN_CONANCENTER=<token>``."
+msgstr ""
+
+#: ../../../devops/audit.rst:39
+msgid "Scanning packages"
+msgstr "掃瞄軟體包"
+
+#: ../../../devops/audit.rst:41
+msgid ""
+"Once you have authenticated, you can check for vulnerabilities in your "
+"packages with the ``conan audit scan`` and ``conan audit list`` commands."
+msgstr ""
+
+#: ../../../devops/audit.rst:44
+msgid ""
+"``conan audit scan`` will check for the vulnerabilities of the given "
+"package(s) and their dependencies."
+msgstr ""
+
+#: ../../../devops/audit.rst:45
+msgid ""
+"``conan audit list`` will list the vulnerabilities of the given package(s) "
+"without checking their dependencies."
+msgstr ""
+
+#: ../../../devops/audit.rst:47
+msgid ""
+"$ conan audit list openssl/1.1.1w\n"
+"\n"
+"Requesting vulnerability info for: openssl/1.1.1w\n"
+"\n"
+"******************\n"
+"* openssl/1.1.1w *\n"
+"******************\n"
+"\n"
+"2 vulnerabilities found:\n"
+"\n"
+"- CVE-2023-5678 (Severity: Medium, CVSS: 5.3)\n"
+"\n"
+"  Issue summary: Generating excessively long X9.42 DH keys or checking\n"
+"  excessively long X9.42 DH keys or parameters may be very slow.  Impact "
+"summary:\n"
+"  Applications that use the functions DH_generate_key() to generate an X9.42 "
+"DH\n"
+"  key may exper...\n"
+"  url: https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;"
+"h=db925ae2e65d0d925adef429afc37f75bd1c2017\n"
+"\n"
+"- CVE-2024-0727 (Severity: Medium, CVSS: 5.5)\n"
+"\n"
+"  Issue summary: Processing a maliciously formatted PKCS12 file may lead "
+"OpenSSL\n"
+"  to crash leading to a potential Denial of Service attack  Impact summary:\n"
+"  Applications loading files in the PKCS12 format from untrusted sources "
+"might\n"
+"  terminate ...\n"
+"  url: https://github.com/alexcrichton/openssl-src-rs/commit/"
+"add20f73b6b42be7451af2e1044d4e0e778992b2\n"
+"\n"
+"Total vulnerabilities found: 2\n"
+"\n"
+"\n"
+"Summary:\n"
+"\n"
+"- openssl/1.1.1w 2 vulnerabilities found\n"
+"\n"
+"Vulnerability information provided by JFrog. Please check https://jfrog.com/"
+"advanced-security/ for more information.\n"
+"You can send questions and report issues about the returned vulnerabilities "
+"to conan-research@jfrog.com."
+msgstr ""
+"$ conan audit list openssl/1.1.1w\n"
+"\n"
+"Requesting vulnerability info for: openssl/1.1.1w\n"
+"\n"
+"******************\n"
+"* openssl/1.1.1w *\n"
+"******************\n"
+"\n"
+"2 vulnerabilities found:\n"
+"\n"
+"- CVE-2023-5678 (Severity: Medium, CVSS: 5.3)\n"
+"\n"
+"  Issue summary: Generating excessively long X9.42 DH keys or checking\n"
+"  excessively long X9.42 DH keys or parameters may be very slow.  Impact "
+"summary:\n"
+"  Applications that use the functions DH_generate_key() to generate an X9.42 "
+"DH\n"
+"  key may exper...\n"
+"  url: https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;"
+"h=db925ae2e65d0d925adef429afc37f75bd1c2017\n"
+"\n"
+"- CVE-2024-0727 (Severity: Medium, CVSS: 5.5)\n"
+"\n"
+"  Issue summary: Processing a maliciously formatted PKCS12 file may lead "
+"OpenSSL\n"
+"  to crash leading to a potential Denial of Service attack  Impact summary:\n"
+"  Applications loading files in the PKCS12 format from untrusted sources "
+"might\n"
+"  terminate ...\n"
+"  url: https://github.com/alexcrichton/openssl-src-rs/commit/"
+"add20f73b6b42be7451af2e1044d4e0e778992b2\n"
+"\n"
+"Total vulnerabilities found: 2\n"
+"\n"
+"\n"
+"Summary:\n"
+"\n"
+"- openssl/1.1.1w 2 vulnerabilities found\n"
+"\n"
+"Vulnerability information provided by JFrog. Please check https://jfrog.com/"
+"advanced-security/ for more information.\n"
+"You can send questions and report issues about the returned vulnerabilities "
+"to conan-research@jfrog.com."
+
+#: ../../../devops/audit.rst:86
+msgid ""
+"To scan the entire dependency graph of a package, the simplest way is using "
+"the ``conan audit scan`` command and providing a path to your conanfile, "
+"just as you would do with other Conan commands such as ``conan install``."
+msgstr ""
+
+#: ../../../devops/audit.rst:89
+msgid "For example, for a project with a conanfile.txt:"
+msgstr ""
+
+#: ../../../devops/audit.rst:91
+msgid ""
+"[requires]\n"
+"libpng/1.5.30\n"
+"openssl/1.1.1w"
+msgstr ""
+"[requires]\n"
+"libpng/1.5.30\n"
+"openssl/1.1.1w"
+
+#: ../../../devops/audit.rst:98
+msgid "You can run:"
+msgstr "你可以執行："
+
+#: ../../../devops/audit.rst:100
+msgid "$ conan audit scan ."
+msgstr "$ conan audit scan ."
+
+#: ../../../devops/audit.rst:105
+msgid ""
+"Note that all of these commands support various output formats, such as JSON "
+"and HTML."
+msgstr ""
+
+#: ../../../devops/audit.rst:107
+msgid "$ conan audit scan . -f=html > report.html"
+msgstr "$ conan audit scan . -f=html > report.html"
+
+#: ../../../devops/audit.rst:111
+msgid ""
+"This generates an HTML report with the vulnerabilities found in the given "
+"package(s) and their dependencies, which will look something like:"
+msgstr ""
+
+#: ../../../devops/audit.rst:-1
+msgid "Conan audit report"
+msgstr ""
+
+#: ../../../devops/audit.rst:119
+msgid ""
+"The scan also has the threshold option ``--severity-level``, which allows "
+"you to set a minimum severity level for the vulnerabilities. In case the "
+"threshold value is surpassed by any of the vulnerabilities found, the "
+"command will return a non-zero exit code. By default, it's set to 9.0 "
+"(Critical), but you can set it to a lower value to include lower severity "
+"vulnerabilities in the report. To disable the threshold, set it to 100.0."
+msgstr ""
+
+#: ../../../devops/audit.rst:124
+msgid ""
+"$ conan audit scan . --severity-level=5.0\n"
+"...\n"
+"The package openssl/1.1.1w has a CVSS score 5.3 and exceeded the threshold "
+"severity level 5.0."
+msgstr ""
+"$ conan audit scan . --severity-level=5.0\n"
+"...\n"
+"The package openssl/1.1.1w has a CVSS score 5.3 and exceeded the threshold "
+"severity level 5.0."
+
+#: ../../../devops/audit.rst:133
+msgid "Adding private providers"
+msgstr ""
+
+#: ../../../devops/audit.rst:135
+msgid ""
+"You can add your own private providers to the list of providers used by the "
+"``conan audit`` subcommands. For now, only JFrog Advanced Security providers "
+"are supported."
+msgstr ""
+
+#: ../../../devops/audit.rst:140
+msgid ""
+"To use these private providers, your Artifactory license should include a "
+"subscription to JFrog Curation"
+msgstr ""
+
+#: ../../../devops/audit.rst:144
+msgid ""
+"To add a provider, the recommended way is to first create a specific user in "
+"Artifactory to use as the read-only user, which can be given no extra "
+"permissions. Then, after creating an access token for the user, you can add "
+"the provider with the following command:"
+msgstr ""
+
+#: ../../../devops/audit.rst:148
+msgid ""
+"$ conan audit provider add myprovider --type=private --url=https://your."
+"artifactory.url --token=<your_token>"
+msgstr ""
+
+#: ../../../devops/audit.rst:155
+msgid ""
+"Instead of using the ``--token`` argument in the command line, which may "
+"expose your token in the shell history, you can authenticate with the "
+"provider using an environment variable. Set the "
+"``CONAN_AUDIT_PROVIDER_TOKEN_<PROVIDER_NAME>`` environment variable with the "
+"token value, replacing `<PROVIDER_NAME>` with the provider name in uppercase "
+"and using underscores (`_`) instead of hyphens (`-`)."
+msgstr ""
+
+#: ../../../devops/audit.rst:161
+msgid ""
+"For example, for `myprovider`, use: "
+"``CONAN_AUDIT_PROVIDER_TOKEN_MYPROVIDER=<token>``."
+msgstr ""
+
+#: ../../../devops/audit.rst:164
+msgid ""
+"Note the ``--type=private`` argument, which specifies that the provider is a "
+"private provider, and that the supplied URL should be the base URL of the "
+"Artifactory instance."
+msgstr ""
+
+#: ../../../devops/audit.rst:167
+msgid ""
+"You can now use the provider with the ``conan audit scan`` and ``conan audit "
+"list`` commands **without any limitation on the number of requests**, by "
+"specifying the provider name using the ``-p`` / ``--provider`` argument."
+msgstr ""
+
+#: ../../../devops/audit.rst:171
+msgid "$ conan audit scan . -p=myprovider"
+msgstr "$ conan audit scan . -p=myprovider"
+
+#: ../../../devops/audit.rst:178
+msgid ""
+"For detailed reference documentation on all ``conan audit`` subcommands and "
+"their options, consult the :ref:`conan audit command reference "
+"<reference_commands_audit>`."
+msgstr ""
+
+#: ../../../devops/audit.rst:181
+msgid ""
+"Read more in the dedicated `blog post <https://blog.conan.io/introducing-"
+"conan-audit-command/>`_."
+msgstr ""
+
+#: ../../../devops/audit.rst:183
+msgid ""
+"Please check the :ref:`conan audit command reference <security>` for other "
+"security related features."
+msgstr ""

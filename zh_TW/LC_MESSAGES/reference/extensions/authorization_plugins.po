@@ -1,0 +1,162 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.19\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/extensions/authorization_plugins.rst:4
+msgid "Authorization plugins"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:8
+msgid ""
+"Regarding authorization, we have two plugins: one focused on remote  :ref:"
+"`Conan servers <setting_up_conan_remotes>` authorization, ``auth_remote."
+"py``, and another focused on authorization for source file servers, "
+"``auth_source.py``."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:11
+msgid ""
+"The idea behind these plugins is to create custom integrations with each "
+"user's secrets managers."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:14
+msgid "Auth remote plugin"
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:15
+msgid ""
+"This first plugin is a Python script that receives a :ref:`Remote <conan.api."
+"model.Remote>` object and an optional parameter: ``user``. If the user is "
+"provided, the expected output is the credentials that use that username. The "
+"output should be a tuple of the username that we want to use for that "
+"remote, or ``None`` if no credentials are specified for that remote and we "
+"want Conan to follow the normal login flow."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:20
+msgid ""
+"This plugin is located at the path ``<CONAN_HOME>/extensions/plugins/"
+"auth_remote.py`` and must be manually created with the name ``auth_remote."
+"py``, containing a function named ``auth_remote_plugin(remote, user=None, "
+"**kwargs)``."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:23
+msgid "The order for retrieving credentials is as follows:"
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:25
+msgid ""
+"First, an attempt is made to obtain the credentials from the "
+"``auth_remote_plugin``."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:26
+msgid ""
+"If it doesn't exist or returns ``None``, the next step is to check "
+"``credentials.json``."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:27
+msgid "After that, the environment variables are searched."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:28
+msgid "Finally, the credentials are obtained through an interactive prompt."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:30
+#: ../../../reference/extensions/authorization_plugins.rst:52
+msgid "Here we can see an example of a plugin implementation."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:32
+msgid ""
+"def auth_remote_plugin(remote, user=None, **kwargs):\n"
+"    if remote.url.startswith(\"https://artifactory.my-org/\"):\n"
+"        return \"admin\", \"password\""
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:40
+msgid "Auth source plugin"
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:41
+msgid ""
+"This one is a Python script that receives an ``url`` as a parameter and "
+"outputs a dictionary with the credentials or access token. It can also "
+"return ``None`` to indicate that Conan should proceed with its normal login "
+"flow."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:44
+msgid ""
+"This plugin is located at the path ``<CONAN_HOME>/extensions/plugins/"
+"auth_source.py`` and must be manually created with the name ``auth_source."
+"py``, containing a function named ``auth_source_plugin(url, **kwargs)``."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:47
+msgid "The order for retrieving the credentials is as follows:"
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:49
+msgid ""
+"First, an attempt is made to obtain the credentials from the "
+"``auth_source_plugin``."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:50
+msgid ""
+"If it doesn't exist or returns ``None``, an attempt is made to retrieve them "
+"from ``source_credentials.json``."
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:54
+msgid ""
+"def auth_source_plugin(url, **kwargs):\n"
+"    if url.startswith(\"https://my-sources-user-password.my-org/\"):\n"
+"        return {'user': 'my-user', 'password': 'my-password'}\n"
+"    elif url.startswith(\"https://my-private-token-sources.my-org/\"):\n"
+"        return {'token': 'my-secure-token'}"
+msgstr ""
+"def auth_source_plugin(url, **kwargs):\n"
+"    if url.startswith(\"https://my-sources-user-password.my-org/\"):\n"
+"        return {'user': 'my-user', 'password': 'my-password'}\n"
+"    elif url.startswith(\"https://my-private-token-sources.my-org/\"):\n"
+"        return {'token': 'my-secure-token'}"
+
+#: ../../../reference/extensions/authorization_plugins.rst:65
+msgid ""
+"These plugins can be shared and installed using ``conan config install`` or "
+"``conan config install-pkg``"
+msgstr ""
+
+#: ../../../reference/extensions/authorization_plugins.rst:67
+msgid ""
+"**Important:** Ensure that your plugins and configurations do **not** "
+"contain hardcoded secrets or sensitive data. Instead, passwords should be "
+"retrieved using your implementation with a secret manager."
+msgstr ""

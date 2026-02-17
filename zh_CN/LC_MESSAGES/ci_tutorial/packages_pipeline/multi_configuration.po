@@ -1,0 +1,224 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.22\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-09 17:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:2
+msgid "Package pipeline: multi configuration"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:4
+msgid ""
+"In the previous section we were building just 1 configuration. This section "
+"will cover the case in which we need to build more than 1 configuration. We "
+"will use the ``Release`` and ``Debug`` configurations here for convenience, "
+"as it is easier to follow, but in real case these configurations will be "
+"more like Windows, Linux, OSX, building for different architectures, cross "
+"building, etc."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:9
+msgid "Let's begin cleaning our cache:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:11
+msgid "$ conan remove \"*\" -c  # Make sure no packages from last run"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:15
+msgid ""
+"We will create the packages for the 2 configurations sequentially in our "
+"computer, but note these will typically run in different computers, so it is "
+"typical for CI systems to launch the builds of different configurations in "
+"parallel."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:18
+msgid "Release build"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:18
+msgid ""
+"$ cd ai  # If you were not inside \"ai\" folder already\n"
+"$ conan create . --build=\"missing:ai/*\" -s build_type=Release --"
+"format=json > graph.json\n"
+"$ conan list --graph=graph.json --graph-binaries=build --format=json > built."
+"json\n"
+"\n"
+"$ conan remote enable packages\n"
+"$ conan upload -l=built.json -r=packages -c --format=json > uploaded_release."
+"json\n"
+"$ conan remote disable packages"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:29
+msgid "We have done a few changes and extra steps:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:31
+msgid ""
+"First step is similar to the one in the previous section, a ``conan "
+"create``, just making it explicit our configuration ``-s "
+"build_type=Release`` for clarity, and capturing the output of the ``conan "
+"create`` in a ``graph.json`` file."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:33
+msgid ""
+"The second step is create from the ``graph.json`` a ``built.json`` **package "
+"list** file, with the packages that needs to be uploaded, in this case, only "
+"the packages that have been built from source (``--graph-binaries=build``) "
+"will be uploaded. This is done for efficiency and faster uploads."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:36
+msgid ""
+"Third step is to enable the ``packages`` repository. It was not enabled to "
+"guarantee that all possible dependencies came from ``develop`` repo only."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:38
+msgid ""
+"Then, we will upload the ``built.json`` package list to the ``packages`` "
+"repository, creating the ``uploaded_release.json`` package list with the new "
+"location of the packages (the server repository)."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:40
+msgid "Finally, we will disable again the ``packages`` repository"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:42
+msgid "Likewise, the Debug build will do the same steps:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:45
+msgid "Debug build"
+msgstr "调试版构建"
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:45
+msgid ""
+"$ conan create . --build=\"missing:ai/*\" -s build_type=Debug --format=json "
+"> graph.json\n"
+"$ conan list --graph=graph.json --graph-binaries=build --format=json > built."
+"json\n"
+"\n"
+"$ conan remote enable packages\n"
+"$ conan upload -l=built.json -r=packages -c --format=json > uploaded_debug."
+"json\n"
+"$ conan remote disable packages"
+msgstr ""
+"$ conan create . --build=\"missing:ai/*\" -s build_type=Debug --format=json "
+"> graph.json\n"
+"$ conan list --graph=graph.json --graph-binaries=build --format=json > built."
+"json\n"
+"\n"
+"$ conan remote enable packages\n"
+"$ conan upload -l=built.json -r=packages -c --format=json > uploaded_debug."
+"json\n"
+"$ conan remote disable packages"
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:56
+msgid ""
+"When both Release and Debug configuration finish successfully, we would have "
+"these packages in the repositories:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:107
+msgid ""
+"When all the different binaries for ``ai/1.1.0`` have been built correctly, "
+"the ``package pipeline`` can consider its job succesfull and decide to "
+"promote those binaries. But further package builds and checks are necessary, "
+"so instead of promoting them to the ``develop`` repository, the ``package "
+"pipeline`` can promote them to the ``products`` binary repository. As all "
+"other developers and CI use the ``develop`` repository, no one will be "
+"broken at this stage either:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:112
+msgid "Promoting from packages->product"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:112
+msgid ""
+"# aggregate the package list\n"
+"$ conan pkglist merge -l uploaded_release.json -l uploaded_debug.json --"
+"format=json > uploaded.json\n"
+"\n"
+"$ conan remote enable packages\n"
+"$ conan remote enable products\n"
+"# Promotion using Conan download/upload commands\n"
+"# (slow, can be improved with art:promote custom command)\n"
+"$ conan download --list=uploaded.json -r=packages --format=json > promote."
+"json\n"
+"$ conan upload --list=promote.json -r=products -c\n"
+"$ conan remote disable packages\n"
+"$ conan remote disable products"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:128
+msgid ""
+"The first step uses the ``conan pkglist merge`` command to merge the package "
+"lists from the \"Release\" and \"Debug\" configurations and merge it into a "
+"single ``uploaded.json`` package list. This list is the one that will be "
+"used to run the promotion."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:132
+msgid ""
+"In this example we are using a slow ``conan download`` + ``conan upload`` "
+"promotion. This can be way more efficient with the ``conan art:promote`` "
+"extension command."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:135
+msgid ""
+"After running the promotion we will have the following packages in the "
+"server:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:188
+msgid "To summarize:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:190
+msgid ""
+"We built 2 different configurations, ``Release`` and ``Debug`` (could have "
+"been Windows/Linux or others), and uploaded them to the ``packages`` "
+"repository."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:192
+msgid ""
+"When all package binaries for all configurations were successfully built, we "
+"promoted them from the ``packages`` to the ``products`` repository, to make "
+"them available for the ``products pipeline``."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:194
+msgid ""
+"**Package lists** were captured in the package creation process and merged "
+"into a single one to run the promotion."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration.rst:197
+msgid ""
+"There is still an aspect that we haven't considered yet, the possibility "
+"that the dependencies of ``ai/1.1.0`` change during the build. Move to the "
+"next section to see how to use lockfiles to achieve more consistent multi-"
+"configuration builds."
+msgstr ""

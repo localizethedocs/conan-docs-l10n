@@ -1,0 +1,456 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.25\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-03 08:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tutorial/developing_packages/workspaces.rst:4
+msgid "Workspaces"
+msgstr ""
+
+#: ../../../common/incubating_warning.inc:3
+msgid ""
+"This feature is part of the new incubating features. This means that it is "
+"under development, and looking for user testing and feedback. For more info "
+"see :ref:`Incubating section<incubating>`."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:9
+msgid ""
+"In the previous section, we worked with *editable packages* and how to "
+"define a custom layout. Let's introduce the concept of *workspace* and how "
+"to use it."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:13
+msgid "Introduction"
+msgstr "介紹"
+
+#: ../../../tutorial/developing_packages/workspaces.rst:17
+msgid ""
+"The workspace feature can be enabled defining the environment variable "
+"``CONAN_WORKSPACE_ENABLE=will_break_next``. The value ``will_break_next`` is "
+"used to emphasize that it will change in next releases, and this feature is "
+"for testing only, it cannot be used in production."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:22
+msgid ""
+"A Conan *workspace* gives you the chance to manage several packages as "
+"``editable`` mode in an *orchestrated* or *monolithic* (also called *super-"
+"build*) way:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:25
+msgid ""
+"*orchestrated*, we denote Conan building the editable packages one by one "
+"starting on the applications/consumers if exist."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:26
+msgid ""
+"*monolithic*, we denote the editable packages built as a monolith, "
+"generating a single result (generators, etc) for the whole workspace."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:28
+msgid ""
+"Notice that the packages added to the workspace are automatically resolved "
+"as ``editable`` ones. Those editable packages are named as workspace's "
+"``packages``."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:33
+msgid "How to define a workspace"
+msgstr "如何定義工作空間"
+
+#: ../../../tutorial/developing_packages/workspaces.rst:35
+msgid ""
+"Workspaces are defined by the files ``conanws.yml`` and/or ``conanws.py`` "
+"files. Any Conan workspace command will traverse up the file system from the "
+"current working directory to the filesystem root, until it finds one of "
+"those files. That will define the \"root\" workspace folder. The paths in "
+"the ``conanws`` file are intended to be relative to be relocatable if "
+"necessary, or could be committed to Git in monorepo-like projects."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:40
+msgid ""
+"Through the ``conan workspace`` command, we can open, add, and/or remove "
+"``packages`` from the current workspace."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:44
+msgid ""
+"Read the :ref:`workspace files<reference_workspace_files>` section. Read "
+"the :ref:`conan workspace command<reference_commands_workspace>` section."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:50
+msgid "Monolithic build"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:52
+msgid ""
+"Conan workspaces can be built as a single monolithic project (super-"
+"project), which can be very convenient. Let's see it with an example:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:55
+msgid ""
+"$ conan new workspace\n"
+"$ conan workspace super-install\n"
+"$ cmake --preset conan-release # use conan-default in Win\n"
+"$ cmake --build --preset conan-release"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:63
+msgid ""
+"Let's explain a bit what happened. At first, the ``conan new workspace`` "
+"created a template project with some relevant files and the following "
+"structure:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:66
+msgid ""
+".\n"
+"├── CMakeLists.txt\n"
+"├── app1\n"
+"│    ├── CMakeLists.txt\n"
+"│    ├── conanfile.py\n"
+"│    ├── src\n"
+"│    │    ├── app1.cpp\n"
+"│    │    ├── app1.h\n"
+"│    │    └── main.cpp\n"
+"│    └── test_package\n"
+"│        └── conanfile.py\n"
+"├── conanws.py\n"
+"├── conanws.yml\n"
+"├── liba\n"
+"│    ├── CMakeLists.txt\n"
+"│    ├── conanfile.py\n"
+"│    ├── include\n"
+"│    │    └── liba.h\n"
+"│    ├── src\n"
+"│    │    └── liba.cpp\n"
+"│    └── test_package\n"
+"│        ├── CMakeLists.txt\n"
+"│        ├── conanfile.py\n"
+"│        └── src\n"
+"│            └── example.cpp\n"
+"└── libb\n"
+"    ├── CMakeLists.txt\n"
+"    ├── conanfile.py\n"
+"    ├── include\n"
+"    │    └── libb.h\n"
+"    ├── src\n"
+"    │    └── libb.cpp\n"
+"    └── test_package\n"
+"        ├── CMakeLists.txt\n"
+"        ├── conanfile.py\n"
+"        └── src\n"
+"            └── example.cpp"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:107
+msgid "The root ``CMakeLists.txt`` defines the super-project with:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:109
+msgid "CMakeLists.txt"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:109
+msgid ""
+"cmake_minimum_required(VERSION 3.25)\n"
+"project(monorepo CXX)\n"
+"\n"
+"include(FetchContent)\n"
+"\n"
+"function(add_project PACKAGE_NAME SUBFOLDER)\n"
+"    message(STATUS \"Adding project: ${PACKAGE_NAME}. Folder: "
+"${SUBFOLDER}\")\n"
+"    FetchContent_Declare(\n"
+"        ${PACKAGE_NAME}\n"
+"        SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/${SUBFOLDER}\n"
+"        SYSTEM\n"
+"        OVERRIDE_FIND_PACKAGE\n"
+"    )\n"
+"    FetchContent_MakeAvailable(${PACKAGE_NAME})\n"
+"endfunction()\n"
+"\n"
+"include(build/conanws_build_order.cmake)\n"
+"\n"
+"foreach(pair ${CONAN_WS_BUILD_ORDER})\n"
+"    string(FIND \"${pair}\" \":\" pos)\n"
+"    string(SUBSTRING \"${pair}\" 0 \"${pos}\" pkg)\n"
+"    math(EXPR pos \"${pos} + 1\")  # Skip the separator\n"
+"    string(SUBSTRING \"${pair}\" \"${pos}\" -1 folder)\n"
+"\n"
+"    add_project(${pkg} ${folder})\n"
+"    # This target should be defined in the liba/CMakeLists.txt, but we can "
+"fix it here\n"
+"    get_target_property(target_type ${pkg} TYPE)\n"
+"    if (NOT target_type STREQUAL \"EXECUTABLE\")\n"
+"        add_library(${pkg}::${pkg} ALIAS ${pkg})\n"
+"    endif()\n"
+"endforeach()"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:145
+msgid ""
+"So basically, the super-project uses ``FetchContent`` to add the subfolders' "
+"sub-projects. For this to work correctly, the subprojects must be CMake "
+"based subprojects with ``CMakeLists.txt``. Also, the subprojects must define "
+"the correct targets as would be defined by the ``find_package()`` scripts, "
+"like ``liba::liba``. If this is not the case, it is always possible to "
+"define some local ``ALIAS`` targets."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:151
+msgid ""
+"This super-build ``CMakeLists.txt`` defines dynamically the correct sub-"
+"projects order. Note that the ``FetchContent`` strategy requires to define "
+"the different sub-projects in the correct build-order. While this is easy "
+"for workspaces with very few packages, this can become a burden for larger "
+"workspaces. The definition of the build-order is done in the generated "
+"``conanws_build_order.cmake`` file, that is created by the ``conan workspace "
+"super-install`` command calling the ``conanws.py`` workspace "
+"``build_order()`` method. It is the responsibility of the workspace to "
+"translate the information of the ``build_order()`` to specifics of the build "
+"system. The exact implementation, like the ``conanws_build_order.cmake`` "
+"file, is not a \"built-in\" workspace feature, note this is only the example "
+"approach provided by the ``conan new workspace`` default template. Users can "
+"implement their own logic in their ``conanws.py`` files."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:162
+msgid "The other important part is the ``conanws.py`` file:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:164
+msgid "conanws.py"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:164
+msgid ""
+"from conan import Workspace\n"
+"from conan import ConanFile\n"
+"from conan.tools.files import save\n"
+"from conan.tools.cmake import CMakeDeps, CMakeToolchain, cmake_layout\n"
+"\n"
+"\n"
+"class MyWs(ConanFile):\n"
+"    \"\"\" This is a special conanfile, used only for workspace definition "
+"of layout\n"
+"    and generators. It shouldn't have requirements, tool_requirements. It "
+"shouldn't have\n"
+"    build() or package() methods\n"
+"    \"\"\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"    def generate(self):\n"
+"        deps = CMakeDeps(self)\n"
+"        deps.generate()\n"
+"        tc = CMakeToolchain(self)\n"
+"        tc.generate()\n"
+"\n"
+"    def layout(self):\n"
+"        cmake_layout(self)\n"
+"\n"
+"\n"
+"class Ws(Workspace):\n"
+"    def root_conanfile(self):\n"
+"        return MyWs  # Note this is the class name\n"
+"\n"
+"    def build_order(self, order):\n"
+"        super().build_order(order)  # default behavior prints the build "
+"order\n"
+"        pkglist = \" \".join([f'{it[\"ref\"].name}:{it[\"folder\"]}' for "
+"level in order for it in level])\n"
+"        save(self, \"build/conanws_build_order.cmake\", "
+"f\"set(CONAN_WS_BUILD_ORDER {pkglist})\")"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:200
+msgid ""
+"The role of the ``class MyWs(ConanFile)`` embedded conanfile is important, "
+"it defines the super-project necessary generators and layout."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:203
+msgid ""
+"The ``conan workspace super-install`` does not install the different "
+"packages separately, for this command, the packages of the workspace no "
+"longer exist as independent entities, they are just treated as a single "
+"\"node\" in the dependency graph, as they will be part of the super-project "
+"build. So there is only a single generated ``conan_toolchain.cmake`` and a "
+"single common set of dependencies ``xxx-config.cmake`` files for all super-"
+"project external dependencies."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:209
+msgid ""
+"In the ``build_order(self, order)`` method above, the ``order`` argument is "
+"an ordered list of lists representing the topologically sorted order of "
+"building. The elements of the inner lists represent packages in the "
+"workspace, and are dictionaries with the reference ``ref`` (of type :ref:"
+"`RecipeReference<conan.api.model.RecipeReference>`) and the source folder "
+"``folder`` of every package. This ``folder`` will be the ``source_folder``, "
+"specified in the recipe ``layout()``."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:216
+msgid "**Best practices**"
+msgstr "**最佳實踐**"
+
+#: ../../../tutorial/developing_packages/workspaces.rst:218
+msgid ""
+"For workspace recipes, the recommendation is to keep a simple layout, with "
+"the ``conanfile.py`` in the root of each package repository, the source "
+"folder also being the root of the repository and the ``CMakeLists.txt`` in "
+"the root of the repository. That simplifies many tasks, like ``git clone "
+"<repo> && cd repo && conan install/build``, and also makes workspaces easier "
+"to define and manage."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:225
+msgid ""
+"The template above worked without external dependencies, but everything "
+"would work the same when there are external dependencies. This can be tested "
+"with:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:228
+msgid ""
+"$ conan new cmake_lib -d name=mymath\n"
+"$ conan create .\n"
+"$ conan new workspace -d requires=mymath/0.1\n"
+"$ conan workspace super-install\n"
+"$ cmake ..."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:239
+msgid ""
+"The current ``conan new workspace`` generates a CMake based super project. "
+"But it is possible to define a super-project using other build systems, like "
+"a MSBuild solution file that adds the different ``.vcxproj`` subprojects. As "
+"long as the super-project knows how to aggregate and manage the sub-"
+"projects, this is possible."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:244
+msgid ""
+"It might also be possible for the ``add()`` method in the ``conanws.py`` to "
+"manage the addition of the subprojects to the super-project, if there is "
+"some structure."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:251
+msgid "Orchestrated build"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:253
+msgid ""
+"Conan workspaces can also build the different ``packages`` separately, and "
+"taking into account if there are packages defined as consumers of the other "
+"ones."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:256
+msgid ""
+"Let's use another structure to understand better how it works. Now, let's "
+"create it from scratch with the ``conan workspace init .`` that creates an "
+"almost empty conanws.py/conanws.yml, and using the ``conan new cmake_lib/"
+"cmake_exe`` basic templates, that create regular CMake-based conan packages:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:258
+msgid ""
+"$ mkdir myproject && cd myproject\n"
+"$ conan workspace init .\n"
+"$ conan new cmake_lib -d name=hello -d version=1.0 -o hello\n"
+"$ conan new cmake_exe -d name=app -d version=1.0 -d requires=hello/1.0 -o app"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:265
+msgid "Those commands created a file structure like this:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:267
+msgid ""
+".\n"
+"├── conanws.py\n"
+"├── conanws.yml\n"
+"├── app\n"
+"│    ├── CMakeLists.txt\n"
+"│    ├── conanfile.py\n"
+"│    ├── src\n"
+"│    │    ├── app.cpp\n"
+"│    │    ├── app.h\n"
+"│    │    └── main.cpp\n"
+"│    └── test_package\n"
+"│        └── conanfile.py\n"
+"└── hello\n"
+"     ├── CMakeLists.txt\n"
+"     ├── conanfile.py\n"
+"     ├── include\n"
+"     │    └── hello.h\n"
+"     ├── src\n"
+"     │    └── hello.cpp\n"
+"     └── test_package\n"
+"         ├── CMakeLists.txt\n"
+"         ├── conanfile.py\n"
+"         └── src\n"
+"             └── example.cpp"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:295
+msgid ""
+"Now, the ``conanws.yml`` is empty and the ``conanws.py`` has a quite minimal "
+"definition. Let's add the ``app`` application (consumes ``hello``) and the "
+"``hello`` lib as new ``packages`` to the workspace:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:298
+msgid ""
+"$ conan workspace add hello\n"
+"Reference 'hello/1.0' added to workspace\n"
+"$ conan workspace add app\n"
+"Reference 'app/1.0' added to workspace"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:305
+msgid ""
+"Defined the workspace's ``packages``, we can build them and execute the "
+"application:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:307
+msgid ""
+"$ conan workspace build\n"
+"$ app/build/Release/app\n"
+"hello/1.0: Hello World Release!\n"
+"...\n"
+"app/1.0: Hello World Release!\n"
+"..."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/workspaces.rst:317
+msgid ""
+"For any feedback, please open new tickets in https://github.com/conan-io/"
+"conan/issues."
+msgstr ""

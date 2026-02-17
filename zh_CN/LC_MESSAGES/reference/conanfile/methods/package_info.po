@@ -1,0 +1,662 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.25\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-03 08:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/package_info.rst:4
+msgid "package_info()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:6
+msgid ""
+"The ``package_info()`` method is the one responsible of defining the "
+"information to the consumers of the package, so those consumers can easily "
+"and automatically consume this package. The ``generate()`` method of the "
+"consumers is the place where the information defined in the "
+"``package_info()`` will be mapped to the specific build system of the "
+"consumer. Then, if we want a package to be consumed by different build "
+"systems (like it happens with ConanCenter recipes for the community), it is "
+"very important that this information is complete."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:11
+msgid ""
+"This method defines information exclusively for **consumers** of this "
+"package, not for itself. This method executes after the binary has been "
+"built and packaged. The information that is consumed in the build should be "
+"processed in ``generate()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:19
+msgid "cpp_info: Library and build information"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:21
+msgid ""
+"Each package has to specify certain build information for its consumers. "
+"This can be done in the ``cpp_info`` attribute."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:23
+msgid ""
+"# Binaries to link\n"
+"self.cpp_info.libs = []  # The libs to link against\n"
+"self.cpp_info.system_libs = []  # System libs to link against\n"
+"self.cpp_info.frameworks = []  # OSX frameworks that consumers will link "
+"against\n"
+"self.cpp_info.objects = []  # precompiled objects like .obj .o that "
+"consumers will link\n"
+"# Directories\n"
+"self.cpp_info.includedirs = ['include']  # Ordered list of include paths\n"
+"self.cpp_info.libdirs = ['lib']  # Directories where libraries can be found\n"
+"self.cpp_info.bindirs = ['bin']  # Directories where executables and shared "
+"libs can be found\n"
+"self.cpp_info.resdirs = []  # Directories where resources, data, etc. can be "
+"found\n"
+"self.cpp_info.srcdirs = []  # Directories where sources can be found "
+"(debugging, reusing sources)\n"
+"self.cpp_info.builddirs = []  # Directories where build scripts for "
+"consumers can be found\n"
+"self.cpp_info.frameworkdirs = []  # Directories where OSX frameworks can be "
+"found\n"
+"# Flags\n"
+"self.cpp_info.defines = []  # preprocessor definitions\n"
+"self.cpp_info.cflags = []  # pure C flags\n"
+"self.cpp_info.cxxflags = []  # C++ compilation flags\n"
+"self.cpp_info.sharedlinkflags = []  # linker flags\n"
+"self.cpp_info.exelinkflags = []  # linker flags\n"
+"# Properties\n"
+"self.cpp_info.set_property(\"property_name\", \"property_value\")\n"
+"# Structure\n"
+"self.cpp_info.components # Dictionary-like structure to define the different "
+"components a package may have\n"
+"self.cpp_info.requires # List of components from requirements that need to "
+"be propagated downstream"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:50
+msgid "Binaries to link:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:52
+msgid ""
+"**libs**: Ordered list of compiled libraries (contained in the package) the "
+"consumers should link. Empty by default."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:53
+msgid ""
+"**system_libs**: Ordered list of system libs (not contained in the package) "
+"the consumers should link. Empty by default."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:54
+msgid ""
+"**frameworks**: Ordered list of OSX frameworks (contained or not in the "
+"package), the consumers should link. Empty by default."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:55
+msgid ""
+"**objects**: Ordered list of precompiled objects (.obj, .o) contained in the "
+"package the consumers should link. Empty by default"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:57
+msgid "Directories:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:59
+msgid ""
+"**includedirs**: List of relative paths (starting from the package root) of "
+"directories where headers can be found. By default it is initialized to "
+"``['include']``, and it is rarely changed."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:61
+msgid ""
+"**libdirs**: List of relative paths (starting from the package root) of "
+"directories in which to find library object binaries (\\*.lib, \\*.a, \\*."
+"so, \\*.dylib). By default it is initialized to ``['lib']``, and it is "
+"rarely changed."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:63
+msgid ""
+"**bindirs**: List of relative paths (starting from the package root) of "
+"directories in which to find library runtime binaries (like executable "
+"Windows .dlls). By default it is initialized to ``['bin']``, and it is "
+"rarely changed."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:65
+msgid ""
+"**resdirs**: List of relative paths (starting from the package root) of "
+"directories in which to find resource files (images, xml, etc). By default "
+"it is empty."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:67
+msgid ""
+"**srcdirs**: List of relative paths (starting from the package root) of "
+"directories in which to find sources (like .c, .cpp). By default it is "
+"empty. It might be used to store sources (for later debugging of packages, "
+"or to reuse those sources building them in other packages too)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:70
+msgid ""
+"**builddirs**: List of relative paths (starting from package root) of "
+"directories that can contain build scripts that could be used by the "
+"consumers. Empty by default."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:71
+msgid ""
+"**frameworkdirs**: List of relative paths (starting from the package root), "
+"of directories containing OSX frameworks."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:73
+msgid ""
+"There is one exception that would allow using absolute paths in ``self."
+"cpp_info.xxxxdirs`` fields: for recipes that serve as a \"wrapper\" of a "
+"library installed in the system, but not by Conan. See the :ref:`example of "
+"a recipe wrapping a library installed in the "
+"system<examples_tools_system_package_manager_wrapper>`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:75
+msgid "Flags:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:77
+msgid ""
+"**defines**: Ordered list of preprocessor directives. It is common that the "
+"consumers have to specify some sort of defines in some cases, so that "
+"including the library headers matches the binaries."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:79
+msgid ""
+"**cflags**, **cxxflags**, **sharedlinkflags**, **exelinkflags**: List of "
+"flags that the consumer should activate for proper behavior. Rarely used."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:82
+msgid "Properties:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:84
+msgid ""
+"**set_property()** allows to define some built-in and user general "
+"properties to be propagated with the ``cpp_info`` model for consumers. They "
+"might contain build-system specific information. Some built-in properties "
+"are ``cmake_file_name``, ``cmake_target_name``, ``pkg_config_name``, that "
+"can define specific behavior for ``CMakeDeps`` or ``PkgConfigDeps`` "
+"generators. For more information about these, read the specific build system "
+"integration documentation."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:86
+msgid "Structure:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:88
+msgid ""
+"**components**: Dictionary with names as keys and a component object as "
+"value to model the different components a package may have: libraries, "
+"executables..."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:90
+msgid ""
+"**requires**: **Experimental** List of components from the requirements this "
+"package (and its consumers) should link with. It will be used by generators "
+"that add support for components features."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:94
+msgid ""
+"It is common that different configurations will produce different "
+"``package_info``, for example, the library names might change in different "
+"OSs, or different ``system_libs`` will be used depending on the compiler and "
+"OS:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:97
+msgid ""
+"settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"options = {\"shared\": [True, False]}\n"
+"\n"
+"def package_info(self):\n"
+"    if not self.settings.os == \"Windows\":\n"
+"        self.cpp_info.libs = [\"zmq-static\"] if not self.options.shared "
+"else [\"zmq\"]\n"
+"    else:\n"
+"        ...\n"
+"\n"
+"    if not self.options.shared:\n"
+"        self.cpp_info.defines = [\"ZMQ_STATIC\"]\n"
+"    if self.settings.os == \"Windows\" and self.settings.compiler == "
+"\"msvc\":\n"
+"        self.cpp_info.system_libs.append(\"ws2_32\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:115
+msgid "Properties"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:117
+msgid ""
+"Any CppInfo object can declare \"properties\" that can be read by the "
+"generators. The value of a property can be of any type. Check each generator "
+"reference to see the properties used on it."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:120
+msgid ""
+"def set_property(self, property_name, value)\n"
+"def get_property(self, property_name, check_type=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:125
+msgid "Example:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:127
+msgid ""
+"def package_info(self):\n"
+"    self.cpp_info.set_property(\"cmake_find_mode\", \"both\")\n"
+"    self.cpp_info.get_property(\"cmake_find_mode\", check_type=str)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:135
+msgid "Components"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:137
+msgid ""
+"If your package is composed by more than one library, it is possible to "
+"declare components that allow to define a ``CppInfo`` object per each of "
+"those libraries and also requirements between them and to components of "
+"other packages (the following case is not a real example):"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:141
+msgid ""
+"def package_info(self):\n"
+"    self.cpp_info.set_property(\"cmake_file_name\", \"OpenSSL\")\n"
+"\n"
+"    self.cpp_info.components[\"crypto\"].set_property(\"cmake_target_name\", "
+"\"OpenSSL::Crypto\")\n"
+"    self.cpp_info.components[\"crypto\"].libs = [\"libcrypto\"]\n"
+"    self.cpp_info.components[\"crypto\"].defines = [\"DEFINE_CRYPTO=1\"]\n"
+"    self.cpp_info.components[\"crypto\"].requires = [\"zlib::zlib\"]  # "
+"Depends on all components in zlib package\n"
+"\n"
+"    self.cpp_info.components[\"ssl\"].set_property(\"cmake_target_name\", "
+"\"OpenSSL::SSL\")\n"
+"    self.cpp_info.components[\"ssl\"].includedirs = [\"include/"
+"headers_ssl\"]\n"
+"    self.cpp_info.components[\"ssl\"].libs = [\"libssl\"]\n"
+"    self.cpp_info.components[\"ssl\"].requires = [\"crypto\",\n"
+"                                                \"boost::headers\"]  # "
+"Depends on headers component in boost package\n"
+"\n"
+"    obj_ext = \"obj\" if platform.system() == \"Windows\" else \"o\"\n"
+"    self.cpp_info.components[\"ssl-objs\"].objects = [os.path.join(\"lib\", "
+"\"ssl-object.{}\".format(obj_ext))]"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:161
+msgid ""
+"Dependencies among components and to components of other requirements can be "
+"defined using the ``requires`` attribute and the name of the component. The "
+"dependency graph for components will be calculated and values will be "
+"aggregated in the correct order for each field."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:169
+msgid "buildenv_info, runenv_info"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:171
+msgid ""
+"The ``buildenv_info`` and ``runenv_info`` attributes are ``Environment`` "
+"objects that allow to define information for the consumers in the form of "
+"environment variables. They can use any of the ``Environment`` methods to "
+"define such information:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:174
+msgid ""
+"settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"\n"
+"def package_info(self):\n"
+"    self.buildenv_info.define(\"MYVAR\", \"1\")\n"
+"    self.buildenv_info.prepend_path(\"MYPATH\", \"my/path\")\n"
+"    if self.settings.os == \"Android\":\n"
+"        arch = \"myarmarch\" if self.settings.arch==\"armv8\" else "
+"\"otherarch\"\n"
+"        self.buildenv_info.append(\"MY_ANDROID_ARCH\", f\"android-{arch})\n"
+"\n"
+"    self.runenv_info.append_path(\"MYRUNPATH\", \"my/run/path\")\n"
+"    if self.settings.os == \"Windows\":\n"
+"        self.runenv_info.define_path(\"MYPKGHOME\", \"my/home\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:190
+msgid ""
+"Note that these objects are not tied to either regular ``requires`` or "
+"``tool_requires``, any package recipe can use both. The difference between "
+"``buildenv_info`` and ``runenv_info`` is that the former is applied when "
+"Conan is building something from source, like in the ``build()`` method, "
+"while the later would be used when executing something in the \"host\" "
+"context that would need the runtime activated."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:193
+msgid ""
+"Conan ``VirtualBuildEnv`` generator will be used by default in consumers, "
+"collecting the information from ``buildenv_info`` (and some ``runenv_info`` "
+"from the \"build\" context) to create the ``conanbuild`` environment script, "
+"which runs by default in all ``self.run(cmd, env=\"conanbuild\")`` calls. "
+"The ``VirtualRunEnv`` generator will also be used by default in consumers "
+"collecting the ``runenv_info`` from the \"host\" context creating the "
+"``conanrun`` environment script, which can be explicitly used with ``self."
+"run(<cmd>, env=\"conanrun\")``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:199
+#: ../../../reference/conanfile/methods/package_info.rst:335
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:201
+msgid ""
+"It is not necessary to add ``bindirs`` to the ``PATH`` environment variable, "
+"this will be automatically done by the consumer ``VirtualBuildEnv`` and "
+"``VirtualRunEnv`` generators. Likewise, it is not necessary to add "
+"``includedirs``, ``libdirs`` or any other dirs to environment variables, as "
+"this information will be typically managed by other generators."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:209
+msgid "conf_info"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:211
+msgid ""
+"``tool_requires`` packages in the \"build\" context can transmit some "
+"``conf`` configuration to its immediate consumers, with the ``conf_info`` "
+"attribute. For example, one Conan package packaging the AndroidNDK could do:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:214
+msgid ""
+"def package_info(self):\n"
+"    self.conf_info.define_path(\"tools.android:ndk_path\", \"path/to/ndk/in/"
+"package\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:219
+msgid ""
+"``conf_info`` from packages can still be overwritten from profiles values, "
+"because user profiles will have higher priority."
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.define:1
+msgid "Define a value for the given configuration name."
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.append:0
+#: conan.internal.model.conf.Conf.define:0
+#: conan.internal.model.conf.Conf.prepend:0
+#: conan.internal.model.conf.Conf.remove:0
+#: conan.internal.model.conf.Conf.unset:0
+#: conan.internal.model.conf.Conf.update:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.append:3
+#: conan.internal.model.conf.Conf.define:3
+#: conan.internal.model.conf.Conf.prepend:3
+#: conan.internal.model.conf.Conf.remove:3
+#: conan.internal.model.conf.Conf.unset:3
+#: conan.internal.model.conf.Conf.update:3
+msgid "Name of the configuration."
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.define:4
+#: conan.internal.model.conf.Conf.update:4
+msgid "Value of the configuration."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:226
+msgid ""
+"def package_info(self):\n"
+"    # Setting values\n"
+"    self.conf_info.define(\"tools.build:verbosity\", \"verbose\")\n"
+"    self.conf_info.define(\"tools.system.package_manager:sudo\", True)\n"
+"    self.conf_info.define(\"tools.microsoft.msbuild:max_cpu_count\", 2)\n"
+"    self.conf_info.define(\"user.myconf.build:ldflags\", [\"--flag1\", \"--"
+"flag2\"])\n"
+"    self.conf_info.define(\"tools.microsoft.msbuildtoolchain:"
+"compile_options\", {\"ExceptionHandling\": \"Async\"})"
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.append:1
+msgid "Append a value to the given configuration name."
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.append:4
+msgid "Value to append."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:239
+msgid ""
+"def package_info(self):\n"
+"    # Modifying configuration list-like values\n"
+"    self.conf_info.append(\"user.myconf.build:ldflags\", \"--flag3\")  # == "
+"[\"--flag1\", \"--flag2\", \"--flag3\"]"
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.prepend:1
+msgid "Prepend a value to the given configuration name."
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.prepend:4
+msgid "Value to prepend."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:249
+msgid ""
+"def package_info(self):\n"
+"    self.conf_info.prepend(\"user.myconf.build:ldflags\", \"--flag0\")  # == "
+"[\"--flag0\", \"--flag1\", \"--flag2\", \"--flag3\"]"
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.update:1
+msgid "Update the value to the given configuration name."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:257
+msgid ""
+"def package_info(self):\n"
+"    # Modifying configuration dict-like values\n"
+"    self.conf_info.update(\"tools.microsoft.msbuildtoolchain:"
+"compile_options\", {\"ExpandAttributedSource\": \"false\"})"
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.remove:1
+msgid "Remove a value from the given configuration name."
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.remove:4
+msgid "Value to remove."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:267
+msgid ""
+"def package_info(self):\n"
+"    # Remove\n"
+"    self.conf_info.remove(\"user.myconf.build:ldflags\", \"--flag1\")  # == "
+"[\"--flag0\", \"--flag2\", \"--flag3\"]"
+msgstr ""
+
+#: ../../../conan_sources/conan/internal/model/conf.py:docstring of
+#: conan.internal.model.conf.Conf.unset:1
+msgid "Clears the variable, equivalent to a unset or set XXX="
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:277
+msgid ""
+"def package_info(self):\n"
+"    # Unset any value\n"
+"    self.conf_info.unset(\"tools.microsoft.msbuildtoolchain:"
+"compile_options\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:284
+msgid ""
+"It is possible to define configuration in packages that are "
+"``tool_requires``. For example, assuming there is a package that bundles the "
+"*AndroidNDK*, it could define the location of such NDK to the ``tools."
+"android:ndk_path`` configuration as:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:289
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    name = \"android_ndk\"\n"
+"\n"
+"    def package_info(self):\n"
+"        self.conf_info.define(\"tools.android:ndk_path\", os.path.join(self."
+"package_folder, \"ndk\"))"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:301
+msgid ""
+"Note that this only propagates from the immediate, direct ``tool_requires`` "
+"of a recipe."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:307
+msgid "generator_info"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:312
+msgid ""
+"``tool_requires`` in the build context can inject generators into the "
+"recipe, by adding them to the ``generator_info`` attribute inside the "
+"``package_info`` method. This is useful to inject custom generators into the "
+"recipe, that will be used by the consumers of the package, just as if they "
+"were declared in their ``generators`` attribute."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:317
+msgid ""
+"class MyGenerator:\n"
+"    def __init__(self, conanfile):\n"
+"        self._conanfile = conanfile\n"
+"\n"
+"    def generate(self):\n"
+"        self.output.info(f\"Calling custom generator for {conanfile}\")\n"
+"\n"
+"def package_info(self):\n"
+"    self.generator_info = [MyGenerator]"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:329
+msgid ""
+"Note that this only propagates from the immediate, direct ``tool_requires`` "
+"of a recipe, and that by default ``self.generator_info`` is ``None``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:337
+msgid ""
+"The ``package_info()`` method is not strictly necessary if you have other "
+"means of propagating information for consumers. For example, if your package "
+"creates ``xxx-config.cmake`` files at build time, and they are put in the "
+"final package, it might not be necessary to define ``package_info()`` at "
+"all, and in the consumer side the ``CMakeDeps`` would not be necessary "
+"either, as ``CMakeToolchain`` is able to inject the paths to locate the "
+"``xxx-config.cmake`` files inside the packages. This approach can be good "
+"for private usage of Conan, albeit some limitations of CMake, like not being "
+"able to manage multi-configuration projects (like Visual Studio switching "
+"Debug/Release in the IDE, that ``CMakeDeps`` can provide), limitations in "
+"some cross-build scenarios using packages that are both libraries and build "
+"tools (like ``protobuf``, that also ``CMakeDeps`` can handle)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:338
+msgid ""
+"Providing a ``package_info()`` is very necessary if consumers can use "
+"different build systems, like in ConanCenter. In this case, it is necessary "
+"a bit of repetition, and coding the ``package_info()`` might feel "
+"duplicating the package ``xxx-config.cmake``, but automatically extracting "
+"the info from CMake is not feasible at this moment."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:339
+msgid ""
+"If you plan to use editables or the local development flow, there's a need "
+"to check the ``layout()`` and define the information for ``self.cpp.build`` "
+"and ``self.cpp.source``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:340
+msgid ""
+"It is not necessary to add ``bindirs`` to the ``PATH`` environment variable, "
+"this will be automatically done by the consumer ``VirtualBuildEnv`` and "
+"``VirtualRunEnv`` generators."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:341
+msgid ""
+"The **paths** defined in ``package_info()`` shouldn't be converted to any "
+"specific format (like the one required by Windows subsystems). Instead, it "
+"is the responsibility of the consumer to translate these paths to the "
+"adequate format."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:346
+msgid ""
+"See :ref:`the defining package information "
+"tutorial<tutorial_creating_define_package_info>` for more information."
+msgstr ""

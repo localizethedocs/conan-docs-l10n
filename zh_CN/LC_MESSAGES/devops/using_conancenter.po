@@ -1,0 +1,248 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.25\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-03 08:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devops/using_conancenter.rst:4
+msgid "Using ConanCenter packages in production environments"
+msgstr ""
+
+#: ../../../common/conancenter_frozen.inc:3
+msgid "**Default Remote Update in Conan 2.9.2**"
+msgstr ""
+
+#: ../../../common/conancenter_frozen.inc:5
+msgid ""
+"Starting from **Conan version 2.9.2**, the default remote has been changed "
+"to `https://center2.conan.io`. The previous default remote `https://center."
+"conan.io` is now frozen and will no longer receive updates. It is "
+"recommended to update your remote configuration to use the new default "
+"remote to ensure access to the latest recipes and package updates (for more "
+"information, please read this `post <https://blog.conan.io/2024/09/30/Conan-"
+"Center-will-stop-receiving-updates-for-Conan-1.html>`_)."
+msgstr ""
+
+#: ../../../common/conancenter_frozen.inc:12
+msgid ""
+"If you still have the deprecated remote configured as the default, please "
+"update using the following command:"
+msgstr ""
+
+#: ../../../common/conancenter_frozen.inc:15
+msgid "conan remote update conancenter --url=\"https://center2.conan.io\""
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:8
+msgid ""
+"ConanCenter is a fantastic resource that contains reference implementations "
+"of recipes for over 1500 libraries and applications contributed by the "
+"community. As such, it is a great knowledge base on how to create and build "
+"Conan packages for open source dependencies."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:13
+msgid ""
+"ConanCenter also builds and provides binary packages for a wide range of "
+"configurations: multiple operating systems (Windows, Linux, macOS), "
+"compilers, compiler versions, and library variants (shared, static). On top "
+"of this, for a lot of libraries community contributors ensure that recipes "
+"are compatible for additional operating systems (Android, iOS, FreeBSD, QNX) "
+"and CPU architectures. The recipes in Conan Center are the greatest example "
+"of Conan’s universality promise."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:20
+msgid ""
+"Unlike other package managers or repositories, ConanCenter does not maintain "
+"a fixed snapshot of versions. On the contrary, for a given library (e.g. "
+"OpenCV), multiple versions are actively maintained at the same time. This "
+"gives users greater control of which versions to use, rather than having to "
+"remain fixed to an older version, or pushing them to always be on the latest "
+"version."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:26
+msgid ""
+"In order to support this ecosystem, ConanCenter recipes are updated very "
+"frequently. Recipes themselves may be updated to support a new platform, bug "
+"fixes, or to require newer versions of their dependencies. On the other "
+"hand, each user of ConanCenter may have a different combination of versions "
+"in their requirements. This means that given the same input list of "
+"requirements, Conan may resolve the graph differently at different points in "
+"time - resolving to different recipe revisions, versions, or packages. This "
+"is similar to the default behavior of package managers in other languages "
+"(pip/PyPi, npm, cargo, etc). In production environments where "
+"reproducibility is important, it is therefore discouraged to depend directly "
+"on Conan Center in an unconstrained manner."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:38
+msgid ""
+"The following guidelines contain a series of recommendations to ensure "
+"repeatability, reliability, compliance and, where applicable, control to "
+"enable customization. As a summary, it is highly recommended to follow these "
+"approaches when using packages from ConanCenter:"
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:42
+msgid ""
+"Lock the versions and revisions you depend on using :ref:"
+"`lockfiles<tutorial_versioning_lockfiles>`"
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:43
+msgid ""
+"Host your own copy of ConanCenter recipes and package binaries :ref:`in a "
+"server under your control "
+"<devops_conancenter_hosting_your_own_conancenter_fork>`"
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:46
+msgid "Repeatability and reproducibility"
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:47
+msgid ""
+"As mentioned earlier - given a set of requirements, changes in ConanCenter "
+"can cause the Conan dependency solver to resolve different graphs over time. "
+"This does not only apply to the actual versions of libraries (e.g. "
+"``opencv/4.5.0`` instead ``opencv/4.2.1``) - but also the recipes "
+"themselves. That is, there may exist multiple revisions of the "
+"``opencv/4.5.0`` recipe, which can have side effects for consumers. Changes "
+"in recipes typically address a problem (bugfixes), target functionality (e."
+"g. adding a conditional option, support for a new platform), or change "
+"versions of dependencies."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:56
+msgid ""
+"In order to ensure repeatability, the use of lockfiles on the consumer side "
+"is greatly encouraged: please check :ref:`the lockfile "
+"docs<tutorial_versioning_lockfiles>` for more information."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:60
+msgid ""
+"Lockfiles ensure that Conan will resolve the same graph in a repeatable and "
+"consistent manner - thus making sure the same versions are used across "
+"multiple systems (CI, developers, etc)."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:64
+msgid ""
+"Lockfiles are also used in other package managers like Python pip, Rust "
+"Cargo, npm - these recommendations are in line with the practices of these "
+"other technologies."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:67
+msgid ""
+"Additionally, it is highly recommended to host your recipes and packages in "
+"your own server (see below). Both of these approaches help you achieve "
+"having control on when upstream changes from ConanCenter are propagated "
+"across your team and systems."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:73
+msgid "Service reliability"
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:74
+msgid ""
+"Consuming recipes and packages from the ConanCenter remote can be impacted "
+"during periods of downtime (scheduled or otherwise). While every effort is "
+"made to ensure that the ConanCenter is always available, and unscheduled "
+"downtime is rare and treated with urgency - this can impact users that "
+"depend on ConanCenter directly. Additionally, when building recipes from "
+"source, this requires retrieving the source packages (typically zip or tar "
+"files) from remote servers outside of the control of ConanCenter. "
+"Occasionally, these too can suffer from unscheduled downtime."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:82
+msgid ""
+"In enterprise production environments with strong uptime is required, it is "
+"strongly recommended to host recipes and binary packages in a server under "
+"your control."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:85
+#: ../../../devops/using_conancenter.rst:104
+#: ../../../devops/using_conancenter.rst:125
+msgid ""
+"Read more: :ref:`creating and hosting your own Conan Center binaries "
+"<devops_conancenter_hosting_your_own_conancenter_fork>`"
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:87
+msgid ""
+"This can also protect against transient network issues, and issues caused by "
+"transfer of binary data from external sources. These recommendations also "
+"apply when consuming packages from external sources in any package manager."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:93
+msgid "Compliance and security"
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:94
+msgid ""
+"Some industries such as finance, robotics and embedded, have stronger "
+"requirements around change management, open source licenses and "
+"reproducibility. For example, changes in recipes could result in a new "
+"version being resolved for a dependency, in a way that the license for that "
+"version has changed and needs to be validated and audited by your "
+"organization. In some industries like medical or automotive, you may be "
+"required to ensure all your dependencies can be built from source in a "
+"repeatable way, and thus using binaries provided by Conan Center may not be "
+"advisable. In these instances, we recommend building your own binary "
+"packages from source:"
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:106
+msgid ""
+"If the ``conancenter`` remote is used directly, your organization might "
+"require that the binaries are built from source, and not downloaded directly "
+"from ConanCenter. This can exceptionally be achieved with the "
+"``recipes_only`` field :ref:`in the remote "
+"configuration<reference_config_files_remotes_json>`, but it is highly likely "
+"that you will also want to build the packages from source, and not depend on "
+"the recipes and binaries provided by ConanCenter. See the above link for "
+"more information."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:115
+msgid "Control and customization"
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:116
+msgid ""
+"It is very common for users of dependencies to require custom changes to "
+"external libraries - typically to support specific platform configurations "
+"not considered by either ConanCenter or the original library authors, "
+"backport bug fixes, etc. Some of these changes may not be suitable to be "
+"merged in ConanCenter, and it may not happen until this has been reviewed "
+"and validated by ConanCenter maintainers. For this reason, if you need tight "
+"control over the changes in recipes, it is highly recommended to host not "
+"only a Conan remote, but your own fork of the conan-center-index recipe "
+"repository."
+msgstr ""
+
+#: ../../../devops/using_conancenter.rst:128
+msgid ""
+"The following subsections describe in more details the above strategies:"
+msgstr ""

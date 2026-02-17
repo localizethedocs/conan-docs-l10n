@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.25\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-03 08:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:2
+msgid "Depending on different versions of the same tool-require"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:6
+msgid ""
+"This is an **advanced** use case. It shouldn't be necessary in the vast "
+"majority of cases."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:9
+msgid "In the general case, trying to do something like this:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:11
+msgid ""
+"def build_requirements(self):\n"
+"    self.tool_requires(\"gcc/1.0\")\n"
+"    self.tool_requires(\"gcc/2.0\")"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:17
+msgid ""
+"Will generate a \"conflict\", showing an error like ``Duplicated "
+"requirement``. This is correct in most situations, when it is obvious that "
+"it is not possible to use 2 versions of the same compiler to build the "
+"current package."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:20
+msgid ""
+"However there are some exceptional situations when something like that is "
+"desired. Let's recreate the potential scenario. Please, first clone the "
+"sources to recreate this project. You can find them in the `examples2 "
+"repository <https://github.com/conan-io/examples2>`_ on GitHub:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:24
+msgid ""
+"git clone https://github.com/conan-io/examples2.git\n"
+"cd examples2/examples/graph/tool_requires/different_versions"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:29
+msgid "There we have a ``gcc`` fake recipe with:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:31
+msgid ""
+"class Pkg(ConanFile):\n"
+"    name = \"gcc\"\n"
+"\n"
+"    def package(self):\n"
+"        echo = f\"@echo off\\necho MYGCC={self.version}!!\"\n"
+"        save(self, os.path.join(self.package_folder, \"bin\", f\"mygcc{self."
+"version}.bat\"), echo)\n"
+"        save(self, os.path.join(self.package_folder, \"bin\", f\"mygcc{self."
+"version}.sh\"), echo)\n"
+"        os.chmod(os.path.join(self.package_folder, \"bin\", f\"mygcc{self."
+"version}.sh\"), 0o777)"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:43
+msgid ""
+"This is not an actual compiler, it fakes it with a shell or bat script that "
+"prints ``MYGCC=current-version`` when executed. Note the binary itself is "
+"called ``mygcc1.0`` and ``mygcc2.0``, that is, it contains the version in "
+"the executable name itself."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:46
+msgid ""
+"We can create 2 different versions for ``gcc/1.0`` and ``gcc/2.0`` with:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:49
+msgid ""
+"$ conan create gcc --version=1.0\n"
+"$ conan create gcc --version=2.0"
+msgstr ""
+"$ conan create gcc --version=1.0\n"
+"$ conan create gcc --version=2.0"
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:54
+msgid "Now, in the ``wine`` folder there is a ``conanfile.py`` like this:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:56
+msgid ""
+"class Pkg(ConanFile):\n"
+"    name = \"wine\"\n"
+"    version = \"1.0\"\n"
+"\n"
+"    def build_requirements(self):\n"
+"        # If we specify \"run=False\" they no longer conflict\n"
+"        self.tool_requires(\"gcc/1.0\", run=False)\n"
+"        self.tool_requires(\"gcc/2.0\", run=False)\n"
+"\n"
+"    def generate(self):\n"
+"        # It is possible to individually reference each one\n"
+"        gcc1 = self.dependencies.build[\"gcc/1.0\"]\n"
+"        assert gcc1.ref.version == \"1.0\"\n"
+"        gcc2 = self.dependencies.build[\"gcc/2.0\"]\n"
+"        assert gcc2.ref.version == \"2.0\"\n"
+"\n"
+"    def build(self):\n"
+"        ext = \"bat\" if platform.system() == \"Windows\" else \"sh\"\n"
+"        self.run(f\"mygcc1.0.{ext}\")\n"
+"        self.run(f\"mygcc2.0.{ext}\")"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:80
+msgid ""
+"The first important point is the ``build_requirements()`` method, that does "
+"a ``tool_requires()`` to both versions, but defining ``run=False``. **This "
+"is very important**: we are telling Conan that we actually don't need to run "
+"anything from those packages. As ``tool_requires`` are not visible, they "
+"don't define headers or libraries, there is nothing that makes Conan "
+"identify those 2 ``tool_requires`` as conflicting. So the dependency graph "
+"can be constructed without errors, and the ``wine/1.0`` package will contain "
+"2 different tool-requires to both ``gcc/1.0`` and ``gcc/2.0``."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:86
+msgid ""
+"Of course, it is not true that we won't run anything from those "
+"``tool_requires``, but now Conan is not aware of it, and it is completely "
+"the responsibility of the user to manage it."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:91
+msgid ""
+"Using ``run=False`` makes the ``tool_requires()`` completely invisible, that "
+"means that profile ``[tool_requires]`` will not be able to override its "
+"version, but it would create an extra tool-require dependency with the "
+"version injected from the profile. You might want to exclude specific "
+"packages with something like ``!wine/*: gcc/3.0``."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:95
+msgid ""
+"The recipe has still access in the ``generate()`` method to each different "
+"``tool_require`` version, just by providing the full reference like ``self."
+"dependencies.build[\"gcc/1.0\"]``."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:98
+msgid ""
+"Finally, the most important part is that the usage of those tools is "
+"completely the responsibility of the user. The ``bin`` folder of both "
+"``tool_requires`` containing the executables will be in the path thanks to "
+"the ``VirtualBuildEnv`` generator that by default updates the PATH env-var. "
+"In this case the executables are different like ``mygcc1.0.sh`` and "
+"``mygcc2.0.sh``, so it is not an issue, and each one will be found inside "
+"its package."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:103
+msgid ""
+"But if the executable file was exactly the same like ``gcc.exe``, then it "
+"would be necessary to obtain the full folder (typically in the "
+"``generate()`` method) with something like ``self.dependencies."
+"build[\"gcc/1.0\"].cpp_info.bindir`` and use the full path to disambiguate."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:108
+msgid "Let's see it working. If we execute:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/different_versions.rst:111
+msgid ""
+"$ conan create wine\n"
+"...\n"
+"wine/1.0: RUN: mygcc1.0.bat\n"
+"MYGCC=1.0!!\n"
+"\n"
+"wine/1.0: RUN: mygcc2.0.bat\n"
+"MYGCC=2.0!!"
+msgstr ""
+"$ conan create wine\n"
+"...\n"
+"wine/1.0: RUN: mygcc1.0.bat\n"
+"MYGCC=1.0!!\n"
+"\n"
+"wine/1.0: RUN: mygcc2.0.bat\n"
+"MYGCC=2.0!!"

@@ -1,0 +1,117 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.25\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-03 08:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:4
+msgid "Consuming system requirements only when building a package"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:6
+msgid ""
+"In some cases, you may want to consume system requirements only when "
+"building a package, but not when installing it. It can be useful when you "
+"want to build a package in a CI/CD pipeline, but you don't want to run the "
+"system package manager when installing the Conan package in a different "
+"environment. For those cases, there are few approaches that can be used to "
+"achieve this goal."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:13
+msgid ""
+"Consume a Conan package wrapper for a system package as build requirement"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:15
+msgid ""
+"In this approach, you can use a Conan package for a :ref:`wrapped system "
+"package<examples_tools_system_package_manager>`. Then, the package can be "
+"consumed regularly by the method :ref:"
+"`build_requirements()<reference_conanfile_methods_build_requirements>`."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:19
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class MyPackage(ConanFile):\n"
+"    name = \"mypackage\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"    def build_requirements(self):\n"
+"        self.tool_requires(\"ncurses/system\")\n"
+"\n"
+"    ..."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:32
+msgid ""
+"This ensures that downstream consumers of the package *mypackage* will not "
+"directly invoke the system package manager (e.g., apt-get). Only the direct "
+"package consumer of the system wrap package for ``ncurses`` will execute the "
+"system package manager when building the package."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:36
+msgid ""
+"Centralizing and wrapping ``ncurses`` in a separated recipe makes it "
+"reusable across multiple cases and is good practice to avoid code "
+"duplication."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:41
+msgid "Consume the system package directly in the build() method"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:43
+msgid ""
+"In case wanting to run the system package manager only when building the "
+"package, but not having a Conan package to wrap the system library "
+"information, it's possible to run the system package manager in the "
+"**build()** method:"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:46
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.system import package_manager\n"
+"\n"
+"class MyPackage(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    ...\n"
+"\n"
+"    def build(self):\n"
+"        if self.settings.os == \"Linux\":\n"
+"            apt = package_manager.Apt(self)\n"
+"            apt.install([\"libncurses-dev\"], update=True, check=True)"
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:60
+msgid ""
+"This way, the system package manager will be called only when building the "
+"package, not when installing it. There is the advantage of not needed to "
+"create a separated Conan package to wrap the system library information, "
+"this is a much simpler case, when only a single recipe need to install the "
+"system package."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/consuming_system_packages.rst:64
+msgid ""
+"Still, this approach may lead to code duplication if multiple recipes "
+"consume the same system package. It is recommended to use this method "
+"sparingly and only for well-contained cases."
+msgstr ""

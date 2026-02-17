@@ -1,0 +1,216 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.25\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-03 08:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/build_id.rst:4
+msgid "build_id()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:6
+msgid ""
+"The ``build_id()`` method allows you to **reuse a single build** to create "
+"multiple binary packages in the Conan cache, saving time by avoiding "
+"unnecessary rebuilds."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:9
+msgid ""
+"It is primarily an optimization tool for situations where **building each "
+"configuration separately isn't feasible**."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:11
+msgid ""
+"There are a couple of scenarios where this could be useful, for example, "
+"when a package build:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:13
+msgid ""
+"**Generates multiple configurations in a single build run**: Some build "
+"scripts always produce both Debug and Release artifacts together, without a "
+"way to build them separately."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:17
+msgid ""
+"**Produces one configuration but different sets of artifacts**: The build "
+"could generate the main library plus some test executables, and you want to "
+"create:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:20
+msgid "one package with just the library (for general use), and"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:21
+msgid ""
+"another package that includes both the library and the test binaries (for "
+"compliance, debugging, or reproducibility)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:23
+msgid ""
+"In these scenarios, **reusing the same build folder avoids recompiling the "
+"same sources multiple times** just because you need slightly different "
+"packaging."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:26
+msgid "How does the build folder relate to the package ID and the build ID?"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:28
+msgid ""
+"By default, Conan creates **one build folder per unique package ID**, where:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:30
+msgid ""
+"Generally, the **package ID** depends on the combination of `settings`, "
+"`options`, and dependencies."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:31
+msgid ""
+"Each different **package ID** triggers a separate ``build()`` execution and "
+"generates a separate build folder."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:33
+msgid ""
+"When you define the ``build_id()`` method, you can **force different package "
+"IDs to share the same build folder** by customizing `self.info_build`:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:35
+msgid ""
+"``self.info_build`` is like ``self.info``, but it only affects the "
+"computation of the **build ID**, not the final package ID."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:36
+msgid ""
+"Any package IDs with the same build ID will reuse the same build folder and "
+"the same build step."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:40
+msgid "Example: sharing the build for Debug and Release"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:42
+msgid ""
+"settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"\n"
+"def build_id(self):\n"
+"    self.info_build.settings.build_type = \"Any\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:49
+msgid ""
+"With this recipe, Debug and Release will each produce their own package IDs "
+"(and thus their own binary packages), but they will **share the same build "
+"folder**, because the build ID ignores the ``build_type`` setting."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:51
+msgid ""
+"**However, you still need to run one** :command:`conan create` **command per "
+"configuration** (e.g., once for Debug, once for Release). Conan will check "
+"if the build folder already exists (based on the shared build ID) and skip "
+"the actual compilation if it's already been built, only executing "
+"`package()` to create the corresponding package."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:55
+msgid "Example workflow:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:57
+msgid ""
+"# First build: creates the build folder + packages the Debug package\n"
+"$ conan create . -s build_type=Debug\n"
+"\n"
+"# Second build: reuses the previous build folder + packages the Release "
+"package without rebuilding\n"
+"$ conan create . -s build_type=Release"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:65
+msgid ""
+"This way, although we called :command:`conan create` twice (once per package "
+"ID), the actual build will only happen once."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:69
+msgid "You can also customize ``build_id()`` based on options:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:71
+msgid ""
+"def build_id(self):\n"
+"    self.info_build.options.myoption = \"MyValue\"\n"
+"    self.info_build.options.fullsource = \"Always\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:78
+msgid "Conditional usage of the build ID"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:80
+msgid ""
+"If the ``build_id()`` method does not modify the ``self.info_build`` data, "
+"and produces the same build ID as the package ID, then the standard behavior "
+"will be applied. For example:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:83
+msgid ""
+"settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"\n"
+"def build_id(self):\n"
+"    if self.settings.os == \"Windows\":\n"
+"        self.info_build.settings.build_type = \"Any\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:91
+msgid ""
+"This will only produce a different **build ID** if the package is for "
+"Windows, so it will only run the ``build()`` method once for all the "
+"``build_type`` values."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:94
+msgid ""
+"For any other OS, Conan will behave as usual (as if the ``build_id()`` "
+"method was not defined), running the ``build()`` method for every "
+"``build_type`` configuration."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_id.rst:99
+msgid "**Best practices**"
+msgstr "**最佳實踐**"
+
+#: ../../../reference/conanfile/methods/build_id.rst:101
+msgid ""
+"The goal of the ``build_id()`` method is to deal with legacy build scripts "
+"that cannot easily be changed to compile one configuration at a time. We "
+"strongly recommend to just package **one package binary per package ID** for "
+"each different configuration."
+msgstr ""

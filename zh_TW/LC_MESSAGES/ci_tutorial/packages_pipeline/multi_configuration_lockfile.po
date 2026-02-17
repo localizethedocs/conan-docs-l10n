@@ -1,0 +1,237 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.13\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:2
+msgid "Package pipeline: multi configuration using lockfiles"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:4
+msgid ""
+"In the previous example, we built both ``Debug`` and ``Release`` package "
+"binaries for ``ai/1.1.0``. In real world scenarios the binaries to build "
+"would be different platforms (Windows, Linux, embedded), different "
+"architectures, and very often it will not be possible to build them in the "
+"same machine, requiring different computers."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:6
+msgid ""
+"The previous example had an important assumption: the dependencies of "
+"``ai/1.1.0`` do not change at all during the building process. In many "
+"scenarios, this assumption will not hold, for example if there are any other "
+"concurrent CI jobs, and one succesfull job publishes a new ``mathlib/1.1`` "
+"version in the ``develop`` repo."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:8
+msgid ""
+"Then it is possible that one build of ``ai/1.1.0``, for example, the one "
+"running in the Linux servers starts earlier and uses the previous "
+"``mathlib/1.0`` version as dependency, while the Windows servers start a bit "
+"later, and then their build will use the recent ``mathlib/1.1`` version as "
+"dependency. This is a very undesirable situation, having binaries for the "
+"same ``ai/1.1.0`` version using different dependencies versions. This can "
+"lead in later graph resolution problems, or even worse, get to the release "
+"with different behavior for different platforms."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:10
+msgid ""
+"The way to avoid this discrepancy in dependencies is to force the usage of "
+"the same dependencies versions and revisions, something that can be done "
+"with :ref:`lockfiles<tutorial_versioning_lockfiles>`."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:12
+msgid ""
+"Creating and applying lockfiles is relatively straightforward. The process "
+"of creating and promoting the configurations will be identical to the "
+"previous section, but just applying the lockfiles."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:15
+msgid "Creating the lockfile"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:17
+msgid "Let's make sure as usual that we start from a clean state:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:19
+msgid "$ conan remove \"*\" -c  # Make sure no packages from last run"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:24
+msgid "Then we can create the lockfile ``conan.lock`` file:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:26
+msgid ""
+"# Capture a lockfile for the Release configuration\n"
+"$ conan lock create . -s build_type=Release --lockfile-out=conan.lock\n"
+"# extend the lockfile so it also covers the Debug configuration\n"
+"# in case there are Debug-specific dependencies\n"
+"$ conan lock create . -s build_type=Debug --lockfile=conan.lock --lockfile-"
+"out=conan.lock"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:34
+msgid ""
+"Note that different configurations, using different profiles or settings "
+"could result in different dependency graphs. A lockfile file can be used to "
+"lock the different configurations, but it is important to iterate the "
+"different configurations/profiles and capture their information in the "
+"lockfile."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:38
+msgid ""
+"The ``conan.lock`` is the default argument, and if a ``conan.lock`` file "
+"exists, it might be automatically used by ``conan install/create`` and other "
+"graph commands. This can simplify many of the commands, but this tutorial is "
+"showing the full explicit commands for clarity and didactical reasons."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:40
+msgid "The ``conan.lock`` file can be inspected, it will be something like:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:42
+msgid ""
+"{\n"
+"    \"version\": \"0.5\",\n"
+"    \"requires\": [\n"
+"        \"mathlib/1.0#f2b05681ed843bf50d8b7b7bdb5163ea%1724319985.398\"\n"
+"    ],\n"
+"    \"build_requires\": [],\n"
+"    \"python_requires\": [],\n"
+"    \"config_requires\": []\n"
+"}"
+msgstr ""
+"{\n"
+"    \"version\": \"0.5\",\n"
+"    \"requires\": [\n"
+"        \"mathlib/1.0#f2b05681ed843bf50d8b7b7bdb5163ea%1724319985.398\"\n"
+"    ],\n"
+"    \"build_requires\": [],\n"
+"    \"python_requires\": [],\n"
+"    \"config_requires\": []\n"
+"}"
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:54
+msgid ""
+"As we can see, it is locking the ``mathlib/1.0`` dependency version and "
+"revision."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:57
+msgid ""
+"With the lockfile, creating the different configurations is exactly the "
+"same, but providing the ``--lockfile=conan.lock`` argument to the ``conan "
+"create`` step, it will guarantee that "
+"``mathlib/1.0#f2b05681ed843bf50d8b7b7bdb5163ea`` will always be the exact "
+"dependency used, irrespective if there exist new ``mathlib/1.1`` versions or "
+"new revisions available. The following builds could be launched in parallel "
+"but executed at different times, and still they will always use the same "
+"``mathlib/1.0`` dependency:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:60
+msgid "Release build"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:60
+msgid ""
+"$ cd ai  # If you were not inside \"ai\" folder already\n"
+"$ conan create . --build=\"missing:ai/*\" --lockfile=conan.lock -s "
+"build_type=Release --format=json > graph.json\n"
+"$ conan list --graph=graph.json --graph-binaries=build --format=json > built."
+"json\n"
+"$ conan remote enable packages\n"
+"$ conan upload -l=built.json -r=packages -c --format=json > uploaded_release."
+"json\n"
+"$ conan remote disable packages"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:70
+msgid "Debug build"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:70
+msgid ""
+"$ conan create . --build=\"missing:ai/*\" --lockfile=conan.lock -s "
+"build_type=Debug --format=json > graph.json\n"
+"$ conan list --graph=graph.json --graph-binaries=build --format=json > built."
+"json\n"
+"$ conan remote enable packages\n"
+"$ conan upload -l=built.json -r=packages -c --format=json > uploaded_debug."
+"json\n"
+"$ conan remote disable packages"
+msgstr ""
+"$ conan create . --build=\"missing:ai/*\" --lockfile=conan.lock -s "
+"build_type=Debug --format=json > graph.json\n"
+"$ conan list --graph=graph.json --graph-binaries=build --format=json > built."
+"json\n"
+"$ conan remote enable packages\n"
+"$ conan upload -l=built.json -r=packages -c --format=json > uploaded_debug."
+"json\n"
+"$ conan remote disable packages"
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:79
+msgid ""
+"Note the only modification to the previous example is the addition of ``--"
+"lockfile=conan.lock``. The promotion will also be identical to the previous "
+"one:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:81
+msgid "Promoting from packages->product"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:81
+msgid ""
+"# aggregate the package list\n"
+"$ conan pkglist merge -l uploaded_release.json -l uploaded_debug.json --"
+"format=json > uploaded.json\n"
+"\n"
+"$ conan remote enable packages\n"
+"$ conan remote enable products\n"
+"# Promotion using Conan download/upload commands\n"
+"# (slow, can be improved with art:promote custom command)\n"
+"$ conan download --list=uploaded.json -r=packages --format=json > promote."
+"json\n"
+"$ conan upload --list=promote.json -r=products -c\n"
+"$ conan remote disable packages\n"
+"$ conan remote disable products"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:96
+msgid ""
+"And the final result will be the same as in the previous section, but this "
+"time just with the guarantee that both ``Debug`` and ``Release`` binaries "
+"were built using exactly the same ``mathlib`` version:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/multi_configuration_lockfile.rst:148
+msgid ""
+"Now that we have the new ``ai/1.1.0`` binaries in the ``products`` repo, we "
+"can consider the ``packages pipeline`` finished and move to the next "
+"section, and build and check our products to see if this new ``ai/1.1.0`` "
+"version integrates correctly."
+msgstr ""

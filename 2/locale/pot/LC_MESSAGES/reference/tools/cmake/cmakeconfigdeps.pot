@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 09:24+0000\n"
+"POT-Creation-Date: 2026-03-10 13:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,7 +66,7 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmakeconfigdeps.rst:29
 #: ../../../reference/tools/cmake/cmakeconfigdeps.rst:39
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:235
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:242
 msgid "conanfile.py"
 msgstr ""
 
@@ -363,38 +364,49 @@ msgid ""
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmakeconfigdeps.rst:164
+msgid ""
+"**cmake_file_name_variants**: List of upper/lower case variants of the cmake "
+"file name that consumers can use to find the package. This is useful to "
+"increase the compatibility with different CMake ``find_package()`` calls "
+"that might be used in the consumers. An error will be raised if the list "
+"contains words that are not variants of the ``cmake_file_name`` value unless "
+"the consumer explicitly sets a custom ``cmake_file_name``, in which case the "
+"variants will be ignored."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:168
 msgid "**cmake_target_name**: Name of the target to be consumed."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:165
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:169
 msgid ""
 "**cmake_target_aliases**: List of aliases that Conan will create for an "
 "already existing target."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:166
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:170
 msgid "**cmake_find_mode**: Defaulted to ``config``. Possible values are:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:168
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:172
 msgid ""
 "``config``: The ``CMakeConfigDeps`` generator will create config scripts for "
 "the dependency."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:169
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:173
 msgid ""
 "``module``: Not supported, will be ignored and generate only ``xxx-config."
 "cmake`` files (with a warning)."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:170
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:174
 msgid ""
 "``both``: Not supported, will be ignored and generate only ``xxx-config."
 "cmake`` files (with a warning)."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:171
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:175
 msgid ""
 "``none``: Won't generate any file. It can be used, for instance, to create a "
 "system wrapper package so the consumers find the config files in the CMake "
@@ -402,7 +414,7 @@ msgid ""
 "been skipped)."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:172
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:176
 msgid ""
 "**cmake_build_modules**: List of ``.cmake`` files (path relative to root "
 "package folder) that are automatically included when the consumer run the "
@@ -410,7 +422,7 @@ msgid ""
 "the root ``self.cpp_info``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:174
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:178
 msgid ""
 "**cmake_config_version_compat**: By default ``SameMajorVersion``, it can "
 "take the values ``\"AnyNewerVersion\", \"SameMajorVersion\", "
@@ -418,7 +430,7 @@ msgid ""
 "generated ``<PackageName>ConfigVersion.cmake`` file"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:175
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:179
 msgid ""
 "**system_package_version**: version of the package used to generate the "
 "``<PackageName>ConfigVersion.cmake`` file. Can be useful when creating "
@@ -427,7 +439,7 @@ msgid ""
 "compatibility to ``find_package(<PackageName> <Version>)`` calls."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:176
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:180
 msgid ""
 "**cmake_additional_variables_prefixes**: List of prefixes to be used when "
 "creating CMake variables in the config files. These variables are created "
@@ -436,7 +448,7 @@ msgid ""
 "default ``file_name`` one."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:179
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:183
 msgid ""
 "**cmake_extra_variables**: Dictionary of extra variables to be added to the "
 "generated config file. The keys of the dictionary are the variable names and "
@@ -448,7 +460,7 @@ msgid ""
 "``tools.cmake.cmaketoolchain:extra_variables`` conf."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:185
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:189
 msgid ""
 "**cmake_link_feature**: Sets the link feature for the generated target. This "
 "can be any of the built-in link features supported by CMake like "
@@ -460,12 +472,12 @@ msgid ""
 "to the recipe author to ensure that the feature is usable."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:193
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:312
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:197
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:319
 msgid "Example:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:195
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:199
 msgid ""
 "def package_info(self):\n"
 "    ...\n"
@@ -501,6 +513,12 @@ msgid ""
 "                               })\n"
 "\n"
 "    self.cpp_info.set_property(\"cmake_link_feature\", \"WHOLE_ARCHIVE\")\n"
+"    # Additional names that consumers of this library might usually use in "
+"their find_package() calls,\n"
+"    # so they can find the same config file with different lower/upper case "
+"variants.\n"
+"    self.cpp_info.set_property(\"cmake_file_name_variants\", "
+"[\"myfilename\", \"MYFILENAME\"])\n"
 "\n"
 "# Or if using components\n"
 "def package_info(self):\n"
@@ -513,14 +531,14 @@ msgid ""
 "set_property(\"cmake_target_aliases\", [\"VarComponent\"])"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:232
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:239
 msgid ""
 "Using ``CMakeConfigDeps.set_property()`` method you can overwrite the "
 "property values set by the Conan recipes from the consumer. This can be done "
 "for every property listed above."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:235
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:242
 msgid ""
 "class Pkg(ConanFile):\n"
 "\n"
@@ -536,7 +554,7 @@ msgid ""
 "        deps.generate()"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:251
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:258
 msgid ""
 "You can also use the ``set_property()`` method to invalidate the property "
 "values set by the upstream recipe and use the values that Conan assigns by "
@@ -544,14 +562,14 @@ msgid ""
 "set_property(\"zlib\", \"cmake_target_name\", None)``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:255
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:262
 msgid ""
 "After doing this the generated target name for the Zlib library will be "
 "``zlib::zlib`` instead of ``ZLIB::ZLIB`` which is the upstream default "
 "target name."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:258
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:265
 msgid ""
 "Additionally, `CMakeConfigDeps.set_property()` can also be used for packages "
 "that have components. In this case, you will need to provide the package "
@@ -559,7 +577,7 @@ msgid ""
 "example:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:262
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:269
 msgid ""
 "def generate(self):\n"
 "    deps = CMakeConfigDeps(self)\n"
@@ -568,17 +586,17 @@ msgid ""
 "    deps.generate()"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:271
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:278
 msgid "Configuration"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:273
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:280
 msgid ""
 "Allows to define custom user CMake configuration besides the standard "
 "Release, Debug, etc ones."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:275
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:282
 msgid ""
 "def generate(self):\n"
 "    deps = CMakeConfigDeps(self)\n"
@@ -591,7 +609,7 @@ msgid ""
 "    deps.generate()"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:286
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:293
 msgid ""
 "The ``CMakeConfigDeps`` is a *multi-configuration* generator, it can "
 "correctly create files for Release/Debug configurations to be simultaneously "
@@ -602,11 +620,11 @@ msgid ""
 "helper)."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:293
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:300
 msgid "Using \"host\" and \"build\" context dependencies"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:295
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:302
 msgid ""
 "With ``CMakeConfigDeps``, it is possible to use executable ``IMPORTED`` "
 "targets from regular \"host\" dependencies. This can only be done in case "
@@ -614,7 +632,7 @@ msgid ""
 "cross-compiling, it will fail."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:297
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:304
 msgid ""
 "The ``IMPORTED`` executable targets will be automatically created from the "
 "``self.cpp_info.exe`` and ``self.cpp_info.components[\"mycomponent\"].exe`` "
@@ -622,7 +640,7 @@ msgid ""
 "builds as tools."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:299
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:306
 msgid ""
 "When a Conan package recipe depends on the same package both as regular "
 "``requires`` and ``tool-requires``, to be able to implement scenarios like "
@@ -637,13 +655,13 @@ msgid ""
 "``protoc`` will be defined from the \"build\" context."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:305
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:312
 msgid ""
 "Disable ``CMakeConfigDeps`` to use ``xxx-config.cmake`` files inside the "
 "package"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:307
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:314
 msgid ""
 "Some projects may want to disable the ``CMakeConfigDeps`` generator for "
 "downstream consumers. This can be done by setting ``cmake_find_mode`` to "
@@ -651,7 +669,7 @@ msgid ""
 "it should append them to the ``builddirs`` attribute of ``cpp_info``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:310
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:317
 msgid ""
 "This method is intended to work with downstream consumers using the "
 "``CMakeToolchain`` generator or by including the generated "
@@ -659,7 +677,7 @@ msgid ""
 "``builddirs`` attribute."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:314
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:321
 msgid ""
 "def package(self):\n"
 "    ...\n"
@@ -671,7 +689,7 @@ msgid ""
 "    self.cpp_info.builddirs.append(os.path.join(\"lib\", \"cmake\", \"foo\"))"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:326
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:333
 msgid "Reference"
 msgstr ""
 

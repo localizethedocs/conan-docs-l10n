@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-29 13:31+0000\n"
+"POT-Creation-Date: 2026-03-10 13:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,11 +137,33 @@ msgid ""
 "``cpp_info.bindirs`` and ``cpp_info.libdirs`` configuration."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:75
+#: ../../../reference/extensions/deployers.rst:77
+msgid "cyclone_1.6 and cyclone_1.4"
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:79
+msgid ""
+"The ``cyclone_1.6`` and ``cyclone_1.4`` deployers are available to generate "
+"a CycloneDX 1.6 or 1.4 SBOM file respectively, with the information of the "
+"dependencies in the graph. The generated file will be named ``sbom-"
+"cyclonedx-1.{6, 4}.json`` and it will be located in the deployer output "
+"folder. These deployers will use the ``cyclonedx_1_6`` and ``cyclonedx_1_4`` "
+"functions from the :ref:`conan.tools.sbom.cyclonedx<conan_tools_sbom>` "
+"module with default arguments."
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:85
+msgid ""
+"If you want to customize the generated SBOM, you can either create your own "
+"custom deployer that calls these functions with the desired arguments, or "
+"use the documented hook approach from the previous link to generate the SBOM."
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:91
 msgid "configuration"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:77
+#: ../../../reference/extensions/deployers.rst:93
 msgid ""
 "The ``full_deploy``, ``direct_deploy`` and ``runtime_deploy`` understand "
 "when the conf ``tools.deployer:symlinks`` is set to ``False`` to disable "
@@ -149,61 +171,61 @@ msgid ""
 "support symlinks and could fail if deploying packages that contain symlinks."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:83
+#: ../../../reference/extensions/deployers.rst:99
 msgid "Custom deployers"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:85
+#: ../../../reference/extensions/deployers.rst:101
 msgid ""
 "Custom deployers can be managed via ``conan config install``. When looking "
 "for a specific deployer, Conan will look in these locations for the deployer "
 "in the following order:"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:88
+#: ../../../reference/extensions/deployers.rst:104
 msgid "Absolute paths"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:89
+#: ../../../reference/extensions/deployers.rst:105
 msgid "Relative to cwd"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:90
+#: ../../../reference/extensions/deployers.rst:106
 msgid "In the ``[CONAN_HOME]/extensions/deployers`` folder"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:91
+#: ../../../reference/extensions/deployers.rst:107
 msgid "As built-in deployers"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:93
+#: ../../../reference/extensions/deployers.rst:109
 msgid ""
 "Conan will look for a ``deploy()`` method to call for each installed file. "
 "The function signature of your custom deployers should be as follows:"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:97
+#: ../../../reference/extensions/deployers.rst:113
 msgid "**my_custom_deployer.py**"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:97
+#: ../../../reference/extensions/deployers.rst:113
 msgid "def deploy(graph, output_folder: str, **kwargs):"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:102
+#: ../../../reference/extensions/deployers.rst:118
 msgid ""
 "(Note that the arguments are passed as named parameters, so both the "
 "``graph`` and ``output_folder`` names are mandatory)"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:104
+#: ../../../reference/extensions/deployers.rst:120
 msgid ""
 "The ``**kwargs`` is mandatory even if not used, as new arguments can be "
 "added in future Conan versions, and those would break if ``**kwargs`` is not "
 "defined."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:107
+#: ../../../reference/extensions/deployers.rst:123
 msgid ""
 "You can access your conanfile object with ``graph.root.conanfile``. See :ref:"
 "`ConanFile.dependencies<conan_conanfile_model_dependencies>` for information "
@@ -213,7 +235,7 @@ msgid ""
 "that supplying the **.py** extension is optional."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:112
+#: ../../../reference/extensions/deployers.rst:128
 msgid ""
 "See the :ref:`custom deployers<examples_extensions_deployers>` section for "
 "examples on how to implement your own deployers."

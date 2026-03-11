@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-28 08:24+0000\n"
+"POT-Creation-Date: 2026-03-10 13:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -292,24 +292,29 @@ msgid ""
 "    package_id_embed_mode = \"full_mode\"\n"
 "    package_id_non_embed_mode = \"patch_mode\"\n"
 "    package_id_unknown_mode = \"minor_mode\"\n"
-"    build_mode = \"patch_mode\"  # when this is used with tool_requires"
-msgstr ""
-
-#: ../../../reference/binary_model/custom_compatibility.rst:143
-msgid "Read more in :ref:`reference_conanfile_attributes_package_id_modes`"
+"    build_mode = \"patch_mode\"  # when this is used with tool_requires\n"
+"    # For exceptional cases when we explicitly want to make consumers\n"
+"    # depend on this dependency option value\n"
+"    package_id_abi_options = [\"shared\"]"
 msgstr ""
 
 #: ../../../reference/binary_model/custom_compatibility.rst:146
+msgid ""
+"Read more in :ref:`reference_conanfile_attributes_package_id_modes` and in :"
+"ref:`reference_conanfile_attributes_package_id_abi_options`."
+msgstr ""
+
+#: ../../../reference/binary_model/custom_compatibility.rst:149
 msgid "Custom package_id from recipe dependencies"
 msgstr ""
 
-#: ../../../reference/binary_model/custom_compatibility.rst:148
+#: ../../../reference/binary_model/custom_compatibility.rst:151
 msgid ""
 "Recipes can define how their dependencies affect their ``package_id``, using "
 "the ``package_id_mode`` trait:"
 msgstr ""
 
-#: ../../../reference/binary_model/custom_compatibility.rst:150
+#: ../../../reference/binary_model/custom_compatibility.rst:153
 msgid ""
 "from conan import ConanFile\n"
 "\n"
@@ -318,7 +323,7 @@ msgid ""
 "        self.requires(\"mydep/1.0\", package_id_mode=\"patch_mode\")"
 msgstr ""
 
-#: ../../../reference/binary_model/custom_compatibility.rst:159
+#: ../../../reference/binary_model/custom_compatibility.rst:162
 msgid ""
 "Using ``package_id_mode`` trait does not differentiate between the \"embed\" "
 "and \"non-embed\" cases, it is up to the user to define the correct value. "
@@ -327,7 +332,7 @@ msgid ""
 "``options``."
 msgstr ""
 
-#: ../../../reference/binary_model/custom_compatibility.rst:161
+#: ../../../reference/binary_model/custom_compatibility.rst:164
 msgid ""
 "Note that the ``requirements()`` method is evaluated while the graph is "
 "being expanded, the dependencies do not exist yet (haven't been computed), "
@@ -335,13 +340,13 @@ msgid ""
 "might be preferred to use the ``package_id()`` method."
 msgstr ""
 
-#: ../../../reference/binary_model/custom_compatibility.rst:164
+#: ../../../reference/binary_model/custom_compatibility.rst:167
 msgid ""
 "The ``package_id()`` method can define how the dependencies affect the "
 "current package with:"
 msgstr ""
 
-#: ../../../reference/binary_model/custom_compatibility.rst:166
+#: ../../../reference/binary_model/custom_compatibility.rst:169
 msgid ""
 "from conan import ConanFile\n"
 "\n"
@@ -350,7 +355,7 @@ msgid ""
 "        self.info.requires[\"mydep\"].major_mode()"
 msgstr ""
 
-#: ../../../reference/binary_model/custom_compatibility.rst:174
+#: ../../../reference/binary_model/custom_compatibility.rst:177
 msgid ""
 "The different modes that can be used are defined in :ref:"
 "`reference_conanfile_attributes_package_id_modes`"

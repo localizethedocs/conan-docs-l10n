@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-02 08:40+0000\n"
+"POT-Creation-Date: 2026-03-10 13:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1529,11 +1529,126 @@ msgid ""
 "view of the Conan binary model."
 msgstr ""
 
-#: ../../../reference/conanfile/attributes/binary_model.inc:436
+#: ../../../reference/conanfile/attributes/binary_model.inc:438
+msgid "package_id_abi_options"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:440
+msgid ""
+"There are some scenarios when it might be desired to make the value of a "
+"given option to influence the ``package_id`` of the binaries consuming this "
+"package."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:443
+msgid ""
+"This is generally not necessary in most of the cases, as the default binary "
+"model is good for the majority of scenarios. For example, in all ``embed`` "
+"modes, the full dependency reference, including its ``package_id``, that "
+"already encodes the dependency options, are already factored in into the "
+"consumer ``package_id``. So for that case, the dependency's options already "
+"have this effect on the consumer ``package_id``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:448
+msgid ""
+"But there might be some cases for ``non_embed``, like a static library that "
+"could be linking a dependency sometimes as a static library and sometimes as "
+"a shared library. In platforms such as Linux or Mac, the linkage doesn't "
+"really change the consumer. But this case for Windows ``msvc`` compiler, "
+"when the dependency is conditionally defining ``dllimport`` in their "
+"headers, the calling convention changes, and the binary of the consumer is "
+"different."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:454
+msgid "For shared libraries in Windows, it is common to find this idiom:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:456
+msgid ""
+"#ifdef WIN32\n"
+"    #define HELLO_EXPORT __declspec(dllexport)\n"
+"#else\n"
+"    #define HELLO_EXPORT\n"
+"#endif\n"
+"\n"
+"HELLO_EXPORT void hello();"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:466
+msgid ""
+"To export the ``hello()`` symbol into the shared library, as in Windows MSVC "
+"the symbols are not exported by default. This is not an issue, as the "
+"consumer packages and callers of ``hello()`` will not change its linkage."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:470
+msgid ""
+"But in some cases, some libraries might decide to define something like:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:472
+msgid ""
+"#ifdef WIN32\n"
+"    #ifdef libhello_EXPORTS\n"
+"        /* We are building this library */\n"
+"        #define HELLO_EXPORT __declspec(dllexport)\n"
+"    #else\n"
+"        /* We are using this library */\n"
+"        #define HELLO_EXPORT __declspec(dllimport)\n"
+"    #endif\n"
+"#else\n"
+"    #define HELLO_EXPORT\n"
+"#endif\n"
+"\n"
+"HELLO_EXPORT void hello();"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:488
+msgid ""
+"And control via ``libhello_EXPORTS`` if the package is being built or "
+"consumed. In this case, the consumer will have a different linkage when "
+"linking this shared library with the ``dllimport``, than when linking this "
+"library as a static library."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:492
+msgid ""
+"For those case, the package recipe can define which of its own options "
+"affect the consumers ``package_id``, irrespective of the ``non_embed`` mode, "
+"so they can still generate different binaries for the different linkages, "
+"without necessarily resorting to a full ``embed`` mode that will require "
+"unnecessary rebuilds of binaries from source."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:497
+msgid "This can be defined with:"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:499
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    name = \"pkg\"\n"
+"    version = \"1.0.0\"\n"
+"    options = {\"shared\": [False, True]}\n"
+"\n"
+"    package_id_abi_options = [\"shared\"]"
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:511
+msgid ""
+"And that will make all the consumers of ``pkg/1.0.0`` to automatically "
+"factor the ``pkg/*:shared=True/False`` value in their own ``package_id``."
+msgstr ""
+
+#: ../../../reference/conanfile/attributes/binary_model.inc:516
 msgid "context"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes/binary_model.inc:441
+#: ../../../reference/conanfile/attributes/binary_model.inc:521
 msgid ""
 "The ``conanfile.py`` recipe attribute ``context`` will contain either the "
 "\"build\" or \"host\" value to represent the context where the current "
@@ -1542,7 +1657,7 @@ msgid ""
 "on the usage."
 msgstr ""
 
-#: ../../../reference/conanfile/attributes/binary_model.inc:445
+#: ../../../reference/conanfile/attributes/binary_model.inc:525
 msgid ""
 "This attribute shouldn't be necessary for the vast majority of cases, so it "
 "is recommended to avoid using it. One potential exception for this "
@@ -1550,7 +1665,7 @@ msgid ""
 "defining some conditional dependency as:"
 msgstr ""
 
-#: ../../../reference/conanfile/attributes/binary_model.inc:449
+#: ../../../reference/conanfile/attributes/binary_model.inc:529
 msgid ""
 "def requirements(self):\n"
 "    if self.context == \"host\":\n"

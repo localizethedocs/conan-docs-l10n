@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-03-10 13:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -154,10 +154,10 @@ msgstr ""
 #: ../../../reference/conanfile/methods/build_requirements.rst:51
 msgid ""
 "This syntax is useful when you're using the same package recipe as a "
-"*requires* and as a *tool_requires* and you want to avoid conflicting "
-"downstream if any user decides to override the original *requires* version "
-"in the *host* context, i.e., the user could end up with two different "
-"versions in the host and build contexts of the same dependency."
+"*requires* and as a *tool_requires* and you want to avoid version mismatches "
+"if any user decides to override the original *requires* version in the "
+"*host* context, i.e., the user could end up with two different versions in "
+"the host and build contexts of the same dependency."
 msgstr ""
 
 #: ../../../reference/conanfile/methods/build_requirements.rst:55
@@ -198,8 +198,8 @@ msgid ""
 "    name = \"myapp\"\n"
 "    version = \"0.1\"\n"
 "    def requirements(self):\n"
-"        self.requires(\"mylib/0.1\")\n"
-"        self.requires(\"protobuf/3.21.9\", override=True)"
+"        self.requires(\"protobuf/3.21.9\", override=True)\n"
+"        self.requires(\"mylib/0.1\")"
 msgstr ""
 
 #: ../../../reference/conanfile/methods/build_requirements.rst:85
@@ -229,27 +229,63 @@ msgid ""
 msgstr ""
 
 #: ../../../reference/conanfile/methods/build_requirements.rst:105
-#: ../../../reference/conanfile/methods/build_requirements.rst:149
-msgid ":ref:`examples_graph_tool_requires_protobuf`"
+msgid ""
+"It's important to note that the reference match is only performed over the "
+"package name, not the full reference, so variations on the ``user`` and "
+"``channel`` fields are allowed, for example, having ``self."
+"requires(\"protobuf/3.18.1@mycompany/fork\")`` and ``self."
+"tool_requires(\"protobuf/<host_version>\")`` will work and look for a "
+"``protobuf/3.18.1`` package in the build context, without ``user`` nor "
+"``channel`` fields."
 msgstr ""
 
 #: ../../../reference/conanfile/methods/build_requirements.rst:110
+msgid ""
+"If we want to also keep the same ``user`` and ``channel`` fields, we'd need "
+"to specify it in the tool requirements reference as well, i.e., ``self."
+"tool_requires(\"protobuf/<host_version>@mycompany/fork\")``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:113
+msgid ""
+"The ``<host_version>`` feature also works when the requirement is replaced "
+"using the :ref:"
+"`[replace_requires]<reference_config_files_profiles_replace_requires>` "
+"section in your profile, so that the replaced version would be used in both "
+"contexts at once."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:118
+msgid ""
+"If your ``[replace_requires]`` is replacing not only the version, but also "
+"the ``user``/``channel`` fields, (so for example replacing ``protobuf/*: "
+"protobuf/3.18.1@mycompany/fork``) and you would like to also use the same "
+"``user`` and ``channel`` fields in the build context, you should use the :"
+"ref:"
+"`[replace_tool_requires]<reference_config_files_profiles_replace_tool_requires>` "
+"to replace it in the build context as well, otherwise the ``<host_version>`` "
+"will look for ``protobuf/3.18.1`` without the ``user`` and ``channel`` "
+"fields in the build context as explained in the previous warning, which "
+"could lead to unexpected results."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:130
 msgid "test_requires"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:112
+#: ../../../reference/conanfile/methods/build_requirements.rst:132
 msgid ""
 "The ``test_requires`` is equivalent to ``requires()`` with the following "
 "traits:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:114
+#: ../../../reference/conanfile/methods/build_requirements.rst:134
 msgid ""
 "``test=True``. This dependency is a \"test\" dependency, existing in the "
 "\"host\" context, but not aiming to be part of the final product."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:115
+#: ../../../reference/conanfile/methods/build_requirements.rst:135
 msgid ""
 "``visible=False``. The dependency to a test requirement is not propagated "
 "downstream. For example, one package can call ``self."
@@ -258,7 +294,7 @@ msgid ""
 "or the same ``gtest`` with a different version, without causing conflicts."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:119
+#: ../../../reference/conanfile/methods/build_requirements.rst:139
 msgid ""
 "As the ``test_requires`` defines a ``visible=False`` trait, care must be "
 "taken to avoid having transitive dependencies with a normal requirement to "
@@ -270,19 +306,19 @@ msgid ""
 "dependency will be used and propagated downstream."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:127
+#: ../../../reference/conanfile/methods/build_requirements.rst:147
 msgid ""
 "It is possible to further modify individual traits of ``tool_requires()`` "
 "and ``test_requires()`` if necessary, for example:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:129
+#: ../../../reference/conanfile/methods/build_requirements.rst:149
 msgid ""
 "def build_requirements(self):\n"
 "   self.tool_requires(\"cmake/3.23.5\", options={\"shared\": False})"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:135
+#: ../../../reference/conanfile/methods/build_requirements.rst:155
 msgid ""
 "The ``test_requires()`` allows the ``force=True`` trait in case there are "
 "transitive test requirements with conflicting versions, and likewise "
@@ -290,11 +326,11 @@ msgid ""
 "possible transitive dependencies of the direct tool requirements."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:139
+#: ../../../reference/conanfile/methods/build_requirements.rst:159
 msgid "**Best practices**"
 msgstr "**最佳實踐**"
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:141
+#: ../../../reference/conanfile/methods/build_requirements.rst:161
 msgid ""
 "``tool_requires`` are exclusively for build time **tools**, not for "
 "libraries that would be included and linked into the consumer package. For "
@@ -302,7 +338,7 @@ msgid ""
 "custom trait values."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:142
+#: ../../../reference/conanfile/methods/build_requirements.rst:162
 msgid ""
 "The ``self.test_requires()`` and ``self.tool_requires()`` methods should "
 "exclusively be used in the ``build_requirements()`` method, with the only "
@@ -312,14 +348,18 @@ msgid ""
 "dependencies<conan_conanfile_model_dependencies>` attribute should be used."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:147
+#: ../../../reference/conanfile/methods/build_requirements.rst:167
 msgid ""
 "Follow the :ref:`tutorial about consuming Conan packages as "
 "tools<consuming_packages_tool_requires>`."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:148
+#: ../../../reference/conanfile/methods/build_requirements.rst:168
 msgid ""
 "Read the :ref:`tutorial about creating tool_requires "
 "packages<tutorial_other_tool_requires_packages>`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:169
+msgid ":ref:`examples_graph_tool_requires_protobuf`"
 msgstr ""

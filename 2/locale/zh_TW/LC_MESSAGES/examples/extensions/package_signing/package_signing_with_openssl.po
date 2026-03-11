@@ -1,0 +1,425 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:4
+msgid "Signing packages with OpenSSL"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:6
+msgid ""
+"This is an example of a Package Signing Plugin implementation using the "
+"`OpensSSL digest tool <https://docs.openssl.org/3.1/man1/openssl-dgst/>`_. "
+"You will need to have ``openssl`` installed at the system level and "
+"available in your ``PATH``."
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:11
+msgid ""
+"This example is available in the examples2 repository: `examples/extensions/"
+"plugins/openssl_sign <https://github.com/conan-io/examples2/tree/main/"
+"examples/extensions/plugins/openssl_sign>`_."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:15
+msgid ""
+"OpenSSL is used here for demonstration purposes only. The Package Signing "
+"plugin mechanism is backend-agnostic, and you could implement a similar "
+"plugin using other tools available in your system (for example, ``gpg``), "
+"with minimal changes to the signing and verification commands."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:21
+msgid "Generating the signing keys"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:23
+msgid ""
+"To sign and verify the packages using the plugin, first, we will need a "
+"public and private key."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:25
+msgid "To generate the keys using the ``openssl`` executable, we can run:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:27
+msgid ""
+"$ openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt "
+"rsa_keygen_bits:2048"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:31
+msgid "This will generate the private key used to sign the packages."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:33
+msgid "Now, we can get the public key from it with this command:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:35
+msgid "$ openssl pkey -in private_key.pem -pubout -out public_key.pem"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:39
+msgid "The plugin will use this public key to verify the packages."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:43
+msgid "Configuring the plugin"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:47
+msgid ""
+"This example stores a private key next to the plugin for simplicity. **Do "
+"not do this in production**. Instead, load the signing key from environment "
+"variables or a secret manager, or delegate signing to a remote signing "
+"service. **Always keep the private key out of the Conan cache and out of "
+"source control**."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:51
+msgid ""
+"Copy the ``examples/extensions/plugins/openssl_sign/sign.py`` file to your "
+"Conan home at ``CONAN_HOME/extensions/plugins/sign/sign.py``."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:53
+msgid "Copy the ``sign.py`` file to your Conan home:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:55
+msgid "``CONAN_HOME/extensions/plugins/sign/sign.py``"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:57
+msgid ""
+"Place the generated keys in a folder named after your provider (``my-"
+"organization`` in this example), next to ``sign.py``:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:60
+msgid "Your final folder structure should look like this:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:62
+msgid ""
+"CONAN_HOME/\n"
+"└── extensions/\n"
+"    └── plugins/\n"
+"        └── sign/\n"
+"            ├── sign.py\n"
+"            └── my-organization/\n"
+"                ├── private_key.pem\n"
+"                └── public_key.pem"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:73
+msgid ""
+"The ``my-organization`` folder serves as the **provider** in this example, "
+"and it is used by the plugin to identify the organization that owns the keys."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:77
+msgid ""
+"The Package Signing plugin is installed in the Conan configuration folder, "
+"so they can be easily distributed as part of the client configuration using "
+"the :ref:`conan config install<reference_commands_conan_config_install>` "
+"command."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:82
+msgid "Implementation"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:84
+msgid "The plugin's implementation is very straightforward."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:86
+msgid ""
+"For signing packages, the `sign()` function is defined, where the packages "
+"are signed by the :command:`openssl dgst` command:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:88
+msgid ""
+"def sign(ref, artifacts_folder, signature_folder, **kwargs)\n"
+"    ...\n"
+"    openssl_sign_cmd = [\n"
+"        \"openssl\",\n"
+"        \"dgst\",\n"
+"        \"-sha256\",\n"
+"        \"-sign\", privkey_filepath,\n"
+"        \"-out\", signature_filepath,\n"
+"        manifest_filepath\n"
+"    ]\n"
+"    try:\n"
+"        _run_command(openssl_sign_cmd)\n"
+"        ConanOutput().success(f\"Package signed for reference {ref}\")\n"
+"    except Exception as exc:\n"
+"        raise ConanException(f\"Error signing artifact: {exc}\")\n"
+"    ..."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:107
+msgid ""
+"There, the manifest ``pkgsign-manifest.json`` (created right before "
+"``sign()`` function is called) is used to sign the package, as it contains "
+"the filenames and checksums of the artifacts of the package."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:110
+msgid ""
+"The signature file is saved into the ``signature_filepath`` (the signature "
+"folder at ``<package_folder>/metadata/sign``), and finally, the metadata of "
+"the signature is returned as a dictionary in a list:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:113
+msgid ""
+"def sign(ref, artifacts_folder, signature_folder, **kwargs)\n"
+"    ...\n"
+"    return [{\"method\": \"openssl-dgst\",\n"
+"         \"provider\": \"my-organization\",\n"
+"         \"sign_artifacts\": {\n"
+"            \"manifest\": \"pkgsign-manifest.json\",\n"
+"            \"signature\": signature_filename}}]"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:123
+msgid ""
+"This information saved in a file ``pkgsign-signatures.json`` placed in the "
+"signature folder, so it can be used in the `verify()` to verify the package "
+"signature against the correct provider keys, with the correct signing method "
+"(``openssl-dgst`` for this example) and using the signature files in "
+"``sign_artifacts``."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:127
+msgid "For verifying packages, the `verify()` function is defined."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:129
+msgid ""
+"First, the ``pkgsign-signatures.json`` is loaded to read the metadata of the "
+"signatures (multiple signatures are supported):"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:131
+msgid ""
+"def verify(ref, artifacts_folder, signature_folder, files, **kwargs):\n"
+"    ...\n"
+"    signatures = json.loads(f.read()).get(\"signatures\")\n"
+"    ...\n"
+"    for signature in signatures:\n"
+"        signature_filename = signature.get(\"sign_artifacts\")."
+"get(\"signature\")\n"
+"        signature_filepath = os.path.join(signature_folder, "
+"signature_filename)\n"
+"        ...\n"
+"        provider = signature.get(\"provider\")\n"
+"        signature_method = signature.get(\"method\")\n"
+"        ..."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:145
+msgid ""
+"Then, the ``provider`` information is used to select the correct public key "
+"for verification that use the right signature verification ``method`` "
+"(``openssl-dgst`` for this example) and run the :command:`openssl dgst -"
+"verify` command:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:148
+msgid ""
+"def verify(ref, artifacts_folder, signature_folder, files, **kwargs):\n"
+"    ...\n"
+"    openssl_verify_cmd = [\n"
+"        \"openssl\",\n"
+"        \"dgst\",\n"
+"        \"-sha256\",\n"
+"        \"-verify\", pubkey_filepath,\n"
+"        \"-signature\", signature_filepath,\n"
+"        manifest_filepath,\n"
+"    ]\n"
+"    try:\n"
+"        _run_command(openssl_verify_cmd)\n"
+"        ConanOutput().success(f\"Package verified for reference {ref}\")\n"
+"    except Exception as exc:\n"
+"        raise ConanException(f\"Error verifying signature "
+"{signature_filepath}: {exc}\")"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:166
+msgid ""
+"The ``verify()`` function does not return any value in case the package is "
+"correct. If the verification fails, then a ``ConanException()`` should be "
+"raised."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:169
+msgid "Signing packages"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:171
+msgid ""
+"Now that the plugin is configured, we can create a package and sign it "
+"afterwards:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:173
+msgid ""
+"$ conan new cmake_lib -d name=hello -d version=1.0\n"
+"$ conan create"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:178
+msgid "For signing the recipe and package, use the dedicated command:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:180
+msgid ""
+"$ conan cache sign hello/1.0\n"
+"\n"
+"hello/1.0: Compressing conan_sources.tgz\n"
+"hello/1.0:dee9f7f985eb1c20e3c41afaa8c35e2a34b5ae0b: Compressing "
+"conan_package.tgz\n"
+"Running command: openssl dgst -sha256 -sign C:\\Users\\user\\."
+"conan2\\extensions\\plugins\\sign\\my-organization\\private_key.pem -out C:"
+"\\Users\\user\\.conan2\\p\\hello092ffa809a9a1\\d\\metadata\\sign\\pkgsign-"
+"manifest.json.sig C:\\Users\\user\\."
+"conan2\\p\\hello092ffa809a9a1\\d\\metadata\\sign\\pkgsign-manifest.json\n"
+"Package signed for reference hello/1.0\n"
+"Running command: openssl dgst -sha256 -sign C:\\Users\\user\\."
+"conan2\\extensions\\plugins\\sign\\my-organization\\private_key.pem -out C:"
+"\\Users\\user\\.conan2\\p\\b\\hello5b13c694fef4a\\d\\metadata\\sign\\pkgsign-"
+"manifest.json.sig C:\\Users\\user\\."
+"conan2\\p\\b\\hello5b13c694fef4a\\d\\metadata\\sign\\pkgsign-manifest.json\n"
+"Package signed for reference hello/1.0:"
+"dee9f7f985eb1c20e3c41afaa8c35e2a34b5ae0b\n"
+"[Package sign] Results:\n"
+"\n"
+"hello/1.0\n"
+"revisions\n"
+"    53321bba8793db6fea5ea1a98dd6f3d6\n"
+"    packages\n"
+"        dee9f7f985eb1c20e3c41afaa8c35e2a34b5ae0b\n"
+"        revisions\n"
+"            4b1eaf2e27996cb39cb3774f185fcd8e\n"
+"\n"
+"[Package sign] Summary: OK=2, FAILED=0"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:202
+msgid ""
+"As you see, the command is executing the ``sign()`` function of the plugin "
+"that uses the ``openssl`` executable to sign the recipe and the package with "
+"a command similar to:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:204
+msgid ""
+"$ openssl dgst -sha256 -sign private_key.pem -out pkgsign-manifest.json.sig "
+"pkgsign-manifest.json"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:208
+msgid ""
+"And it is also using the conan-generated ``pkgsign-manifest.json`` file to "
+"create the signature. You can read more about this manifest file at :ref:"
+"`reference_extensions_package_signing`."
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:213
+msgid "Verifying packages"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:215
+msgid "For verifying the recipe and package, use the dedicated command:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:217
+msgid ""
+"$ conan cache verify hello/1.0\n"
+"\n"
+"[Package sign] Checksum verified for file conan_sources.tgz "
+"(4ce077cbea9ce87a481b5d6dbb50bd791f4e37e931754cdeb40aeb017baed66c).\n"
+"[Package sign] Checksum verified for file conanfile.py "
+"(0ec44c268f0f255ab59a246c3d13ae6dbd487dea7635b584236b701047f92ba0).\n"
+"[Package sign] Checksum verified for file conanmanifest.txt "
+"(f7f00bb74ed8469a367ed02faded3c763130da9b63dae23916b2a4f099625b15).\n"
+"Running command: openssl dgst -sha256 -verify C:\\Users\\user\\."
+"conan2\\extensions\\plugins\\sign\\my-organization\\public_key.pem -"
+"signature C:\\Users\\user\\."
+"conan2\\p\\hello092ffa809a9a1\\d\\metadata\\sign\\pkgsign-manifest.json.sig "
+"C:\\Users\\user\\.conan2\\p\\hello092ffa809a9a1\\d\\metadata\\sign\\pkgsign-"
+"manifest.json\n"
+"Package verified for reference hello/1.0\n"
+"[Package sign] Checksum verified for file conan_package.tgz "
+"(5cc1b9e330fe5bb6ad5904db45d78ecd6bdc71bcc18eff8d19a1ed126ba5a5aa).\n"
+"[Package sign] Checksum verified for file conaninfo.txt "
+"(f80367b17176346e10640ed813d6d2f1c45ed526822ff71066696179d16e2f2f).\n"
+"[Package sign] Checksum verified for file conanmanifest.txt "
+"(91429ce32c2d0a99de6459a589ac9c35933ed65165ee5c564b6534da57fdfa65).\n"
+"Running command: openssl dgst -sha256 -verify C:\\Users\\user\\."
+"conan2\\extensions\\plugins\\sign\\my-organization\\public_key.pem -"
+"signature C:\\Users\\user\\."
+"conan2\\p\\b\\hello5b13c694fef4a\\d\\metadata\\sign\\pkgsign-manifest.json."
+"sig C:\\Users\\user\\."
+"conan2\\p\\b\\hello5b13c694fef4a\\d\\metadata\\sign\\pkgsign-manifest.json\n"
+"Package verified for reference hello/1.0:"
+"dee9f7f985eb1c20e3c41afaa8c35e2a34b5ae0b\n"
+"[Package sign] Results:\n"
+"\n"
+"hello/1.0\n"
+"revisions\n"
+"    53321bba8793db6fea5ea1a98dd6f3d6\n"
+"    packages\n"
+"        dee9f7f985eb1c20e3c41afaa8c35e2a34b5ae0b\n"
+"        revisions\n"
+"            4b1eaf2e27996cb39cb3774f185fcd8e\n"
+"\n"
+"[Package sign] Summary: OK=2, FAILED=0"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:243
+msgid ""
+"As you see, Conan is performing an internal checksum verification for the "
+"files and calling the ``verify()`` function of the plugin that uses the "
+"``openssl`` executable to verify the recipe and the package with a command "
+"similar to:"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:246
+msgid ""
+"$ openssl dgst -sha256 -verify public_key.pem -signature pkgsign-manifest."
+"json.sig pkgsign-manifest.json"
+msgstr ""
+
+#: ../../../examples/extensions/package_signing/package_signing_with_openssl.rst:252
+msgid ""
+"If you want to create your own package signing plugin, check the reference "
+"documentation at :ref:`reference_extensions_package_signing`."
+msgstr ""

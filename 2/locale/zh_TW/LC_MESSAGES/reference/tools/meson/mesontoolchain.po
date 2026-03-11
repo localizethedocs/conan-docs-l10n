@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-03-10 13:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -368,58 +368,65 @@ msgstr ""
 
 #: ../../../reference/tools/meson/mesontoolchain.rst:207
 msgid ""
+"``tools.build:tools.build:add_rpath_link``: add ``-Wl,-rpath-link,`` linker "
+"flag. Set this to ``True`` to pass this flag pointing to all library "
+"directories of all host dependencies."
+msgstr ""
+
+#: ../../../reference/tools/meson/mesontoolchain.rst:209
+msgid ""
 "``tools.build:defines`` list of preprocessor definitions, each of which will "
 "be prefixed with ``-D`` and passed to ``cpp_args`` and ``c_args``."
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:208
+#: ../../../reference/tools/meson/mesontoolchain.rst:210
 msgid ""
 "``tools.build:compiler_executables`` dict-like Python object which specifies "
 "the compiler as key and the compiler executable path as value. Those keys "
 "will be mapped as follows:"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:210
+#: ../../../reference/tools/meson/mesontoolchain.rst:212
 msgid ""
 "``tools.build:sysroot`` which accepts a path to the system root directory "
 "and sets the ``--sysroot`` flag that is used by ``c_args``, ``cpp_args``, "
 "``c_link_args`` and ``cpp_link_args``."
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:212
+#: ../../../reference/tools/meson/mesontoolchain.rst:214
 msgid ""
 "``c``: will set ``c`` in ``[binaries]`` section from *conan_meson_xxxx.ini*."
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:213
+#: ../../../reference/tools/meson/mesontoolchain.rst:215
 msgid ""
 "``cpp``: will set ``cpp`` in ``[binaries]`` section from *conan_meson_xxxx."
 "ini*."
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:214
+#: ../../../reference/tools/meson/mesontoolchain.rst:216
 msgid ""
 "``objc``: will set ``objc`` in ``[binaries]`` section from *conan_meson_xxxx."
 "ini*."
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:215
+#: ../../../reference/tools/meson/mesontoolchain.rst:217
 msgid ""
 "``objcpp``: will set ``objcpp`` in ``[binaries]`` section from "
 "*conan_meson_xxxx.ini*."
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:219
+#: ../../../reference/tools/meson/mesontoolchain.rst:221
 msgid "Using Proper Data Types for Conan Options in Meson"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:221
+#: ../../../reference/tools/meson/mesontoolchain.rst:223
 msgid ""
 "Always transform Conan options into valid Python data types before assigning "
 "them as Meson values:"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:224
+#: ../../../reference/tools/meson/mesontoolchain.rst:226
 msgid ""
 "options = {{\"shared\": [True, False], \"fPIC\": [True, False], "
 "\"with_msg\": [\"ANY\"]}}\n"
@@ -439,13 +446,13 @@ msgid ""
 "    tc.generate()"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:237
+#: ../../../reference/tools/meson/mesontoolchain.rst:239
 msgid ""
 "In contrast, directly assigning a Conan option as a Meson value is strongly "
 "discouraged:"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:239
+#: ../../../reference/tools/meson/mesontoolchain.rst:241
 msgid ""
 "options = {{\"shared\": [True, False], \"fPIC\": [True, False], "
 "\"with_msg\": [\"ANY\"]}}\n"
@@ -465,7 +472,7 @@ msgid ""
 "    tc.generate()"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:252
+#: ../../../reference/tools/meson/mesontoolchain.rst:254
 msgid ""
 "These are not boolean or string values but an internal Conan class "
 "representing such option values. If you assign these values directly, upon "
@@ -475,21 +482,21 @@ msgid ""
 "unexpected errors during your project's build process."
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:260
+#: ../../../reference/tools/meson/mesontoolchain.rst:262
 msgid "Cross-building for Apple and Android"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:262
+#: ../../../reference/tools/meson/mesontoolchain.rst:264
 msgid ""
 "The ``MesonToolchain`` generator adds all the flags required to cross-"
 "compile for Apple (MacOS M1, iOS, etc.) and Android."
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:264
+#: ../../../reference/tools/meson/mesontoolchain.rst:266
 msgid "**Apple**"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:266
+#: ../../../reference/tools/meson/mesontoolchain.rst:268
 msgid ""
 "It adds link flags ``-arch XXX``, ``-isysroot [SDK_PATH]`` and the minimum "
 "deployment target flag, e.g., ``-mios-version-min=8.0`` to the "
@@ -499,11 +506,11 @@ msgid ""
 "like it's shown in this example of host profile:"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:271
+#: ../../../reference/tools/meson/mesontoolchain.rst:273
 msgid "**ios_host_profile**"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:271
+#: ../../../reference/tools/meson/mesontoolchain.rst:273
 msgid ""
 "[settings]\n"
 "os = iOS\n"
@@ -529,11 +536,11 @@ msgstr ""
 "[conf]\n"
 "tools.apple:sdk_path=/my/path/to/iPhoneOS.sdk"
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:287
+#: ../../../reference/tools/meson/mesontoolchain.rst:289
 msgid "**Android**"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:289
+#: ../../../reference/tools/meson/mesontoolchain.rst:291
 msgid ""
 "It initializes the ``MesonToolchain`` ``c``, ``cpp``, and ``ar`` attributes, "
 "which are needed to cross-compile for Android, given the Conan settings for "
@@ -541,11 +548,11 @@ msgid ""
 "shown in this example of host profile:"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:294
+#: ../../../reference/tools/meson/mesontoolchain.rst:296
 msgid "**android_host_profile**"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:294
+#: ../../../reference/tools/meson/mesontoolchain.rst:296
 msgid ""
 "[settings]\n"
 "os = Android\n"
@@ -556,17 +563,17 @@ msgid ""
 "tools.android:ndk_path=/my/path/to/NDK"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:307
+#: ../../../reference/tools/meson/mesontoolchain.rst:309
 msgid "Cross-building and native=true"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:309
+#: ../../../reference/tools/meson/mesontoolchain.rst:311
 msgid ""
 "New since `Conan 2.3.0 <https://github.com/conan-io/conan/releases/"
 "tag/2.3.0>`__"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:311
+#: ../../../reference/tools/meson/mesontoolchain.rst:313
 msgid ""
 "When you are cross-building, sometimes you need to build a tool which is "
 "used to generate source files. For this you would want to build some targets "
@@ -574,7 +581,7 @@ msgid ""
 "context files:"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:315
+#: ../../../reference/tools/meson/mesontoolchain.rst:317
 msgid ""
 "def generate(self):\n"
 "    tc = MesonToolchain(self)\n"
@@ -585,18 +592,18 @@ msgid ""
 "        tc.generate()"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:325
+#: ../../../reference/tools/meson/mesontoolchain.rst:327
 msgid ""
 "See also `this reference <https://mesonbuild.com/Cross-compilation."
 "html#mixing-host-and-build-targets>`__ from the Meson documentation for more "
 "information."
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:330
+#: ../../../reference/tools/meson/mesontoolchain.rst:332
 msgid "Objective-C arguments"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:332
+#: ../../../reference/tools/meson/mesontoolchain.rst:334
 msgid ""
 "In Apple OS's there are also specific Objective-C/Objective-C++ arguments: "
 "``objc``, ``objcpp``, ``objc_args``, ``objc_link_args``, ``objcpp_args``, "
@@ -605,13 +612,13 @@ msgid ""
 "``clang`` and ``clang++`` respectively by default."
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:340
+#: ../../../reference/tools/meson/mesontoolchain.rst:342
 msgid ""
 ":ref:`Getting started with "
 "Meson<examples_tools_meson_toolchain_build_simple_meson_project>`"
 msgstr ""
 
-#: ../../../reference/tools/meson/mesontoolchain.rst:346
+#: ../../../reference/tools/meson/mesontoolchain.rst:348
 msgid "Reference"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"POT-Creation-Date: 2026-04-14 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,10 +95,10 @@ msgid ""
 "stored\n"
 "core.download:download_cache: Define path to a file download cache\n"
 "core.download:parallel: Number of concurrent threads to download packages\n"
-"core.download:retry: Number of retries in case of failure when downloading "
-"from Conan server\n"
-"core.download:retry_wait: Seconds to wait between download attempts from "
-"Conan server\n"
+"core.download:retry:  (int, default: 2) Number of retries in case of failure "
+"when downloading from Conan server\n"
+"core.download:retry_wait: (int, default: 1s) Seconds to wait between "
+"download attempts from Conan server\n"
 "core.graph:compatibility_mode: (Experimental) Set this to 'optimized' to "
 "enable the improved compatibility behaviour when querying multiple "
 "compatible binaries in remotes\n"
@@ -136,10 +136,10 @@ msgid ""
 "core.upload:compression_format: The compression format used when uploading "
 "Conan packages. Possible values: 'zst', 'xz', 'gz' (default=gz)\n"
 "core.upload:parallel: Number of concurrent threads to upload packages\n"
-"core.upload:retry: Number of retries in case of failure when uploading to "
-"Conan server\n"
-"core.upload:retry_wait: Seconds to wait between upload attempts to Conan "
-"server\n"
+"core.upload:retry: (int, default: 1) Number of retries in case of failure "
+"when uploading to Conan server\n"
+"core.upload:retry_wait: (int, default: 5s) Seconds to wait between upload "
+"attempts to Conan server\n"
 "core.version_ranges:resolve_prereleases: Whether version ranges can resolve "
 "to pre-releases or not\n"
 "core:allow_uppercase_pkg_names: Temporarily (will be removed in 2.X) allow "
@@ -198,6 +198,9 @@ msgid ""
 "tools.build:linker_scripts: List of linker script files to pass to the "
 "linker used by different toolchains like CMakeToolchain, AutotoolsToolchain, "
 "and MesonToolchain\n"
+"tools.build:rcflags: List of extra RC (resource compiler) flags used by "
+"different toolchains like CMakeToolchain, MSBuildToolchain and "
+"MesonToolchain\n"
 "tools.build:sharedlinkflags: List of extra flags used by different "
 "toolchains like CMakeToolchain, AutotoolsToolchain and MesonToolchain\n"
 "tools.build:skip_test: Do not execute CMake.test() and Meson.test() when "
@@ -243,7 +246,10 @@ msgid ""
 "tools.cmake.cmaketoolchain:user_toolchain: Inject existing user toolchains "
 "at the beginning of conan_toolchain.cmake\n"
 "tools.cmake:cmake_program: Path to CMake executable\n"
-"tools.cmake:ctest_args: To inject list of arguments to CMake.ctest() runner\n"
+"tools.cmake:configure_args: Add extra arguments to CMake.configure() command "
+"line \n"
+"tools.cmake:ctest_args: Add extra arguments to CMake.ctest() runner command "
+"line\n"
 "tools.cmake:install_strip: (Deprecated) Add --strip to cmake.install(). Use "
 "tools.build:install_strip instead\n"
 "tools.compilation:verbosity: Verbosity of compilation tools if set. Possible "
@@ -256,9 +262,10 @@ msgid ""
 "tools.env:deactivation_mode: (Experimental) If 'function', generate a "
 "deactivate function instead of a script to unset the environment variables\n"
 "tools.env:dotenv: (Experimental) Generate dotenv environment files\n"
-"tools.files.download:retry: Number of retries in case of failure when "
-"downloading\n"
-"tools.files.download:retry_wait: Seconds to wait between download attempts\n"
+"tools.files.download:retry: (int, default: 2) Number of retries in case of "
+"failure when downloading\n"
+"tools.files.download:retry_wait: (int, default: 5s) Seconds to wait between "
+"download attempts\n"
 "tools.files.download:verify: If set, overrides recipes on whether to perform "
 "SSL verification for their downloaded files. Only recommended to be set "
 "while testing\n"
@@ -350,9 +357,9 @@ msgstr ""
 
 #: ../../../reference/config_files/global_conf.rst:43
 #: ../../../reference/config_files/global_conf.rst:141
-#: ../../../reference/config_files/global_conf.rst:384
-#: ../../../reference/config_files/global_conf.rst:397
-#: ../../../reference/config_files/global_conf.rst:492
+#: ../../../reference/config_files/global_conf.rst:390
+#: ../../../reference/config_files/global_conf.rst:403
+#: ../../../reference/config_files/global_conf.rst:498
 msgid "*global.conf*"
 msgstr ""
 
@@ -880,14 +887,21 @@ msgid ""
 msgstr ""
 
 #: ../../../reference/config_files/global_conf.rst:346
+msgid ""
+"If you need to use both a corporate remote (with a private CA) and a public "
+"remote like ConanCenter, see :ref:`faq_ssl_corporate_certificates` for step-"
+"by-step instructions on creating a combined CA bundle."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:352
 msgid "Proxies"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:348
+#: ../../../reference/config_files/global_conf.rst:354
 msgid "There are 3 ``confs`` that can define proxies information:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:350
+#: ../../../reference/config_files/global_conf.rst:356
 msgid ""
 "$ conan config list proxies\n"
 "core.net.http:clean_system_proxy: If defined, the proxies system env-vars "
@@ -897,7 +911,7 @@ msgid ""
 "core.net.http:proxies: Dictionary containing the proxy configuration"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:357
+#: ../../../reference/config_files/global_conf.rst:363
 msgid ""
 "The ``core.net.http:proxies`` dictionary is passed to the underlying "
 "``python-requests`` library, to the \"proxies\" argument as described in the "
@@ -905,15 +919,15 @@ msgid ""
 "user/advanced/#proxies>`_"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:360
+#: ../../../reference/config_files/global_conf.rst:366
 msgid "The ``core.net:no_proxy_match`` is a list of URL patterns, like:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:362
+#: ../../../reference/config_files/global_conf.rst:368
 msgid "core.net.http:no_proxy_match = [\"http://someurl.com/*\"]"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:367
+#: ../../../reference/config_files/global_conf.rst:373
 msgid ""
 "for URLs to be excluded from the ``proxies`` configuration. That means that "
 "all URLs that are referenced that matches any of those patterns will not "
@@ -921,7 +935,7 @@ msgid ""
 "necessary for the match."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:370
+#: ../../../reference/config_files/global_conf.rst:376
 msgid ""
 "If ``core.net.http:clean_system_proxy`` is ``True``, then the environment "
 "variables ``\"http_proxy\", \"https_proxy\", \"ftp_proxy\", \"all_proxy\", "
@@ -929,81 +943,81 @@ msgid ""
 "not taken into account when resolving proxies."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:376
+#: ../../../reference/config_files/global_conf.rst:382
 msgid "Storage configurations"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:379
+#: ../../../reference/config_files/global_conf.rst:385
 msgid "core.cache:storage_path"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:381
+#: ../../../reference/config_files/global_conf.rst:387
 msgid ""
 "Absolute path to a folder where the Conan packages and the database of the "
 "packages will be stored. This folder will be the heaviest Conan storage "
 "folder, as it stores the binary packages downloaded or created."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:384
+#: ../../../reference/config_files/global_conf.rst:390
 msgid "core.cache:storage_path = C:\\Users\\danielm\\my_conan_storage_folder"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:389
+#: ../../../reference/config_files/global_conf.rst:395
 msgid "**Default value:** ``<CONAN_HOME>/p``"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:392
+#: ../../../reference/config_files/global_conf.rst:398
 msgid "core.download:download_cache"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:394
+#: ../../../reference/config_files/global_conf.rst:400
 msgid ""
 "Absolute path to a folder where the Conan packages will be stored "
 "*compressed*. This is useful to avoid recurrent downloads of the same "
 "packages, especially in CI."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:397
+#: ../../../reference/config_files/global_conf.rst:403
 msgid "core.download:download_cache = C:\\Users\\danielm\\my_download_cache"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:402
+#: ../../../reference/config_files/global_conf.rst:408
 msgid "**Default value:** Not defined."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:406
+#: ../../../reference/config_files/global_conf.rst:412
 msgid "UX confs"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:411
+#: ../../../reference/config_files/global_conf.rst:417
 msgid "Skip warnings"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:413
+#: ../../../reference/config_files/global_conf.rst:419
 msgid ""
 "There are several warnings that Conan outputs in certain cases which can be "
 "omitted via the ``core:skip_warnings`` conf, by adding the warning tag to "
 "its value."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:416
+#: ../../../reference/config_files/global_conf.rst:422
 msgid "Those warnings are:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:418
+#: ../../../reference/config_files/global_conf.rst:424
 msgid ""
 "``deprecated``: Messages for deprecated features such as legacy generators"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:419
+#: ../../../reference/config_files/global_conf.rst:425
 msgid "``network``: Messages related to network issues, such as retries"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:423
+#: ../../../reference/config_files/global_conf.rst:429
 msgid "Parallel download"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:425
+#: ../../../reference/config_files/global_conf.rst:431
 msgid ""
 "By default the download and unzip of pre-compiled package binaries from "
 "remote servers will happen in parallel, defaulting to the number of cpu-"
@@ -1015,7 +1029,7 @@ msgid ""
 "moment is not to use parallelism, but sequential download."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:434
+#: ../../../reference/config_files/global_conf.rst:440
 msgid "Environment deactivation functions"
 msgstr ""
 
@@ -1025,80 +1039,80 @@ msgid ""
 "Conan stability<stability>` section for more information."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:439
+#: ../../../reference/config_files/global_conf.rst:445
 msgid ""
 "When setting the configuration ``tools.env:deactivation_mode`` to "
 "``function`` in your profile or in ``global.conf``, the deactivation scripts "
 "will no longer be generated."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:442
+#: ../../../reference/config_files/global_conf.rst:448
 msgid ""
 "Instead, an *in-memory* deactivation function will be available in the "
 "current shell session as soon as you activate the conan environment."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:445
+#: ../../../reference/config_files/global_conf.rst:451
 msgid "Moving from the classical Conan workflow:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:449
+#: ../../../reference/config_files/global_conf.rst:455
 msgid ""
 "$ source conanbuild.sh\n"
 "$ ...\n"
 "$ source deactivate_conanbuild.sh"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:455
+#: ../../../reference/config_files/global_conf.rst:461
 msgid ""
 "$ .\\conanbuild.ps1\n"
 "$ ...\n"
 "$ .\\deactivate_conanbuild.ps1"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:461
+#: ../../../reference/config_files/global_conf.rst:467
 msgid ""
 "$ .\\conanbuild.bat\n"
 "$ ...\n"
 "$ .\\deactivate_conanbuild.bat"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:467
+#: ../../../reference/config_files/global_conf.rst:473
 msgid "To the new workflow,"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:471
+#: ../../../reference/config_files/global_conf.rst:477
 msgid ""
 "$ source conanbuild.sh\n"
 "$ ...\n"
 "$ deactivate_conanbuild # from anywhere in the shell"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:477
+#: ../../../reference/config_files/global_conf.rst:483
 msgid ""
 "$ .\\conanbuild.ps1\n"
 "$ ...\n"
 "$ deactivate_conanbuild # from anywhere in the shell"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:483
+#: ../../../reference/config_files/global_conf.rst:489
 msgid ""
 "$ .\\conanbuild.bat\n"
 "$ ...\n"
 "$ deactivate_conanbuild # from anywhere in the shell"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:489
+#: ../../../reference/config_files/global_conf.rst:495
 msgid ""
 "By executing this function, the environment will be restored and the "
 "function will no longer be available in the current shell session. This "
 "behavior emulates the well known ``virtualenv`` Python tool."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:492
+#: ../../../reference/config_files/global_conf.rst:498
 msgid "tools.env:deactivation_mode=function"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:497
+#: ../../../reference/config_files/global_conf.rst:503
 msgid "**Default value:** None."
 msgstr ""

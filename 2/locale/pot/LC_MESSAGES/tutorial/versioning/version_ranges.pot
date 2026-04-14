@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-04-14 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -254,10 +254,14 @@ msgid ""
 "The tilde ``~`` operator can be used to define an \"approximately\" equal "
 "version range. ``requires = \"pkg/[~1]\"`` will include versions 1.3 and "
 "1.8.1, but will exclude versions like 0.8 or 2.0. Likewise ``requires = "
-"\"pkg/[~2.5]\"`` will include 2.5.0 and 2.5.3, but exclude 2.1, 2.7, 2.8."
+"\"pkg/[~2.5]\"`` will include 2.5.0 and 2.5.3, but exclude 2.1, 2.7, 2.8. As "
+"conan semver implementation allows multiple digits, expressions like "
+"``requires = \"pkg/[~2.5.2]\"`` will be equivalent to ``requires = \"pkg/"
+"[>=2.5.2 < 2.6.0]\"`` and ``requires = \"pkg/[~2.5.1.3]\"`` will be "
+"equivalent to ``requires = \"pkg/[>=2.5.1.3 < 2.6.0.0]\"``."
 msgstr ""
 
-#: ../../../tutorial/versioning/version_ranges.rst:157
+#: ../../../tutorial/versioning/version_ranges.rst:160
 msgid ""
 "The caret ``^`` operator is very similar to the tilde, but allows "
 "variability over the digit following the first non-zero digit. ``requires = "
@@ -266,7 +270,7 @@ msgid ""
 "and 0.1.3, but exclude 0.1.1 and 0.2.0."
 msgstr ""
 
-#: ../../../tutorial/versioning/version_ranges.rst:161
+#: ../../../tutorial/versioning/version_ranges.rst:164
 msgid ""
 "It is also possible to apply multiple conditions with the OR operator, like "
 "``requires = \"pkg/[>1 <2.0 || ^3.2]\"`` but this kind of complex "
@@ -274,7 +278,7 @@ msgid ""
 "extreme cases."
 msgstr ""
 
-#: ../../../tutorial/versioning/version_ranges.rst:164
+#: ../../../tutorial/versioning/version_ranges.rst:167
 msgid ""
 "There is the possibility to use string-matching over the end of the string "
 "to simplify some ranges that otherwise would require more complicated "
@@ -284,7 +288,7 @@ msgid ""
 "discard ``1.2.3`` (as it doesn't have the final dot)."
 msgstr ""
 
-#: ../../../tutorial/versioning/version_ranges.rst:167
+#: ../../../tutorial/versioning/version_ranges.rst:170
 msgid ""
 "Finally, note that pre-releases are not resolved by default. The way to "
 "include them in the range is to explicitly enable them with either the "
@@ -295,7 +299,7 @@ msgid ""
 "1.5.1-pre1 will be included, but 2.0-pre1 would be excluded."
 msgstr ""
 
-#: ../../../tutorial/versioning/version_ranges.rst:175
+#: ../../../tutorial/versioning/version_ranges.rst:178
 msgid ""
 "While it is possible to hardcode the ``include_prerelease`` in the "
 "``requires`` version range, it is not recommended generally. Pre-releases "
@@ -305,7 +309,7 @@ msgid ""
 "``include_prerelease=False``."
 msgstr ""
 
-#: ../../../tutorial/versioning/version_ranges.rst:179
+#: ../../../tutorial/versioning/version_ranges.rst:182
 msgid ""
 "For more information about valid range expressions go to :ref:`Requires "
 "reference <version_ranges_reference>`"

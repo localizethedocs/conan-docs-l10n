@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"POT-Creation-Date: 2026-04-14 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -292,7 +292,8 @@ msgstr ""
 #: ../../../reference/config_files/profiles.rst:936
 #: ../../../reference/config_files/profiles.rst:947
 #: ../../../reference/config_files/profiles.rst:963
-#: ../../../reference/config_files/profiles.rst:1011
+#: ../../../reference/config_files/profiles.rst:974
+#: ../../../reference/config_files/profiles.rst:1026
 msgid "*myprofile*"
 msgstr ""
 
@@ -1501,6 +1502,28 @@ msgstr ""
 
 #: ../../../reference/config_files/profiles.rst:970
 msgid ""
+"From Conan 2.27 it is also possible to do an exclusion of multiple patterns, "
+"with the ``!(<pattern1>|<pattern2>)`` **experimental** syntax, exclusively "
+"for ``[tool_requires]`` (it will not work in other sections), like:"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:974
+msgid ""
+"[tool_requires]\n"
+"!(gcc/*|ninja/*): cmake/3.20"
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:980
+msgid ""
+"That means that all packages except ``gcc`` and ``ninja`` will get a tool-"
+"requires to ``cmake``. This feature is intended to avoid circular "
+"dependencies in the build-context (try to avoid abusing it for other use "
+"cases), that is, it should be mostly in the \"build\" profile, but likely "
+"not in the \"host\" profile."
+msgstr ""
+
+#: ../../../reference/config_files/profiles.rst:985
+msgid ""
 "Note that for the ``msvc`` compiler, the ``compiler.runtime_type`` setting "
 "is  automatically initialized from the ``build_type`` setting value by the "
 "``profile.py`` plugin, as it is a good default for the vast majority of "
@@ -1513,25 +1536,25 @@ msgid ""
 "runtime_type``."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:979
+#: ../../../reference/config_files/profiles.rst:994
 msgid ""
 "In some circumstances it might be desired to undefine some specific package "
 "settings, assuming that such a setting allows to be undefined. For this "
 "case, the syntax ``~`` can be used as:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:982
+#: ../../../reference/config_files/profiles.rst:997
 msgid "myprofile"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:982
+#: ../../../reference/config_files/profiles.rst:997
 msgid ""
 "[settings]\n"
 "build_type=Release\n"
 "mypkg/*:build_type=~"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:990
+#: ../../../reference/config_files/profiles.rst:1005
 msgid ""
 "This syntax will define ``build_type=Release`` for all packages, except for "
 "``mypkg`` (any version), that will leave ``build_type`` undefined, as it was "
@@ -1539,26 +1562,26 @@ msgid ""
 "build_type`` will be ``None``."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:996
+#: ../../../reference/config_files/profiles.rst:1011
 msgid "Profile includes"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:998
+#: ../../../reference/config_files/profiles.rst:1013
 msgid ""
 "You can include other profile files using the ``include()`` statement. The "
 "path can be relative to the current profile, absolute, or a profile name "
 "from the default profile location in the local cache."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1001
+#: ../../../reference/config_files/profiles.rst:1016
 msgid "The ``include()`` statement has to be at the top of the profile file:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1003
+#: ../../../reference/config_files/profiles.rst:1018
 msgid "*gcc_49*"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1003
+#: ../../../reference/config_files/profiles.rst:1018
 msgid ""
 "[settings]\n"
 "compiler=gcc\n"
@@ -1566,7 +1589,7 @@ msgid ""
 "compiler.libcxx=libstdc++11"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1011
+#: ../../../reference/config_files/profiles.rst:1026
 msgid ""
 "include(gcc_49)\n"
 "\n"
@@ -1576,34 +1599,34 @@ msgid ""
 "zlib/*:compiler.libcxx=libstdc++11"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1024
+#: ../../../reference/config_files/profiles.rst:1039
 msgid ""
 "Cache profiles have more priority than the ones in the current working "
 "directory, so if you have a profile named ``myprofile`` in the cache, it "
 "will be used instead of the one in the current working directory."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1028
+#: ../../../reference/config_files/profiles.rst:1043
 msgid "To use the profile in the current working directory, you can use:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1030
+#: ../../../reference/config_files/profiles.rst:1045
 msgid "``-pr ./myprofile`` option in the command line or"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1031
+#: ../../../reference/config_files/profiles.rst:1046
 msgid "``include(./myprofile)`` in the profile file itself."
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1034
+#: ../../../reference/config_files/profiles.rst:1049
 msgid "The final result of using *myprofile* is:"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1036
+#: ../../../reference/config_files/profiles.rst:1051
 msgid "*myprofile (virtual result)*"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1036
+#: ../../../reference/config_files/profiles.rst:1051
 msgid ""
 "[settings]\n"
 "compiler=gcc\n"
@@ -1614,7 +1637,7 @@ msgid ""
 "zlib/*:compiler.version=3.5"
 msgstr ""
 
-#: ../../../reference/config_files/profiles.rst:1050
+#: ../../../reference/config_files/profiles.rst:1065
 msgid ""
 ":ref:`How to compose two or more profiles "
 "<reference_commands_install_composition>`"

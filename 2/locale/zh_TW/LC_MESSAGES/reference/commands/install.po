@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-18 08:38+0000\n"
+"POT-Creation-Date: 2026-04-14 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -710,11 +710,24 @@ msgid ""
 "doing ``--build=zlib`` will not work."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:287
+#: ../../../reference/commands/install.rst:285
+msgid ""
+"The ``--build=missing:[pattern]`` form uses the same kind of package "
+"patterns as in :ref:`Profile patterns "
+"<reference_config_files_profile_patterns>` (``fnmatch``-style wildcards, "
+"references like ``name/version@user/channel``, etc.). Also, you can use the "
+"``&`` syntax to match the **consumer** conanfile (the root of the graph). "
+"That is useful with ``conan create .`` when you only want to build the "
+"package being created if its binary is missing, without retyping its name: "
+"``--build=missing:&`` (equivalent to ``--build=missing:current_pkg/"
+"current_version`` in the case of ``conan create .``)."
+msgstr ""
+
+#: ../../../reference/commands/install.rst:296
 msgid "**Best practices**"
 msgstr "**最佳實踐**"
 
-#: ../../../reference/commands/install.rst:289
+#: ../../../reference/commands/install.rst:298
 msgid ""
 "Forcing the rebuild of existing binaries with ``--build=\"*\"`` or any other "
 "``--build=\"pkg/*\"`` or similar pattern is not a recommended practice. If a "
@@ -723,7 +736,7 @@ msgid ""
 "build=missing`` and ``--build=missing:[pattern]`` are more recommended."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:294
+#: ../../../reference/commands/install.rst:303
 msgid ""
 "The ``--build=cascade`` mode is partly legacy, and shouldn't be used in most "
 "cases. The ``package_id`` computation should be the driver to decide what "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"POT-Creation-Date: 2026-04-14 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -863,7 +863,7 @@ msgstr ""
 msgid ""
 "**extra_flags**: Adds extra definitions, compile and link flags from ``tools."
 "build:cxxflags``, ``tools.build:cflags``, ``tools.build:defines``, ``tools."
-"build:sharedlinkflags``, etc."
+"build:sharedlinkflags``, ``tools.build:rcflags``, etc."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:483
@@ -1444,11 +1444,17 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:798
 msgid ""
+"**tools.build:rcflags** list of extra RC flags that will be appended to "
+"``CMAKE_RC_FLAGS_INIT``."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:799
+msgid ""
 "**tools.build:defines** list of preprocessor definitions that will be used "
 "by ``add_definitions()``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:799
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:800
 msgid ""
 "**tools.build:tools.build:add_rpath_link**: add ``-Wl,-rpath-link,`` linker "
 "flag. Set this to ``True`` to pass this flag pointing to all library "
@@ -1456,86 +1462,95 @@ msgid ""
 "when using the newer `CMakeConfigDeps` generator."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:800
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:801
 msgid ""
 "**tools.apple:sdk_path** value for ``CMAKE_OSX_SYSROOT``. In the general "
 "case it's not needed and will be passed to CMake by the settings values."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:801
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:802
 msgid ""
 "**tools.apple:enable_bitcode** boolean value to enable/disable Bitcode Apple "
 "Clang flags, e.g., ``CMAKE_XCODE_ATTRIBUTE_ENABLE_BITCODE``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:802
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:803
 msgid ""
 "**tools.apple:enable_arc** boolean value to enable/disable ARC Apple Clang "
 "flags, e.g., ``CMAKE_XCODE_ATTRIBUTE_CLANG_ENABLE_OBJC_ARC``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:803
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:804
 msgid ""
 "**tools.apple:enable_visibility** boolean value to enable/disable Visibility "
 "Apple Clang flags, e.g., "
 "``CMAKE_XCODE_ATTRIBUTE_GCC_SYMBOLS_PRIVATE_EXTERN``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:804
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:805
 msgid "**tools.build:sysroot** defines the value of ``CMAKE_SYSROOT``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:805
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:806
 msgid ""
 "**tools.microsoft:winsdk_version** Defines the ``CMAKE_SYSTEM_VERSION`` or "
 "the ``CMAKE_GENERATOR_PLATFORM`` according to CMake policy ``CMP0149``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:806
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:807
+msgid ""
+"**tools.microsoft:msvc_update** allows defining the latest digits of "
+"``CMAKE_GENERATOR_TOOLSET`` without being part of the package-id. For "
+"example defining it to ``tools.microsoft:msvc_update=0.35717`` for "
+"``compiler.version=195`` will generate ``CMAKE_GENERATOR_TOOLSET = \"v145,"
+"version=14.50.35717\"``."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:808
 msgid ""
 "**tools.build:compiler_executables** dict-like Python object which specifies "
 "the compiler as key and the compiler executable path as value. Those keys "
 "will be mapped as follows:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:810
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:812
 msgid "``c``: will set ``CMAKE_C_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:811
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:813
 msgid "``cpp``: will set ``CMAKE_CXX_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:812
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:814
 msgid "``RC``: will set ``CMAKE_RC_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:813
-msgid "``objc``: will set ``CMAKE_OBJC_COMPILER`` in *conan_toolchain.cmake*."
-msgstr ""
-
-#: ../../../reference/tools/cmake/cmaketoolchain.rst:814
-msgid ""
-"``objcpp``: will set ``CMAKE_OBJCXX_COMPILER`` in *conan_toolchain.cmake*."
-msgstr ""
-
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:815
-msgid "``cuda``: will set ``CMAKE_CUDA_COMPILER`` in *conan_toolchain.cmake*."
+msgid "``objc``: will set ``CMAKE_OBJC_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:816
 msgid ""
-"``fortran``: will set ``CMAKE_Fortran_COMPILER`` in *conan_toolchain.cmake*."
+"``objcpp``: will set ``CMAKE_OBJCXX_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:817
-msgid "``asm``: will set ``CMAKE_ASM_COMPILER`` in *conan_toolchain.cmake*."
+msgid "``cuda``: will set ``CMAKE_CUDA_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:818
-msgid "``hip``: will set ``CMAKE_HIP_COMPILER`` in *conan_toolchain.cmake*."
+msgid ""
+"``fortran``: will set ``CMAKE_Fortran_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:819
+msgid "``asm``: will set ``CMAKE_ASM_COMPILER`` in *conan_toolchain.cmake*."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:820
+msgid "``hip``: will set ``CMAKE_HIP_COMPILER`` in *conan_toolchain.cmake*."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmaketoolchain.rst:821
 msgid "``ispc``: will set ``CMAKE_ISPC_COMPILER`` in *conan_toolchain.cmake*."
 msgstr ""

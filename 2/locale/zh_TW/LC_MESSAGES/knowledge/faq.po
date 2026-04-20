@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"POT-Creation-Date: 2026-04-14 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -652,4 +652,78 @@ msgid ""
 "When doing ``conan create`` for a package intended to be used as a "
 "``tool_requires``, always specify the ``conan create ... --build-require`` "
 "argument."
+msgstr ""
+
+#: ../../../knowledge/faq.rst:350
+msgid "Using Conan with both corporate and public remotes (SSL certificates)"
+msgstr ""
+
+#: ../../../knowledge/faq.rst:352
+msgid ""
+"In corporate environments it is common to need access to both a private "
+"Artifactory remote (secured with a self-signed or internal CA certificate) "
+"and a public remote such as ConanCenter at the same time."
+msgstr ""
+
+#: ../../../knowledge/faq.rst:356
+msgid "The problem appears because:"
+msgstr ""
+
+#: ../../../knowledge/faq.rst:358
+msgid ""
+"Without any custom CA configuration Conan may reject the corporate remote "
+"(``CERTIFICATE_VERIFY_FAILED``)."
+msgstr ""
+
+#: ../../../knowledge/faq.rst:360
+msgid ""
+"Setting ``core.net.http:cacert_path`` to point **only** to the corporate CA "
+"makes ConanCenter unreachable, because the public root CAs are no longer in "
+"the trust bundle."
+msgstr ""
+
+#: ../../../knowledge/faq.rst:363
+msgid ""
+"The solution is to build a **single combined CA bundle** that contains both "
+"the public root certificates **and** the corporate CA, and then configure "
+"Conan to use it via ``core.net.http:cacert_path`` (see :ref:"
+"`reference_config_files_global_conf_ssl_certificates`)."
+msgstr ""
+
+#: ../../../knowledge/faq.rst:367
+msgid ""
+"The combined bundle can be created by appending the corporate CA (in PEM "
+"format) to the default public CA bundle. The ``certifi`` Python package "
+"ships the Mozilla root CA bundle that Conan uses by default:"
+msgstr ""
+
+#: ../../../knowledge/faq.rst:371
+msgid ""
+"# 1. Copy the default public CA bundle to a working location\n"
+"cp \"$(python -m certifi)\" combined-ca-bundle.pem\n"
+"\n"
+"# 2. Append the corporate CA (PEM format) to the bundle\n"
+"cat my-corporate-ca.crt >> combined-ca-bundle.pem"
+msgstr ""
+
+#: ../../../knowledge/faq.rst:379
+msgid ""
+"You can append as many additional CAs as needed. Then point Conan at the "
+"combined file:"
+msgstr ""
+
+#: ../../../knowledge/faq.rst:381
+msgid "**[CONAN_HOME]/global.conf**"
+msgstr ""
+
+#: ../../../knowledge/faq.rst:381
+msgid "core.net.http:cacert_path=/path/to/combined-ca-bundle.pem"
+msgstr ""
+
+#: ../../../knowledge/faq.rst:388
+msgid ""
+":ref:`reference_config_files_global_conf_ssl_certificates` for the full "
+"reference on ``core.net.http:cacert_path``, ``core.net.http:client_cert``, "
+"and alternative ways to aggregate certificates (including ``update-ca-"
+"certificates`` on Debian/Ubuntu)."
 msgstr ""

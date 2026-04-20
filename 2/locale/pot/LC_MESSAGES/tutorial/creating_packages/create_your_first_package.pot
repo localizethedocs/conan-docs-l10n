@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"POT-Creation-Date: 2026-04-14 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -214,25 +214,35 @@ msgid ""
 "shared or static library, with static being the default."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:137
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:139
+msgid ""
+"The ``shared`` option implicitly defines that this package is a "
+"``package_type = \"library\"`` and it will be either a ``shared-library`` or "
+"a ``static-library`` depending on the value. Defining a ``package_type`` is "
+"important, so if this option is not defined, it is strongly recommended to "
+"define a explicit ``package_type`` see :ref:`package_type reference "
+"<reference_conanfile_attributes_package_type>`."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:145
 msgid ""
 "After that, the ``exports_sources`` attribute is set to define which sources "
 "are part of the Conan package. These are the sources for the library you "
 "want to package. In this case, the sources for our \"hello\" library."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:141
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:149
 msgid "Then, several methods are declared:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:143
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:151
 msgid ""
 "The ``config_options()`` method (together with the ``configure()`` one) "
 "allows fine-tuning the binary configuration model. For example, on Windows, "
 "there is no ``fPIC`` option, so it can be removed."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:146
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:154
 msgid ""
 "The ``layout()`` method declares the locations where we expect to find the "
 "source files and destinations for the files generated during the build "
@@ -243,7 +253,7 @@ msgid ""
 "for a CMake project."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:152
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:160
 msgid ""
 "The ``generate()`` method prepares the build of the package from source. In "
 "this case, it could be simplified to an attribute ``generators = "
@@ -255,7 +265,7 @@ msgid ""
 "to the recipe."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:158
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:166
 msgid ""
 "The ``build()`` method uses the ``CMake`` wrapper to call CMake commands. It "
 "is a thin layer that, in this case, will pass the ``-"
@@ -263,7 +273,7 @@ msgid ""
 "the project and build it from source."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:162
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:170
 msgid ""
 "The ``package()`` method copies artifacts (headers, libs) from the build "
 "folder to the final package folder. It can be done with bare \"copy\" "
@@ -273,7 +283,7 @@ msgid ""
 "tool<conan_tools_files_copy>` in the ``package()`` method."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:168
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:176
 msgid ""
 "Finally, the ``package_info()`` method defines that consumers must link with "
 "a \"hello\" library when using this package. Other information such as "
@@ -284,13 +294,13 @@ msgid ""
 "of the build system we have used in the ``build()`` method."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:175
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:183
 msgid ""
 "The **test_package** folder is not critical now for understanding how "
 "packages are created. The important bits are:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:178
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:186
 msgid ""
 "The **test_package** folder is different from unit or integration tests. "
 "These tests are \"package\" tests, and validate that the package is properly "
@@ -298,7 +308,7 @@ msgid ""
 "reuse it."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:182
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:190
 msgid ""
 "It is a small Conan project itself. It contains its own ``conanfile.py`` and "
 "its source code including build scripts, that depends on the package being "
@@ -306,19 +316,19 @@ msgid ""
 "library in the package."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:186
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:194
 msgid ""
 "It doesn't belong in the package. It only exists in the source repository, "
 "not in the package."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:190
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:198
 msgid ""
 "Let's build the package from sources with the current default configuration, "
 "and then let the ``test_package`` folder test the package:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:193
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:201
 msgid ""
 "$ conan create .\n"
 "\n"
@@ -354,38 +364,38 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:227
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:235
 msgid ""
 "If \"Hello world Release!\" is displayed, it worked. This is what has "
 "happened:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:229
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:237
 msgid ""
 "The *conanfile.py* together with the contents of the *src* folder have been "
 "copied (**exported**, in Conan terms) to the local Conan cache."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:232
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:240
 msgid ""
 "A new build from source for the ``hello/1.0`` package starts, calling the "
 "``generate()``, ``build()`` and ``package()`` methods. This creates the "
 "binary package in the Conan cache."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:236
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:244
 msgid ""
 "Conan then moves to the *test_package* folder and executes a :command:`conan "
 "install` + :command:`conan build` + ``test()`` method, to check if the "
 "package was correctly created."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:240
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:248
 msgid ""
 "We can now validate that the recipe and the package binary are in the cache:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:242
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:250
 msgid ""
 "$ conan list hello\n"
 "Local Cache\n"
@@ -393,7 +403,7 @@ msgid ""
 "    hello/1.0"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:249
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:257
 msgid ""
 "The :command:`conan create` command receives the same parameters as :command:"
 "`conan install`, so you can pass to it the same settings and options. If we "
@@ -401,7 +411,7 @@ msgid ""
 "Debug configuration and build the hello library as a shared library:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:253
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:261
 msgid ""
 "$ conan create . -s build_type=Debug\n"
 "...\n"
@@ -412,13 +422,13 @@ msgid ""
 "hello/1.0: Hello World Release!"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:264
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:272
 msgid ""
 "These new package binaries will be also stored in the Conan cache, ready to "
 "be used by any project in this computer. We can see them with:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:268
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:276
 msgid ""
 "# list all the binaries built for the hello/1.0 package in the cache\n"
 "$ conan list \"hello/1.0:*\"\n"
@@ -468,7 +478,7 @@ msgid ""
 "                  shared: False"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:318
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:326
 msgid ""
 "Now that we have created a simple Conan package, we will explain each of the "
 "methods of the Conanfile in more detail. You will learn how to modify those "
@@ -477,11 +487,11 @@ msgid ""
 "and much more."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:325
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:333
 msgid "A note about the Conan cache"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:327
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:335
 msgid ""
 "When you did the :command:`conan create` command, the build of your package "
 "did not take place in your local folder but in another folder inside the "
@@ -492,14 +502,14 @@ msgid ""
 "local cache."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:334
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:342
 msgid ""
 "An **important** note: the Conan cache is private to the Conan client - "
 "modifying, adding, removing or changing files inside the Conan cache is "
 "undefined behaviour likely to cause breakages."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:339
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:347
 msgid ""
 "`JFrog Academy Conan 2 Essentials Module 2, Lesson 8: Creating Your First "
 "Conan Package <https://academy.jfrog.com/path/conan-cc-package-manager/"
@@ -507,29 +517,29 @@ msgid ""
 "utm_source=Conan+Docs>`__"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:340
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:348
 msgid ""
 ":ref:`Create your first Conan package with Visual Studio/"
 "MSBuild<examples_tools_microsoft_create_first_package>`."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:341
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:349
 msgid ""
 ":ref:`Create your first Conan package with "
 "Meson<examples_tools_meson_create_first_package>`."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:342
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:350
 msgid ""
 ":ref:`Create your first Conan package with Autotools (only "
 "Linux)<examples_tools_autotools_create_first_package>`."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:343
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:351
 msgid ":ref:`CMake built-in integrations reference<conan_tools_cmake>`."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/create_your_first_package.rst:344
+#: ../../../tutorial/creating_packages/create_your_first_package.rst:352
 msgid ""
 ":ref:`conan create command reference<reference_commands_create>` and :ref:"
 "`Conan list command reference<reference_commands_list>`."

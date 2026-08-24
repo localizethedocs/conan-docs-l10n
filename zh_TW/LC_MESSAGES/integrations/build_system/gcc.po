@@ -1,0 +1,169 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.55\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/build_system/gcc.rst:10
+msgid "Compilers on command line"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:12
+msgid ""
+"The **compiler_args** generator creates a file named ``conanbuildinfo.args`` "
+"containing command line arguments to invoke ``gcc``, ``clang`` or ``cl`` "
+"(Visual Studio) compiler."
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:15
+msgid ""
+"Now we are going to compile the :ref:`getting started<getting_started>` "
+"example using **compiler_args** instead of the **cmake** generator."
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:17
+msgid "Open ``conanfile.txt`` and change (or add) **compiler_args** generator:"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:20
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"\n"
+"[generators]\n"
+"compiler_args"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:28
+msgid "Install the requirements (from the mytimer/build folder):"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:30
+msgid "$ conan install .."
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:37
+msgid ""
+"Remember, if you don't specify settings in the **install command** with **-"
+"s**, Conan will use the detected defaults. You can always change them by "
+"editing the ``~/.conan/profiles/default`` or override them with \"-s\" "
+"parameters."
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:41
+msgid "The generated ``conanbuildinfo.args`` show:"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:43
+msgid ""
+"-DPOCO_STATIC=ON -DPOCO_NO_AUTOMATIC_LIBS\n"
+"-I/home/user/.conan/data/poco/1.9.4/_/_/"
+"package/58080bce1cc38259eb7c282aa95c25aecde8efe4/include\n"
+"-I/home/user/.conan/data/openssl/1.0.2t/_/_/package/"
+"f99afdbf2a1cc98ba2029817b35103455b6a9b77/include\n"
+"-I/home/user/.conan/data/zlib/1.2.11/_/_/"
+"package/6af9cc7cb931c5ad942174fd7838eb655717c709/include\n"
+"-m64 -O3 -s -DNDEBUG\n"
+"-Wl,-rpath=\"/home/user/.conan/data/poco/1.9.4/_/_/"
+"package/58080bce1cc38259eb7c282aa95c25aecde8efe4/lib\"\n"
+"-Wl,-rpath=\"/home/user/.conan/data/openssl/1.0.2t/_/_/package/"
+"f99afdbf2a1cc98ba2029817b35103455b6a9b77/lib\"\n"
+"-Wl,-rpath=\"/home/user/.conan/data/zlib/1.2.11/_/_/"
+"package/6af9cc7cb931c5ad942174fd7838eb655717c709/lib\"\n"
+"-L/home/user/.conan/data/poco/1.9.4/_/_/"
+"package/58080bce1cc38259eb7c282aa95c25aecde8efe4/lib\n"
+"-L/home/user/.conan/data/openssl/1.0.2t/_/_/package/"
+"f99afdbf2a1cc98ba2029817b35103455b6a9b77/lib\n"
+"-L/home/user/.conan/data/zlib/1.2.11/_/_/"
+"package/6af9cc7cb931c5ad942174fd7838eb655717c709/lib\n"
+"-lPocoMongoDB -lPocoNetSSL -lPocoNet -lPocoCrypto -lPocoDataSQLite -"
+"lPocoData -lPocoZip -lPocoUtil\n"
+"-lPocoXML -lPocoJSON -lPocoRedis -lPocoFoundation\n"
+"-lrt -lssl -lcrypto -ldl -lpthread -lz\n"
+"-D_GLIBCXX_USE_CXX11_ABI=1"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:61
+msgid ""
+"This is hard to read, but those are just the **compiler_args** parameters "
+"needed to compile our program:"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:63
+msgid "**-I** options with headers directories"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:64
+msgid "**-L** for libraries directories"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:65
+msgid "**-l** for library names"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:66
+msgid ""
+"and so on... see the :ref:`complete reference here<compiler_args_generator>`"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:68
+msgid ""
+"It's almost the same information we can see in ``conanbuildinfo.cmake`` and "
+"many other generators' files."
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:70
+msgid "Run:"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:72
+msgid ""
+"$ mkdir bin\n"
+"$ g++ ../timer.cpp @conanbuildinfo.args -std=c++14 -o bin/timer"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:80
+msgid ""
+"\"@conanbuildinfo.args\" appends all the file contents to g++ command "
+"parameters"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:83
+msgid ""
+"$ ./bin/timer\n"
+" Callback called after 250 milliseconds.\n"
+" ..."
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:90
+msgid "To invoke ``cl`` (Visual Studio compiler):"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:93
+msgid "$ cl /EHsc timer.cpp @conanbuildinfo.args"
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:97
+msgid ""
+"You can also use the generator within your ``build()`` method of your "
+"conanfile.py."
+msgstr ""
+
+#: ../../../integrations/build_system/gcc.rst:99
+msgid ""
+"Check the :ref:`Reference, generators, compiler_args "
+"<compiler_args_generator>` section for more info."
+msgstr ""

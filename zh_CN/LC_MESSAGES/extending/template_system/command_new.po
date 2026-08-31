@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.27\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../extending/template_system/command_new.rst:5
+msgid "Package scaffolding for :command:`conan new` command"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:9
+msgid ""
+"This has to be an considered as an **experimental** feature, we might change "
+"the context provided to this templates once we have more exmpales from the "
+"community."
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:14
+msgid ""
+"Using the Conan command :command:`conan new` is a very convenient way to "
+"start a new project with a example `conanfile.py`. This command has a ``--"
+"template`` argument you can use to provide a path to a template file for the "
+"``conanfile.py`` itself or even a path to a folder containing files for a C+"
+"+ project using Conan recipes."
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:19
+msgid ""
+"The argument ``--template`` can take an absolute path or a relative path. If "
+"relative, Conan will look for the files starting in the Conan cache folder "
+"``templates/command/new/``, this is very useful in combination with :ref:"
+"`conan_config_install` because you can easily share these templates with all "
+"your team."
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:26
+msgid ""
+"For backwards compatibility reasons, if the ``--template`` argument takes "
+"the path to a single file Conan will look for it in the cache at the path "
+"``templates/<filename>`` first. This will likely be removed in Conan v2.0"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:31
+msgid ""
+"This mechanism lets you have in the Conan cache templates containing not "
+"only a *conanfile.py*, but the full C++ project scaffolding, and with a "
+"single command you can get started:"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:34
+msgid ""
+"$ conan new mypackage/version --template=header_only\n"
+"$ conan new mypackage/version --template=conan-center"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:39
+msgid ""
+"Conan will process all the files found in that folder using `Jinja2 engine "
+"<https://palletsprojects.com/p/jinja/>`_ and the paths to those files too. "
+"Thus the following template directory (which match the conventions for "
+"`conan-center-index <https://github.com/conan-io/conan-center-index/tree/"
+"master/recipes>`_ recipes):"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:43
+msgid ""
+"conan-center/{{name}}/config.yml\n"
+"            /{{name}}/all/conanfile.py\n"
+"            /{{name}}/all/conandata.yml\n"
+"            /{{name}}/all/test_package/conanfile.py\n"
+"            /{{name}}/all/test_package/CMakeLists.txt\n"
+"            /{{name}}/all/test_package/main.cpp"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:53
+msgid "will be translated to:"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:55
+msgid ""
+"conan-center/mypackage/config.yml\n"
+"            /mypackage/all/conanfile.py\n"
+"            /mypackage/all/conandata.yml\n"
+"            /mypackage/all/test_package/conanfile.py\n"
+"            /mypackage/all/test_package/CMakeLists.txt\n"
+"            /mypackage/all/test_package/main.cpp"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:64
+msgid ""
+"And the contents of all the files will be rendered using Jinja2 syntax too, "
+"substituting values in the context as we will see in the next section."
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:69
+msgid "Context"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:71
+msgid ""
+"All the files should be valid Jinja2 templates and they will be feed with "
+"the following context:"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:73
+msgid "``name`` and ``version``: defined from the command line."
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:74
+msgid ""
+"``package_name``: a *CamelCase* variant of the name. Any valid Conan package "
+"name like ``package_name``, ``package+name``, ``package.name`` or ``package-"
+"name`` will be converted into a suitable name for a Python class, "
+"``PackageName``."
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:76
+msgid ""
+"``conan_version``: an object that renders as the current Conan version, e.g. "
+"``1.24.0``."
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:80
+msgid "Example"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:82
+msgid "This is a very simple example for a header only library:"
+msgstr ""
+
+#: ../../../extending/template_system/command_new.rst:84
+msgid ""
+"# Recipe autogenerated with Conan {{ conan_version }} using `conan new --"
+"template` command\n"
+"\n"
+"from conans import ConanFile\n"
+"\n"
+"\n"
+"class {{package_name}}Conan(ConanFile):\n"
+"    name = \"{{ name }}\"\n"
+"    version = \"{{ version }}\"\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    exports_sources = \"include/*\"\n"
+"\n"
+"    def package(self):\n"
+"        self.copy(\"*.hpp\", dst=\"include\")\n"
+"        self.copy(\"LICENSE.txt\", dst=\"licenses\")\n"
+"\n"
+"    def package_id(self):\n"
+"        self.info.header_only()"
+msgstr ""

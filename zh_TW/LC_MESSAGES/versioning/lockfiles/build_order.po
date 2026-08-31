@@ -1,0 +1,370 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2021, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.43\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../versioning/lockfiles/build_order.rst:4
+msgid "Build order in lockfiles"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:8
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:10
+msgid ""
+"In this section we are going to use the following packages, defining this "
+"dependency graph."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:20
+msgid ""
+"The code used in this section, including a *build.py* script to reproduce "
+"it, is in the examples repository: https://github.com/conan-io/examples. You "
+"can go step by step reproducing this example while reading the below "
+"documentation."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:None
+msgid ""
+"$ git clone https://github.com/conan-io/examples.git\n"
+"$ cd features/lockfiles/build_order\n"
+"# $ python build.py only to run the full example, but better go step by step"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:31
+msgid ""
+"The example in this section uses ``full_version_mode``, that is, if a "
+"package changes any part of its version, its consumers will need to build a "
+"new binary because a new ``package_id`` will be computed. This example will "
+"use version ranges, and it is not necessary to have revisions enabled. It "
+"also does not require a server, everything can be reproduced locally."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:36
+msgid "$ conan config set general.default_package_id_mode=full_version_mode"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:40
+msgid ""
+"Let's start by creating the initial dependency graph, without binaries (just "
+"the exported recipes), in our local cache:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:43
+msgid ""
+"$ conan export liba liba/0.1@user/testing\n"
+"$ conan export libb libb/0.1@user/testing\n"
+"$ conan export libc libc/0.1@user/testing\n"
+"$ conan export libd libd/0.1@user/testing\n"
+"$ conan export app1 app1/0.1@user/testing\n"
+"$ conan export app2 app2/0.1@user/testing"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:52
+msgid ""
+"Now we will create a lockfile that captures the dependency graph for "
+"``app1/0.1@user/testing``. In the same way we created lockfiles for a local "
+"*conanfile.py* in a user folder, we can also create a lockfile for a recipe "
+"in the Conan cache, with the :command:`--reference` argument:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:56
+msgid ""
+"$ conan lock create --reference=app1/0.1@user/testing --lockfile-out=app1."
+"lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:60
+msgid ""
+"The resulting *app1.lock* lockfile will not be able to completely lock the "
+"binaries because such binaries do not exist at all. This can be checked in "
+"the *app1.lock* file, the packages do not contain a package revision "
+"(``prev``) field at all:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:64
+msgid ""
+"{\n"
+"   ...\n"
+"   \"4\": {\n"
+"   \"ref\": \"liba/0.1@user/testing\",\n"
+"   \"options\": \"\",\n"
+"   \"package_id\": \"5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9\",\n"
+"   \"context\": \"host\"\n"
+"   }\n"
+"   ...\n"
+"}"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:77
+msgid ""
+"We can now compute the \"build-order\" of the dependency graph. The \"build-"
+"order\" lists in order all the packages that needs to be built from sources. "
+"The logic is the following:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:80
+msgid ""
+"If a package is fully locked (it contains a package revision field ``prev`` "
+"in the lockfile), it will not be built from sources and will **never** "
+"appear in the build-order list."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:82
+msgid ""
+"If a package is not fully locked (it does **not** contain a package revision "
+"``prev`` in the lockfile), it will appear in the build-order list. This "
+"situation happens both when the package binary doesn't exist yet, or when "
+"the ``--build`` argument was used while creating the lockfile."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:86
+msgid "$ conan lock build-order app1.lock --json=build_order.json"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:90
+msgid ""
+"The resulting *build_order.json* file is a list of lists, structured by "
+"levels of possible parallel builds:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:92
+msgid ""
+"[\n"
+"  # First level liba\n"
+"  [[\"liba/0.1@user/testing\", \"5ab8...1ac9\", \"host\", \"4\"]],\n"
+"  # Second level libb and libc\n"
+"  [[\"libb/0.1@user/testing\", \"cfd1...ec23\", \"host\", \"3\"],\n"
+"   [\"libc/0.1@user/testing\", \"cfd1...ec23\", \"host\", \"5\"]],\n"
+"  # Third level libd\n"
+"  [[\"libd/0.1@user/testing\", \"d075...5b9d\", \"host\", \"2\"]],\n"
+"  # Fourth level libd\n"
+"  [[\"app1/0.1@user/testing\", \"3bf2...5188\", \"host\", \"1\"]]\n"
+"]"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:106
+msgid ""
+"Every item in the outer list is a \"level\" in the graph, a set of packages "
+"that needs to be built, and are independent of every other package in the "
+"level, so they can be built in parallel. Levels in the build order must be "
+"respected, as the second level cannot be built until all the packages in the "
+"first level are built and so on. In this example, once the build of "
+"``liba/0.1@user/testing`` finishes, as it is the only item in the first "
+"level, the second level can start, and it can build both ``libb/0.1@user/"
+"testing`` and ``libc/0.1@user/testing`` in parallel. It is necessary that "
+"both of them finish their build to be able to continue to the third level, "
+"that contains ``libd/0.1@user/testing``, because this package depends on "
+"them."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:114
+msgid ""
+"Every item in each level has 4 elements: ``[ref, package_id, context, node-"
+"id]``. At the moment the only necessary one is the first one. The ``ref`` "
+"value is the one that can be used for example in a :command:`conan install` "
+"command like:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:118
+msgid "$ conan install <ref> --build=<ref> --lockfile=mylock.lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:123
+msgid ""
+"The last value, the ``node-id`` could be used in cases where the ``ref`` is "
+"not enough to address a given package in the graph, for example when the "
+"same package can be found in the graph multiple times. In this case, "
+"explicitly adding the ``--lockfile-node-id`` argument can resolve the "
+"ambiguity (this is an **experimental feature**, subject to breaking changes):"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:127
+msgid ""
+"$ conan install <ref> --build=<ref> --lockfile=mylock.lock --lockfile-node-"
+"id=<node-id>"
+msgstr ""
+"$ conan install <ref> --build=<ref> --lockfile=mylock.lock --lockfile-node-"
+"id=<node-id>"
+
+#: ../../../versioning/lockfiles/build_order.rst:133
+msgid "Defining builds"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:135
+msgid ""
+"The definition of what needs to be built comes from the existing binaries "
+"plus the :command:`--build` argument in the :command:`conan lock create`."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:138
+msgid "Let's build all the binaries for the exported packages first:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:140
+msgid ""
+"# Build app1 and dependencies\n"
+"$ conan install app1/0.1@user/testing --build=missing"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:146
+msgid ""
+"Now that there are binaries for all packages in the cache, let's capture "
+"them in a new lockfile and compute the build order:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:148
+msgid ""
+"# Create a new lockfile now with all the package binaries\n"
+"$ conan lock create --reference=app1/0.1@user/testing --lockfile-out=app1."
+"lock\n"
+"# And check which one needs to be built\n"
+"$ conan lock build-order app1.lock --json=build_order.json\n"
+"# The build order is emtpy, nothing to build\n"
+"[]"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:157
+msgid ""
+"The result of this build order is empty. As the :command:`conan lock create` "
+"found existing binaries, everything is fully locked, nothing needs to be "
+"built."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:160
+msgid ""
+"If we specify the :command:`--build` flag, then the behavior is different:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:162
+msgid ""
+"$ conan lock create --reference=app1/0.1@user/testing --lockfile-out=app1."
+"lock --build\n"
+"# the lockfile will not lock the binaries\n"
+"# And check which one needs to be built\n"
+"$ conan lock build-order app1.lock --json=build_order.json\n"
+"[[[\"liba/0.1@user/testing\", \"5ab8...1ac9\", \"host\", \"4\"]], ..."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:171
+msgid ""
+"This feature is powerful when combined with ``package_id_modes``, because it "
+"can automatically define the minimum set of packages that needs to be built "
+"for any change in the dependency graph."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:175
+msgid ""
+"Let's say that a new version ``libb/1.1@user/testing`` is created. But if we "
+"check the ``libd`` *conanfile.py* requirement ``libb/[>0.0 <1.0]@user/"
+"testing``, we can see that this 1.1 version falls outside of the valid "
+"version range. Then, it does not affect ``libd`` or ``app1`` and nothing "
+"needs to be built:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:180
+msgid ""
+"$ conan create libb libb/1.1@user/testing\n"
+"$ conan lock create --reference=app1/0.1@user/testing --lockfile-out=app1."
+"lock\n"
+"$ conan lock build-order app1.lock --json=build_order.json\n"
+"[] # Empty, nothing to build, libb/1.1 does not become part of app1"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:188
+msgid ""
+"If on the contrary, a new ``libb/0.2@user/testing`` is created, and we "
+"capture a new lockfile, it will contain such new version. Other packages, "
+"like ``liba`` and ``libc`` are not affected by this new version, and will be "
+"fully locked in the lockfile, but the dependents of ``libb`` now won't be "
+"locked and it will be necessary to build them:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:193
+msgid ""
+"$ conan create libb libb/0.2@user/testing\n"
+"$ conan lock create --reference=app1/0.1@user/testing --lockfile-out=app1."
+"lock\n"
+"$ conan lock build-order app1.lock --json=build_order.json\n"
+"[[['libd/0.1@user/testing', '97e9...b7f4', 'host', '2']],\n"
+" [['app1/0.1@user/testing', '2bf1...e405', 'host', '1']]]"
+msgstr ""
+"$ conan create libb libb/0.2@user/testing\n"
+"$ conan lock create --reference=app1/0.1@user/testing --lockfile-out=app1."
+"lock\n"
+"$ conan lock build-order app1.lock --json=build_order.json\n"
+"[[['libd/0.1@user/testing', '97e9...b7f4', 'host', '2']],\n"
+" [['app1/0.1@user/testing', '2bf1...e405', 'host', '1']]]"
+
+#: ../../../versioning/lockfiles/build_order.rst:201
+msgid "So in this case the *app1.lock* is doing these things:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:203
+msgid "Fully locking the non-affected packages (``liba/0.1``, ``libc/0.1``)"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:204
+msgid ""
+"Fully locking the ``libb/0.2``, as the binary that was just created is valid "
+"for our ``app1`` (Note that this might not always be true, and ``app1`` "
+"build could require a different ``libb/0.2`` binary)."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:207
+msgid ""
+"Partial locking (the version and package-id) of the affected packages that "
+"need to be built (``libd/0.1`` and ``app1/0.1``)."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:209
+msgid ""
+"Retrieving via ``build-order`` the right order in which the affected "
+"packages need to be built."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:211
+msgid ""
+"Recall that a package in a lockfile is fully locked if it contains a "
+"``prev`` (package revision) field defined. Fully locked packages cannot be "
+"built from sources. Partially locked packages do not contain a ``prev`` "
+"defined. They lock the reference and the package-id, and they can be built "
+"from sources."
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:216
+msgid ""
+"If we want to check if the new ``libb/0.2`` version affects to the ``app2`` "
+"and something needs to be rebuilt, the process is identical:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:219
+msgid ""
+"$ conan lock create --reference=app2/0.1@user/testing --lockfile-out=app2."
+"lock\n"
+"$ conan lock build-order app2.lock --json=build_order2.json\n"
+"[]"
+msgstr ""
+
+#: ../../../versioning/lockfiles/build_order.rst:225
+msgid ""
+"As expected, nothing to build, as ``app2`` does not depend on ``libb`` at "
+"all."
+msgstr ""

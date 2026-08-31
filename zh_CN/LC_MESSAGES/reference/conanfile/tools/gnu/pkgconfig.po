@@ -1,0 +1,134 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.48\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:2
+msgid "PkgConfig"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:6
+msgid ""
+"These tools are still **experimental** (so subject to breaking changes) but "
+"with very stable syntax. We encourage the usage of it to be prepared for "
+"Conan 2.0."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:10
+msgid "Available since: `1.43.0 <https://github.com/conan-io/conan/releases>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:13
+msgid ""
+"This tool can execute ``pkg_config`` executable to extract information from "
+"existing ``.pc`` files. This can be useful for example to create a "
+"\"system\" package recipe over some system installed library, as a way to "
+"automatically extract the ``.pc`` information from the system. Or if some "
+"proprietary package has a build system that only outputs ``.pc`` files."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:19
+msgid "The constructor is:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:21
+msgid "def __init__(self, conanfile, library, pkg_config_path=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:25
+msgid ""
+"``conanfile``: The current ``self`` instance of the conanfile using the tool"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:26
+msgid ""
+"``library``: The library which ``.pc`` file is to be parsed. It must exist "
+"in the pkg_config path"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:27
+msgid ""
+"``pkg_config_path``: If defined it will be prepended to ``PKG_CONFIG_PATH`` "
+"environment variable, so the execution finds the required files."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:30
+msgid "It can be used as:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:32
+msgid ""
+"pkg_config = PkgConfig(conanfile, \"libastral\", pkg_config_path=<somedir>)\n"
+"\n"
+"print(pkg_config.provides) # something like\"libastral = 6.6.6\"\n"
+"print(pkg_config.version) # something like\"6.6.6\"\n"
+"print(pkg_config.includedirs) # something like['/usr/local/include/"
+"libastral']\n"
+"print(pkg_config.defines) # something like['_USE_LIBASTRAL']\n"
+"print(pkg_config.libs) # something like['astral', 'm']\n"
+"print(pkg_config.libdirs) # something like['/usr/local/lib/libastral']\n"
+"print(pkg_config.linkflags) # something like['-Wl,--whole-archive']\n"
+"print(pkg_config.variables['prefix']) # something like'/usr/local'"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:46
+msgid ""
+"There is a convenience method ``fill_cpp_info()``, that can be used in the "
+"``package_info()`` method as:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:48
+msgid ""
+"def package_info(self):\n"
+"    pkg_config = PkgConfig(conanfile, \"libastral\", "
+"pkg_config_path=tmp_dir)\n"
+"    pkg_config.fill_cpp_info(self.cpp_info, is_system=False, "
+"system_libs=[\"m\", \"rt\"])"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:55
+msgid "Where:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:57
+msgid "``cpp_info`` first argument could be the global one or a component one."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:58
+msgid ""
+"``is_system``: if ``True``, all detected libraries will be assigned to "
+"``cpp_info.system_libs``, and none to ``cpp_info.libs``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:59
+msgid ""
+"``system_libs``: If ``is_system=False``, this argument allows defining some "
+"potential system libraries found that would be assigned to ``cpp_info."
+"system_libs``. The remaining detected libs will be assigned to ``cpp_info."
+"libs``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:64
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfig.rst:66
+msgid ""
+"This helper will listen to ``tools.gnu:pkg_config`` :ref:`configuration "
+"<global_conf>` to define the ``pkg_config`` executable name or full path. It "
+"will by default it is ``pkg-config``."
+msgstr ""

@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.64\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/config_files/conandata.yml.rst:4
+msgid "conandata.yml"
+msgstr ""
+
+#: ../../../reference/config_files/conandata.yml.rst:6
+msgid ""
+"This YAML file can be used to declare specific information to be used inside "
+"the recipe. This file is specific to each recipe *conanfile.py* and it "
+"should be placed next to it. The file is automatically exported with the "
+"recipe (no need to add it to :ref:`exports_attribute` attribute) and its "
+"content is loaded into the :ref:`conandata_attribute` attribute of the "
+"recipe."
+msgstr ""
+
+#: ../../../reference/config_files/conandata.yml.rst:10
+msgid ""
+"This file can be used, for example, to declare a list of sources links and "
+"checksums for the recipe or a list patches to apply to them, but you can use "
+"it to store any data you want to extract from the recipe. For example:"
+msgstr ""
+
+#: ../../../reference/config_files/conandata.yml.rst:14
+msgid ""
+"sources:\n"
+"  \"1.70.0\":\n"
+"    url: \"https://boostorg.jfrog.io/artifactory/main/release/1.70.0/source/"
+"boost_1_70_0.tar.bz2\"\n"
+"    sha256: "
+"\"430ae8354789de4fd19ee52f3b1f739e1fba576f0aded0897c3c2bc00fb38778\"\n"
+"  \"1.71.0\":\n"
+"    url: \"https://boostorg.jfrog.io/artifactory/main/release/1.70.0/source/"
+"boost_1_71_0.tar.bz2\"\n"
+"    sha256: "
+"\"d73a8da01e8bf8c7eda40b4c84915071a8c8a0df4a6734537ddde4a8580524ee\"\n"
+"patches:\n"
+"  \"1.70.0\":\n"
+"    patches: \"0001-beast-fix-moved-from-executor.patch,bcp_namespace_issues."
+"patch\"\n"
+"  \"1.71.0\":\n"
+"    patches: \"bcp_namespace_issues.patch,"
+"boost_build_qcc_fix_debug_build_parameter.patch\"\n"
+"requirements:\n"
+"  - \"foo/1.0\"\n"
+"  - \"bar/1.0\""
+msgstr ""
+
+#: ../../../reference/config_files/conandata.yml.rst:32
+msgid "Usages in a *conanfile.py*:"
+msgstr ""
+
+#: ../../../reference/config_files/conandata.yml.rst:34
+msgid ""
+"def source(self):\n"
+"    tools.get(**self.conan_data[\"sources\"][self.version])\n"
+"    for patch in self.conan_data[\"patches\"][self.version]:\n"
+"        tools.patch(**patch)\n"
+"\n"
+"def requirements(self):\n"
+"    for req in self.conan_data[\"requirements\"]:\n"
+"        self.requires(req)"
+msgstr ""
+
+#: ../../../reference/config_files/conandata.yml.rst:47
+msgid ""
+"Use always quotes around versions numbers, otherwise YAML parser could "
+"interpret those values as integers or floats and lead to unexpected effects "
+"when comparing them against the recipe version inside the recipes."
+msgstr ""
+
+#: ../../../reference/config_files/conandata.yml.rst:52
+msgid "The first level entry key ``.conan`` is reserved for Conan usage."
+msgstr ""

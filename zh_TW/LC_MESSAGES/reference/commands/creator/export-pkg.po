@@ -1,0 +1,320 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.47\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/creator/export-pkg.rst:5
+msgid "conan export-pkg"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:7
+msgid ""
+"$ conan export-pkg [-h] [-bf BUILD_FOLDER] [-f] [-if INSTALL_FOLDER]\n"
+"                   [-pf PACKAGE_FOLDER] [-sf SOURCE_FOLDER] [-j JSON]\n"
+"                   [-l LOCKFILE] [--lockfile-out LOCKFILE_OUT]\n"
+"                   [--ignore-dirty] [-e ENV_HOST] [-e:b ENV_BUILD]\n"
+"                   [-e:h ENV_HOST] [-o OPTIONS_HOST] [-o:b OPTIONS_BUILD]\n"
+"                   [-o:h OPTIONS_HOST] [-pr PROFILE_HOST]\n"
+"                   [-pr:b PROFILE_BUILD] [-pr:h PROFILE_HOST]\n"
+"                   [-s SETTINGS_HOST] [-s:b SETTINGS_BUILD] [-s:h "
+"SETTINGS_HOST]\n"
+"                   [-c CONF_HOST] [-c:b CONF_BUILD] [-c:h CONF_HOST]\n"
+"                   path [reference]"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:20
+msgid ""
+"Exports a recipe, then creates a package from local source and build folders."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:22
+msgid ""
+"If '--package-folder' is provided it will copy the files from there, "
+"otherwise, it will execute package() method over '--source-folder' and '--"
+"build-folder' to create the binary package."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:26
+msgid ""
+"positional arguments:\n"
+"  path                  Path to a folder containing a conanfile.py or to a\n"
+"                        recipe file e.g., my_folder/conanfile.py\n"
+"  reference             user/channel or pkg/version@user/channel (if name "
+"and\n"
+"                        version are not declared in the conanfile.py)\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  -bf BUILD_FOLDER, --build-folder BUILD_FOLDER\n"
+"                        Directory for the build process. Defaulted to the\n"
+"                        current directory. A relative path to the current\n"
+"                        directory can also be specified\n"
+"  -f, --force           Overwrite existing package if existing\n"
+"  -if INSTALL_FOLDER, --install-folder INSTALL_FOLDER\n"
+"                        Directory containing the conaninfo.txt and\n"
+"                        conanbuildinfo.txt files (from previous 'conan\n"
+"                        install'). Defaulted to --build-folder If these "
+"files\n"
+"                        are found in the specified folder and any of '-e',\n"
+"                        '-o', '-pr' or '-s' arguments are used, it will "
+"raise\n"
+"                        an error.\n"
+"  -pf PACKAGE_FOLDER, --package-folder PACKAGE_FOLDER\n"
+"                        folder containing a locally created package. If a\n"
+"                        value is given, it won't call the recipe "
+"'package()'\n"
+"                        method, and will run a copy of the provided folder.\n"
+"  -sf SOURCE_FOLDER, --source-folder SOURCE_FOLDER\n"
+"                        Directory containing the sources. Defaulted to the\n"
+"                        conanfile's directory. A relative path to the "
+"current\n"
+"                        directory can also be specified\n"
+"  -j JSON, --json JSON  Path to a json file where the install information "
+"will\n"
+"                        be written\n"
+"  -l LOCKFILE, --lockfile LOCKFILE\n"
+"                        Path to a lockfile.\n"
+"  --lockfile-out LOCKFILE_OUT\n"
+"                        Filename of the updated lockfile\n"
+"  --ignore-dirty        When using the \"scm\" feature with \"auto\" "
+"values,\n"
+"                        capture the revision and url even if there are\n"
+"                        uncommitted changes\n"
+"  -e ENV_HOST, --env ENV_HOST\n"
+"                        Environment variables that will be set during the\n"
+"                        package build (host machine). e.g.: -e\n"
+"                        CXX=/usr/bin/clang++\n"
+"  -e:b ENV_BUILD, --env:build ENV_BUILD\n"
+"                        Environment variables that will be set during the\n"
+"                        package build (build machine). e.g.: -e:b\n"
+"                        CXX=/usr/bin/clang++\n"
+"  -e:h ENV_HOST, --env:host ENV_HOST\n"
+"                        Environment variables that will be set during the\n"
+"                        package build (host machine). e.g.: -e:h\n"
+"                        CXX=/usr/bin/clang++\n"
+"  -o OPTIONS_HOST, --options OPTIONS_HOST\n"
+"                        Define options values (host machine), e.g.: -o\n"
+"                        Pkg:with_qt=true\n"
+"  -o:b OPTIONS_BUILD, --options:build OPTIONS_BUILD\n"
+"                        Define options values (build machine), e.g.: -o:b\n"
+"                        Pkg:with_qt=true\n"
+"  -o:h OPTIONS_HOST, --options:host OPTIONS_HOST\n"
+"                        Define options values (host machine), e.g.: -o:h\n"
+"                        Pkg:with_qt=true\n"
+"  -pr PROFILE_HOST, --profile PROFILE_HOST\n"
+"                        Apply the specified profile to the host machine\n"
+"  -pr:b PROFILE_BUILD, --profile:build PROFILE_BUILD\n"
+"                        Apply the specified profile to the build machine\n"
+"  -pr:h PROFILE_HOST, --profile:host PROFILE_HOST\n"
+"                        Apply the specified profile to the host machine\n"
+"  -s SETTINGS_HOST, --settings SETTINGS_HOST\n"
+"                        Settings to build the package, overwriting the\n"
+"                        defaults (host machine). e.g.: -s compiler=gcc\n"
+"  -s:b SETTINGS_BUILD, --settings:build SETTINGS_BUILD\n"
+"                        Settings to build the package, overwriting the\n"
+"                        defaults (build machine). e.g.: -s:b compiler=gcc\n"
+"  -s:h SETTINGS_HOST, --settings:host SETTINGS_HOST\n"
+"                        Settings to build the package, overwriting the\n"
+"                        defaults (host machine). e.g.: -s:h compiler=gcc\n"
+"  -c CONF_HOST, --conf CONF_HOST\n"
+"                        Configuration to build the package, overwriting the "
+"defaults (host machine). e.g.: -c\n"
+"                        tools.cmake.cmaketoolchain:generator=Xcode\n"
+"  -c:b CONF_BUILD, --conf:build CONF_BUILD\n"
+"                        Configuration to build the package, overwriting the "
+"defaults (build machine). e.g.: -c:b\n"
+"                        tools.cmake.cmaketoolchain:generator=Xcode\n"
+"  -c:h CONF_HOST, --conf:host CONF_HOST\n"
+"                        Configuration to build the package, overwriting the "
+"defaults (host machine). e.g.: -c:h\n"
+"                        tools.cmake.cmaketoolchain:generator=Xcode"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:112
+msgid ""
+"The :command:`export-pkg` command let you create a package from already "
+"existing files in your working folder, it can be useful if you are using a "
+"build process external to Conan and do not want to provide it with the "
+"recipe. Nevertheless, you should take into account that it will generate a "
+"package and Conan won't be able to guarantee its reproducibility or "
+"regenerate it again. This is **not** the normal or recommended flow for "
+"creating Conan packages."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:119
+msgid ""
+"Execution of this command will result in several files copied to the package "
+"folder in the cache identified by its ``package_id`` (Conan will perform all "
+"the required actions to compute this _id_: build the graph, evaluate the "
+"requirements and options, and call any required method), but there could be "
+"two different sources for the files:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:125
+msgid ""
+"If the argument ``--package-folder`` is provided, Conan will just copy all "
+"the contents of that folder to the package one in the cache."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:127
+msgid ""
+"If no ``--package-folder`` is given, Conan will execute the method "
+"``package()`` once and the ``self.copy(...)`` functions will copy matching "
+"files from the ``source_folder`` **and** ``build_folder`` to the "
+"corresponding path in the Conan cache (working directory corresponds to the "
+"``build_folder``)."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:131
+msgid ""
+"If the arguments ``--package-folder``, ```--build-folder`` or ``--source-"
+"folder`` are declared, but the path is incorrect, :command:`export-pkg` will "
+"raise an exception."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:135
+msgid ""
+"There are different scenarios where this command could look like useful:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:137
+msgid ""
+"You are :ref:`working locally on a package<package_dev_flow>` and you want "
+"to upload it to the cache to be able to consume it from other recipes. In "
+"this situation you can use the :command:`export-pkg` command to copy the "
+"package to the cache, but you could also put the :ref:`package in editable "
+"mode<editable_packages>` and avoid this extra step."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:143
+msgid ""
+"You only have precompiled binaries available, then you can use the :command:"
+"`export-pkg` to create the Conan package, or you can build a working recipe "
+"to download and package them. These scenarios are described in the "
+"documentation section :ref:`How to package existing binaries "
+"<existing_binaries>`."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:149
+msgid ""
+"Packages created with ``conan export-pkg`` cannot be rebuilt from sources in "
+"the cache with the ``--build`` command line argument. It is possible to "
+"specify the class attribute ``build_policy=\"never\"`` in this recipes (this "
+"is an experimental feature, available from Conan 1.37) to avoid the ``--"
+"build=*`` or ``--build`` argument to try to rebuild them from sources as "
+"part of a dependency graph."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:157
+msgid ""
+"Note that if :command:`--profile`, settings or options are not provided to :"
+"command:`export-pkg`, the configuration will be extracted from the "
+"information stored after a previous :command:`conan install`. That "
+"information might be incomplete in some edge cases, so we strongly recommend "
+"the usage of :command:`--profile` or :command:`--settings, --options`, etc."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:163
+msgid "**Examples**"
+msgstr "**範例**"
+
+#: ../../../reference/commands/creator/export-pkg.rst:165
+msgid ""
+"Create a package from a directory containing the binaries for Windows/x86/"
+"Release:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:167
+msgid ""
+"We need to collect all the files from the local filesystem and tell Conan to "
+"compute the proper ``package_id`` so its get associated with the correct "
+"settings and it works when consuming it."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:171
+msgid "If the files in the working folder are:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:173
+msgid ""
+"Release_x86/lib/libmycoollib.a\n"
+"Release_x86/lib/other.a\n"
+"Release_x86/include/mylib.h\n"
+"Release_x86/include/other.h"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:180
+msgid "then, just run:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:182
+msgid ""
+"$ conan new hello/0.1 --bare  # It creates a minimum recipe example\n"
+"$ conan export-pkg . hello/0.1@user/stable -s os=Windows -s arch=x86 -s "
+"build_type=Release --package-folder=Release_x86"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:187
+msgid ""
+"This last command will copy all the contents from the ``package-folder`` and "
+"create the package associated with the settings provided through the command "
+"line."
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:191
+msgid "Create a package from a source and build folder:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:193
+msgid ""
+"The objective is to collect the files that will be part of the package from "
+"the source folder (*include files*) and from the build folder (libraries), "
+"so, if these are the files in the working folder:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:197
+msgid ""
+"sources/include/mylib.h\n"
+"sources/src/file.cpp\n"
+"build/lib/mylib.lib\n"
+"build/lib/mylib.tmp\n"
+"build/file.obj"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:205
+msgid ""
+"we would need a slightly more complicated *conanfile.py* than in the "
+"previous example to select which files to copy, we need to change the "
+"patterns in the ``package()`` method:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:209
+msgid ""
+"def package(self):\n"
+"   self.copy(\"*.h\", dst=\"include\", src=\"include\")\n"
+"   self.copy(\"*.lib\", dst=\"lib\", keep_path=False)"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:215
+msgid "Now, we can run Conan to create the package:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export-pkg.rst:217
+msgid ""
+"$ conan export-pkg . hello/0.1@user/stable -pr:host=myprofile --source-"
+"folder=sources --build-folder=build"
+msgstr ""

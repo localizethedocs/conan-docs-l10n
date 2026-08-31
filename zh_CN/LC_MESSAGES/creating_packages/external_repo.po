@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.61\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../creating_packages/external_repo.rst:4
+msgid "Recipe and Sources in a Different Repo"
+msgstr ""
+
+#: ../../../creating_packages/external_repo.rst:6
+msgid ""
+"In the previous section, we fetched the sources of our library from an "
+"external repository. It is a typical workflow for packaging third party "
+"libraries."
+msgstr ""
+
+#: ../../../creating_packages/external_repo.rst:9
+msgid ""
+"There are two different ways to fetch the sources from an external "
+"repository:"
+msgstr ""
+
+#: ../../../creating_packages/external_repo.rst:11
+msgid "Using the ``source()`` method as we displayed in the previous section:"
+msgstr ""
+
+#: ../../../creating_packages/external_repo.rst:13
+msgid ""
+"from conans import ConanFile, CMake, tools\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def source(self):\n"
+"        self.run(\"git clone https://github.com/conan-io/hello.git\")\n"
+"        ..."
+msgstr ""
+
+#: ../../../creating_packages/external_repo.rst:24
+msgid "You can also use the :ref:`tools.Git <tools_git>` class:"
+msgstr ""
+
+#: ../../../creating_packages/external_repo.rst:26
+msgid ""
+"from conans import ConanFile, CMake, tools\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def source(self):\n"
+"        git = tools.Git(folder=\"hello\")\n"
+"        git.clone(\"https://github.com/conan-io/hello.git\", \"master\")\n"
+"        ..."
+msgstr ""
+
+#: ../../../creating_packages/external_repo.rst:38
+msgid "Using the :ref:`scm attribute <scm_attribute>` of the ConanFile:"
+msgstr ""
+
+#: ../../../creating_packages/external_repo.rst:42
+msgid ""
+"This is a **deprecated** feature. Please refer to the :ref:`Migration "
+"Guidelines<conan2_migration_guide>` to find the feature that replaces this "
+"one."
+msgstr ""
+
+#: ../../../creating_packages/external_repo.rst:45
+msgid ""
+"from conans import ConanFile, CMake, tools\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"     scm = {\n"
+"        \"type\": \"git\",\n"
+"        \"subfolder\": \"hello\",\n"
+"        \"url\": \"https://github.com/conan-io/hello.git\",\n"
+"        \"revision\": \"master\"\n"
+"     }\n"
+"    ..."
+msgstr ""
+
+#: ../../../creating_packages/external_repo.rst:58
+msgid ""
+"Conan will clone the ``scm url`` and will checkout the ``scm revision``. "
+"Head to :ref:`creating package documentation <scm_feature>` to know more "
+"details about SCM feature."
+msgstr ""
+
+#: ../../../creating_packages/external_repo.rst:61
+msgid ""
+"The ``source()`` method will be called after the checkout process, so you "
+"can still use it to patch something or retrieve more sources, but it is not "
+"necessary in most cases."
+msgstr ""

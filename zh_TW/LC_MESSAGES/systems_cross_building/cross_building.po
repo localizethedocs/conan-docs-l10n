@@ -1,0 +1,865 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../systems_cross_building/cross_building.rst:4
+msgid "Cross building"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:6
+msgid ""
+"Cross building is compiling a library or executable in one platform to be "
+"used in a different one."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:8
+msgid ""
+"Cross-compilation is used to build software for embedded devices where you "
+"don't have an operating system nor a compiler available. Also for building "
+"software for not too fast devices, like an Android machine, a Raspberry PI "
+"etc."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:11
+msgid ""
+"To cross build code you need the right toolchain. A toolchain is basically a "
+"compiler with a set of libraries matching the ``host`` platform."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:16
+msgid "GNU triplet convention"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:18
+msgid ""
+"According to the GNU convention, there are three platforms involved in the "
+"software building:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:20
+msgid ""
+"**Build platform:** The platform on which the compilation tools are executed"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:21
+msgid "**Host platform:** The platform on which the code will run"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:22
+msgid ""
+"**Target platform:** Only when building a compiler, this is the platform "
+"that the compiler will generate code for"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:26
+msgid ""
+"When you are building code for your own machine it's called **native "
+"building**, where the ``build`` and the ``host`` platforms are the same. The "
+"``target`` platform is not defined in this situation."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:29
+msgid ""
+"When you are building code for a different platform, it's called **cross "
+"building**, where the ``build`` platform is different from the ``host`` "
+"platform. The ``target`` platform is not defined in this situation."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:32
+msgid ""
+"The use of the ``target`` platform is rarely needed, only makes sense when "
+"you are building a compiler. For instance, when you are building in your "
+"Linux machine a GCC compiler that will run on Windows, to generate code for "
+"Android. Here, the ``build`` is your Linux computer, the ``host`` is the "
+"Windows computer and the ``target`` is Android."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:38
+msgid "Conan settings"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:40
+msgid ""
+"From version 1.0, Conan introduces new settings to model the GNU convention "
+"triplet:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:42
+msgid "``build`` platform settings:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:44
+msgid "**os_build**: Operating system of the ``build`` system."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:45
+msgid "**arch_build**: Architecture system of the ``build`` system."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:47
+msgid ""
+"These settings are detected the first time you run Conan with the same "
+"values than the ``host`` settings, so by default, we are doing **native "
+"building**. Probably you will never need to change the value of this "
+"settings because they describe where are you running Conan."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:52
+msgid "``host`` platform settings:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:54
+msgid "**os**: Operating system of the ``host`` system."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:55
+msgid "**arch**: Architecture of the ``host`` system."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:56
+msgid ""
+"**compiler**: Compiler of the ``host`` system (to declare compatibility of "
+"libs in the host platform)"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:57
+msgid "... (all the regular settings)"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:59
+msgid ""
+"These settings are the regular Conan settings, already present before "
+"supporting the GNU triplet convention. If you are cross building you have to "
+"change them according to the ``host`` platform."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:63
+msgid "``target`` platform:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:65
+msgid "**os_target**: Operating system of the ``target`` system."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:66
+msgid "**arch_target**: Architecture of the ``target`` system."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:68
+msgid ""
+"If you are building a compiler, specify with these settings where the "
+"compiled code will run."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:72
+msgid "Cross building with Conan"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:74
+msgid ""
+"If you want to cross-build a Conan package, for example, in your Linux "
+"machine, build the `zlib` Conan package for Windows, you need to indicate to "
+"Conan where to find your cross-compiler/toolchain."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:77
+msgid "There are two approaches:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:79
+msgid ""
+"Install the toolchain in your computer and use a ``profile`` to declare the "
+"settings and point to the needed tools/libraries in the toolchain using the "
+"``[env]`` section to declare, at least, the ``CC`` and ``CXX`` environment "
+"variables."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:83
+msgid ""
+"Package the toolchain as a Conan package and include it as a "
+"``build_require``."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:87
+msgid "Using profiles"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:89
+msgid "Create a profile with:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:91
+msgid ""
+"A **[settings]** section containing the needed settings: ``os_build``, "
+"``arch_build`` and the regular settings ``os``, ``arch``, ``compiler``, "
+"``build_type`` and so on."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:94
+msgid ""
+"An **[env]** section with a PATH variable pointing to your installed "
+"toolchain. Also any other variable that the toolchain expects (read the docs "
+"of your compiler). Some build systems need a variable ``SYSROOT`` to locate "
+"where the host system libraries and tools are."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:100
+msgid "Linux to Windows"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:102
+msgid "Install the needed toolchain, in ubuntu:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:104
+msgid "``sudo apt-get install g++-mingw-w64 gcc-mingw-w64``"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:106
+msgid "Create a file named **linux_to_win64** with the contents:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:108
+msgid ""
+"$toolchain=/usr/x86_64-w64-mingw32 # Adjust this path\n"
+"target_host=x86_64-w64-mingw32\n"
+"cc_compiler=gcc\n"
+"cxx_compiler=g++\n"
+"\n"
+"[env]\n"
+"CONAN_CMAKE_FIND_ROOT_PATH=$toolchain\n"
+"CHOST=$target_host\n"
+"AR=$target_host-ar\n"
+"AS=$target_host-as\n"
+"RANLIB=$target_host-ranlib\n"
+"CC=$target_host-$cc_compiler\n"
+"CXX=$target_host-$cxx_compiler\n"
+"STRIP=$target_host-strip\n"
+"RC=$target_host-windres\n"
+"\n"
+"[settings]\n"
+"# We are building in Ubuntu Linux\n"
+"os_build=Linux\n"
+"arch_build=x86_64\n"
+"\n"
+"# We are cross building to Windows\n"
+"os=Windows\n"
+"arch=x86_64\n"
+"compiler=gcc\n"
+"\n"
+"# Adjust to the gcc version of your MinGW package\n"
+"compiler.version=7.3\n"
+"compiler.libcxx=libstdc++11\n"
+"build_type=Release"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:141
+#: ../../../systems_cross_building/cross_building.rst:206
+msgid "Clone an example recipe or use your own recipe:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:143
+#: ../../../systems_cross_building/cross_building.rst:208
+msgid "git clone https://github.com/memsharded/conan-hello.git"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:147
+msgid "Call :command:`conan create` using the created **linux_to_win64**"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:149
+msgid ""
+"$ cd conan-hello && conan create . conan/testing --profile ../"
+"linux_to_win64\n"
+"...\n"
+"[ 50%] Building CXX object CMakeFiles/example.dir/example.cpp.obj\n"
+"[100%] Linking CXX executable bin/example.exe\n"
+"[100%] Built target example"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:157
+msgid "A *bin/example.exe* for Win64 platform has been built."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:160
+msgid "Windows to Raspberry PI (Linux/ARM)"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:162
+msgid ""
+"Install the toolchain: http://gnutoolchains.com/raspberry/ You can choose "
+"different versions of the GCC cross compiler, choose one and adjust the "
+"following settings in the profile accordingly."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:166
+msgid "Create a file named **win_to_rpi** with the contents:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:168
+msgid ""
+"target_host=arm-linux-gnueabihf\n"
+"standalone_toolchain=C:/sysgcc/raspberry\n"
+"cc_compiler=gcc\n"
+"cxx_compiler=g++\n"
+"\n"
+"[settings]\n"
+"os_build=Windows\n"
+"arch_build=x86_64\n"
+"os=Linux\n"
+"arch=armv7 # Change to armv6 if you are using Raspberry 1\n"
+"compiler=gcc\n"
+"compiler.version=6\n"
+"compiler.libcxx=libstdc++11\n"
+"build_type=Release\n"
+"\n"
+"[env]\n"
+"CONAN_CMAKE_FIND_ROOT_PATH=$standalone_toolchain/$target_host/sysroot\n"
+"PATH=[$standalone_toolchain/bin]\n"
+"CHOST=$target_host\n"
+"AR=$target_host-ar\n"
+"AS=$target_host-as\n"
+"RANLIB=$target_host-ranlib\n"
+"LD=$target_host-ld\n"
+"STRIP=$target_host-strip\n"
+"CC=$target_host-$cc_compiler\n"
+"CXX=$target_host-$cxx_compiler\n"
+"CXXFLAGS=-I\"$standalone_toolchain/$target_host/lib/include\""
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:198
+msgid ""
+"The profiles to target Linux are all very similar, probably you just need to "
+"adjust the variables declared in the top of the profile:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:201
+msgid ""
+"**target_host**: All the executables in the toolchain starts with this "
+"prefix."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:202
+msgid "**standalone_toolchain**: Path to the toolchain installation."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:203
+msgid ""
+"**cc_compiler/cxx_compiler**: In this case ``gcc``/``g++``, but could be "
+"``clang``/``clang++``."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:212
+#: ../../../systems_cross_building/cross_building.rst:332
+msgid "Call :command:`conan create` using the created profile."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:214
+msgid ""
+"$ cd conan-hello && conan create . conan/testing --profile=../win_to_rpi\n"
+"...\n"
+"[ 50%] Building CXX object CMakeFiles/example.dir/example.cpp.obj\n"
+"[100%] Linking CXX executable bin/example\n"
+"[100%] Built target example"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:222
+msgid ""
+"A *bin/example* for Raspberry PI (Linux/armv7hf) platform has been built."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:227
+msgid "Linux/Windows/macOS to Android"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:229
+msgid ""
+"Cross building a library for Android is very similar to the previous "
+"examples, except the complexity of managing different architectures "
+"(armeabi, armeabi-v7a, x86, arm64-v8a) and the Android API levels."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:232
+msgid ""
+"Download the Android NDK `here <https://developer.android.com/ndk/"
+"downloads>`_ and unzip it."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:236
+msgid ""
+"If you are in Windows the process will be almost the same, but unzip the "
+"file in the root folder of your hard disk (``C:\\``) to avoid issues with "
+"path lengths."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:238
+msgid ""
+"Now you have to build a `standalone toolchain <https://developer.android.com/"
+"ndk/guides/standalone_toolchain>`_, we are going to target \"arm\" "
+"architecture and the Android API level 21, change the ``--install-dir`` to "
+"any other place that works for you:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:242
+msgid ""
+"$ cd build/tools\n"
+"$ python make_standalone_toolchain.py --arch=arm --api=21 --stl=libc++ --"
+"install-dir=/myfolder/arm_21_toolchain"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:250
+msgid ""
+"You can generate the standalone toolchain with several different options to "
+"target different architectures, api levels etc."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:252
+msgid ""
+"Check the Android docs: `standalone toolchain <https://developer.android.com/"
+"ndk/guides/standalone_toolchain>`_"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:255
+msgid ""
+"To use the ``clang`` compiler, create a profile ``android_21_arm_clang``. "
+"Once again, the profile is very similar to the RPI one:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:258
+msgid ""
+"standalone_toolchain=/myfolder/arm_21_toolchain # Adjust this path\n"
+"target_host=arm-linux-androideabi\n"
+"cc_compiler=clang\n"
+"cxx_compiler=clang++\n"
+"\n"
+"[settings]\n"
+"compiler=clang\n"
+"compiler.version=5.0\n"
+"compiler.libcxx=libc++\n"
+"os=Android\n"
+"os.api_level=21\n"
+"arch=armv7\n"
+"build_type=Release\n"
+"\n"
+"[env]\n"
+"CONAN_CMAKE_FIND_ROOT_PATH=$standalone_toolchain/sysroot\n"
+"PATH=[$standalone_toolchain/bin]\n"
+"CHOST=$target_host\n"
+"AR=$target_host-ar\n"
+"AS=$target_host-as\n"
+"RANLIB=$target_host-ranlib\n"
+"CC=$target_host-$cc_compiler\n"
+"CXX=$target_host-$cxx_compiler\n"
+"LD=$target_host-ld\n"
+"STRIP=$target_host-strip\n"
+"CFLAGS= -fPIE -fPIC -I$standalone_toolchain/include/c++/4.9.x\n"
+"CXXFLAGS= -fPIE -fPIC -I$standalone_toolchain/include/c++/4.9.x\n"
+"LDFLAGS= -pie"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:290
+msgid ""
+"You could also use ``gcc`` using this profile ``arm_21_toolchain_gcc``, "
+"changing the ``cc_compiler`` and ``cxx_compiler`` variables, removing ``-"
+"fPIE`` flag and, of course, changing the ``[settings]`` to match the gcc "
+"toolchain compiler:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:295
+msgid ""
+"standalone_toolchain=/myfolder/arm_21_toolchain\n"
+"target_host=arm-linux-androideabi\n"
+"cc_compiler=gcc\n"
+"cxx_compiler=g++\n"
+"\n"
+"[settings]\n"
+"compiler=gcc\n"
+"compiler.version=4.9\n"
+"compiler.libcxx=libstdc++\n"
+"os=Android\n"
+"os.api_level=21\n"
+"arch=armv7\n"
+"build_type=Release\n"
+"\n"
+"[env]\n"
+"CONAN_CMAKE_FIND_ROOT_PATH=$standalone_toolchain/sysroot\n"
+"PATH=[$standalone_toolchain/bin]\n"
+"CHOST=$target_host\n"
+"AR=$target_host-ar\n"
+"AS=$target_host-as\n"
+"RANLIB=$target_host-ranlib\n"
+"CC=$target_host-$cc_compiler\n"
+"CXX=$target_host-$cxx_compiler\n"
+"LD=$target_host-ld\n"
+"STRIP=$target_host-strip\n"
+"CFLAGS= -fPIC -I$standalone_toolchain/include/c++/4.9.x\n"
+"CXXFLAGS= -fPIC -I$standalone_toolchain/include/c++/4.9.x\n"
+"LDFLAGS="
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:326
+msgid "Clone, for example, the zlib library to try to build it to Android"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:328
+msgid "git clone https://github.com/conan-community/conan-zlib.git"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:334
+msgid ""
+"$ cd conan-zlib && conan create . conan/testing --profile=../"
+"android_21_arm_clang\n"
+"\n"
+"...\n"
+"-- Build files have been written to: /tmp/conan-zlib/test_package/build/"
+"ba0b9dbae0576b9a23ce7005180b00e4fdef1198\n"
+"Scanning dependencies of target enough\n"
+"[ 50%] Building C object CMakeFiles/enough.dir/enough.c.o\n"
+"[100%] Linking C executable bin/enough\n"
+"[100%] Built target enough\n"
+"zlib/1.2.11@conan/testing (test package): Running test()"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:346
+msgid "A **bin/enough** for Android ARM platform has been built."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:349
+msgid "Using build requires"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:351
+msgid ""
+"Instead of downloading manually the toolchain and creating a profile, you "
+"can create a Conan package with it. The toolchain Conan package needs to "
+"fill the ``env_info`` object in the :ref:"
+"`package_info()<method_package_info>` method with the same variables we've "
+"specified in the examples above in the ``[env]`` section of profiles."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:356
+msgid "A layout of a Conan package for a toolchain could looks like this:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:359
+msgid ""
+"from conans import ConanFile\n"
+"import os\n"
+"\n"
+"\n"
+"class MyToolchainXXXConan(ConanFile):\n"
+"    name = \"my_toolchain\"\n"
+"    version = \"0.1\"\n"
+"    settings = \"os_build\", \"arch_build\"\n"
+"\n"
+"    def build(self):\n"
+"        # Typically download the toolchain for the 'build' host\n"
+"        url = \"http://fake_url.com/installers/%s/%s/toolchain.tgz\" % "
+"(os_build, os_arch)\n"
+"        tools.download(url, \"toolchain.tgz\")\n"
+"        tools.unzip(\"toolchain.tgz\")\n"
+"\n"
+"    def package(self):\n"
+"        # Copy all the\n"
+"        self.copy(\"*\", dst=\"\", src=\"toolchain\")\n"
+"\n"
+"    def package_info(self):\n"
+"        bin_folder = os.path.join(self.package_folder, \"bin\")\n"
+"        self.env_info.path.append(bin_folder)\n"
+"        self.env_info.CC = os.path.join(bin_folder, \"mycompiler-cc\")\n"
+"        self.env_info.CXX = os.path.join(bin_folder, \"mycompiler-cxx\")\n"
+"        self.env_info.SYSROOT = self.package_folder"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:387
+msgid ""
+"Finally, when you want to cross-build a library, the profile to be used, "
+"will include a ``[build_requires]`` section with the reference to our new "
+"packaged toolchain. Also will contain a ``[settings]`` section with the same "
+"settings of the examples above."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:395
+msgid "Example: Darwin Toolchain"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:397
+msgid ""
+"Check the `Darwin Toolchain <https://github.com/theodelrieu/conan-darwin-"
+"toolchain>`_  package in conan-center. You can use a profile like the "
+"following to cross build your packages for ``iOS``,  ``watchOS`` and "
+"``tvOS``:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:400
+msgid "ios_profile"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:400
+msgid ""
+"include(default)\n"
+"\n"
+"[settings]\n"
+"os=iOS\n"
+"os.version=9.0\n"
+"arch=armv7\n"
+"\n"
+"[build_requires]\n"
+"darwin-toolchain/1.0@theodelrieu/stable"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:414
+msgid "$ conan install . --profile ios_profile"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:420
+msgid ""
+"Check the :ref:`Creating conan packages to install dev "
+"tools<create_installer_packages>` to learn more about how to create Conan "
+"packages for tools."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:423
+msgid ""
+"Check the `mingw-installer <https://github.com/conan-community/conan-mingw-"
+"installer/blob/master/conanfile.py>`_ build require recipe as an example of "
+"packaging a compiler."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:427
+msgid "Using Docker images"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:429
+msgid ""
+"You can use some :ref:`available docker images with Conan preinstalled "
+"images<available_docker_images>` to cross build conan packages. Currently "
+"there are ``i386``, ``armv7`` and ``armv7hf`` images with the needed "
+"packages and toolchains installed to cross build."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:432
+msgid ""
+"**Example**: Cross-building and uploading a package along with all its "
+"missing dependencies for ``Linux/armv7hf`` is done in few steps:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:434
+msgid ""
+"$ git clone https://github.com/conan-community/conan-openssl\n"
+"$ cd conan-openssl\n"
+"$ docker run -it -v$(pwd):/home/conan/project --rm conanio/gcc49-armv7hf /"
+"bin/bash\n"
+"\n"
+"# Now we are running on the conangcc49-armv7hf container\n"
+"$ sudo pip install conan --upgrade\n"
+"$ cd project\n"
+"\n"
+"$ conan create . user/channel --build missing\n"
+"$ conan remote add myremoteARMV7 http://some.remote.url\n"
+"$ conan upload \"*\" -r myremoteARMV7 --all"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:449
+msgid ""
+"Check the section: :ref:`How to run Conan with Docker<docker_conan>` to know "
+"more."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:453
+msgid "Preparing recipes to be cross-compiled"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:455
+msgid ""
+"If you use the build helpers :ref:"
+"`AutoToolsBuildEnvironment<autotools_reference>` or :ref:"
+"`CMake<cmake_reference>`, Conan will adjust the configuration accordingly to "
+"the specified settings."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:458
+msgid ""
+"If don't, you can always check the ``self.settings.os``, ``self.settings."
+"build_os``, ``self.settings.arch`` and ``self.settings.build_arch`` settings "
+"values and inject the needed flags to your build system script."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:462
+msgid "You can use this tool to check if you are cross building:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:464
+msgid ""
+":ref:`tools.cross_building(self.settings)<cross_building_reference>` "
+"(returns True or False)"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:468
+msgid "ARM architecture reference"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:470
+msgid ""
+"Remember that the conan settings are intended to unify the different names "
+"for operating systems, compilers, architectures etc."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:473
+msgid ""
+"Conan has different architecture settings for ARM: ``armv6``, ``armv7``, "
+"``armv7hf``, ``armv8``. The \"problem\" with ARM architecture is that "
+"frequently are named in different ways, so maybe you are wondering what "
+"setting do you need to specify in your case."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:477
+msgid "Here is a table with some typical ARM platforms:"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:480
+msgid "Platform"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:480
+msgid "Conan setting"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:482
+msgid "Raspberry PI 1"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:482
+msgid "``armv6``"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:484
+msgid "Raspberry PI 2"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:484
+msgid "``armv7`` or ``armv7hf`` if we want to use the float point hard support"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:486
+msgid "Raspberry PI 3"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:486
+msgid "``armv8`` also known as armv64-v8a"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:488
+msgid "Visual Studio"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:488
+msgid ""
+"``armv7`` currently Visual Studio builds ``armv7`` binaries when you select "
+"ARM."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:490
+msgid "Android armbeabi-v7a"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:490
+msgid "``armv7``"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:492
+msgid "Android armv64-v8a"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:492
+msgid "``armv8``"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:494
+msgid "Android armeabi"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:494
+msgid "``armv6`` (as a minimal compatible, will be compatible with v7 too)"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:499
+msgid "Reference links"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:501
+msgid "**ARM**"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:503
+msgid ""
+"https://developer.arm.com/docs/dui0773/latest/compiling-c-and-c-code/"
+"specifying-a-target-architecture-processor-and-instruction-set"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:504
+msgid ""
+"https://developer.arm.com/docs/dui0774/latest/compiler-command-line-options/-"
+"target"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:505
+msgid ""
+"https://developer.arm.com/docs/dui0774/latest/compiler-command-line-options/-"
+"march"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:507
+msgid "**ANDROID**"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:509
+msgid "https://developer.android.com/ndk/guides/standalone_toolchain"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:511
+msgid "**VISUAL STUDIO**"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:513
+msgid ""
+"https://docs.microsoft.com/en-us/cpp/build/overview-of-arm-abi-conventions?"
+"view=vs-2017"
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:518
+msgid ""
+"See :ref:`conan.conf file<conan_conf>` and :ref:`Environment variables "
+"<env_vars>` sections to know more."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:519
+msgid ""
+"See :ref:`AutoToolsBuildEnvironment build helper<autotools_reference>` "
+"reference."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:520
+msgid "See :ref:`CMake build helper<cmake_reference>` reference."
+msgstr ""
+
+#: ../../../systems_cross_building/cross_building.rst:521
+msgid ""
+"See `CMake cross building wiki <https://www.vtk.org/Wiki/"
+"CMake_Cross_Compiling>`_ to know more about cross building with CMake."
+msgstr ""

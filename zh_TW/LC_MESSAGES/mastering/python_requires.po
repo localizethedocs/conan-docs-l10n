@@ -1,0 +1,257 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../mastering/python_requires.rst:4
+msgid "Python requires: reusing python code in recipes"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:7
+msgid ""
+"This is an EXPERIMENTAL feature released in 1.7. Subject to breaking changes."
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:9
+msgid ""
+"The ``python_requires()`` feature allows to reuse python from other "
+"conanfile.py recipes easily, even for inheritance approaches. The code to be "
+"reused will be in a *conanfile.py* recipe, and will be managed as any other "
+"conan package. Let's create for example some reusable base class:"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:13
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class MyBase(ConanFile):\n"
+"    def source(self):\n"
+"        self.output.info(\"My cool source!\")\n"
+"    def build(self):\n"
+"        self.output.info(\"My cool build!\")\n"
+"    def package(self):\n"
+"        self.output.info(\"My cool package!\")\n"
+"    def package_info(self):\n"
+"        self.output.info(\"My cool package_info!\")"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:27
+msgid ""
+"With this conanfile, we can export it to the local cache to make it "
+"available, and also upload to our remote:"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:29
+msgid ""
+"$ conan export . MyBase/0.1@user/channel\n"
+"$ conan upload MyBase/0.1@user/channel -r=myremote"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:34
+msgid ""
+"It is not necessary to \"create\" any package binaries, or to ``upload --"
+"all``, because there are no binaries for this recipe."
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:36
+msgid ""
+"Now, using the ``python_requires()`` we can write a new package recipe like:"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:38
+msgid ""
+"from conans import python_requires\n"
+"\n"
+"base = python_requires(\"MyBase/0.1@user/channel\")\n"
+"\n"
+"class PkgTest(base.MyBase):\n"
+"    pass"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:47
+msgid ""
+"If we run a ``conan create``, of this recipe, we can see how it is "
+"effectively reusing the above code:"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:49
+msgid ""
+"$ conan create . Pkg/0.1@user/channel\n"
+"\n"
+"Pkg/0.1@lasote/testing: Installing package\n"
+"Requirements\n"
+"    Pkg/0.1@lasote/testing from local cache - Cache\n"
+"Python requires\n"
+"    MyConanfileBase/1.1@lasote/testing\n"
+"Packages\n"
+"    Pkg/0.1@lasote/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9 - Build\n"
+"...\n"
+"Pkg/0.1@lasote/testing: Configuring sources\n"
+"Pkg/0.1@lasote/testing: My cool source!\n"
+"...\n"
+"Pkg/0.1@lasote/testing: Calling build()\n"
+"Pkg/0.1@lasote/testing: My cool build!\n"
+"...\n"
+"Pkg/0.1@lasote/testing: Calling package()\n"
+"Pkg/0.1@lasote/testing: My cool package!\n"
+"...\n"
+"Pkg/0.1@lasote/testing: My cool package_info!"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:73
+msgid ""
+"It is not compulsory to extend the reused ``MyBase`` class, it is possible "
+"to reuse just functions too:"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:75
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"def my_build(settings):\n"
+"    # doing custom stuff based on settings\n"
+"\n"
+"class MyBase(ConanFile):\n"
+"    pass"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:85
+msgid ""
+"$ conan export . MyBuild/0.1@user/channel\n"
+"$ conan upload MyBuild/0.1@user/channel -r=myremote"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:90
+msgid ""
+"from conans import ConanFile, python_requires\n"
+"\n"
+"base = python_requires(\"MyBuild/0.1@user/channel\")\n"
+"\n"
+"class PkgTest(ConanFile):\n"
+"    ...\n"
+"    def build(self):\n"
+"        base.my_build(self.settings)"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:102
+msgid ""
+"Version ranges are possible with the version ranges notation ``[]``, similar "
+"to regular requirements. Multiple ``python_requires()`` are also possible"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:105
+#: ../../../mastering/python_requires.rst:119
+msgid "**conanfile.py**"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:105
+msgid ""
+"from conans import python_requires\n"
+"\n"
+"base = python_requires(\"MyBase/[~0.1]@user/channel\")\n"
+"other = python_requires(\"Other/1.2@user/channel\")\n"
+"\n"
+"class Pkg(base.MyBase):\n"
+"    def source(self):\n"
+"        other.some_function()"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:117
+msgid "It is possible to structure the code in different files too:"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:119
+msgid ""
+"from conans import ConanFile\n"
+"import mydata # reuse the strings from here\n"
+"class MyConanfileBase(ConanFile):\n"
+"    exports = \"*.py\"\n"
+"    def source(self):\n"
+"        self.output.info(mydata.src)"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:129
+msgid "**mydata.py**"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:129
+msgid ""
+"src = \"My cool source!\"\n"
+"build = \"My cool build!\"\n"
+"pkg = \"My cool package!\"\n"
+"info = \"My cool package_info!\""
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:137
+msgid ""
+"This would be created with the same ``conan export`` and consumed with the "
+"same ``base = python_requires(\"MyBase/0.1@user/channel\")`` as above."
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:141
+msgid ""
+"There are a few important considerations regarding ``python_requires()``:"
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:143
+msgid ""
+"They are required at every step of the conan commands. If you are creating a "
+"package that ``python_requires(\"MyBase/...\")``, the ``MyBase`` package "
+"should be already available in the local cache or to be downloaded from the "
+"remotes. Otherwise, conan will raise a \"missing package\" error."
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:146
+msgid ""
+"They do not affect the package binary ID (hash). Depending on different "
+"version, or different channel of such ``python_requires()`` do not change "
+"the package IDs as the normal dependencies do."
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:148
+msgid ""
+"They are imported only once. The python code that is reused is imported only "
+"once, the first time it is required. Subsequent requirements of that conan "
+"recipe will reuse the previously imported module. Global initialization at "
+"parsing time and global state are discouraged."
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:151
+msgid ""
+"They are transitive. One recipe using ``python_requires()`` can be also "
+"consumed with a ``python_requires()`` from another package recipe."
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:153
+msgid ""
+"They are not automatically updated with the ``--update`` argument from "
+"remotes."
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:154
+msgid ""
+"Different packages can require different versions in their "
+"``python_requires()``. They are private to each recipe, so they do not "
+"conflict with each other, but it is the responsibility of the user to keep "
+"consistency."
+msgstr ""
+
+#: ../../../mastering/python_requires.rst:156
+msgid ""
+"They are not overridden from downstream consumers. Again, as they are "
+"private, they are not affected by other packages, even consumers"
+msgstr ""

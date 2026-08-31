@@ -1,0 +1,372 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.40\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/generators/b2.rst:4
+msgid "b2"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:8
+msgid ""
+"This is the reference page for the ``b2`` (*Boost Build*) generator. It is a "
+"multi-generator to match the multi-build nature of B2."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:13
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:16
+msgid "Usage"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:18
+msgid ""
+"# Use release dependencies:\n"
+"$ conan install -g b2 -s build_type=Release ...\n"
+"# Optionally, also use debug dependencies:\n"
+"$ conan install -g b2 -s build_type=Debug ...\n"
+"# And so on for any number of configurations you need."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:26
+msgid "The commands will generate 3 files:"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:28
+msgid ""
+"``conanbuildinfo.jam``: Which includes the other two, and enables its use."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:29
+msgid ""
+"``conanbuildinfo-XXX.jam``: Variables and targets adjusted only for "
+"build_type Release, where ``XXX`` is a key indicating the full variation "
+"built."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:32
+msgid ""
+"``conanbuildinfo-YYY.jam``: Variables and targets adjusted only for "
+"build_type Debug, where ``YYY`` is a key indicating the full variation built."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:39
+msgid "Sub-projects in conanbuildinfo-XXX.jam"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:41
+msgid ""
+"The ``b2`` generator defines sub-projects relative to the location of the B2 "
+"project you generate the Conan configuration. For each package a sub-project "
+"with the package name is created that contains targets you can use as B2 "
+"sources in your projects."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:46
+msgid "For example with this ``conanfile.txt``:"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:48
+msgid ""
+"[requires]\n"
+"clara/[>=1.1.0]@bincrafters/stable\n"
+"boost_predef/[>=1.66.0]@bincrafters/stable\n"
+"zlib/[>=1.2.11]@conan/stable\n"
+"\n"
+"[generators]\n"
+"b2"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:58
+msgid ""
+"You would get three sub-projects defined relative to the ``conanfile.txt`` "
+"location:"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:61
+msgid ""
+"project clara ;\n"
+"project boost_predef ;\n"
+"project zlib ;"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:67
+msgid ""
+"For a root level project those could be referenced with an absolute project "
+"path, for example */clara*. Or you can use relative project paths as needed, "
+"for example *../clara* or *subproject/clara*."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:74
+msgid "Targets in *conanbuildinfo-XXX.jam*"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:76
+msgid ""
+"For each package a target in the corresponding package subproject is created "
+"that is specific to the variant built. There is also a general ``libs`` "
+"target that is an alias to all the package library targets. For header only "
+"packages this ``libs`` target would not contain references to the package "
+"libraries as they do not exist. But it would still contain the rest of the "
+"Usage requirements for you to make use of the headers in that package. For "
+"example, for the above *conanfile.txt*, the targets would be:"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:84
+msgid "``clara subproject``"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:84
+msgid ""
+" alias libs\n"
+"     : # source, none as it's header only\n"
+"     : # requirements specific to the build\n"
+"       ...\n"
+"     : # default-build\n"
+"     : # usage-requirements\n"
+"       <include>/absolute/path/to/conan/package/include\n"
+"       <define>...\n"
+"       <cflags>...\n"
+"       <cxxflags>...\n"
+"       <link>shared:<linkflags>...\n"
+"     ;"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:100
+msgid ""
+"Where ``...`` contains references to the variant specific constants. The "
+"target for ``boost_predef`` is equivalent as that's also a header only "
+"library. For ``libz`` it contains a built linkable library and hence it has "
+"additional targets for that."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:105
+msgid "``libz subproject``"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:105
+msgid ""
+" alias z\n"
+"     : # source, no source as it's a searched pre-built library\n"
+"     : # requirements\n"
+"       <name>z\n"
+"       <search>/absolute/path/to/conan/package/lib\n"
+"       # rest of the requirements specific to the build\n"
+"     : # default-build\n"
+"     : # usage-requirements\n"
+"       <include>/abolute/path/to/conan/package/include\n"
+"       <define>...\n"
+"       <cflags>...\n"
+"       <cxxflags>...\n"
+"       <link>shared:<linkflags>...\n"
+"     ;\n"
+"\n"
+" alias libs\n"
+"     : # source\n"
+"       z\n"
+"     : # requirements specific to the build\n"
+"       ...\n"
+"     : # default-build\n"
+"     : # usage-requirements\n"
+"       <include>/absolute/path/to/conan/package/include\n"
+"       <define>...\n"
+"       <cflags>...\n"
+"       <cxxflags>...\n"
+"       <link>shared:<linkflags>...\n"
+"     ;"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:140
+msgid "Constants in *conanbuildinfo-XXX.jam*"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:142
+msgid ""
+"This generator also defines constants, and path constants, in the project "
+"where the conanfile.txt is located. The constants define variant specific "
+"variables for all the packages and a transitive ``conan`` set of constants "
+"for all the packages."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:147
+msgid "**Per package constants**"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:149
+msgid ""
+"For each requirement ``conanbuildinfo-XXX.cmake`` file declares the "
+"following constants. ``variation`` is the name of the package and variation. "
+"That ``YYY`` variation takes the form of a comma separated list of: package "
+"name, address-model, architecture, target-os, toolset with version, and "
+"variant (``debug``, ``release``, ``relwithdebinfo``, and ``minsizerel``). "
+"All are lower case and use the values of the corresponding B2 features. For "
+"example a ``boost_predef`` package dependency when building with apple-clang "
+"9.0 and debug would be: ``boost_predef,64,x86,darwin,clang-9.0,debug``."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:160
+#: ../../../reference/generators/b2.rst:196
+msgid "NAME"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:160
+#: ../../../reference/generators/b2.rst:196
+msgid "VALUE"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:162
+msgid "rootpath(variation)"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:162
+msgid "Abs path to root package folder."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:164
+msgid "includedirs(variation)"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:164
+msgid "Header's folders"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:166
+msgid "libdirs(variation)"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:166
+msgid "Library folders (default {rootpath}/lib)"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:168
+msgid "defines(variation)"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:168
+msgid "Library defines"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:170
+msgid "cppflags(variation)"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:170
+msgid "CXX flags"
+msgstr "CXX 旗標"
+
+#: ../../../reference/generators/b2.rst:172
+msgid "sharedlinkflags(variation)"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:172
+msgid "Shared link flags"
+msgstr "共享連結旗標"
+
+#: ../../../reference/generators/b2.rst:174
+msgid "cflags(variation)"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:174
+msgid "C flags"
+msgstr "C 旗標"
+
+#: ../../../reference/generators/b2.rst:176
+msgid "requirements(variation)"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:176
+msgid "B2 requirements"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:178
+msgid "usage-requirements(variation)"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:178
+msgid "B2 usage requirements"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:181
+msgid ""
+"Both the ``requirements`` and ``usage-requirements`` are synthesized from "
+"the other constants."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:184
+msgid "**Global declared constants**"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:186
+msgid ""
+"The generator also defines a corresponding set of constants that aggregate "
+"the values of all the package requirements. The constants for this are the "
+"same as the package-specific ones but with ``conan`` as the name of the "
+"project."
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:190
+msgid "**Constants from user_info**"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:192
+msgid ""
+"If any of the requirements is filling the user_info object in the "
+"package_info method a set of constants will be declared following this "
+"naming:"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:198
+msgid "user(name,variation)"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:198
+msgid "User declared value"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:201
+msgid ""
+"``variation`` is the package and variant as above and ``name`` the variable "
+"name in lower case. For example:"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:204
+msgid ""
+"class MyLibConan(ConanFile):\n"
+"    name = \"mylib\"\n"
+"    version = \"1.6.0\"\n"
+"\n"
+"    # ...\n"
+"\n"
+"    def package_info(self):\n"
+"        self.user_info.var1 = 2"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:215
+msgid "When other library requires ``mylib`` and uses the ``b2`` generator:"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:217
+msgid "*conanbuildinfo-XXX.jam*"
+msgstr ""
+
+#: ../../../reference/generators/b2.rst:217
+msgid " constant user(var1,mylib,...) : \"2\" ;"
+msgstr ""

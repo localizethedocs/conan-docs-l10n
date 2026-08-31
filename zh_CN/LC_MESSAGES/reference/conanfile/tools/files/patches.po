@@ -1,0 +1,208 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.56\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/files/patches.rst:2
+msgid "conan.tools.files patches"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:7
+msgid "conan.tools.files.patch()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:9
+#: ../../../reference/conanfile/tools/files/patches.rst:44
+msgid ""
+"Available since: `1.35.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.35.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:11
+msgid ""
+"def patch(conanfile, base_path=None, patch_file=None, patch_string=None, "
+"strip=0, fuzz=False, **kwargs):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:15
+msgid ""
+"Applies a diff from file (*patch_file*) or string (*patch_string*) in the "
+"``conanfile.source_folder`` directory. The folder containing the sources can "
+"be customized with the ``self.folders`` attribute in the :ref:`layout(self) "
+"method<layout_folders_reference>`."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:19
+msgid "Parameters:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:21
+msgid ""
+"**patch_file**: Patch file that should be applied. The path is relative to "
+"the **conanfile.source_folder** unless an absolute path is provided."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:23
+msgid ""
+"**base_path**: The path is a relative path to **conanfile."
+"export_sources_folder** unless an absolute path is provided."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:24
+msgid "**patch_string**: Patch string that should be applied."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:25
+msgid "**strip**: Number of folders to be stripped from the path."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:26
+msgid "**output**: Stream object."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:27
+msgid "**fuzz**: Should accept fuzzy patches."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:28
+msgid ""
+"**kwargs**: Extra parameters that can be added and will contribute to output "
+"information."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:31
+msgid ""
+"from conan.tools.files import patch\n"
+"\n"
+"def build(self):\n"
+"    for it in self.conan_data.get(\"patches\", {}).get(self.version, []):\n"
+"        patch(self, **it)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:42
+msgid "conan.tools.files.apply_conandata_patches()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:46
+msgid "def apply_conandata_patches(conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:50
+msgid ""
+"Applies patches stored in ``conanfile.conan_data`` (read from ``conandata."
+"yml`` file). It will apply all the patches under ``patches`` entry that "
+"matches the given ``conanfile.version``. If versions are not defined in "
+"``conandata.yml`` it will apply all the patches directly under ``patches`` "
+"keyword."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:54
+msgid ""
+"The key entries will be passed as kwargs to the :ref:"
+"`patch<conan_tools_files_patch>` function."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:56
+#: ../../../reference/conanfile/tools/files/patches.rst:118
+msgid "Example of ``conandata.yml`` without versions defined:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:58
+msgid ""
+"from conan.tools.files import apply_conandata_patches\n"
+"\n"
+"def build(self):\n"
+"    apply_conandata_patches(self)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:65
+msgid ""
+"patches:\n"
+"- patch_file: \"patches/0001-buildflatbuffers-cmake.patch\"\n"
+"- patch_file: \"patches/0002-implicit-copy-constructor.patch\"\n"
+"  base_path: \"subfolder\"\n"
+"  patch_type: backport\n"
+"  patch_source: https://github.com/google/flatbuffers/pull/5650\n"
+"  patch_description: Needed to build with modern clang compilers."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:75
+msgid ""
+"Example of ``conandata.yml`` with different patches for different versions:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:77
+msgid ""
+"patches:\n"
+"  \"1.11.0\":\n"
+"    - patch_file: \"patches/0001-buildflatbuffers-cmake.patch\"\n"
+"    - patch_file: \"patches/0002-implicit-copy-constructor.patch\"\n"
+"      base_path: \"subfolder\"\n"
+"      patch_type: backport\n"
+"      patch_source: https://github.com/google/flatbuffers/pull/5650\n"
+"      patch_description: Needed to build with modern clang compilers.\n"
+"  \"1.12.0\":\n"
+"    - patch_file: \"patches/0001-buildflatbuffers-cmake.patch\"\n"
+"    - patch_string: |\n"
+"        --- a/tests/misc-test.c\n"
+"        +++ b/tests/misc-test.c\n"
+"        @@ -1232,6 +1292,8 @@ main (int argc, char **argv)\n"
+"              g_test_add_func (\"/misc/pause-cancel\", "
+"do_pause_cancel_test);\n"
+"              g_test_add_data_func (\"/misc/stealing/async\", "
+"GINT_TO_POINTER (FALSE), do_stealing_test);\n"
+"              g_test_add_data_func (\"/misc/stealing/sync\", GINT_TO_POINTER "
+"(TRUE), do_stealing_test);\n"
+"        +     g_test_add_func (\"/misc/response/informational/content-"
+"length\", do_response_informational_content_length_test);\n"
+"        +\n"
+"\n"
+"        ret = g_test_run ();\n"
+"    - patch_file: \"patches/0003-fix-content-length-calculation.patch\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:104
+msgid "conan.tools.files.export_conandata_patches()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:106
+msgid ""
+"Available since: `1.52.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.52.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:108
+msgid "def export_conandata_patches(conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:112
+msgid ""
+"Exports (copies from ``conanfile.recipe_folder`` to ``conanfile."
+"exports_sources_folder``) patches stored in ``conanfile.conan_data`` (read "
+"from ``conandata.yml`` file). It will export all the patches under "
+"``patches`` entry that matches the given ``conanfile.version``. If versions "
+"are not defined in ``conandata.yml`` it will export all the patches directly "
+"under ``patches`` keyword."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/patches.rst:120
+msgid ""
+"from conan.tools.files import export_conandata_patches\n"
+"\n"
+"def export_sources(self):\n"
+"    export_conandata_patches(self)"
+msgstr ""

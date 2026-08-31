@@ -1,0 +1,176 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.56\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:5
+msgid "Meson"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:9
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:11
+msgid ""
+"Available since: `1.33.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.33.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:13
+msgid ""
+"The ``Meson()`` build helper that works with the ``MesonToolchain`` is also "
+"experimental, and subject to breaking change in the future. It will evolve "
+"to adapt and complement the toolchain functionality."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:17
+msgid ""
+"The helper is intended to be used in the ``build()`` method, to call Meson "
+"commands automatically when a package is being built directly by Conan "
+"(create, install)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:29
+msgid ""
+"from conan.tools.meson import Meson\n"
+"\n"
+"def build(self):\n"
+"    meson = Meson(self)\n"
+"    meson.configure()\n"
+"    meson.build()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:30
+msgid "It supports the following methods:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:34
+msgid "constructor"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:39
+msgid "def __init__(self, conanfile):"
+msgstr "def __init__(self, conanfile):"
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:40
+msgid "``conanfile``: the current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:44
+msgid "configure()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:49
+msgid "def configure(self, reconfigure=False):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:50
+msgid ""
+"Calls :command:`meson`, with the given generator and passing either :command:"
+"`--native-file conan_meson_native.ini` (native builds) or :command:`--cross-"
+"file conan_meson_cross.ini` (cross builds). Use ``tools.meson.mesontoolchain:"
+"extra_machine_files=[<FILENAME>]`` configuration to add your machine files "
+"at the end of the command using the correct parameter depending on native or "
+"cross builds. See `this Meson reference <https://mesonbuild.com/Machine-"
+"files.html#loading-multiple-machine-files>`_ for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:57
+#: ../../../reference/conanfile/tools/meson/meson.rst:69
+msgid "Parameters:"
+msgstr "參數："
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:56
+msgid ""
+"**reconfigure** (Optional, Defaulted to ``False``): Adds the ``--"
+"reconfigure`` parameter to the ``meson setup`` command if ``True``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:60
+msgid "build()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:65
+msgid "def build(self, target=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:66
+msgid ""
+"Calls the build system. Equivalent to :command:`meson compile -C .` in the "
+"build folder."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:69
+msgid ""
+"**target** (Optional, Defaulted to ``None``): Specifies the target to "
+"execute. The default *all* target will be built if ``None`` is specified."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:72
+msgid "install()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:77
+msgid "def install(self):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:78
+msgid ""
+"Installs development files (headers, libraries, etc.). Equivalent to run :"
+"command:`meson install -C .` in the build folder."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:81
+msgid "test()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:86
+msgid "def test(self):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:87
+msgid ""
+"Runs project's tests. Equivalent to running :command:`meson test -v -C .` in "
+"the build folder. Use ``tools.build:skip_test=False`` to avoid execute this "
+"command and skip the tests."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:92
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:94
+msgid ""
+"``tools.build:jobs=10`` (integer) argument for the ``--jobs`` parameter when "
+"running Ninja."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:95
+msgid ""
+"``tools.build:skip_test=<bool>``(boolean) if ``True`` running ``meson test``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/meson.rst:96
+msgid ""
+"``tools.meson.mesontoolchain:extra_machine_files=[\"<FILENAME>\"]`` (list of "
+"strings) adds your own extra machine files in ``meson setup`` command, e.g., "
+"``meson setup --native-file \"conan_meson_native.ini\" --native-file "
+"\"<FILENAME>\"``."
+msgstr ""

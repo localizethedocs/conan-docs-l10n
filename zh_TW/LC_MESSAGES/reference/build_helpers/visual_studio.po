@@ -1,0 +1,364 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/build_helpers/visual_studio.rst:5
+msgid "MSBuild"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:7
+msgid "Calls Visual Studio ``msbuild`` command to build a ``sln`` project:"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:9
+msgid ""
+"from conans import ConanFile, MSBuild\n"
+"\n"
+"class ExampleConan(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def build(self):\n"
+"        msbuild = MSBuild(self)\n"
+"        msbuild.build(\"MyProject.sln\")"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:20
+msgid "Internally the ``MSBuild`` build helper uses:"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:22
+msgid ""
+":ref:`VisualStudioBuildEnvironment<visual_studio_build>` to adjust the "
+"``LIB`` and ``CL`` environment variables with all the information from the "
+"requirements: include directories, library names, flags etc."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:24
+msgid ":ref:`tools.msvc_build_command<msvc_build_command>` to call msbuild."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:26
+msgid ""
+"You can adjust all the information from the requirements accessing to the "
+"``build_env`` that it is a :ref:"
+"`VisualStudioBuildEnvironment<visual_studio_build>` object:"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:29
+msgid ""
+" from conans import ConanFile, MSBuild\n"
+"\n"
+" class ExampleConan(ConanFile):\n"
+"     ...\n"
+"\n"
+"     def build(self):\n"
+"         msbuild = MSBuild(self)\n"
+"         msbuild.build_env.include_paths.append(\"mycustom/directory/to/"
+"headers\")\n"
+"         msbuild.build_env.lib_paths.append(\"mycustom/directory/to/libs\")\n"
+"         msbuild.build_env.link_flags = []\n"
+"\n"
+"         msbuild.build(\"MyProject.sln\")"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:46
+msgid "Constructor"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:48
+msgid ""
+"class MSBuild(object):\n"
+"\n"
+"    def __init__(self, conanfile)"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:55
+#: ../../../reference/build_helpers/visual_studio.rst:90
+#: ../../../reference/build_helpers/visual_studio.rst:106
+msgid "Parameters:"
+msgstr "參數："
+
+#: ../../../reference/build_helpers/visual_studio.rst:55
+msgid ""
+"**conanfile** (Required): ConanFile object. Usually ``self`` in a "
+"``conanfile.py``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:58
+msgid "Methods"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:61
+msgid "build()"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:63
+msgid ""
+"def build(self, project_file, targets=None, upgrade_project=True, "
+"build_type=None, arch=None,\n"
+"          parallel=True, force_vcvars=False, toolset=None, platforms=None, "
+"use_env=True)"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:68
+msgid ""
+"Builds Visual Studio project with the given parameters. It will call ``tools."
+"msvc_build_command()``."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:71
+msgid "**project_file** (Required): Path to the ``sln`` file."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:72
+msgid ""
+"**targets** (Optional, Defaulted to ``None``): List of targets to build."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:73
+msgid ""
+"**upgrade_project** (Optional, Defaulted to ``True``): Will call ``devenv`` "
+"to upgrade the solution to your current Visual Studio."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:74
+msgid ""
+"**build_type** (Optional, Defaulted to ``None``): Optional. Defaulted to "
+"None, will use the ``settings.build_type``"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:75
+msgid ""
+"**arch** (Optional, Defaulted to ``None``): Optional. Defaulted to None, "
+"will use ``settings.arch``"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:76
+msgid ""
+"**force_vcvars** (Optional, Defaulted to ``False``): Will ignore if the "
+"environment is already set for a different Visual Studio version."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:77
+msgid ""
+"**parallel** (Optional, Defaulted to ``True``): Will use the configured "
+"number of cores in the :ref:`conan.conf<conan_conf>` file (``cpu_count``)."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:78
+msgid ""
+"**toolset** (Optional, Defaulted to ``None``): Specify a toolset. Will "
+"append a ``/p:PlatformToolset`` option."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:79
+msgid ""
+"**platforms** (Optional, Defaulted to ``None``): Dictionary with the mapping "
+"of archs/platforms from Conan naming to another one. It is useful for Visual "
+"Studio solutions that have a different naming in architectures. Example: "
+"``platforms={\"x86\":\"Win32\"}`` (Visual solution uses \"Win32\" instead of "
+"\"x86\"). This dictionary will update the default one:"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:83
+msgid ""
+"msvc_arch = {'x86': 'x86',\n"
+"             'x86_64': 'x64',\n"
+"             'armv7': 'ARM',\n"
+"             'armv8': 'ARM64'}"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:89
+msgid ""
+"**use_env** (Optional, Defaulted to ``True``: Applies the argument ``/p:"
+"UseEnv=true`` to the ``msbuild()`` call."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:93
+msgid "get_command()"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:95
+msgid "Returns a string command calling ``msbuild``"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:97
+msgid ""
+"def get_command(self, project_file, props_file_path=None, targets=None, "
+"upgrade_project=True, build_type=None,\n"
+"                arch=None, parallel=True, toolset=None, platforms=None, "
+"use_env=False):"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:103
+msgid ""
+"**project_file** (Optional, defaulted to None): Path to a properties file to "
+"include in the project."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:104
+msgid "Same other parameters than **build()**"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:112
+msgid "VisualStudioBuildEnvironment"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:114
+msgid ""
+"Prepares the needed environment variables to invoke the Visual Studio "
+"compiler. Use it together with :ref:`vcvars_command tool <tools>`"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:117
+msgid ""
+"from conans import ConanFile, VisualStudioBuildEnvironment\n"
+"\n"
+"class ExampleConan(ConanFile):\n"
+"\n"
+"    ...\n"
+"\n"
+"    def build(self):\n"
+"        if self.settings.compiler == \"Visual Studio\":\n"
+"           env_build = VisualStudioBuildEnvironment(self)\n"
+"           with tools.environment_append(env_build.vars):\n"
+"               vcvars = tools.vcvars_command(self.settings)\n"
+"               self.run('%s && cl /c /EHsc hello.cpp' % vcvars)\n"
+"               self.run('%s && lib hello.obj -OUT:hello.lib' % vcvars"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:135
+msgid "Set environment variables:"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:138
+msgid "NAME"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:138
+#: ../../../reference/build_helpers/visual_studio.rst:149
+msgid "DESCRIPTION"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:140
+msgid "LIB"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:140
+msgid "Library paths separated with \";\""
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:142
+msgid "CL"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:142
+msgid ""
+"\"/I\" flags with include directories, Runtime (/MT, /MD...), Definitions (/"
+"DXXX), and any other C and CXX flags."
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:146
+msgid "**Attributes**"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:149
+msgid "PROPERTY"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:151
+msgid ".include_paths"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:151
+msgid "List with directories of include paths"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:153
+msgid ".lib_paths"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:153
+msgid "List with directories of libraries"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:155
+msgid ".defines"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:155
+msgid "List with definitions (from requirements cpp_info.defines)"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:157
+msgid ".runtime"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:157
+msgid "List with directories (from settings.compiler.runtime)"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:159
+msgid ".flags"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:159
+msgid "List with flag (from requirements cpp_info.cflags"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:161
+msgid ".cxx_flags"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:161
+msgid "List with cxx flags (from requirements cpp_info.cppflags"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:163
+msgid ".link_flags"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:163
+msgid ""
+"List with linker flags (from requirements cpp_info.sharedlinkflags and "
+"cpp_info.exelinkflags"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:168
+msgid ""
+"You can adjust the automatically filled values modifying the attributes "
+"above:"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:171
+msgid ""
+"   def build(self):\n"
+"      if self.settings.compiler == \"Visual Studio\":\n"
+"         env_build = VisualStudioBuildEnvironment(self)\n"
+"         env_build.include_paths.append(\"mycustom/directory/to/headers\")\n"
+"         env_build.lib_paths.append(\"mycustom/directory/to/libs\")\n"
+"         env_build.link_flags = []\n"
+"         with tools.environment_append(env_build.vars):\n"
+"             vcvars = tools.vcvars_command(self.settings)\n"
+"             self.run('%s && cl /c /EHsc hello.cpp' % vcvars)\n"
+"             self.run('%s && lib hello.obj -OUT:hello.lib' % vcvars"
+msgstr ""
+
+#: ../../../reference/build_helpers/visual_studio.rst:186
+msgid ":ref:`Reference/Tools/environment_append <environment_append_tool>`"
+msgstr ""

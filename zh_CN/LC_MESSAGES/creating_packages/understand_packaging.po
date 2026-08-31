@@ -1,0 +1,174 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.19\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../creating_packages/understand_packaging.rst:4
+msgid "Understanding Packaging"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:7
+msgid "Creating and Testing Packages Manually"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:9
+msgid ""
+"The previous **create** approach using *test_package* subfolder, is not "
+"strictly necessary, though **very strongly recommended**. If we didn't want "
+"to use the *test_package* functionality, we could just write our recipe "
+"ourselves or use the :command:`conan new` command without the :command:`-t`. "
+"command line argument."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:14
+msgid ""
+"$ mkdir mypkg && cd mypkg\n"
+"$ conan new Hello/0.1"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:19
+msgid ""
+"This will create just the *conanfile.py* recipe file. Now we can create our "
+"package:"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:21
+msgid "$ conan create . demo/testing"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:25
+msgid "This is equivalent to:"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:27
+msgid ""
+"$ conan export . demo/testing\n"
+"$ conan install Hello/0.1@demo/testing --build=Hello"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:32
+msgid ""
+"Once the package is created, it can be consumed like any other package, by "
+"adding ``Hello/0.1@demo/testing`` to a project *conanfile.txt* or *conanfile."
+"py* requirements and running:"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:35
+msgid ""
+"$ conan install .\n"
+"# build and run your project to ensure the package works"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:41
+msgid "Package Creation Process"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:43
+msgid ""
+"It is very useful for package creators and Conan users in general to "
+"understand the flow for creating a package inside the conan local cache, and "
+"all about its layout."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:46
+msgid ""
+"Each package recipe contains five important folders in the **local cache**:"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:48
+msgid "**export**: The folder in which the package recipe is stored."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:49
+msgid ""
+"**export_source**: The folder in which code copied with the recipe "
+"``exports_sources`` attribute is stored."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:51
+msgid ""
+"**source**: The folder in which the source code for building from sources is "
+"stored."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:52
+msgid ""
+"**build**: The folder in which the actual compilation of sources is done. "
+"There will typically be one subfolder for each different binary configuration"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:54
+msgid ""
+"**package**: The folder in which the final package artifacts are stored. "
+"There will be one subfolder for each different binary configuration"
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:57
+msgid ""
+"The *source* and *build* folders only exist when the packages have been "
+"built from sources."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:64
+msgid ""
+"The process starts when a package is \"exported\", via the :command:`conan "
+"export` command or more typically, with the :command:`conan create` command. "
+"The *conanfile.py* and files specified by the ``exports_sources`` field are "
+"copied from the user space to the **local cache**."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:68
+msgid ""
+"The *export* and *export_source* files are copied to the *source* folder, "
+"and then the ``source()`` method is executed (if it exists). Note that there "
+"is only one source folder for all the binary packages. If when generating "
+"the code, there is source code that varies for the different configurations, "
+"it cannot be generated using the ``source()`` method, but rather needs to be "
+"generated using the ``build()`` method."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:74
+msgid ""
+"Then, for each different configuration of settings and options, a package ID "
+"will be computed in the form of a SHA-1 hash for this configuration. Sources "
+"will be copied to the *build/hashXXX* folder, and the ``build()`` method "
+"will be triggered."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:78
+msgid ""
+"After that, the ``package()`` method will be called to copy artifacts from "
+"the *build/hashXXX* folder to the *package/hashXXX* folder."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:81
+msgid ""
+"Finally, the ``package_info()`` methods of all dependencies will be called "
+"and gathered so you can generate files for the consumer build system, as the "
+"*conanbuildinfo.cmake* for the ``cmake`` generator. Also the ``imports`` "
+"feature will copy artifacts from the local cache into user space if "
+"specified."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:85
+msgid ""
+"Any doubts? Please check out our :ref:`FAQ section <faq>` or |write_us|."
+msgstr ""
+
+#: ../../../creating_packages/understand_packaging.rst:87
+msgid "<a href=\"mailto:info@conan.io\" target=\"_blank\">write us</a>"
+msgstr ""

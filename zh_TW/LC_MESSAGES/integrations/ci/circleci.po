@@ -1,0 +1,186 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.60\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/ci/circleci.rst:7
+msgid "|circleci_logo| Circle CI"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:9
+msgid ""
+"You can use the `Circle CI`_ cloud to automatically build and test your "
+"project in Linux/MacOS environments. It is free for OSS projects, and offers "
+"an easy integration with Github, so builds can be automatically fired in "
+"CircleCI after a ``git push`` to Github."
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:13
+msgid "You can use CircleCI both for:"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:15
+msgid ""
+"Building and testing your project, which manages dependencies with Conan, "
+"and probably a conanfile.txt file"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:16
+msgid ""
+"Building and testing Conan binary packages for a given Conan package recipe "
+"(with a conanfile.py)"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:20
+msgid "Building and testing your project"
+msgstr "建置並測試您的專案"
+
+#: ../../../integrations/ci/circleci.rst:22
+msgid ""
+"We are going to use an example with GTest package, with **CircleCI** support "
+"to run the tests."
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:25
+msgid "Clone the project from github:"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:28
+msgid "$ git clone https://github.com/lasote/conan-gtest-example"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:33
+msgid "Create a ``.circleci/config.yml`` file and paste this code in it:"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:36
+msgid ""
+"version: 2\n"
+"gcc-6:\n"
+"  docker:\n"
+"    - image: conanio/gcc6\n"
+"  steps:\n"
+"    - checkout\n"
+"    - run:\n"
+"        name: Build Conan package\n"
+"        command: |\n"
+"          sudo pip install --upgrade conan\n"
+"          conan user\n"
+"          conan create . user/channel\n"
+"workflows:\n"
+"  version: 2\n"
+"  build_and_test:\n"
+"    jobs:\n"
+"    - gcc-6"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:57
+msgid ""
+"CircleCI will install the **Conan** tool and will execute the **conan "
+"create** command. Then, the **script** section creates the build folder, "
+"compiles the project with **cmake** and runs the **tests**."
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:62
+msgid "Creating, testing and uploading Conan package binaries"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:63
+msgid ""
+"You can use CircleCI to automate the building of binary packages, which will "
+"be created in the cloud after pushing to Github. You can probably set up "
+"your own way, but Conan has some utilities to help in the process."
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:66
+msgid ""
+"The command ``conan new`` has arguments to create a default working ``."
+"circleci/config.yml`` file. Other setups might be possible, but for this "
+"example we are assuming that you are using github and also uploading your "
+"final packages to your own Artifactory CE server. You could follow these "
+"steps:"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:70
+msgid ""
+"First, create an empty Github repository (let's call it \"hello\") for "
+"creating a \"hello world\" package. Github allows to create it with a "
+"Readme, license and .gitignore."
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:71
+msgid ""
+"Create a Conan repository in your Artifactory CE and get its URL (\"Set me "
+"up\"). We will call it ``UPLOAD_URL``"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:72
+msgid ""
+"Under your project page, *Settings -> Pipelines -> Add a variable*, add the "
+"``CONAN_LOGIN_USERNAME`` and ``CONAN_PASSWORD`` environment variables with "
+"the Artifactory CE user and password."
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:73
+msgid "Clone the repo: ``$ git clone <your_repo/hello> && cd hello``"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:74
+msgid ""
+"Create the package: ``$ conan new hello/0.1@myteam/testing -t -s -ciccg -"
+"ciccc -cicco -cis -ciu=UPLOAD_URL``"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:75
+msgid ""
+"You can inspect the created files: both ``.circleci/config.yml`` and the "
+"``build.py`` script, that is used by ``conan-package-tools`` utility to "
+"split different builds with different configurations in different GitLab CI "
+"jobs."
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:76
+msgid "You can test locally, before pushing, with ``$ conan create``"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:77
+msgid ""
+"Add the changes, commit and push: ``$ git add . && git commit -m \"first "
+"commit\" && git push``"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:78
+msgid "Go to Pipelines page and see the pipeline, with the different jobs."
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:79
+msgid ""
+"When it has finished, go to your Artifactory CE repository, you should see "
+"there the uploaded packages for different configurations"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:80
+msgid ""
+"Check locally, searching in Artifactory CE: ``$ conan search "
+"hello/0.1@myteam/testing -r=myremote``"
+msgstr ""
+
+#: ../../../integrations/ci/circleci.rst:82
+msgid ""
+"If something fails, please report an issue in the ``conan-package-tools`` "
+"github repository: https://github.com/conan-io/conan-package-tools"
+msgstr ""

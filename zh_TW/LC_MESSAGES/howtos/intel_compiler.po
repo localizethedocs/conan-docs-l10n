@@ -1,0 +1,336 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.50\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/intel_compiler.rst:4
+msgid "Working with Intel compilers"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:7
+msgid "intel"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:11
+msgid ""
+"This compiler is aimed to manage legacy Intel Parallel Studio XE compiler "
+"versions. For new Intel oneAPI, check the information about the ``intel-cc`` "
+"compiler below."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:14
+msgid ""
+"The ``Intel`` compiler is a particular case, as it uses ``Visual Studio`` "
+"compiler in Windows environments and ``gcc`` in Linux environments. If you "
+"are wondering how to manage the compatibility between the packages generated "
+"with ``intel`` and the generated with the pure base compiler (``gcc`` or "
+"``Visual Studio``) check the :ref:`Compatible Packages<compatible_packages>` "
+"and :ref:`Compatible Compilers<compatible_compilers>` sections."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:21
+msgid "intel-cc"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:25
+msgid ""
+"The support for this compiler is **experimental** and subject to breaking "
+"changes."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:28
+msgid "Available since: `1.41.0 <https://github.com/conan-io/conan/releases>`_"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:30
+msgid ""
+"This new compiler is defined to manage the different Intel oneAPI `DPC++/C++ "
+"<https://software.intel.com/content/www/us/en/develop/documentation/oneapi-"
+"dpcpp-cpp-compiler-dev-guide-and-reference/top.html>`_ and `Classic <https://"
+"software.intel.com/content/www/us/en/develop/documentation/cpp-compiler-"
+"developer-guide-and-reference/top.html>`_ ones."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:35
+msgid ""
+"macOS is not supported for the Intel oneAPI DPC++/C++ (icx/icpx or dpcpp) "
+"compilers. For macOS or Xcode support, you'll have to use the Intel C++ "
+"Classic Compiler."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:38
+msgid ""
+"It can be declared into your local profile like any other compiler as "
+"follows:"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:40 ../../../howtos/intel_compiler.rst:164
+msgid "intelprofile"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:40
+msgid ""
+"[settings]\n"
+"...\n"
+"compiler=intel-cc\n"
+"compiler.mode=dpcpp\n"
+"compiler.version=2021.3\n"
+"compiler.libcxx=libstdc++\n"
+"build_type=Release\n"
+"[options]\n"
+"\n"
+"[tool_requires]\n"
+"[env]\n"
+"CC=dpcpp\n"
+"CXX=dpcpp\n"
+"\n"
+"[conf]\n"
+"tools.intel:installation_path=/opt/intel/oneapi"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:63
+msgid ""
+"Remember to put this ``[conf]`` entry to find out the root path of your "
+"Intel oneAPI folder. Normally, it'll be installed by default in either ``/"
+"opt/intel/oneapi`` (Linux and macOS) or ``C:\\Program Files "
+"(x86)\\Intel\\oneAPI`` (Windows)."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:66
+msgid ""
+"We're specifying the ``CC`` and ``CXX`` compilers and the ``compiler.mode`` "
+"subsetting. The possible values for ``compiler.mode`` are:"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:69
+msgid "``icx`` for Intel oneAPI C++ (icx/icpx compilers)."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:70
+msgid ""
+"``dpcpp`` for Intel oneAPI DPC++ (dpcpp compiler and dpcpp-cl for Windows "
+"only)."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:71
+msgid "``classic`` for Intel C++ Classic (icc for Linux and icl for Windows)."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:74
+msgid ""
+"To set up the compiler **without Conan** you need to run an Intel official "
+"script to set all the proper variables to use those compilers called "
+"``setvars.sh|bat`` script."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:76
+msgid ""
+"If you are using either the ``CMakeToolChain`` or the ``MSBuildToolchain``, "
+"when using the ``intel-cc`` compiler, Conan automatically calls the "
+"``setvars`` script. Otherwise, you can use the :ref:`IntelCC "
+"generator<conan_tools_intel>`."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:79
+msgid ""
+"This is an example of a Conan package called ``hello/1.0`` using the "
+"``CMakeToolchain``. Remember you can use the command :command:`conan new "
+"hello/1.0 -m cmake_lib` to create a simple project like this one:"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:82 ../../../howtos/intel_compiler.rst:184
+msgid "conanfile.py"
+msgstr "conanfile.py"
+
+#: ../../../howtos/intel_compiler.rst:82
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.cmake import CMakeToolchain\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    name = \"hello\"\n"
+"    version = \"1.0\"\n"
+"\n"
+"    # more code here...\n"
+"\n"
+"    def generate(self):\n"
+"        tc = CMakeToolchain(self)\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:99
+msgid ""
+"Running :command:`conan create . -pr intelprofile -pr:b intelprofile`, "
+"you'll see something like this output:"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:101
+msgid "output"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:101
+msgid ""
+"......\n"
+"hello/1.0: Generating the package\n"
+"hello/1.0: Package folder /home/franchuti/.conan/data/hello/1.0/_/_/"
+"package/7d9c7d5fa3c48c9705c2cb864656c00fa8672524\n"
+"hello/1.0: Calling package()\n"
+"hello/1.0: CMake command: cmake --build '/home/franchuti/.conan/data/"
+"hello/1.0/_/_/build/7d9c7d5fa3c48c9705c2cb864656c00fa8672524/cmake-build-"
+"release' '--target' 'install'\n"
+":: initializing oneAPI environment ...\n"
+"   dash: SH_VERSION = unknown\n"
+":: advisor -- latest\n"
+":: ccl -- latest\n"
+":: clck -- latest\n"
+":: compiler -- latest\n"
+":: dal -- latest\n"
+":: debugger -- latest\n"
+":: dev-utilities -- latest\n"
+":: dnnl -- latest\n"
+":: dpcpp-ct -- latest\n"
+":: dpl -- latest\n"
+":: inspector -- latest\n"
+":: intelpython -- latest\n"
+":: ipp -- latest\n"
+":: ippcp -- latest\n"
+":: ipp -- latest\n"
+":: itac -- latest\n"
+":: mkl -- latest\n"
+":: mpi -- latest\n"
+":: tbb -- latest\n"
+":: vpl -- latest\n"
+":: vtune -- latest\n"
+":: oneAPI environment initialized ::\n"
+"Using Conan toolchain through /home/franchuti/.conan/data/hello/1.0/_/_/"
+"build/7d9c7d5fa3c48c9705c2cb864656c00fa8672524/cmake-build-release/conan/"
+"conan_toolchain.cmake.\n"
+"-- Conan toolchain: Setting CMAKE_POSITION_INDEPENDENT_CODE=ON (options."
+"fPIC)\n"
+"-- Conan toolchain: Setting BUILD_SHARED_LIBS= OFF\n"
+"-- The CXX compiler identification is Clang 13.0.0\n"
+"-- Check for working CXX compiler: /opt/intel/oneapi/compiler/2021.3.0/linux/"
+"bin/dpcpp\n"
+"Using Conan toolchain through .\n"
+"-- Check for working CXX compiler: /opt/intel/oneapi/compiler/2021.3.0/linux/"
+"bin/dpcpp -- works\n"
+"-- Detecting CXX compiler ABI info\n"
+"Using Conan toolchain through .\n"
+"-- Detecting CXX compiler ABI info - done\n"
+"-- Detecting CXX compile features\n"
+"-- Detecting CXX compile features - done\n"
+"-- Configuring done\n"
+"-- Generating done\n"
+"......."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:150
+msgid ""
+"As you can observe, you have used one of these Intel compilers, the DPC++ "
+"one and successfully generated the ``libhello.a`` file."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:154
+msgid "intel-cc and Microsoft Visual Studio"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:158
+msgid ""
+"Ensure you have installed the Intel plugins for Microsoft Visual Studio "
+"before reading this section."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:161
+msgid ""
+"If you're working on a Microsoft Visual Studio project, you can add the "
+"Intel Toolset as a new *.props* file. Let's suppose you have defined these "
+"files into your current project folder:"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:164
+msgid ""
+"[settings]\n"
+"os=Windows\n"
+"os_build=Windows\n"
+"arch=x86_64\n"
+"arch_build=x86_64\n"
+"compiler=intel-cc\n"
+"compiler.mode=classic\n"
+"compiler.version=2021.3\n"
+"compiler.runtime=dynamic\n"
+"build_type=Release\n"
+"[options]\n"
+"[tool_requires]\n"
+"[env]\n"
+"[conf]\n"
+"tools.intel:installation_path=\"C:\\Program Files (x86)\\Intel\\oneAPI\""
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:184
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.microsoft import MSBuildToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = MSBuildToolchain(self)\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:198
+msgid ""
+"Running a :command:`conan install . -pr intelprofile`, a file "
+"*conantoolchain_release_x64.props* is generated in your current folder:"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:201
+msgid "conantoolchain_release_x64.props"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:201
+msgid ""
+"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+"<Project xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\n"
+"  <ItemDefinitionGroup>\n"
+"    <ClCompile>\n"
+"      <PreprocessorDefinitions>\n"
+"         ;%(PreprocessorDefinitions)\n"
+"      </PreprocessorDefinitions>\n"
+"      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>\n"
+"      <LanguageStandard></LanguageStandard>\n"
+"    </ClCompile>\n"
+"  </ItemDefinitionGroup>\n"
+"  <PropertyGroup Label=\"Configuration\">\n"
+"    <PlatformToolset>Intel C++ Compiler 19.2</PlatformToolset>\n"
+"  </PropertyGroup>\n"
+"</Project>"
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:221
+msgid ""
+"Note that a ``PlatformToolset`` is set to ``Intel C++ Compiler 19.2``. You "
+"can import that file to your project or solution of Visual Studio. Read more "
+"about the :ref:`MSBuildToolchain here<conan_tools_microsoft>`."
+msgstr ""
+
+#: ../../../howtos/intel_compiler.rst:227
+msgid ""
+"See the complete :ref:`IntelCC reference<conan_tools_intel>` for more "
+"information about that tool."
+msgstr ""

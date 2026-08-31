@@ -1,0 +1,200 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.45\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/creator/upload.rst:5
+msgid "conan upload"
+msgstr "conan upload"
+
+#: ../../../reference/commands/creator/upload.rst:7
+msgid ""
+"$ conan upload [-h] [-p PACKAGE] [-q QUERY] [-r REMOTE] [--all]\n"
+"               [--skip-upload] [--force] [--check] [-c] [--retry RETRY]\n"
+"               [--retry-wait RETRY_WAIT] [-no [{all,recipe}]] [-j JSON]\n"
+"               [--parallel]\n"
+"               pattern_or_reference"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:15
+msgid "Uploads a recipe and binary packages to a remote."
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:17
+msgid ""
+"If no remote is specified, the first configured remote (by default "
+"conancenter, use 'conan remote list' to list the remotes) will be used."
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:20
+msgid ""
+"positional arguments:\n"
+"  pattern_or_reference  Pattern, recipe reference or package reference e."
+"g.,\n"
+"                        'boost/*', 'MyPackage/1.2@user/channel', "
+"'MyPackage/1.\n"
+"                        2@user/channel:"
+"af7901d8bdfde621d086181aa1c495c25a17b13\n"
+"                        7'\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  -p PACKAGE, --package PACKAGE\n"
+"                        Package ID [DEPRECATED: use full reference instead]\n"
+"  -q QUERY, --query QUERY\n"
+"                        Only upload packages matching a specific query.\n"
+"                        Packages query: 'os=Windows AND (arch=x86 OR\n"
+"                        compiler=gcc)'. The 'pattern_or_reference' "
+"parameter\n"
+"                        has to be a reference: MyPackage/1.2@user/channel\n"
+"  -r REMOTE, --remote REMOTE\n"
+"                        upload to this specific remote\n"
+"  --all                 Upload both package recipe and packages\n"
+"  --skip-upload         Do not upload anything, just run the checks and the\n"
+"                        compression\n"
+"  --force               Ignore checks before uploading the recipe: it will\n"
+"                        bypass missing fields in the scm attribute and it "
+"will\n"
+"                        override remote recipe with local regardless of "
+"recipe\n"
+"                        date\n"
+"  --check               Perform an integrity check, using the manifests,\n"
+"                        before upload\n"
+"  -c, --confirm         Upload all matching recipes without confirmation\n"
+"  --retry RETRY         In case of fail retries to upload again the "
+"specified\n"
+"                        times.\n"
+"  --retry-wait RETRY_WAIT\n"
+"                        Waits specified seconds before retry again\n"
+"  -no [{all,recipe}], --no-overwrite [{all,recipe}]\n"
+"                        Uploads package only if recipe is the same as the\n"
+"                        remote one\n"
+"  -j JSON, --json JSON  json file path where the upload information will be\n"
+"                        written to\n"
+"  --parallel            Upload files in parallel using multiple threads. "
+"The\n"
+"                        default number of launched threads is set to the "
+"value\n"
+"                        of cpu_count and can be configured using the\n"
+"                        CONAN_CPU_COUNT environment variable or defining\n"
+"                        cpu_count in conan.conf"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:65
+msgid "**Examples**:"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:67
+msgid "Uploads a package recipe (*conanfile.py* and the exported files):"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:69
+msgid "$ conan upload OpenCV/1.4.0@lasote/stable"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:74
+msgid "Uploads a package recipe and a single binary package:"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:76
+msgid ""
+"$ conan upload OpenCV/1.4.0@lasote/stable:"
+"d50a0d523d98c15bb147b18fa7d203887c38be8b"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:80
+msgid ""
+"Uploads a package recipe and all the generated binary packages to a "
+"specified remote:"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:82
+msgid "$ conan upload OpenCV/1.4.0@lasote/stable --all -r my_remote"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:86
+msgid ""
+"Uploads all recipes and binary packages from our local cache to "
+"``my_remote`` without confirmation:"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:88
+msgid "$ conan upload \"*\" --all -r my_remote -c"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:92
+msgid ""
+"Uploads the recipe for OpenCV alongside any of its binary packages which are "
+"built with settings ``arch=x86_64`` and ``os=Linux`` from our local cache to "
+"``my_remote``:"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:95
+msgid ""
+"$ conan upload OpenCV/1.4.0@lasote/stable -q 'arch=x86_64 and os=Linux' -r "
+"my_remote"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:99
+msgid ""
+"Upload all local packages and recipes beginning with \"Op\" retrying 3 times "
+"and waiting 10 seconds between upload attempts:"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:102
+msgid "$ conan upload \"Op*\" --all -r my_remote -c --retry 3 --retry-wait 10"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:106
+msgid ""
+"Upload packages without overwriting the recipe and packages if the recipe "
+"has changed:"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:108
+msgid ""
+"$ conan upload OpenCV/1.4.0@lasote/stable --all --no-overwrite  # defaults "
+"to --no-overwrite all"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:112
+msgid ""
+"Upload packages without overwriting the recipe if the packages have changed:"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:114
+msgid "$ conan upload OpenCV/1.4.0@lasote/stable --all --no-overwrite recipe"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:118
+msgid ""
+"Upload packages using multiple threads without requiring confirmation to "
+"my_remote. By default, the number of threads used is the number of cores "
+"available in the machine running Conan. It can also be configured setting "
+"the environment variable :ref:`env_vars_conan_cpu_count` or defining "
+"``cpu_count`` in the :ref:`conan_conf`."
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:123
+msgid "$ conan upload \"*\" --confirm --parallel -r my_remote"
+msgstr ""
+
+#: ../../../reference/commands/creator/upload.rst:129
+msgid ""
+"Note that :ref:`non_interactive mode<conan_conf>` will be forced to `true` "
+"when using parallel upload"
+msgstr ""

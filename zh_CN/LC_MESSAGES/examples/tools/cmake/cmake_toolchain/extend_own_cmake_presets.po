@@ -1,0 +1,187 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.23\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-16 08:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:4
+msgid "CMakeToolchain: Extending your CMakePresets with Conan generated ones"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:6
+msgid ""
+"In this example we are going to see how to extend your own CMakePresets to "
+"include Conan generated ones."
+msgstr ""
+
+#: ../../../tutorial/cmake_presets_note.inc:3
+msgid ""
+"We use CMake presets in this example. This requires CMake >= 3.23 because "
+"the \"include\" from ``CMakeUserPresets.json`` to ``CMakePresets.json`` is "
+"only supported since that version. If you prefer not to use presets you can "
+"use something like:"
+msgstr ""
+
+#: ../../../tutorial/cmake_presets_note.inc:7
+msgid ""
+"cmake <path> -G <CMake generator> -DCMAKE_TOOLCHAIN_FILE=<path to\n"
+"conan_toolchain.cmake> -DCMAKE_BUILD_TYPE=Release"
+msgstr ""
+
+#: ../../../tutorial/cmake_presets_note.inc:12
+msgid ""
+"Conan will show the exact CMake command everytime you run ``conan install`` "
+"in case you can't use the presets feature."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:11
+msgid ""
+"Please, first clone the sources to recreate this project. You can find them "
+"in the `examples2 repository <https://github.com/conan-io/examples2>`_ in "
+"GitHub:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:14
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:19
+msgid ""
+"Please open the `conanfile.py` and check how it sets ``tc.user_presets_path "
+"= 'ConanPresets.json'``. By modifying this attribute of `CMakeToolchain`, "
+"you can change the default filename of the generated preset."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:23
+msgid ""
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    tc.user_presets_path = 'ConanPresets.json'\n"
+"    tc.generate()\n"
+"    ..."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:31
+msgid ""
+"Now you can provide your own ``CMakePresets.json``, besides the ``CMakeLists."
+"txt``:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:33
+msgid "CMakePresets.json"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:33
+msgid ""
+"{\n"
+"\"version\": 4,\n"
+"\"include\": [\"./ConanPresets.json\"],\n"
+"\"configurePresets\": [\n"
+"    {\n"
+"        \"name\": \"default\",\n"
+"        \"displayName\": \"multi config\",\n"
+"        \"inherits\": \"conan-default\"\n"
+"    },\n"
+"    {\n"
+"        \"name\": \"release\",\n"
+"        \"displayName\": \"release single config\",\n"
+"        \"inherits\": \"conan-release\"\n"
+"    },\n"
+"    {\n"
+"        \"name\": \"debug\",\n"
+"        \"displayName\": \"debug single config\",\n"
+"        \"inherits\": \"conan-debug\"\n"
+"    }\n"
+"],\n"
+"\"buildPresets\": [\n"
+"    {\n"
+"        \"name\": \"multi-release\",\n"
+"        \"configurePreset\": \"default\",\n"
+"        \"configuration\": \"Release\",\n"
+"        \"inherits\": \"conan-release\"\n"
+"    },\n"
+"    {\n"
+"        \"name\": \"multi-debug\",\n"
+"        \"configurePreset\": \"default\",\n"
+"        \"configuration\": \"Debug\",\n"
+"        \"inherits\": \"conan-debug\"\n"
+"    },\n"
+"    {\n"
+"        \"name\": \"release\",\n"
+"        \"configurePreset\": \"release\",\n"
+"        \"configuration\": \"Release\",\n"
+"        \"inherits\": \"conan-release\"\n"
+"    },\n"
+"    {\n"
+"        \"name\": \"debug\",\n"
+"        \"configurePreset\": \"debug\",\n"
+"        \"configuration\": \"Debug\",\n"
+"        \"inherits\": \"conan-debug\"\n"
+"    }\n"
+"]\n"
+"}"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:84
+msgid ""
+"Note how the ``\"include\": [\"./ConanPresets.json\"],`` and that every "
+"preset ``inherits`` a Conan generated one."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:87
+msgid ""
+"We can now install for both Release and Debug (and other configurations "
+"also, with the help of ``build_folder_vars`` if we want):"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:90
+msgid ""
+"$ conan install .\n"
+"$ conan install . -s build_type=Debug"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:95
+msgid ""
+"And build and run our application, by using **our own presets** that extend "
+"the Conan generated ones:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/extend_own_cmake_presets.rst:97
+msgid ""
+"# Linux (single-config, 2 configure, 2 builds)\n"
+"$ cmake --preset debug\n"
+"$ cmake --build --preset debug\n"
+"$ ./build/Debug/foo\n"
+"> Hello World Debug!\n"
+"\n"
+"$ cmake --preset release\n"
+"$ cmake --build --preset release\n"
+"$ ./build/Release/foo\n"
+"> Hello World Release!\n"
+"\n"
+"# Windows VS (Multi-config, 1 configure 2 builds)\n"
+"$ cmake --preset default\n"
+"\n"
+"$ cmake --build --preset multi-debug\n"
+"$ build\\\\Debug\\\\foo\n"
+"> Hello World Debug!\n"
+"\n"
+"$ cmake --build --preset multi-release\n"
+"$ build\\\\Release\\\\foo\n"
+"> Hello World Release!"
+msgstr ""

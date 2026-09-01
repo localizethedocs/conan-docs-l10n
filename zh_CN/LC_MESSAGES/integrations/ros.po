@@ -1,0 +1,359 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.17\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/ros.rst:4
+msgid "|ros_logo| ROS"
+msgstr ""
+
+#: ../../../integrations/ros.rst:237
+msgid "ros_logo"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../integrations/ros.rst:8
+msgid ""
+"Conan provides integration for your Robot Operating System (ROS) C/C++ based "
+"projects. This will allow you to consume Conan packages inside your ROS "
+"package projects. The Conan packages can be installed and used in CMake with "
+"the help of the :ref:`ROSEnv generator <conan_tools_ros_rosenv>` created for "
+"the purpose."
+msgstr ""
+
+#: ../../../integrations/ros.rst:13
+msgid ""
+"It provides a clean integration that requires no Conan-specific "
+"modifications in your *CMakeLists.txt*."
+msgstr ""
+
+#: ../../../integrations/ros.rst:17
+msgid ""
+"This integration supports **ROS2**, it has been developed using its **Humble "
+"version** and the aim is to **support newer versions going forward**. If you "
+"have any issues with other ROS versions, please let us know by opening an "
+"issue in our GitHub repository."
+msgstr ""
+
+#: ../../../integrations/ros.rst:22
+msgid "**Pre-requisites to run the example:**"
+msgstr ""
+
+#: ../../../integrations/ros.rst:24
+msgid ""
+"In order to run the example, it is expected that you have an Ubuntu "
+"environment (22.04 LTS preferred) with `ROS2 Humble version installed "
+"<https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html>`_. "
+"For convenience, you can also use this Docker File instead:"
+msgstr ""
+
+#: ../../../integrations/ros.rst:26
+msgid ""
+"FROM osrf/ros:humble-desktop\n"
+"RUN apt-get update && apt-get install -y \\\n"
+"curl \\\n"
+"python3-pip \\\n"
+"git \\\n"
+"ros-humble-nav2-msgs \\\n"
+"&& rm -rf /var/lib/apt/lists/*\n"
+"RUN pip3 install --upgrade pip && pip3 install conan==2.*\n"
+"RUN conan profile detect\n"
+"CMD [\"bash\"]"
+msgstr ""
+
+#: ../../../integrations/ros.rst:40
+msgid ""
+"Simply copy the Dockerfile, build your image with ``docker build -t conanio/"
+"ros-humble .``, and finally run it with ``docker run -it conanio/ros-"
+"humble``."
+msgstr ""
+
+#: ../../../integrations/ros.rst:42
+msgid ""
+"The files for this example can be found at `our examples repository <https://"
+"github.com/conan-io/examples2/tree/main/examples/tools/ros/rosenv/"
+"workspace>`_. Clone it like so to get started:"
+msgstr ""
+
+#: ../../../integrations/ros.rst:45
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/examples/tools/ros/rosenv"
+msgstr ""
+
+#: ../../../integrations/ros.rst:56
+msgid "Consuming Conan packages using the ROSEnv generator"
+msgstr ""
+
+#: ../../../integrations/ros.rst:58
+msgid ""
+"Imagine we have a ROS C++ package called `str_printer` that uses some "
+"functionality from the third party string formatting library `fmt <https://"
+"conan.io/center/recipes/fmt>`_ to print fancy strings."
+msgstr ""
+
+#: ../../../integrations/ros.rst:61
+msgid "We have the following project structure:"
+msgstr ""
+
+#: ../../../integrations/ros.rst:63
+msgid ""
+"$  tree /f\n"
+"workspace\n"
+"├───str_printer\n"
+"│   │   CMakeLists.txt\n"
+"│   │   conanfile.txt\n"
+"│   │   package.xml\n"
+"│   ├───include\n"
+"│   │   └──str_printer\n"
+"│   │         str_printer.h\n"
+"│   └───src\n"
+"│          str_printer.cpp\n"
+"└───consumer\n"
+"    │   CMakeLists.txt\n"
+"    │   package.xml\n"
+"    └───src\n"
+"           main.cpp"
+msgstr ""
+
+#: ../../../integrations/ros.rst:82
+msgid "Where:"
+msgstr ""
+
+#: ../../../integrations/ros.rst:84
+msgid ""
+"The `str_printer` is a ROS package that implements a function and **depends "
+"on the fmt Conan package**."
+msgstr ""
+
+#: ../../../integrations/ros.rst:85
+msgid ""
+"The `consumer` is also a ROS package that depends on the `str_printer` ROS "
+"package and uses its functionality in a **final executable**."
+msgstr ""
+
+#: ../../../integrations/ros.rst:87
+msgid ""
+"The only difference in the `str_printer` package with respect to a normal "
+"ROS package is that it includes a *conanfile.txt* file. This is the file "
+"used by Conan to install the required dependencies and generate the files "
+"needed to perform the build."
+msgstr ""
+
+#: ../../../integrations/ros.rst:90
+msgid "str_printer/conanfile.txt"
+msgstr ""
+
+#: ../../../integrations/ros.rst:90
+msgid ""
+" [requires]\n"
+" fmt/11.0.2\n"
+"\n"
+" [generators]\n"
+" CMakeDeps\n"
+" CMakeToolchain\n"
+" ROSEnv"
+msgstr ""
+
+#: ../../../integrations/ros.rst:101
+msgid ""
+"In this case, we will install the 11.0.2 version of `fmt` and Conan will "
+"generate files for CMake and ROS so we can build the `str_printer` package "
+"later."
+msgstr ""
+
+#: ../../../integrations/ros.rst:103
+msgid "To install the `fmt` library using Conan we should do the following:"
+msgstr ""
+
+#: ../../../integrations/ros.rst:105
+msgid ""
+"$ cd workspace\n"
+"$ conan install str_printer/conanfile.txt --build missing --output-folder "
+"install/conan\n"
+"======== Computing dependency graph ========\n"
+"fmt/11.0.2: Not found in local cache, looking in remotes...\n"
+"fmt/11.0.2: Checking remote: conancenter\n"
+"fmt/11.0.2: Downloaded recipe revision 5c7438ef4d5d69ab106a41e460ce11f3\n"
+"Graph root\n"
+"    conanfile.txt: /home/user/examples2/examples/tools/ros/rosenv/workspace/"
+"str_printer/conanfile.txt\n"
+"Requirements\n"
+"    fmt/11.0.2#5c7438ef4d5d69ab106a41e460ce11f3 - Downloaded (conancenter)\n"
+"\n"
+"======== Computing necessary packages ========\n"
+"Requirements\n"
+"    fmt/11.0.2#5c7438ef4d5d69ab106a41e460ce11f3:29da3f322a17cc9826b294a7ab191c2f298a9f49#d8d27fde7061f89f7992c671d98ead71 "
+"- Download (conancenter)\n"
+"\n"
+"======== Installing packages ========\n"
+"\n"
+"-------- Downloading 1 package --------\n"
+"fmt/11.0.2: Retrieving package 29da3f322a17cc9826b294a7ab191c2f298a9f49 from "
+"remote 'conancenter'\n"
+"fmt/11.0.2: Package installed 29da3f322a17cc9826b294a7ab191c2f298a9f49\n"
+"fmt/11.0.2: Downloaded package revision d8d27fde7061f89f7992c671d98ead71\n"
+"\n"
+"======== Finalizing install (deploy, generators) ========\n"
+"conanfile.txt: Writing generators to /home/user/examples2/examples/tools/ros/"
+"rosenv/workspace/install/conan\n"
+"conanfile.txt: Generator 'CMakeDeps' calling 'generate()'\n"
+"conanfile.txt: CMakeDeps necessary find_package() and targets for your "
+"CMakeLists.txt\n"
+"    find_package(fmt)\n"
+"    target_link_libraries(... fmt::fmt)\n"
+"conanfile.txt: Generator 'CMakeToolchain' calling 'generate()'\n"
+"conanfile.txt: CMakeToolchain generated: conan_toolchain.cmake\n"
+"conanfile.txt: Preset 'conan-release' added to CMakePresets.json. Invoke it "
+"manually using 'cmake --preset conan-release' if using CMake>=3.23\n"
+"conanfile.txt: If your CMake version is not compatible with CMakePresets "
+"(<3.23) call cmake like: 'cmake <path> -G \"Unix Makefiles\" -"
+"DCMAKE_TOOLCHAIN_FILE=/home/danimtb/examples2/examples/tools/ros/rosenv/"
+"workspace/install/conan/conan_toolchain.cmake -"
+"DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_BUILD_TYPE=Release'\n"
+"conanfile.txt: CMakeToolchain generated: CMakePresets.json\n"
+"conanfile.txt: CMakeToolchain generated: ../../str_printer/CMakeUserPresets."
+"json\n"
+"conanfile.txt: Generator 'ROSEnv' calling 'generate()'\n"
+"conanfile.txt: Generated ROSEnv Conan file: conanrosenv.sh\n"
+"Use 'source /home/user/examples2/examples/tools/ros/rosenv/workspace/install/"
+"conan/conanrosenv.sh' to set the ROSEnv Conan before 'colcon build'\n"
+"conanfile.txt: Generating aggregated env files\n"
+"conanfile.txt: Generated aggregated env files: ['conanrosenv.sh']\n"
+"Install finished successfully"
+msgstr ""
+
+#: ../../../integrations/ros.rst:148
+msgid ""
+"This will download the `fmt` Conan package to the local cache and generate "
+"the CMake and ROS environment files in the `conan` subfolder of the "
+"`install` directory."
+msgstr ""
+
+#: ../../../integrations/ros.rst:151
+msgid ""
+"Now we can source our ROS environment, then **source the Conan ROSEnv "
+"environment**, so the conan-installed package are found by CMake, and then "
+"we can build the `str_printer` package as usual with Colcon."
+msgstr ""
+
+#: ../../../integrations/ros.rst:154
+msgid ""
+"$ source /opt/ros/humble/setup.bash\n"
+"$ source install/conan/conanrosenv.sh\n"
+"$ colcon build --packages-select str_printer\n"
+"Starting >>> str_printer\n"
+"Finished <<< str_printer [10.8s]\n"
+"\n"
+"Summary: 1 package finished [12.4s]"
+msgstr ""
+
+#: ../../../integrations/ros.rst:166
+msgid ""
+"Bridging the Conan-provided transitive dependencies to another ROS package"
+msgstr ""
+
+#: ../../../integrations/ros.rst:168
+msgid ""
+"As the `consumer` ROS package depends on `str_printer`, the targets of "
+"transitive dependencies should be exported. This is done as usual in the "
+"`str_printers`'s *CMakeLists.txt* using `ament_export_dependencies()`:"
+msgstr ""
+
+#: ../../../integrations/ros.rst:171
+msgid "str_printer/CMakeLists.txt"
+msgstr ""
+
+#: ../../../integrations/ros.rst:171
+msgid ""
+" cmake_minimum_required(VERSION 3.8)\n"
+" project(str_printer)\n"
+"\n"
+" if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES \"Clang\")\n"
+" add_compile_options(-Wall -Wextra -Wpedantic)\n"
+" endif()\n"
+"\n"
+" # find dependencies\n"
+" find_package(ament_cmake REQUIRED)\n"
+" find_package(fmt REQUIRED)  # Retrieved with Conan C/C++ Package Manager\n"
+"\n"
+" add_library(str_printer src/str_printer.cpp)\n"
+"\n"
+" target_include_directories(str_printer PUBLIC\n"
+" $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/str_printer>\n"
+" $<INSTALL_INTERFACE:include>)\n"
+"\n"
+" target_compile_features(str_printer PUBLIC c_std_99 cxx_std_17)  # Require "
+"C99 and C++17\n"
+" ament_target_dependencies(str_printer fmt)\n"
+"\n"
+" ament_export_targets(str_printerTargets HAS_LIBRARY_TARGET)\n"
+" ament_export_dependencies(fmt)\n"
+"\n"
+" install(\n"
+" DIRECTORY include/\n"
+" DESTINATION include\n"
+" )\n"
+"\n"
+" install(\n"
+" TARGETS str_printer\n"
+" EXPORT str_printerTargets\n"
+" LIBRARY DESTINATION lib\n"
+" ARCHIVE DESTINATION lib\n"
+" RUNTIME DESTINATION bin\n"
+" INCLUDES DESTINATION include\n"
+" )\n"
+"\n"
+" ament_package()"
+msgstr ""
+
+#: ../../../integrations/ros.rst:214
+msgid ""
+"To build the `consumer` ROS package, you can proceed as usual (make sure "
+"that you have both the ROS environment and the Conan ROSEnv environment "
+"*sourced* before building as in previous step):"
+msgstr ""
+
+#: ../../../integrations/ros.rst:217
+msgid ""
+"$ colcon build --packages-select consumer\n"
+"Starting >>> consumer\n"
+"Finished <<< consumer [7.9s]\n"
+"\n"
+"Summary: 1 package finished [9.4s]"
+msgstr ""
+
+#: ../../../integrations/ros.rst:225
+msgid ""
+"And after this, our `consumer` application should be ready to run with just:"
+msgstr ""
+
+#: ../../../integrations/ros.rst:227
+msgid ""
+"$ source install/setup.bash\n"
+"$ ros2 run consumer main\n"
+"Hi there! I am using fmt library fetched with Conan C/C++ Package Manager"
+msgstr ""
+
+#: ../../../integrations/ros.rst:235
+msgid "Reference for :ref:`ROSEnv generator<conan_tools_ros_rosenv>`."
+msgstr ""

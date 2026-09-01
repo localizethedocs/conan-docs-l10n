@@ -1,0 +1,335 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/requirements.rst:4
+msgid "requirements()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:6
+msgid ""
+"The ``requirements()`` method is used to specify the dependencies of a "
+"package."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:8
+msgid ""
+"def requirements(self):\n"
+"    self.requires(\"zlib/1.2.11\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:14
+msgid ""
+"For simple cases the attribute syntax can be used, like ``requires = "
+"\"zlib/1.2.11\"``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:18
+msgid "Requirement traits"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:20
+msgid ""
+"Traits are properties of a requires clause. They determine how various parts "
+"of a dependency are treated and propagated by Conan. Values for traits are "
+"usually computed by Conan based on the dependency's :ref:"
+"`reference_conanfile_attributes_package_type`, but can also be specified "
+"manually."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:25
+msgid ""
+"A good introduction to traits is provided in the `Advanced Dependencies "
+"Model in Conan 2.0 <https://youtu.be/kKGglzm5ous>`_ presentation."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:28
+msgid "In the example below ``headers`` and ``libs`` are traits."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:30
+msgid "self.requires(\"math/1.0\", headers=True, libs=True)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:36
+msgid "headers"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:38
+msgid ""
+"Indicates that there are headers that are going to be ``#included`` from "
+"this package at compile time. The dependency will be in the host context."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:42
+msgid "libs"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:44
+msgid ""
+"The dependency contains some library or artifact that will be used at link "
+"time of the consumer. This trait will typically be ``True`` for direct "
+"shared and static libraries, but could be false for indirect static "
+"libraries that are consumed via a shared library. The dependency will be in "
+"the host context."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:50
+msgid "build"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:52
+msgid ""
+"This dependency is a build tool, an application or executable, like cmake, "
+"that is used exclusively at build time. It is not linked/embedded into "
+"binaries, and will be in the build context."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:57
+msgid "run"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:59
+msgid ""
+"This dependency contains some executables, either apps or shared libraries "
+"that need to be available to execute (typically in the path, or other system "
+"env-vars). This trait can be ``True`` for ``build=False``, in that case, the "
+"package will contain some executables that can run in the host system when "
+"installing it, typically like an end-user application. This trait can be "
+"``True`` for ``build=True``, the package will contain executables that will "
+"run in the build context, typically while being used to build other packages."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:67
+msgid "visible"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:69
+msgid ""
+"This ``require`` will be propagated downstream, even if it doesn't propagate "
+"``headers``, ``libs`` or ``run`` traits. Requirements that propagate "
+"downstream can cause version conflicts. This is typically ``True``, because "
+"in most cases, having 2 different versions of the same library in the same "
+"dependency graph is at least complicated, if not directly violating ODR or "
+"causing linking errors. It can be set to ``False`` in advanced scenarios, "
+"when we want to use different versions of the same package during the build."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:77
+msgid "transitive_headers"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:79
+msgid "If ``True`` the headers of the dependency will be visible downstream."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:82
+msgid "transitive_libs"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:84
+msgid ""
+"If ``True`` the libraries to link with of the dependency will be visible "
+"downstream."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:87
+msgid "test"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:89
+msgid ""
+"This requirement is a test library or framework, like Catch2 or gtest. It is "
+"mostly a library that needs to be included and linked, but that will not be "
+"propagated downstream."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:95
+msgid "package_id_mode"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:97
+msgid ""
+"If the recipe wants to specify how the dependency version affects the "
+"current package ``package_id``, can be directly specified here."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:100
+msgid ""
+"While it could be also done in the ``package_id()`` method, it seems simpler "
+"to be able to specify it in the ``requires`` while avoiding some ambiguities."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:103
+msgid ""
+"# We set the package_id_mode so it is part of the package_id\n"
+"self.tool_requires(\"tool/1.1.1\", package_id_mode=\"minor_mode\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:108
+msgid "Which would be equivalent to:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:110
+msgid ""
+"def package_id(self):\n"
+"  self.info.requires[\"tool\"].minor_mode()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:116
+msgid "force"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:118
+msgid ""
+"This ``requires`` will force its version in the dependency graph upstream, "
+"overriding other existing versions even of transitive dependencies, and also "
+"solving potential existing conflicts. The downstream consumer's ``force`` "
+"traits always have higher priority."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:123
+msgid "override"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:125
+msgid ""
+"The same as the ``force`` trait, but not adding a ``direct`` dependency. If "
+"there is no transitive dependency to override, this ``require`` will be "
+"discarded. This trait only exists at the time of defining a ``requires``, "
+"but it will not exist as an actual ``requires`` once the graph is fully "
+"evaluated"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:132
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:134
+msgid ""
+"The ``force`` and ``override`` traits to solve conflicts are not recommended "
+"as a general versioning solution, just as a temporary workaround to solve a "
+"version conflict. Its usage should be avoided whenever possible, and "
+"updating versions or version ranges in the graph to avoid the conflicts "
+"without overrides and forces is the recommended approach."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:140
+msgid "direct"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:142
+msgid ""
+"If the dependency is a direct one, that is, it has explicitly been declared "
+"by the current recipe, or if it is a transitive one."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:146
+msgid "options"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:148
+msgid "It is possible to define options values for dependencies as a trait:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:150
+msgid "self.requires(\"mydep/0.1\", options={\"dep_option\": \"value\"})"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:157
+msgid ""
+"Defining options values in recipes does not have strong guarantees, please "
+"check :ref:`this FAQ about options values for "
+"dependencies<faq_different_options_values>`. The recommended way to define "
+"options values is in profile files."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:165
+msgid "package_type trait inferring"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:167
+msgid ""
+"Some traits are automatically inferred based on the value of the "
+"``package_type`` if not explicitly set by the recipe."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:169
+msgid "``application``: ``headers=False``, ``libs=False``, ``run=True``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:170
+msgid "``shared-library``: ``run=True``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:171
+msgid "``static-library``: ``run=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:172
+msgid "``header-library``: ``headers=True``, ``libs=False``, ``run=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:173
+msgid ""
+"``build-scripts``: ``headers=False``, ``libs=False``, ``run=True``, "
+"``visible=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:175
+msgid ""
+"Additionally, some additional traits are inferred on top of the above "
+"mentioned based on the ``package_type`` of the dependant:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:177
+msgid ""
+"``header-library``: ``transitive_headers=True``, ``transitive_libs=True``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:180
+msgid "Default traits for each kind of requires"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:182
+msgid ""
+"Each kind of requires sets some additional traits by default on top of the "
+"ones stated in the last section. Those are:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:184
+msgid "``requires``: ``build=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:185
+msgid ""
+"``build_requires``:  ``headers=False``, ``libs=False``, ``build=True``, "
+"``visible=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:186
+msgid ""
+"``tool_requires``: ``headers=False``, ``libs=False``, ``build=True``, "
+"``run=True``, ``visible=False``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/requirements.rst:187
+msgid ""
+"``test_requires``: ``headers=True``, ``libs=True``, ``build=False``, "
+"``visible=False``, ``test=True``"
+msgstr ""

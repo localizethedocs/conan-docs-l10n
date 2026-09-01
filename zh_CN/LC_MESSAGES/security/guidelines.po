@@ -1,0 +1,80 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.18\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../security/guidelines.rst:5
+msgid "Security guidelines"
+msgstr ""
+
+#: ../../../security/guidelines.rst:7
+msgid ""
+"This is an incomplete and preliminary, not exhaustive security related "
+"recommendations when using Conan:"
+msgstr ""
+
+#: ../../../security/guidelines.rst:9
+msgid ""
+"Avoid using tokens and passwords in URLs, they can easily be leaked in logs. "
+"For example, if the ``source()`` method of recipes implement a ``git "
+"clone``, do not use git credentials in the URL, but instead use ssh-keys "
+"configured in the system. Same for downloading tarballs with ``tools.get()`` "
+"and ``tools.download()``."
+msgstr ""
+
+#: ../../../security/guidelines.rst:12
+msgid ""
+"In general, developers shouldn't have write permissions on servers, just "
+"read permissions to download and install packages. Only the CI should have "
+"write/upload permissions. As an exception, it might be possible to use some "
+"\"playground\" repository that developers use to share packages for "
+"debugging and testing purposes with other colleagues, but that "
+"\"playground\" repository should be isolated from the normal testing and "
+"production repositories."
+msgstr ""
+
+#: ../../../security/guidelines.rst:16
+msgid ""
+"Use tokens with limited permissions in CI. If a job only needs read "
+"permissions, use a token with read-permissions only. Use write credentials "
+"exclusively in the \"upload\" parts of the CI pieplines."
+msgstr ""
+
+#: ../../../security/guidelines.rst:18
+msgid ""
+"Enable dependencies vulnerability checking with ``conan audit``, check :ref:"
+"`the conan audit docs<security_audit>`"
+msgstr ""
+
+#: ../../../security/guidelines.rst:19
+msgid ""
+"In many production cases, it is very recommended to fully own the SW "
+"lifecycle (SWLC) of the dependencies, including the third party "
+"dependencies. For this reason, the :ref:`Using ConanCenter packages in "
+"production environments <devops_consuming_conan_center>` section recommends "
+"building your own binaries from source and storing those binaries in your "
+"own private server, without downloading packages directly from ConanCenter. "
+"The :ref:`local-recipes-index feature<devops_local_recipes_index>` was "
+"designed to help in this process."
+msgstr ""
+
+#: ../../../security/guidelines.rst:23
+msgid ""
+"To avoid being disrupted by internet outages and possible tampering of "
+"tarballs downloaded from the internet, the :ref:`Backup "
+"sources<conan_backup_sources>` feature can be used."
+msgstr ""

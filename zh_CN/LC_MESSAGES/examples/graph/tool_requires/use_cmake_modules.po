@@ -1,0 +1,172 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:2
+msgid "Use cmake modules inside a ``tool_requires`` transparently"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:4
+msgid ""
+"When we want to reuse some ``.cmake`` scripts that are inside another Conan "
+"package there are several possible different scenarios, like if the ``."
+"cmake`` scripts are inside a regular ``requires`` or a ``tool_requires``."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:8
+msgid "Also, it is possible to want 2 different approaches:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:10
+msgid ""
+"The consumer of the scripts can do a explicit ``include(MyScript)`` in their "
+"CMakeLists.txt. This approach is nicely explicit and simpler to setup, just "
+"define ``self.cpp_info.builddirs`` in the recipe, and consumers with "
+"``CMakeToolchain`` will automatically be able to do the ``include()`` and "
+"use the functionality. See the :ref:`example here<consume_cmake_macro>`"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:11
+msgid ""
+"The consumer wants to have the dependency cmake modules automatically loaded "
+"when the ``find_package()`` is executed. This current example implements "
+"this case."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:14
+msgid ""
+"Let's say that we have a package, intended to be used as a ``tool_require``, "
+"with the following recipe:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:16
+msgid "myfunctions/conanfile.py"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:16
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"from conan.tools.files import copy\n"
+"\n"
+"class Conan(ConanFile):\n"
+"    name = \"myfunctions\"\n"
+"    version = \"1.0\"\n"
+"    exports_sources = [\"*.cmake\"]\n"
+"\n"
+"    def package(self):\n"
+"        copy(self, \"*.cmake\", self.source_folder, self.package_folder)\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.set_property(\"cmake_build_modules\", [\"myfunction."
+"cmake\"])"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:34
+msgid "And a ``myfunction.cmake`` file in:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:36
+msgid "myfunctions/myfunction.cmake"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:36
+msgid ""
+"function(myfunction)\n"
+"    message(\"Hello myfunction!!!!\")\n"
+"endfunction()"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:43
+msgid ""
+"We can do a ``cd myfunctions && conan create .`` which will create the "
+"``myfunctions/1.0`` package containing the cmake script."
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:45
+msgid "Then, a consumer package will look like:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:47
+msgid "consumer/conanfile.py"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:47
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain\n"
+"\n"
+"class Conan(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    tool_requires = \"myfunctions/1.0\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = CMakeToolchain(self)\n"
+"        tc.generate()\n"
+"\n"
+"        deps = CMakeDeps(self)\n"
+"        # By default 'myfunctions-config.cmake' is not created for "
+"tool_requires\n"
+"        # we need to explicitly activate it\n"
+"        deps.build_context_activated = [\"myfunctions\"]\n"
+"        # and we need to tell to automatically load 'myfunctions' modules\n"
+"        deps.build_context_build_modules = [\"myfunctions\"]\n"
+"        deps.generate()\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure()"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:73
+msgid "And a ``CMakeLists.txt`` like:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:75
+msgid "consumer/CMakeLists.txt"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:75
+msgid ""
+"cmake_minimum_required(VERSION 3.0)\n"
+"project(test)\n"
+"find_package(myfunctions CONFIG REQUIRED)\n"
+"myfunction()"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:84
+msgid ""
+"Then, the consumer will be able to automatically call the ``myfunction()`` "
+"from the dependency module:"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:86
+msgid ""
+"$ conan build .\n"
+"...\n"
+"Hello myfunction!!!!"
+msgstr ""
+
+#: ../../../examples/graph/tool_requires/use_cmake_modules.rst:92
+msgid ""
+"If for some reason the consumer wants to force the usage from the "
+"``tool_requires()`` as a CMake module, the consumer could do ``deps."
+"set_property(\"myfunctions\", \"cmake_find_mode\", \"module\", "
+"build_context=True)``, and then ``find_package(myfunctions MODULE "
+"REQUIRED)`` will work."
+msgstr ""

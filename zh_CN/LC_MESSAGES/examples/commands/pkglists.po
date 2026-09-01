@@ -1,0 +1,332 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/commands/pkglists.rst:4
+msgid "Using packages-lists"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:9
+msgid ""
+"Packages lists are a powerful and convenient Conan feature that allows to "
+"automate and concatenate different Conan commands. Let's see some common use "
+"cases:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:14
+msgid "Listing packages and downloading them"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:16
+msgid ""
+"A first simple use case could be listing some recipes and/or binaries in a "
+"server, and then downloading them."
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:18
+msgid ""
+"We can do any ``conan list``, for example, to list all ``zlib`` versions "
+"above ``1.2.11``, the latest recipe revision, all Windows binaries for that "
+"latest recipe revision, and finally the latest package revision for every "
+"binary. Note that if we want to actually download something later, it is "
+"necessary to specify the ``latest`` package revision, otherwise only the "
+"recipes will be downloaded."
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:23
+msgid ""
+"$ conan list \"zlib/[>1.2.11]#latest:*#latest\" -p os=Windows --format=json -"
+"r=conancenter > pkglist.json"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:28
+msgid ""
+"The output of the command is sent in ``json`` format to the file ``pkglist."
+"json`` that looks like:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:31
+msgid "pkglist.json (simplified)"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:31
+msgid ""
+"\"conancenter\": {\n"
+"    \"zlib/1.2.12\": {\n"
+"        \"revisions\": {\n"
+"            \"b1fd071d8a2234a488b3ff74a3526f81\": {\n"
+"                \"timestamp\": 1667396813.987,\n"
+"                \"packages\": {\n"
+"                    \"ae9eaf478e918e6470fe64a4d8d4d9552b0b3606\": {\n"
+"                        \"revisions\": {\n"
+"                            \"19808a47de859c2408ffcf8e5df1fdaf\": {\n"
+"                            }\n"
+"                        },\n"
+"                        \"info\": {\n"
+"                            \"settings\": {\n"
+"                                \"arch\": \"x86_64\",\n"
+"                                \"os\": \"Windows\"\n"
+"                            }\n"
+"                        }\n"
+"                    }\n"
+"                }\n"
+"            }\n"
+"        },\n"
+"    \"zlib/1.2.13\": {\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:60
+msgid ""
+"The first level in the ``pkglist.json`` is the \"origin\" remote or \"Local "
+"Cache\" if the list happens in the cache. In this case, as we listed the "
+"packages in ``conancenter`` remote, that will be the origin."
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:64
+msgid ""
+"We can now do a download of these recipes and binaries with a single ``conan "
+"download`` invocation:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:66
+msgid ""
+"$ conan download --list=pkglist.json -r=conancenter\n"
+"# Download the recipes and binaries in pkglist.json\n"
+"# And displays a report of the downloaded things"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:74
+msgid "Downloading from one remote and uploading to a different remote"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:76
+msgid ""
+"Let's say that we create a new package list from the packages downloaded in "
+"the previous step:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:78
+msgid ""
+"$ conan download --list=pkglist.json -r=conancenter --format=json > "
+"downloaded.json\n"
+"# Download the recipes and binaries in pkglist.json\n"
+"# And stores the result in \"downloaded.json\""
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:85
+msgid ""
+"The resulting ``downloaded.json`` will be almost the same as the ``pkglist."
+"json`` file, but in this case, the \"origin\" of those packages is the "
+"``\"Local Cache\"`` (as the downloaded packages will be in the cache):"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:89
+msgid "downloaded.json (simplified)"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:89
+msgid ""
+"\"Local Cache\": {\n"
+"        \"zlib/1.2.12\": {\n"
+"            \"revisions\": {\n"
+"            }\n"
+"        }\n"
+"    }"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:99
+msgid ""
+"That means that we can now upload this same set of recipes and binaries to a "
+"different remote:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:101
+msgid ""
+"$ conan upload --list=downloaded.json -r=myremote -c\n"
+"# Upload those artifacts to the same remote"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:109
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:111
+msgid ""
+"This would be a **slow** mechanism to run promotions between different "
+"server repositories. Servers like Artifactory provide ways to directly copy "
+"packages from one repository to another without using a client, that are "
+"orders of magnitude faster because of file deduplication, so that would be "
+"the recommended approach. The presented approach in this section might be "
+"used for air-gapped environments and other situations in which it is not "
+"possible to do a server-to-server copy."
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:120
+msgid "Building and uploading packages"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:122
+msgid ""
+"One of the most interesting flows is the one when some packages are being "
+"built in the local cache, with a ``conan create`` or ``conan install --"
+"build=xxx`` command. Typically, we would like to upload the locally built "
+"packages to the server, so they don't have to be re-built again by others. "
+"But we might want to upload only the built binaries, but not all others "
+"transitive dependencies, or other packages that we had previously in our "
+"local cache."
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:128
+msgid ""
+"It is possible to compute a package list from the output of a ``conan "
+"install``, ``conan create`` and ``conan graph info`` commands. Then, that "
+"package list can be used for the upload. Step by step:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:131
+msgid ""
+"First let's say that we have our own package ``mypkg/0.1`` and we create it:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:133
+msgid ""
+"$ conan new cmake_lib -d name=mypkg -d version=0.1\n"
+"$ conan create . --format=json > create.json"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:139
+msgid ""
+"This will create a json representation of the graph, with information of "
+"what packages have been built ``\"binary\": \"Build\"``:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:141
+msgid "create.json (simplified)"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:141
+msgid ""
+"{\n"
+"\"graph\": {\n"
+"    \"nodes\": {\n"
+"        \"0\": {\n"
+"            \"ref\": \"conanfile\",\n"
+"            \"id\": \"0\",\n"
+"            \"recipe\": \"Cli\",\n"
+"            \"context\": \"host\",\n"
+"            \"test\": false\n"
+"        },\n"
+"        \"1\": {\n"
+"            \"ref\": \"mypkg/0.1#f57cc9a1824f47af2f52df0dbdd440f6\",\n"
+"            \"id\": \"1\",\n"
+"            \"recipe\": \"Cache\",\n"
+"            \"package_id\": \"2401fa1d188d289bb25c37cfa3317e13e377a351\",\n"
+"            \"prev\": \"75f44d989175c05bc4be2399edc63091\",\n"
+"            \"build_id\": null,\n"
+"            \"binary\": \"Build\"\n"
+"        }\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:167
+msgid ""
+"We can compute a package list from this file, and then upload those "
+"artifacts to the server with:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:169
+msgid ""
+"$ conan list --graph=create.json --graph-binaries=build --format=json > "
+"pkglist.json\n"
+"# Create a pkglist.json with the known list of recipes and binaries built "
+"from sources\n"
+"$ conan upload --list=pkglist.json -r=myremote -c"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:177
+msgid "Removing packages lists"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:179
+msgid ""
+"It is also possible to first ``conan list`` and create a list of things to "
+"remove, and then remove them:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:181
+msgid ""
+"# Removes everything from the cache\n"
+"$ conan list *#* --format=json > pkglist.json\n"
+"$ conan remove --list=pkglist.json  -c"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:187
+msgid ""
+"Note that in this case, the default patterns are different in ``list`` and "
+"``remove``, because of the destructive nature of ``conan remove``:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:189
+msgid ""
+"When a recipe is passed to ``remove`` like ``conan remove zlib/1.2.13``, it "
+"will remove the recipe of ``zlib/1.2.13`` and all of its binaries, because "
+"the binaries cannot live without the recipe."
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:190
+msgid ""
+"When a ``package_id`` is passed, like ``conan remove zlib/1.2.13:"
+"package_id``, then that specific ``package_id`` will be removed, but the "
+"recipe will not"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:192
+msgid ""
+"Then the pattern to remove everything will be different if we call directly "
+"``conan remove`` or if we call first ``conan list``, for example:"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:194
+msgid ""
+"# Removes everything from the cache\n"
+"$ conan remove *\n"
+"# OR via list, we need to explicitly include all revisions\n"
+"$ conan list *#* --format=json > pkglist.json\n"
+"$ conan remove --list=pkglist.json  -c\n"
+"\n"
+"# Removes only the binaries from the cache (leave recipes)\n"
+"$ conan remove *:*\n"
+"# OR via list, we need to explicitly include all revisions\n"
+"$ conan list *#*:* --format=json > pkglist.json\n"
+"$ conan remove --list=pkglist.json  -c"
+msgstr ""
+
+#: ../../../examples/commands/pkglists.rst:209
+msgid ""
+"For more information see the :ref:`Reference commands "
+"section<reference_commands>`"
+msgstr ""

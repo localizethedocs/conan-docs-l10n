@@ -1,0 +1,232 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/configure.rst:4
+msgid "configure()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:6
+msgid ""
+"The ``configure()`` method should be used for the configuration of settings "
+"and options in the recipe for later use in the different methods like "
+"``generate()``, ``build()`` or ``package()``. This method executes while "
+"building the dependency graph and expanding the packages dependencies, which "
+"means that when this method executes the dependencies are still not there, "
+"they do not exist, and it is not possible to access ``self.dependencies``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:12
+msgid ""
+"For example, for a C (not C++) library, the ``compiler.libcxx`` and "
+"``compiler.cppstd`` settings shouldn't even exist during the ``build()``. It "
+"is not only that they are not part of the ``package_id``, but they shouldn't "
+"be used in the build process at all. They will be defined in the profile, "
+"because other packages in the graph can be C++ packages and need them, but "
+"it is the responsibility of this recipe to remove them so they are not used "
+"in the recipe:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:18
+msgid ""
+"settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"def configure(self):\n"
+"    # Not all compilers have libcxx subsetting, so we use rm_safe\n"
+"    # to avoid exceptions\n"
+"    self.settings.rm_safe(\"compiler.libcxx\")\n"
+"    self.settings.rm_safe(\"compiler.cppstd\")\n"
+"\n"
+"def package_id(self):\n"
+"    # No need to delete those settings here, they were already deleted\n"
+"    pass"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:34
+msgid ""
+"From Conan 2.4, the above ``configure()`` is not necessary if defined "
+"``languages = \"C\"`` recipe attribute (experimental)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:38
+msgid ""
+"For packages where you want to remove every subsetting of a setting, you can "
+"use the ``rm_safe`` method with a wildcard:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:41
+msgid ""
+"settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"def configure(self):\n"
+"    self.settings.rm_safe(\"compiler.*\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:49
+msgid ""
+"This will remove all the subsettings of the ``compiler`` setting, like "
+"``compiler.libcxx`` or ``compiler.cppstd``, but keep the ``compiler`` "
+"setting itself (Which ``self.settings.rm_safe(\"compiler\")`` would remove)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:52
+msgid ""
+"Likewise, for a package containing a library, the ``fPIC`` option really "
+"only applies when the library is compiled as a static library, but "
+"otherwise, the ``fPIC`` option doesn't make sense, so it should be removed:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:56
+msgid ""
+"options = {\"shared\": [True, False], \"fPIC\": [True, False]}\n"
+"default_options = {\"shared\": False, \"fPIC\": True}\n"
+"\n"
+"def configure(self):\n"
+"    if self.options.shared:\n"
+"        # fPIC might have been removed in config_options(), so we use "
+"rm_safe\n"
+"        self.options.rm_safe(\"fPIC\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:69
+msgid "Available automatic implementations"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:73
+msgid ""
+"When the ``configure()`` method is not defined, Conan can automatically "
+"manage some conventional options if specified in the :ref:"
+"`implements<conan_conanfile_attributes_implements>` ConanFile attribute:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:78
+msgid "auto_shared_fpic"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:80
+msgid "Options automatically managed:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:82
+msgid "``fPIC`` (True, False)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:83
+msgid "``shared`` (True, False)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:84
+msgid "``header_only`` (True, False)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:86
+msgid "It can be added to the recipe like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:88
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    implements = [\"auto_shared_fpic\"]\n"
+"    ..."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:96
+msgid ""
+"Then, if no ``configure()`` method is specified in the recipe, Conan will "
+"automatically manage the fPIC setting in the ``configure`` step like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:99
+msgid ""
+"if conanfile.options.get_safe(\"header_only\"):\n"
+"    conanfile.options.rm_safe(\"fPIC\")\n"
+"    conanfile.options.rm_safe(\"shared\")\n"
+"elif conanfile.options.get_safe(\"shared\"):\n"
+"    conanfile.options.rm_safe(\"fPIC\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:107
+msgid ""
+"Be aware that adding this implementation to the recipe may also affect the :"
+"ref:`configure<reference_conanfile_methods_config_options_implementations>` "
+"step."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:110
+msgid ""
+"If you need to implement custom behaviors in your recipes but also need this "
+"logic, it must be explicitly declared:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:113
+msgid ""
+"def configure(self):\n"
+"    if conanfile.options.get_safe(\"header_only\"):\n"
+"        conanfile.options.rm_safe(\"fPIC\")\n"
+"        conanfile.options.rm_safe(\"shared\")\n"
+"    elif conanfile.options.get_safe(\"shared\"):\n"
+"        conanfile.options.rm_safe(\"fPIC\")\n"
+"    self.settings.rm_safe(\"compiler.libcxx\")\n"
+"    self.settings.rm_safe(\"compiler.cppstd\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:126
+msgid ""
+"Recipes can suggest values for their dependencies options as "
+"``default_options = {\"*:shared\": True}``, but it is not possible to do "
+"that conditionally. For this purpose, it is also possible to use the "
+"``configure()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:130
+msgid ""
+"def configure(self):\n"
+"    if something:\n"
+"        self.options[\"*\"].shared = True"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:139
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:141
+msgid ""
+"Recall that it is **not** possible to define ``settings`` or ``conf`` values "
+"in recipes, they are read only."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:142
+msgid ""
+"The definition of ``options`` values is only a \"suggestion\", depending on "
+"the graph computation, priorities, etc., the final value of ``options`` can "
+"be different from the one set by the recipe."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/configure.rst:147
+msgid ""
+"Follow the :ref:`tutorial about recipe configuration "
+"methods<tutorial_creating_configure>`."
+msgstr ""

@@ -1,0 +1,194 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/init.rst:5
+msgid "init()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:7
+msgid ""
+"This is an optional method for initializing conanfile values, designed for "
+"inheritance from ``python_requires``. Assuming we have a ``base/1.1`` recipe:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:10
+#: ../../../reference/conanfile/methods/init.rst:50
+msgid "base/conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:10
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class MyConanfileBase:\n"
+"    license = \"MyLicense\"\n"
+"    settings = \"os\", # tuple!\n"
+"\n"
+"\n"
+"class PyReq(ConanFile):\n"
+"    name = \"base\"\n"
+"    version = \"1.1\"\n"
+"    package_type = \"python-require\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:26
+msgid "We could reuse and inherit from it with:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:28
+#: ../../../reference/conanfile/methods/init.rst:69
+msgid "pkg/conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:28
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    license = \"MIT\"\n"
+"    settings = \"arch\", # tuple!\n"
+"    python_requires = \"base/1.1\"\n"
+"    python_requires_extend = \"base.MyConanfileBase\"\n"
+"\n"
+"    def init(self):\n"
+"        base = self.python_requires[\"base\"].module.MyConanfileBase\n"
+"        self.settings = base.settings + self.settings  # Note, adding 2 "
+"tuples = tuple\n"
+"        self.license = base.license  # License is overwritten"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:45
+msgid ""
+"The final ``Pkg`` conanfile will have both ``os`` and ``arch`` as settings, "
+"and ``MyLicense`` as license."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:47
+msgid ""
+"To extend the ``options`` of the base class, it is necessary to call the "
+"``self.options.update()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:50
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class BaseConan:\n"
+"    options = {\"base\": [True, False]}\n"
+"    default_options = {\"base\": True}\n"
+"\n"
+"class PyReq(ConanFile):\n"
+"    name = \"base\"\n"
+"    version = \"1.0.0\"\n"
+"    package_type = \"python-require\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:65
+msgid ""
+"When the ``init()`` is called, the ``self.options`` object is already "
+"initialized. Then, updating the ``self.default_options`` is useless, and it "
+"is necessary to update the ``self.options`` with both the base class options "
+"and the base class default options values:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:69
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class DerivedConan(ConanFile):\n"
+"    name = \"derived\"\n"
+"    python_requires = \"base/1.0.0\"\n"
+"    python_requires_extend = \"base.BaseConan\"\n"
+"    options = {\"derived\": [True, False]}\n"
+"    default_options = {\"derived\": False}\n"
+"\n"
+"    def init(self):\n"
+"        base = self.python_requires[\"base\"].module.BaseConan\n"
+"        # Note we pass the base options and default_options\n"
+"        self.options.update(base.options, base.default_options)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:87
+msgid ""
+"This method can also be useful if you need to unconditionally initialize "
+"class attributes like ``license`` or ``description`` or any other from "
+"datafiles other than `conandata.yml`. For example, you can have a `json` "
+"file containing the information about the ``license``, ``description`` and "
+"``author`` for the library:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:93
+msgid "data.json"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:93
+msgid ""
+"{\"license\": \"MIT\", \"description\": \"This is my awesome library.\", "
+"\"author\": \"Me\"}"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:98
+msgid "Then, you can load that information from the ``init()``  method:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:100
+msgid ""
+"import os\n"
+"import json\n"
+"from conan import ConanFile\n"
+"from conan.tools.files import load\n"
+"\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    exports = \"data.json\" # Important that it is exported with the recipe\n"
+"\n"
+"    def init(self):\n"
+"        data = load(self, os.path.join(self.recipe_folder, \"data.json\"))\n"
+"        d = json.loads(data)\n"
+"        self.license = d[\"license\"]\n"
+"        self.description = d[\"description\"]\n"
+"        self.author = d[\"author\"]"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:121
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:123
+msgid ""
+"Try to keep your ``python_requires`` as simple as possible, and do not reuse "
+"attributes from them (the main need for the ``init()`` method), trying to "
+"avoid the complexity of this ``init()`` method. In general inheritance can "
+"have more issues than composition (or in other words \"use composition over "
+"inheritance\" as a general programming good practice), so try to avoid it if "
+"possible."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:124
+msgid ""
+"Do not abuse ``init()`` for other purposes other than listed here, nor use "
+"the Python private ``ConanFile.__init__`` constructor."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/init.rst:125
+msgid ""
+"The ``init()`` method executes at recipe load time. It cannot contain "
+"conditionals on settings, options, conf, or use any dependencies information "
+"other than the above ``python_requires``."
+msgstr ""

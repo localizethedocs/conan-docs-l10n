@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-TW" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signing packages with Sigstore (Cosign) &mdash; conan 2.27.1 說明文件</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=2da93098" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/conan.css?v=7d9e9f1e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/examples/extensions/package_signing/package_signing_with_sigstore.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=f04e5045"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/translations.js?v=d9a6981e"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜尋" href="../../../search.html" />
+    <link rel="next" title="Conan recipe tools examples" href="../../tools.html" />
+    <link rel="prev" title="Signing packages with OpenSSL" href="package_signing_with_openssl.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/conan-docs-logo-2.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">安裝</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">教學</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ci_tutorial/tutorial.html">CI 教學</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devops/devops.html">開發運維指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/security.html">安全性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../examples.html">範例</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../conanfile.html">ConanFile 方法範例</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../extensions.html">Conan 擴充功能範例</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../commands/custom_commands.html">自訂命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployers/builtin_deployers.html">內建部署器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployers/custom_deployers.html">自訂部署器</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="package_signing.html">Package Signing Plugin</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="package_signing_with_openssl.html">Signing packages with OpenSSL</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Signing packages with Sigstore (Cosign)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools.html">Conan recipe tools examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cross_build.html">交叉建置範例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config_files.html">組態檔範例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph.html">Graph examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev_flow.html">開發者工具與流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../commands.html">Conan 命令範例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runners.html">Conan 執行器範例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../security.html">Conan security examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../incubating.html">孵化中的功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../whatsnew.html">What’s new in Conan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">變更日誌</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../examples.html">範例</a></li>
+          <li class="breadcrumb-item"><a href="../../extensions.html">Conan 擴充功能範例</a></li>
+          <li class="breadcrumb-item"><a href="package_signing.html">Package Signing Plugin</a></li>
+      <li class="breadcrumb-item active">Signing packages with Sigstore (Cosign)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/develop2/examples/extensions/package_signing/package_signing_with_sigstore.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="signing-packages-with-sigstore-cosign">
+<span id="examples-extensions-package-signing-sigstore"></span><h1>Signing packages with Sigstore (Cosign)<a class="headerlink" href="#signing-packages-with-sigstore-cosign" title="Link to this heading">¶</a></h1>
+<p>This is an example of a package signing plugin implementation using <a class="reference external" href="https://www.sigstore.dev/">Sigstore</a> via
+<a class="reference external" href="https://github.com/sigstore/cosign">Cosign</a>.
+You need <strong>Cosign</strong> (version 3.0.0 or newer) on your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.
+See the <a class="reference external" href="https://github.com/sigstore/cosign/releases">Cosign releases</a> page for binaries.</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>This feature is experimental and subject to breaking changes.
+See <a class="reference internal" href="../../../introduction.html#stability"><span class="std std-ref">the Conan stability</span></a> section for more information.</p>
+</div>
+<p>This example is available in the examples2 repository: <a class="reference external" href="https://github.com/conan-io/examples2/tree/main/examples/extensions/plugins/sigstore_sign">examples/extensions/plugins/sigstore_sign</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">備註</p>
+<p>Cosign is used here for demonstration only. The package signing plugin mechanism is backend-agnostic; you could implement
+a similar plugin with other tools (for example OpenSSL or GPG) by changing the commands invoked from <code class="docutils literal notranslate"><span class="pre">sign()</span></code> and <code class="docutils literal notranslate"><span class="pre">verify()</span></code>,
+as described in <a class="reference internal" href="../../../reference/extensions/package_signing.html#reference-extensions-package-signing"><span class="std std-ref">Package signing</span></a>.</p>
+</div>
+<section id="generating-the-signing-key-pair">
+<h2>Generating the signing key pair<a class="headerlink" href="#generating-the-signing-key-pair" title="Link to this heading">¶</a></h2>
+<p>Generate a Cosign key pair (Cosign prompts for a passphrase to protect the private key):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cosign<span class="w"> </span>generate-key-pair<span class="w"> </span>--output-key-prefix<span class="w"> </span>signing
+</pre></div>
+</div>
+<p>This creates <code class="docutils literal notranslate"><span class="pre">signing.key</span></code> (private) and <code class="docutils literal notranslate"><span class="pre">signing.pub</span></code> (public).
+Use the passphrase later to set the <code class="docutils literal notranslate"><span class="pre">COSIGN_PASSWORD</span></code> environment variable when configuring the plugin (see below).</p>
+</section>
+<section id="configuring-the-plugin">
+<h2>Configuring the plugin<a class="headerlink" href="#configuring-the-plugin" title="Link to this heading">¶</a></h2>
+<div class="admonition caution">
+<p class="admonition-title">警示</p>
+<p>This example stores a private key next to the plugin for simplicity. <strong>Do not do this in production.</strong>
+Instead, load the signing key from environment variables or a secret manager, or delegate signing to a remote signing service.
+<strong>Always keep the private key out of the Conan cache and out of source control</strong>.</p>
+</div>
+<ol class="arabic">
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">sign.py</span></code> and <code class="docutils literal notranslate"><span class="pre">signing-config.json</span></code> from the examples2 folder into your Conan home:</p>
+<p><code class="docutils literal notranslate"><span class="pre">CONAN_HOME/extensions/plugins/sign/sign.py</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">CONAN_HOME/extensions/plugins/sign/signing-config.json</span></code></p>
+</li>
+<li><p>Place the generated keys in a folder named after the <strong>provider</strong> used by the plugin. This example uses <code class="docutils literal notranslate"><span class="pre">my-organization</span></code>
+(the name is hardcoded in <code class="docutils literal notranslate"><span class="pre">sign.py</span></code>):</p>
+<p><code class="docutils literal notranslate"><span class="pre">CONAN_HOME/extensions/plugins/sign/my-organization/signing.key</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">CONAN_HOME/extensions/plugins/sign/my-organization/signing.pub</span></code></p>
+</li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">COSIGN_PASSWORD</span></code> environment variable. The plugin <strong>requires</strong> this variable to be present when signing:
+Cosign reads it instead of prompting on the terminal. Set it to the <strong>private key passphrase</strong> you chose when generating the key pair.
+If the key has <strong>no</strong> passphrase, set <code class="docutils literal notranslate"><span class="pre">COSIGN_PASSWORD</span></code> to an empty value.</p></li>
+</ol>
+<p>Your layout should look like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CONAN_HOME/
+└── extensions/
+    └── plugins/
+        └── sign/
+            ├── sign.py
+            ├── signing-config.json
+            └── my-organization/
+                ├── signing.key
+                └── signing.pub
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">小訣竅</p>
+<p>The package signing plugin lives under the Conan configuration directory, so you can distribute it with
+<a class="reference internal" href="../../../reference/commands/config.html#reference-commands-conan-config-install"><span class="std std-ref">conan config install</span></a> (for example from a fork or internal
+repo that contains the same files).</p>
+</div>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">備註</p>
+<p><strong>Method name convention:</strong> Use the literal string <code class="docutils literal notranslate"><span class="pre">sigstore</span></code> (lowercase) in the <code class="docutils literal notranslate"><span class="pre">method</span></code> field when your plugin uses this
+Cosign/Sigstore tools. This is a convenient way to identify the signing method used to sign the package and so the verifier
+can pick the right backend.</p>
+</div>
+<p>For signing, <code class="docutils literal notranslate"><span class="pre">sign()</span></code> invokes <strong class="command">cosign sign-blob</strong> on Conan’s <code class="docutils literal notranslate"><span class="pre">pkgsign-manifest.json</span></code>, writes a Sigstore <strong>bundle</strong>
+(<code class="docutils literal notranslate"><span class="pre">artifact.sigstore.json</span></code>) next to the manifest, and returns metadata for <code class="docutils literal notranslate"><span class="pre">pkgsign-signatures.json</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sign</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">artifacts_folder</span><span class="p">,</span> <span class="n">signature_folder</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">cosign_sign_cmd</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">"cosign"</span><span class="p">,</span>
+        <span class="s2">"sign-blob"</span><span class="p">,</span>
+        <span class="s2">"--key"</span><span class="p">,</span>
+        <span class="n">privkey_filepath</span><span class="p">,</span>
+        <span class="s2">"--bundle"</span><span class="p">,</span>
+        <span class="n">bundle_filepath</span><span class="p">,</span>
+        <span class="s2">"-y"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">"--signing-config=</span><span class="si">{</span><span class="n">_signing_config_path</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="n">manifest_filepath</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_run_command</span><span class="p">(</span><span class="n">cosign_sign_cmd</span><span class="p">)</span>
+        <span class="n">ConanOutput</span><span class="p">()</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Package signed for reference </span><span class="si">{</span><span class="n">ref</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ConanException</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error signing artifact: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"sigstore"</span><span class="p">,</span>
+            <span class="s2">"provider"</span><span class="p">:</span> <span class="n">provider</span><span class="p">,</span>
+            <span class="s2">"sign_artifacts"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"manifest"</span><span class="p">:</span> <span class="s2">"pkgsign-manifest.json"</span><span class="p">,</span>
+                <span class="s2">"bundle"</span><span class="p">:</span> <span class="s2">"artifact.sigstore.json"</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p>For verification, <code class="docutils literal notranslate"><span class="pre">verify()</span></code> reads <code class="docutils literal notranslate"><span class="pre">pkgsign-signatures.json</span></code>, resolves the manifest and bundle paths, loads the public key for
+the recorded <strong>provider</strong>, and runs <strong class="command">cosign verify-blob</strong> (without Rekor support):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">artifacts_folder</span><span class="p">,</span> <span class="n">signature_folder</span><span class="p">,</span> <span class="n">files</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">cosign_verify_cmd</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">"cosign"</span><span class="p">,</span>
+        <span class="s2">"verify-blob"</span><span class="p">,</span>
+        <span class="s2">"--key"</span><span class="p">,</span>
+        <span class="n">pubkey_filepath</span><span class="p">,</span>
+        <span class="s2">"--bundle"</span><span class="p">,</span>
+        <span class="n">bundle_filepath</span><span class="p">,</span>
+        <span class="s2">"--private-infrastructure=true"</span><span class="p">,</span>
+        <span class="n">manifest_filepath</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_run_command</span><span class="p">(</span><span class="n">cosign_verify_cmd</span><span class="p">)</span>
+        <span class="n">ConanOutput</span><span class="p">()</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Package verified for reference </span><span class="si">{</span><span class="n">ref</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ConanException</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error verifying signature </span><span class="si">{</span><span class="n">bundle_filepath</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+</pre></div>
+</div>
+<p>If verification fails, the plugin raises <code class="docutils literal notranslate"><span class="pre">ConanException</span></code>. On success it does not return a value.</p>
+<p>You can read more about <code class="docutils literal notranslate"><span class="pre">pkgsign-manifest.json</span></code> at <a class="reference internal" href="../../../reference/extensions/package_signing.html#reference-extensions-package-signing"><span class="std std-ref">Package signing</span></a>.</p>
+</section>
+<section id="signing-packages">
+<h2>Signing packages<a class="headerlink" href="#signing-packages" title="Link to this heading">¶</a></h2>
+<p>Create a package and sign it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>new<span class="w"> </span>cmake_lib<span class="w"> </span>-d<span class="w"> </span><span class="nv">name</span><span class="o">=</span>hello<span class="w"> </span>-d<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">1</span>.0
+$<span class="w"> </span>conan<span class="w"> </span>create
+$<span class="w"> </span>conan<span class="w"> </span>cache<span class="w"> </span>sign<span class="w"> </span>hello/1.0
+
+hello/1.0:<span class="w"> </span>Compressing<span class="w"> </span>conan_sources.tgz
+hello/1.0:dee9f7f985eb1c20e3c41afaa8c35e2a34b5ae0b:<span class="w"> </span>Compressing<span class="w"> </span>conan_package.tgz
+Running<span class="w"> </span>command:<span class="w"> </span>cosign<span class="w"> </span>sign-blob<span class="w"> </span>--key<span class="w"> </span>.../sign/my-organization/signing.key<span class="w"> </span>--bundle<span class="w"> </span>.../metadata/sign/artifact.sigstore.json<span class="w"> </span>-y<span class="w"> </span>--signing-config<span class="o">=</span>.../sign/signing-config.json<span class="w"> </span>.../metadata/sign/pkgsign-manifest.json
+Package<span class="w"> </span>signed<span class="w"> </span><span class="k">for</span><span class="w"> </span>reference<span class="w"> </span>hello/1.0
+...
+<span class="o">[</span>Package<span class="w"> </span>sign<span class="o">]</span><span class="w"> </span>Summary:<span class="w"> </span><span class="nv">OK</span><span class="o">=</span><span class="m">2</span>,<span class="w"> </span><span class="nv">FAILED</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">備註</p>
+<p>Starting with Conan 2.26.0, <strong class="command">conan upload</strong> does not sign packages automatically. Use <strong class="command">conan cache sign</strong> before upload
+when remotes should store signatures. See <a class="reference internal" href="../../../reference/extensions/package_signing.html#reference-extensions-package-signing"><span class="std std-ref">Package signing</span></a>.</p>
+</div>
+</section>
+<section id="verifying-packages">
+<h2>Verifying packages<a class="headerlink" href="#verifying-packages" title="Link to this heading">¶</a></h2>
+<p>Verify recipe and package binaries in the cache:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>cache<span class="w"> </span>verify<span class="w"> </span>hello/1.0
+
+<span class="o">[</span>Package<span class="w"> </span>sign<span class="o">]</span><span class="w"> </span>Checksum<span class="w"> </span>verified<span class="w"> </span><span class="k">for</span><span class="w"> </span>file<span class="w"> </span>conan_sources.tgz<span class="w"> </span><span class="o">(</span>...<span class="o">)</span>
+...
+Running<span class="w"> </span>command:<span class="w"> </span>cosign<span class="w"> </span>verify-blob<span class="w"> </span>--key<span class="w"> </span>.../sign/my-organization/signing.pub<span class="w"> </span>--bundle<span class="w"> </span>.../metadata/sign/artifact.sigstore.json<span class="w"> </span>--private-infrastructure<span class="o">=</span><span class="nb">true</span><span class="w"> </span>.../metadata/sign/pkgsign-manifest.json
+Package<span class="w"> </span>verified<span class="w"> </span><span class="k">for</span><span class="w"> </span>reference<span class="w"> </span>hello/1.0
+...
+<span class="o">[</span>Package<span class="w"> </span>sign<span class="o">]</span><span class="w"> </span>Summary:<span class="w"> </span><span class="nv">OK</span><span class="o">=</span><span class="m">2</span>,<span class="w"> </span><span class="nv">FAILED</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<p>Packages downloaded from a remote are verified on install (for example <strong class="command">conan install</strong>).</p>
+<div class="admonition seealso">
+<p class="admonition-title">也參考</p>
+<p>Plugin API and manifest details: <a class="reference internal" href="../../../reference/extensions/package_signing.html#reference-extensions-package-signing"><span class="std std-ref">Package signing</span></a>.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="package_signing_with_openssl.html" class="btn btn-neutral float-left" title="Signing packages with OpenSSL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../tools.html" class="btn btn-neutral float-right" title="Conan recipe tools examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2026, JFrog.
+      <span class="lastupdated">最後更新於 9月 01, 2026。
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

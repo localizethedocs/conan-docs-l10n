@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-21 08:54+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,13 +105,24 @@ msgid ""
 "cmake`` package) inside that folder, to be located by consumers."
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:54
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:56
+msgid ""
+"If the in-package ``xxx-config.cmake`` file has a different name than the "
+"Conan package name, set the ``cmake_file_name`` property with the right "
+"value, so that ``find_package()`` can locate it:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:60
+msgid "self.cpp_info.set_property(\"cmake_file_name\", \"MyPkg\")"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:64
 msgid ""
 "So the responsibility of defining the package details has been transferred "
 "to the ``CMakeLists.txt`` that contains:"
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:56
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:66
 msgid ""
 "add_library(mylib src/pkg.cpp)  # Use a different name than the package, to "
 "make sure\n"
@@ -134,39 +145,39 @@ msgid ""
 ")"
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:77
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:87
 msgid "With that information, when ``conan create`` is executed:"
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:79
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:89
 msgid "The ``build()`` method will build the package"
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:80
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:90
 msgid ""
 "The ``package()`` method will call ``cmake install``, which will create the "
 "``mypkgConfig.cmake`` file"
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:81
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:91
 msgid ""
 "It will be created in the package folder ``pkg/cmake/mypkgConfig.cmake`` file"
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:82
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:92
 msgid ""
 "It will contain enough information for the headers, and it will create a "
 "``mypkg::mylib`` target."
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:84
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:94
 msgid ""
 "Note that the details of the config filename, the namespace and the target "
 "are also not known by Conan, so this is also something that the consumer "
 "build scripts should know."
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:88
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:98
 msgid ""
 "This is enough to have a package with an internal ``mypkgConfig.cmake`` file "
 "that can be used by consumers. In this example code, the consumer is just "
@@ -174,7 +185,7 @@ msgid ""
 "arbitrary consumer."
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:92
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:102
 msgid ""
 "The consumer ``conanfile.py`` doesn't need to use ``CMakeDeps`` at all, only "
 "``generators = \"CMakeToolchain\"``. Note that the ``CMakeToolchain`` "
@@ -183,11 +194,11 @@ msgid ""
 "``conan_toolchain.cmake`` file contains these paths defined."
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:97
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:107
 msgid "The consumer ``CMakeLists.txt`` would be standard:"
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:99
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:109
 msgid ""
 "find_package(mypkg CONFIG REQUIRED)\n"
 "\n"
@@ -195,11 +206,11 @@ msgid ""
 "target_link_libraries(example mypkg::mylib)"
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:107
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:117
 msgid "You can verify it works with:"
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:109
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:119
 msgid ""
 "$ conan create .\n"
 "\n"
@@ -215,11 +226,11 @@ msgid ""
 "pkg/0.1 test_package"
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:126
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:136
 msgid "Important considerations"
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:128
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:138
 msgid ""
 "The presented approach has one limitation, it doesn't work for multi-"
 "configuration IDEs. Implementing this approach won't allow developers to "
@@ -232,7 +243,7 @@ msgid ""
 "nothing that Conan can do to avoid this limitation."
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:135
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:145
 msgid ""
 "It is important to know that it is also the package author and the package "
 "``CMakeLists.txt`` responsibility to correctly manage transitivity to other "
@@ -242,7 +253,7 @@ msgid ""
 "transitive Conan package dependencies."
 msgstr ""
 
-#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:140
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:150
 msgid ""
 "Finally, recall that these packages won't be usable by other build systems "
 "rather than CMake."

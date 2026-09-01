@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,8 @@ msgid ""
 msgstr ""
 
 #: ../../../reference/tools/system/package_manager.rst:18
-#: ../../../reference/tools/system/package_manager.rst:169
+#: ../../../reference/tools/system/package_manager.rst:172
+#: ../../../reference/tools/system/package_manager.rst:204
 msgid "conanfile.py"
 msgstr ""
 
@@ -161,11 +162,14 @@ msgid ""
 "ref:`configuration<conan_tools_system_package_manager_config>`. If the "
 "parameter ``host_package`` is ``True`` it will install the packages for the "
 "host machine architecture (the machine that will run the software), it has "
-"an effect when cross building. This method will return the return code of "
-"the executed commands."
+"an effect when cross building. When ``host_package`` is ``False``, packages "
+"are installed for the build machine. In both cases you can include an "
+"explicit architecture suffix in the package name (see :ref:"
+"`conan_tools_system_package_manager_explicit_arch_suffix`). This method will "
+"return the return code of the executed commands."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:77
+#: ../../../reference/tools/system/package_manager.rst:80
 msgid ""
 "``install_substitutes(packages_substitutes, update=False, check=True)``: try "
 "to install one of the lists of substitutes packages passed as a parameter, e."
@@ -179,31 +183,31 @@ msgid ""
 "``check`` have the same purpose as above."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:84
+#: ../../../reference/tools/system/package_manager.rst:87
 msgid ""
 "``update()`` update the system package manager database. Its behaviour is "
 "affected by the value of ``tools.system.package_manager:mode`` :ref:"
 "`configuration<conan_tools_system_package_manager_config>`."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:87
+#: ../../../reference/tools/system/package_manager.rst:90
 msgid ""
 "``check(packages)`` check if the list of packages passed as parameter are "
 "already installed. It will return a list with the packages that are missing."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:93
+#: ../../../reference/tools/system/package_manager.rst:96
 msgid ""
 "Configuration properties that affect how system package managers are invoked"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:95
+#: ../../../reference/tools/system/package_manager.rst:98
 msgid ""
 "As explained above there are several ``[conf]`` that affect how these tools "
 "are invoked:"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:98
+#: ../../../reference/tools/system/package_manager.rst:101
 msgid ""
 "``tools.system.package_manager:tool``: to choose which package manager tool "
 "you want to use by default: ``\"apk\"``, ``\"apt-get\"``, ``\"yum\"``, "
@@ -211,13 +215,13 @@ msgid ""
 "``\"pkg\"`` or ``\"pkgutil\"``"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:102
+#: ../../../reference/tools/system/package_manager.rst:105
 msgid ""
 "``tools.system.package_manager:mode``: mode to use when invoking the package "
 "manager tool. There are two possible values:"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:105
+#: ../../../reference/tools/system/package_manager.rst:108
 msgid ""
 "``\"check\"``: it will just check for missing packages at most and will not "
 "try to update the package manager database or install any packages in any "
@@ -225,63 +229,63 @@ msgid ""
 "system. This is the default value."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:110
+#: ../../../reference/tools/system/package_manager.rst:113
 msgid ""
 "``\"report\"``: Just capture the ``.install()`` calls to capture packages, "
 "but do not check nor install them. Never raises an error. Mostly useful for "
 "``conan graph info`` commands."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:114
+#: ../../../reference/tools/system/package_manager.rst:117
 msgid ""
 "``\"report-installed\"``: Report, without failing which packages are needed "
 "(same as ``report``) and also check which of them are actually installed in "
 "the current system."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:117
+#: ../../../reference/tools/system/package_manager.rst:120
 msgid ""
 "``\"install\"``: it will allow Conan to perform update or install operations."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:119
+#: ../../../reference/tools/system/package_manager.rst:122
 msgid ""
 "``tools.system.package_manager:sudo``: Use *sudo* when invoking the package "
 "manager tools in Linux (``False`` by default)"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:122
+#: ../../../reference/tools/system/package_manager.rst:125
 msgid ""
 "``tools.system.package_manager:sudo_askpass``: Use the ``-A`` argument if "
 "using sudo in Linux to invoke the system package manager (``False`` by "
 "default)"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:126
+#: ../../../reference/tools/system/package_manager.rst:129
 msgid ""
 "There are some specific arguments for each of these tools. Here is the "
 "complete reference:"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:131
+#: ../../../reference/tools/system/package_manager.rst:134
 msgid "conan.tools.system.package_manager.Apk"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:133
+#: ../../../reference/tools/system/package_manager.rst:136
 msgid ""
 "Will invoke the *apk* command. Enabled by default for **Linux** with "
 "distribution names: *alpine*."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:137
-#: ../../../reference/tools/system/package_manager.rst:158
-#: ../../../reference/tools/system/package_manager.rst:199
-#: ../../../reference/tools/system/package_manager.rst:235
-#: ../../../reference/tools/system/package_manager.rst:256
-#: ../../../reference/tools/system/package_manager.rst:270
-#: ../../../reference/tools/system/package_manager.rst:284
-#: ../../../reference/tools/system/package_manager.rst:298
-#: ../../../reference/tools/system/package_manager.rst:312
+#: ../../../reference/tools/system/package_manager.rst:140
+#: ../../../reference/tools/system/package_manager.rst:161
+#: ../../../reference/tools/system/package_manager.rst:227
+#: ../../../reference/tools/system/package_manager.rst:269
+#: ../../../reference/tools/system/package_manager.rst:290
+#: ../../../reference/tools/system/package_manager.rst:304
+#: ../../../reference/tools/system/package_manager.rst:318
+#: ../../../reference/tools/system/package_manager.rst:332
+#: ../../../reference/tools/system/package_manager.rst:346
 msgid "Reference"
 msgstr ""
 
@@ -411,17 +415,17 @@ msgstr ""
 msgid "the return code of the executed package manager update command."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:146
+#: ../../../reference/tools/system/package_manager.rst:149
 msgid ""
 "Alpine Linux does not support multiple architectures in the same repository, "
 "so there is no mapping from Conan architectures to Alpine architectures."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:152
+#: ../../../reference/tools/system/package_manager.rst:155
 msgid "conan.tools.system.package_manager.Apt"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:154
+#: ../../../reference/tools/system/package_manager.rst:157
 msgid ""
 "Will invoke the *apt-get* command. Enabled by default for **Linux** with "
 "distribution names: *ubuntu*, *debian*, *raspbian* and *linuxmint*."
@@ -466,13 +470,13 @@ msgstr ""
 msgid "the return code of the executed apt command."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:167
+#: ../../../reference/tools/system/package_manager.rst:170
 msgid ""
 "You can pass the ``arch_names`` argument to override the default Conan "
 "mapping like this:"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:169
+#: ../../../reference/tools/system/package_manager.rst:172
 msgid ""
 "...\n"
 "def system_requirements(self):\n"
@@ -481,11 +485,11 @@ msgid ""
 "    apt.install([\"libgl-dev\"])"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:177
+#: ../../../reference/tools/system/package_manager.rst:180
 msgid "The default mapping that Conan uses for *APT* packages architecture is:"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:179
+#: ../../../reference/tools/system/package_manager.rst:182
 msgid ""
 "self._arch_names = {\"x86_64\": \"amd64\",\n"
 "                    \"x86\": \"i386\",\n"
@@ -498,11 +502,46 @@ msgid ""
 "arch_names"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:193
+#: ../../../reference/tools/system/package_manager.rst:196
+msgid "Explicit architecture suffixes"
+msgstr ""
+
+#: ../../../reference/tools/system/package_manager.rst:198
+msgid ""
+"When cross-building, Conan can automatically append the architecture suffix "
+"to package names based on the Conan ``settings``. You can also include the "
+"architecture directly in the package name. This is useful when you need "
+"packages for a foreign architecture on the native build machine — for "
+"example, 32-bit libraries on an ``x86_64`` system to run 32-bit build tools "
+"— using ``host_package=False``:"
+msgstr ""
+
+#: ../../../reference/tools/system/package_manager.rst:204
+msgid ""
+"def system_requirements(self):\n"
+"    apt = Apt(self)\n"
+"    apt.install([\"libc6:i386\", \"libstdc++6:i386\"], check=True, "
+"host_package=False)"
+msgstr ""
+
+#: ../../../reference/tools/system/package_manager.rst:211
+msgid ""
+"Conan parses the ``:`` suffix and uses it for both ``check()`` and "
+"``install()``, so already installed packages are detected correctly. Version "
+"constraints are also supported, for example ``libc6:i386=2.39-0ubuntu8.7``."
+msgstr ""
+
+#: ../../../reference/tools/system/package_manager.rst:215
+msgid ""
+"An explicit suffix in the package name takes precedence over the automatic "
+"mapping described above."
+msgstr ""
+
+#: ../../../reference/tools/system/package_manager.rst:221
 msgid "conan.tools.system.package_manager.Yum"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:195
+#: ../../../reference/tools/system/package_manager.rst:223
 msgid ""
 "Will invoke the *yum* command. Enabled by default for **Linux** with "
 "distribution names: *pidora*, *scientific*, *xenserver*, *amazon*, *oracle*, "
@@ -519,11 +558,11 @@ msgid ""
 "86`` for *Yum* and try to install the ``<package_name>.i?86`` package."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:208
+#: ../../../reference/tools/system/package_manager.rst:236
 msgid "The default mapping Conan uses for *Yum* packages architecture is:"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:210
+#: ../../../reference/tools/system/package_manager.rst:238
 msgid ""
 "self._arch_names = {\"x86_64\": \"x86_64\",\n"
 "                    \"x86\": \"i?86\",\n"
@@ -536,11 +575,20 @@ msgid ""
 "arch_names"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:222
+#: ../../../reference/tools/system/package_manager.rst:249
+msgid ""
+"*Yum* and *Dnf* also support :ref:`explicit architecture suffixes "
+"<conan_tools_system_package_manager_explicit_arch_suffix>` using ``.`` as "
+"separator (for example ``glibc.i686``). The name is only split when the "
+"suffix matches a known architecture from the mapping above, so package names "
+"that contain dots (such as ``libfoo.bar``) are not affected."
+msgstr ""
+
+#: ../../../reference/tools/system/package_manager.rst:256
 msgid "conan.tools.system.package_manager.Dnf"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:224
+#: ../../../reference/tools/system/package_manager.rst:258
 msgid ""
 "Will invoke the *dnf* command. Enabled by default for **Linux** with "
 "distribution names: *fedora*, *rhel*, *centos* and *mageia*. This tool has "
@@ -548,11 +596,11 @@ msgid ""
 "`Yum<conan_tools_system_package_manager_yum>` tool."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:229
+#: ../../../reference/tools/system/package_manager.rst:263
 msgid "conan.tools.system.package_manager.PacMan"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:231
+#: ../../../reference/tools/system/package_manager.rst:265
 msgid ""
 "Will invoke the *pacman* command. Enabled by default for **Linux** with "
 "distribution names: *arch*, *manjaro* and when using **Windows** with *msys2*"
@@ -568,55 +616,55 @@ msgid ""
 "*PacMan* and try to install the ``<package_name>-lib32`` package."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:243
+#: ../../../reference/tools/system/package_manager.rst:277
 msgid "The default mapping Conan uses for *PacMan* packages architecture is:"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:245
+#: ../../../reference/tools/system/package_manager.rst:279
 msgid ""
 "self._arch_names = {\"x86\": \"lib32\"} if arch_names is None else arch_names"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:250
+#: ../../../reference/tools/system/package_manager.rst:284
 msgid "conan.tools.system.package_manager.Zypper"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:252
+#: ../../../reference/tools/system/package_manager.rst:286
 msgid ""
 "Will invoke the *zypper* command. Enabled by default for **Linux** with "
 "distribution names: *opensuse*, *sles*."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:265
+#: ../../../reference/tools/system/package_manager.rst:299
 msgid "conan.tools.system.package_manager.Brew"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:267
+#: ../../../reference/tools/system/package_manager.rst:301
 msgid "Will invoke the *brew* command. Enabled by default for **macOS**."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:279
+#: ../../../reference/tools/system/package_manager.rst:313
 msgid "conan.tools.system.package_manager.Pkg"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:281
+#: ../../../reference/tools/system/package_manager.rst:315
 msgid ""
 "Will invoke the *pkg* command. Enabled by default for **Linux** with "
 "distribution names: *freebsd*."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:293
+#: ../../../reference/tools/system/package_manager.rst:327
 msgid "conan.tools.system.package_manager.PkgUtil"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:295
+#: ../../../reference/tools/system/package_manager.rst:329
 msgid "Will invoke the *pkgutil* command. Enabled by default for **Solaris**."
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:307
+#: ../../../reference/tools/system/package_manager.rst:341
 msgid "conan.tools.system.package_manager.Chocolatey"
 msgstr ""
 
-#: ../../../reference/tools/system/package_manager.rst:309
+#: ../../../reference/tools/system/package_manager.rst:343
 msgid "Will invoke the *choco* command. Enabled by default for **Windows**."
 msgstr ""

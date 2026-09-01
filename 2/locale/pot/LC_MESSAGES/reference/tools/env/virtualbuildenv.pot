@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -183,17 +183,25 @@ msgid ""
 "to report any feedback about this feature."
 msgstr ""
 
-#: ../../../reference/tools/env/virtualbuildenv.rst:114
+#: ../../../reference/tools/env/virtualbuildenv.rst:111
+msgid ""
+"The ``VirtualBuildEnv`` generator will not propagate the bindirs of tool "
+"requires which have the ``run`` trait set to ``False``, for either recipes "
+"that have ``required_conan_version=\">=2.28\"`` or greater, or globally with "
+"the ``core:policies=[\"required_conan_version>=2.28\"]`` conf."
+msgstr ""
+
+#: ../../../reference/tools/env/virtualbuildenv.rst:119
 msgid "Disabling VirtualBuildEnv"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualbuildenv.rst:116
+#: ../../../reference/tools/env/virtualbuildenv.rst:121
 msgid ""
 "It is possible to disable the generation of the ``VirtualBuildEnv`` and "
 "``VirtualRunEnv`` files with different mechanisms:"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualbuildenv.rst:119
+#: ../../../reference/tools/env/virtualbuildenv.rst:124
 msgid ""
 "By passing ``--envs-generation=false`` to the ``conan install`` command, it "
 "will disable the generation of environment files (both ``VirtualBuildEnv`` "
@@ -202,14 +210,14 @@ msgid ""
 "needed). **This feature is experimental and subject to change**."
 msgstr ""
 
-#: ../../../reference/tools/env/virtualbuildenv.rst:123
+#: ../../../reference/tools/env/virtualbuildenv.rst:128
 msgid ""
 "Recipes can instantiate a ``VirtualBuildEnv(self)`` in their ``generate()`` "
 "method, without calling their ``generate()`` method. That will inhibit the "
 "creation of environment files for that specific recipe:"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualbuildenv.rst:127
+#: ../../../reference/tools/env/virtualbuildenv.rst:132
 msgid ""
 "def generate(self):\n"
 "    VirtualBuildEnv(self)\n"
@@ -220,14 +228,14 @@ msgid ""
 "    # Same for VirtualRunEnv"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualbuildenv.rst:137
+#: ../../../reference/tools/env/virtualbuildenv.rst:142
 msgid ""
 "Recipes can directly define their ``virtualbuildenv = False`` attribute to "
 "inhibit the automatic default creation of ``VirtualBuildEnv`` files for this "
 "recipe:"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualbuildenv.rst:140
+#: ../../../reference/tools/env/virtualbuildenv.rst:145
 msgid ""
 "class Pkg(ConanFile):\n"
 "    virtualbuildenv = False\n"
@@ -235,7 +243,7 @@ msgid ""
 "    virtualrunenv = False"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualbuildenv.rst:150
+#: ../../../reference/tools/env/virtualbuildenv.rst:155
 msgid ""
 "In general, disabling the generation of environment files is "
 "**discouraged**. Environment files are the mechanism use for things like "
@@ -245,7 +253,7 @@ msgid ""
 "the recipe, the ``tool_requires`` will fail to apply."
 msgstr ""
 
-#: ../../../reference/tools/env/virtualbuildenv.rst:158
+#: ../../../reference/tools/env/virtualbuildenv.rst:163
 msgid "Reference"
 msgstr ""
 

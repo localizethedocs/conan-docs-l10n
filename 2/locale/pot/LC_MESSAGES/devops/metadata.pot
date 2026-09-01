@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-21 08:54+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -449,10 +449,75 @@ msgid ""
 msgstr ""
 
 #: ../../../devops/metadata.rst:270
+msgid "Downloading metadata to an arbitrary folder"
+msgstr ""
+
+#: ../../../devops/metadata.rst:274
+msgid ""
+"Since Conan 2.32, the Python API provides two methods to fetch only the "
+"metadata of a recipe or package revision into an arbitrary folder, bypassing "
+"the Conan cache. This is useful for custom commands and CI workflows that "
+"need to inspect metadata (build logs, test outputs...) without changing the "
+"local cache state:"
+msgstr ""
+
+#: ../../../devops/metadata.rst:279
+msgid ""
+":meth:`DownloadAPI.recipe_metadata <conan.api.subapi.download.DownloadAPI."
+"recipe_metadata>`"
+msgstr ""
+
+#: ../../../devops/metadata.rst:280
+msgid ""
+":meth:`DownloadAPI.package_metadata <conan.api.subapi.download.DownloadAPI."
+"package_metadata>`"
+msgstr ""
+
+#: ../../../devops/metadata.rst:282
+msgid ""
+"Both methods require a fully resolved reference (with recipe revision, and "
+"package revision for the package case), the target ``Remote``, the metadata "
+"patterns to fetch, and the destination folder. The metadata files are "
+"written under ``<folder>/metadata/``. This can be wrapped in a custom "
+"command as follows:"
+msgstr ""
+
+#: ../../../devops/metadata.rst:287
+msgid ""
+"import os\n"
+"from conan.api.model import PkgReference, RecipeReference\n"
+"from conan.cli.command import conan_command\n"
+"\n"
+"\n"
+"@conan_command(group=\"custom commands\")\n"
+"def metadata_download(conan_api, parser, *args):\n"
+"    \"\"\"Download the metadata of a recipe/package revision into cwd (no "
+"cache).\"\"\"\n"
+"    parser.add_argument(\"reference\")\n"
+"    parser.add_argument(\"-r\", \"--remote\", required=True)\n"
+"    a = parser.parse_args(*args)\n"
+"    remote = conan_api.remotes.get(a.remote)\n"
+"    if \":\" in a.reference:\n"
+"        pref = PkgReference.loads(a.reference)\n"
+"        if pref.ref.revision is None:\n"
+"            pref.ref = conan_api.list.latest_recipe_revision(pref.ref, "
+"remote)\n"
+"        if pref.revision is None:\n"
+"            pref = conan_api.list.latest_package_revision(pref, remote)\n"
+"        conan_api.download.package_metadata(pref, remote, [\"*\"], os."
+"getcwd())\n"
+"    else:\n"
+"        ref = RecipeReference.loads(a.reference)\n"
+"        if ref.revision is None:\n"
+"            ref = conan_api.list.latest_recipe_revision(ref, remote)\n"
+"        conan_api.download.recipe_metadata(ref, remote, [\"*\"], os.getcwd())"
+msgstr ""
+
+#: ../../../devops/metadata.rst:316
 msgid "Removing metadata"
 msgstr ""
 
-#: ../../../devops/metadata.rst:271
+#: ../../../devops/metadata.rst:317
 msgid ""
 "At the moment it is not possible to remove metadata from the server side "
 "using Conan, as the metadata are \"additive\", it is possible to add new "
@@ -462,17 +527,17 @@ msgid ""
 "race conditions)."
 msgstr ""
 
-#: ../../../devops/metadata.rst:273
+#: ../../../devops/metadata.rst:319
 msgid ""
 "The recommendation to remove metadata from the server side would be to use "
 "the tools, web interface or APIs that the server might provide."
 msgstr ""
 
-#: ../../../devops/metadata.rst:277
+#: ../../../devops/metadata.rst:323
 msgid "**Best practices**"
 msgstr ""
 
-#: ../../../devops/metadata.rst:279
+#: ../../../devops/metadata.rst:325
 msgid ""
 "Metadata shouldn't be necessary for using packages. It should be possible to "
 "consume recipes and packages without downloading their metadata. If metadata "
@@ -480,7 +545,7 @@ msgid ""
 "packaged as headers and binaries."
 msgstr ""
 
-#: ../../../devops/metadata.rst:281
+#: ../../../devops/metadata.rst:327
 msgid ""
 "Metadata reading access should not be a frequent operation, or something "
 "that developers have to do. Metadata read is intended for exceptional cases, "
@@ -488,7 +553,7 @@ msgid ""
 "executables might be needed for debugging or re-checking a crash."
 msgstr ""
 
-#: ../../../devops/metadata.rst:284
+#: ../../../devops/metadata.rst:330
 msgid ""
 "Conan does not do any compression or decompression of the metadata files. If "
 "there are a lot of metadata files, consider zipping them yourself, otherwise "
@@ -498,24 +563,24 @@ msgid ""
 "metadata=xxx`` argument."
 msgstr ""
 
-#: ../../../devops/metadata.rst:288
+#: ../../../devops/metadata.rst:334
 msgid "test_package as metadata"
 msgstr ""
 
-#: ../../../devops/metadata.rst:290
+#: ../../../devops/metadata.rst:336
 msgid ""
 "This is an illustrative example of usage of metadata, storing the full "
 "``test_package`` folder as metadata to later recover it and execute it. Note "
 "that this is not necessarily intended for production."
 msgstr ""
 
-#: ../../../devops/metadata.rst:293
+#: ../../../devops/metadata.rst:339
 msgid ""
 "Let's  start with a hook that automatically stores as **recipe metadata** "
 "the ``test_package`` folder"
 msgstr ""
 
-#: ../../../devops/metadata.rst:295
+#: ../../../devops/metadata.rst:341
 msgid ""
 "import os\n"
 "from conan.tools.files import copy\n"
@@ -528,7 +593,7 @@ msgid ""
 "\"test_package\"))"
 msgstr ""
 
-#: ../../../devops/metadata.rst:307
+#: ../../../devops/metadata.rst:353
 msgid ""
 "Note that this hook doesn't take into account that ``test_package`` can be "
 "dirty with tons of temporary build objects (it should be cleaned before "
@@ -536,13 +601,13 @@ msgid ""
 "not exist at all and crash."
 msgstr ""
 
-#: ../../../devops/metadata.rst:311
+#: ../../../devops/metadata.rst:357
 msgid ""
 "When a package is created and uploaded, it will upload to the server the "
 "recipe metadata containing the ``test_package``:"
 msgstr ""
 
-#: ../../../devops/metadata.rst:313
+#: ../../../devops/metadata.rst:359
 msgid ""
 "$ conan create ...\n"
 "$ conan upload \"*\" -c -r=default  # uploads metadata\n"
@@ -550,27 +615,27 @@ msgid ""
 "pkg/0.1: Recipe metadata: 1 files"
 msgstr ""
 
-#: ../../../devops/metadata.rst:320
+#: ../../../devops/metadata.rst:366
 msgid ""
 "Let's remove the local copy, and assume that the package is installed, but "
 "the metadata is not:"
 msgstr ""
 
-#: ../../../devops/metadata.rst:322
+#: ../../../devops/metadata.rst:368
 msgid ""
 "$ conan remove \"*\" -c  # lets remove the local packages\n"
 "$ conan install --requires=pkg/0.1 -r=default  # this will not download "
 "metadata"
 msgstr ""
 
-#: ../../../devops/metadata.rst:328
+#: ../../../devops/metadata.rst:374
 msgid ""
 "If at this stage the installed package is failing in our application, we "
 "could recover the ``test_package``, downloading it, and copying it to our "
 "current folder:"
 msgstr ""
 
-#: ../../../devops/metadata.rst:331
+#: ../../../devops/metadata.rst:377
 msgid ""
 "$ conan download pkg/0.1 -r=default --metadata=\"test_package*\"\n"
 "$ conan cache path pkg/0.1 --folder=metadata\n"
@@ -582,13 +647,13 @@ msgid ""
 "pkg/0.1 (test package): Running test()"
 msgstr ""
 
-#: ../../../devops/metadata.rst:345
+#: ../../../devops/metadata.rst:391
 msgid ""
 "TODO: Examples how to collect the metadata of a complete dependency graph "
 "with some custom deployer or command"
 msgstr ""
 
-#: ../../../devops/metadata.rst:348
+#: ../../../devops/metadata.rst:394
 msgid ""
 "This is an **experimental** feature. We are looking forward to hearing your "
 "feedback, use cases and needs, to keep improving this feature. Please report "

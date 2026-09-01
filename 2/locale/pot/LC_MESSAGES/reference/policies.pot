@@ -1,0 +1,138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/policies.rst:4
+msgid "Policies"
+msgstr ""
+
+#: ../../../reference/policies.rst:5
+msgid ""
+"Policies are a set of rules to enforce certain behaviors from Conan. "
+"Policies are handled by the ``core:policies`` configuration in your ``global."
+"conf``, which is a list of strings, where each string is the name of a "
+"policy to be enabled."
+msgstr ""
+
+#: ../../../reference/policies.rst:10
+msgid "``global.conf``"
+msgstr ""
+
+#: ../../../reference/policies.rst:10
+msgid "core:policies = [\"required_conan_version>=2.28\"]"
+msgstr ""
+
+#: ../../../reference/policies.rst:16
+msgid "List of current policies"
+msgstr ""
+
+#: ../../../reference/policies.rst:19
+msgid "required_conan_version>=version"
+msgstr ""
+
+#: ../../../reference/policies.rst:20
+msgid "*Introduced in Conan 2.28*"
+msgstr ""
+
+#: ../../../reference/policies.rst:22
+msgid ""
+"This policy is unique, as the version specified in the policy is used to "
+"enable different behaviors based on the version. This allows to opt-in to "
+"bugfixes that can be considered breaking changes, without having to wait for "
+"a new Conan release to include them by default."
+msgstr ""
+
+#: ../../../reference/policies.rst:25
+msgid ""
+"The same behaviours are also enabled recipe-wise when the "
+"``required_conan_version`` attribute is defined in the recipe, such that the "
+"policy can be enabled for specific recipes, without having to enable it "
+"globally. If both the policy and the recipe attribute are defined, the "
+"behavior will be enabled if either of them matches the required version "
+"range."
+msgstr ""
+
+#: ../../../reference/policies.rst:43
+msgid ""
+"If using ``required_conan_version>=2.28`` or later, the following bugfixes "
+"will be enabled:"
+msgstr ""
+
+#: ../../../reference/policies.rst:32
+msgid "Bugfix https://github.com/conan-io/conan/pull/19705:"
+msgstr ""
+
+#: ../../../reference/policies.rst:31
+msgid ""
+"The computation of ``package_id`` for static libraries and non-embed mode "
+"was taking into account transitive (non-direct) dependencies, even if they "
+"were not being embedded and not contributing headers at all. See the docs "
+"for the :ref:`effect of dependencies in the "
+"package_id<reference_binary_model_dependencies>`."
+msgstr ""
+
+#: ../../../reference/policies.rst:37
+msgid "Bugfix https://github.com/conan-io/conan/pull/19849:"
+msgstr ""
+
+#: ../../../reference/policies.rst:35
+msgid ""
+"The ``VirtualBuildEnv`` generator used to include the ``bindir`` paths of "
+"tool requires regardless of their ``run`` trait in the generated "
+"environment. With the bugfix enabled, only tool requires with the ``run`` "
+"trait set to ``True`` will have their ``bindir`` paths propagated."
+msgstr ""
+
+#: ../../../reference/policies.rst:43
+msgid "Behaviour change https://github.com/conan-io/conan/pull/19286:"
+msgstr ""
+
+#: ../../../reference/policies.rst:40
+msgid ""
+"For the new ``consistent`` trait, its default value currently keeps the old "
+"graph expansion behaviour, which had some inconsistencies regarding the "
+"handling of private dependencies. With the new behaviour enabled, the graph "
+"expansion is more consistent and private dependencies are handled in a more "
+"intuitive way, but some graphs can be expanded differently. For a detailed "
+"explanation of the changes, see :ref:`the trait documentation "
+"section<reference_conanfile_methods_requirements_consistent>`."
+msgstr ""
+
+#: ../../../reference/policies.rst:51
+msgid ""
+"If using ``required_conan_version>=2.30`` or later, the following bugfixes "
+"will be enabled:"
+msgstr ""
+
+#: ../../../reference/policies.rst:51
+msgid "Bugfix https://github.com/conan-io/conan/pull/20073:"
+msgstr ""
+
+#: ../../../reference/policies.rst:47
+msgid ""
+"The ``transitive_headers`` trait propagation of some diamond structures was "
+"not working correctly and unexpected headers were being propagated to "
+"consumers. With the bugfix enabled, the propagation of transitive headers is "
+"fixed and works as expected in all cases, but the consumer package_id can "
+"change if it was previously affected by this bug."
+msgstr ""
+
+#: ../../../reference/policies.rst:54
+msgid ""
+"This policy is independent of the ``core:required_conan_version`` conf, "
+"which is exclusively used to define the minimum required Conan version."
+msgstr ""

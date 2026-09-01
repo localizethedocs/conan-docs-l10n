@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/extensions/compiler_flags_plugin.rst:4
+msgid "Compiler flags mapper plugin"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/extensions/compiler_flags_plugin.rst:8
+msgid ""
+"The ``compiler_flags.py`` extension plugin is a Python script that receives "
+"the list of compiler flags provided by dependencies ``cpp_info`` "
+"information, and allows to process it."
+msgstr ""
+
+#: ../../../reference/extensions/compiler_flags_plugin.rst:11
+msgid ""
+"This plugin must be located in the ``extensions/plugins`` cache folder, and "
+"can be installed with the ``conan config install`` and ``conan config "
+"install-pkg`` commands."
+msgstr ""
+
+#: ../../../reference/extensions/compiler_flags_plugin.rst:14
+msgid ""
+"A possible use case would be when packages built with a different compiler, "
+"for example ``msvc`` define some ``msvc`` specific compiler flags for their "
+"consumers assuming it will be the same compiler. But if the consumer is "
+"using LLVM/Clang, assuming binary compatibility, then that clang compiler "
+"could be receiving ``msvc`` flags that is not expecting and that it doesn't "
+"understand. This plugin allows to convert, map, remove, translate or add "
+"compiler flags."
+msgstr ""
+
+#: ../../../reference/extensions/compiler_flags_plugin.rst:20
+msgid ""
+"For example, a case that exists in ConanCenter recipes is some packages "
+"defining ``/Zc:__cplusplus`` compiler flag for ``msvc`` that ``clang`` "
+"compiler won't understand. In this case, it is possible to write a pluging "
+"like:"
+msgstr ""
+
+#: ../../../reference/extensions/compiler_flags_plugin.rst:24
+msgid ""
+"def flags_map(conanfile, item, flags, **kwargs):\n"
+"    if item != \"cxxflags\":\n"
+"        return flags\n"
+"    result = []\n"
+"    compiler = conanfile.settings.get_safe(\"compiler\")\n"
+"    for d in flags:\n"
+"        if d.startswith(\"/Zc:\"):\n"
+"            if compiler == \"msvc\":\n"
+"                result.append(d)\n"
+"        else:\n"
+"            result.append(d)\n"
+"    return result"
+msgstr ""
+
+#: ../../../reference/extensions/compiler_flags_plugin.rst:39
+msgid ""
+"The ``conanfile`` object is passed as an argument, so it is possible to "
+"check the ``compiler`` that the consumer will be using. Only for ``msvc`` "
+"the ``/Zc`` flags will be propagated, otherwise they will be ignored."
+msgstr ""
+
+#: ../../../reference/extensions/compiler_flags_plugin.rst:43
+msgid ""
+"The possible ``item`` values are ``cflags``, ``cxxflags``, "
+"``sharedlinkflags`` and ``exelinkflags``."
+msgstr ""
+
+#: ../../../reference/extensions/compiler_flags_plugin.rst:47
+msgid ""
+"Do not abuse this feature for other purposes rather than the binary "
+"compatibility among different compilers exemplified above. If you have some "
+"other use case that could be addressed by this plugin, please submit a "
+"ticket to https://github.com/conan-io/conan/issues first to discuss."
+msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-16 08:57+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,4 +32,82 @@ msgid ""
 "Subapis **must not** be initialized by themselves. They are intended to be "
 "accessed only through the main :ref:`ConanAPI "
 "<reference_python_api_conan_api>` attributes."
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/command.py:docstring of
+#: conan.api.subapi.command.CommandAPI:1
+msgid ""
+"This CommandAPI is useful to be able to launch full commands from the "
+"ConanAPI"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/command.py:docstring of
+#: conan.api.subapi.command.CommandAPI:3
+msgid ""
+"Sometimes some commands are built using several calls to the ConanAPI. If we "
+"want to reuse the same functionality, then we would have to copy all that "
+"code into our own commands. Instead of doing that, it is possible to call "
+"Conan commands using this API, via the ``run()`` method."
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/command.py:docstring of
+#: conan.api.subapi.command.CommandAPI.run:1
+msgid "Runs another Conan command via API"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/command.py:docstring of
+#: conan.api.subapi.command.CommandAPI.run:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/command.py:docstring of
+#: conan.api.subapi.command.CommandAPI.run:3
+msgid "Conan command to run. It can be either a string, or a list of strings."
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/command.py:docstring of
+#: conan.api.subapi.command.CommandAPI.run:4
+msgid ""
+"If True, it will raise an exception on errors. By default, some command will "
+"return errors as ``conan_error`` entries in the result, and it will be the "
+"caller's responsibility to check for them and raise/report them if desired."
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/command.py:docstring of
+#: conan.api.subapi.command.CommandAPI.run:0
+msgid "Returns"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/command.py:docstring of
+#: conan.api.subapi.command.CommandAPI.run:7
+msgid ""
+"It will return what that command returns. Note that different commands can "
+"return different things, so the caller needs to process it accordingly."
+msgstr ""
+
+#: ../../../reference/extensions/python_api/CommandAPI.rst:16
+msgid ""
+"When consuming this sub-API from a standalone script where the ``ConanAPI`` "
+"class is instantiated manually (which is not the recommended way to use the "
+"Python API, and :ref:`custom commands<reference_commands_custom_commands>` "
+"should be preferred), an extra step is required, because the ``ConanAPI`` "
+"class does not automatically set the CLI interface needed for this sub-API "
+"to work properly. In that case, the following code snippet should be used:"
+msgstr ""
+
+#: ../../../reference/extensions/python_api/CommandAPI.rst:21
+msgid ""
+"from conan.api.conan_api import ConanAPI\n"
+"from conan.cli.cli import Cli\n"
+"\n"
+"api = ConanAPI()\n"
+"cli = Cli(api)\n"
+"cli.add_commands()\n"
+"result = api.command.run([\"remote\", \"list\"])"
+msgstr ""
+
+#: ../../../reference/extensions/python_api/CommandAPI.rst:33
+msgid ""
+"The ``Cli`` class should be treated as a private opaque object, and its "
+"usage limited to the above snippet."
 msgstr ""

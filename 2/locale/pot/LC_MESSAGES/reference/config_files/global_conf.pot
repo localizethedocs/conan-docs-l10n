@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-14 10:10+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,34 +55,40 @@ msgid "Related tools configurations (used by toolchains, helpers, etc.)"
 msgstr ""
 
 #: ../../../reference/config_files/global_conf.rst:18
+msgid ""
+":ref:`Policies<reference_policies>`, which are a set of rules to enforce "
+"certain behaviors from Conan."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:19
 msgid "Others (required Conan version, CLI non-interactive, etc.)"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:20
+#: ../../../reference/config_files/global_conf.rst:21
 msgid "Let's briefly explain the three types of existing configurations:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:22
+#: ../../../reference/config_files/global_conf.rst:23
 msgid ""
 "``core.*``: aimed to configure values of Conan core behavior (download "
 "retries, package ID modes, etc.). Only definable in *global.conf* file."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:24
+#: ../../../reference/config_files/global_conf.rst:25
 msgid ""
 "``tools.*``: aimed to configure values of Conan tools (toolchains, build "
 "helpers, etc.) used in your recipes. Definable in both *global.conf* and :"
 "ref:`profiles <reference_config_files_profiles>`."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:26
+#: ../../../reference/config_files/global_conf.rst:27
 msgid ""
 "``user.*``: aimed to define personal user configurations. They can define "
 "whatever user wants. Definable in both *global.conf* and :ref:`profiles "
 "<reference_config_files_profiles>`."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:29
+#: ../../../reference/config_files/global_conf.rst:30
 msgid ""
 "To list all the possible configurations available, run :command:`conan "
 "config list`:"
@@ -93,7 +99,9 @@ msgid ""
 "$ conan config list\n"
 "core.cache:storage_path: Absolute path where the packages and database are "
 "stored\n"
-"core.download:download_cache: Define path to a file download cache\n"
+"core.download:download_cache: Define path to a file download cache. Files "
+"uploaded to a server are also stored here, so a later download of the same "
+"artifact can be skipped\n"
 "core.download:parallel: Number of concurrent threads to download packages\n"
 "core.download:retry:  (int, default: 2) Number of retries in case of failure "
 "when downloading from Conan server\n"
@@ -152,6 +160,19 @@ msgid ""
 "default)\n"
 "core:non_interactive: Disable interactive user input, raises error if input "
 "necessary\n"
+"core:policies: A list of opt-in behaviors that can be defined in the "
+"configuration to control specific aspects of Conan's behavior,\n"
+"such as keeping deprecated behaviours:\n"
+"   - If required_conan_version>=2.28, bugfix https://github.com/conan-io/"
+"conan/pull/19705 for transitive static libraries package_id\n"
+"   - If required_conan_version>=2.28, bugfix https://github.com/conan-io/"
+"conan/pull/19849 for VirtualBuildEnv bindir path propagation based on "
+"requirement run trait\n"
+"   - If required_conan_version>=2.28, https://github.com/conan-io/conan/"
+"pull/19286 defaults the new 'consistent' trait to True for the host context, "
+"even when 'visible=False'\n"
+"   - If required_conan_version>=2.30, bugfix https://github.com/conan-io/"
+"conan/pull/20073 for propagation of the 'transitive_header' trait\n"
 "core:required_conan_version: Raise if current version does not match the "
 "defined range.\n"
 "core:skip_warnings: Do not show warnings matching any of the patterns in "
@@ -179,6 +200,7 @@ msgid ""
 "tool\n"
 "tools.build:add_rpath_link: Add -Wl,-rpath-link flags pointing to all lib "
 "directories for host dependencies (CMake and Meson toolchains)\n"
+"tools.build:asmflags: List of extra ASM flags used by CMakeToolchain\n"
 "tools.build:cflags: List of extra C flags used by different toolchains like "
 "CMakeToolchain, AutotoolsToolchain and MesonToolchain\n"
 "tools.build:compiler_executables: Defines a Python dict-like with the "
@@ -191,8 +213,9 @@ msgid ""
 "tools.build:download_source: Force download of sources for every package\n"
 "tools.build:exelinkflags: List of extra flags used by different toolchains "
 "like CMakeToolchain, AutotoolsToolchain and MesonToolchain\n"
-"tools.build:install_strip: (boolean) Strip the binaries when installing them "
-"with CMake, Meson and Autotools\n"
+"tools.build:install_strip: (boolean or list) True/False to strip on install "
+"for every CMake, Meson and Autotools integration, or a list of 'cmake', "
+"'meson', 'autotools' to strip only for those.\n"
 "tools.build:jobs: Default compile jobs number -jX Ninja, Make, /MP VS "
 "(default: max CPUs)\n"
 "tools.build:linker_scripts: List of linker script files to pass to the "
@@ -242,12 +265,14 @@ msgid ""
 "tools.cmake.cmaketoolchain:toolset_cuda: (Experimental) Path to a CUDA "
 "toolset to use, or version if installed at the system level\n"
 "tools.cmake.cmaketoolchain:user_presets: (Experimental) Select a different "
-"name instead of CMakeUserPresets.json, empty to disable\n"
+"name or relative filepath instead of CMakeUserPresets.json, empty to "
+"disable. A relative filepath (with directory component) enables CMake 4.4+ --"
+"preset-file mode\n"
 "tools.cmake.cmaketoolchain:user_toolchain: Inject existing user toolchains "
 "at the beginning of conan_toolchain.cmake\n"
 "tools.cmake:cmake_program: Path to CMake executable\n"
 "tools.cmake:configure_args: Add extra arguments to CMake.configure() command "
-"line \n"
+"line\n"
 "tools.cmake:ctest_args: Add extra arguments to CMake.ctest() runner command "
 "line\n"
 "tools.cmake:install_strip: (Deprecated) Add --strip to cmake.install(). Use "
@@ -257,8 +282,7 @@ msgid ""
 "tools.deployer:symlinks: Set to False to disable deployers copying symlinks\n"
 "tools.env.virtualenv:powershell: If specified, it generates PowerShell "
 "launchers (.ps1). Use this configuration setting the PowerShell executable "
-"you want to use (e.g., 'powershell.exe' or 'pwsh'). Setting it to True or "
-"False is deprecated as of Conan 2.11.0.\n"
+"you want to use (e.g., 'powershell.exe' or 'pwsh')\n"
 "tools.env:deactivation_mode: (Experimental) If 'function', generate a "
 "deactivate function instead of a script to unset the environment variables\n"
 "tools.env:dotenv: (Experimental) Generate dotenv environment files\n"
@@ -305,6 +329,9 @@ msgid ""
 "tools.meson.mesontoolchain:extra_machine_files: List of paths for any "
 "additional native/cross file references to be appended to the existing Conan "
 "ones\n"
+"tools.meson.mesontoolchain:extra_variables: Dict of dicts defining extra "
+"variables per meson file section: 'properties', 'binaries', "
+"'project_options'\n"
 "tools.microsoft.bash:active: Set True only when Conan runs in a POSIX Bash "
 "(MSYS2/Cygwin) where Python's subprocess (shell=True) uses a POSIX-"
 "compatible shell (e.g., /bin/sh). Do not set when using Conan from cmd/"
@@ -344,26 +371,26 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:37
+#: ../../../reference/config_files/global_conf.rst:38
 msgid "User/Tools configurations"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:39
+#: ../../../reference/config_files/global_conf.rst:40
 msgid ""
 "Tools and user configurations can be defined in both the *global.conf* file "
 "and :ref:`Conan profiles <reference_config_files_profiles_conf>`. They look "
 "like:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:43
-#: ../../../reference/config_files/global_conf.rst:141
-#: ../../../reference/config_files/global_conf.rst:390
-#: ../../../reference/config_files/global_conf.rst:403
-#: ../../../reference/config_files/global_conf.rst:498
+#: ../../../reference/config_files/global_conf.rst:44
+#: ../../../reference/config_files/global_conf.rst:177
+#: ../../../reference/config_files/global_conf.rst:495
+#: ../../../reference/config_files/global_conf.rst:508
+#: ../../../reference/config_files/global_conf.rst:608
 msgid "*global.conf*"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:43
+#: ../../../reference/config_files/global_conf.rst:44
 msgid ""
 "tools.build:verbosity=verbose\n"
 "tools.microsoft.msbuild:max_cpu_count=2\n"
@@ -373,48 +400,48 @@ msgid ""
 "user.confvar:something=False"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:55
+#: ../../../reference/config_files/global_conf.rst:56
 msgid ""
 "Profiles values will have priority over globally defined ones in global.conf."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:58
+#: ../../../reference/config_files/global_conf.rst:59
 msgid "These are some hints about configuration items scope and naming:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:60
+#: ../../../reference/config_files/global_conf.rst:61
 msgid ""
 "``core.xxx`` and ``tools.yyy`` are Conan built-ins, users cannot define "
 "their own ones in these scopes."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:61
+#: ../../../reference/config_files/global_conf.rst:62
 msgid ""
 "``core.xxx`` can be defined in ``global.conf`` or via the ``--core-conf`` "
 "CLI argument only, but not in profiles."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:62
+#: ../../../reference/config_files/global_conf.rst:63
 msgid ""
 "``tools.yyy`` can be defined in ``global.conf``, in profiles ``[conf]`` "
 "section and as CLI ``-c`` arguments"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:66
+#: ../../../reference/config_files/global_conf.rst:67
 msgid ""
 "``user.zzz`` can be defined everywhere, and they are totally at the user "
 "discretion, no established naming convention. However this would be more or "
 "less expected:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:64
+#: ../../../reference/config_files/global_conf.rst:65
 msgid ""
 "For open source libraries, specially those in conancenter, ``user."
 "packagename:conf`` might be expected, like the ``boost`` recipe defining "
 "``user.boost:conf`` conf"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:65
+#: ../../../reference/config_files/global_conf.rst:66
 msgid ""
 "For private usage, the recommendation could be to use something like ``user."
 "orgname:conf`` for global org configuration across all projects, ``user."
@@ -422,25 +449,25 @@ msgid ""
 "project:conf`` might be also good if the project name is unique enough."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:66
+#: ../../../reference/config_files/global_conf.rst:67
 msgid ""
 "They _must_ have one ``:`` separator, like ``user.myorg:conf``, but not "
 "``user.myorg.conf`` or ``user.myorg``. This is to disambiguate from "
 "patterns, which are discussed below."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:69
+#: ../../../reference/config_files/global_conf.rst:70
 msgid "Configuration file template"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:72
+#: ../../../reference/config_files/global_conf.rst:73
 msgid ""
 "It is possible to use **jinja2** template engine for *global.conf*. When "
 "Conan loads this file, it immediately parses and renders the template, which "
 "must result in a standard tools-configuration text."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:75
+#: ../../../reference/config_files/global_conf.rst:76
 msgid ""
 "# Using all the cores automatically\n"
 "tools.build:jobs={{os.cpu_count()}}\n"
@@ -448,26 +475,26 @@ msgid ""
 "user.myconf.system:name = {{platform.system()}}"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:82
+#: ../../../reference/config_files/global_conf.rst:83
 msgid ""
 "Conan also injects ``detect_api`` (non-stable, read the reference) to the "
 "jinja rendering context. You can use it like this:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:84
+#: ../../../reference/config_files/global_conf.rst:85
 msgid ""
 "user.myteam:myconf1={{detect_api.detect_os()}}\n"
 "user.myteam:myconf2={{detect_api.detect_arch()}}"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:89
+#: ../../../reference/config_files/global_conf.rst:90
 msgid ""
 "For more information on how to use it, please check :ref:`the detect_api "
 "section <reference_config_files_profiles_detect_api>` in the profiles "
 "reference."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:92
+#: ../../../reference/config_files/global_conf.rst:93
 msgid ""
 "The Python packages passed to render the template are ``os``, ``platform`` "
 "and ``hashlib`` for all platforms and ``distro`` in Linux platforms. "
@@ -475,7 +502,7 @@ msgid ""
 "also available."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:95
+#: ../../../reference/config_files/global_conf.rst:96
 msgid ""
 "The ``os``, ``platform`` and ``distro`` can be useful to perform different "
 "system checks, while the ``hashlib`` library can be convenient to compute "
@@ -484,7 +511,7 @@ msgid ""
 "the path length can be an issue, for example:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:99
+#: ../../../reference/config_files/global_conf.rst:100
 msgid ""
 "# compute a unique hash based on the current home folder\n"
 "{% set h = hashlib.new(\"sha256\", conan_home_folder.encode(),\n"
@@ -494,17 +521,17 @@ msgid ""
 "core.cache:storage_path=C:/conan_{{h[:6]}}"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:109
+#: ../../../reference/config_files/global_conf.rst:110
 msgid "Configuration data types"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:112
+#: ../../../reference/config_files/global_conf.rst:113
 msgid ""
 "All the values will be interpreted by Conan as the result of the python "
 "built-in `eval()` function:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:114
+#: ../../../reference/config_files/global_conf.rst:115
 msgid ""
 "# String\n"
 "tools.build:verbosity=verbose\n"
@@ -520,38 +547,90 @@ msgid ""
 msgstr ""
 
 #: ../../../reference/config_files/global_conf.rst:131
+msgid ""
+"Because the value is passed through ``eval()``, an input that looks like a "
+"numeric literal will be evaluated as such. For example, a version string "
+"like ``1.10`` will be evaluated to the float ``1.1``, silently losing the "
+"trailing zero:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:135
+msgid ""
+"# This becomes the float 1.1, NOT the string \"1.10\"\n"
+"user.myorg:docker_image_tag=1.10"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:140
+msgid ""
+"Note that this mostly affects ``user.*`` confs, since built-in ``core.*`` "
+"and ``tools.*`` confs internally declare their type and would not convert a "
+"float. For ``user.*`` confs no type is enforced by default, so the evaluated "
+"value is passed through as-is."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:145
+msgid ""
+"The recommended workaround is to prefix the value with a non-numeric "
+"character (for example ``v``) so ``eval()`` cannot turn it into a number, "
+"and then strip that character in the recipe:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:149
+msgid ""
+"# In the profile / global.conf / -c CLI argument\n"
+"user.myorg:docker_image_tag=v1.10"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:154
+msgid ""
+"# In the recipe\n"
+"tag = self.conf.get(\"user.myorg:docker_image_tag\", check_type=str)."
+"lstrip(\"v\")"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:159
+msgid ""
+"Wrapping the value in quotes (``\"1.10\"``) also works from a *global.conf* "
+"or profile ``[conf]`` section (``eval()`` will return the string ``1.10``), "
+"but this typically does not survive shell quoting when passed on the command "
+"line with ``-c``."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:167
 msgid "Configuration data operators"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:133
+#: ../../../reference/config_files/global_conf.rst:169
 msgid ""
 "It's also possible to use some extra operators when you're composing tool "
 "configurations in your *global.conf* or any of your profiles:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:136
+#: ../../../reference/config_files/global_conf.rst:172
 msgid ""
 "``+=`` == ``append``: appends values at the end of the existing value (only "
 "for lists)."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:137
+#: ../../../reference/config_files/global_conf.rst:173
 msgid ""
 "``=+`` == ``prepend``: puts values at the beginning of the existing value "
 "(only for lists)."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:138
+#: ../../../reference/config_files/global_conf.rst:174
 msgid ""
 "``*=`` == ``update``: updates the specified keys only, leaving the rest "
 "unmodified (only for dictionaries)"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:139
-msgid "``=!`` == ``unset``: gets rid of any configuration value."
+#: ../../../reference/config_files/global_conf.rst:175
+msgid ""
+"``=!`` == ``unset``: gets rid of any configuration value. The ``=~`` "
+"operator is an alias for ``=!``."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:141
+#: ../../../reference/config_files/global_conf.rst:177
 msgid ""
 "# Define the value => [\"-f1\"]\n"
 "user.myconf.build:flags=[\"-f1\"]\n"
@@ -562,8 +641,9 @@ msgid ""
 "# Prepend the value [\"-f0\"] => [\"-f0\", \"-f1\", \"-f2\"]\n"
 "user.myconf.build:flags=+[\"-f0\"]\n"
 "\n"
-"# Unset the value\n"
+"# Unset the value (both notations are equivalent)\n"
 "user.myconf.build:flags=!\n"
+"user.myconf.build:flags=~\n"
 "\n"
 "# Define the value => {\"a\": 1, \"b\": 2}\n"
 "user.myconf.build:other={\"a\": 1, \"b\": 2}\n"
@@ -572,42 +652,42 @@ msgid ""
 "user.myconf.build:other*={\"b\": 4}"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:165
+#: ../../../reference/config_files/global_conf.rst:202
 msgid "Configuration patterns"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:167
+#: ../../../reference/config_files/global_conf.rst:204
 msgid ""
 "You can use package patterns to apply the configuration in those "
 "dependencies which are matching:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:169
+#: ../../../reference/config_files/global_conf.rst:206
 msgid ""
 "*:tools.cmake.cmaketoolchain:generator=Ninja\n"
 "zlib/*:tools.cmake.cmaketoolchain:generator=Visual Studio 16 2019"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:174
+#: ../../../reference/config_files/global_conf.rst:211
 msgid ""
 "This example shows you how to specify a general ``generator`` for all your "
 "packages except for ``zlib`` which is defining ``Visual Studio 16 2019`` as "
 "its generator."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:177
+#: ../../../reference/config_files/global_conf.rst:214
 msgid ""
 "Besides that, it's quite relevant to say that **the order matters**. So, if "
 "we change the order of the configuration lines above:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:180
+#: ../../../reference/config_files/global_conf.rst:217
 msgid ""
 "zlib/*:tools.cmake.cmaketoolchain:generator=Visual Studio 16 2019\n"
 "*:tools.cmake.cmaketoolchain:generator=Ninja"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:185
+#: ../../../reference/config_files/global_conf.rst:222
 msgid ""
 "The result is that you're specifying a general ``generator`` for all your "
 "packages, and that's it. The ``zlib`` line has no effect because it's the "
@@ -616,46 +696,101 @@ msgid ""
 "to the order."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:191
+#: ../../../reference/config_files/global_conf.rst:227
+msgid "global_user.conf"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:232
+msgid ""
+"Similar to how the ``settings_user.yml`` can complete the default ``settings."
+"yml``, the (new in Conan 2.29) ``global_user.conf`` allow developers to have "
+"their own ``[CONAN_HOME]/global_user.conf`` file in the Conan cache, with "
+"the following properties:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:235
+msgid ""
+"It also allows ``jinja2`` templating syntax, with the same inputs as the "
+"``global.conf`` file."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:236
+msgid ""
+"Its contents compose and overwrite the existing values in ``global.conf`` "
+"with higher precedence."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:237
+msgid ""
+"It is designed for developers to be able to customize and deviate from the "
+"organization/team common ``global.conf``."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:238
+msgid ""
+"This file is not intended to be managed or installed by ``conan config "
+"install/install-pkg`` commands."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:239
+msgid ""
+"The existence of this file allows developers to sync and update their "
+"organization ``global.conf`` with ``conan config install/install-pkg`` "
+"without losing their customization"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:240
+msgid ""
+"A ``conan config clean`` will remove the ``global_user.conf`` file, as its "
+"purpose is to completely reset the Conan home configuration."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:244
 msgid "Configuration precedence"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:193
+#: ../../../reference/config_files/global_conf.rst:246
 msgid ""
 "There are different places where a configuration such as ``tools.build:"
 "verbosity`` can be defined:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:195
+#: ../../../reference/config_files/global_conf.rst:248
 msgid "Globally, in the ``global.conf`` file"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:196
+#: ../../../reference/config_files/global_conf.rst:249
 msgid ""
 "In a ``tool_requires`` recipe that defines a ``self.conf_info`` in their "
 "``package_info()`` method. (Recall that only **direct** ``tool_requires`` "
 "propagate ``conf_info`` to their consumers)."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:198
+#: ../../../reference/config_files/global_conf.rst:251
 msgid "In a profile file ``[conf]`` section"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:199
+#: ../../../reference/config_files/global_conf.rst:252
 msgid "In the command line ``-c tools.build:verbosity=<value>``"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:201
+#: ../../../reference/config_files/global_conf.rst:254
 msgid ""
 "In general, the rule is that the \"closest to the user\" has higher "
 "precedence."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:203
+#: ../../../reference/config_files/global_conf.rst:256
 msgid "That means that:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:205
+#: ../../../reference/config_files/global_conf.rst:258
 msgid ""
 "The command line arguments like ``-c tools.build:verbosity=<value>`` will "
 "have higher precedence and overwrite possible values already defined in "
@@ -664,52 +799,52 @@ msgid ""
 "line, so they want that value to prevail."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:208
+#: ../../../reference/config_files/global_conf.rst:261
 msgid ""
 "Then, the profile ``[conf]`` section will have precedence over the "
 "``tool_requires`` and ``global.conf`` definitions, as the profiles are also "
 "inputs by the user."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:210
+#: ../../../reference/config_files/global_conf.rst:263
 msgid ""
 "Then, the ``global.conf`` will have precedence over ``tool_requires`` "
 "defined ``conf_info``. The idea is that the user can define the behavior "
 "they want without having to modify or rewrite recipes."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:212
+#: ../../../reference/config_files/global_conf.rst:265
 msgid ""
 "Finally, the one with less precedence is the ``tool_requires`` configuration "
 "defined in ``package_info()`` method with ``self.conf_info``."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:214
+#: ../../../reference/config_files/global_conf.rst:267
 msgid ""
 "The core configurations such as ``core:skip_warnings`` can be defined in:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:216
+#: ../../../reference/config_files/global_conf.rst:269
 msgid "Globally, in the ``global.conf``, with less precedence"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:217
+#: ../../../reference/config_files/global_conf.rst:270
 msgid ""
 "In the command line, with ``-cc/--core-conf core:skip_warnings=<value>`` "
 "with higher precedence over the ``global.conf``."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:219
+#: ../../../reference/config_files/global_conf.rst:272
 msgid ""
 "Note that ``core`` configurations cannot be defined in profiles or in "
 "recipes."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:223
+#: ../../../reference/config_files/global_conf.rst:276
 msgid "Important configurations with ``!`` specifier"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:225
+#: ../../../reference/config_files/global_conf.rst:278
 msgid ""
 "There are some scenarios when it is desired that a recipe defined "
 "configuration in ``package_info()`` via the ``conf_info`` has higher "
@@ -717,7 +852,7 @@ msgid ""
 "command line."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:228
+#: ../../../reference/config_files/global_conf.rst:281
 msgid ""
 "The \"important configuration\" definition allows this, specifying with the "
 "``!`` qualifier over the configuration name that such value should have "
@@ -729,7 +864,7 @@ msgid ""
 "We could define a recipe like:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:235
+#: ../../../reference/config_files/global_conf.rst:288
 msgid ""
 "from conan import ConanFile\n"
 "\n"
@@ -747,11 +882,11 @@ msgid ""
 "      # operations, for paths, append/prepend, etc"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:252
+#: ../../../reference/config_files/global_conf.rst:305
 msgid "with some consumers that requires it:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:254
+#: ../../../reference/config_files/global_conf.rst:307
 msgid ""
 "from conan import ConanFile\n"
 "\n"
@@ -764,31 +899,31 @@ msgid ""
 "        self.tool_requires(\"msys2/1.0\")"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:266
+#: ../../../reference/config_files/global_conf.rst:319
 msgid "And then have a profile like"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:268
+#: ../../../reference/config_files/global_conf.rst:321
 msgid ""
 "[conf]\n"
 "tools.microsoft.bash:path=<point/to/system/msys2/installation>"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:273
+#: ../../../reference/config_files/global_conf.rst:326
 msgid ""
 "Then, the ``mylib/1.0`` will get the ``tools.microsoft.bash:path`` pointing "
 "to the ``msys2`` path, while other recipes that do not ``tool_requires`` the "
 "``msys2`` will still get the system one."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:276
+#: ../../../reference/config_files/global_conf.rst:329
 msgid ""
 "If for some reason a profile or command line would still want to force an "
 "override also the important configurations from packages upstream, they can "
 "do it using the same syntax:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:279
+#: ../../../reference/config_files/global_conf.rst:332
 msgid ""
 "[conf]\n"
 "# This will force all packages to use the system msys2, even if they\n"
@@ -797,11 +932,11 @@ msgid ""
 "tools.microsoft.bash:path!=<point/to/system/msys2/installation>"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:290
+#: ../../../reference/config_files/global_conf.rst:343
 msgid "**Best practices**"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:292
+#: ../../../reference/config_files/global_conf.rst:345
 msgid ""
 "The usage of important ``!`` configuration should be exceptional, and "
 "reduced to limited cases when there are no other alternatives. Modifying the "
@@ -810,43 +945,54 @@ msgid ""
 "feature sparingly and being aware of these implications."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:299
+#: ../../../reference/config_files/global_conf.rst:352
 msgid "Information about built-in confs"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:301
+#: ../../../reference/config_files/global_conf.rst:354
 msgid "This section provides extra information about specific confs."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:304
+#: ../../../reference/config_files/global_conf.rst:358
+msgid "Policies"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:360
+msgid ""
+"The ``core:policies`` conf allows to define policies that will be applied "
+"globally to modify the behaviour of Conan in certain aspects. Check :ref:"
+"`the policies section <reference_policies>` for more information."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:365
 msgid "Networking confs"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:309
+#: ../../../reference/config_files/global_conf.rst:370
 msgid "Configuration of client certificates"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:311
+#: ../../../reference/config_files/global_conf.rst:372
 msgid ""
 "Conan supports client TLS certificates. You can configure the path to your "
 "existing *Cacert* file and/or your client certificate (and the key) using "
 "the following configuration variables:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:314
+#: ../../../reference/config_files/global_conf.rst:375
 msgid ""
 "``core.net.http:cacert_path``: Path containing a custom Cacert file. When "
 "multiple certificates are necessary for different remotes, it is possible to "
 "aggregate them, for example adding your own ``my-ca.crt`` certificate:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:318
+#: ../../../reference/config_files/global_conf.rst:379
 msgid ""
 "sudo cp my-ca.crt /usr/local/share/ca-certificates/my-ca.crt\n"
 "sudo update-ca-certificates"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:324
+#: ../../../reference/config_files/global_conf.rst:385
 msgid ""
 "Then, the certificate storage can be defined with ``core.net.http:"
 "cacert_path=/etc/ssl/certs/ca-certificates.crt``. The ``cacert_path`` Conan "
@@ -857,7 +1003,7 @@ msgid ""
 "into account too."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:329
+#: ../../../reference/config_files/global_conf.rst:390
 msgid ""
 "``core.net.http:client_cert``: Path or tuple of files containing a client "
 "certificate (and the key). See more details in `Python requests and Client "
@@ -865,19 +1011,19 @@ msgid ""
 "#client-side-certificates>`_"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:332
+#: ../../../reference/config_files/global_conf.rst:393
 msgid "For instance:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:334
+#: ../../../reference/config_files/global_conf.rst:395
 msgid "**[CONAN_HOME]/global.conf**"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:334
+#: ../../../reference/config_files/global_conf.rst:395
 msgid "core.net.http:client_cert=('/path/client.cert', '/path/client.key')"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:339
+#: ../../../reference/config_files/global_conf.rst:400
 msgid ""
 "``tools.files.download:verify``: Setting ``tools.files.download:"
 "verify=False`` constitutes a security risk if enabled, as it disables "
@@ -886,22 +1032,22 @@ msgid ""
 "good idea) or if you are using it for development purposes"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:346
+#: ../../../reference/config_files/global_conf.rst:407
 msgid ""
 "If you need to use both a corporate remote (with a private CA) and a public "
 "remote like ConanCenter, see :ref:`faq_ssl_corporate_certificates` for step-"
 "by-step instructions on creating a combined CA bundle."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:352
+#: ../../../reference/config_files/global_conf.rst:413
 msgid "Proxies"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:354
+#: ../../../reference/config_files/global_conf.rst:415
 msgid "There are 3 ``confs`` that can define proxies information:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:356
+#: ../../../reference/config_files/global_conf.rst:417
 msgid ""
 "$ conan config list proxies\n"
 "core.net.http:clean_system_proxy: If defined, the proxies system env-vars "
@@ -911,7 +1057,7 @@ msgid ""
 "core.net.http:proxies: Dictionary containing the proxy configuration"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:363
+#: ../../../reference/config_files/global_conf.rst:424
 msgid ""
 "The ``core.net.http:proxies`` dictionary is passed to the underlying "
 "``python-requests`` library, to the \"proxies\" argument as described in the "
@@ -919,15 +1065,15 @@ msgid ""
 "user/advanced/#proxies>`_"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:366
+#: ../../../reference/config_files/global_conf.rst:427
 msgid "The ``core.net:no_proxy_match`` is a list of URL patterns, like:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:368
+#: ../../../reference/config_files/global_conf.rst:429
 msgid "core.net.http:no_proxy_match = [\"http://someurl.com/*\"]"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:373
+#: ../../../reference/config_files/global_conf.rst:434
 msgid ""
 "for URLs to be excluded from the ``proxies`` configuration. That means that "
 "all URLs that are referenced that matches any of those patterns will not "
@@ -935,7 +1081,7 @@ msgid ""
 "necessary for the match."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:376
+#: ../../../reference/config_files/global_conf.rst:437
 msgid ""
 "If ``core.net.http:clean_system_proxy`` is ``True``, then the environment "
 "variables ``\"http_proxy\", \"https_proxy\", \"ftp_proxy\", \"all_proxy\", "
@@ -943,81 +1089,179 @@ msgid ""
 "not taken into account when resolving proxies."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:382
+#: ../../../reference/config_files/global_conf.rst:442
+msgid "MSYS2 subsystem environments"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:444
+msgid ""
+"The ``tools.microsoft.bash:subsystem`` configuration accepts ``msys2`` as a "
+"generic value, but also supports explicit MSYS2 environment names using the "
+"``msys2-<environment>`` syntax. This allows selecting a specific MSYS2 "
+"environment (and its associated ``MSYSTEM`` variable) rather than relying on "
+"the architecture-based default."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:449
+msgid ""
+"This specific ``MSYSTEM`` variable can become important for recipes using "
+"autotools in Windows with ``win_bash=True``, and compiling with different "
+"``msys2`` compilers. For other build systems such as CMake, explicitly "
+"defining the path to the compiler used could be enough."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:453
+msgid "Supported values:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:455
+msgid ""
+"``msys2`` (default): uses architecture-based MSYSTEM (``MINGW64`` for "
+"x86_64, ``MINGW32`` for x86)."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:456
+msgid "``msys2-ucrt64``: selects the UCRT64 environment (``UCRT64``)."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:457
+msgid "``msys2-clang64``: selects the CLANG64 environment (``CLANG64``)."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:458
+msgid "``msys2-clangarm64``: selects the CLANGARM64 environment."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:459
+msgid "``msys2-mingw64``: selects the MINGW64 environment explicitly."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:460
+msgid "``msys2-mingw32``: selects the MINGW32 environment explicitly."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:461
+msgid "``msys2-clang32``: selects the CLANG32 environment."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:463
+msgid "Example profile:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:465
+msgid "*windows_ucrt64*"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:465
+msgid ""
+"[settings]\n"
+"os=Windows\n"
+"arch=x86_64\n"
+"...\n"
+"\n"
+"[conf]\n"
+"tools.microsoft.bash:subsystem=msys2-ucrt64\n"
+"tools.microsoft.bash:path=C:\\msys64\\usr\\bin\\bash.exe"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:477
+msgid ""
+"The ``msys2-<environment>`` format sets the ``MSYSTEM`` environment variable "
+"accordingly when running bash commands, enabling proper activation of the "
+"selected MSYS2 toolchain."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:480
+msgid ""
+"Recall that the ``tools.microsoft.bash:subsystem`` conf doesn't have any "
+"effect on the ``package_id`` computation. If users want to model binaries "
+"for the different environments, it is necessary to define accordingly the "
+"``os.subsystem`` setting. At the moment it only accepts ``msys2`` value, so "
+"users wanting more control can extend it via the custom ``settings_user."
+"yml`` file."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:487
 msgid "Storage configurations"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:385
+#: ../../../reference/config_files/global_conf.rst:490
 msgid "core.cache:storage_path"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:387
+#: ../../../reference/config_files/global_conf.rst:492
 msgid ""
 "Absolute path to a folder where the Conan packages and the database of the "
 "packages will be stored. This folder will be the heaviest Conan storage "
 "folder, as it stores the binary packages downloaded or created."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:390
+#: ../../../reference/config_files/global_conf.rst:495
 msgid "core.cache:storage_path = C:\\Users\\danielm\\my_conan_storage_folder"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:395
+#: ../../../reference/config_files/global_conf.rst:500
 msgid "**Default value:** ``<CONAN_HOME>/p``"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:398
+#: ../../../reference/config_files/global_conf.rst:503
 msgid "core.download:download_cache"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:400
+#: ../../../reference/config_files/global_conf.rst:505
 msgid ""
 "Absolute path to a folder where the Conan packages will be stored "
 "*compressed*. This is useful to avoid recurrent downloads of the same "
 "packages, especially in CI."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:403
+#: ../../../reference/config_files/global_conf.rst:508
 msgid "core.download:download_cache = C:\\Users\\danielm\\my_download_cache"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:408
+#: ../../../reference/config_files/global_conf.rst:513
 msgid "**Default value:** Not defined."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:412
+#: ../../../reference/config_files/global_conf.rst:517
+msgid ""
+"When this conf is defined and an artifact is uploaded to a remote, Conan "
+"will also populate the download cache of the client with the same artifact."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:522
 msgid "UX confs"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:417
+#: ../../../reference/config_files/global_conf.rst:527
 msgid "Skip warnings"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:419
+#: ../../../reference/config_files/global_conf.rst:529
 msgid ""
 "There are several warnings that Conan outputs in certain cases which can be "
 "omitted via the ``core:skip_warnings`` conf, by adding the warning tag to "
 "its value."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:422
+#: ../../../reference/config_files/global_conf.rst:532
 msgid "Those warnings are:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:424
+#: ../../../reference/config_files/global_conf.rst:534
 msgid ""
 "``deprecated``: Messages for deprecated features such as legacy generators"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:425
+#: ../../../reference/config_files/global_conf.rst:535
 msgid "``network``: Messages related to network issues, such as retries"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:429
+#: ../../../reference/config_files/global_conf.rst:539
 msgid "Parallel download"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:431
+#: ../../../reference/config_files/global_conf.rst:541
 msgid ""
 "By default the download and unzip of pre-compiled package binaries from "
 "remote servers will happen in parallel, defaulting to the number of cpu-"
@@ -1029,90 +1273,84 @@ msgid ""
 "moment is not to use parallelism, but sequential download."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:440
+#: ../../../reference/config_files/global_conf.rst:550
 msgid "Environment deactivation functions"
 msgstr ""
 
-#: ../../../common/experimental_warning.inc:3
-msgid ""
-"This feature is experimental and subject to breaking changes. See :ref:`the "
-"Conan stability<stability>` section for more information."
-msgstr ""
-
-#: ../../../reference/config_files/global_conf.rst:445
+#: ../../../reference/config_files/global_conf.rst:555
 msgid ""
 "When setting the configuration ``tools.env:deactivation_mode`` to "
 "``function`` in your profile or in ``global.conf``, the deactivation scripts "
 "will no longer be generated."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:448
+#: ../../../reference/config_files/global_conf.rst:558
 msgid ""
 "Instead, an *in-memory* deactivation function will be available in the "
 "current shell session as soon as you activate the conan environment."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:451
+#: ../../../reference/config_files/global_conf.rst:561
 msgid "Moving from the classical Conan workflow:"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:455
+#: ../../../reference/config_files/global_conf.rst:565
 msgid ""
 "$ source conanbuild.sh\n"
 "$ ...\n"
 "$ source deactivate_conanbuild.sh"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:461
+#: ../../../reference/config_files/global_conf.rst:571
 msgid ""
 "$ .\\conanbuild.ps1\n"
 "$ ...\n"
 "$ .\\deactivate_conanbuild.ps1"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:467
+#: ../../../reference/config_files/global_conf.rst:577
 msgid ""
 "$ .\\conanbuild.bat\n"
 "$ ...\n"
 "$ .\\deactivate_conanbuild.bat"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:473
+#: ../../../reference/config_files/global_conf.rst:583
 msgid "To the new workflow,"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:477
+#: ../../../reference/config_files/global_conf.rst:587
 msgid ""
 "$ source conanbuild.sh\n"
 "$ ...\n"
 "$ deactivate_conanbuild # from anywhere in the shell"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:483
+#: ../../../reference/config_files/global_conf.rst:593
 msgid ""
 "$ .\\conanbuild.ps1\n"
 "$ ...\n"
 "$ deactivate_conanbuild # from anywhere in the shell"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:489
+#: ../../../reference/config_files/global_conf.rst:599
 msgid ""
 "$ .\\conanbuild.bat\n"
 "$ ...\n"
 "$ deactivate_conanbuild # from anywhere in the shell"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:495
+#: ../../../reference/config_files/global_conf.rst:605
 msgid ""
 "By executing this function, the environment will be restored and the "
 "function will no longer be available in the current shell session. This "
 "behavior emulates the well known ``virtualenv`` Python tool."
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:498
+#: ../../../reference/config_files/global_conf.rst:608
 msgid "tools.env:deactivation_mode=function"
 msgstr ""
 
-#: ../../../reference/config_files/global_conf.rst:503
+#: ../../../reference/config_files/global_conf.rst:613
 msgid "**Default value:** None."
 msgstr ""

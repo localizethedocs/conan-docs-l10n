@@ -1,0 +1,196 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:4
+msgid "Using PkgConfig.fill_cpp_info with PKG_CONFIG_PATH from a profile"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:6
+msgid ""
+"The :ref:`PkgConfig<conan_tools_gnu_pkgconfig>` helper can read a ``.pc`` "
+"file and use its contents to fill a ``cpp_info`` object with "
+"``fill_cpp_info()``. When ``pkg_config_path`` is not passed explicitly, "
+"``pkg-config`` locates the ``.pc`` file via the ``PKG_CONFIG_PATH`` "
+"environment variable, which can be defined in the profile ``[buildenv]`` "
+"section."
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:12
+msgid ""
+"A common scenario is cross-compilation with an external toolchain: the "
+"toolchain provides a sysroot that already ships ``.pc`` files describing its "
+"libraries (``gl.pc``, ``EGL.pc``, ``zlib.pc``, ...), and the host profile "
+"points ``PKG_CONFIG_PATH`` at the sysroot's ``pkgconfig`` folder. A wrapper "
+"recipe can then read those ``.pc`` files at ``package()`` time and expose "
+"the information to consumers without hard-coding include and library paths."
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:18
+msgid ""
+"The challenge comes when users try to define ``PKG_CONFIG_PATH`` in the "
+"``[buildenv]`` section of a profile, because that is not available in the "
+"``package_info()`` method of the recipes, as the package information cannot "
+"rely on the \"build environment\", as the build environment is only "
+"available when the package is being built, but not necessarily when the "
+"package is being consumed."
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:24
+msgid ""
+"The example below uses a fabricated ``mylibastral.pc`` next to the profile "
+"to keep it self-contained, but the mechanism is exactly the same as pointing "
+"to a real sysroot folder, to illustrate how this could be implemented if "
+"necessary."
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:31
+msgid ""
+"This strategy is valid only for \"system\" packages, that is, recipes that "
+"act as a wrapper around a system or sysroot dependency (typical in cross-"
+"compilation with an external toolchain). Regular Conan packages that build "
+"and package their own artifacts should not use this."
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:37
+msgid ""
+"The **profile** below adds a folder containing ``.pc`` files to "
+"``PKG_CONFIG_PATH``. The ``profile_dir`` Jinja variable resolves to the "
+"folder that contains the profile itself, so a ``mypcs/`` folder next to the "
+"profile can be used directly:"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:41
+msgid "*myprofile*"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:41
+msgid ""
+"[settings]\n"
+"os=Linux\n"
+"arch=armv8\n"
+"\n"
+"[buildenv]\n"
+"PKG_CONFIG_PATH+=(path){{ profile_dir }}/mypcs"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:51
+msgid ""
+"In a real cross-compilation setup, that path would typically point to the "
+"sysroot folder shipped by the toolchain, for example ``{{ sysroot }}/usr/lib/"
+"pkgconfig``."
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:54
+msgid ""
+"The ``.pc`` file located in the ``mypcs`` folder besides the profile "
+"describes the library (include folders, library folders, libs, defines, link "
+"flags, ...):"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:57
+msgid "*mypcs/mylibastral.pc*"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:57
+msgid ""
+"prefix=/usr/local\n"
+"exec_prefix=${prefix}\n"
+"libdir=${exec_prefix}/lib\n"
+"includedir=${prefix}/include\n"
+"\n"
+"Name: mylibastral\n"
+"Description: Interface library for Astral data flows\n"
+"Version: 6.6.6\n"
+"Libs: -L${libdir}/libastral -lastral -lm -Wl,--whole-archive\n"
+"Cflags: -I${includedir}/libastral -D_USE_LIBASTRAL"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:72
+msgid ""
+"The ``conanfile.py`` recipe uses ``PkgConfig`` to read ``mylibastral.pc`` "
+"and populate a ``CppInfo`` object. It does it at ``package()`` time, when "
+"the package is being built (the policies are added so the package is "
+"automatically build when necessary in the current machine, and binaries are "
+"never uploaded, as the information from that .pc file will only be valid in "
+"the current machine). Notice that ``pkg_config_path`` is not passed: it is "
+"picked up from ``PKG_CONFIG_PATH`` defined in the profile. The resulting "
+"``CppInfo`` is serialized to the package folder in ``package()``, and "
+"reloaded in ``package_info()``:"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:80
+msgid "*conanfile.py*"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:80
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"from conan.tools.gnu import PkgConfig\n"
+"from conan.tools import CppInfo\n"
+"\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    name = \"mypkg\"\n"
+"    version = \"0.1\"\n"
+"    build_policy = \"missing\"\n"
+"    upload_policy = \"skip\"\n"
+"\n"
+"    def package(self):\n"
+"        # This method executes at package build time, it has\n"
+"        # available the build environment \"buildenv\"\n"
+"        pkg_config = PkgConfig(self, \"mylibastral\")\n"
+"        cpp_info = CppInfo(self)\n"
+"        pkg_config.fill_cpp_info(cpp_info, is_system=False, "
+"system_libs=[\"m\"])\n"
+"        cpp_info.save(os.path.join(self.package_folder, \"cpp_info.json\"))\n"
+"\n"
+"    def package_info(self):\n"
+"        # This method executes at package consumption time, it will\n"
+"        # NOT have available the build environment, but it can load a file\n"
+"        # generated at build/package time\n"
+"        self.cpp_info = CppInfo(self).load(\"cpp_info.json\")"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:110
+msgid "Let's now create and consume the package:"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:112
+msgid ""
+"$ conan create . -pr=myprofile\n"
+"$ conan install --requires=mypkg/0.1 -pr=myprofile -g CMakeDeps"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:117
+msgid ""
+"The generated ``mypkg-none-armv8-data.cmake`` will contain the include/lib "
+"folders, libs, defines and link flags read from ``mylibastral.pc``, "
+"something like:"
+msgstr ""
+
+#: ../../../examples/tools/gnu/pkg_config_sysroot.rst:120
+msgid ""
+"set(mypkg_INCLUDE_DIRS_NONE \"/usr/local/include/libastral\")\n"
+"set(mypkg_LIB_DIRS_NONE \"/usr/local/lib/libastral\")\n"
+"set(mypkg_LIBS_NONE astral)\n"
+"set(mypkg_SYSTEM_LIBS_NONE m)\n"
+"set(mypkg_DEFINITIONS_NONE \"-D_USE_LIBASTRAL\")\n"
+"set(mypkg_COMPILE_DEFINITIONS_NONE \"_USE_LIBASTRAL\")\n"
+"set(mypkg_SHARED_LINK_FLAGS_NONE \"-Wl,--whole-archive\")"
+msgstr ""

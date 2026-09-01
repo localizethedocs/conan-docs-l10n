@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.15\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/export_sources.rst:4
+msgid "export_sources()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export_sources.rst:6
+msgid ""
+"Equivalent to the ``exports_sources`` attribute, but in method form. This "
+"method will be called at ``export`` time, which happens in ``conan export``, "
+"``conan export-pkg``  and ``conan create`` commands, and it is intended to "
+"allow copying files from the user folder to the Conan cache folders, those "
+"files becoming part of the recipe sources. These sources will be uploaded to "
+"the servers together with the recipe, but are typically not downloaded "
+"unless the package is being built from source."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export_sources.rst:12
+msgid ""
+"The current working directory will be ``self.recipe_folder``, and it can use "
+"the ``self.export_sources_folder`` as the destination folder for using "
+"``copy()`` or your custom copy."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export_sources.rst:15
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.files import copy\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    def export_sources(self):\n"
+"        # This LICENSE.md is a source file intended to be part of the final "
+"package\n"
+"        # it is not the license of the current recipe\n"
+"        copy(self, \"LICENSE.md\", self.recipe_folder, self."
+"export_sources_folder)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export_sources.rst:27
+msgid ""
+"The method might be able to read files in the recipe folder and do something "
+"with it:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export_sources.rst:29
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"from conan.tools.files import load, save\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"\n"
+"    def export_sources(self):\n"
+"        content = load(self, os.path.join(self.recipe_folder, \"data."
+"txt\"))\n"
+"        save(self, os.path.join(self.export_sources_folder, \"myfile.txt\"), "
+"content)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export_sources.rst:42
+msgid ""
+"The ``export_conandata_patches()`` is a high-level helper function that does "
+"the export of the patches defined in the ``conandata.yml`` file, which could "
+"be later applied with ``apply_conandata_patches()`` in the ``source()`` "
+"method."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export_sources.rst:45
+msgid ""
+"from conan.tools.files import export_conandata_patches\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"\n"
+"    def export_sources(self):\n"
+"        export_conandata_patches(self)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export_sources.rst:57
+msgid "**Best practices**"
+msgstr "**最佳實踐**"
+
+#: ../../../reference/conanfile/methods/export_sources.rst:59
+msgid ""
+"The recipe sources must be configuration independent. Those sources are "
+"common for all configurations, thus it is not possible to do conditional "
+"``export_sources()`` to different settings, options, or platforms. Do not "
+"try to do any kind of conditional export. If necessary export all the files "
+"necessary for all configurations at once."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export_sources.rst:60
+msgid ""
+"The ``export_sources()`` method does not receive any information from "
+"profiles, not even ``conf``. Only the ``global.conf`` will be available, and "
+"in any case it is not possible to use that ``conf`` to define conditionals."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export_sources.rst:61
+msgid ""
+"Keep the ``export_source()`` method simple. Its intention is to copy files "
+"from the user folder to the cache to store those files together with the "
+"recipe."
+msgstr ""

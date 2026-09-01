@@ -1,0 +1,701 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.15\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../incubating.rst:5
+msgid "Incubating features"
+msgstr "孵化中的功能"
+
+#: ../../../incubating.rst:7
+msgid ""
+"This section is dedicated to new features that are under development, "
+"looking for user testing and feedback. They are generally behind a flag to "
+"enable them to explicitly opt-in on this testing stage. They require the "
+"very latest Conan version (sometimes recommended running from the "
+"``develop2`` source branch), and explicitly setting those flags."
+msgstr ""
+
+#: ../../../incubating.rst:11
+msgid "New CMakeConfigDeps generator"
+msgstr "新的 CMakeConfigDeps 生成器"
+
+#: ../../../incubating.rst:13
+msgid ""
+"This generator is designed as a replacement of the current ``CMakeDeps`` "
+"generator, with multiple pending fixes and improvements that couldn't easily "
+"be done in the current one without breaking:"
+msgstr ""
+
+#: ../../../incubating.rst:15
+msgid ""
+"Creates real SHARED/STATIC/INTERFACE IMPORTED targets, no more artificial "
+"interface targets. The ``CONAN_LIB::`` and other similar targets do not "
+"exist anymore."
+msgstr ""
+
+#: ../../../incubating.rst:16
+msgid "Defines IMPORTED_CONFIGURATIONS for targets."
+msgstr ""
+
+#: ../../../incubating.rst:17
+msgid ""
+"CONFIG definition of dependencies matching the dependency ``Release/Debug/"
+"etc`` ``build_type``, no longer using the consumer one."
+msgstr ""
+
+#: ../../../incubating.rst:18
+msgid ""
+"Definition of IMPORTED_LOCATION and IMPORTED_IMPLIB for library targets."
+msgstr ""
+
+#: ../../../incubating.rst:19
+msgid ""
+"Definition of LINK_LANGUAGES based on the recipe ``languages`` and "
+"``cpp_info/component`` ``languages`` properties."
+msgstr ""
+
+#: ../../../incubating.rst:20
+msgid ""
+"All these allows better propagation of linkage requirement and visibility, "
+"avoiding some linkage error of transitive shared libraries in Linux."
+msgstr ""
+
+#: ../../../incubating.rst:21
+msgid ""
+"Better definition of ``requires`` relationships accross components inside "
+"the same package and with respect to other packages."
+msgstr ""
+
+#: ../../../incubating.rst:22
+msgid ""
+"It doesn't need any ``build_context_activated`` or ``build_context_suffix`` "
+"to use ``tool_requires`` dependencies."
+msgstr ""
+
+#: ../../../incubating.rst:23
+msgid ""
+"Definition of ``cpp_info/component.exe`` information (should include the ``."
+"location`` definition too), to define EXECUTABLE targets that can be run."
+msgstr ""
+
+#: ../../../incubating.rst:24
+msgid ""
+"Executables from ``requires`` can also be used in non cross-build scenarios. "
+"When a ``tool_requires`` to the same depependency exists, then those "
+"executables will have priority."
+msgstr ""
+
+#: ../../../incubating.rst:25
+msgid ""
+"Creation of a new ``conan_cmakedeps_paths.cmake`` that contains definitions "
+"of ``<pkg>_DIR`` paths for direct finding of the dependencies. This file is "
+"also planned to be used in ``cmake-conan`` to extend its usage and avoid "
+"some current limitations due to the fact that a CMake driven installation "
+"cannot inject a toolchain later."
+msgstr ""
+
+#: ../../../incubating.rst:26
+msgid ""
+"(new since Conan 2.14) Better management of the system OSX Frameworks "
+"through ``cpp_info.frameworks``."
+msgstr ""
+
+#: ../../../incubating.rst:27
+msgid ""
+"(new since Conan 2.14) Definition of ``cpp_info/component."
+"package_framework`` information (should include the ``.location`` definition "
+"too, e.g., ``os.path.join(self.package_folder, \"MyFramework.framework\", "
+"\"MyFramework\")``) to define the custom OSX Framework library to be linked "
+"against."
+msgstr ""
+
+#: ../../../incubating.rst:32
+msgid ""
+"This generator is only intended to generate ``config.cmake`` config files, "
+"it will not generate ``Find*.cmake`` find modules, and support for it is not "
+"planned. Use the ``CMakeDeps`` generator for that."
+msgstr ""
+
+#: ../../../incubating.rst:36
+msgid ""
+"The new fields that can be defined in the ``cpp_info`` or ``cpp_info."
+"components``, besides the already defined in :ref:"
+"`CppInfo<conan_conanfile_model_cppinfo>` are:"
+msgstr ""
+
+#: ../../../incubating.rst:38
+msgid ""
+"# EXPERIMENTAL FIELDS, used exclusively by new CMakeConfigDeps (-c tools."
+"cmake.cmakedeps:new)\n"
+"self.cpp_info.type  # The type of this artifact \"shared-library\", \"static-"
+"library\", etc (same as package_type)\n"
+"self.cpp_info.location # full location (path and filename with extension) of "
+"the artifact or the Apple Framework library one\n"
+"self.cpp_info.link_location  # Location of the import library for Windows ."
+"lib associated to a dll\n"
+"self.cpp_info.languages # same as \"languages\" attribute, it can be \"C\", "
+"\"C++\"\n"
+"self.cpp_info.exe  # Definition of an executable artifact\n"
+"self.cpp_info.package_framework  # Definition of an Apple Framework (new "
+"since Conan 2.14)"
+msgstr ""
+
+#: ../../../incubating.rst:49
+msgid ""
+"These fields will be auto-deduced from the other ``cpp_info`` and "
+"``components`` definitions, like the ``libs`` or ``libdirs`` fields, but the "
+"automatic deduction might have limitations. Defining them explicitly will "
+"inhibit the auto deduction and use the value as provided by the recipe."
+msgstr ""
+
+#: ../../../incubating.rst:52
+msgid ""
+"This feature is enabled with the ``-c tools.cmake.cmakedeps:"
+"new=will_break_next`` configuration. The value ``will_break_next`` will "
+"change in next releases to emphasize the fact that this feature is not "
+"suitable for usage beyond testing. Just by enabling this conf and forcing "
+"the build of packages that use ``CMakeDeps`` will trigger the usage of the "
+"new generator."
+msgstr ""
+
+#: ../../../incubating.rst:54
+msgid "This new generator will also be usable in ``conanfile`` files with:"
+msgstr ""
+
+#: ../../../incubating.rst:56
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../incubating.rst:56
+msgid ""
+"[generators]\n"
+"CMakeConfigDeps"
+msgstr ""
+
+#: ../../../incubating.rst:62 ../../../incubating.rst:70
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../incubating.rst:62
+msgid ""
+"class Pkg(ConanFile):\n"
+"   generators = \"CMakeConfigDeps\""
+msgstr ""
+
+#: ../../../incubating.rst:68
+msgid "Or:"
+msgstr ""
+
+#: ../../../incubating.rst:70
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMakeConfigDeps\n"
+"\n"
+"class TestConan(ConanFile):\n"
+"\n"
+"   def generate(self):\n"
+"      deps = CMakeConfigDeps(self)\n"
+"      deps.generate()"
+msgstr ""
+
+#: ../../../incubating.rst:83
+msgid ""
+"The ``-c tools.cmake.cmakedeps:new=will_break_next`` is still necessary for "
+"this recipe ``CMakeConfigDeps`` usage, if the config is not enabled, those "
+"recipes will fail. It is also possible to define ``-c tools.cmake.cmakedeps:"
+"new=recipe_will_break`` to enable exclusively the ``CMakeConfigDeps`` "
+"generators usages, but not the automatic replacement of existing "
+"``CMakeDeps`` by the ``CMakeConfigDeps``."
+msgstr ""
+
+#: ../../../incubating.rst:87
+msgid ""
+"Note that the feature is still \"incubating\", even for the explicit "
+"``CMakeConfigDeps`` generator syntax, this recipe is subject to break or be "
+"removed at any time."
+msgstr ""
+
+#: ../../../incubating.rst:89
+msgid ""
+"For any feedback, please open new tickets in https://github.com/conan-io/"
+"conan/issues. This feedback is very important to stabilize the feature and "
+"get it out of incubating, so even if it worked fine and you found no issue, "
+"having the positive feedback reported is very useful."
+msgstr ""
+
+#: ../../../incubating.rst:97
+msgid "Workspaces"
+msgstr ""
+
+#: ../../../incubating.rst:99
+msgid ""
+"The workspaces feature can be enabled defining the environment variable "
+"``CONAN_WORKSPACE_ENABLE=will_break_next``. The value ``will_break_next`` is "
+"used to emphasize that it will change in next releases, and this feature is "
+"for testing only, it cannot be used in production."
+msgstr ""
+
+#: ../../../incubating.rst:102
+msgid ""
+"Once the feature is enabled, workspaces are defined by the ``conanws.yml`` "
+"and/or ``conanws.py`` files. By default, any Conan command will traverse up "
+"the file system from the current working directory to the filesystem root, "
+"until it finds one of those files. That will define the \"root\" workspace "
+"folder."
+msgstr ""
+
+#: ../../../incubating.rst:105
+msgid ""
+"The ``conan workspace`` command allows to open, add, remove packages from "
+"the current workspace. Check the ``conan workspace -h`` help and the help of "
+"the subcommands to check their usage."
+msgstr ""
+
+#: ../../../incubating.rst:107
+msgid ""
+"Dependencies added to a workspace work as local ``editable`` dependencies. "
+"They are only resolved as ``editable`` under the current workspace, if the "
+"current directory is moved outside of it, those ``editable`` dependencies "
+"won't be used anymore."
+msgstr ""
+
+#: ../../../incubating.rst:109
+msgid ""
+"The paths in the ``conanws`` files are intended to be relative to be "
+"relocatable if necessary, or could be committed to Git in monorepo-like "
+"projects."
+msgstr ""
+
+#: ../../../incubating.rst:113
+msgid "Workspace files syntax"
+msgstr "工作空間檔案語法"
+
+#: ../../../incubating.rst:115
+msgid ""
+"The most basic implementation of a workspace is a ``conanws.yml`` file with "
+"just the definition of properties. For example, a very basic workspace file "
+"that just defines the current CONAN_HOME to be a local folder would be:"
+msgstr ""
+
+#: ../../../incubating.rst:118 ../../../incubating.rst:152
+msgid "conanws.yml"
+msgstr ""
+
+#: ../../../incubating.rst:118
+msgid "home_folder: myhome"
+msgstr ""
+
+#: ../../../incubating.rst:124
+msgid ""
+"But a ``conanws.yml`` can be extended with a way more powerful ``conanws."
+"py`` that follows the same relationship as a ``ConanFile`` does with its "
+"``conandata.yml``, for example, it can dynamically define the workspace home "
+"with:"
+msgstr ""
+
+#: ../../../incubating.rst:127 ../../../incubating.rst:166
+#: ../../../incubating.rst:189 ../../../incubating.rst:215
+#: ../../../incubating.rst:348
+msgid "conanws.py"
+msgstr ""
+
+#: ../../../incubating.rst:127
+msgid ""
+"from conan import Workspace\n"
+"\n"
+"class MyWs(Workspace):\n"
+"\n"
+"   def home_folder(self):\n"
+"      # This reads the \"conanws.yml\" file, and returns \"new_myhome\"\n"
+"      # as the current CONAN_HOME for this workspace\n"
+"      return \"new_\" + self.conan_data[\"home_folder\"]"
+msgstr ""
+
+#: ../../../incubating.rst:140
+msgid "So the command ``conan config home``:"
+msgstr ""
+
+#: ../../../incubating.rst:142
+msgid ""
+"$ conan config home\n"
+"/path/to/ws/new_myhome"
+msgstr ""
+
+#: ../../../incubating.rst:147
+msgid ""
+"Will display as the current CONAN_HOME the ``new_myhome`` folder (by default "
+"it is relative to the folder containing the ``conanws`` file)"
+msgstr ""
+
+#: ../../../incubating.rst:150
+msgid "Likewise, a workspace ``conanws.yml`` defining 2 editables could be:"
+msgstr ""
+
+#: ../../../incubating.rst:152
+msgid ""
+"editables:\n"
+"   dep1/0.1:\n"
+"      path: dep1\n"
+"   dep2/0.1:\n"
+"      path: dep2"
+msgstr ""
+
+#: ../../../incubating.rst:162
+msgid ""
+"But if we wanted to dynamically define the ``editables``, for example based "
+"on the existence of some ``name.txt`` and ``version.txt`` files in folders, "
+"the editables could be defined in ``conanws.py`` as:"
+msgstr ""
+
+#: ../../../incubating.rst:166
+msgid ""
+"import os\n"
+"from conan import Workspace\n"
+"\n"
+"class MyWorkspace(Workspace):\n"
+"\n"
+"   def editables(self):\n"
+"      result = {}\n"
+"      for f in os.listdir(self.folder):\n"
+"         if os.path.isdir(os.path.join(self.folder, f)):\n"
+"            with open(os.path.join(self.folder, f, \"name.txt\")) as fname:\n"
+"               name = fname.read().strip()\n"
+"            with open(os.path.join(self.folder, f, \"version.txt\")) as "
+"fversion:\n"
+"               version = fversion.read().strip()\n"
+"            result[f\"{name}/{version}\"] = {\"path\": f}\n"
+"      return result"
+msgstr ""
+
+#: ../../../incubating.rst:186
+msgid ""
+"It is also possible to re-use the ``conanfile.py`` logic in ``set_name()`` "
+"and ``set_version()`` methods, using the ``Workspace.load_conanfile()`` "
+"helper:"
+msgstr ""
+
+#: ../../../incubating.rst:189
+msgid ""
+"import os\n"
+"from conan import Workspace\n"
+"\n"
+"class MyWorkspace(Workspace):\n"
+"   def editables(self):\n"
+"      result = {}\n"
+"      for f in os.listdir(self.folder):\n"
+"         if os.path.isdir(os.path.join(self.folder, f)):\n"
+"            conanfile = self.load_conanfile(f)\n"
+"            result[f\"{conanfile.name}/{conanfile.version}\"] = {\"path\": "
+"f}\n"
+"      return result"
+msgstr ""
+
+#: ../../../incubating.rst:206
+msgid "Workspace commands"
+msgstr ""
+
+#: ../../../incubating.rst:209
+msgid "conan workspace add/remove"
+msgstr ""
+
+#: ../../../incubating.rst:211
+msgid ""
+"Use these commands to add or remove editable packages to the current "
+"workspace. The ``conan workspace add <path>`` folder must contain a "
+"``conanfile.py``."
+msgstr ""
+
+#: ../../../incubating.rst:213
+msgid ""
+"The ``conanws.py`` has a default implementation, but it is possible to "
+"override the default behavior:"
+msgstr ""
+
+#: ../../../incubating.rst:215
+msgid ""
+"import os\n"
+"from conan import Workspace\n"
+"\n"
+"class MyWorkspace(Workspace):\n"
+"   def name(self):\n"
+"      return \"myws\"\n"
+"\n"
+"   def add(self, ref, path, *args, **kwargs):\n"
+"      self.output.info(f\"Adding {ref} at {path}\")\n"
+"      super().add(ref, path, *args, **kwargs)\n"
+"\n"
+"   def remove(self, path, *args, **kwargs):\n"
+"      self.output.info(f\"Removing {path}\")\n"
+"      return super().remove(path, *args, **kwargs)"
+msgstr ""
+
+#: ../../../incubating.rst:235
+msgid "conan workspace info"
+msgstr ""
+
+#: ../../../incubating.rst:237
+msgid "Use this command to show information about the current workspace"
+msgstr ""
+
+#: ../../../incubating.rst:239
+msgid ""
+"$ cd myfolder\n"
+"$ conan new workspace\n"
+"$ conan workspace info\n"
+"WARN: Workspace found\n"
+"WARN: Workspace is a dev-only feature, exclusively for testing\n"
+"name: myfolder\n"
+"folder: /path/to/myfolder\n"
+"products\n"
+"   app1\n"
+"editables\n"
+"   liba/0.1\n"
+"      path: liba\n"
+"   libb/0.1\n"
+"      path: libb\n"
+"   app1/0.1\n"
+"      path: app1"
+msgstr ""
+
+#: ../../../incubating.rst:260
+msgid "conan workspace open"
+msgstr ""
+
+#: ../../../incubating.rst:262
+msgid ""
+"The new ``conan workspace open`` command implements a new concept. Those "
+"packages containing an ``scm`` information in the ``conandata.yml`` (with "
+"``git.coordinates_to_conandata()``) can be automatically cloned and checkout "
+"inside the current workspace from their Conan recipe reference (including "
+"recipe revision)."
+msgstr ""
+
+#: ../../../incubating.rst:266
+msgid "conan new workspace"
+msgstr ""
+
+#: ../../../incubating.rst:268
+msgid ""
+"The command ``conan new`` has learned a new built-in (experimental) template "
+"``workspace`` that creates a local project with some editable packages and a "
+"``conanws.yml`` that represents it. It is useful for quick demos, proofs of "
+"concepts and experimentation."
+msgstr ""
+
+#: ../../../incubating.rst:273
+msgid "conan workspace build"
+msgstr ""
+
+#: ../../../incubating.rst:275
+msgid ""
+"The command ``conan workspace build`` does the equivalent of ``conan build "
+"<product-path> --build=editable``, for every ``product`` defined in the "
+"workspace."
+msgstr ""
+
+#: ../../../incubating.rst:278
+msgid ""
+"Products are the \"downstream\" consumers, the \"root\" and starting node of "
+"dependency graphs. They can be defined with the ``conan workspace add "
+"<folder> --product`` new ``--product`` argument."
+msgstr ""
+
+#: ../../../incubating.rst:281
+msgid ""
+"The ``conan workspace build`` command just iterates all products, so it "
+"might repeat the build of editables dependencies of the products. In most "
+"cases, it will be a no-op as the projects would be already built, but might "
+"still take some time. This is pending for optimization, but that will be "
+"done later, the important thing now is to focus on tools, UX, flows, and "
+"definitions (of things like the ``products``)."
+msgstr ""
+
+#: ../../../incubating.rst:285
+msgid "conan workspace install"
+msgstr ""
+
+#: ../../../incubating.rst:287
+msgid ""
+"The command ``conan workspace install`` is useful to install and build the "
+"current workspace as a monolithic super-project of the editables. See next "
+"section."
+msgstr ""
+
+#: ../../../incubating.rst:290
+msgid ""
+"By default it uses all the ``editable`` packages in the workspace. It is "
+"possible to select only a subset of them with the ``conan workspace install "
+"<folder1> .. <folderN>`` optional arguments. Only the subgraph of those "
+"packages, incluing their dependencies and transitive dependencies will be "
+"installed."
+msgstr ""
+
+#: ../../../incubating.rst:297
+msgid "Workspace monolithic builds"
+msgstr ""
+
+#: ../../../incubating.rst:299
+msgid ""
+"Conan workspaces can be built as a single monolithic project (sometimes "
+"called super-project), which can be very convenient. Let's see it with an "
+"example:"
+msgstr ""
+
+#: ../../../incubating.rst:302
+msgid ""
+"$ conan new workspace\n"
+"$ conan workspace install\n"
+"$ cmake --preset conan-release # use conan-default in Win\n"
+"$ cmake --build --preset conan-release"
+msgstr ""
+
+#: ../../../incubating.rst:309
+msgid ""
+"Let's explain a bit what happened. First the ``conan new workspace`` created "
+"a template project with some relevant files:"
+msgstr ""
+
+#: ../../../incubating.rst:312
+msgid "The ``CMakeLists.txt`` defines the super-project with:"
+msgstr ""
+
+#: ../../../incubating.rst:314
+msgid "CMakeLists.txt"
+msgstr ""
+
+#: ../../../incubating.rst:314
+msgid ""
+"cmake_minimum_required(VERSION 3.25)\n"
+"project(monorepo CXX)\n"
+"\n"
+"include(FetchContent)\n"
+"\n"
+"function(add_project SUBFOLDER)\n"
+"   FetchContent_Declare(\n"
+"      ${SUBFOLDER}\n"
+"      SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/${SUBFOLDER}\n"
+"      SYSTEM\n"
+"      OVERRIDE_FIND_PACKAGE\n"
+"   )\n"
+"   FetchContent_MakeAvailable(${SUBFOLDER})\n"
+"endfunction()\n"
+"\n"
+"add_project(liba)\n"
+"# They should be defined in the liba/CMakeLists.txt, but we can fix it here\n"
+"add_library(liba::liba ALIAS liba)\n"
+"add_project(libb)\n"
+"add_library(libb::libb ALIAS libb)\n"
+"add_project(app1)"
+msgstr ""
+
+#: ../../../incubating.rst:339
+msgid ""
+"So basically, the super-project uses ``FetchContent`` to add the subfolders "
+"sub-projects. For this to work correctly, the subprojects must be CMake "
+"based sub projects with ``CMakeLists.txt``. Also, the subprojects must "
+"define the correct targets as would be defined by the ``find_package()`` "
+"scripts, like ``liba::liba``. If this is not the case, it is always possible "
+"to define some local ``ALIAS`` targets."
+msgstr ""
+
+#: ../../../incubating.rst:345
+msgid "The other important part is the ``conanws.py`` file:"
+msgstr ""
+
+#: ../../../incubating.rst:348
+msgid ""
+"from conan import Workspace\n"
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMakeDeps, CMakeToolchain, cmake_layout\n"
+"\n"
+"class MyWs(ConanFile):\n"
+"   \"\"\" This is a special conanfile, used only for workspace definition of "
+"layout\n"
+"   and generators. It shouldn't have requirements, tool_requirements. It "
+"shouldn't have\n"
+"   build() or package() methods\n"
+"   \"\"\"\n"
+"   settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"   def generate(self):\n"
+"      deps = CMakeDeps(self)\n"
+"      deps.generate()\n"
+"      tc = CMakeToolchain(self)\n"
+"      tc.generate()\n"
+"\n"
+"   def layout(self):\n"
+"      cmake_layout(self)\n"
+"\n"
+"class Ws(Workspace):\n"
+"   def root_conanfile(self):\n"
+"      return MyWs  # Note this is the class name"
+msgstr ""
+
+#: ../../../incubating.rst:376
+msgid ""
+"The role of the ``class MyWs(ConanFile)`` embedded conanfile is important, "
+"it defines the super-project necessary generators and layout."
+msgstr ""
+
+#: ../../../incubating.rst:379
+msgid ""
+"The ``conan workspace install`` does not install the different editables "
+"separately, for this command, the editables do not exist, they are just "
+"treated as a single \"node\" in the dependency graph, as they will be part "
+"of the super-project build. So there is only a single generated "
+"``conan_toolchain.cmake`` and a single common set of dependencies ``xxx-"
+"config.cmake`` files for all super-project external dependencies."
+msgstr ""
+
+#: ../../../incubating.rst:386
+msgid ""
+"The template above worked without external dependencies, but everything "
+"would work the same when there are external dependencies. This can be tested "
+"with:"
+msgstr ""
+
+#: ../../../incubating.rst:389
+msgid ""
+"$ conan new cmake_lib -d name=mymath\n"
+"$ conan create .\n"
+"$ conan new workspace -d requires=mymath/0.1\n"
+"$ conan workspace install\n"
+"$ cmake ..."
+msgstr ""
+
+#: ../../../incubating.rst:400
+msgid ""
+"The current ``conan new workspace`` generates a CMake based super project. "
+"But it is possible to define a super-project using other build systems, like "
+"a MSBuild solution file that adds the different ``.vcxproj`` subprojects. As "
+"long as the super-project knows how to aggregate and manage the sub-"
+"projects, this is possible."
+msgstr ""
+
+#: ../../../incubating.rst:405
+msgid ""
+"It might also be possible for the ``add()`` method in the ``conanws.py`` to "
+"manage the addition of the subprojects to the super-project, if there is "
+"some structure."
+msgstr ""
+
+#: ../../../incubating.rst:409
+msgid ""
+"For any feedback, please open new tickets in https://github.com/conan-io/"
+"conan/issues."
+msgstr ""

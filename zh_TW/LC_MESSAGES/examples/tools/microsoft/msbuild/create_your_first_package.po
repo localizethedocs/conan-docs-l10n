@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.21\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-09 17:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:4
+msgid "Create your first Conan package with Visual Studio/MSBuild"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:6
+msgid ""
+"In the :ref:`Create your first Conan package "
+"tutorial<creating_packages_create_your_first_conan_package>` CMake was used "
+"as the build system. If you haven't read that section, read it first to "
+"familiarize yourself with the ``conanfile.py`` and ``test_package`` "
+"concepts, then come back to read about the specifics of the ``Visual "
+"Studio`` package creation."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:11
+msgid ""
+"Use the :command:`conan new` command to create a \"Hello World\" C++ library "
+"example project:"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:13
+msgid "$ conan new msbuild_lib -d name=hello -d version=1.0"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:18
+msgid "This will create a Conan package project with the following structure."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:20
+msgid ""
+".\n"
+"├── conanfile.py\n"
+"├── hello.sln\n"
+"├── hello.vcxproj\n"
+"├── include\n"
+"│   └── hello.h\n"
+"├── src\n"
+"│   └── hello.cpp\n"
+"└── test_package\n"
+"    ├── conanfile.py\n"
+"    ├── test_hello.sln\n"
+"    ├── test_hello.vcxproj\n"
+"    └── src\n"
+"        └── test_hello.cpp"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:37
+msgid "The structure and files are very similar to the previous CMake example:"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:39
+msgid ""
+"**conanfile.py**: On the root folder, there is a *conanfile.py* which is the "
+"main recipe file, responsible for defining how the package is built and "
+"consumed."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:41
+msgid ""
+"**hello.sln**: A Visual Studio solution file that can be opened with the IDE."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:42
+msgid ""
+"**hello.vcxproj**: A Visual Studio C/C++ project, part of the solution above."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:43
+msgid ""
+"**src** and **include** folders: the folders that contains the simple C++ "
+"\"hello\" library."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:44
+msgid ""
+"**test_package** folder: contains an *example* application that will require "
+"and link with the created package. In this case the ``test_package`` also "
+"contains a Visual Studio solution and project, but it is possible to have "
+"the ``test_package`` using other build system as CMake if desired. It is not "
+"mandatory that the test_package is using the same build system as the "
+"package."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:50
+msgid ""
+"Let's have a look at the package recipe *conanfile.py* (only the relevant "
+"new parts):"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:52
+msgid ""
+"# Sources are located in the same place as this recipe, copy them to the "
+"recipe\n"
+"exports_sources = \"hello.sln\", \"hello.vcxproj\", \"src/*\", \"include/"
+"*\"\n"
+"\n"
+"def layout(self):\n"
+"    vs_layout(self)\n"
+"\n"
+"def generate(self):\n"
+"    tc = MSBuildToolchain(self)\n"
+"    tc.generate()\n"
+"\n"
+"def build(self):\n"
+"    msbuild = MSBuild(self)\n"
+"    msbuild.build(\"hello.sln\")\n"
+"\n"
+"def package(self):\n"
+"    copy(self, \"*.h\", os.path.join(self.source_folder, \"include\"),\n"
+"         dst=os.path.join(self.package_folder, \"include\"))\n"
+"    copy(self, \"*.lib\", src=self.build_folder, dst=os.path.join(self."
+"package_folder, \"lib\"),\n"
+"         keep_path=False)"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:75
+msgid "Let's explain the different sections of the recipe briefly:"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:77
+msgid ""
+"Note there are no ``options`` like the ``shared`` option in this recipe. The "
+"current project always builds a static library, so it is not optional."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:79
+msgid ""
+"The ``layout()`` defines a typical VS layout, this is less flexible than a "
+"CMake one, so it doesn't allow any parametrization."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:81
+msgid ""
+"The ``generate()`` method calls ``MSBuildToolchain`` to generate a "
+"``conantoolchain.props`` file, that the project must add to its properties. "
+"If the project had dependencies with Conan ``requires``, it should add "
+"``MSBuildDeps`` too and add the relevant generated files property sheets."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:85
+msgid ""
+"The ``build()`` method uses the ``MSBuild()`` helper to drive the build of "
+"the solution"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:86
+msgid ""
+"As the project doesn't have any \"install\" functionality in the build "
+"scripts, the ``package()`` method can manually define which files must be "
+"copied."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:89
+msgid ""
+"The ``hello.vcxproj`` project file adds the generated property sheets like "
+"``conantoolchain.props`` to the project, so the build can receive the Conan "
+"input ``settings`` and act accordingly."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:92
+msgid "hello.vcxproj"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:92
+msgid ""
+" <ImportGroup Label=\"PropertySheets\">\n"
+"   <Import Project=\"conan\\conantoolchain.props\" />\n"
+" </ImportGroup>"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:99
+msgid ""
+"If the project had dependencies, it should add the dependencies generated ``."
+"props`` files too."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:102
+msgid ""
+"The **test_package** folder also contains a ``test_hello.vcxproj`` file, "
+"that includes both the toolchain and the dependencies property sheets:"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:105
+msgid "test_package/test_hello.vcxproj"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:105
+msgid ""
+"<ImportGroup Label=\"PropertySheets\">\n"
+"    <Import Project=\"conan\\conantoolchain.props\" />\n"
+"    <Import Project=\"conan\\conandeps.props\" />\n"
+"</ImportGroup>"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:114
+msgid ""
+"Note the ``test_package/conanfile.py`` contains also a "
+"``generators=\"MSBuildDeps\"``."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:116
+msgid ""
+"Let's build the package from sources with the current default configuration, "
+"and then let the ``test_package`` folder test the package:"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:119
+msgid ""
+"$ conan create .\n"
+"\n"
+"...\n"
+"======== Testing the package: Executing test ========\n"
+"hello/1.0 (test package): Running test()\n"
+"hello/1.0 (test package): RUN: x64\\Release\\test_hello\n"
+"hello/1.0: Hello World Release!\n"
+"  hello/1.0: _M_X64 defined\n"
+"  hello/1.0: MSVC runtime: MultiThreadedDLL\n"
+"  hello/1.0: _MSC_VER1939\n"
+"  hello/1.0: _MSVC_LANG201402\n"
+"  hello/1.0: __cplusplus199711\n"
+"hello/1.0 test_package"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:136
+msgid ""
+"We can now validate that the recipe and the package binary are in the cache:"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:139
+msgid ""
+"$ conan list hello/1.0:*\n"
+"Local Cache:\n"
+"  hello\n"
+"    hello/1.0\n"
+"      revisions\n"
+"        856c535669f78da11502a119b7d8a6c9 (2024-03-04 17:52:39 UTC)\n"
+"          packages\n"
+"            c13a22a41ecd72caf9e556f68b406569547e0861\n"
+"              info\n"
+"                settings\n"
+"                  arch: x86_64\n"
+"                  build_type: Release\n"
+"                  compiler: msvc\n"
+"                  compiler.cppstd: 14\n"
+"                  compiler.runtime: dynamic\n"
+"                  compiler.runtime_type: Release\n"
+"                  compiler.version: 193\n"
+"                  os: Windows"
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:167
+msgid ""
+"Check the :ref:`Conan Visual Studio Extension "
+"<integrations_visual_studio_extension>`."
+msgstr ""
+
+#: ../../../examples/tools/microsoft/msbuild/create_your_first_package.rst:168
+msgid ":ref:`MSBuild built-in integrations reference<conan_tools_microsoft>`."
+msgstr ""

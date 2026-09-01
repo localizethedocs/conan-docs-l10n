@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.21\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-09 17:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/graph/build_order_merge.rst:2
+msgid "conan graph build-order-merge"
+msgstr ""
+
+#: ../../../reference/commands/graph/build_order_merge.rst:-1
+msgid ""
+"$ conan graph build-order-merge -h\n"
+"usage: conan graph build-order-merge [-h] [-f FORMAT] [--out-file OUT_FILE]\n"
+"                                     [-v [V]] [-cc CORE_CONF] [--file "
+"[FILE]]\n"
+"                                     [--reduce]\n"
+"\n"
+"Merge more than 1 build-order file.\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -f FORMAT, --format FORMAT\n"
+"                        Select the output format: json, html\n"
+"  --out-file OUT_FILE   Write the output of the command to the specified "
+"file\n"
+"                        instead of stdout.\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  --file [FILE]         Files to be merged\n"
+"  --reduce              Reduce the build order, output only those to build.\n"
+"                        Use this only if the result will not be merged "
+"later\n"
+"                        with other build-order\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/graph/build_order_merge.rst:8
+msgid ""
+"As described in the ``conan graph build-order`` command, there are 2 types "
+"of order ``recipe`` and ``configuration``. Only build-orders of the same "
+"type can be merged together, otherwise the command will return an error."
+msgstr ""
+
+#: ../../../reference/commands/graph/build_order_merge.rst:11
+msgid ""
+"Note that only build-orders that haven't been reduced with ``--reduce`` can "
+"be merged."
+msgstr ""
+
+#: ../../../reference/commands/graph/build_order_merge.rst:13
+msgid ""
+"The result of merging the different input files can be also reduced with the "
+"``conan graph build-order-merge --reduce`` argument, and the behavior will "
+"be the same, leave only the elements that need to be built from source."
+msgstr ""
+
+#: ../../../reference/commands/graph/build_order_merge.rst:17
+msgid ""
+"When 2 or more \"build-order\" files are merged, the resulting merge "
+"contains a ``profiles`` section like:"
+msgstr ""
+
+#: ../../../reference/commands/graph/build_order_merge.rst:19
+msgid ""
+"\"profiles\": {\n"
+"    \"build_order_win\": {\n"
+"        \"args\": \"-pr:h=\\\"profile1\\\" -s:h=\\\"os=Windows\\\" ...\"\n"
+"    },\n"
+"    \"build_order_nix\": {\n"
+"        \"args\": \"-pr:h=\\\"profile2\\\" -s:h=\\\"os=Linux\\\" ...\"\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../reference/commands/graph/build_order_merge.rst:30
+msgid ""
+"With the ``build_order_win`` and ``build_order_nix`` being the \"build-"
+"order\" filenames that were used as inputs to the merge, and which will be "
+"referenced in the ``filenames`` field of every ``package`` in the build "
+"order. This way, it is easier to obtain the necessary command line arguments "
+"to build a specific package binary in the build-order when building multiple "
+"configurations."
+msgstr ""
+
+#: ../../../reference/commands/graph/build_order_merge.rst:32
+msgid ""
+"Note that when a merged build order containing multilpe ``filenames`` "
+"something like:"
+msgstr ""
+
+#: ../../../reference/commands/graph/build_order_merge.rst:34
+msgid ""
+"{\n"
+"    \"package_id\": \"efa83b160a55b033c4ea706ddb980cd708e3ba1b\",\n"
+"    \"context\": \"build\",\n"
+"    \"binary\": \"Build\",\n"
+"    \"filenames\": [\n"
+"        \"build_order_win\",\n"
+"        \"build_order_nix\"\n"
+"    ],\n"
+"    \"build_args\": \"--tool-requires=dep/0.1 --build=dep/0.1\",\n"
+"    \"info\": {\n"
+"        \"settings\": {\n"
+"            \"build_type\": \"Release\"\n"
+"        }\n"
+"    }\n"
+"}\n"
+"\n"
+"\"profiles\": {\n"
+"    \"build_order_win\": {\n"
+"        \"args\": \"-pr:h=\\\"profile1\\\" -s:h=\\\"os=Windows\\\" ...\"\n"
+"    },\n"
+"    \"build_order_nix\": {\n"
+"        \"args\": \"-pr:h=\\\"profile2\\\" -s:h=\\\"os=Linux\\\" ...\"\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../reference/commands/graph/build_order_merge.rst:62
+msgid ""
+"Then, the ``filename`` to be used is the first one, in this case "
+"``build_order_win``, because the ``context`` and ``build_args`` arguments "
+"matches this profile information. The other filenames are provided as a "
+"reference to which other individual build-order files had this "
+"``package_id`` listed for build."
+msgstr ""

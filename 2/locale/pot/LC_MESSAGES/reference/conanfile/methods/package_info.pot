@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 09:24+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,43 +194,46 @@ msgstr ""
 #: ../../../reference/conanfile/methods/package_info.rst:79
 msgid ""
 "**cflags**, **cxxflags**, **sharedlinkflags**, **exelinkflags**: List of "
-"flags that the consumer should activate for proper behavior. Rarely used."
+"flags that the consumer should activate for proper behavior. Rarely used. "
+"These flags can be handled by the :ref:`compiler flags "
+"plugin<reference_extensions_compiler_flags_plugin>` when mixing different "
+"compilers that create compatible binaries."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:82
+#: ../../../reference/conanfile/methods/package_info.rst:83
 msgid "Properties:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:84
+#: ../../../reference/conanfile/methods/package_info.rst:85
 msgid ""
 "**set_property()** allows to define some built-in and user general "
 "properties to be propagated with the ``cpp_info`` model for consumers. They "
 "might contain build-system specific information. Some built-in properties "
-"are ``cmake_file_name``, ``cmake_target_name``, ``pkg_config_name``, that "
-"can define specific behavior for ``CMakeDeps`` or ``PkgConfigDeps`` "
-"generators. For more information about these, read the specific build system "
-"integration documentation."
+"are ``cmake_file_name``, ``cmake_target_name``, ``pkg_config_name``, "
+"``qbs_file_name``, that can define specific behavior for ``CMakeDeps``, "
+"``PkgConfigDeps`` or ``QbsDeps`` generators. For more information about "
+"these, read the specific build system integration documentation."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:86
+#: ../../../reference/conanfile/methods/package_info.rst:87
 msgid "Structure:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:88
+#: ../../../reference/conanfile/methods/package_info.rst:89
 msgid ""
 "**components**: Dictionary with names as keys and a component object as "
 "value to model the different components a package may have: libraries, "
 "executables..."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:90
+#: ../../../reference/conanfile/methods/package_info.rst:91
 msgid ""
 "**requires**: **Experimental** List of components from the requirements this "
 "package (and its consumers) should link with. It will be used by generators "
 "that add support for components features."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:94
+#: ../../../reference/conanfile/methods/package_info.rst:95
 msgid ""
 "It is common that different configurations will produce different "
 "``package_info``, for example, the library names might change in different "
@@ -238,7 +241,7 @@ msgid ""
 "OS:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:97
+#: ../../../reference/conanfile/methods/package_info.rst:98
 msgid ""
 "settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
 "options = {\"shared\": [True, False]}\n"
@@ -257,39 +260,39 @@ msgid ""
 "        self.cpp_info.system_libs.append(\"ws2_32\")"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:115
+#: ../../../reference/conanfile/methods/package_info.rst:116
 msgid "Properties"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:117
+#: ../../../reference/conanfile/methods/package_info.rst:118
 msgid ""
 "Any CppInfo object can declare \"properties\" that can be read by the "
 "generators. The value of a property can be of any type. Check each generator "
 "reference to see the properties used on it."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:120
+#: ../../../reference/conanfile/methods/package_info.rst:121
 msgid ""
 "def set_property(self, property_name, value)\n"
 "def get_property(self, property_name, check_type=None):"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:125
+#: ../../../reference/conanfile/methods/package_info.rst:126
 msgid "Example:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:127
+#: ../../../reference/conanfile/methods/package_info.rst:128
 msgid ""
 "def package_info(self):\n"
 "    self.cpp_info.set_property(\"cmake_find_mode\", \"both\")\n"
 "    self.cpp_info.get_property(\"cmake_find_mode\", check_type=str)"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:135
+#: ../../../reference/conanfile/methods/package_info.rst:136
 msgid "Components"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:137
+#: ../../../reference/conanfile/methods/package_info.rst:138
 msgid ""
 "If your package is composed by more than one library, it is possible to "
 "declare components that allow to define a ``CppInfo`` object per each of "
@@ -297,7 +300,7 @@ msgid ""
 "other packages (the following case is not a real example):"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:141
+#: ../../../reference/conanfile/methods/package_info.rst:142
 msgid ""
 "def package_info(self):\n"
 "    self.cpp_info.set_property(\"cmake_file_name\", \"OpenSSL\")\n"
@@ -323,7 +326,7 @@ msgid ""
 "\"ssl-object.{}\".format(obj_ext))]"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:161
+#: ../../../reference/conanfile/methods/package_info.rst:162
 msgid ""
 "Dependencies among components and to components of other requirements can be "
 "defined using the ``requires`` attribute and the name of the component. The "
@@ -331,11 +334,54 @@ msgid ""
 "aggregated in the correct order for each field."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:169
+#: ../../../reference/conanfile/methods/package_info.rst:165
+msgid ""
+"Conan validates that every direct dependency of a recipe is used in some "
+"``(cpp_info/components).requires``, raising an error otherwise."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:167
+msgid ""
+"If a dependency really has no relationship at all with the current package "
+"artifacts (not linked, not embedded, not exposing any of its headers), it "
+"can be added to ``self.cpp_info.ignored_requires`` to silence the validation:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:170
+msgid ""
+"def requirements(self):\n"
+"    self.requires(\"other/1.0\")\n"
+"    self.requires(\"another/1.0\")  # not linked or embedded in this package "
+"in any way\n"
+"\n"
+"def package_info(self):\n"
+"    self.cpp_info.components[\"cmp1\"].requires = [\"other::other\"]\n"
+"    self.cpp_info.ignored_requires = [\"another\"]"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:180
+msgid ""
+"The definition of ``ignored_requires`` should not be necessary in most "
+"cases, as Conan already avoids propagating information that is not needed "
+"(for example, it doesn't propagate headers downstream unless "
+"``transitive_headers=True``)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:183
+msgid ""
+"If there is some relationship between the dependency and the package, even "
+"if it looks like a build-time only one (for example, a static library linked "
+"into the current shared library), it is recommended to still declare it via "
+"``requires`` instead. Otherwise, changes in that dependency, like building "
+"it with a different ``shared`` value, could break the package without Conan "
+"being able to detect it."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package_info.rst:193
 msgid "buildenv_info, runenv_info"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:171
+#: ../../../reference/conanfile/methods/package_info.rst:195
 msgid ""
 "The ``buildenv_info`` and ``runenv_info`` attributes are ``Environment`` "
 "objects that allow to define information for the consumers in the form of "
@@ -343,7 +389,7 @@ msgid ""
 "define such information:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:174
+#: ../../../reference/conanfile/methods/package_info.rst:198
 msgid ""
 "settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
 "\n"
@@ -360,7 +406,7 @@ msgid ""
 "        self.runenv_info.define_path(\"MYPKGHOME\", \"my/home\")"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:190
+#: ../../../reference/conanfile/methods/package_info.rst:214
 msgid ""
 "Note that these objects are not tied to either regular ``requires`` or "
 "``tool_requires``, any package recipe can use both. The difference between "
@@ -370,7 +416,7 @@ msgid ""
 "context that would need the runtime activated."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:193
+#: ../../../reference/conanfile/methods/package_info.rst:217
 msgid ""
 "Conan ``VirtualBuildEnv`` generator will be used by default in consumers, "
 "collecting the information from ``buildenv_info`` (and some ``runenv_info`` "
@@ -382,12 +428,12 @@ msgid ""
 "run(<cmd>, env=\"conanrun\")``."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:199
-#: ../../../reference/conanfile/methods/package_info.rst:335
+#: ../../../reference/conanfile/methods/package_info.rst:223
+#: ../../../reference/conanfile/methods/package_info.rst:359
 msgid "**Best practices**"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:201
+#: ../../../reference/conanfile/methods/package_info.rst:225
 msgid ""
 "It is not necessary to add ``bindirs`` to the ``PATH`` environment variable, "
 "this will be automatically done by the consumer ``VirtualBuildEnv`` and "
@@ -396,25 +442,25 @@ msgid ""
 "this information will be typically managed by other generators."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:209
+#: ../../../reference/conanfile/methods/package_info.rst:233
 msgid "conf_info"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:211
+#: ../../../reference/conanfile/methods/package_info.rst:235
 msgid ""
 "``tool_requires`` packages in the \"build\" context can transmit some "
 "``conf`` configuration to its immediate consumers, with the ``conf_info`` "
 "attribute. For example, one Conan package packaging the AndroidNDK could do:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:214
+#: ../../../reference/conanfile/methods/package_info.rst:238
 msgid ""
 "def package_info(self):\n"
 "    self.conf_info.define_path(\"tools.android:ndk_path\", \"path/to/ndk/in/"
 "package\")"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:219
+#: ../../../reference/conanfile/methods/package_info.rst:243
 msgid ""
 "``conf_info`` from packages can still be overwritten from profiles values, "
 "because user profiles will have higher priority."
@@ -451,7 +497,7 @@ msgstr ""
 msgid "Value of the configuration."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:226
+#: ../../../reference/conanfile/methods/package_info.rst:250
 msgid ""
 "def package_info(self):\n"
 "    # Setting values\n"
@@ -474,7 +520,7 @@ msgstr ""
 msgid "Value to append."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:239
+#: ../../../reference/conanfile/methods/package_info.rst:263
 msgid ""
 "def package_info(self):\n"
 "    # Modifying configuration list-like values\n"
@@ -492,7 +538,7 @@ msgstr ""
 msgid "Value to prepend."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:249
+#: ../../../reference/conanfile/methods/package_info.rst:273
 msgid ""
 "def package_info(self):\n"
 "    self.conf_info.prepend(\"user.myconf.build:ldflags\", \"--flag0\")  # == "
@@ -504,7 +550,7 @@ msgstr ""
 msgid "Update the value to the given configuration name."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:257
+#: ../../../reference/conanfile/methods/package_info.rst:281
 msgid ""
 "def package_info(self):\n"
 "    # Modifying configuration dict-like values\n"
@@ -522,7 +568,7 @@ msgstr ""
 msgid "Value to remove."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:267
+#: ../../../reference/conanfile/methods/package_info.rst:291
 msgid ""
 "def package_info(self):\n"
 "    # Remove\n"
@@ -535,7 +581,7 @@ msgstr ""
 msgid "Clears the variable, equivalent to a unset or set XXX="
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:277
+#: ../../../reference/conanfile/methods/package_info.rst:301
 msgid ""
 "def package_info(self):\n"
 "    # Unset any value\n"
@@ -543,7 +589,7 @@ msgid ""
 "compile_options\")"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:284
+#: ../../../reference/conanfile/methods/package_info.rst:308
 msgid ""
 "It is possible to define configuration in packages that are "
 "``tool_requires``. For example, assuming there is a package that bundles the "
@@ -551,7 +597,7 @@ msgid ""
 "android:ndk_path`` configuration as:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:289
+#: ../../../reference/conanfile/methods/package_info.rst:313
 msgid ""
 "import os\n"
 "from conan import ConanFile\n"
@@ -564,13 +610,13 @@ msgid ""
 "package_folder, \"ndk\"))"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:301
+#: ../../../reference/conanfile/methods/package_info.rst:325
 msgid ""
 "Note that this only propagates from the immediate, direct ``tool_requires`` "
 "of a recipe."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:307
+#: ../../../reference/conanfile/methods/package_info.rst:331
 msgid "generator_info"
 msgstr ""
 
@@ -580,7 +626,7 @@ msgid ""
 "Conan stability<stability>` section for more information."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:312
+#: ../../../reference/conanfile/methods/package_info.rst:336
 msgid ""
 "``tool_requires`` in the build context can inject generators into the "
 "recipe, by adding them to the ``generator_info`` attribute inside the "
@@ -589,7 +635,7 @@ msgid ""
 "were declared in their ``generators`` attribute."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:317
+#: ../../../reference/conanfile/methods/package_info.rst:341
 msgid ""
 "class MyGenerator:\n"
 "    def __init__(self, conanfile):\n"
@@ -602,13 +648,13 @@ msgid ""
 "    self.generator_info = [MyGenerator]"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:329
+#: ../../../reference/conanfile/methods/package_info.rst:353
 msgid ""
 "Note that this only propagates from the immediate, direct ``tool_requires`` "
 "of a recipe, and that by default ``self.generator_info`` is ``None``."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:337
+#: ../../../reference/conanfile/methods/package_info.rst:361
 msgid ""
 "The ``package_info()`` method is not strictly necessary if you have other "
 "means of propagating information for consumers. For example, if your package "
@@ -624,7 +670,7 @@ msgid ""
 "tools (like ``protobuf``, that also ``CMakeDeps`` can handle)."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:338
+#: ../../../reference/conanfile/methods/package_info.rst:362
 msgid ""
 "Providing a ``package_info()`` is very necessary if consumers can use "
 "different build systems, like in ConanCenter. In this case, it is necessary "
@@ -633,21 +679,21 @@ msgid ""
 "the info from CMake is not feasible at this moment."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:339
+#: ../../../reference/conanfile/methods/package_info.rst:363
 msgid ""
 "If you plan to use editables or the local development flow, there's a need "
 "to check the ``layout()`` and define the information for ``self.cpp.build`` "
 "and ``self.cpp.source``."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:340
+#: ../../../reference/conanfile/methods/package_info.rst:364
 msgid ""
 "It is not necessary to add ``bindirs`` to the ``PATH`` environment variable, "
 "this will be automatically done by the consumer ``VirtualBuildEnv`` and "
 "``VirtualRunEnv`` generators."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:341
+#: ../../../reference/conanfile/methods/package_info.rst:365
 msgid ""
 "The **paths** defined in ``package_info()`` shouldn't be converted to any "
 "specific format (like the one required by Windows subsystems). Instead, it "
@@ -655,7 +701,7 @@ msgid ""
 "adequate format."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/package_info.rst:346
+#: ../../../reference/conanfile/methods/package_info.rst:370
 msgid ""
 "See :ref:`the defining package information "
 "tutorial<tutorial_creating_define_package_info>` for more information."

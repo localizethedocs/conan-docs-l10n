@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,11 +137,21 @@ msgid ""
 "``cpp_info.bindirs`` and ``cpp_info.libdirs`` configuration."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:77
+#: ../../../reference/extensions/deployers.rst:75
+msgid ""
+"``runtime_deploy`` only copies dependencies whose requirement has the "
+"``run`` trait set to ``True``. A ``static-library`` dependency is skipped by "
+"default, even if it internally ships a shared library needed at runtime. To "
+"include such a dependency, declare ``\"run\": True`` inside :ref:"
+"`package_type_traits<conan_conanfile_attributes_package_type_traits>` in its "
+"recipe."
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:84
 msgid "cyclone_1.6 and cyclone_1.4"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:79
+#: ../../../reference/extensions/deployers.rst:86
 msgid ""
 "The ``cyclone_1.6`` and ``cyclone_1.4`` deployers are available to generate "
 "a CycloneDX 1.6 or 1.4 SBOM file respectively, with the information of the "
@@ -152,18 +162,18 @@ msgid ""
 "module with default arguments."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:85
+#: ../../../reference/extensions/deployers.rst:92
 msgid ""
 "If you want to customize the generated SBOM, you can either create your own "
 "custom deployer that calls these functions with the desired arguments, or "
 "use the documented hook approach from the previous link to generate the SBOM."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:91
+#: ../../../reference/extensions/deployers.rst:98
 msgid "configuration"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:93
+#: ../../../reference/extensions/deployers.rst:100
 msgid ""
 "The ``full_deploy``, ``direct_deploy`` and ``runtime_deploy`` understand "
 "when the conf ``tools.deployer:symlinks`` is set to ``False`` to disable "
@@ -171,71 +181,92 @@ msgid ""
 "support symlinks and could fail if deploying packages that contain symlinks."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:99
+#: ../../../reference/extensions/deployers.rst:106
 msgid "Custom deployers"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:101
+#: ../../../reference/extensions/deployers.rst:108
 msgid ""
 "Custom deployers can be managed via ``conan config install``. When looking "
 "for a specific deployer, Conan will look in these locations for the deployer "
 "in the following order:"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:104
+#: ../../../reference/extensions/deployers.rst:111
 msgid "Absolute paths"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:105
+#: ../../../reference/extensions/deployers.rst:112
 msgid "Relative to cwd"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:106
+#: ../../../reference/extensions/deployers.rst:113
 msgid "In the ``[CONAN_HOME]/extensions/deployers`` folder"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:107
+#: ../../../reference/extensions/deployers.rst:114
 msgid "As built-in deployers"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:109
+#: ../../../reference/extensions/deployers.rst:116
 msgid ""
 "Conan will look for a ``deploy()`` method to call for each installed file. "
 "The function signature of your custom deployers should be as follows:"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:113
+#: ../../../reference/extensions/deployers.rst:120
 msgid "**my_custom_deployer.py**"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:113
+#: ../../../reference/extensions/deployers.rst:120
 msgid "def deploy(graph, output_folder: str, **kwargs):"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:118
+#: ../../../reference/extensions/deployers.rst:125
 msgid ""
 "(Note that the arguments are passed as named parameters, so both the "
 "``graph`` and ``output_folder`` names are mandatory)"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:120
+#: ../../../reference/extensions/deployers.rst:127
 msgid ""
 "The ``**kwargs`` is mandatory even if not used, as new arguments can be "
 "added in future Conan versions, and those would break if ``**kwargs`` is not "
 "defined."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:123
+#: ../../../reference/extensions/deployers.rst:130
 msgid ""
 "You can access your conanfile object with ``graph.root.conanfile``. See :ref:"
 "`ConanFile.dependencies<conan_conanfile_model_dependencies>` for information "
-"on how to iterate over its dependencies. Your custom deployer can now be "
-"invoked as if it were a built-in deployer using the filename in which it's "
-"found, in this case ``conan install . --deployer=my_custom_deployer``. Note "
-"that supplying the **.py** extension is optional."
+"on how to iterate over its dependencies."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:128
+#: ../../../reference/extensions/deployers.rst:133
+msgid ""
+"If you need to run binaries from your build dependencies, the recommended "
+"approach is to apply the env from a ``VirtualBuildEnv``, such as:"
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:136
+msgid ""
+"from conan.tools.env import VirtualBuildEnv\n"
+"\n"
+"def deploy(graph, output_folder: str, **kwargs):\n"
+"    venv = VirtualBuildEnv(graph.root.conanfile)\n"
+"    with venv.vars().apply():\n"
+"        self.run(\"mytool\")"
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:146
+msgid ""
+"Your custom deployer can now be invoked as if it were a built-in deployer "
+"using the filename in which it's found, in this case ``conan install . --"
+"deployer=my_custom_deployer``. Note that supplying the **.py** extension is "
+"optional."
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:149
 msgid ""
 "See the :ref:`custom deployers<examples_extensions_deployers>` section for "
 "examples on how to implement your own deployers."

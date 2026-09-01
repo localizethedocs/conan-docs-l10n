@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 09:24+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -553,12 +553,32 @@ msgid ""
 "``tools.cmake.cmaketoolchain:extra_variables`` conf."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:273
-#: ../../../reference/tools/cmake/cmakedeps.rst:401
+#: ../../../reference/tools/cmake/cmakedeps.rst:272
+msgid ""
+"**cmake_extra_dependencies**: List of extra package names for which a "
+"``find_dependency()`` call will be added to the generated ``<pkg>-config."
+"cmake`` file. Useful when the package depends on libraries located via "
+"CMake's ``find_package()`` but not declared as Conan ``requires`` (for "
+"example, system-provided dependencies like ``OpenMPI``). This property is "
+"only honored at the package level (setting it on a component has no effect)."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmakedeps.rst:277
+msgid ""
+"**cmake_extra_interface_libs**: List of extra libraries to be appended to "
+"the generated CMake target's interface link libraries. Useful to declare "
+"additional libraries (such as system libraries, or libraries located by the "
+"packages declared in ``cmake_extra_dependencies``) that have to be linked "
+"together with the package's own libraries. Can be defined both at the "
+"package level and per-component."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmakedeps.rst:282
+#: ../../../reference/tools/cmake/cmakedeps.rst:420
 msgid "Example:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:275
+#: ../../../reference/tools/cmake/cmakedeps.rst:284
 msgid ""
 "def package_info(self):\n"
 "    ...\n"
@@ -602,32 +622,48 @@ msgid ""
 "\"hello world\",\n"
 "                                                             \"cache\": "
 "True, \"type\": \"STRING\"}\n"
-"                               })"
+"                               })\n"
+"\n"
+"    # Emit ``find_dependency(MyOpenMPI REQUIRED)`` in the generated <pkg>-"
+"config.cmake,\n"
+"    # so consumers can locate dependencies not provided as Conan requires.\n"
+"    self.cpp_info.set_property(\"cmake_extra_dependencies\", "
+"[\"MyOpenMPI\"])\n"
+"\n"
+"    # Append extra libraries to the generated target's interface link "
+"libraries.\n"
+"    # Can also be set per-component, for example:\n"
+"    # self.cpp_info.components[\"mycomponent\"]."
+"set_property(\"cmake_extra_interface_libs\",\n"
+"    #                                                     [\"MyOpenMPI::"
+"MyOpenMPI\"])\n"
+"    self.cpp_info.set_property(\"cmake_extra_interface_libs\", [\"MyOpenMPI::"
+"MyOpenMPI\"])"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:312
+#: ../../../reference/tools/cmake/cmakedeps.rst:331
 msgid ""
 "Overwrite properties from the consumer side using CMakeDeps.set_property()"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:314
+#: ../../../reference/tools/cmake/cmakedeps.rst:333
 msgid ""
 "Using ``CMakeDeps.set_property()`` method you can overwrite the property "
 "values set by the Conan recipes from the consumer. This can be done for "
 "every property listed above."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:317
+#: ../../../reference/tools/cmake/cmakedeps.rst:336
 msgid ""
 "Imagine we have a *compressor/1.0* package that depends on *zlib/1.3.1*. The "
 "*zlib* recipe defines some properties:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:321
+#: ../../../reference/tools/cmake/cmakedeps.rst:340
 msgid "Zlib conanfile.py"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:321
+#: ../../../reference/tools/cmake/cmakedeps.rst:340
 msgid ""
 "class ZlibConan(ConanFile):\n"
 "    name = \"zlib\"\n"
@@ -641,7 +677,7 @@ msgid ""
 "        ..."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:335
+#: ../../../reference/tools/cmake/cmakedeps.rst:354
 msgid ""
 "This recipe defines several properties. For example the ``cmake_find_mode`` "
 "property is set to ``both``. That means that module and config files are "
@@ -650,12 +686,12 @@ msgid ""
 "``CMakeDeps.set_property()`` method:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:341
 #: ../../../reference/tools/cmake/cmakedeps.rst:360
+#: ../../../reference/tools/cmake/cmakedeps.rst:379
 msgid "compressor conanfile.py"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:341
+#: ../../../reference/tools/cmake/cmakedeps.rst:360
 msgid ""
 "class Compressor(ConanFile):\n"
 "    name = \"compressor\"\n"
@@ -670,14 +706,14 @@ msgid ""
 "        ..."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:356
+#: ../../../reference/tools/cmake/cmakedeps.rst:375
 msgid ""
 "You can also use the ``set_property()`` method to invalidate the property "
 "values set by the upstream recipe and use the values that Conan assigns by "
 "default. To do so, set the value ``None`` to the property like this:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:360
+#: ../../../reference/tools/cmake/cmakedeps.rst:379
 msgid ""
 "class Compressor(ConanFile):\n"
 "    name = \"compressor\"\n"
@@ -692,13 +728,13 @@ msgid ""
 "        ..."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:375
+#: ../../../reference/tools/cmake/cmakedeps.rst:394
 msgid ""
 "After doing this the generated target name for the Zlib library will be "
 "``zlib::zlib`` instead of ``ZLIB::ZLIB``"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:378
+#: ../../../reference/tools/cmake/cmakedeps.rst:397
 msgid ""
 "Additionally, `CMakeDeps.set_property()` can also be used for packages that "
 "have components. In this case, you will need to provide the package name "
@@ -706,7 +742,7 @@ msgid ""
 "example:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:382
+#: ../../../reference/tools/cmake/cmakedeps.rst:401
 msgid ""
 "def generate(self):\n"
 "    deps = CMakeDeps(self)\n"
@@ -716,11 +752,11 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:394
+#: ../../../reference/tools/cmake/cmakedeps.rst:413
 msgid "Disable CMakeDeps For Installed CMake configuration files"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:396
+#: ../../../reference/tools/cmake/cmakedeps.rst:415
 msgid ""
 "Some projects may want to disable the ``CMakeDeps`` generator for downstream "
 "consumers. This can be done by settings ``cmake_find_mode`` to ``none``. If "
@@ -728,14 +764,14 @@ msgid ""
 "them to the ``buildirs`` attribute of ``cpp_info``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:399
+#: ../../../reference/tools/cmake/cmakedeps.rst:418
 msgid ""
 "This method is intended to work with downstream consumers using the "
 "``CMakeToolchain`` generator, which will be populated with the ``builddirs`` "
 "attribute."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:403
+#: ../../../reference/tools/cmake/cmakedeps.rst:422
 msgid ""
 "def package(self):\n"
 "    ...\n"
@@ -747,11 +783,11 @@ msgid ""
 "    self.cpp_info.builddirs.append(os.path.join(\"lib\", \"cmake\", \"foo\"))"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:415
+#: ../../../reference/tools/cmake/cmakedeps.rst:434
 msgid "Map from project configuration to imported target's configuration"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:417
+#: ../../../reference/tools/cmake/cmakedeps.rst:436
 msgid ""
 "As mentioned above, ``CMakeDeps`` provides support for multiple "
 "configuration environments (Debug, Release, etc.) This is achieved by "
@@ -762,7 +798,7 @@ msgid ""
 "of the installed dependencies."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:422
+#: ../../../reference/tools/cmake/cmakedeps.rst:441
 msgid ""
 "If the consumer CMake project is configured with a different build type than "
 "the dependencies, it is necessary to tell CMake how to map the "
@@ -770,7 +806,7 @@ msgid ""
 "the ``CMAKE_MAP_IMPORTED_CONFIG_<CONFIG>`` CMake variable."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakedeps.rst:426
+#: ../../../reference/tools/cmake/cmakedeps.rst:445
 msgid ""
 "cd build-coverage/\n"
 "conan install .. -s build_type=Debug\n"

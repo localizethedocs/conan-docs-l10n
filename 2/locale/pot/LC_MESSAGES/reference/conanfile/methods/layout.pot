@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,21 +181,101 @@ msgid ""
 "    self.cpp.package.libs = [\"foo\"]"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/layout.rst:102
+#: ../../../reference/conanfile/methods/layout.rst:99
+msgid ""
+"When defining ``.location`` or ``.link_location`` in ``self.cpp.build`` or "
+"``self.cpp.source`` for editable packages, Conan automatically relativizes "
+"these paths with respect to the build/source folder. This ensures that the "
+"location correctly resolves relative to the package's build or source "
+"directory:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/layout.rst:104
+msgid ""
+"def layout(self):\n"
+"    cmake_layout(self)\n"
+"    # location is relative to self.build_folder for editable packages\n"
+"    self.cpp.build.location = \"lib/myexe\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods/layout.rst:113
 msgid ""
 "Read more about the usage of the ``layout()`` in :ref:`this "
 "tutorial<developing_packages_layout>` and Conan package layout"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/layout.rst:103
+#: ../../../reference/conanfile/methods/layout.rst:114
 msgid ":ref:`here<tutorial_package_layout>`."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/layout.rst:107
+#: ../../../reference/conanfile/methods/layout.rst:120
+msgid "Ordering and ``conan source`` compatibility"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/layout.rst:122
+msgid ""
+"The ``layout()`` method is also called by the :command:`conan source` "
+"command, which runs without a host profile. This has two implications for "
+"how ``layout()`` should be written:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/layout.rst:126
+msgid ""
+"**Order matters**: define the inputs, source-related parts first (``self."
+"folders.source``, ``self.folders.root``, ``self.folders.subproject``). These "
+"are independent of settings and options, so they will always be correctly "
+"defined even when :command:`conan source` is invoked."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/layout.rst:131
+msgid ""
+"**Do not fail when settings/options are not defined**: the build-related "
+"parts (``self.folders.build``, ``self.folders.generators``, ``self.cpp."
+"build``...) typically depend on ``self.settings`` or ``self.options``, which "
+"are empty during :command:`conan source`. The ``layout()`` method must not "
+"raise in that case. There are two common approaches:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/layout.rst:137
+msgid ""
+"Use ``self.settings.get_safe(...)`` / ``self.options.get_safe(...)``, which "
+"return ``None`` when the value is not defined instead of raising. This is "
+"the approach used by the built-in ``cmake_layout()``, which produces a build "
+"folder like ``build/None`` when :command:`conan source` is invoked. That "
+"value is not used by :command:`conan source`, so it is harmless."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/layout.rst:142
+msgid ""
+"Early-return from ``layout()`` after defining the source parts when settings "
+"are not available, for example ``if not self.settings.get_safe(): return``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/layout.rst:145
+msgid ""
+"def layout(self):\n"
+"    # 1) Source parts: independent of settings/options, define them first\n"
+"    self.folders.source = \"src\"\n"
+"\n"
+"    # 2) Build parts: may depend on settings/options, use get_safe to avoid\n"
+"    #    failing during `conan source` when settings are empty\n"
+"    build_type = self.settings.get_safe(\"build_type\")\n"
+"    # might be \"build/None\", but won't really be used in \"conan source\" "
+"commands\n"
+"    self.folders.build = f\"build/{build_type}\"\n"
+"    self.folders.generators = f\"build/{build_type}/generators\"\n"
+"    self.cpp.build.libdirs = [f\"build/{build_type}\"]\n"
+"\n"
+"    # The \"cpp_info\" editable information needs also configuration, goes\n"
+"    # together with the build parts\n"
+"    self.cpp.source.includedirs = [\"include\"]"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/layout.rst:165
 msgid "Environment variables and configuration"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/layout.rst:109
+#: ../../../reference/conanfile/methods/layout.rst:167
 msgid ""
 "There are some packages that might define some environment variables in "
 "their ``package_info()`` method via ``self.buildenv_info``, ``self."
@@ -203,7 +283,7 @@ msgid ""
 "configuration to their consumers."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/layout.rst:113
+#: ../../../reference/conanfile/methods/layout.rst:171
 msgid ""
 "This is not an issue as long as the value of those environment variables or "
 "configuration do not require using the ``self.package_folder``. If they do, "
@@ -212,7 +292,7 @@ msgid ""
 "mode:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/layout.rst:118
+#: ../../../reference/conanfile/methods/layout.rst:176
 msgid ""
 "import os\n"
 "from conan import ConanFile\n"
@@ -226,7 +306,7 @@ msgid ""
 "data/path\"))"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/layout.rst:130
+#: ../../../reference/conanfile/methods/layout.rst:188
 msgid ""
 "When the package is in editable mode, for example, ``self.package_folder`` "
 "is ``None``, as obviously there is no package yet. The solution is to define "
@@ -234,7 +314,7 @@ msgid ""
 "defined there:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/layout.rst:135
+#: ../../../reference/conanfile/methods/layout.rst:193
 msgid ""
 "from conan import ConanFile\n"
 "\n"
@@ -256,7 +336,7 @@ msgid ""
 "\"local/path/to/ndk\")"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/layout.rst:152
+#: ../../../reference/conanfile/methods/layout.rst:210
 msgid ""
 "The ``layouts`` object contains ``source``, ``build`` and ``package`` "
 "scopes, and each one contains one instance of ``buildenv_info``, "

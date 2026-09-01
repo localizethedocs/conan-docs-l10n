@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-18 08:38+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgid ""
 "trace,vv}]]\n"
 "                    [-cc CORE_CONF] [-p PACKAGE_QUERY] -r REMOTE\n"
 "                    [--only-recipe] [--force] [--check] [-c] [--dry-run]\n"
-"                    [-l LIST] [-m METADATA]\n"
+"                    [--allow-disabled] [-l LIST] [-m METADATA]\n"
 "                    [pattern]\n"
 "\n"
 "Upload packages to a remote.\n"
@@ -89,6 +89,7 @@ msgid ""
 "                        before upload\n"
 "  -c, --confirm         Upload all matching recipes without confirmation\n"
 "  --dry-run             Do not execute the real upload (experimental)\n"
+"  --allow-disabled      Allow uploading to disabled remote\n"
 "  -l LIST, --list LIST  Package list file\n"
 "  -m METADATA, --metadata METADATA\n"
 "                        Upload the metadata, even if the package is already "
@@ -129,27 +130,164 @@ msgid ""
 "is already in the server, but it will not execute the actual upload."
 msgstr ""
 
-#: ../../../reference/commands/upload.rst:25
+#: ../../../reference/commands/upload.rst:27
 msgid ""
-"Using the ``core.upload:parallel`` conf, it is possible to upload packages "
-"in parallel. By default, or when set to a value less than ``2``, no "
-"parallelization will take place, and any other value will be the number of "
-"parallel threads to utilize."
+"The ``--dry-run`` flag is useful as the resulting package list json can be "
+"used to feed a ``conan upload --list=<pkglist>`` call, allowing for the "
+"split of the preparation of artifacts step and the actual upload step, which "
+"can be useful in CI pipelines."
 msgstr ""
 
-#: ../../../reference/commands/upload.rst:31
+#: ../../../reference/commands/upload.rst:30
+msgid ""
+"# Recipes are loaded and artifacts prepared, but no upload is performed\n"
+"$ conan upload <pattern> --dry-run -r=myremote -f=json > pkglist.json\n"
+"# Nothing is re-prepared, only the actual upload is performed\n"
+"$ conan upload --list=pkglist.json -r=myremote"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:40
+msgid "Upload policies and efficient uploads"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:42
+msgid ""
+"The ``conan upload`` commmand performs a check in the server to see if the "
+"local Conan packages in the cache already exist in the server or not. This "
+"is done by comparing the local ``recipe-revision`` and ``package-revision`` "
+"against the existing server ones. If they already exist in the server, the "
+"actual upload can be skipped, as the revision system uses the artifacts "
+"checksums, so it is guaranteed that the same artifacts already exist in the "
+"server."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:44
+msgid ""
+"If for some reason it is desired to force the full transfer of the artifacts "
+"from the local filesystem to the server again, and assuming the server has "
+"overwrite/delete permissions (necessary for an overwrite), then the ``conan "
+"upload --force`` can be used. That will force a new upload to the server."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:46
+msgid ""
+"Uploading an older existing revision to the server with ``--force`` doesn't "
+"guarantee that such a revision will be made the latest one in the server, "
+"that is to update its timestamp to the current time. This behavior might "
+"depend on the server configuration. For example in **Artifactory** the "
+"default configuration, due to historic reasons and Conan 1.X compatibility "
+"the behavior is as follows:"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:49
+msgid ""
+"If the ``conan upload --force`` happens before 60 seconds of the original "
+"upload, it is not made latest."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:50
+msgid ""
+"If the ``conan upload --force`` happens after 60 seconds of the original "
+"upload, it is made latest."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:52
+msgid ""
+"The time limit can be configured with ``artifactory.conan.index.timestamp."
+"override.threshold.millis``, for example, to completely opt-out of this "
+"behavior and ``conan upload --force`` not changing the revision timestamp "
+"and consequently never making it the latest, it is possible to define "
+"``artifactory.conan.index.timestamp.override.threshold.millis=Long."
+"MAX_VALUE``."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:56
+msgid ""
+"In general, the ``conan upload --force`` argument shouldn't be used in "
+"regular production pipelines. It is more intended for exceptional cases, "
+"like fixing some corrupted package."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:60
+msgid "Upload configurations"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:62
+msgid ""
+"There are different configurations and parameters that can affect the "
+"uploads:"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:64
+msgid ""
+"The recipe ``upload_policy = \"skip\"`` attribute is intended to skip the "
+"upload of binaries for that package, only the recipe will ever be uploaded. "
+"This attribute is used for exceptional cases where a package can only be "
+"built in the installation machine, for example \"system\" package wrappers"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:65
+msgid ""
+"``core.scm:local_url``: By default allows to store local folders as remote "
+"url, but not upload them. Use 'allow' for allowing upload and 'block' to "
+"completely forbid it. By default ``scm`` captures that are not reproducible, "
+"that is, that point to a local folder, will be blocked at upload time. This "
+"configuration can avoid that block, but please note that this is not "
+"recommended in the general case, as those packages won't be able to be "
+"reproduce later, as their sources are pointing to a local machine folder "
+"that will dissapear."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:66
+msgid ""
+"``core.sources:upload_url``: Remote URL to upload backup sources to. If the "
+"\"backup-sources\" system is configured with this URL, then the ``conan "
+"upload`` command will also upload the associated downloaded sources to this "
+"backup-sources repository."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:67
+msgid ""
+"``core.upload:compression_format``: The compression format used when "
+"uploading Conan packages. Possible values: 'zst', 'xz', 'gz' (default=gz)`. "
+"Recall that ``zst`` requires at least Python>=3.14 to work. With this "
+"configuration, it is possible to change the compression format for Conan "
+"stored artifacts."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:68
+msgid ""
+"``core.upload:parallel``: Number of concurrent threads to upload packages. "
+"Using this conf, it is possible to upload packages in parallel. By default, "
+"or when set to a value less than ``2``, no parallelization will take place, "
+"and any other value will be the number of parallel threads to utilize."
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:69
+msgid ""
+"``core.upload:retry``: (int, default: 1) Number of retries in case of "
+"failure when uploading to Conan server"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:70
+msgid ""
+"``core.upload:retry_wait``: (int, default: 5s) Seconds to wait between "
+"upload attempts to Conan server"
+msgstr ""
+
+#: ../../../reference/commands/upload.rst:74
 msgid ":ref:`Uploading packages tutorial <uploading_packages>`"
 msgstr ""
 
-#: ../../../reference/commands/upload.rst:32
+#: ../../../reference/commands/upload.rst:75
 msgid ":ref:`Working with Conan repositories <conan_repositories>`"
 msgstr ""
 
-#: ../../../reference/commands/upload.rst:33
+#: ../../../reference/commands/upload.rst:76
 msgid ""
 ":ref:`Managing remotes with conan remote command <reference_commands_remote>`"
 msgstr ""
 
-#: ../../../reference/commands/upload.rst:34
+#: ../../../reference/commands/upload.rst:77
 msgid ":ref:`Uploading metadata files<devops_metadata>`."
 msgstr ""

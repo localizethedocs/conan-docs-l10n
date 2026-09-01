@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,18 +60,32 @@ msgid ""
 "information."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/deploy.rst:29
+#: ../../../reference/conanfile/methods/deploy.rst:27
+msgid ""
+"If you need to run binaries from your build dependencies, the recommended "
+"approach is to apply the env from a ``VirtualBuildEnv``, such as:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/deploy.rst:30
+msgid ""
+"def deploy(self):\n"
+"    venv = VirtualBuildEnv(self)\n"
+"    with venv.vars().apply():\n"
+"        self.run(\"mytool\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/deploy.rst:40
 msgid "**Best practices**"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/deploy.rst:31
+#: ../../../reference/conanfile/methods/deploy.rst:42
 msgid ""
 "Only \"binary\" package artifacts can be deployed, copying from the ``self."
 "package_folder``. It is recommended to copy only from the package folder, "
 "not other folders."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/deploy.rst:32
+#: ../../../reference/conanfile/methods/deploy.rst:43
 msgid ""
 "The ``deploy()`` method is intended for final production deployments or the "
 "installation of binaries on the machine, as it extracts the files from the "
@@ -80,7 +94,7 @@ msgid ""
 "build against packages in the Conan cache."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/deploy.rst:33
+#: ../../../reference/conanfile/methods/deploy.rst:44
 msgid ""
 "The ``self.deploy_folder`` should only be used from within the ``deploy()`` "
 "method."

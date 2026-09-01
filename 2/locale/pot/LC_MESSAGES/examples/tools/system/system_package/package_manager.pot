@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 09:24+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,16 +184,24 @@ msgid ""
 msgstr ""
 
 #: ../../../examples/tools/system/system_package/package_manager.rst:121
+msgid ""
+"See :ref:`examples_tools_gnu_pkg_config_sysroot` for a variant of this "
+"pattern in a cross-compilation scenario, where the ``.pc`` files are "
+"provided by a sysroot pointed to by ``PKG_CONFIG_PATH`` in the profile "
+"``[buildenv]``."
+msgstr ""
+
+#: ../../../examples/tools/system/system_package/package_manager.rst:125
 msgid "Now, let's install the ncurses library using the **conanfile.py** file:"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:123
+#: ../../../examples/tools/system/system_package/package_manager.rst:127
 msgid ""
 "$ conan create . --build=missing -c tools.system.package_manager:"
 "mode=install -c tools.system.package_manager:sudo=true"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:127
+#: ../../../examples/tools/system/system_package/package_manager.rst:131
 msgid ""
 "Note that we are using the :ref:`Conan "
 "configuration<conan_tools_system_package_manager_config>` ``tools.system."
@@ -204,17 +212,17 @@ msgid ""
 "**ncurses** library installed in your system, in case not been installed yet."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:132
+#: ../../../examples/tools/system/system_package/package_manager.rst:136
 msgid ""
 "Now, let's check the **consumer** directory. This directory contains a "
 "simple C application that uses the ncurses library."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:134
+#: ../../../examples/tools/system/system_package/package_manager.rst:138
 msgid "The **conanfile.py** file in the **consumer** directory is:"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:136
+#: ../../../examples/tools/system/system_package/package_manager.rst:140
 msgid ""
 "from conan import ConanFile\n"
 "from conan.tools.build import can_run\n"
@@ -245,7 +253,7 @@ msgid ""
 "built.\\nPlease run the executable using: '{app_path}'\")"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:165
+#: ../../../examples/tools/system/system_package/package_manager.rst:169
 msgid ""
 "The recipe is simple. It requires the **ncurses** package we just created "
 "and uses the **CMake** tool to build the application. Once the application "
@@ -253,14 +261,14 @@ msgid ""
 "it manually as you wish and check its output."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:168
+#: ../../../examples/tools/system/system_package/package_manager.rst:172
 msgid ""
 "The **ncurses_version.c** file is a simple C application that uses the "
 "ncurses library to print the ncurses version, but using white background and "
 "blue text:"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:171
+#: ../../../examples/tools/system/system_package/package_manager.rst:175
 msgid ""
 "#include <stdlib.h>\n"
 "#include <stdio.h>\n"
@@ -292,13 +300,13 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:200
+#: ../../../examples/tools/system/system_package/package_manager.rst:204
 msgid ""
 "The **CMakeLists.txt** file is a simple CMake file that builds the "
 "**ncurses_version** application:"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:202
+#: ../../../examples/tools/system/system_package/package_manager.rst:206
 msgid ""
 "cmake_minimum_required(VERSION 3.15)\n"
 "project(ncurses_version C)\n"
@@ -309,7 +317,7 @@ msgid ""
 "target_link_libraries(${PROJECT_NAME} PRIVATE Curses::Curses)"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:212
+#: ../../../examples/tools/system/system_package/package_manager.rst:216
 msgid ""
 "The CMake target **Curses::Curses** is provided by the **ncurses** package "
 "we just created. It follows the official CMake module for `FindCurses "
@@ -318,11 +326,11 @@ msgid ""
 "**cpp_info** object, as we filled it using the **PkgConfig** tool."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:215
+#: ../../../examples/tools/system/system_package/package_manager.rst:219
 msgid "Now, let's build the application:"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:217
+#: ../../../examples/tools/system/system_package/package_manager.rst:221
 msgid ""
 "$ cd consumer/\n"
 "$ conan build . --name=ncurses-version --version=0.1.0\n"
@@ -333,37 +341,37 @@ msgid ""
 "ncurses_version'"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:225
+#: ../../../examples/tools/system/system_package/package_manager.rst:229
 msgid ""
 "After building the application, it will show the executable path. You can "
 "run it to check the output:"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:227
+#: ../../../examples/tools/system/system_package/package_manager.rst:231
 msgid ""
 "$ /tmp/consumer/build/Release/ncurses_version\n"
 "\n"
 "Conan 2.x Examples - Installed ncurses version: ncurses 6.0.20160213"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:233
+#: ../../../examples/tools/system/system_package/package_manager.rst:237
 msgid ""
 "Don't worry if the displayed version is different from the one shown here or "
 "the executable path different. It depends on the version installed in your "
 "system and where you built the application."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:236
+#: ../../../examples/tools/system/system_package/package_manager.rst:240
 msgid ""
 "That's it! You have successfully packaged a system library and consumed it "
 "in a Conan package."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:242
+#: ../../../examples/tools/system/system_package/package_manager.rst:246
 msgid "Wrapping a library installed in the system as a Conan package"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:244
+#: ../../../examples/tools/system/system_package/package_manager.rst:248
 msgid ""
 "As a variant of the above case, it is also possible to apply the above "
 "strategy to libraries that are installed in the system, but not necessarily "
@@ -371,13 +379,13 @@ msgid ""
 "system locations where the compilers will find them by default."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:248
+#: ../../../examples/tools/system/system_package/package_manager.rst:252
 msgid ""
 "Suppose that there is an existing library, already compiled in a user folder "
 "such as:"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:250
+#: ../../../examples/tools/system/system_package/package_manager.rst:254
 msgid ""
 "/home/myuser/mymath\n"
 "                └── include\n"
@@ -386,13 +394,13 @@ msgid ""
 "                    ├── mymath.lib"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:258
+#: ../../../examples/tools/system/system_package/package_manager.rst:262
 msgid ""
 "And ``/home/myuser/mymath`` is not added to the compilers default paths or "
 "anything like that."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:260
+#: ../../../examples/tools/system/system_package/package_manager.rst:264
 msgid ""
 "In general, a more recommended approach is to create a full package from "
 "those precompiled binaries, and upload that package, and then manage it as "
@@ -400,7 +408,7 @@ msgid ""
 "from pre-compiled binaries here<creating_packages_other_prebuilt>`."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:264
+#: ../../../examples/tools/system/system_package/package_manager.rst:268
 msgid ""
 "But in some scenarios, it might still be desirable to use that library from "
 "its installed location ``/home/myuser/mymath`` without putting the artifacts "
@@ -409,11 +417,11 @@ msgid ""
 "method."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:269
+#: ../../../examples/tools/system/system_package/package_manager.rst:273
 msgid "It could be something like:"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:272
+#: ../../../examples/tools/system/system_package/package_manager.rst:276
 msgid ""
 "from conan import ConanFile\n"
 "\n"
@@ -431,14 +439,14 @@ msgid ""
 "        self.cpp_info.libs = [\"mymath\"]"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:289
+#: ../../../examples/tools/system/system_package/package_manager.rst:293
 msgid ""
 "Note that it is also possible to still do conditions based on settings, in "
 "case that the library is installed in the system in different locations "
 "based on the platform:"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:292
+#: ../../../examples/tools/system/system_package/package_manager.rst:296
 msgid ""
 "settings = \"os\"\n"
 "\n"
@@ -454,17 +462,17 @@ msgid ""
 "    self.cpp_info.libs = [\"mymath\"]"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:308
+#: ../../../examples/tools/system/system_package/package_manager.rst:312
 msgid ""
 "It might even be possible to parametrize those absolute paths with some "
 "environment variable specific for that platform too."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:313
+#: ../../../examples/tools/system/system_package/package_manager.rst:317
 msgid "**Best practices**"
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:315
+#: ../../../examples/tools/system/system_package/package_manager.rst:319
 msgid ""
 "The use of \"wrapper\" recipes like this one should be minimized, as it "
 "makes reproducibility and traceability harder. Creating a real package "
@@ -472,7 +480,7 @@ msgid ""
 "makes it possible to achieve such traceability and reproducibility."
 msgstr ""
 
-#: ../../../examples/tools/system/system_package/package_manager.rst:318
+#: ../../../examples/tools/system/system_package/package_manager.rst:322
 msgid ""
 "This type of \"wrapper\" recipe can be convenient together with the "
 "``[replace_requires]`` feature, for specific platform constraints, like a "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,37 +53,48 @@ msgid ""
 "similarly deduced on non-Windows hosts if the ``os`` setting is set."
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:17
+#: ../../../reference/tools/env/virtualrunenv.rst:19
+msgid ""
+"Only dependencies whose ``run`` requirement trait is ``True`` contribute "
+"their folders to this environment. This is normally inferred from the "
+"dependency's ``package_type`` (e.g. ``shared-library`` or ``application``), "
+"but a ``static-library`` that also ships runtime artifacts, like a shared "
+"library, can opt in by declaring ``\"run\": True`` inside :ref:"
+"`package_type_traits<conan_conanfile_attributes_package_type_traits>` in its "
+"recipe."
+msgstr ""
+
+#: ../../../reference/tools/env/virtualrunenv.rst:26
 msgid "It can be used by name in conanfiles:"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:19
-#: ../../../reference/tools/env/virtualrunenv.rst:33
+#: ../../../reference/tools/env/virtualrunenv.rst:28
+#: ../../../reference/tools/env/virtualrunenv.rst:42
 msgid "conanfile.py"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:19
+#: ../../../reference/tools/env/virtualrunenv.rst:28
 msgid ""
 "class Pkg(ConanFile):\n"
 "    generators = \"VirtualRunEnv\""
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:25
+#: ../../../reference/tools/env/virtualrunenv.rst:34
 msgid "conanfile.txt"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:25
+#: ../../../reference/tools/env/virtualrunenv.rst:34
 msgid ""
 "[generators]\n"
 "VirtualRunEnv"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:31
+#: ../../../reference/tools/env/virtualrunenv.rst:40
 msgid ""
 "And it can also be fully instantiated in the conanfile ``generate()`` method:"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:33
+#: ../../../reference/tools/env/virtualrunenv.rst:42
 msgid ""
 "from conan import ConanFile\n"
 "from conan.tools.env import VirtualRunEnv\n"
@@ -97,11 +108,11 @@ msgid ""
 "        ms.generate()"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:50
+#: ../../../reference/tools/env/virtualrunenv.rst:59
 msgid "Generated files"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:52
+#: ../../../reference/tools/env/virtualrunenv.rst:61
 msgid ""
 "conanrunenv-release-x86_64.(bat|ps1|sh): This file contains the actual "
 "definition of environment variables like PATH, LD_LIBRARY_PATH, etc, and "
@@ -110,7 +121,7 @@ msgid ""
 "other settings, a different file will be created."
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:55
+#: ../../../reference/tools/env/virtualrunenv.rst:64
 msgid ""
 "conanrun.(bat|ps1|sh): Accumulates the calls to one or more other scripts to "
 "give one single convenient file for all. This only calls the latest specific "
@@ -119,7 +130,7 @@ msgid ""
 "the Debug one."
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:59
+#: ../../../reference/tools/env/virtualrunenv.rst:68
 msgid ""
 "After the execution of one of those files, a new deactivation script will be "
 "generated, capturing the current environment, so the environment can be "
@@ -127,7 +138,7 @@ msgid ""
 "active configuration, like ``deactivate_conanrunenv-release-x86_64.bat``."
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:65
+#: ../../../reference/tools/env/virtualrunenv.rst:74
 msgid ""
 "To create ``.ps1`` files required for PowerShell, you need to set the "
 "``tools.env.virtualenv:powershell`` configuration with the value of the "
@@ -136,7 +147,7 @@ msgid ""
 "should no longer be used."
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:72
+#: ../../../reference/tools/env/virtualrunenv.rst:81
 msgid ""
 "To create ``.env`` dotenv files, use the **experimental** (new in Conan "
 "2.21) ``tools.env:dotenv`` configuration. These files are not intended to be "
@@ -149,13 +160,35 @@ msgid ""
 "to report any feedback about this feature."
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:83
+#: ../../../reference/tools/env/virtualrunenv.rst:92
 msgid ""
 "For disabling the automatic generation of environment files, check :ref:"
 "`reference_tools_env_virtualbuildenv_disable`"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:87
+#: ../../../reference/tools/env/virtualrunenv.rst:94
+msgid ""
+"On Windows, ``VirtualRunEnv`` can also copy the runtime binaries of "
+"dependencies into a single folder and point ``PATH`` to that folder instead "
+"of to every dependency ``bindirs`` location. This can help avoid ``PATH`` "
+"overflow limits for large dependency graphs. Use the ``win_copy_folder`` "
+"argument with a relative path when instantiating the generator:"
+msgstr ""
+
+#: ../../../reference/tools/env/virtualrunenv.rst:96
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.env import VirtualRunEnv\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        runenv = VirtualRunEnv(self, win_copy_folder=\"imported-bin\")\n"
+"        runenv.generate()"
+msgstr ""
+
+#: ../../../reference/tools/env/virtualrunenv.rst:110
 msgid "Reference"
 msgstr ""
 
@@ -176,6 +209,19 @@ msgstr ""
 #: ../../../conan_sources/conan/tools/env/virtualrunenv.py:docstring of
 #: conan.tools.env.virtualrunenv.VirtualRunEnv:4
 msgid "The current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/virtualrunenv.py:docstring of
+#: conan.tools.env.virtualrunenv.VirtualRunEnv:5
+msgid "Automatically generate .bat or .sh files"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/virtualrunenv.py:docstring of
+#: conan.tools.env.virtualrunenv.VirtualRunEnv:6
+msgid ""
+"Copy the \"bindirs\" folders contents from dependencies into this folder, "
+"and point the PATH environment variable to it, instead of the dependencies "
+"ones. Only for Windows, to avoid PATH and env-var overflow limits."
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/env/virtualrunenv.py:docstring of

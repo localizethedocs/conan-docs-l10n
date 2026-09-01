@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,10 +112,24 @@ msgid ""
 msgstr ""
 
 #: ../../../examples/tools/files/patches/patch_sources.rst:69
+msgid ""
+"Regular expressions and backreferences are also supported by enabling "
+"``regex``. For example, the following call captures the numeric part of "
+"``version=123`` with ``(\\d+)`` and reuses it in the replacement with "
+"``\\1``, producing ``version=v123``:"
+msgstr ""
+
+#: ../../../examples/tools/files/patches/patch_sources.rst:73
+msgid ""
+"replace_in_file(self, \"file.txt\", r\"version=(\\d+)\", r\"version=v\\1\", "
+"regex=True)"
+msgstr ""
+
+#: ../../../examples/tools/files/patches/patch_sources.rst:78
 msgid "in build() method"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:71
+#: ../../../examples/tools/files/patches/patch_sources.rst:80
 msgid ""
 "In this case, we need to apply a different patch depending on the "
 "configuration (`self.settings`, `self.options`...), so it has to be done in "
@@ -123,7 +137,7 @@ msgid ""
 "depends on the ``self.options.shared``:"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:76
+#: ../../../examples/tools/files/patches/patch_sources.rst:85
 msgid ""
 "class helloRecipe(ConanFile):\n"
 "\n"
@@ -146,13 +160,13 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:95
+#: ../../../examples/tools/files/patches/patch_sources.rst:104
 msgid ""
 "If we call ``conan create`` with different ``option.shared`` we can check "
 "the output:"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:97
+#: ../../../examples/tools/files/patches/patch_sources.rst:106
 msgid ""
 "$ conan create .\n"
 "...\n"
@@ -165,24 +179,24 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:111
+#: ../../../examples/tools/files/patches/patch_sources.rst:120
 msgid "Patching using \"patch\" tool"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:113
+#: ../../../examples/tools/files/patches/patch_sources.rst:122
 msgid ""
 "If you have a patch file (diff between two versions of a file), you can use "
 "the ``conan.tools.files.patch`` tool to apply it. The rules about where to "
 "apply the patch (``source()`` or ``build()`` methods) are the same."
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:116
+#: ../../../examples/tools/files/patches/patch_sources.rst:125
 msgid ""
 "We have this patch file, where we are changing again the message to say "
 "\"Hello Patched World Release!\":"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:119
+#: ../../../examples/tools/files/patches/patch_sources.rst:128
 msgid ""
 "--- a/src/hello.cpp\n"
 "+++ b/src/hello.cpp\n"
@@ -200,25 +214,25 @@ msgid ""
 "     // ARCHITECTURES"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:137
+#: ../../../examples/tools/files/patches/patch_sources.rst:146
 msgid "Edit the ``conanfile.py`` to:"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:139
+#: ../../../examples/tools/files/patches/patch_sources.rst:148
 msgid "Import the ``patch`` tool."
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:140
+#: ../../../examples/tools/files/patches/patch_sources.rst:149
 msgid ""
 "Add ``exports_sources`` to the patch file so we have it available in the "
 "cache."
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:141
+#: ../../../examples/tools/files/patches/patch_sources.rst:150
 msgid "Call the ``patch`` tool."
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:144
+#: ../../../examples/tools/files/patches/patch_sources.rst:153
 msgid ""
 "import os\n"
 "from conan import ConanFile\n"
@@ -246,13 +260,13 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:170
+#: ../../../examples/tools/files/patches/patch_sources.rst:179
 msgid "We can run \"conan create\" and see that the patch worked:"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:172
-#: ../../../examples/tools/files/patches/patch_sources.rst:212
-#: ../../../examples/tools/files/patches/patch_sources.rst:248
+#: ../../../examples/tools/files/patches/patch_sources.rst:181
+#: ../../../examples/tools/files/patches/patch_sources.rst:221
+#: ../../../examples/tools/files/patches/patch_sources.rst:257
 msgid ""
 "$ conan create .\n"
 "...\n"
@@ -261,25 +275,25 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:181
+#: ../../../examples/tools/files/patches/patch_sources.rst:190
 msgid ""
 "We can also use the ``conandata.yml`` :ref:`introduced in the "
 "tutorial<creating_packages_handle_sources_in_packages_conandata>` so we can "
 "declare the patches to apply for each version:"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:185
+#: ../../../examples/tools/files/patches/patch_sources.rst:194
 msgid ""
 "patches:\n"
 "  \"1.0\":\n"
 "    - patch_file: \"hello_patched.patch\""
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:192
+#: ../../../examples/tools/files/patches/patch_sources.rst:201
 msgid "And there are the changes we introduce in the ``source()`` method:"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:195
+#: ../../../examples/tools/files/patches/patch_sources.rst:204
 msgid ""
 ".. code-block:: python\n"
 "\n"
@@ -293,19 +307,19 @@ msgid ""
 "            patch(self, patch_file=patch_file)"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:207
+#: ../../../examples/tools/files/patches/patch_sources.rst:216
 msgid "Check :ref:`patch <conan_tools_files_patch>` for more details."
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:210
+#: ../../../examples/tools/files/patches/patch_sources.rst:219
 msgid "If we run the :command:`conan create`, the patch is also applied:"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:221
+#: ../../../examples/tools/files/patches/patch_sources.rst:230
 msgid "Patching using \"apply_conandata_patches\" tool"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:223
+#: ../../../examples/tools/files/patches/patch_sources.rst:232
 msgid ""
 "The example above works but it is a bit complex. If you follow the same yml "
 "structure (check the :ref:`apply_conandata_patches "
@@ -313,7 +327,7 @@ msgid ""
 "you only need to call ``apply_conandata_patches``:"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:228
+#: ../../../examples/tools/files/patches/patch_sources.rst:237
 msgid ""
 "from conan import ConanFile\n"
 "from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout\n"
@@ -332,6 +346,6 @@ msgid ""
 "        apply_conandata_patches(self)"
 msgstr ""
 
-#: ../../../examples/tools/files/patches/patch_sources.rst:246
+#: ../../../examples/tools/files/patches/patch_sources.rst:255
 msgid "Let's check if the patch is also applied:"
 msgstr ""

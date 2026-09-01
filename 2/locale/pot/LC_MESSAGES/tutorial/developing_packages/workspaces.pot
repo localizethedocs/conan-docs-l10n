@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-16 08:57+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,11 +21,10 @@ msgstr ""
 msgid "Workspaces"
 msgstr ""
 
-#: ../../../common/incubating_warning.inc:3
+#: ../../../common/experimental_warning.inc:3
 msgid ""
-"This feature is part of the new incubating features. This means that it is "
-"under development, and looking for user testing and feedback. For more info "
-"see :ref:`Incubating section<incubating>`."
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
 msgstr ""
 
 #: ../../../tutorial/developing_packages/workspaces.rst:9
@@ -39,45 +38,37 @@ msgstr ""
 msgid "Introduction"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:17
-msgid ""
-"The workspace feature can be enabled defining the environment variable "
-"``CONAN_WORKSPACE_ENABLE=will_break_next``. The value ``will_break_next`` is "
-"used to emphasize that it will change in next releases, and this feature is "
-"for testing only, it cannot be used in production."
-msgstr ""
-
-#: ../../../tutorial/developing_packages/workspaces.rst:22
+#: ../../../tutorial/developing_packages/workspaces.rst:15
 msgid ""
 "A Conan *workspace* gives you the chance to manage several packages as "
 "``editable`` mode in an *orchestrated* or *monolithic* (also called *super-"
 "build*) way:"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:25
+#: ../../../tutorial/developing_packages/workspaces.rst:18
 msgid ""
 "*orchestrated*, we denote Conan building the editable packages one by one "
 "starting on the applications/consumers if exist."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:26
+#: ../../../tutorial/developing_packages/workspaces.rst:19
 msgid ""
 "*monolithic*, we denote the editable packages built as a monolith, "
 "generating a single result (generators, etc) for the whole workspace."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:28
+#: ../../../tutorial/developing_packages/workspaces.rst:21
 msgid ""
 "Notice that the packages added to the workspace are automatically resolved "
 "as ``editable`` ones. Those editable packages are named as workspace's "
 "``packages``."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:33
+#: ../../../tutorial/developing_packages/workspaces.rst:26
 msgid "How to define a workspace"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:35
+#: ../../../tutorial/developing_packages/workspaces.rst:28
 msgid ""
 "Workspaces are defined by the files ``conanws.yml`` and/or ``conanws.py`` "
 "files. Any Conan workspace command will traverse up the file system from the "
@@ -87,29 +78,29 @@ msgid ""
 "necessary, or could be committed to Git in monorepo-like projects."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:40
+#: ../../../tutorial/developing_packages/workspaces.rst:33
 msgid ""
 "Through the ``conan workspace`` command, we can open, add, and/or remove "
 "``packages`` from the current workspace."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:44
+#: ../../../tutorial/developing_packages/workspaces.rst:37
 msgid ""
-"Read the :ref:`workspace files<reference_workspace_files>` section. Read "
-"the :ref:`conan workspace command<reference_commands_workspace>` section."
+"Read the :ref:`workspace <reference_workspace>` section. Read the :ref:"
+"`conan workspace command<reference_commands_workspace>` section."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:50
+#: ../../../tutorial/developing_packages/workspaces.rst:43
 msgid "Monolithic build"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:52
+#: ../../../tutorial/developing_packages/workspaces.rst:45
 msgid ""
 "Conan workspaces can be built as a single monolithic project (super-"
 "project), which can be very convenient. Let's see it with an example:"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:55
+#: ../../../tutorial/developing_packages/workspaces.rst:48
 msgid ""
 "$ conan new workspace\n"
 "$ conan workspace super-install\n"
@@ -117,14 +108,14 @@ msgid ""
 "$ cmake --build --preset conan-release"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:63
+#: ../../../tutorial/developing_packages/workspaces.rst:56
 msgid ""
 "Let's explain a bit what happened. At first, the ``conan new workspace`` "
 "created a template project with some relevant files and the following "
 "structure:"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:66
+#: ../../../tutorial/developing_packages/workspaces.rst:59
 msgid ""
 ".\n"
 "├── CMakeLists.txt\n"
@@ -165,15 +156,15 @@ msgid ""
 "            └── example.cpp"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:107
+#: ../../../tutorial/developing_packages/workspaces.rst:100
 msgid "The root ``CMakeLists.txt`` defines the super-project with:"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:109
+#: ../../../tutorial/developing_packages/workspaces.rst:102
 msgid "CMakeLists.txt"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:109
+#: ../../../tutorial/developing_packages/workspaces.rst:102
 msgid ""
 "cmake_minimum_required(VERSION 3.25)\n"
 "project(monorepo CXX)\n"
@@ -210,7 +201,7 @@ msgid ""
 "endforeach()"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:145
+#: ../../../tutorial/developing_packages/workspaces.rst:138
 msgid ""
 "So basically, the super-project uses ``FetchContent`` to add the subfolders' "
 "sub-projects. For this to work correctly, the subprojects must be CMake "
@@ -220,7 +211,7 @@ msgid ""
 "define some local ``ALIAS`` targets."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:151
+#: ../../../tutorial/developing_packages/workspaces.rst:144
 msgid ""
 "This super-build ``CMakeLists.txt`` defines dynamically the correct sub-"
 "projects order. Note that the ``FetchContent`` strategy requires to define "
@@ -237,15 +228,15 @@ msgid ""
 "implement their own logic in their ``conanws.py`` files."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:162
+#: ../../../tutorial/developing_packages/workspaces.rst:155
 msgid "The other important part is the ``conanws.py`` file:"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:164
+#: ../../../tutorial/developing_packages/workspaces.rst:157
 msgid "conanws.py"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:164
+#: ../../../tutorial/developing_packages/workspaces.rst:157
 msgid ""
 "from conan import Workspace\n"
 "from conan import ConanFile\n"
@@ -285,13 +276,13 @@ msgid ""
 "f\"set(CONAN_WS_BUILD_ORDER {pkglist})\")"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:200
+#: ../../../tutorial/developing_packages/workspaces.rst:193
 msgid ""
 "The role of the ``class MyWs(ConanFile)`` embedded conanfile is important, "
 "it defines the super-project necessary generators and layout."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:203
+#: ../../../tutorial/developing_packages/workspaces.rst:196
 msgid ""
 "The ``conan workspace super-install`` does not install the different "
 "packages separately, for this command, the packages of the workspace no "
@@ -302,7 +293,7 @@ msgid ""
 "project external dependencies."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:209
+#: ../../../tutorial/developing_packages/workspaces.rst:202
 msgid ""
 "In the ``build_order(self, order)`` method above, the ``order`` argument is "
 "an ordered list of lists representing the topologically sorted order of "
@@ -313,11 +304,11 @@ msgid ""
 "specified in the recipe ``layout()``."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:216
+#: ../../../tutorial/developing_packages/workspaces.rst:209
 msgid "**Best practices**"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:218
+#: ../../../tutorial/developing_packages/workspaces.rst:211
 msgid ""
 "For workspace recipes, the recommendation is to keep a simple layout, with "
 "the ``conanfile.py`` in the root of each package repository, the source "
@@ -327,14 +318,14 @@ msgid ""
 "to define and manage."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:225
+#: ../../../tutorial/developing_packages/workspaces.rst:218
 msgid ""
 "The template above worked without external dependencies, but everything "
 "would work the same when there are external dependencies. This can be tested "
 "with:"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:228
+#: ../../../tutorial/developing_packages/workspaces.rst:221
 msgid ""
 "$ conan new cmake_lib -d name=mymath\n"
 "$ conan create .\n"
@@ -343,7 +334,7 @@ msgid ""
 "$ cmake ..."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:239
+#: ../../../tutorial/developing_packages/workspaces.rst:232
 msgid ""
 "The current ``conan new workspace`` generates a CMake based super project. "
 "But it is possible to define a super-project using other build systems, like "
@@ -352,25 +343,25 @@ msgid ""
 "projects, this is possible."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:244
+#: ../../../tutorial/developing_packages/workspaces.rst:237
 msgid ""
 "It might also be possible for the ``add()`` method in the ``conanws.py`` to "
 "manage the addition of the subprojects to the super-project, if there is "
 "some structure."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:251
+#: ../../../tutorial/developing_packages/workspaces.rst:244
 msgid "Orchestrated build"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:253
+#: ../../../tutorial/developing_packages/workspaces.rst:246
 msgid ""
 "Conan workspaces can also build the different ``packages`` separately, and "
 "taking into account if there are packages defined as consumers of the other "
 "ones."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:256
+#: ../../../tutorial/developing_packages/workspaces.rst:249
 msgid ""
 "Let's use another structure to understand better how it works. Now, let's "
 "create it from scratch with the ``conan workspace init .`` that creates an "
@@ -378,7 +369,7 @@ msgid ""
 "cmake_exe`` basic templates, that create regular CMake-based conan packages:"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:258
+#: ../../../tutorial/developing_packages/workspaces.rst:251
 msgid ""
 "$ mkdir myproject && cd myproject\n"
 "$ conan workspace init .\n"
@@ -386,11 +377,11 @@ msgid ""
 "$ conan new cmake_exe -d name=app -d version=1.0 -d requires=hello/1.0 -o app"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:265
+#: ../../../tutorial/developing_packages/workspaces.rst:258
 msgid "Those commands created a file structure like this:"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:267
+#: ../../../tutorial/developing_packages/workspaces.rst:260
 msgid ""
 ".\n"
 "├── conanws.py\n"
@@ -418,14 +409,14 @@ msgid ""
 "             └── example.cpp"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:295
+#: ../../../tutorial/developing_packages/workspaces.rst:288
 msgid ""
 "Now, the ``conanws.yml`` is empty and the ``conanws.py`` has a quite minimal "
 "definition. Let's add the ``app`` application (consumes ``hello``) and the "
 "``hello`` lib as new ``packages`` to the workspace:"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:298
+#: ../../../tutorial/developing_packages/workspaces.rst:291
 msgid ""
 "$ conan workspace add hello\n"
 "Reference 'hello/1.0' added to workspace\n"
@@ -433,13 +424,13 @@ msgid ""
 "Reference 'app/1.0' added to workspace"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:305
+#: ../../../tutorial/developing_packages/workspaces.rst:298
 msgid ""
 "Defined the workspace's ``packages``, we can build them and execute the "
 "application:"
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:307
+#: ../../../tutorial/developing_packages/workspaces.rst:300
 msgid ""
 "$ conan workspace build\n"
 "$ app/build/Release/app\n"
@@ -449,7 +440,7 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../tutorial/developing_packages/workspaces.rst:317
+#: ../../../tutorial/developing_packages/workspaces.rst:310
 msgid ""
 "For any feedback, please open new tickets in https://github.com/conan-io/"
 "conan/issues."

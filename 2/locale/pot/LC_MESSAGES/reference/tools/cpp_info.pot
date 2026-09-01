@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,25 +96,29 @@ msgid ""
 "passing all the information from all dependencies is the only possibility."
 msgstr ""
 
-#: ../../../reference/tools/cpp_info.rst:46
+#: ../../../reference/tools/cpp_info.rst:47
+msgid "CppInfo interface"
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:49
 msgid ""
 "The public documented interface (besides the defined one in :ref:`the "
 "package_info()<reference_conanfile_methods_package_info>`) is:"
 msgstr ""
 
-#: ../../../reference/tools/cpp_info.rst:48
+#: ../../../reference/tools/cpp_info.rst:51
 msgid ""
 "``CppInfo(conanfile)``: Constructor. Receives a ``conanfile`` as argument, "
 "typically ``self``"
 msgstr ""
 
-#: ../../../reference/tools/cpp_info.rst:49
+#: ../../../reference/tools/cpp_info.rst:52
 msgid ""
 "``aggregated_components()``: return a new ``CppInfo`` object resulting from "
 "the aggregation of all the components"
 msgstr ""
 
-#: ../../../reference/tools/cpp_info.rst:50
+#: ../../../reference/tools/cpp_info.rst:53
 msgid ""
 "``get_sorted_components()``: Get the ordered components of a package, "
 "prioritizing those with fewer dependencies within the same package. Returns "
@@ -122,9 +126,35 @@ msgid ""
 "component}``."
 msgstr ""
 
-#: ../../../reference/tools/cpp_info.rst:53
+#: ../../../reference/tools/cpp_info.rst:56
 msgid ""
 "``merge(other_cppinfo: CppInfo)``: modifies the current ``CppInfo`` object, "
 "updating it with the information of the parameter ``other_cppinfo``, "
 "allowing to aggregate information from multiple dependencies."
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:57
+msgid ""
+"``save(path)`` serializes the ``CppInfo`` object into json and saves it to "
+"the ``path``."
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:58
+msgid ""
+"``CppInfo.load(path)`` static method returns a ``CppInfo`` object result of "
+"loading the ``path`` file and deserializing its json contents (result of a "
+"``cpp_info.save(path)``)"
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:62
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/tools/cpp_info.rst:64
+msgid ""
+"Regular recipes should not use these special ``CppInfo`` methods in most "
+"cases. Most of them are intended for custom generators only, not recipes. "
+"The ``save()/load()`` operations shouldn't be needed in recipes in most "
+"cases either, only for some exceptional circumstances like the :ref:"
+"`PkgConfig fill_cpp_info example<examples_tools_gnu_pkg_config_sysroot>`."
 msgstr ""

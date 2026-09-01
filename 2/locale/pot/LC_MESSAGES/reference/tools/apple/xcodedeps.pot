@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,8 +78,8 @@ msgstr ""
 #: ../../../reference/tools/apple/xcodedeps.rst:41
 msgid ""
 "When the ``XcodeDeps`` generator is used, every invocation of ``conan "
-"install`` will generate several configuration files, per dependency and "
-"configuration. For the *conanfile.py* above, for example:"
+"install`` will generate several configuration files, per direct dependency "
+"and configuration. For the *conanfile.py* above, for example:"
 msgstr ""
 
 #: ../../../reference/tools/apple/xcodedeps.rst:45
@@ -91,10 +91,10 @@ msgstr ""
 #: ../../../reference/tools/apple/xcodedeps.rst:50
 msgid ""
 "This generator is multi-configuration. It will generate different files for "
-"the different *Debug/Release* configurations for each requirement. It will "
-"also generate one single file (*conandeps.xcconfig*) aggregating all the "
-"files for the direct dependencies (just *libpng* in this case). The above "
-"commands generate the following files:"
+"the different *Debug/Release* configurations for each direct requirement. It "
+"will also generate one single file (*conandeps.xcconfig*) aggregating all "
+"the files for the direct dependencies (just *libpng* in this case). The "
+"above commands generate the following files:"
 msgstr ""
 
 #: ../../../reference/tools/apple/xcodedeps.rst:55
@@ -105,61 +105,63 @@ msgid ""
 "├── conan_libpng_libpng.xcconfig\n"
 "├── conan_libpng_libpng_debug_x86_64.xcconfig\n"
 "├── conan_libpng_libpng_release_x86_64.xcconfig\n"
-"├── conan_zlib.xcconfig\n"
-"├── conan_zlib_zlib.xcconfig\n"
-"├── conan_zlib_zlib_debug_x86_64.xcconfig\n"
-"├── conan_zlib_zlib_release_x86_64.xcconfig\n"
 "└── conandeps.xcconfig"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:69
+#: ../../../reference/tools/apple/xcodedeps.rst:65
+msgid ""
+"Note that even though *libpng* depends on *zlib*, no *conan_zlib*\\* files "
+"are generated. The *XcodeDeps* generator only emits *xcconfig* files for "
+"**direct** dependencies, and inlines all transitive data (include "
+"directories, library names, flags, etc.) into the props file of the direct "
+"dependency."
+msgstr ""
+
+#: ../../../reference/tools/apple/xcodedeps.rst:70
 msgid ""
 "The first ``conan install`` with the default *Release* and *x86_64* "
 "configuration generates:"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:71
+#: ../../../reference/tools/apple/xcodedeps.rst:72
 msgid ""
 "*conan_libpng_libpng_release_x86_64.xcconfig*: declares variables with "
 "conditional logic to be considered only for the active configuration in "
-"*Xcode* or the one passed by command line to *xcodebuild*."
-msgstr ""
-
-#: ../../../reference/tools/apple/xcodedeps.rst:72
-msgid ""
-"*conan_libpng_libpng.xcconfig*: includes *conan_libpng_libpng_release_x86_64."
-"xcconfig* and declares the following *Xcode* build settings: "
-"``SYSTEM_HEADER_SEARCH_PATHS``, ``GCC_PREPROCESSOR_DEFINITIONS``, "
-"``OTHER_CFLAGS``, ``OTHER_CPLUSPLUSFLAGS``, ``FRAMEWORK_SEARCH_PATHS``, "
-"``LIBRARY_SEARCH_PATHS``, ``OTHER_LDFLAGS``. It also includes the generated "
-"*xcconfig* files for transitive dependencies (*conan_zlib_zlib.xcconfig* in "
-"this case)."
+"*Xcode* or the one passed by command line to *xcodebuild*. The values "
+"inlined here include the *includedirs*, *libs*, *libdirs*, flags, etc., from "
+"*libpng* and from all of its transitive dependencies (in this case, also "
+"*zlib*), merged into a single set of variables named after the direct "
+"dependency."
 msgstr ""
 
 #: ../../../reference/tools/apple/xcodedeps.rst:73
+msgid ""
+"*conan_libpng_libpng.xcconfig*: includes *conan_libpng_libpng_release_x86_64."
+"xcconfig* and declares the following *Xcode* build settings using the "
+"inlined values: ``SYSTEM_HEADER_SEARCH_PATHS``, "
+"``GCC_PREPROCESSOR_DEFINITIONS``, ``OTHER_CFLAGS``, "
+"``OTHER_CPLUSPLUSFLAGS``, ``FRAMEWORK_SEARCH_PATHS``, "
+"``LIBRARY_SEARCH_PATHS``, ``OTHER_LDFLAGS``. This file no longer includes "
+"any *xcconfig* file from transitive dependencies, since the data is already "
+"inlined in the props file."
+msgstr ""
+
+#: ../../../reference/tools/apple/xcodedeps.rst:74
 msgid ""
 "*conan_libpng.xcconfig*: in this case it only includes *conan_libpng_libpng."
 "xcconfig*, but in the case that the required package has components, this "
 "file will include all of the components of the package."
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:74
-msgid ""
-"Same 3 files will be generated for each dependency in the graph. In this "
-"case, as *zlib* is a dependency of *libpng* it will generate: "
-"*conan_zlib_zlib_release_x86_64.xcconfig*, *conan_zlib_zlib.xcconfig* and "
-"*conan_zlib.xcconfig*."
-msgstr ""
-
 #: ../../../reference/tools/apple/xcodedeps.rst:75
-#: ../../../reference/tools/apple/xcodedeps.rst:84
+#: ../../../reference/tools/apple/xcodedeps.rst:83
 msgid ""
-"*conandeps.xcconfig*: configuration files including all direct dependencies, "
+"*conandeps.xcconfig*: configuration file including all direct dependencies, "
 "in this case, it just includes ``conan_libpng.xcconfig``."
 msgstr ""
 
 #: ../../../reference/tools/apple/xcodedeps.rst:76
-#: ../../../reference/tools/apple/xcodedeps.rst:85
+#: ../../../reference/tools/apple/xcodedeps.rst:84
 msgid ""
 "The main *conan_config.xcconfig* file, to be added to the project. Includes "
 "both the files from this generator and the generated by the :ref:"
@@ -172,66 +174,60 @@ msgstr ""
 
 #: ../../../reference/tools/apple/xcodedeps.rst:80
 msgid ""
-"*conan_libpng_libpng_debug_x86_64.xcconfig*: same variables as the one below "
-"for *Debug* configuration."
+"*conan_libpng_libpng_debug_x86_64.xcconfig*: same variables as the one above "
+"for *Debug* configuration, also containing the inlined data from transitive "
+"dependencies."
 msgstr ""
 
 #: ../../../reference/tools/apple/xcodedeps.rst:81
 msgid ""
 "*conan_libpng_libpng.xcconfig*: this file has been already created by the "
 "previous command, now it's modified to add the include for "
-"*conan_libpng_debug_x86_64.xcconfig*."
+"*conan_libpng_libpng_debug_x86_64.xcconfig*."
 msgstr ""
 
 #: ../../../reference/tools/apple/xcodedeps.rst:82
 msgid "*conan_libpng.xcconfig*: this file will remain the same."
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:83
-msgid ""
-"Like in the previous command the same 3 files will be generated for each "
-"dependency in the graph. In this case, as *zlib* is a dependency of *libpng* "
-"it will generate: *conan_zlib_zlib_debug_x86_64.xcconfig*, *conan_zlib_zlib."
-"xcconfig* and *conan_zlib.xcconfig*."
-msgstr ""
-
-#: ../../../reference/tools/apple/xcodedeps.rst:87
+#: ../../../reference/tools/apple/xcodedeps.rst:86
 msgid ""
 "If you want to add this dependencies to you Xcode project, you just have to "
 "add the *conan_config.xcconfig* configuration file for all of the "
 "configurations you want to use (usually *Debug* and *Release*)."
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:92
+#: ../../../reference/tools/apple/xcodedeps.rst:91
 msgid "Additional variables defined"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:94
+#: ../../../reference/tools/apple/xcodedeps.rst:93
 msgid ""
 "Besides the variables that define the *Xcode* build settings mentioned "
 "above, there are additional variables declared that may be useful to use in "
 "your *Xcode* project:"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:97
+#: ../../../reference/tools/apple/xcodedeps.rst:96
 msgid ""
 "`PACKAGE_ROOT_<package_name>`: Set to the location of the :ref:"
 "`package_folder attribute <conan_conanfile_properties_package_folder>`."
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:101
+#: ../../../reference/tools/apple/xcodedeps.rst:100
 msgid "Components support"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:103
+#: ../../../reference/tools/apple/xcodedeps.rst:102
 msgid "This generator supports packages with components. That means that:"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:105
+#: ../../../reference/tools/apple/xcodedeps.rst:104
 msgid ""
 "If a **dependency** ``package_info()`` declares ``cpp_info.requires`` on "
-"some components, the generated *.xcconfig* files will contain includes to "
-"only those components."
+"some components, only the data from those components (and their transitive "
+"components) will be inlined into the props file of the direct dependency. "
+"Components that are not required by anyone are not inlined."
 msgstr ""
 
 #: ../../../reference/tools/apple/xcodedeps.rst:109
@@ -241,11 +237,11 @@ msgid ""
 "but not to the current package."
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:114
+#: ../../../reference/tools/apple/xcodedeps.rst:115
 msgid "Custom configurations"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:116
+#: ../../../reference/tools/apple/xcodedeps.rst:117
 msgid ""
 "If your Xcode project defines custom configurations, like ``ReleaseShared``, "
 "or ``MyCustomConfig``, it is possible to define it into the ``XcodeDeps`` "
@@ -255,7 +251,7 @@ msgid ""
 "also controls this with the ``shared`` option:"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:122
+#: ../../../reference/tools/apple/xcodedeps.rst:123
 msgid ""
 "from conan import ConanFile\n"
 "from conan.tools.apple import XcodeDeps\n"
@@ -276,7 +272,7 @@ msgid ""
 "        xcode.generate()"
 msgstr ""
 
-#: ../../../reference/tools/apple/xcodedeps.rst:140
+#: ../../../reference/tools/apple/xcodedeps.rst:141
 msgid ""
 "This will manage to generate new *.xcconfig* files for this custom "
 "configuration, and when you switch to this configuration in the IDE, the "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,6 +86,7 @@ msgstr ""
 #: ../../../tutorial/creating_packages/define_package_information.rst:65
 #: ../../../tutorial/creating_packages/define_package_information.rst:152
 #: ../../../tutorial/creating_packages/define_package_information.rst:245
+#: ../../../tutorial/creating_packages/define_package_information.rst:308
 msgid "*conanfile.py*"
 msgstr ""
 
@@ -174,7 +175,7 @@ msgid "Propagating environment information to consumers"
 msgstr ""
 
 #: ../../../tutorial/creating_packages/define_package_information.rst:94
-#: ../../../tutorial/creating_packages/define_package_information.rst:336
+#: ../../../tutorial/creating_packages/define_package_information.rst:346
 msgid "Define components for Conan packages that provide multiple libraries"
 msgstr ""
 
@@ -430,16 +431,30 @@ msgstr ""
 
 #: ../../../tutorial/creating_packages/define_package_information.rst:304
 msgid ""
+"Similarly, if the CMake config file name differs from the Conan package "
+"name, set the ``cmake_file_name`` property so consumers can call "
+"``find_package()`` with the right name, for example if the consumers are "
+"expected to do ``find_package(MyHello CONFIG REQUIRED)``"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/define_package_information.rst:308
+msgid ""
+"def package_info(self):\n"
+"    self.cpp_info.set_property(\"cmake_file_name\", \"MyHello\")"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/define_package_information.rst:314
+msgid ""
 "The target name is not the only property you can set in the ``CMakeDeps`` "
 "generator. For a complete list of properties that affect the ``CMakeDeps`` "
 "generator behaviour, please check the :ref:`reference<CMakeDeps Properties>`."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:309
+#: ../../../tutorial/creating_packages/define_package_information.rst:319
 msgid "Propagating environment or configuration information to consumers"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:311
+#: ../../../tutorial/creating_packages/define_package_information.rst:321
 msgid ""
 "You can provide environment information to consumers in the "
 "``package_info()``. To do so, you can use the ConanFile's :ref:"
@@ -447,21 +462,21 @@ msgid ""
 "`buildenv_info<conan_conanfile_attributes_buildenv_info>` properties:"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:315
+#: ../../../tutorial/creating_packages/define_package_information.rst:325
 msgid ""
 "``runenv_info`` :ref:`Environment<conan_tools_env_environment_model>` object "
 "that defines environment information that consumers that use the package may "
 "need when **running**."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:319
+#: ../../../tutorial/creating_packages/define_package_information.rst:329
 msgid ""
 "``buildenv_info`` :ref:`Environment<conan_tools_env_environment_model>` "
 "object that defines environment information that consumers that use the "
 "package may need when **building**."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:323
+#: ../../../tutorial/creating_packages/define_package_information.rst:333
 msgid ""
 "Please note that it's not necessary to add ``cpp_info.bindirs`` to ``PATH`` "
 "or ``cpp_info.libdirs`` to ``LD_LIBRARY_PATH``, those are automatically "
@@ -469,20 +484,20 @@ msgid ""
 "ref:`VirtualRunEnv<conan_tools_env_virtualrunenv>`."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:328
+#: ../../../tutorial/creating_packages/define_package_information.rst:338
 msgid ""
 "You can also define configuration values in the ``package_info()`` so that "
 "consumers can use that information. To do this, set the :ref:"
 "`conf_info<conan_conanfile_model_conf_info>` property of the ``ConanFile``."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:332
+#: ../../../tutorial/creating_packages/define_package_information.rst:342
 msgid ""
 "To learn more about this use case, please check the :ref:`corresponding "
 "example<examples_conanfile_package_info_conf_and_env>`."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:338
+#: ../../../tutorial/creating_packages/define_package_information.rst:348
 msgid ""
 "There are cases in which a Conan package may provide multiple libraries, for "
 "these cases you can set the separate information for each of those libraries "
@@ -490,13 +505,13 @@ msgid ""
 "`CppInfo<conan_conanfile_model_cppinfo_attributes>` object."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:342
+#: ../../../tutorial/creating_packages/define_package_information.rst:352
 msgid ""
 "To know more about this use case, please check the :ref:`components "
 "example<examples_conanfile_package_info_components>` in the examples section."
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:348
+#: ../../../tutorial/creating_packages/define_package_information.rst:358
 msgid ""
 "`JFrog Academy Conan 2 Essentials Module 2, Lesson 10: The package() And "
 "package_info() Methods <https://academy.jfrog.com/path/conan-cc-package-"
@@ -504,19 +519,19 @@ msgid ""
 "utm_source=Conan+Docs>`__"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:349
+#: ../../../tutorial/creating_packages/define_package_information.rst:359
 msgid ""
 ":ref:`Propagating environment and configuration information to consumers "
 "example<examples_conanfile_package_info_conf_and_env>`"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:350
+#: ../../../tutorial/creating_packages/define_package_information.rst:360
 msgid ""
 ":ref:`Define components for Conan packages that provide multiple libraries "
 "example<examples_conanfile_package_info_components>`"
 msgstr ""
 
-#: ../../../tutorial/creating_packages/define_package_information.rst:351
+#: ../../../tutorial/creating_packages/define_package_information.rst:361
 msgid ""
 ":ref:`package_info() reference<reference_conanfile_methods_package_info>`"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -318,7 +318,35 @@ msgid ""
 "   self.tool_requires(\"cmake/3.23.5\", options={\"shared\": False})"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:155
+#: ../../../reference/conanfile/methods/build_requirements.rst:157
+msgid ""
+"Defining options values for dependencies in recipes does not have strong "
+"guarantees, please check :ref:`this FAQ about options values for "
+"dependencies<faq_different_options_values>`. The recommended way to define "
+"options values for dependencies is in **profile files**."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:161
+msgid ""
+"For the ``tool_requires/test_requires`` defining the ``options`` trait is "
+"more feasible than with regular requires, because they are not visible and "
+"not propagated, but don't apply ``options`` trait to regular requires if "
+"possible, and use **profile files** instead."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:165
+msgid ""
+"Still, both ``tool_requires`` and ``test_requires`` are private "
+"(``visible=False``), only the recipe that declares them has visibility and "
+"can use them. The consumers of the package will not see or know about their "
+"existence. Consequently, they cannot be affected by consumers "
+"``options``values definitions, it doesn't matter that a consumer of the "
+"package defines options like ``cmake*:some_option=somevalue``, because "
+"``cmake`` is ``visible=False`` and it will never receive that value from "
+"downstream consumers."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_requirements.rst:172
 msgid ""
 "The ``test_requires()`` allows the ``force=True`` trait in case there are "
 "transitive test requirements with conflicting versions, and likewise "
@@ -326,11 +354,11 @@ msgid ""
 "possible transitive dependencies of the direct tool requirements."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:159
+#: ../../../reference/conanfile/methods/build_requirements.rst:176
 msgid "**Best practices**"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:161
+#: ../../../reference/conanfile/methods/build_requirements.rst:178
 msgid ""
 "``tool_requires`` are exclusively for build time **tools**, not for "
 "libraries that would be included and linked into the consumer package. For "
@@ -338,7 +366,7 @@ msgid ""
 "custom trait values."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:162
+#: ../../../reference/conanfile/methods/build_requirements.rst:179
 msgid ""
 "The ``self.test_requires()`` and ``self.tool_requires()`` methods should "
 "exclusively be used in the ``build_requirements()`` method, with the only "
@@ -348,18 +376,18 @@ msgid ""
 "dependencies<conan_conanfile_model_dependencies>` attribute should be used."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:167
+#: ../../../reference/conanfile/methods/build_requirements.rst:184
 msgid ""
 "Follow the :ref:`tutorial about consuming Conan packages as "
 "tools<consuming_packages_tool_requires>`."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:168
+#: ../../../reference/conanfile/methods/build_requirements.rst:185
 msgid ""
 "Read the :ref:`tutorial about creating tool_requires "
 "packages<tutorial_other_tool_requires_packages>`."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/build_requirements.rst:169
+#: ../../../reference/conanfile/methods/build_requirements.rst:186
 msgid ":ref:`examples_graph_tool_requires_protobuf`"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,47 +61,50 @@ msgstr ""
 #: ../../../conan_sources/conan/tools/files/copy_pattern.py:docstring of
 #: conan.tools.files.copy_pattern.copy:4
 msgid ""
-"(Required) An fnmatch file pattern of the files that should be copied. It "
-"must not start with ``..`` relative path or an exception will be raised."
+"(Required) An fnmatch file pattern, or a list/tuple of fnmatch patterns, of "
+"the files that should be copied. When a list is given the src folder is "
+"walked only once, and every file matching any of the patterns is copied "
+"exactly once, even if several patterns match it. Patterns must not start "
+"with ``..`` relative path or an exception will be raised."
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/files/copy_pattern.py:docstring of
-#: conan.tools.files.copy_pattern.copy:6
+#: conan.tools.files.copy_pattern.copy:9
 msgid ""
 "(Required) Source folder in which those files will be searched. This folder "
 "will be stripped from the dst parameter. E.g., lib/Debug/x86."
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/files/copy_pattern.py:docstring of
-#: conan.tools.files.copy_pattern.copy:8
+#: conan.tools.files.copy_pattern.copy:11
 msgid ""
 "(Required) Destination local folder. It must be different from src value or "
 "an exception will be raised."
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/files/copy_pattern.py:docstring of
-#: conan.tools.files.copy_pattern.copy:10
+#: conan.tools.files.copy_pattern.copy:13
 msgid ""
 "(Optional, defaulted to ``True``) Means if you want to keep the relative "
 "path when you copy the files from the src folder to the dst one."
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/files/copy_pattern.py:docstring of
-#: conan.tools.files.copy_pattern.copy:12
+#: conan.tools.files.copy_pattern.copy:15
 msgid ""
 "(Optional, defaulted to ``None``) A tuple/list of fnmatch patterns or even a "
 "single one to be excluded from the copy."
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/files/copy_pattern.py:docstring of
-#: conan.tools.files.copy_pattern.copy:14
+#: conan.tools.files.copy_pattern.copy:17
 msgid ""
 "(Optional, defaulted to ``True``) If enabled, it will do a case-insensitive "
 "pattern matching. will do a case-insensitive pattern matching when ``True``"
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/files/copy_pattern.py:docstring of
-#: conan.tools.files.copy_pattern.copy:17
+#: conan.tools.files.copy_pattern.copy:20
 msgid ""
 "(Optional, default ``False``). If the file to be copied already exists in "
 "the destination folder, only really copy it if it seems different (different "
@@ -117,20 +120,20 @@ msgid "Returns"
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/files/copy_pattern.py:docstring of
-#: conan.tools.files.copy_pattern.copy:20
+#: conan.tools.files.copy_pattern.copy:23
 msgid "list of copied files"
 msgstr ""
 
 #: ../../../reference/tools/files/basic.rst:13
-#: ../../../reference/tools/files/basic.rst:42
-#: ../../../reference/tools/files/basic.rst:59
-#: ../../../reference/tools/files/basic.rst:77
-#: ../../../reference/tools/files/basic.rst:97
-#: ../../../reference/tools/files/basic.rst:147
-#: ../../../reference/tools/files/basic.rst:166
-#: ../../../reference/tools/files/basic.rst:185
-#: ../../../reference/tools/files/basic.rst:289
-#: ../../../reference/tools/files/basic.rst:319
+#: ../../../reference/tools/files/basic.rst:53
+#: ../../../reference/tools/files/basic.rst:70
+#: ../../../reference/tools/files/basic.rst:88
+#: ../../../reference/tools/files/basic.rst:108
+#: ../../../reference/tools/files/basic.rst:164
+#: ../../../reference/tools/files/basic.rst:183
+#: ../../../reference/tools/files/basic.rst:202
+#: ../../../reference/tools/files/basic.rst:306
+#: ../../../reference/tools/files/basic.rst:336
 msgid "Usage:"
 msgstr ""
 
@@ -143,14 +146,29 @@ msgid ""
 "package_folder, \"lib\"))"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:24
+#: ../../../reference/tools/files/basic.rst:22
+msgid ""
+"Since Conan 2.32, the ``pattern`` argument also accepts a list or tuple of "
+"patterns. When a list is provided, the source folder is walked only once and "
+"every file matching any of the patterns is copied, which can be "
+"significantly faster than calling ``copy()`` several times for large trees:"
+msgstr ""
+
+#: ../../../reference/tools/files/basic.rst:26
+msgid ""
+"def package(self):\n"
+"    copy(self, [\"*.h\", \"*.hpp\"], self.source_folder,\n"
+"         os.path.join(self.package_folder, \"include\"))"
+msgstr ""
+
+#: ../../../reference/tools/files/basic.rst:35
 msgid ""
 "The files that are **symlinks to files** or **symlinks to folders** with be "
 "treated like any other file, so they will only be copied if the specified "
 "pattern matches with the file."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:27
+#: ../../../reference/tools/files/basic.rst:38
 msgid ""
 "At the destination folder, the symlinks will be created pointing to the "
 "exact same file or folder, absolute or relative, being the responsibility of "
@@ -159,13 +177,13 @@ msgid ""
 "folder."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:31
+#: ../../../reference/tools/files/basic.rst:42
 msgid ""
 "Check :ref:`here<conan_tools_files_symlinks>` the reference of tools to "
 "manage symlinks."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:35
+#: ../../../reference/tools/files/basic.rst:46
 msgid "conan.tools.files.load()"
 msgstr ""
 
@@ -193,14 +211,14 @@ msgstr ""
 msgid "The contents of the file"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:44
+#: ../../../reference/tools/files/basic.rst:55
 msgid ""
 "from conan.tools.files import load\n"
 "\n"
 "content = load(self, \"myfile.txt\")"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:53
+#: ../../../reference/tools/files/basic.rst:64
 msgid "conan.tools.files.save()"
 msgstr ""
 
@@ -234,14 +252,14 @@ msgid ""
 "(Optional, Defaulted to utf-8): Specifies the output file text encoding."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:61
+#: ../../../reference/tools/files/basic.rst:72
 msgid ""
 "from conan.tools.files import save\n"
 "\n"
 "save(self, \"path/to/otherfile.txt\", \"contents of the file\")"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:71
+#: ../../../reference/tools/files/basic.rst:82
 msgid "conan.tools.files.rename()"
 msgstr ""
 
@@ -264,7 +282,7 @@ msgstr ""
 msgid "Path to be renamed to."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:79
+#: ../../../reference/tools/files/basic.rst:90
 msgid ""
 "from conan.tools.files import rename\n"
 "\n"
@@ -272,7 +290,7 @@ msgid ""
 "    rename(self, \"lib-sources-abe2h9fe\", \"sources\")  # renaming a folder"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:90
+#: ../../../reference/tools/files/basic.rst:101
 msgid "conan.tools.files.replace_in_file()"
 msgstr ""
 
@@ -290,36 +308,54 @@ msgstr ""
 
 #: ../../../conan_sources/conan/tools/files/files.py:docstring of
 #: conan.tools.files.files.replace_in_file:5
-msgid "String you want to be replaced."
-msgstr ""
-
-#: ../../../conan_sources/conan/tools/files/files.py:docstring of
-#: conan.tools.files.files.replace_in_file:6
-msgid "String to replace the searched string."
+msgid ""
+"String you want to be replaced. With ``regex=True``, treated as a regular "
+"expression."
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/files/files.py:docstring of
 #: conan.tools.files.files.replace_in_file:7
+msgid ""
+"String to replace the searched string. With regex mode, backreferences "
+"(``\\1``, ``\\g<name>``) are supported."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/files/files.py:docstring of
+#: conan.tools.files.files.replace_in_file:9
 msgid ""
 "(Optional, Defaulted to ``True``) If ``True``, it raises an error if the "
 "searched string is not found, so nothing is actually replaced."
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/files/files.py:docstring of
-#: conan.tools.files.files.replace_in_file:9
+#: conan.tools.files.files.replace_in_file:11
 msgid ""
 "(Optional, Defaulted to utf-8): Specifies the input and output files text "
 "encoding."
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/files/files.py:docstring of
-#: conan.tools.files.files.replace_in_file:11
+#: conan.tools.files.files.replace_in_file:13
+msgid ""
+"(Optional, Defaulted to ``False``) If ``True``, ``search`` is treated as a "
+"regular expression and applied with ``re.sub``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/files/files.py:docstring of
+#: conan.tools.files.files.replace_in_file:15
+msgid ""
+"(Optional, Defaulted to ``re.MULTILINE``) Flags passed to ``re.sub`` when "
+"``regex=True``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/files/files.py:docstring of
+#: conan.tools.files.files.replace_in_file:17
 msgid ""
 "``True`` if the pattern was found, ``False`` otherwise if `strict` is "
 "``False``."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:99
+#: ../../../reference/tools/files/basic.rst:110
 msgid ""
 "from conan.tools.files import replace_in_file\n"
 "\n"
@@ -327,7 +363,18 @@ msgid ""
 "txt\"), \"foo\", \"bar\")"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:107
+#: ../../../reference/tools/files/basic.rst:116
+msgid ""
+"Regular expressions and backreferences can be used by enabling ``regex``:"
+msgstr ""
+
+#: ../../../reference/tools/files/basic.rst:118
+msgid ""
+"replace_in_file(self, \"file.txt\", r\"version=(\\d+)\", r\"version=v\\1\", "
+"regex=True)"
+msgstr ""
+
+#: ../../../reference/tools/files/basic.rst:124
 msgid "conan.tools.files.chmod()"
 msgstr ""
 
@@ -456,11 +503,11 @@ msgid ""
 "execute=True)"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:115
+#: ../../../reference/tools/files/basic.rst:132
 msgid "conan.tools.files.rm()"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:117
+#: ../../../reference/tools/files/basic.rst:134
 msgid ""
 "This function removes files from the filesystem. It can be used to remove a "
 "single file or a pattern based on fnmatch. It's indicated to use it instead "
@@ -468,22 +515,22 @@ msgid ""
 "issues."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:120
+#: ../../../reference/tools/files/basic.rst:137
 msgid "*Remove all files finished in .tmp in build_folder and recursively*"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:120
+#: ../../../reference/tools/files/basic.rst:137
 msgid ""
 "from conan.tools.files import rm\n"
 "\n"
 "rm(self, \"*.tmp\", self.build_folder, recursive=True)"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:127
+#: ../../../reference/tools/files/basic.rst:144
 msgid "*Remove all files from bin_folder, except for any finished by .dll*"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:127
+#: ../../../reference/tools/files/basic.rst:144
 msgid ""
 "from conan.tools.files import rm\n"
 "\n"
@@ -518,7 +565,7 @@ msgid ""
 "single one to be excluded from the remove pattern."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:140
+#: ../../../reference/tools/files/basic.rst:157
 msgid "conan.tools.files.mkdir()"
 msgstr ""
 
@@ -535,7 +582,7 @@ msgstr ""
 msgid "Path to the folder to be created."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:149
+#: ../../../reference/tools/files/basic.rst:166
 msgid ""
 "from conan.tools.files import mkdir\n"
 "\n"
@@ -543,11 +590,11 @@ msgid ""
 "mkdir(self, \"mydir\") # Does nothing"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:159
+#: ../../../reference/tools/files/basic.rst:176
 msgid "conan.tools.files.rmdir()"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:168
+#: ../../../reference/tools/files/basic.rst:185
 msgid ""
 "from conan.tools.files import rmdir\n"
 "\n"
@@ -555,7 +602,7 @@ msgid ""
 "rmdir(self, \"mydir\") # Does nothing"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:179
+#: ../../../reference/tools/files/basic.rst:196
 msgid "conan.tools.files.chdir()"
 msgstr ""
 
@@ -571,7 +618,7 @@ msgstr ""
 msgid "Directory path name to change the current directory."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:187
+#: ../../../reference/tools/files/basic.rst:204
 msgid ""
 "from conan.tools.files import chdir\n"
 "\n"
@@ -580,18 +627,18 @@ msgid ""
 "        do_something()"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:198
+#: ../../../reference/tools/files/basic.rst:215
 msgid "conan.tools.files.unzip()"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:200
+#: ../../../reference/tools/files/basic.rst:217
 msgid ""
 "This function extract different compressed formats (``.tar``, ``.tar.gz``, "
 "``.tgz``, ``.tar.bz2``, ``.tbz2``, ``.tar.xz``, ``.txz``, and ``.zip``) into "
 "the given destination folder."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:203
+#: ../../../reference/tools/files/basic.rst:220
 msgid ""
 "It also accepts gzipped files, with extension ``.gz`` (not matching any of "
 "the above), and it will unzip them into a file with the same name but "
@@ -599,7 +646,7 @@ msgid ""
 "argument."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:206
+#: ../../../reference/tools/files/basic.rst:223
 msgid ""
 "from conan.tools.files import unzip\n"
 "\n"
@@ -608,26 +655,26 @@ msgid ""
 "unzip(self, \"myfile.zip\", \"myfolder\")"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:214
+#: ../../../reference/tools/files/basic.rst:231
 msgid ""
 "You can keep the permissions of the files using the "
 "``keep_permissions=True`` parameter."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:216
+#: ../../../reference/tools/files/basic.rst:233
 msgid ""
 "from conan.tools.files import unzip\n"
 "\n"
 "unzip(self, \"myfile.zip\", \"myfolder\", keep_permissions=True)"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:222
+#: ../../../reference/tools/files/basic.rst:239
 msgid ""
 "Use the ``pattern`` argument if you want to filter specific files and paths "
 "to decompress from the archive."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:224
+#: ../../../reference/tools/files/basic.rst:241
 msgid ""
 "from conan.tools.files import unzip\n"
 "\n"
@@ -637,7 +684,7 @@ msgid ""
 "unzip(self, \"bigfile.zip\", pattern=\"*.txt\")"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:236
+#: ../../../reference/tools/files/basic.rst:253
 msgid ""
 "In Conan 2.8 ``unzip()`` provides a new ``extract_filter=None`` argument and "
 "a new ``tools.files.unzip:filter`` configuration was added to prepare for "
@@ -706,11 +753,11 @@ msgid ""
 "see fnmatch documentation for more details."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:250
+#: ../../../reference/tools/files/basic.rst:267
 msgid "conan.tools.files.update_conandata()"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:252
+#: ../../../reference/tools/files/basic.rst:269
 msgid ""
 "This function reads the ``conandata.yml`` inside the exported folder in the "
 "conan cache, if it exists. If the ``conandata.yml`` does not exist, it will "
@@ -720,7 +767,7 @@ msgid ""
 "saved in the same place."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:258
+#: ../../../reference/tools/files/basic.rst:275
 msgid ""
 "This helper can only be used within the ``export()`` method, it can raise "
 "otherwise. One application is to capture in the ``conandata.yml`` the scm "
@@ -754,7 +801,7 @@ msgstr ""
 msgid "(Required) A dictionary (can be nested), of values to update"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:269
+#: ../../../reference/tools/files/basic.rst:286
 msgid "conan.tools.files.trim_conandata()"
 msgstr ""
 
@@ -765,20 +812,20 @@ msgid ""
 "current version only"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:278
+#: ../../../reference/tools/files/basic.rst:295
 msgid ""
 "The ``conan.tools.files.trim_conandata()`` function is in **preview**. See :"
 "ref:`the Conan stability<stability>` section for more information."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:282
+#: ../../../reference/tools/files/basic.rst:299
 msgid ""
 "This function modifies the ``conandata.yml`` inside the exported folder in "
 "the conan cache, if it exists, and keeps only the information related to the "
 "currently built version."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:285
+#: ../../../reference/tools/files/basic.rst:302
 msgid ""
 "This helper can only be used within the ``export()`` method or "
 "``post_export()`` :ref:`hook<reference_extensions_hooks>`, it may raise in "
@@ -787,7 +834,7 @@ msgid ""
 "recipe revisions of the rest."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:291
+#: ../../../reference/tools/files/basic.rst:308
 msgid ""
 "from conan import ConanFile\n"
 "from conan.tools.files import trim_conandata\n"
@@ -801,7 +848,7 @@ msgid ""
 "        trim_conandata(self)"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:308
+#: ../../../reference/tools/files/basic.rst:325
 msgid "conan.tools.files.collect_libs()"
 msgstr ""
 
@@ -834,7 +881,7 @@ msgstr ""
 msgid "A list with the library names"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:316
+#: ../../../reference/tools/files/basic.rst:333
 msgid ""
 "This tool collects the libraries searching directly inside the package "
 "folder and returns them in no specific order. If libraries are inter-"
@@ -842,7 +889,7 @@ msgid ""
 "correct linking order."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:321
+#: ../../../reference/tools/files/basic.rst:338
 msgid ""
 "from conan.tools.files import collect_libs\n"
 "\n"
@@ -852,7 +899,7 @@ msgid ""
 "    self.cpp_info.libs = collect_libs(self)"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:329
+#: ../../../reference/tools/files/basic.rst:346
 msgid ""
 "For UNIX libraries starting with **lib**, like *libmath.a*, this tool will "
 "collect the library name **math**. Regarding symlinks, this tool will keep "
@@ -862,7 +909,7 @@ msgid ""
 "list:"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:335
+#: ../../../reference/tools/files/basic.rst:352
 msgid ""
 "-rwxr-xr-x libmath.1.0.0.dylib lrwxr-xr-x libmath.1.dylib -> libmath.1.0.0."
 "dylib\n"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 09:24+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,13 +46,138 @@ msgid "Scan a given recipe for vulnerabilities in its dependencies."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.add_provider:0
+#: conan.api.subapi.audit.AuditAPI.auth_provider:0
+#: conan.api.subapi.audit.AuditAPI.get_provider:0
+#: conan.api.subapi.audit.AuditAPI.list:0
+#: conan.api.subapi.audit.AuditAPI.remove_provider:0
+#: conan.api.subapi.audit.AuditAPI.scan:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.scan:3
+msgid ""
+"Dependency graph as returned by the :class:`Graph API <conan.api.subapi."
+"graph.GraphAPI>`"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.list:4
+#: conan.api.subapi.audit.AuditAPI.scan:4
+msgid ""
+"Provider object as returned by :meth:`get_provider() <conan.api.subapi.audit."
+"AuditAPI.get_provider>`"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.scan:5
+msgid ""
+"Context to filter the dependencies (e.g., ``\"host\"`` or ``\"build\"``). If "
+"``None``, all contexts are considered."
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.get_provider:0
+#: conan.api.subapi.audit.AuditAPI.list:0
+#: conan.api.subapi.audit.AuditAPI.list_providers:0
+#: conan.api.subapi.audit.AuditAPI.scan:0
+msgid "Returns"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.scan:6
+msgid ""
+"A ``dict`` mapping each scanned reference to its vulnerability information, "
+"together with some metadata about the request, with the following shape:  .. "
+"code-block:: python      {         \"data\": {             # One entry per "
+"scanned reference             \"openssl/3.2.0\": "
+"{                 \"vulnerabilities\": {                     \"totalCount\": "
+"2,                     # One \"node\" per vulnerability, holding its "
+"name,                     # description, severity, cvss, "
+"references,                     # advisories, fixed versions, "
+"etc.                     \"edges\": [{\"node\": "
+"{...}}, ...]                 }             },             # References that "
+"could not be scanned carry an error instead             \"unknown/1.0\": "
+"{\"error\": {\"details\": \"Package 'unknown/1.0' not scanned: Not found."
+"\"}},         },         # URL of the provider that produced the data, or "
+"None         \"provider_url\": \"https://...\",         # Only present if "
+"the whole request failed (authentication,         # rate limit, server "
+"error...). When set, the scan is aborted.         \"conan_error\": \"..."
+"\",     }"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.scan:6
+msgid ""
+"A ``dict`` mapping each scanned reference to its vulnerability information, "
+"together with some metadata about the request, with the following shape:"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.scan:9
+msgid ""
+"{\n"
+"    \"data\": {\n"
+"        # One entry per scanned reference\n"
+"        \"openssl/3.2.0\": {\n"
+"            \"vulnerabilities\": {\n"
+"                \"totalCount\": 2,\n"
+"                # One \"node\" per vulnerability, holding its name,\n"
+"                # description, severity, cvss, references,\n"
+"                # advisories, fixed versions, etc.\n"
+"                \"edges\": [{\"node\": {...}}, ...]\n"
+"            }\n"
+"        },\n"
+"        # References that could not be scanned carry an error instead\n"
+"        \"unknown/1.0\": {\"error\": {\"details\": \"Package 'unknown/1.0' "
+"not scanned: Not found.\"}},\n"
+"    },\n"
+"    # URL of the provider that produced the data, or None\n"
+"    \"provider_url\": \"https://...\",\n"
+"    # Only present if the whole request failed (authentication,\n"
+"    # rate limit, server error...). When set, the scan is aborted.\n"
+"    \"conan_error\": \"...\",\n"
+"}"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
 #: conan.api.subapi.audit.AuditAPI.list:1
 msgid "List the vulnerabilities of the given reference."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.list:3
+msgid "List of reference strings"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.list:5
+msgid ""
+"A ``dict`` with the vulnerability information for each reference, with the "
+"same structure as the one returned by :meth:`scan() <conan.api.subapi.audit."
+"AuditAPI.scan>`."
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
 #: conan.api.subapi.audit.AuditAPI.get_provider:1
-msgid "Get the provider by name."
+msgid ""
+"Get the provider opaque object by name. This object is only meant to be used "
+"as arguments for other methods in this class, and should not be used/"
+"modified directly."
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.add_provider:3
+#: conan.api.subapi.audit.AuditAPI.auth_provider:4
+#: conan.api.subapi.audit.AuditAPI.get_provider:5
+#: conan.api.subapi.audit.AuditAPI.remove_provider:3
+msgid "Provider name"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.get_provider:6
+msgid "Provider opaque object"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
@@ -61,8 +186,23 @@ msgid "Get all available providers."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.list_providers:3
+msgid "The list of available providers"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
 #: conan.api.subapi.audit.AuditAPI.add_provider:1
 msgid "Add a provider."
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.add_provider:4
+msgid "Provider url"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.add_provider:5
+msgid "Provider type, either ``conan-center-proxy`` or ``private``"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
@@ -72,5 +212,12 @@ msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
 #: conan.api.subapi.audit.AuditAPI.auth_provider:1
-msgid "Authenticate a provider."
+msgid ""
+"Set authentication token for the provider. Note that this does not perform "
+"an authentication attempt, it just stores the token for future use."
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/audit.py:docstring of
+#: conan.api.subapi.audit.AuditAPI.auth_provider:5
+msgid "Provider token"
 msgstr ""

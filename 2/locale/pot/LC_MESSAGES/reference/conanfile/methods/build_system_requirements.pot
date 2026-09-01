@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/build_system_requirements.rst:4
+msgid "build_system_requirements()"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_system_requirements.rst:8
+msgid ""
+"The ``build_system_requirements()`` method is a companion to "
+"``system_requirements()`` intended specifically for system packages that are "
+"only needed when **building from source** (i.e., when the package binary is "
+"being compiled). It is not called when a pre-built binary is retrieved from "
+"a server or cache."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_system_requirements.rst:12
+msgid ""
+"The key difference from ``system_requirements()`` is that "
+"``build_system_requirements()`` installs packages using the **build machine "
+"architecture** (``settings_build.arch``) rather than the host architecture. "
+"This is especially important in cross-compilation scenarios where the build "
+"and host machines have different architectures."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_system_requirements.rst:17
+msgid ""
+"Then, these requirements are intended to be \"tools\", executables used at "
+"build time, but not libraries that would be linked in the consumers "
+"libraries or applications."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_system_requirements.rst:20
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.system.package_manager import Apt\n"
+"\n"
+"class MyPkg(ConanFile):\n"
+"    name = \"mypkg\"\n"
+"    version = \"1.0\"\n"
+"    settings = \"os\", \"arch\"\n"
+"\n"
+"    def build_system_requirements(self):\n"
+"        # Installed using build machine arch (settings_build.arch),\n"
+"        # only when building from source\n"
+"        apt = Apt(self)\n"
+"        apt.install([\"build-essential\", \"pkg-config\"])\n"
+"\n"
+"    def system_requirements(self):\n"
+"        # Installed using host arch (settings.arch), always\n"
+"        apt = Apt(self)\n"
+"        apt.install([\"libssl-dev\"])"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_system_requirements.rst:43
+msgid ""
+"``build_system_requirements()`` is only invoked when the package is being "
+"built from source. If the binary is already available in the cache or a "
+"remote, this method is skipped."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_system_requirements.rst:49
+msgid ":ref:`reference_conanfile_methods_system_requirements`"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/build_system_requirements.rst:50
+msgid ":ref:`conan_tools_system_package_manager`"
+msgstr ""

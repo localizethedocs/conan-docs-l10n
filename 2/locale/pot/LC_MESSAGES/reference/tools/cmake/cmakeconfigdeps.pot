@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:30+0000\n"
+"POT-Creation-Date: 2026-09-01 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmakeconfigdeps.rst:29
 #: ../../../reference/tools/cmake/cmakeconfigdeps.rst:39
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:242
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:268
 msgid "conanfile.py"
 msgstr ""
 
@@ -462,6 +462,26 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmakeconfigdeps.rst:189
 msgid ""
+"**cmake_extra_dependencies**: List of extra package names for which a "
+"``find_dependency()`` call will be added to the generated ``<pkg>-config."
+"cmake`` file. Useful when the package depends on libraries located via "
+"CMake's ``find_package()`` but not declared as Conan ``requires`` (for "
+"example, system-provided dependencies like ``OpenMPI``). This property is "
+"only honored at the package level (setting it on a component has no effect)."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:194
+msgid ""
+"**cmake_extra_interface_libs**: List of extra libraries to be appended to "
+"the generated CMake target's ``INTERFACE_LINK_LIBRARIES``. Useful to declare "
+"additional libraries (such as system libraries, or libraries located by the "
+"packages declared in ``cmake_extra_dependencies``) that have to be linked "
+"together with the package's own libraries. Can be defined both at the "
+"package level and per-component."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:198
+msgid ""
 "**cmake_link_feature**: Sets the link feature for the generated target. This "
 "can be any of the built-in link features supported by CMake like "
 "``WHOLE_ARCHIVE`` etc., or a custom one, provided you also set the expected "
@@ -472,12 +492,22 @@ msgid ""
 "to the recipe author to ensure that the feature is usable."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:197
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:319
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:204
+msgid ""
+"**nosoname**: boolean value that should be used only by dependencies that "
+"are defined as ``SHARED`` and represent a library built without the "
+"``soname`` flag option. When set to ``True``, the generated target will have "
+"the ``IMPORTED_NO_SONAME_<CONFIG>`` CMake property set to ``TRUE``, so CMake "
+"skips the SONAME check when linking. Can be set at the package level or per-"
+"component. Ignored for non-shared library types. Available since Conan 2.31."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:211
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:345
 msgid "Example:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:199
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:213
 msgid ""
 "def package_info(self):\n"
 "    ...\n"
@@ -520,6 +550,17 @@ msgid ""
 "    self.cpp_info.set_property(\"cmake_file_name_variants\", "
 "[\"myfilename\", \"MYFILENAME\"])\n"
 "\n"
+"    # Emit ``find_dependency(MyOpenMPI REQUIRED)`` in the generated <pkg>-"
+"config.cmake,\n"
+"    # so consumers can locate dependencies not provided as Conan requires.\n"
+"    self.cpp_info.set_property(\"cmake_extra_dependencies\", "
+"[\"MyOpenMPI\"])\n"
+"\n"
+"    # Append extra libraries to the generated target's "
+"INTERFACE_LINK_LIBRARIES\n"
+"    self.cpp_info.set_property(\"cmake_extra_interface_libs\", [\"MyOpenMPI::"
+"MyOpenMPI\"])\n"
+"\n"
 "# Or if using components\n"
 "def package_info(self):\n"
 "    self.cpp_info.components[\"mycomponent\"]."
@@ -528,17 +569,25 @@ msgid ""
 "    # Create a new target \"VarComponent\" that is an alias to the \"Foo::"
 "Var\" component target\n"
 "    self.cpp_info.components[\"mycomponent\"]."
-"set_property(\"cmake_target_aliases\", [\"VarComponent\"])"
+"set_property(\"cmake_target_aliases\", [\"VarComponent\"])\n"
+"\n"
+"    # ``cmake_extra_interface_libs`` can also be set on a single component,\n"
+"    # in which case it is appended only to that component's "
+"INTERFACE_LINK_LIBRARIES.\n"
+"    self.cpp_info.components[\"mycomponent\"]."
+"set_property(\"cmake_extra_interface_libs\",\n"
+"                                                         [\"MyOpenMPI::"
+"MyOpenMPI\"])"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:239
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:265
 msgid ""
 "Using ``CMakeConfigDeps.set_property()`` method you can overwrite the "
 "property values set by the Conan recipes from the consumer. This can be done "
 "for every property listed above."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:242
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:268
 msgid ""
 "class Pkg(ConanFile):\n"
 "\n"
@@ -554,7 +603,7 @@ msgid ""
 "        deps.generate()"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:258
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:284
 msgid ""
 "You can also use the ``set_property()`` method to invalidate the property "
 "values set by the upstream recipe and use the values that Conan assigns by "
@@ -562,14 +611,14 @@ msgid ""
 "set_property(\"zlib\", \"cmake_target_name\", None)``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:262
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:288
 msgid ""
 "After doing this the generated target name for the Zlib library will be "
 "``zlib::zlib`` instead of ``ZLIB::ZLIB`` which is the upstream default "
 "target name."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:265
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:291
 msgid ""
 "Additionally, `CMakeConfigDeps.set_property()` can also be used for packages "
 "that have components. In this case, you will need to provide the package "
@@ -577,7 +626,7 @@ msgid ""
 "example:"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:269
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:295
 msgid ""
 "def generate(self):\n"
 "    deps = CMakeConfigDeps(self)\n"
@@ -586,17 +635,17 @@ msgid ""
 "    deps.generate()"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:278
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:304
 msgid "Configuration"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:280
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:306
 msgid ""
 "Allows to define custom user CMake configuration besides the standard "
 "Release, Debug, etc ones."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:282
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:308
 msgid ""
 "def generate(self):\n"
 "    deps = CMakeConfigDeps(self)\n"
@@ -609,7 +658,7 @@ msgid ""
 "    deps.generate()"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:293
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:319
 msgid ""
 "The ``CMakeConfigDeps`` is a *multi-configuration* generator, it can "
 "correctly create files for Release/Debug configurations to be simultaneously "
@@ -620,11 +669,11 @@ msgid ""
 "helper)."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:300
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:326
 msgid "Using \"host\" and \"build\" context dependencies"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:302
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:328
 msgid ""
 "With ``CMakeConfigDeps``, it is possible to use executable ``IMPORTED`` "
 "targets from regular \"host\" dependencies. This can only be done in case "
@@ -632,7 +681,7 @@ msgid ""
 "cross-compiling, it will fail."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:304
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:330
 msgid ""
 "The ``IMPORTED`` executable targets will be automatically created from the "
 "``self.cpp_info.exe`` and ``self.cpp_info.components[\"mycomponent\"].exe`` "
@@ -640,7 +689,7 @@ msgid ""
 "builds as tools."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:306
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:332
 msgid ""
 "When a Conan package recipe depends on the same package both as regular "
 "``requires`` and ``tool-requires``, to be able to implement scenarios like "
@@ -655,13 +704,13 @@ msgid ""
 "``protoc`` will be defined from the \"build\" context."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:312
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:338
 msgid ""
 "Disable ``CMakeConfigDeps`` to use ``xxx-config.cmake`` files inside the "
 "package"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:314
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:340
 msgid ""
 "Some projects may want to disable the ``CMakeConfigDeps`` generator for "
 "downstream consumers. This can be done by setting ``cmake_find_mode`` to "
@@ -669,7 +718,7 @@ msgid ""
 "it should append them to the ``builddirs`` attribute of ``cpp_info``."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:317
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:343
 msgid ""
 "This method is intended to work with downstream consumers using the "
 "``CMakeToolchain`` generator or by including the generated "
@@ -677,7 +726,7 @@ msgid ""
 "``builddirs`` attribute."
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:321
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:347
 msgid ""
 "def package(self):\n"
 "    ...\n"
@@ -689,7 +738,7 @@ msgid ""
 "    self.cpp_info.builddirs.append(os.path.join(\"lib\", \"cmake\", \"foo\"))"
 msgstr ""
 
-#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:333
+#: ../../../reference/tools/cmake/cmakeconfigdeps.rst:359
 msgid "Reference"
 msgstr ""
 
@@ -749,4 +798,20 @@ msgstr ""
 msgid ""
 "Set to ``True`` if you want to set the property for a dependency that "
 "belongs to the build context (``False`` by default)."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/cmake/cmakeconfigdeps/cmakeconfigdeps.py:docstring
+#: of
+#: conan.tools.cmake.cmakeconfigdeps.cmakeconfigdeps.CMakeConfigDeps.get_cmake_filename:1
+msgid ""
+"Map of CMake config file names to the components that belong to each file."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/cmake/cmakeconfigdeps/cmakeconfigdeps.py:docstring
+#: of
+#: conan.tools.cmake.cmakeconfigdeps.cmakeconfigdeps.CMakeConfigDeps.get_cmake_filename:3
+msgid ""
+"Used to determine: - The filename to generate (XXX-config.cmake) - The name "
+"of the defined XXX_DIR variables - The name of transitive dependencies for "
+"calls to find_dependency"
 msgstr ""

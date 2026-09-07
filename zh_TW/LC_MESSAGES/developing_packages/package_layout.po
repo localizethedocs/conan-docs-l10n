@@ -1,0 +1,687 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2021, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.43\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../developing_packages/package_layout.rst:4
+msgid "Package layout"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:8
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases. The ``layout()`` feature will be fully functional only in the new "
+"build system integrations (:ref:`in the conan.tools space <conan_tools>`). "
+"If you are using other integrations, they might not fully support this "
+"feature."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:14
+msgid "Available since: `1.37.0 <https://github.com/conan-io/conan/releases>`_"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:17
+msgid "Before starting"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:19
+msgid ""
+"To understand correctly how the ``layout()`` method can help us we need to "
+"recall first how Conan works."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:21
+msgid "Let's say we are working in a project, using, for example, CMake:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:23
+#: ../../../developing_packages/package_layout.rst:234
+msgid ""
+"<my_project_folder>\n"
+"├── conanfile.py\n"
+"└── src\n"
+"    ├── CMakeLists.txt\n"
+"    ├── hello.cpp\n"
+"    ├── my_tool.cpp\n"
+"    └── include\n"
+"        └── hello.h"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:34
+msgid ""
+"When we call ``conan create``, this is a simplified description of what "
+"happens:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:36
+msgid ""
+"Conan exports the recipe (conanfile.py) and the declared sources "
+"(exports_sources) to the cache. The folders in the cache would be something "
+"like:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:39
+#: ../../../developing_packages/package_layout.rst:55
+#: ../../../developing_packages/package_layout.rst:79
+#: ../../../developing_packages/package_layout.rst:107
+#: ../../../developing_packages/package_layout.rst:411
+msgid ".conan/data/<some_cache_folder>"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:39
+msgid ""
+"  ├── export\n"
+"  │   └── conanfile.py\n"
+"  └── export_source\n"
+"      └── src\n"
+"          ├── CMakeLists.txt\n"
+"          ├── hello.cpp\n"
+"          ├── my_tool.cpp\n"
+"          └── include\n"
+"              └── hello.h"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:52
+msgid ""
+"If the method ``source()`` exists, it might retrieve sources from the "
+"internet. Also, the ``export_source`` folder is copied to the ``source`` "
+"folder."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:55
+msgid ""
+"  ├── export\n"
+"  │   └── conanfile.py\n"
+"  ├── export_source\n"
+"  │   └── src\n"
+"  │       ├── CMakeLists.txt\n"
+"  │       ├── hello.cpp\n"
+"  │       ├── my_tool.cpp\n"
+"  │       └── include\n"
+"  │           └── hello.h\n"
+"  └── source\n"
+"      └── src\n"
+"          ├── CMakeLists.txt\n"
+"          ├── hello.cpp\n"
+"          ├── my_tool.cpp\n"
+"          └── include\n"
+"              └── hello.h"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:76
+msgid ""
+"Before calling the ``build()`` method, a build folder is created and the "
+"**sources** are copied there. Later, we call the ``build()`` method so the "
+"libraries and executables are built:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:79
+msgid ""
+" ├── export\n"
+" │   └── conanfile.py\n"
+" ├── export_source\n"
+" │   └── src\n"
+" │       ├── CMakeLists.txt\n"
+" │       ├── hello.cpp\n"
+" │       ├── my_tool.cpp\n"
+" │       └── include\n"
+" │           └── hello.h\n"
+" ├── source\n"
+" │   └── src\n"
+" │       ├── CMakeLists.txt\n"
+" │       ├── hello.cpp\n"
+" │       ├── my_tool.cpp\n"
+" │       └── include\n"
+" │           └── hello.h\n"
+" └── build\n"
+"     └── <build_id>\n"
+"         ├── say.a\n"
+"         └── bin\n"
+"             └── my_app"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:104
+msgid ""
+"At last, Conan calls the ``package()`` method to copy the built artifacts "
+"from the ``source`` (typically includes) and ``build`` folders (libraries "
+"and executables) to a **package** folder."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:107
+msgid ""
+"  ├── export\n"
+"  │   └── conanfile.py\n"
+"  ├── export_source\n"
+"  │   └── src\n"
+"  │       ├── CMakeLists.txt\n"
+"  │       ├── hello.cpp\n"
+"  │       ├── my_tool.cpp\n"
+"  │       └── include\n"
+"  │           └── hello.h\n"
+"  ├── source\n"
+"  │   └── src\n"
+"  │       ├── CMakeLists.txt\n"
+"  │       ├── hello.cpp\n"
+"  │       ├── my_tool.cpp\n"
+"  │       └── include\n"
+"  │           └── hello.h\n"
+"  ├── build\n"
+"  │   └── <build_id>\n"
+"  │       ├── say.a\n"
+"  │       └── bin\n"
+"  │           └── my_app\n"
+"  └── package\n"
+"      └── <package_id>\n"
+"          ├── lib\n"
+"          │   └── say.a\n"
+"          ├── bin\n"
+"          │   └── my_app\n"
+"          └── include\n"
+"              └── hello.h"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:140
+msgid ""
+"The ``package_info(self)`` method will describe with the ``self.cpp_info`` "
+"object the contents of the ``package`` folder, that is the one the consumers "
+"use to link against it. If we call `conan create` with different "
+"configurations the base folder in the cache is different and nothing gets "
+"messed."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:145
+#: ../../../developing_packages/package_layout.rst:264
+#: ../../../developing_packages/package_layout.rst:335
+msgid "conanfile.py"
+msgstr "conanfile.py"
+
+#: ../../../developing_packages/package_layout.rst:145
+msgid ""
+" import os\n"
+" from conans import ConanFile\n"
+" from conan.tools.cmake import CMake\n"
+"\n"
+"\n"
+" class SayConan(ConanFile):\n"
+"     name = \"say\"\n"
+"     version = \"0.1\"\n"
+"     exports_sources = \"src/*\"\n"
+"     ...\n"
+"     def package_info(self):\n"
+"         # These are default values and doesn't need to be adjusted\n"
+"         self.cpp_info.includedirs = [\"include\"]\n"
+"         self.cpp_info.libdirs = [\"lib\"]\n"
+"         self.cpp_info.bindirs = [\"bin\"]\n"
+"\n"
+"         # The library name\n"
+"         self.cpp_info.libs = [\"say\"]"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:168
+msgid "So, this workflow in the cache works flawless but:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:170
+msgid ""
+"What if I'm developing the recipe in my local project and want to use the "
+"local methods (**conan source**, **conan build**) and later call **export-"
+"pkg** to create the package?"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:173
+msgid ""
+"If you call **conan build** in your working directory, without specifying a "
+"``--build-folder`` argument, you will end with a bunch of files messing with "
+"your project. Moreover, if you want to build more configurations you will "
+"need to create several build folders by hand, this is inconvenient, error-"
+"prone, and wouldn't be easy for Conan to locate the correct artifacts if you "
+"want to call **export-pkg** later."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:178
+msgid ""
+"What if I don't even want to call **conan build** but use my CLion IDE to "
+"build the project?"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:180
+msgid ""
+"By default, the CLion IDE will create the folders **cmake-build-release** "
+"and **cmake-build-debug** to put the build files there, so maybe your "
+"``package()`` method is not able to locate the files in there and the "
+"**export-pkg** might fail."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:184
+msgid ""
+"What if I want to use my project as an :ref:`editable "
+"package<editable_packages>`?"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:186
+msgid ""
+"If you want to keep developing your package but let the consumers link with "
+"the artifacts in your project instead of the files in the Conan cache, you "
+"would need to declare a yml file describing where are the headers, the "
+"libraries, the executables in your application."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:190
+msgid ""
+"So, the same we describe the package folder in the ``package_info()`` "
+"method, we can use the ``layout()`` to describe the ``source`` and ``build`` "
+"folders (both in a local project and in the cache) so we can:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:193
+msgid ""
+"Run the conan local commands (**conan source**, **conan build**, **conan "
+"export-pkg**) without taking care of specifying directories, always with the "
+"same syntax."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:195
+msgid ""
+"If you are using an IDE you can describe the build folder naming in the "
+"layout, so the libraries and executables are always in a known place."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:197
+msgid ""
+"In the cache, the layout (like a build subfolder) is kept, so we can always "
+"know where are the artifacts before packaging them."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:199
+msgid ""
+"It enables tools like the :ref:"
+"`AutoPackager<conan_tools_files_autopackager>` to automate the **package()** "
+"method."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:200
+msgid ""
+"It enables out-of-the-box to use :ref:`editable "
+"packages<editable_packages>`, because the recipe describes where the "
+"contents will be, even for different configurations, so the consumers can "
+"link with the correct built artifacts."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:206
+msgid "Declaring the layout"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:208
+msgid "In the ``layout()`` method you can set:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:210
+#: ../../../developing_packages/package_layout.rst:304
+msgid "**self.folders**"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:212
+msgid "**self.folders.source**: To specify a folder where your sources are."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:213
+msgid ""
+"**self.folders.build**: To specify a subfolder where the files from the "
+"build are (or will be)."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:214
+msgid ""
+"**self.folders.generators**: To specify a subfolder where to write the files "
+"from the generators and the toolchains. (e.g the `xx-config.cmake` files "
+"from the ``CMakeDeps``)"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:216
+msgid ""
+"**self.folders.imports**: To specify a subfolder where to write the files "
+"copied when using the ``imports(self)`` method in a ``conanfile.py``."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:219
+msgid ""
+"Check the :ref:`complete reference<layout_folders_reference>` of the \"."
+"folders\" attribute."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:221
+msgid ""
+"**self.cpp.source** and **self.cpp.build**: The same you set the ``self.cpp."
+"package`` to describe the package folder after calling the ``package()`` "
+"method, you can also describe the `source` and `build` folders."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:224
+msgid ""
+"**self.cpp.package**: You can use it as you use the **self.cpp_info** at the "
+"``package_info(self)`` method. The **self.cpp_info** object will be "
+"populated with the information declared in the ``self.cpp.package`` object, "
+"so you can complete it or modify it later in the ``package_info(self)`` "
+"method."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:230
+msgid "Example: Everything together"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:232
+msgid ""
+"Let's say we are working in the project introduced in the section above:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:245
+msgid "We are using the following **CMakeLists.txt**:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:247
+msgid ""
+"cmake_minimum_required(VERSION 3.15)\n"
+"project(say CXX)\n"
+"\n"
+"add_library(say hello.cpp)\n"
+"target_include_directories(say PUBLIC \"include\")\n"
+"\n"
+"add_executable(my_tool my_tool.cpp)\n"
+"target_link_libraries(my_tool say)\n"
+"\n"
+"# The executables are generated at the \"bin\" folder\n"
+"set_target_properties(my_tool PROPERTIES RUNTIME_OUTPUT_DIRECTORY "
+"\"${CMAKE_BINARY_DIR}/bin\")"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:262
+msgid "Let’s see how we describe our project in the ``layout()`` method:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:264
+msgid ""
+" import os\n"
+" from conans import ConanFile\n"
+" from conan.tools.cmake import CMake\n"
+"\n"
+"\n"
+" class SayConan(ConanFile):\n"
+"     name = \"say\"\n"
+"     version = \"0.1\"\n"
+"     exports_sources = \"src/*\"\n"
+"     ...\n"
+"     def layout(self):\n"
+"         self.folders.source = \"src\"\n"
+"         build_type = str(self.settings.build_type).lower()\n"
+"         self.folders.build = \"cmake-build-{}\".format(build_type)\n"
+"         self.folders.generators = os.path.join(self.folders.build, "
+"\"conan\")\n"
+"\n"
+"         self.cpp.package.libs = [\"say\"]\n"
+"         self.cpp.package.includedirs = [\"include\"] # includedirs is "
+"already set to this value by\n"
+"                                                    # default, but declared "
+"for completion\n"
+"\n"
+"         # this information is relative to the source folder\n"
+"         self.cpp.source.includedirs = [\"include\"] # maps to ./src/"
+"include\n"
+"\n"
+"         # this information is relative to the build folder\n"
+"         self.cpp.build.libdirs = [\".\"]        # maps to ./cmake-build-"
+"<build_type>\n"
+"         self.cpp.build.bindirs = [\"bin\"]        # maps to ./cmake-build-"
+"<build_type>/bin\n"
+"\n"
+"     def build(self):\n"
+"         cmake = CMake(self)\n"
+"         cmake.configure()\n"
+"         cmake.build()\n"
+"         # we can also know where is the executable we are building\n"
+"         self.run(os.path.join(self.build_folder, self.cpp.build.bindirs[0], "
+"\"my_tool\"))"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:302
+msgid "Let's review the layout() method changes:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:306
+msgid ""
+"As we have our sources in the ``src`` folder, ``self.folders.source`` is set "
+"to \"**src**\"."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:307
+msgid ""
+"We set ``self.folders.build`` to be **cmake-build-release** or **cmake-build-"
+"debug** depending on the build_type."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:308
+msgid ""
+"The ``self.folders.generators`` folder is where all files generated by Conan "
+"will be stored so they don’t pollute the other folders."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:310
+msgid ""
+"Please, note that the values above are for a single-configuration CMake "
+"generator. To support multi-configuration generators, such as Visual Studio, "
+"you should make some changes to this layout. For a complete layout that "
+"supports both single-config and multi-config please check the :ref:"
+"`cmake_layout()<conan_tools_layout_predefined_layouts>` in the Conan "
+"documentation."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:314
+msgid "**self.cpp**"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:316
+msgid ""
+"Also, we can set the information about the package that the consumers need "
+"to use by setting the conanfile’s ``cpp.package`` attributes values:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:318
+msgid ""
+"Declaring ``self.cpp.package.libs`` inside the layout() method is equivalent "
+"to the “classic” ``self.cpp_info.libs`` declaration in the package_info() "
+"method."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:320
+msgid ""
+"Also, as you may know, ``self.cpp.package.includedirs`` is set to "
+"[\"include\"] by default, so there’s no need in declaring it but we are "
+"leaving it here for completeness."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:323
+msgid ""
+"We can describe also the ``source`` and ``build`` folders with the ``cpp."
+"source`` and ``cpp.build`` objects:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:325
+msgid ""
+"We are setting ``self.cpp.source.includedirs = [\"include\"]``. The ``self."
+"folders.source`` information will be automatically prepended to that path "
+"for consumers so, for example, when working with an editable package, Conan "
+"will try to get the include files from the **./my_project_folder/src/"
+"include** folder."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:328
+msgid ""
+"We set the ``self.cpp.build.libdirs`` to **[\".\"]**, so we are declaring "
+"that, if we make the package ``editable``, the libraries will be at the **./"
+"cmake-build-<build_type>** folder."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:330
+msgid ""
+"We set the ``self.cpp.build.bindirs`` to **[\"bin\"]**, because the "
+"``CMakeLists.txt`` file is changing the ``RUNTIME_OUTPUT_DIRECTORY`` to that "
+"directory."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:333
+msgid "There is also an interesting line in the ``build(self)`` method:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:335
+msgid ""
+"   def build(self):\n"
+"      ...\n"
+"      # we can also know where is the executable we are building\n"
+"      self.run(os.path.join(self.build_folder, self.cpp.build.bindirs[0], "
+"\"my_tool\"))"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:343
+msgid ""
+"We are using the ``self.cpp.build.bindirs[0]`` folder to locate the "
+"``my_tool``. This is a very recommended practice especially when our layout "
+"depends on the build system, for example, when using CMake with Visual "
+"Studio, the binaries are typically built at **Release/** or **Debug/** "
+"(multiconfiguration) but in a regular Linux or Macos the output folder will "
+"be **\".\"**, so it is better to declare the layout ``self.cpp.build."
+"bindirs`` following that logic and then just access to the correct path if "
+"we need to know where are the resulting files of our build. If you check "
+"the :ref:`cmake_layout()<conan_tools_layout_predefined_layouts>` you can see "
+"that the predefined ``cmake_layout`` is doing exactly that when using a "
+"multiconfiguration build system."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:351
+msgid ""
+"So, now we can run the conan local methods without taking much care of the "
+"directories where the files are or the build files should be, because "
+"everything is declared in the layout:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:364
+msgid ""
+"# This will write the toolchains and generator files from the dependencies "
+"to the ``cmake-build-debug/generators``\n"
+"$ conan install . -if=my_install -s build_type=Debug\n"
+"\n"
+"# In case we needed it (not the case as we don't have a source() method), "
+"this would fetch the sources to the ./src folder.\n"
+"$ conan source . -if=my_install\n"
+"\n"
+"# This will build the project using the declared source folder and ``cmake-"
+"build-debug`` as the build folder\n"
+"$ conan build . -if=my_install"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:367
+msgid ""
+"Maybe you are wondering why the **install folder** is not parametrized and "
+"has to be specified with the ``-if`` argument. Currently, Conan generates "
+"several files like the ``graph_info.json`` and the ``conanbuildinfo.txt`` "
+"that are read to restore the configuration saved (settings, options, etc) to "
+"be applied in the local commands. That configuration is needed before "
+"running the ``layout()`` method because the folders might depend on the "
+"settings like in the previous example. It is a kind of a chicken-egg issue. "
+"In Conan 2.0, likely, the configuration won't be stored, and the local "
+"methods like :command:`conan build .` will compute the graph from arguments "
+"(--profile, -s, -o...) and won't need the ``--if`` argument anymore, being "
+"always trivial to run."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:377
+msgid "Our current folder now looks like this:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:379
+msgid ""
+"<my_project_folder>\n"
+"├── conanfile.py\n"
+"├── src\n"
+"│   ├── CMakeLists.txt\n"
+"│   ├── hello.cpp\n"
+"│   ├── my_tool.cpp\n"
+"│   └── include\n"
+"│       └── hello.h\n"
+"└── cmake-build-debug\n"
+"    ├── libsay.a\n"
+"    └── bin\n"
+"        └── my_tool"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:395
+msgid ""
+"We could put the package in editable mode and other packages that require "
+"say would consume it in a completely transparent way, even locating the "
+"correct **Release**/**Debug** artifacts."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:401
+msgid "$ conan editable add .  say/0.1"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:402
+msgid ""
+"When working with editable packages, the information set in ``self.cpp."
+"source`` and ``self.cpp.build`` will be merged with the information set in "
+"``self.cpp.package`` so that we don’t have to declare again something like "
+"``self.cpp.build.libs = [\"say\"]`` that is the same for the consumers "
+"independently of if the package is in editable mode or not."
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:407
+msgid ""
+"And of course we can run also a ``conan create`` command. When the "
+"``build(self)`` method is run in the conan cache, it is also able to locate "
+"the ``my_tool`` correctly, because it is using the same ``folders.build``:"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:411
+msgid ""
+"  ├── source\n"
+"  │   └── src\n"
+"  │       ├── CMakeLists.txt\n"
+"  │       ├── hello.cpp\n"
+"  │       ├── my_tool.cpp\n"
+"  │       └── include\n"
+"  │           └── hello.h\n"
+"  ├── build\n"
+"  │   └── cmake-build-debug\n"
+"  │       ├── say.a\n"
+"  │       └── bin\n"
+"  │           └── my_app\n"
+"  └── package\n"
+"      ├── lib\n"
+"      │   └── say.a\n"
+"      ├── bin\n"
+"      │   └── my_app\n"
+"      └── include\n"
+"          └── hello.h"
+msgstr ""
+
+#: ../../../developing_packages/package_layout.rst:436
+msgid ""
+"The ``conan package`` local command has been disabled (will raise an "
+"exception) when the ``layout()`` method is declared. If the package can be "
+"consumed \"locally\" in a handy way, the use case for the ``conan package`` "
+"method is only testing that the method is correctly coded, but that can also "
+"be done with the ``conan export-pkg`` method. This responds to the migration "
+"to Conan 2.0, where the ``conan package`` method will disappear."
+msgstr ""

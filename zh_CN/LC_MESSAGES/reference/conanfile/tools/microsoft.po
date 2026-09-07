@@ -1,0 +1,725 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.48\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/microsoft.rst:5
+msgid "conan.tools.microsoft"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:7
+msgid ""
+"These tools allow a native integration for Microsoft Visual Studio, natively "
+"(without using CMake, but using directly Visual Studio solutions, projects "
+"and property files)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:12
+msgid ""
+"These tools are still **experimental** (so subject to breaking changes) but "
+"with very stable syntax. We encourage the usage of it to be prepared for "
+"Conan 2.0."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:16
+msgid "MSBuildDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:18
+msgid ""
+"The ``MSBuildDeps`` is the dependency information generator for Microsoft "
+"MSBuild build system. It will generate multiple *xxxx.props* properties "
+"files one per dependency of a package, to be used by consumers using MSBuild "
+"or Visual Studio, just adding the generated properties files to the solution "
+"and projects."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:25
+#: ../../../reference/conanfile/tools/microsoft.rst:148
+msgid ""
+"This class will require very soon to define both the \"host\" and \"build\" "
+"profiles. It is very recommended to start defining both profiles immediately "
+"to avoid future breaking. Furthermore, some features, like trying to cross-"
+"compile might not work at all if the \"build\" profile is not provided."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:30
+msgid ""
+"It is important to highlight that this one is a **dependencies generator** "
+"and it is focused on the **dependencies** of a conanfile, not the current "
+"build."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:33
+msgid "The ``MSBuildDeps`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:35
+#: ../../../reference/conanfile/tools/microsoft.rst:49
+#: ../../../reference/conanfile/tools/microsoft.rst:155
+#: ../../../reference/conanfile/tools/microsoft.rst:280
+#: ../../../reference/conanfile/tools/microsoft.rst:294
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:35
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"MSBuildDeps\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:41
+#: ../../../reference/conanfile/tools/microsoft.rst:161
+#: ../../../reference/conanfile/tools/microsoft.rst:286
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:41
+msgid ""
+"[generators]\n"
+"MSBuildDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:47
+#: ../../../reference/conanfile/tools/microsoft.rst:167
+#: ../../../reference/conanfile/tools/microsoft.rst:292
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:49
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.microsoft import MSBuildDeps\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    requires = \"zlib/1.2.11\", \"bzip2/1.0.8\"\n"
+"\n"
+"    def generate(self):\n"
+"        ms = MSBuildDeps(self)\n"
+"        ms.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:63
+msgid ""
+"When the ``MSBuildDeps`` generator is used, every invocation of ``conan "
+"install`` will generate properties files, one per dependency and per "
+"configuration. For the last *conanfile.py* above:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:67
+#: ../../../reference/conanfile/tools/microsoft.rst:184
+msgid ""
+"$ conan install conanfile.py # default is Release\n"
+"$ conan install conanfile.py -s build_type=Debug"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:72
+msgid ""
+"This is a multi-configuration generator, and will generate different files "
+"for the different Debug/Release configuration. The above commands the "
+"following files will be generated:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:75
+msgid ""
+"*conan_zlib_vars_release_x64.props*: ``Conanzlibxxxx`` variables definitions "
+"for the ``zlib`` dependency, Release config, like ``ConanzlibIncludeDirs``, "
+"``ConanzlibLibs``, etc."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:76
+msgid ""
+"*conan_zlib_vars_debug_x64.props*: Same ``Conanzlib``variables for ``zlib`` "
+"dependency, Debug config"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:77
+msgid ""
+"*conan_zlib_release_x64.props*: Activation of ``Conanzlibxxxx`` variables in "
+"the current build as standard C/C++ build configuration, Release config. "
+"This file contains also the transitive dependencies definitions."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:78
+msgid ""
+"*conan_zlib_debug_x64.props*: Same activation of ``Conanzlibxxxx`` "
+"variables, Debug config, also inclusion of transitive dependencies."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:79
+msgid ""
+"*conan_zlib.props*: Properties file for ``zlib``. It conditionally includes, "
+"depending on the configuration, one of the two immediately above Release/"
+"Debug properties files."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:81
+msgid ""
+"Same 5 files will be generated for every dependency in the graph, in this "
+"case ``conan_bzip.props`` too, which will conditionally include the Release/"
+"Debug bzip properties files."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:83
+msgid ""
+"*conandeps.props*: Properties files including all direct dependencies, in "
+"this case, it includes ``conan_zlib.props`` and ``conan_bzip2.props``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:86
+msgid ""
+"You will be adding the *conandeps.props* to your solution project files if "
+"you want to depend on all the declared dependencies. For single project "
+"solutions, this is probably the way to go. For multi-project solutions, you "
+"might be more efficient and add properties files per project. You could add "
+"*conan_zlib.props* properties to \"project1\" in the solution and "
+"*conan_bzip2.props* to \"project2\" in the solution for example."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:92
+msgid "Custom configurations"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:94
+msgid ""
+"If your Visual Studio project defines custom configurations, like "
+"``ReleaseShared``, or ``MyCustomConfig``, it is possible to define it into "
+"the ``MSBuildDeps`` generator, so different project configurations can use "
+"different set of dependencies. Let's say that our current project can be "
+"built as a shared library, with the custom configuration ``ReleaseShared``, "
+"and the package also controls this with the ``shared`` option:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:100
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.microsoft import MSBuildDeps\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    options = {\"shared\": [True, False]}\n"
+"    default_options = {\"shared\": False}\n"
+"    requires = \"zlib/1.2.11\"\n"
+"\n"
+"    def generate(self):\n"
+"        ms = MSBuildDeps(self)\n"
+"        # We assume that -o *:shared=True is used to install all shared deps "
+"too\n"
+"        if self.options.shared:\n"
+"            ms.configuration = str(self.settings.build_type) + \"Shared\"\n"
+"        ms.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:118
+msgid ""
+"This will manage to generate new properties files for this custom "
+"configuration, and switching it in the IDE allows to be switching "
+"dependencies configuration like Debug/Release, it could be also switching "
+"dependencies from static to shared libraries."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:123
+msgid "Included dependencies"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:125
+msgid ""
+"``MSBuildDeps`` uses the new experimental ``self.dependencies`` access to "
+"dependencies. The following dependencies will be translated to properties "
+"files:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:128
+msgid ""
+"All direct dependencies, that is, the ones declared by the current "
+"``conanfile``, that lives in the host context: all regular ``requires``, "
+"plus the ``tool_requires`` that are in the host context, for example test "
+"frameworks as ``gtest`` or ``catch``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:131
+msgid ""
+"All transitive ``requires`` of those direct dependencies (all in the host "
+"context)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:132
+msgid ""
+"Tool requires, in the build context, that is, application and executables "
+"that run in the build machine irrespective of the destination platform, are "
+"added exclusively to the ``<ExecutablePath>`` property, taking the value "
+"from ``$(Conan{{name}}BinaryDirectories)`` defined properties. This allows "
+"to define custom build commands, invoke code generation tools, with the "
+"``<CustomBuild>`` and ``<Command>`` elements."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:140
+msgid "MSBuildToolchain"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:142
+msgid ""
+"The ``MSBuildToolchain`` is the toolchain generator for MSBuild. It will "
+"generate MSBuild properties files that can be added to the Visual Studio "
+"solution projects. This generator translates the current package "
+"configuration, settings, and options, into MSBuild properties files syntax."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:153
+msgid "The ``MSBuildToolchain`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:155
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"MSBuildToolchain\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:161
+msgid ""
+"[generators]\n"
+"MSBuildToolchain"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:181
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.microsoft import MSBuildToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = MSBuildToolchain(self)\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:182
+msgid ""
+"The ``MSBuildToolchain`` will generate three files after a ``conan install`` "
+"command:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:190
+msgid "The main *conantoolchain.props* file, to be added to the project."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:191
+msgid ""
+"A *conantoolchain_<config>.props* file, that will be conditionally included "
+"from the previous *conantoolchain.props* file based on the configuration and "
+"platform, e.g.: *conantoolchain_release_x86.props*"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:194
+msgid ""
+"A *conanvcvars.bat* file with the necessary ``vcvars`` invocation to define "
+"the build environment if necessary to build from the command line or from "
+"automated tools (might not be necessary if opening the IDE). This file will "
+"be automatically called by the ``tools.microsoft.MSBuild`` helper "
+"``build()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:199
+msgid ""
+"Every invocation to ``conan install`` with different configuration will "
+"create a new properties ``.props`` file, that will also be conditionally "
+"included. This allows to install different configurations, then switch among "
+"them directly from the Visual Studio IDE."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:203
+msgid "The MSBuildToolchain files can configure:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:205
+msgid ""
+"The Visual Studio runtime (MT/MD/MTd/MDd), obtained from Conan input settings"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:206
+msgid "The C++ standard, obtained from Conan input settings"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:208
+msgid ""
+"One of the advantages of using toolchains is that they can help to achieve "
+"the exact same build with local development flows, than when the package is "
+"created in the cache."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:212
+#: ../../../reference/conanfile/tools/microsoft.rst:261
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:214
+msgid ""
+"``MSBuildToolchain`` is affected by these :ref:`[conf]<global_conf>` "
+"variables:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:216
+msgid ""
+"``tools.microsoft.msbuildtoolchain:compile_options`` dict-like object of "
+"extra compile options to be added to ``<ClCompile>`` section. The dict will "
+"be translated as follows: ``<[KEY]>[VALUE]</[KEY]>``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:218
+msgid ""
+"``tools.build:cxxflags`` list of extra C++ flags that will be appended to "
+"``<AdditionalOptions>`` section from ``<ClCompile>`` and "
+"``<ResourceCompile>`` one."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:219
+msgid ""
+"``tools.build:cflags`` list of extra of pure C flags that will be appended "
+"to ``<AdditionalOptions>`` section from ``<ClCompile>`` and "
+"``<ResourceCompile>`` one."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:220
+msgid ""
+"``tools.build:sharedlinkflags`` list of extra linker flags that will be "
+"appended to ``<AdditionalOptions>`` section from ``<Link>`` one."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:221
+msgid ""
+"``tools.build:exelinkflags`` list of extra linker flags that will be "
+"appended to ``<AdditionalOptions>`` section from ``<Link>`` one."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:222
+msgid ""
+"``tools.build:defines`` list of preprocessor definitions that will be "
+"appended to ``<PreprocessorDefinitions>`` section from ``<ResourceCompile>`` "
+"one."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:226
+msgid "MSBuild"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:228
+msgid ""
+"The ``MSBuild`` build helper is a wrapper around the command line invocation "
+"of MSBuild. It will abstract the calls like ``msbuild \"MyProject.sln\" /p:"
+"Configuration=<conf> /p:Platform=<platform>`` into Python method calls."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:231
+msgid "The ``MSBuild`` helper can be used like:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:244
+msgid ""
+"from conans import conanfile\n"
+"from conan.tools.microsoft import MSBuild\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def build(self):\n"
+"        msbuild = MSBuild(self)\n"
+"        msbuild.build(\"MyProject.sln\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:245
+msgid ""
+"The ``MSBuild.build()`` method internally implements a call to ``msbuild`` "
+"like:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:250
+msgid ""
+"$ <vcvars-cmd> && msbuild \"MyProject.sln\" /p:Configuration=<conf> /p:"
+"Platform=<platform>"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:251
+msgid "Where:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:253
+msgid ""
+"``vcvars-cmd`` is calling the Visual Studio prompt that matches the current "
+"recipe ``settings``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:254
+msgid ""
+"``conf`` is the configuration, typically Release, Debug, which will be "
+"obtained from ``settings.build_type`` but this will be configurable. Please "
+"open a `Github issue <https://github.com/conan-io/conan/issues>`_ if you "
+"want to define custom configurations."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:256
+msgid ""
+"``platform`` is the architecture, a mapping from the ``settings.arch`` to "
+"the common 'x86', 'x64', 'ARM', 'ARM64'. If your platform is unsupported, "
+"please report in `Github issues <https://github.com/conan-io/conan/issues>`_ "
+"as well."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:263
+msgid "``MSBuild`` is affected by these :ref:`[conf]<global_conf>` variables:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:265
+msgid ""
+"``tools.microsoft.msbuild:verbosity`` will accept one of ``\"Quiet\", "
+"\"Minimal\", \"Normal\", \"Detailed\", \"Diagnostic\"`` to be passed to the "
+"``MSBuild.build()`` call as ``msbuild .... /verbosity:XXX``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:271
+msgid "VCVars"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:273
+msgid ""
+"Generates a file called ``conanvcvars.bat`` that activate the Visual Studio "
+"developer command prompt according to the current settings by wrapping the "
+"`vcvarsall <https://docs.microsoft.com/en-us/cpp/build/building-on-the-"
+"command-line?view=vs-2017>`_ Microsoft bash script."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:278
+msgid "The ``VCVars`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:280
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"VCVars\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:286
+msgid ""
+"[generators]\n"
+"VCVars"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:294
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.microsoft import VCVars\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    requires = \"zlib/1.2.11\", \"bzip2/1.0.8\"\n"
+"\n"
+"    def generate(self):\n"
+"        ms = VCVars(self)\n"
+"        ms.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:309
+msgid "Constructor"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:314
+msgid "def __init__(self, conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:315
+msgid "``conanfile``: the current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:319
+msgid "generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:324
+msgid "def generate(self, scope=\"build\"):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:325
+#: ../../../reference/conanfile/tools/microsoft.rst:342
+#: ../../../reference/conanfile/tools/microsoft.rst:366
+#: ../../../reference/conanfile/tools/microsoft.rst:394
+#: ../../../reference/conanfile/tools/microsoft.rst:429
+msgid "Parameters:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:327
+msgid ""
+"**scope** (Defaulted to ``\"build\"``): Add the launcher automatically to "
+"the ``conanbuild`` launcher. Read more in the :ref:`Environment "
+"documentation <conan_tools_env_environment_model>`."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:332
+msgid "conan.tools.microsoft.is_msvc()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:334
+msgid "def is_msvc(conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:338
+msgid ""
+"Validate ``self.settings.compiler`` for which compiler is being used. It "
+"returns ``True`` when the host compiler is ``Visual Studio`` or ``msvc``, "
+"otherwise, returns ``False``. When the ``compiler`` is empty, it returns "
+"``False``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:344
+#: ../../../reference/conanfile/tools/microsoft.rst:368
+#: ../../../reference/conanfile/tools/microsoft.rst:431
+msgid "**conanfile**: ConanFile instance."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:346
+msgid ""
+"from conan.tools.microsoft import is_msvc\n"
+"\n"
+"def validate(self):\n"
+"    if not is_msvc(self):\n"
+"        raise ConanInvalidConfiguration(\"Only supported by Visual Studio "
+"and msvc.\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:356
+msgid "conan.tools.microsoft.is_msvc_static_runtime()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:358
+msgid "def is_msvc_static_runtime(conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:362
+msgid ""
+"Validate ``self.settings.compiler.runtime`` for which compiler is being "
+"used. It returns ``True`` when the host compiler is ``Visual Studio`` or "
+"``msvc``, and its runtime is ``MT``, ``MTd`` or ``static``. When the "
+"``compiler`` is empty, it returns ``False``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:371
+msgid ""
+"from conan.tools.microsoft import is_msvc_static_runtime\n"
+"\n"
+"def validate(self):\n"
+"    if is_msvc_static_runtime(self) and self.options.shared(self):\n"
+"        raise ConanInvalidConfiguration(\"This project does not support "
+"shared and static runtime together.\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:383
+msgid "conan.tools.microsoft.msvc_runtime_flag()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:385
+msgid "def msvc_runtime_flag(conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:389
+msgid ""
+"If the current compiler is ``Visual Studio``, ``msvc``, ``clang `` or "
+"``intel-cc``, then detects the runtime type and returns between ``MD``, "
+"``MT``, ``MDd`` or ``MTd``, otherwise, returns ``\"\"`` (empty string). When "
+"the runtime type is ``static``, it returns ``MT``, otherwise, ``MD``. The "
+"suffix ``d`` is added when running on Debug mode."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:396
+msgid "**conanfile**: Conanfile instance."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:398
+msgid ""
+"from conan.tools.microsoft import msvc_runtime_flag\n"
+"\n"
+"def validate(self):\n"
+"     if \"MT\" in msvc_runtime_flag(self):\n"
+"        self.output.warning(\"Runtime MT/MTd is not well tested.\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:409
+msgid "conan.tools.microsoft.unix_path()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:411
+msgid "def unix_path(conanfile, path):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:415
+msgid ""
+"Transforms the specified path into the correct one according to the "
+"subsystem. To determine the subsystem:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:418
+msgid ""
+"The ``settings_build.os`` is checked to verify that we are running on "
+"\"Windows\" otherwise, the path is returned without changes."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:421
+msgid ""
+"If ``settings_build.os.subsystem`` is specified (meaning we are running "
+"Conan under that subsystem) it will be returned."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:424
+msgid ""
+"If ``conanfile.win_bash==True`` (meaning we have to run the commands inside "
+"the subsystem), the conf ``tools.microsoft.bash:subsystem`` has to be "
+"declared or it will raise an Exception."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:427
+msgid "Otherwise the path is returned without changes."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:433
+msgid ""
+"from conan.tools.microsoft import unix_path\n"
+"\n"
+"\n"
+"\n"
+"def build(self):\n"
+"    adjusted_path = unix_path(self, \"C:\\\\path\\\\to\\\\stuff\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:446
+msgid "In the example above, ``adjusted_path`` will be:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:444
+msgid "``/c/path/to/stuff`` if msys2 or msys"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:445
+msgid "``/cygdrive/c/path/to/stuff`` if cygwin"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:446
+msgid "``/mnt/c/path/to/stuff`` if wsl"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/microsoft.rst:447
+msgid "``/dev/fs/C/path/to/stuff`` if sfu"
+msgstr ""

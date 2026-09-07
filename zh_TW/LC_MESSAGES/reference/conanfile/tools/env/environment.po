@@ -1,0 +1,201 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.57\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/env/environment.rst:4
+msgid "Environment"
+msgstr "Environment"
+
+#: ../../../reference/conanfile/tools/env/environment.rst:8
+msgid ""
+"Some of the features used in this section are still **under development**, "
+"while they are recommended and usable and we will try not to break them in "
+"future releases, some breaking changes might still happen if necessary to "
+"prepare for the *Conan 2.0 release*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:12
+msgid ""
+"Available since: `1.35.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.35.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:14
+msgid ""
+"``Environment`` is a generic class that helps defining modifications to the "
+"environment variables. This class is used by other tools like the :ref:"
+"`conan.tools.gnu<conan_tools_gnu>` autotools helpers and the :ref:"
+"`VirtualBuildEnv<conan_tools_env_virtualbuildenv>` and :ref:"
+"`VirtualRunEnv<conan_tools_env_virtualrunenv>` generator. It is important to "
+"highlight that this is a generic class, to be able to use it, a "
+"specialization for the current context (shell script, bat file, path "
+"separators, etc), a ``EnvVars`` object needs to be obtained from it."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:23
+msgid "Variable declaration"
+msgstr "變數宣告"
+
+#: ../../../reference/conanfile/tools/env/environment.rst:41
+msgid ""
+"from conan.tools.env import Environment\n"
+"\n"
+"def generate(self):\n"
+"    env = Environment()\n"
+"    env.define(\"MYVAR1\", \"MyValue1\")  # Overwrite previously existing "
+"MYVAR1 with new value\n"
+"    env.append(\"MYVAR2\", \"MyValue2\")  # Append to existing MYVAR2 the "
+"new value\n"
+"    env.prepend(\"MYVAR3\", \"MyValue3\") # Prepend to existing MYVAR3 the "
+"new value\n"
+"    env.remove(\"MYVAR3\", \"MyValue3\")  # Remove the MyValue3 from MYVAR3\n"
+"    env.unset(\"MYVAR4\")               # Remove MYVAR4 definition from "
+"environment\n"
+"\n"
+"    # And the equivalent with paths\n"
+"    env.define_path(\"MYPATH1\", \"path/one\")  # Overwrite previously "
+"existing MYPATH1 with new value\n"
+"    env.append_path(\"MYPATH2\", \"path/two\")  # Append to existing MYPATH2 "
+"the new value\n"
+"    env.prepend_path(\"MYPATH3\", \"path/three\") # Prepend to existing "
+"MYPATH3 the new value"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:42
+msgid ""
+"The \"normal\" variables (the ones declared with ``define``, ``append`` and "
+"``prepend``) will be appended with a space, by default, but the "
+"``separator`` argument can be provided to define a custom one."
+msgstr ""
+"「普通」變數（即使用 ``define``、``append`` 和 ``prepend`` 宣告的變數）預設會"
+"以空格進行追加，但也可以提供 ``separator`` 引數來定義自訂的分隔符號。"
+
+#: ../../../reference/conanfile/tools/env/environment.rst:45
+msgid ""
+"The \"path\" variables (the ones declared with ``define_path``, "
+"``append_path`` and ``prepend_path``) will be appended with the default "
+"system path separator, either ``:`` or ``;``, but it also allows defining "
+"which one."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:50
+msgid "Composition"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:52
+msgid "Environments can be composed:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:65
+msgid ""
+"from conan.tools.env import Environment\n"
+"\n"
+"env1 = Environment()\n"
+"env1.define(...)\n"
+"env2 = Environment()\n"
+"env2.append(...)\n"
+"\n"
+"env1.compose_env(env2) # env1 has priority, and its modifications will "
+"prevail"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:67
+msgid "Obtaining environment variables"
+msgstr "獲取環境變數"
+
+#: ../../../reference/conanfile/tools/env/environment.rst:69
+msgid ""
+"You can obtain an ``EnvVars`` object with the ``vars()`` method like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:80
+msgid ""
+"from conan.tools.env import Environment\n"
+"\n"
+"def generate(self):\n"
+"    env = Environment()\n"
+"    env.define(\"MYVAR1\", \"MyValue1\")\n"
+"    envvars = env.vars(self, scope=\"build\")\n"
+"    # use the envvars object"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:81
+msgid ""
+"The default ``scope`` is equal ``\"build\"``, which means that if this "
+"``envvars`` generate a script to activate the variables, such script will be "
+"automatically added to the ``conanbuild.sh|bat`` one, for users and recipes "
+"convenience. Conan generators use ``build`` and ``run`` scope, but it might "
+"be possible to manage other scopes too."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:88
+msgid "Environment definition"
+msgstr "Environment 定義"
+
+#: ../../../reference/conanfile/tools/env/environment.rst:90
+msgid ""
+"There are some other places where ``Environment`` can be defined and used:"
+msgstr "還有其他一些地方可以定義和使用 ``Environment``："
+
+#: ../../../reference/conanfile/tools/env/environment.rst:92
+msgid ""
+"In recipes ``package_info()`` method, in new ``self.buildenv_info`` and "
+"``self.runenv_info``, this environment will be propagated via "
+"``VirtualBuildEnv`` and ``VirtualRunEnv`` respectively to packages depending "
+"on this recipe."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:95
+msgid ""
+"In generators like ``AutootoolsDeps``, ``AutotoolsToolchain``, that need to "
+"define environment for the current recipe."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:97
+msgid "In profiles new :ref:`profiles_buildenv` section."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:100
+msgid ""
+"The definition in ``package_info()`` is as follow, taking into account that "
+"both ``self.buildenv_info`` and ``self.runenv_info`` are objects of "
+"``Environment()`` class."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/environment.rst:120
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class App(ConanFile):\n"
+"    name = \"mypkg\"\n"
+"    version = \"1.0\"\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def package_info(self):\n"
+"        # This is information needed by consumers to build using this "
+"package\n"
+"        self.buildenv_info.append(\"MYVAR\", \"MyValue\")\n"
+"        self.buildenv_info.prepend_path(\"MYPATH\", \"some/path/folder\")\n"
+"\n"
+"        # This is information needed by consumers to run apps that depends "
+"on this package\n"
+"        # at runtime\n"
+"        self.runenv_info.define(\"MYPKG_DATA_DIR\", os.path.join(self."
+"package_folder,\n"
+"                                                               \"datadir\"))"
+msgstr ""

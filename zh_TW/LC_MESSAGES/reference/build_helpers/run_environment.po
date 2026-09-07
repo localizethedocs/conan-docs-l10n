@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.57\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/build_helpers/run_environment.rst:4
+msgid "RunEnvironment"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:6
+msgid ""
+"The ``RunEnvironment`` helper prepares ``PATH``, ``LD_LIBRARY_PATH``, "
+"``DYLD_LIBRARY_PATH`` and ``DYLD_FRAMEWORK_PATH`` environment variables to "
+"locate shared libraries, frameworks and executables of your requirements at "
+"runtime."
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:10
+msgid ""
+"The ``RunEnvironment`` is no longer needed, at least explicitly in "
+"*conanfile.py*. It has been integrated into the ``self.run(..., "
+"run_environment=True)`` argument. Check :ref:`self.run()<running_commands>`."
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:13
+msgid "This helper is specially useful if:"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:15
+msgid ""
+"You are requiring packages with shared libraries and you are running some "
+"executable that needs those libraries."
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:16
+msgid ""
+"You have a requirement with some tool (executable) and you need it to be in "
+"the path."
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:18
+msgid ""
+"from conans import ConanFile, RunEnvironment\n"
+"\n"
+"class ExampleConan(ConanFile):\n"
+"   ...\n"
+"\n"
+"   def build(self):\n"
+"      env_build = RunEnvironment(self)\n"
+"      with tools.environment_append(env_build.vars):\n"
+"         self.run(\"....\")\n"
+"         # All the requirements bin folder will be available at PATH\n"
+"         # All the lib folders will be available in LD_LIBRARY_PATH and "
+"DYLD_LIBRARY_PATH\n"
+"         # All the framework_paths folders will be available in "
+"DYLD_FRAMEWORK_PATH"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:35
+msgid "It sets the following environment variables:"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:38
+msgid "NAME"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:38
+msgid "DESCRIPTION"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:40
+msgid "PATH"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:40
+msgid "Containing all the requirements ``bin`` folders."
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:42
+msgid "LD_LIBRARY_PATH"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:42
+msgid "Containing all the requirements ``lib`` folders. (Linux)"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:44
+msgid "DYLD_LIBRARY_PATH"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:44
+msgid "Containing all the requirements ``lib`` folders. (OSX)"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:46
+msgid "DYLD_FRAMEWORK_PATH"
+msgstr "DYLD_FRAMEWORK_PATH"
+
+#: ../../../reference/build_helpers/run_environment.rst:46
+msgid "Containing all the requirements ``framework_paths`` folders. (OSX)"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:51
+msgid ""
+"Security restrictions might apply in OSX (`read this thread <https://"
+"stackoverflow.com/questions/35568122/why-isnt-dyld-library-path-being-"
+"propagated-here>`_), so the ``DYLD_LIBRARY_PATH`` and "
+"``DYLD_FRAMEWORK_PATH`` environment variables are not directly transferred "
+"to the child process. In that case, you have to use it explicitly in your "
+"*conanfile.py*:"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:56
+msgid ""
+"def build(self):\n"
+"    env_build = RunEnvironment(self)\n"
+"    with tools.environment_append(env_build.vars):\n"
+"        # self.run(\"./myexetool\") # won't work, even if "
+"'DYLD_LIBRARY_PATH' and 'DYLD_FRAMEWORK_PATH' are in the env\n"
+"        self.run(\"DYLD_LIBRARY_PATH=%s DYLD_FRAMEWORK_PATH=%s ./myexetool\" "
+"% (os.environ['DYLD_LIBRARY_PATH'], os.environ['DYLD_FRAMEWORK_PATH']))"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:64
+msgid ""
+"This is already handled automatically by the ``self.run(..., "
+"run_environment=True)`` argument."
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:68
+msgid ":ref:`manage_shared_libraries_env_vars`"
+msgstr ""
+
+#: ../../../reference/build_helpers/run_environment.rst:69
+msgid ":ref:`tools_environment_append`"
+msgstr ""

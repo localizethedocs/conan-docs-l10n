@@ -1,0 +1,188 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../mastering/custom_cache.rst:4
+msgid "Conan local cache: concurrency, Continuous Integration, isolation"
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:6
+msgid ""
+"Conan needs access to some per user configuration files, such as the **conan."
+"conf** file that defines the basic client app configuration. By convention, "
+"this file will be located in the user home folder **~/.conan/**. This folder "
+"will also typically store the package cache in **~/.conan/data**. Even "
+"though the latter is configurable in *conan.conf*, Conan needs some place to "
+"look for this initial configuration file."
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:12
+msgid ""
+"There are some scenarios in which you might want to use different initial "
+"locations for the Conan client application:"
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:15
+msgid ""
+"Continuous Integration (CI) environments, in which multiple jobs can also "
+"work concurrently. Moreover, these environments would typically want to run "
+"with different user credentials, different remote configurations, etc. Note "
+"that using Continuous Integration with the same user, with isolated machine "
+"instances (virtual machines), or with sequential jobs is perfectly possible. "
+"For example, we use a lot CI cloud services of travis-ci and appveyor."
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:20
+msgid ""
+"Independent per project management and storage. If as a single developer you "
+"want to manage different projects with different user credentials and/or "
+"different remotes, you might find that having multiple independent caches "
+"makes it easier."
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:24
+msgid ""
+"Using different caches is very simple. You can just define the environment "
+"variable **CONAN_USER_HOME**. By setting this variable to different paths, "
+"you have multiple conan caches, something like python \"virtualenvs\". Just "
+"changing the value of **CONAN_USER_HOME**, you can switch among isolated "
+"Conan instances that will have independent package storage caches, and also "
+"different user credentials, different user default settings, and different "
+"remotes configuration."
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:32
+msgid ""
+"Use an absolute path or a path starting with ~/ (relative to user home). In "
+"Windows do not use quotes."
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:34
+msgid "Windows users:"
+msgstr "Windows 使用者："
+
+#: ../../../mastering/custom_cache.rst:36
+msgid ""
+"$ SET CONAN_USER_HOME=c:\\data\n"
+"$ conan install . # call conan normally, config & data will be in c:\\data\\."
+"conan"
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:42
+msgid "Linux/macOS users:"
+msgstr "Linux/macOS 使用者："
+
+#: ../../../mastering/custom_cache.rst:44
+msgid ""
+"$ export CONAN_USER_HOME=/tmp/conan\n"
+"$ conan install . # call conan normally, config & data will be in /tmp/"
+"conan/.conan"
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:49
+msgid "You can now:"
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:51
+msgid ""
+"Build concurrent jobs, parallel builds in Continuous Integration or locally, "
+"by just setting the variable before launching Conan commands."
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:52
+msgid ""
+"You can test locally different user credentials, default configurations, or "
+"different remotes, just by switching from one cache to another."
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:54
+msgid ""
+"$ export CONAN_USER_HOME=/tmp/conan\n"
+"$ conan search  # using that /tmp/conan cache\n"
+"$ conan user  # using that /tmp/conan cache\n"
+"\n"
+"$ export CONAN_USER_HOME=/tmp/conan2\n"
+"$ conan search  # different packages\n"
+"$ conan user  # can be different users\n"
+"\n"
+"$ export CONAN_USER_HOME=/tmp/conan  # just go back to use the other cache"
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:69
+msgid "Concurrency"
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:71
+msgid ""
+"Conan local cache support some degree of concurrency, allowing simultaneous "
+"creation or installation of different packages, or building different "
+"binaries for the same package. However, concurrent operations like removal "
+"of packages while creating them will fail. If you need different "
+"environments that operate totally independently, you probably want to use "
+"different Conan caches for that."
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:75
+msgid ""
+"The concurrency is implemented with a Readers-Writers lock mechanism, which "
+"in turn uses ``fasteners`` library file locks to achieve multi-platform "
+"portability. As this \"mutex\" resource is by definition not enough to "
+"implement a Readers-Writers solution, some active-wait with time sleeps in a "
+"loop is necessary. However, this time sleeps will be rare, only sleeping "
+"when there is actually a collision and waiting on a lock."
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:80
+msgid ""
+"The lock files will be stored inside each ``Pkg/version/user/channel`` "
+"folder in the local cache, in a ``rw`` file for locking the entire package, "
+"or in a set of locks (one per each different binary package, under a "
+"subfolder called ``locks``, with each lock named with the binary ID of the "
+"package)."
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:84
+msgid "It is possible to disable the locking mechanism in ``conan.conf``:"
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:86
+msgid ""
+"[general]\n"
+"cache_no_locks = True"
+msgstr ""
+"[general]\n"
+"cache_no_locks = True"
+
+#: ../../../mastering/custom_cache.rst:92
+msgid "System Requirements"
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:94
+msgid ""
+"When ``system_requirements()`` runs, Conan creates the ``system_reqs`` "
+"folder. This folder could be created individually by package id or globally "
+"when ``global_system_requirements`` is **True**."
+msgstr ""
+
+#: ../../../mastering/custom_cache.rst:97
+msgid ""
+"However, sometimes you want to run ``system_requirements()`` again for a "
+"specific package, so you could either remove the ``system_reqs.txt`` file "
+"for the specific package id, or you could :ref:`remove system_reqs globally "
+"for the package name referred<conan_remove_system_reqs>`."
+msgstr ""

@@ -1,0 +1,286 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.37\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/other_languages_package_manager/python.rst:2
+msgid "Conan: A Python package manager"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:4
+msgid ""
+"Conan is a C and C++ package manager, and to deal with the vast variability "
+"of C and C++ build systems, compilers, configurations, etc., it was designed "
+"to be extremely flexible, to allow users the freedom to configure builds in "
+"virtually any manner required. This is one of the reasons to use Python as "
+"the scripting language for Conan package recipes."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:8
+msgid ""
+"With this flexibility, Conan is able to do very different tasks: package "
+"`Visual Studio modules <https://blog.conan.io/2016/06/01/Building-and-"
+"packaging-C++-modules-in-VS2015.html>`_, :ref:`package Go code "
+"<go_package_manager>`, build packages from sources or from binaries "
+"retrieved from elsewhere, etc."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:12
+msgid ""
+":ref:`Python code can be reused and packaged with Conan <python_reuse>` to "
+"share functionalities or tools among *conanfile.py* files. Here we can see a "
+"full example of Conan as a Python package manager."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:16
+msgid "A full Python and C/C++ package manager"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:18
+msgid ""
+"The real utility of this is that Conan is a C and C++ package manager. So, "
+"for example, you are able to create a Python package that wraps the "
+"functionality of the Poco C++ library. Poco itself has transitive (C/C++) "
+"dependencies, but they are already handled by Conan. Furthermore, a very "
+"interesting thing is that nothing has to be done in advance for that "
+"library, thanks to useful tools such as **pybind11**, that lets you easily "
+"create Python bindings."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:23
+msgid "So let's build a package with the following files:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:25
+msgid "*conanfile.py*: The package recipe."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:26
+msgid "*__init__.py*: A required file which should remain blank."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:27
+msgid ""
+"*pypoco.cpp*: The C++ code with the ``pybind11`` wrapper for Poco that "
+"generates a Python extension (a shared library that can be imported from "
+"Python)."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:29
+msgid ""
+"*CMakeLists.txt*: The CMake build file that is able to compile *pypoco.cpp* "
+"into a Python extension (*pypoco.pyd* in Windows, *pypoco.so* in Linux)"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:31
+msgid ""
+"*poco.py*: A Python file that makes use of the pypoco Python binary "
+"extension built with *pypoco.cpp*."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:32
+msgid ""
+"*test_package/conanfile.py*: A test consumer \"convenience\" recipe to "
+"create and test the package."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:34
+msgid ""
+"The *pypoco.cpp* file can be coded easily thanks to the elegant ``pybind11`` "
+"library:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:36
+msgid "pypoco.cpp"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:36
+msgid ""
+" #include <pybind11/pybind11.h>\n"
+" #include \"Poco/Random.h\"\n"
+"\n"
+" using Poco::Random;\n"
+" namespace py = pybind11;\n"
+"\n"
+" PYBIND11_PLUGIN(pypoco) {\n"
+"     py::module m(\"pypoco\", \"pybind11 example plugin\");\n"
+"     py::class_<Random>(m, \"Random\")\n"
+"         .def(py::init<>())\n"
+"         .def(\"nextFloat\", &Random::nextFloat);\n"
+"     return m.ptr();\n"
+" }"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:53
+msgid "And the *poco.py* file is straightforward:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:55
+msgid "*poco.py*"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:55
+msgid ""
+" import sys\n"
+" import pypoco\n"
+"\n"
+" def random_float():\n"
+"     r = pypoco.Random()\n"
+"     return r.nextFloat()"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:65
+msgid ""
+"The *conanfile.py* is a bit longer, but is still quite easy to understand:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:67
+msgid "*conanfile.py*"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:67
+msgid ""
+" from conans import ConanFile, tools, CMake\n"
+"\n"
+" class PocoPyReuseConan(ConanFile):\n"
+"     name = \"PocoPy\"\n"
+"     version = \"0.1\"\n"
+"     requires = \"poco/1.9.4\", \"pybind11/2.3.0@conan/stable\"\n"
+"     settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"     exports = \"*\"\n"
+"     generators = \"cmake\"\n"
+"     build_policy = \"missing\"\n"
+"\n"
+"     def build(self):\n"
+"         cmake = CMake(self)\n"
+"         pythonpaths = \"-DPYTHON_INCLUDE_DIR=C:/Python27/include -"
+"DPYTHON_LIBRARY=C:/Python27/libs/python27.lib\"\n"
+"         self.run('cmake %s %s -DEXAMPLE_PYTHON_VERSION=2.7' % (cmake."
+"command_line, pythonpaths))\n"
+"         self.run(\"cmake --build . %s\" % cmake.build_config)\n"
+"\n"
+"     def package(self):\n"
+"         self.copy('*.py*')\n"
+"         self.copy(\"*.so\")\n"
+"\n"
+"     def package_info(self):\n"
+"         self.env_info.PYTHONPATH.append(self.package_folder)"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:94
+msgid ""
+"The recipe now declares 2 ``requires`` that will be used to create the "
+"binary extension: the **Poco library** and the **pybind11 library**."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:96
+msgid ""
+"As we are actually building C++ code, there are a few important things that "
+"we need:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:98
+msgid ""
+"Input ``settings`` that define the OS, compiler, version and architecture we "
+"are using to build our extension. This is necessary because the binary we "
+"are building must match the architecture of the Python interpreter that we "
+"will be using."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:101
+msgid ""
+"The ``build()`` method is actually used to invoke CMake. You may see that we "
+"had to hardcode the Python path in the example, as the *CMakeLists.txt* call "
+"to ``find_package(PythonLibs)`` didn't find my Python installation in *C:/"
+"Python27*, even though that is a standard path. I have also added the "
+"``cmake`` generator to be able to easily use the declared ``requires`` build "
+"information inside my *CMakeLists.txt*."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:105
+msgid ""
+"The *CMakeLists.txt* is not posted here, but is basically the one used in "
+"the pybind11 example with just 2 lines to include the cmake file generated "
+"by Conan for dependencies. It can be inspected in the GitHub repo."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:108
+msgid ""
+"Note that we are using Python 2.7 as an input option. If necessary, more "
+"options for other interpreters/architectures could be easily provided, as "
+"well as avoiding the hardcoded paths. Even the Python interpreter itself "
+"could be packaged in a Conan package."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:111
+msgid ""
+"The above recipe will generate a different binary for different compilers or "
+"versions. As the binary is being wrapped by Python, we could avoid this and "
+"use the same binary for different setups, modifying this behavior with the "
+"``conan_info()`` method."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:114
+msgid ""
+"$ conan export . memsharded/testing\n"
+"$ conan install pocopy/0.1@memsharded/testing -s arch=x86 -g virtualenv\n"
+"$ activate\n"
+"$ python\n"
+">>> import poco\n"
+">>> poco.random_float()\n"
+"0.697845458984375"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:124
+msgid ""
+"Now, the first invocation of :command:`conan install` will retrieve the "
+"dependencies and build the package. The next invocation will use the cached "
+"binaries and be much faster. Note how we have to specify ``-s arch=x86`` to "
+"match the architecture of the Python interpreter to be used, in our case, 32 "
+"bits."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:128
+msgid ""
+"The output of the :command:`conan install` command also shows us the "
+"dependencies that are being pulled:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:130
+msgid ""
+"Requirements\n"
+"    openssl/1.0.2t from conan.io\n"
+"    poco/1.9.4 from conan.io\n"
+"    pocopy/0.1@memsharded/testing from local\n"
+"    pybind11/2.3.0@conan/stable from conan.io\n"
+"    zlib/1.2.11 from conan.io"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:139
+msgid ""
+"This is one of the great advantages of using Conan for this task, because by "
+"depending on Poco, other C and C++ transitive dependencies are retrieved and "
+"used in the application."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/python.rst:142
+msgid ""
+"For a deeper look into the code of these examples, please refer to `this "
+"github repo <https://github.com/memsharded/python-conan-packages>`_. The "
+"above examples and code have only been tested on Win10, VS14u2, but may work "
+"on other configurations with little or no extra work."
+msgstr ""

@@ -1,0 +1,155 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.37\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/config_files/global_conf.rst:4
+msgid "global.conf"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:8
+msgid ""
+"This new configuration mechanism is an **experimental** feature subject to "
+"breaking changes in future releases."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:11
+msgid "The **global.conf** file is located in the Conan user home directory."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:14
+msgid "Global configuration"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:16
+msgid ""
+"``core:required_conan_version = \"expression\"`` allows defining a version "
+"expression like \">=1.30\". Conan will raise an error if its current version "
+"does not satisfy the condition"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:17
+msgid ""
+"``core.package_id:msvc_visual_incompatible`` allows opting-out the fallback "
+"from the new ``msvc`` compiler to the ``Visual Studio`` compiler existing "
+"binaries"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:22
+msgid "Tools configurations"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:24
+msgid ""
+"Tools and user configurations allows them to be defined both in the *global."
+"conf* file and in profile files. Profile values will have priority over "
+"globally defined ones in *global.conf*, and can be defined as:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:27
+msgid ""
+"[settings]\n"
+"...\n"
+"\n"
+"[conf]\n"
+"tools.microsoft.msbuild:verbosity=Diagnostic\n"
+"tools.microsoft.msbuild:max_cpu_count=20\n"
+"tools.microsoft.msbuild:vs_version = 16\n"
+"tools.build:processes=10\n"
+"tools.ninja:jobs=30\n"
+"tools.gnu.make:jobs=40"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:40
+msgid "Existing configurations:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:42
+msgid ""
+"``tools.microsoft.msbuild:verbosity`` allows defining a value from "
+"``\"Quiet\", \"Minimal\", \"Normal\", \"Detailed\", \"Diagnostic\"`` for "
+"build using the MSBuild system, it could be with the ``tools.microsoft."
+"MSBuild`` or with the ``tools.cmake.CMake`` helpers."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:47
+msgid ""
+"``tools.microsoft.msbuild:max_cpu_count`` argument for the ``/m`` (``/"
+"maxCpuCount``) when running ``MSBuild`` standalone or via CMake (overrides "
+"the general ``tools.build:processes``)."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:50
+msgid ""
+"``tools.microsoft.msbuild:vs_version`` defines the compiler version when "
+"using using the new ``msvc`` compiler."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:52
+msgid ""
+"``tools.build:processes``: number of processes to use for every build-helper."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:54
+msgid ""
+"``tools.ninja:jobs`` argument for the ``--jobs`` parameter when running "
+"Ninja generator via CMake or Meson. (overrides the general ``tools.build:"
+"processes``)."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:57
+msgid ""
+"``tools.gnu.make:jobs``: argument for the ``--jobs`` parameter when running "
+"``make`` (overrides the general ``tools.build:processes``)."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:60
+msgid ""
+"To list all possible configurations available, run :command:`conan config "
+"list`."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:64
+msgid "Configuration from build_requires"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:66
+msgid ""
+"From Conan 1.37, it is possible to define configuration in packages that are "
+"``build_requires``. For example, assuming there is a package that bundles "
+"the AndroidNDK, it could define the location of such NDK to the ``tools."
+"android:ndk_path`` configuration as:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:71
+msgid ""
+"import os\n"
+"from conans import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    name = \"android_ndk\"\n"
+"\n"
+"    def package_info(self):\n"
+"        self.conf_info[\"tools.android:ndk_path\"] = os.path.join(self."
+"package_folder, \"ndk\")"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:83
+msgid ""
+"Note that this only propagates from the immediate, direct ``build_requires`` "
+"of a recipe."
+msgstr ""

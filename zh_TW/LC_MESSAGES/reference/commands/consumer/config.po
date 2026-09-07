@@ -1,0 +1,312 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.18\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/consumer/config.rst:9
+msgid "conan config"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:11
+msgid "$ conan config [-h] {rm,set,get,install} ..."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:15
+msgid "Manages Conan configuration."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:17
+msgid "Used to edit conan.conf, or install config files."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:19
+msgid ""
+"positional arguments:\n"
+"  {rm,set,get,install}  sub-command help\n"
+"    rm                  Remove an existing config element\n"
+"    set                 Set a value for a configuration item\n"
+"    get                 Get the value of configuration item\n"
+"    install             install a full configuration from a local or remote\n"
+"                        zip file\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:33
+msgid "**Examples**"
+msgstr "**範例**"
+
+#: ../../../reference/commands/consumer/config.rst:35
+msgid "Change the logging level to 10:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:37
+msgid "$ conan config set log.level=10"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:41
+msgid "Get the logging level:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:43
+msgid ""
+"$ conan config get log.level\n"
+"$> 10"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:51
+msgid "conan config install"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:53
+msgid ""
+"usage: conan config install [-h] [--verify-ssl [VERIFY_SSL]] [--type {git}]\n"
+"                          [--args ARGS] [-sf SOURCE_FOLDER]\n"
+"                          [-tf TARGET_FOLDER]\n"
+"                          [item]\n"
+"\n"
+"positional arguments:\n"
+"  item                  git repository, local folder or zip file (local or\n"
+"                        http) where the configuration is stored\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  --verify-ssl [VERIFY_SSL]\n"
+"                        Verify SSL connection when downloading file\n"
+"  --type {git}, -t {git}\n"
+"                        Type of remote config\n"
+"  --args ARGS, -a ARGS  String with extra arguments for \"git clone\"\n"
+"  -sf SOURCE_FOLDER, --source-folder SOURCE_FOLDER\n"
+"                        Install files only from a source subfolder from the\n"
+"                        specified origin\n"
+"  -tf TARGET_FOLDER, --target-folder TARGET_FOLDER\n"
+"                        Install to that path in the conan cache"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:78
+msgid ""
+"The ``config install`` is intended to share the Conan client configuration. "
+"For example, in a company or organization, is important to have common "
+"``settings.yml``, ``profiles``, etc."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:81
+msgid ""
+"It can get its configuration files from a local or remote zip file, from a "
+"local directory or from a git repository. It then installs the files in the "
+"local Conan configuration."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:84
+msgid ""
+"The configuration may contain all or a subset of the allowed configuration "
+"files. Only the files that are present will be replaced. The only exception "
+"is the *conan.conf* file for which only the variables declared will be "
+"installed, leaving the other variables unchanged."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:88
+msgid ""
+"This means for example that **profiles** and **hooks** files will be "
+"overwritten if already present, but no profile or hook file that the user "
+"has in the local machine will be deleted."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:91
+msgid ""
+"All the configuration files will be copied to the Conan home directory. "
+"These are the special files and the rules applied to merge them:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:94
+msgid "File"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:94
+msgid "How it is applied"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:96
+msgid "profiles/MyProfile"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:96
+msgid "Overrides the local ~/.conan/profiles/MyProfile if already exists"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:98
+msgid "settings.yml"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:98
+msgid "Overrides the local ~/.conan/settings.yml"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:100
+msgid "remotes.txt"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:100
+msgid "Overrides remotes. Will remove remotes that are not present in file"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:102
+msgid "config/conan.conf"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:102
+msgid "Merges the variables, overriding only the declared variables"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:104
+msgid "hooks/my_hook.py"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:104
+msgid "Overrides the local ~/.conan/hooks/my_hook.py if already exists"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:107
+msgid ""
+"The file *remotes.txt* is the only file listed above which does not have a "
+"direct counterpart in the *~/.conan* folder. Its format is a list of "
+"entries, one on each line, with the form of"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:110
+msgid "[remote name] [remote url] [bool]"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:114
+msgid ""
+"where ``[bool]`` (either ``True`` or ``False``) indicates whether SSL should "
+"be used to verify that remote. The remote definitions can be found in the "
+"*registry.txt*/*registry.json* files and they provide a helpful starting "
+"point when writing the *remotes.txt* to be packaged in a Conan client "
+"configuration."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:119
+msgid ""
+"The local cache *registry.txt*/*registry.json* file contains the remotes "
+"definitions as well as the mapping of installed packages from remotes. "
+"Sharing the complete contents of this file via this command is not "
+"recommended as this records the status of the local cache, which may be "
+"different from one machine to another."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:124
+msgid ""
+"During the installation, Conan skips any file with the name *README.md* or "
+"*LICENSE.txt*."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:126
+msgid ""
+"The :command:`conan config install <item>` calls are stored in a "
+"*config_install.json* file in the Conan local cache. That allows to issue a :"
+"command:`conan config install` command, without arguments, to iterate over "
+"the cached configurations, executing them again (updating)."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:129
+msgid "**Examples**:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:131
+msgid "Install the configuration from a URL:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:133
+msgid "$ conan config install http://url/to/some/config.zip"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:138
+msgid ""
+"Install the configuration from a URL, but only getting the files inside a "
+"*origin* folder inside the zip file, and putting them inside a *target* "
+"folder in the local cache:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:141
+msgid ""
+"$ conan config install http://url/to/some/config.zip -sf=origin -tf=target"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:145
+msgid ""
+"Install configuration from 2 different zip files from 2 different urls, "
+"using different source and target folders for each one, then update all:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:148
+msgid ""
+"$ conan config install http://url/to/some/config.zip -sf=origin -tf=target\n"
+"$ conan config install http://url/to/some/config.zip -sf=origin2 -"
+"tf=target2\n"
+"$ conan config install http://other/url/to/other.zip -sf=hooks -tf=hooks\n"
+"# Later on, execute again the previous configurations cached:\n"
+"$ conan config install"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:156
+msgid ""
+"It's not needed to specify any argument, it will iterate previously stored "
+"configurations in *config_install.json*, executing them again."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:158
+msgid "Install the configuration from a Git repository with submodules:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:160
+msgid ""
+"$ conan config install http://github.com/user/conan_config/.git --args \"--"
+"recursive\""
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:164
+msgid ""
+"You can also force the git download by using :command:`--type git` (in case "
+"it is not deduced from the URL automatically):"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:166
+msgid ""
+"$ conan config install http://github.com/user/conan_config/.git --type git"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:170
+msgid "Install from a URL skipping SSL verification:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:172
+msgid "$ conan config install http://url/to/some/config.zip --verify-ssl=False"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:176
+msgid "This will disable the SSL check of the certificate."
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:178
+msgid "Install the configuration from a local path:"
+msgstr ""
+
+#: ../../../reference/commands/consumer/config.rst:180
+msgid "$ conan config install /path/to/some/config.zip"
+msgstr ""

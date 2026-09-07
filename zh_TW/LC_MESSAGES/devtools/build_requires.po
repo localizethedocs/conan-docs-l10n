@@ -1,0 +1,462 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.27\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devtools/build_requires.rst:4
+msgid "Build requirements"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:6
+msgid ""
+"There are some requirements that don't feel natural to add to a package "
+"recipe. For example, imagine that you had a ``cmake/3.4`` package in Conan. "
+"Would you add it as a requirement to the ``zlib`` package, so it will "
+"install cmake first in order to build ``zlib``?"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:9
+msgid "In short:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:11
+msgid ""
+"There are requirements that are only needed when you need to build a package "
+"from sources, but if the binary package already exists, you don't want to "
+"install or retrieve them."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:13
+msgid ""
+"These could be dev tools, compilers, build systems, code analyzers, testing "
+"libraries, etc."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:14
+msgid ""
+"They can be very orthogonal to the creation of the package. It doesn't "
+"matter whether you build zlib with CMake 3.4, 3.5 or 3.6. As long as the "
+"*CMakeLists.txt* is compatible, it will produce the same final package."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:16
+msgid ""
+"You don't want to add a lot of different versions (like those of CMake) to "
+"be able to use them to build the package. You want to easily change the "
+"requirements, without needing to edit the zlib package recipe."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:18
+msgid ""
+"Some of them might not even be taken into account when a package like zlib "
+"is created, such as cross-compiling it to Android (in which the Android "
+"toolchain would be a build requirement too)."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:21
+msgid "To address these needs Conan implements ``build_requires``."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:25
+msgid "Declaring build requirements"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:27
+msgid "Build requirements can be declared in profiles, like:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:29
+msgid "my_profile"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:29
+msgid ""
+" [build_requires]\n"
+" tool1/0.1@user/channel\n"
+" tool2/0.1@user/channel, tool3/0.1@user/channel\n"
+" *: tool4/0.1@user/channel\n"
+" my_pkg*: tool5/0.1@user/channel\n"
+" &: tool6/0.1@user/channel\n"
+" &!: tool7/0.1@user/channel"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:40
+msgid ""
+"Build requirements are specified by a ``pattern:``. If such pattern is not "
+"specified, it will be assumed to be ``*``, i.e. to apply to all packages. "
+"Packages can be declared in different lines or by a comma separated list. In "
+"this example, ``tool1``, ``tool2``, ``tool3`` and ``tool4`` will be used for "
+"all packages in the dependency graph (while running :command:`conan install` "
+"or :command:`conan create`)."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:44
+msgid ""
+"If a pattern like ``my_pkg*`` is specified, the declared build requirements "
+"will only be applied to packages matching that pattern: ``tool5`` will not "
+"be applied to Zlib for example, but it will be applied to ``my_pkg_zlib``."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:47
+msgid ""
+"The special case of a **consumer** conanfile (without name or version) it is "
+"impossible to match with a pattern, so it is handled with the special "
+"character ``&``:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:50
+msgid "``&`` means apply these build requirements to the consumer conanfile"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:51
+msgid ""
+"``&!`` means apply the build requirements to all packages except the "
+"consumer one."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:53
+msgid ""
+"Remember that the consumer conanfile is the one inside the *test_package* "
+"folder or the one referenced in the :command:`conan install` command."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:56
+msgid ""
+"Build requirements can also be specified in a package recipe, with the "
+"``build_requires`` attribute and the ``build_requirements()`` method:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:58
+msgid ""
+"class MyPkg(ConanFile):\n"
+"    build_requires = \"tool_a/0.2@user/testing\", \"tool_b/0.2@user/"
+"testing\"\n"
+"\n"
+"    def build_requirements(self):\n"
+"        # useful for example for conditional build_requires\n"
+"        # This means, if we are running on a Windows machine, require "
+"ToolWin\n"
+"        if platform.system() == \"Windows\":\n"
+"            self.build_requires(\"tool_win/0.1@user/stable\")"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:69
+msgid ""
+"The above ``tool_a`` and ``tool_b`` will always be retrieved and used for "
+"building this recipe, while the ``tool_win`` one will only be used only in "
+"Windows."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:72
+msgid ""
+"If any build requirement defined inside ``build_requirements()`` has the "
+"same package name as the one defined in the ``build_requires`` attribute, "
+"the one inside the ``build_requirements()`` method will prevail."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:75
+msgid ""
+"As a rule of thumb, downstream defined values always override upstream "
+"dependency values. If some build requirement is defined in the profile, it "
+"will overwrite the build requirements defined in package recipes that have "
+"the same package name."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:82
+msgid "Build and Host contexts"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:86
+msgid ""
+"This section refers to the **experimental feature** that is activated when "
+"using ``--profile:build`` and ``--profile:host`` in the command-line. It is "
+"currently under development, features can be added or removed in the "
+"following versions."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:90
+msgid ""
+"Conan v1.24 differentiates between the ``build`` context and the ``host`` "
+"context in the dependency graph (read more about the meaning of ``host`` and "
+"``build`` platforms in the :ref:`cross building <cross_building>` section) "
+"**when the user supplies two profiles** to the command line using the ``--"
+"profile:build`` and ``--profile:host`` arguments:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:94
+msgid ""
+"The **host context** is populated with the root package (the one specified "
+"in the :command:`conan install` or :command:`conan create` command), all its "
+"requirements and the build requirements forced to be in the host context."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:96
+msgid ""
+"The **build context** contains the rest of  build requirements and all of "
+"them in the profiles. This category typically includes all the :ref:`dev "
+"tools <create_installer_packages>` like CMake, compilers, linkers,..."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:100
+msgid ""
+"Build requirements declared in the recipes can be forced to stay in the host "
+"context, this is needed for testing libraries that will be linked to the "
+"generated library or other executable we want to deploy to the ``host`` "
+"platform, for example:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:103
+msgid ""
+"class MyPkg(ConanFile):\n"
+"    build_requires = \"nasm/2.14\"  # 'build' context (nasm.exe will be "
+"available)\n"
+"\n"
+"    def build_requirements(self):\n"
+"        self.build_requires(\"protobuf/3.6.1\")  # 'build' context (protoc."
+"exe will be available)\n"
+"        self.build_requires(\"gtest/0.1\", force_host_context=True)  # "
+"'host' context (our library will link with it)"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:118
+msgid ""
+"Take into account that the same package (executable or library) can appear "
+"two times in the graph, in the ``host`` and in the ``build`` context, with "
+"different package IDs. Conan will propagate the proper information to the "
+"consumers:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:121
+msgid ""
+"Build requirements in the ``host`` context will propagate like any other "
+"requirement:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:123
+msgid ""
+"``cpp_info``: all information will be available in the "
+"``deps_cpp_info[\"xxx\"]`` object."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:124
+msgid "``env_info``: won't be propagated."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:125
+msgid ""
+"``user_info``: will be available using the ``deps_user_info[\"xxx\"]`` "
+"object."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:127
+msgid ""
+"Build requirements in the ``build`` context will propagate all the "
+"``env_info`` and Conan will also populate the environment variables "
+"``DYLD_LIBRARY_PATH``, ``LD_LIBRARY_PATH`` and ``PATH`` with the "
+"corresponding information from the ``cpp_info`` object. All this information "
+"will be available in the ``deps_env_info`` object."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:131
+msgid ""
+"Custom information declared in the ``user_info`` attribute will be available "
+"in the ``user_info_build[\"xxx\"]`` object in the consumer *conanfile*."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:137
+msgid ""
+"If no ``--profile:build`` is provided, all build requirements will belong to "
+"the one and only context and they will share their dependencies with the "
+"libraries we are building. In this scenario all the build requirements "
+"propagate ``user_info``, ``cpp_info`` and ``env_info`` to the consumer's "
+"``deps_user_info``, ``deps_cpp_info`` and ``deps_env_info``."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:143
+msgid "Properties of build requirements"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:145
+msgid ""
+"The behavior of ``build_requires`` is the same irrespective if they are "
+"defined in the profile or if defined in the package recipe."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:147
+msgid ""
+"They will only be retrieved and installed if some package that has to be "
+"built from sources and matches the declared pattern. Otherwise, they will "
+"not even be checked for existence."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:149
+msgid ""
+"Options and environment variables declared in the profile as well as in the "
+"command line will affect the build requirements for packages. In that way, "
+"you can define, for example, for the ``cmake/3.16.3`` package which CMake "
+"version will be installed."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:151
+msgid ""
+"Build requirements will be activated for matching packages, see the section "
+"above about :ref:`build requires context <build_requires_context>` to know "
+"the information that this package will propagate to its consumers."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:153
+msgid ""
+"Build requirements can also be transitive. They can declare their own "
+"requirements, both normal requirements and their own build requirements. "
+"Normal logic for dependency graph resolution applies, such as conflict "
+"resolution and dependency overriding."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:155
+msgid ""
+"Each matching pattern will produce a different dependency graph of build "
+"requirements. These graphs are cached so that they are only computed once. "
+"If a build requirement applies to different packages with the same "
+"configuration it will only be installed once (same behavior as normal "
+"dependencies - once they are cached locally, there is no need to retrieve or "
+"build them again)."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:158
+msgid ""
+"Build requirements do not affect the binary package ID. If using a different "
+"build requirement produces a different binary, you should consider adding an "
+"option or a setting to model that (if not already modeled)."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:160
+msgid "Can also use version-ranges, like ``Tool/[>0.3]@user/channel``."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:161
+msgid ""
+"Build requirements are not listed in :command:`conan info` nor are "
+"represented in the graph (with :command:`conan info --graph`)."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:165
+msgid "Example: testing framework and build tool"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:167
+msgid ""
+"One example of build requirement is a testing framework implemented as a "
+"library, another good example is a build tool used in the compile process. "
+"Let's call them ``mytest_framework`` and ``cmake_turbo``, and imagine we "
+"already have a package available for both of them."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:171
+msgid ""
+"Build requirements can be checked for existence (whether they've been "
+"applied) in the recipes, which can be useful for conditional logic in the "
+"recipes. In this example, we could have one recipe with the following "
+"``build()`` method:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:174
+msgid ""
+"def build_requirements(self):\n"
+"    if self.options.enable_testing:\n"
+"        self.build_requires(\"mytest_framework/0.1@user/channel\", "
+"force_host_context=True)\n"
+"\n"
+"def build(self):\n"
+"    # Use our own 'cmake_turbo' if it is available\n"
+"    use_cmake_turbo = \"cmake_turbo\" in self.deps_env_info.deps\n"
+"    cmake_executable = \"cmake_turbo\" if use_cmake_turbo else None\n"
+"    cmake = CMake(self, cmake_program=cmake_executable)\n"
+"    cmake.configure(defs={\"ENABLE_TESTING\": self.options.enable_testing})\n"
+"    cmake.build()\n"
+"    if enable_testing:\n"
+"        cmake.test()"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:190
+msgid "And the package *CMakeLists.txt*:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:192
+msgid ""
+"project(PackageTest CXX)\n"
+"cmake_minimum_required(VERSION 2.8.12)\n"
+"\n"
+"include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+"conan_basic_setup()\n"
+"if(ENABLE_TESTING)\n"
+"    add_executable(example test.cpp)\n"
+"    target_link_libraries(example ${CONAN_LIBS})\n"
+"\n"
+"    enable_testing()\n"
+"    add_test(NAME example\n"
+"              WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin\n"
+"              COMMAND example)\n"
+"endif()"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:209
+msgid ""
+"This package recipe won't retrieve the ``cmake_turbo`` package for normal "
+"installation:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:211
+msgid "$ conan install ."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:215
+msgid "But if the following profile is defined:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:217
+msgid "use_cmake_turbo_profile"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:217
+msgid ""
+" [build_requires]\n"
+" cmake_turbo/0.1@user/channel"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:223
+msgid "then the install command will retrieve the ``cmake_turbo`` and use it:"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:225
+msgid "$ conan install . --profile=use_cmake_turbo_profile"
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:230
+msgid ""
+"Although the previous line would work it is preferred to use the feature "
+"from Conan v1.24 and provide two profiles to the command line, that way the "
+"build requirements in the ``build`` context won't interfer with the ``host`` "
+"graph if they share common requirements (see :ref:`section about dev tools "
+"<create_installer_packages>`). It can also be needed if cross compiling "
+"(see :ref:`section about cross compiling <cross_building_build_requires>`)."
+msgstr ""
+
+#: ../../../devtools/build_requires.rst:235
+msgid ""
+"$ conan install . --profile:host=use_cmake_turbo_profile --profile:"
+"build=build_machine"
+msgstr ""

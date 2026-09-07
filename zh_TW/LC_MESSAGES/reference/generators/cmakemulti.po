@@ -1,0 +1,330 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.65\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/generators/cmakemulti.rst:4
+msgid "cmake_multi"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:8
+msgid ""
+"This is a **deprecated** feature. Please refer to the :ref:`Migration "
+"Guidelines<conan2_migration_guide>` to find the feature that replaced this "
+"one."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:11
+msgid ""
+"The new, **under development** integration with CMake can be found in :ref:"
+"`conan_tools_cmake`. This is the integration that will become the standard "
+"one in Conan 2.0, and the below generators and integrations will be "
+"deprecated and removed. While they are recommended and usable and we will "
+"try not to break them in future releases, some breaking changes might still "
+"happen if necessary to prepare for the *Conan 2.0 release*."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:18
+msgid ""
+"This is the reference page for ``cmake_multi`` generator. Go to :ref:"
+"`Integrations/CMake<cmake>` if you want to learn how to integrate your "
+"project or recipes with CMake."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:21
+msgid ""
+"This generator will create 3 files with the general information and specific "
+"Debug/Release ones:"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:23
+msgid ""
+"*conanbuildinfo_release.cmake*: Variables adjusted only for build type "
+"Release"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:24
+msgid ""
+"*conanbuildinfo_debug.cmake*: Variables adjusted only for build type Debug"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:25
+msgid ""
+"*conanbuildinfo_multi.cmake*: Which includes the other two and enables its "
+"use and has more generic variables and macros."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:28
+msgid "Variables in *conanbuildinfo_release.cmake*"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:30
+msgid ""
+"Same as :ref:`conanbuildinfo.cmake<conanbuildinfocmake_variables>` with "
+"suffix ``_RELEASE``"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:33
+msgid "Variables in *conanbuildinfo_debug.cmake*"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:35
+msgid ""
+"Same as :ref:`conanbuildinfo.cmake<conanbuildinfocmake_variables>` with "
+"suffix ``_DEBUG``"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:38
+msgid "Macros available in *conanbuildinfo_multi.cmake*"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:41
+msgid "conan_basic_setup()"
+msgstr "conan_basic_setup()"
+
+#: ../../../reference/generators/cmakemulti.rst:43
+msgid ""
+"This is a helper and general purpose macro that uses all the macros below to "
+"set all the CMake variables according to the Conan generated variables. See "
+"the macros below for detailed information."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:46
+msgid ""
+"macro(conan_basic_setup)\n"
+"    set(options TARGETS NO_OUTPUT_DIRS SKIP_RPATH KEEP_RPATHS SKIP_STD "
+"SKIP_FPIC)"
+msgstr ""
+"macro(conan_basic_setup)\n"
+"    set(options TARGETS NO_OUTPUT_DIRS SKIP_RPATH KEEP_RPATHS SKIP_STD "
+"SKIP_FPIC)"
+
+#: ../../../reference/generators/cmakemulti.rst:61
+msgid "Parameters:"
+msgstr "參數："
+
+#: ../../../reference/generators/cmakemulti.rst:52
+msgid ""
+"``TARGETS`` (Optional): Setup all the CMake variables by target (only CMake "
+"> 3.1.2). Activates the call to the macro ``conan_target_link_libraries()``."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:54
+msgid ""
+"``NO_OUTPUT_DIRS`` (Optional): This variable has no effect and it works as "
+"if it was activated by default (does not se fixed output directories and "
+"uses the default ones designated by CMake)."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:56
+msgid ""
+"``SKIP_RPATH`` (Optional): **[DEPRECATED]** Use ``KEEP_RPATHS`` instead. "
+"Activate ``CMAKE_SKIP_RPATH`` variable in OSX."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:57
+msgid ""
+"``KEEP_RPATHS`` (Optional): Do not adjust the ``CMAKE_SKIP_RPATH`` variable "
+"in OSX. Activates the call to the macro ``conan_set_rpath()``"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:58
+msgid ""
+"``SKIP_STD`` (Optional): Do not adjust the C++ standard flag in "
+"``CMAKE_CXX_FLAGS``. Deactivates the call to the macro ``conan_set_std()``."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:60
+msgid ""
+"``SKIP_FPIC`` (Optional): Do not adjust the "
+"``CMAKE_POSITION_INDEPENDENT_CODE`` flag. Deactivates the call to the macro "
+"``conan_set_fpic()``."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:65
+msgid ""
+"You can also call each of the following macros individually instead of using "
+"the ``conan_basic_setup()``."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:68
+msgid "conan_target_link_libraries()"
+msgstr "conan_target_link_libraries()"
+
+#: ../../../reference/generators/cmakemulti.rst:70
+msgid "Helper to link all libraries to a specified target."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:72
+msgid "These targets are:"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:74
+msgid ""
+"A ``CONAN_PKG::<PKG-NAME>`` target per package in the dependency graph. This "
+"is an ``IMPORTED INTERFACE`` target. ``IMPORTED`` because it is external, "
+"external, a pre-compiled library. ``INTERFACE``, because it doesn't "
+"necessarily match a library, it could be a header-only library, or the "
+"package could even contain several libraries. It contains all the properties "
+"(include paths, compile flags, etc.) that are defined in the consumer. It "
+"contains all the properties (include paths, compile flags, etc.) that are "
+"defined in the ``package_info()`` method of the recipe."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:80
+msgid ""
+"Inside each package a ``CONAN_LIB::<PKG-NAME>_<LIB-NAME>`` target will be "
+"generated for each library. Its type is ``IMPORTED UNKNOWN`` and its main "
+"purpose is to provide a correct link order. Their only properties are the "
+"location and the dependencies."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:83
+msgid ""
+"A ``CONAN_PKG`` depends on every ``CONAN_LIB`` that belongs to it, and to "
+"its direct public dependencies (e.g. other ``CONAN_PKG`` targets from its "
+"requirements)."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:86
+msgid ""
+"Each ``CONAN_LIB`` depends on the direct public dependencies ``CONAN_PKG`` "
+"targets of its container package. This guarantees correct link order."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:90
+msgid "conan_check_compiler()"
+msgstr "conan_check_compiler()"
+
+#: ../../../reference/generators/cmakemulti.rst:92
+msgid "Checks that your compiler matches the one declared in settings."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:95
+msgid "conan_output_dirs_setup()"
+msgstr "conan_output_dirs_setup()"
+
+#: ../../../reference/generators/cmakemulti.rst:97
+msgid "Adjust the *bin/* and *lib/* output directories."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:100
+msgid "conan_global_flags()"
+msgstr "conan_global_flags()"
+
+#: ../../../reference/generators/cmakemulti.rst:102
+msgid ""
+"Set the corresponding variables to CMake's ``include_directories()`` and "
+"``link_directories()``. You can enable the variable `CONAN_SYSTEM_INCLUDES` "
+"in order to get directories included with the `SYSTEM` option."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:106
+msgid "conan_define_targets()"
+msgstr "conan_define_targets()"
+
+#: ../../../reference/generators/cmakemulti.rst:108
+msgid ""
+"Define the targets for each dependency (target flags instead of global "
+"flags)."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:111
+msgid "conan_set_rpath()"
+msgstr "conan_set_rpath()"
+
+#: ../../../reference/generators/cmakemulti.rst:113
+msgid "Set ``CMAKE_SKIP_RPATH=1`` in the case of working in OSX."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:116
+msgid "conan_set_vs_runtime()"
+msgstr "conan_set_vs_runtime()"
+
+#: ../../../reference/generators/cmakemulti.rst:118
+msgid ""
+"Adjust the runtime flags ``/MD``, ``/MDd``, ``/MT`` or ``/MTd`` for Visual "
+"Studio."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:121
+msgid "conan_set_std()"
+msgstr "conan_set_std()"
+
+#: ../../../reference/generators/cmakemulti.rst:123
+msgid ""
+"Set ``CMAKE_CXX_STANDARD`` and ``CMAKE_CXX_EXTENSIONS`` to the appropriate "
+"values."
+msgstr "將 ``CMAKE_CXX_STANDARD`` 和 ``CMAKE_CXX_EXTENSIONS`` 設定為合適的值。"
+
+#: ../../../reference/generators/cmakemulti.rst:126
+msgid "conan_set_libcxx()"
+msgstr "conan_set_libcxx()"
+
+#: ../../../reference/generators/cmakemulti.rst:128
+msgid ""
+"Adjust the standard library flags (``libc++```, ``libstdc++``, ``libstdc+"
+"+11``) in ``CMAKE_CXX_FLAGS``."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:131
+msgid "conan_set_find_paths()"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:133
+msgid ""
+"Adjust ``CMAKE_MODULE_PATH`` and ``CMAKE_PREFIX_PATH`` to the values of "
+"``deps_cpp_info.build_paths``."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:137
+msgid "conan_include_build_modules()"
+msgstr "conan_include_build_modules()"
+
+#: ../../../reference/generators/cmakemulti.rst:139
+msgid ""
+"Includes CMake files declared in ``CONAN_BUILD_MODULES`` using the "
+"``include(...)`` directive. This loads the functions or macros that packages "
+"may export and makes them available for usage in the consumers *CMakeLists."
+"txt*."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:143
+msgid "conan_find_apple_frameworks(FRAMEWORKS_FOUND FRAMEWORKS)"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:145
+msgid ""
+"Find framework library names provided in `${FRAMEWORKS}` using "
+"`find_library()` and return the found values in `FRAMEWORKS_FOUND`."
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:149
+msgid "Input variables for *conanbuildinfo_multi.cmake*"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:152
+msgid "CONAN_CMAKE_SILENT_OUTPUT"
+msgstr "CONAN_CMAKE_SILENT_OUTPUT"
+
+#: ../../../reference/generators/cmakemulti.rst:154
+msgid "**Default to**: ``FALSE``"
+msgstr ""
+
+#: ../../../reference/generators/cmakemulti.rst:156
+msgid "Activate it to silence the Conan message output."
+msgstr ""

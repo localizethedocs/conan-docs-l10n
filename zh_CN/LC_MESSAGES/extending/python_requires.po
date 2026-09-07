@@ -1,0 +1,262 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 18:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../extending/python_requires.rst:4
+msgid "Python requires: reusing python code in recipes [EXPERIMENTAL]"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:8
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:10
+msgid ""
+"The ``python_requires()`` feature allows to extend the recipes reusing "
+"Python code from other **conanfile.py** easily, even for inheritance "
+"approaches. The code to be reused will be in a *conanfile.py* recipe, and "
+"will be managed as any other Conan package."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:13
+msgid "Let's create for example some reusable base class:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:15
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class MyBase(ConanFile):\n"
+"    def source(self):\n"
+"        self.output.info(\"My cool source!\")\n"
+"    def build(self):\n"
+"        self.output.info(\"My cool build!\")\n"
+"    def package(self):\n"
+"        self.output.info(\"My cool package!\")\n"
+"    def package_info(self):\n"
+"        self.output.info(\"My cool package_info!\")"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:29
+msgid ""
+"With this conanfile, we can export it to the local cache to make it "
+"available, and also upload to our remote:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:31
+msgid ""
+"$ conan export . MyBase/0.1@user/channel\n"
+"$ conan upload MyBase/0.1@user/channel -r=myremote"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:36
+msgid ""
+"It is not necessary to \"create\" any package binaries, or to ``upload --"
+"all``, because there are no binaries for this recipe."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:38
+msgid ""
+"Now, using the ``python_requires()`` we can write a new package recipe like:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:40
+msgid ""
+"from conans import python_requires\n"
+"\n"
+"base = python_requires(\"MyBase/0.1@user/channel\")\n"
+"\n"
+"class PkgTest(base.MyBase):\n"
+"    pass"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:49
+msgid ""
+"If we run a ``conan create``, of this recipe, we can see how it is "
+"effectively reusing the above code:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:51
+msgid ""
+"$ conan create . Pkg/0.1@user/channel\n"
+"\n"
+"Pkg/0.1@lasote/testing: Installing package\n"
+"Requirements\n"
+"    Pkg/0.1@lasote/testing from local cache - Cache\n"
+"Python requires\n"
+"    MyConanfileBase/1.1@lasote/testing\n"
+"Packages\n"
+"    Pkg/0.1@lasote/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9 - Build\n"
+"...\n"
+"Pkg/0.1@lasote/testing: Configuring sources\n"
+"Pkg/0.1@lasote/testing: My cool source!\n"
+"...\n"
+"Pkg/0.1@lasote/testing: Calling build()\n"
+"Pkg/0.1@lasote/testing: My cool build!\n"
+"...\n"
+"Pkg/0.1@lasote/testing: Calling package()\n"
+"Pkg/0.1@lasote/testing: My cool package!\n"
+"...\n"
+"Pkg/0.1@lasote/testing: My cool package_info!"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:75
+msgid ""
+"It is not compulsory to extend the reused ``MyBase`` class, it is possible "
+"to reuse just functions too:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:77
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"def my_build(settings):\n"
+"    # doing custom stuff based on settings\n"
+"\n"
+"class MyBase(ConanFile):\n"
+"    pass"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:87
+msgid ""
+"$ conan export . MyBuild/0.1@user/channel\n"
+"$ conan upload MyBuild/0.1@user/channel -r=myremote"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:92
+msgid ""
+"from conans import ConanFile, python_requires\n"
+"\n"
+"base = python_requires(\"MyBuild/0.1@user/channel\")\n"
+"\n"
+"class PkgTest(ConanFile):\n"
+"    ...\n"
+"    def build(self):\n"
+"        base.my_build(self.settings)"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:104
+msgid ""
+"Version ranges are possible with the version ranges notation ``[]``, similar "
+"to regular requirements. Multiple ``python_requires()`` are also possible"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:107
+#: ../../../extending/python_requires.rst:121
+msgid "**conanfile.py**"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:107
+msgid ""
+"from conans import python_requires\n"
+"\n"
+"base = python_requires(\"MyBase/[~0.1]@user/channel\")\n"
+"other = python_requires(\"Other/1.2@user/channel\")\n"
+"\n"
+"class Pkg(base.MyBase):\n"
+"    def source(self):\n"
+"        other.some_function()"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:119
+msgid "It is possible to structure the code in different files too:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:121
+msgid ""
+"from conans import ConanFile\n"
+"import mydata # reuse the strings from here\n"
+"class MyConanfileBase(ConanFile):\n"
+"    exports = \"*.py\"\n"
+"    def source(self):\n"
+"        self.output.info(mydata.src)"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:131
+msgid "**mydata.py**"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:131
+msgid ""
+"src = \"My cool source!\"\n"
+"build = \"My cool build!\"\n"
+"pkg = \"My cool package!\"\n"
+"info = \"My cool package_info!\""
+msgstr ""
+
+#: ../../../extending/python_requires.rst:139
+msgid ""
+"This would be created with the same ``conan export`` and consumed with the "
+"same ``base = python_requires(\"MyBase/0.1@user/channel\")`` as above."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:143
+msgid ""
+"There are a few important considerations regarding ``python_requires()``:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:145
+msgid ""
+"They are required at every step of the conan commands. If you are creating a "
+"package that ``python_requires(\"MyBase/...\")``, the ``MyBase`` package "
+"should be already available in the local cache or to be downloaded from the "
+"remotes. Otherwise, conan will raise a \"missing package\" error."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:148
+msgid ""
+"They do not affect the package binary ID (hash). Depending on different "
+"version, or different channel of such ``python_requires()`` do not change "
+"the package IDs as the normal dependencies do."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:150
+msgid ""
+"They are imported only once. The python code that is reused is imported only "
+"once, the first time it is required. Subsequent requirements of that conan "
+"recipe will reuse the previously imported module. Global initialization at "
+"parsing time and global state are discouraged."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:153
+msgid ""
+"They are transitive. One recipe using ``python_requires()`` can be also "
+"consumed with a ``python_requires()`` from another package recipe."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:155
+msgid ""
+"They are not automatically updated with the ``--update`` argument from "
+"remotes."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:156
+msgid ""
+"Different packages can require different versions in their "
+"``python_requires()``. They are private to each recipe, so they do not "
+"conflict with each other, but it is the responsibility of the user to keep "
+"consistency."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:158
+msgid ""
+"They are not overridden from downstream consumers. Again, as they are "
+"private, they are not affected by other packages, even consumers"
+msgstr ""

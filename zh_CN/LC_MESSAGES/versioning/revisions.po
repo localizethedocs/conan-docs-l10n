@@ -1,0 +1,200 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.29\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../versioning/revisions.rst:4
+msgid "Package Revisions"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:6
+msgid ""
+"The goal of the revisions feature is to achieve package immutability, the "
+"packages in a server are never overwritten."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:10
+msgid ""
+"Revisions achieve immutability. For achieving reproducible builds and "
+"reproducible dependencies, **lockfiles** are used. Lockfiles can capture an "
+"exact state of a dependency graph, down to exact versions and revisions, and "
+"use it later to force their usage, even if new versions or revisions were "
+"uploaded to the servers."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:14
+msgid "Learn more about :ref:`lockfiles here.<versioning_lockfiles>`"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:18
+msgid "How it works"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:20
+msgid "**In the client**"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:22
+msgid ""
+"When a **recipe** is exported, Conan calculates a unique ID (revision). For "
+"every change, a new recipe revision (RREV) will be calculated. By default it "
+"will use the checksum hash of the recipe manifest."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:26
+msgid ""
+"Nevertheless, the recipe creator can explicitly declare the :ref:`revision "
+"mode<revision_mode_attribute>`, it can be either ``scm`` (uses version "
+"control system or raises) or ``hash`` (use manifest hash)."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:29
+msgid ""
+"When a **package** is created (by running :ref:`conan create<conan_create>` "
+"or :ref:`conan export-pkg<conan_export-pkg>`) a new package revision (PREV) "
+"will be calculated always using the hash of the package contents. The "
+"packages and their revisions (PREVs) belongs to a concrete recipe revision "
+"(RREV). The same package ID (for example for Linux/GCC5/Debug), can have "
+"multiple revisions (PREVs) that belong to a concrete RREV."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:35
+msgid ""
+"If a client requests a reference like ``lib/1.0@conan/stable``, Conan will "
+"automatically retrieve the latest revision in case the local cache doesn't "
+"contain any revisions already. If a client needs to update an existing "
+"revision, they have to ask for updates explicitly with ``-u, --update`` "
+"argument to :command:`conan install` command. In the client cache there is "
+"**only one revision installed simultaneously**."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:40
+msgid ""
+"The revisions can be pinned when you write a reference (in the recipe "
+"requires, a reference in a :command:`conan install` command,…) but if you "
+"don’t specify a revision, the server will retrieve the latest revision."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:43
+msgid "You can specify the references in the following formats:"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:46
+msgid "Reference"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:46
+msgid "Meaning"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:48
+msgid "``lib/1.0@conan/stable``"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:48
+msgid "Latest RREV for ``lib/1.0@conan/stable``"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:50
+msgid "``lib/1.0@conan/stable#RREV``"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:50
+msgid "Specific RREV for ``lib/1.0@conan/stable``"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:52
+msgid "``lib/1.0@conan/stable#RREV:PACKAGE_ID``"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:52
+msgid "A binary package belonging to the specific RREV"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:54
+msgid "``lib/1.0@conan/stable#RREV:PACKAGE_ID#PREV``"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:54
+msgid "A binary package revision PREV belonging to the specific RREV"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:57
+msgid "**In the server**"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:59
+msgid ""
+"By using a new folder layout and protocol it is able to store multiple "
+"revisions, both for recipes and binary packages."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:62
+msgid "How to activate the revisions"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:64
+msgid "You have to explicitly activate the feature by either:"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:66
+msgid ""
+"Adding ``revisions_enabled=1`` in the ``[general]`` section of your *conan."
+"conf* file (preferred)"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:67
+msgid "Setting the ``CONAN_REVISIONS_ENABLED=1`` environment variable."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:69
+msgid "Take into account that it changes the default Conan behavior. e.g:"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:71
+msgid ""
+"A client with revisions enabled will only find binary packages that belong "
+"to the installed recipe revision. For example, If you create a recipe and "
+"run :command:`conan create . user/channel` and then you modify the recipe "
+"and export it (:command:`conan export . user/channel`), the binary package "
+"generated in the :command:`conan create` command doesn't belong to the new "
+"exported recipe. So it won't be located unless the previous recipe is "
+"recovered."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:76
+msgid ""
+"If you generate and upload N binary packages for a recipe with a given "
+"revision, then if you modify the recipe, and thus the recipe revision, you "
+"need to build and upload N new binaries matching that new recipe revision."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:80
+msgid "Server support"
+msgstr ""
+
+#: ../../../versioning/revisions.rst:82
+msgid "``conan_server`` >= 1.13."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:83
+msgid "``Artifactory`` >= 6.9."
+msgstr ""
+
+#: ../../../versioning/revisions.rst:84
+msgid "``Bintray``."
+msgstr ""

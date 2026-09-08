@@ -1,0 +1,207 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/cross_build/android/ndk.rst:5
+msgid "Cross building to Android with the NDK"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:7
+msgid ""
+"In this example, we are going to see how to cross-build a Conan package to "
+"Android."
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:9
+msgid ""
+"First of all, download the Android NDK from `the download page <https://"
+"developer.android.com/ndk/downloads>`_ and unzip it. In MacOS you can also "
+"install it with ``brew install android-ndk``."
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:12
+msgid ""
+"Then go to the ``profiles`` folder in the conan config home directory (check "
+"it running :command:`conan config home`) and create a file named ``android`` "
+"with the following contents:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:15
+msgid ""
+"include(default)\n"
+"\n"
+"[settings]\n"
+"os=Android\n"
+"os.api_level=21\n"
+"arch=armv8\n"
+"compiler=clang\n"
+"compiler.version=12\n"
+"compiler.libcxx=c++_static\n"
+"compiler.cppstd=14\n"
+"\n"
+"[conf]\n"
+"tools.android:ndk_path=/usr/local/share/android-ndk"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:31
+msgid "You might need to modify:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:33
+msgid ""
+"``compiler.version``: Check the NDK documentation or find a ``bin`` folder "
+"containing the compiler executables like ``x86_64-linux-android31-clang``. "
+"In a Macos installation it is found in the NDK path + ``toolchains/llvm/"
+"prebuilt/darwin-x86_64/bin``. Run ``./x86_64-linux-android31-clang --"
+"version`` to check the running ``clang`` version and adjust the profile."
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:36
+msgid ""
+"``compiler.libcxx``: The supported values are ``c++_static`` and ``c+"
+"+_shared``."
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:37
+msgid "``compiler.cppstd``: The C++ standard version, adjust as your needs."
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:38
+msgid ""
+"``os.api_level``: You can check `here <https://apilevels.com/>`_ the usage "
+"of each Android Version/API level and choose the one that fits better with "
+"your requirements. This is typically a balance between new features and more "
+"compatible applications."
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:40
+msgid ""
+"``arch``: There are several architectures supported by Android: ``x86``, "
+"``x86_64``, ``armv7``, and ``armv8``."
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:41
+msgid ""
+"``tools.android:ndk_path`` conf: Write the location of the unzipped NDK."
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:44
+msgid ""
+"If you are in Windows, it is necessary to have a make-like build system like "
+"MinGW-Make or Ninja. We can provision for Ninja directly in our profile with "
+"``[tool_requires]``:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:47
+msgid ""
+"...\n"
+"[conf]\n"
+"tools.android:ndk_path=C:\\ws\\android\\android-ndk-r23b  # Use your path "
+"here\n"
+"tools.cmake.cmaketoolchain:generator=Ninja\n"
+"\n"
+"[tool_requires]\n"
+"ninja/[*]"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:58
+msgid ""
+"Use the :command:`conan new` command to create a \"Hello World\" C++ library "
+"example project:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:60
+msgid "$ conan new cmake_lib -d name=hello -d version=1.0"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:65
+msgid ""
+"Then we can specify the ``android`` profile and our hello library will be "
+"built for Android:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:67
+msgid ""
+"$ conan create . --profile android\n"
+"\n"
+"[ 50%] Building CXX object CMakeFiles/hello.dir/src/hello.cpp.o\n"
+"[100%] Linking CXX static library libhello.a\n"
+"[100%] Built target hello\n"
+"...\n"
+"[ 50%] Building CXX object CMakeFiles/example.dir/src/example.cpp.o\n"
+"[100%] Linking CXX executable example\n"
+"[100%] Built target example"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:79
+msgid ""
+"Both the library and the ``test_package`` executable are built for Android, "
+"so we cannot use them in our local computer."
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:81
+msgid ""
+"Unless you have access to a `root` Android device, running the test "
+"application or using the built library is not possible directly so it is "
+"more common to build an Android application that uses the ``hello`` library."
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:84
+msgid ""
+"It is also possible to use the ``android-ndk`` from a Conan ``tool-"
+"requires``. There is already a Conan package in ConanCenter containing the "
+"AndroidNDK, so writing a profile like:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:87
+msgid ""
+"[settings]\n"
+"os=Android\n"
+"os.api_level=21\n"
+"arch=armv8\n"
+"compiler=clang\n"
+"compiler.version=18\n"
+"compiler.libcxx=c++_static\n"
+"compiler.cppstd=14\n"
+"build_type=Release\n"
+"\n"
+"# You might need Ninja conf and tool-requires in Windows too\n"
+"[tool_requires]\n"
+"android-ndk/[*]"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:104
+msgid ""
+"And this will download automatically the latest android-ndk from ConanCenter "
+"and inject and apply it automatically to build the package. Note that to use "
+"packages from ConanCenter in production the :ref:`following approach is "
+"recommended<devops_consuming_conan_center>`"
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:110
+msgid ""
+"Check the example :ref:`Integrating Conan in Android "
+"Studio<examples_cross_build_android_studio>` to know how to use your c++ "
+"libraries in a native Android application."
+msgstr ""
+
+#: ../../../examples/cross_build/android/ndk.rst:112
+msgid ""
+"Check the tutorial :ref:`How to cross-compile your applications using "
+"Conan<consuming_packages_cross_building_with_conan>`."
+msgstr ""

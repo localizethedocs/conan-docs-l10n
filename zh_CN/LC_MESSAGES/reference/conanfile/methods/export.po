@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/export.rst:4
+msgid "export()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export.rst:6
+msgid ""
+"Equivalent to the ``exports`` attribute, but in method form. This method "
+"will be called at ``export`` time, which happens in the ``conan export`` and "
+"``conan create`` commands, and it is intended to allow copying files from "
+"the user folder to the Conan cache folders, thus making files becoming part "
+"of the recipe. These sources will be uploaded to the servers together with "
+"the recipe, but are typically not downloaded unless the package is being "
+"built from source."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export.rst:12
+msgid ""
+"The current working directory will be ``self.recipe_folder``, and it can use "
+"the ``self.export_folder`` as the destination folder for using ``copy()`` or "
+"your custom copy."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export.rst:15
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.files import copy\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    def export(self):\n"
+"        # This LICENSE file is intended to be the license of the current "
+"conanfile.py recipe\n"
+"        # and go with it. It is not intended to be the license of the final "
+"package (for that\n"
+"        # purpose export_sources() would be recommended)\n"
+"        copy(self, \"LICENSE.md\", self.recipe_folder, self.export_folder)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export.rst:28
+msgid ""
+"There are 2 files that are always exported to the cache, without being "
+"explicitly defined in the recipe: the ``conanfile.py`` recipe, and the "
+"``conandata.yml`` file if it exists. The ``conandata.yml`` file is "
+"automatically loaded whenever the ``conanfile.py`` is loaded, becoming the "
+"``self.conan_data`` attribute, so it is a intrinsic part of the recipe, so "
+"it is part of the \"exported\" recipe files, not of the \"exported\" source "
+"files."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export.rst:33
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export.rst:35
+msgid ""
+"The recipe files must be configuration independent. Those files are common "
+"for all configurations, thus it is not possible to do conditional "
+"``export()`` to different settings, options, or platforms. Do not try to do "
+"any kind of conditional export. If necessary export all the files necessary "
+"for all configurations at once."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export.rst:36
+msgid ""
+"The ``export()`` method does not receive any information from profiles, not "
+"even ``conf``. Only the ``global.conf`` will be available, and in any case "
+"it is not possible to use that ``conf`` to define conditionals."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export.rst:37
+msgid ""
+"Keep the ``export()`` method simple. Its intention is to copy files from the "
+"user folder to the cache to store those files together with the recipe."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export.rst:38
+msgid ""
+"The exported files must be small. Exporting big files with the recipe will "
+"make the resolution of dependencies much slower the resolution."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/export.rst:39
+msgid ""
+"Only files that are necessary for the evaluation of the ``conanfile.py`` "
+"recipe must be exported with this method. Files necessary for building from "
+"sources should be exported with the ``exports_sources`` attribute or the :"
+"ref:`export_source()<reference_conanfile_methods_export_sources>` method."
+msgstr ""

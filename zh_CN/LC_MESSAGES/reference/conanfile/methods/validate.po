@@ -1,0 +1,138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/validate.rst:5
+msgid "validate()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:7
+msgid ""
+"The ``validate()`` method can be used to mark a package binary as "
+"\"invalid\", or not working for the current configuration. For example, if "
+"we have a header-only library that doesn't work in Windows, we could have "
+"the following ``conanfile.py``:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:10
+msgid ""
+"from conan import ConanFile\n"
+"from conan.errors import ConanInvalidConfiguration\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    name = \"pkg\"\n"
+"    version = \"1.0\"\n"
+"    package_type = \"header-library\"\n"
+"    settings = \"os\"\n"
+"\n"
+"    def validate(self):\n"
+"        if self.settings.os == \"Windows\":\n"
+"            raise ConanInvalidConfiguration(\"Windows not supported\")\n"
+"\n"
+"    def package_id(self):\n"
+"        self.info.clear()  # header-only"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:28
+msgid ""
+"If we try to create this package in Windows, it will fail, but if we do it "
+"in Linux, it will succeed:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:30
+msgid ""
+"$ conan create . -s os=Windows # FAILS\n"
+"...\n"
+"ERROR: There are invalid packages:\n"
+"pkg/1.0: Invalid: Windows not supported\n"
+"$ conan create . -s os=Linux # WORKS"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:38
+msgid "And if we try to use it in Windows, it will fail again:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:40
+msgid ""
+"$ conan install --requires=pkg/1.0 -s os=Windows # FAILS\n"
+"...\n"
+"ERROR: There are invalid packages:\n"
+"pkg/1.0: Invalid: Windows not supported"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:47
+msgid ""
+"When the ``ConanInvalidConfiguration`` causes an error, Conan application "
+"exit code will be ``6``"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:49
+msgid ""
+"It is possible to check the validity of a given graph without raising errors "
+"with the ``conan graph info`` command:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:51
+msgid ""
+"$ conan graph info --requires=pkg/1.0 -s os=Windows --filter=binary\n"
+"conanfile:\n"
+"ref: conanfile\n"
+"binary: None\n"
+"pkg/1.0#cfc18fcc7a50ead278a7c1820be74e56:\n"
+"ref: pkg/1.0#cfc18fcc7a50ead278a7c1820be74e56\n"
+"binary: Invalid"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:63
+msgid ""
+"The ``validate()`` method is evaluated after the whole graph has been "
+"computed. This means that it can use the ``self.dependencies`` information "
+"to raise errors:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:65
+msgid ""
+"from conan import ConanFile\n"
+"from conan.errors import ConanInvalidConfiguration\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    requires = \"dep/0.1\"\n"
+"\n"
+"    def validate(self):\n"
+"        if self.dependencies[\"dep\"].options.myoption == 2:\n"
+"            raise ConanInvalidConfiguration(\"Option 2 of 'dep' not "
+"supported\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:80
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:82
+msgid ""
+"The ``configure()`` method evaluates before the graph is complete, so it "
+"doesn't have the real values of the dependencies ``options``. The "
+"``validate()`` method is the one that should be checking those dependencies "
+"options values if necessary, not ``configure()``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate.rst:87
+msgid ""
+"Follow the :ref:`tutorial about preparing build from source in "
+"recipes<creating_packages_preparing_the_build>`."
+msgstr ""

@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:4
+msgid "Creating an Artifactory backup repo for your sources"
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:6
+msgid ""
+"For the backup repository, we'll create a generic Artifactory repo using the "
+"free Community Edition version."
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:8
+msgid ""
+"For this, in the repositories section of the administration tab, we'll "
+"create a new generic repository, and in this example we'll imaginatively "
+"give it the name of *backup-sources*."
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:11
+msgid ""
+"The URL of the remote should now be added to the :ref:`global."
+"conf<reference_config_files_global_conf>` file's ``core.sources:upload_url`` "
+"conf"
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:14
+msgid "global.conf"
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:14
+msgid ""
+"core.sources:upload_url=https://myteam.myorg.com/artifactory/backup-sources/"
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:20
+msgid ""
+"Next, as we want this to be a public read repo, we'll allow anonymous read "
+"access to our repo. `See the official Artifactory documentation for a step-"
+"by-step guide on how to create one <https://jfrog.com/help/r/how-to-grant-an-"
+"anonymous-user-access-to-specific-repositories/artifactory-how-to-grant-an-"
+"anonymous-user-access-to-specific-repositories>`_."
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:23
+msgid ""
+"Now, to be able to upload contents, we'll also create a new user from the "
+"User Management section, called *backup uploader*, and from the Access "
+"Tokens section, we'll generate a reference token associated with the user"
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:29
+msgid ""
+"The generated token should now live in the :ref:`source_credentials."
+"json<reference_config_files_source_credentials>` file:"
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:31
+msgid "source_credentials.json"
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:31
+msgid ""
+"{\n"
+"   \"credentials\": [\n"
+"      {\n"
+"         \"url\": \"https://myteam.myorg.com/artifactory/backup-sources/\",\n"
+"         \"token\": \"cmVmdGtu1234567890abcdefghijklmnopqrstuvwxyz\"\n"
+"      }\n"
+"   ]\n"
+"}"
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:44
+msgid ""
+"And last but not least, from the Permissions section we'll give the user "
+"manage access to the new repository (which will automatically give it every "
+"other permission available, feel free to modify them according to your needs)"
+msgstr ""
+
+#: ../../../devops/backup_sources/repositories/artifactory/creating_backup_sources_repo.rst:49
+msgid ""
+"With this, access to our remote backup is now configured to allow anonymous "
+"read but authenticated upload."
+msgstr ""

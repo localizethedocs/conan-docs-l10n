@@ -1,0 +1,172 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devops/save_restore.rst:4
+msgid "Save and restore packages from/to the cache"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../devops/save_restore.rst:8
+msgid ""
+"With the ``conan cache save`` and ``conan cache restore`` commands, it is "
+"possible to create a .tgz from one or several packages from a Conan cache "
+"and later restore those packages into another Conan cache. There are some "
+"scenarios this can be useful:"
+msgstr ""
+
+#: ../../../devops/save_restore.rst:10
+msgid ""
+"In Continuous Integration, specially if doing distributed builds, it might "
+"be very convenient to be able to move temporary packages recently built. "
+"Most CI systems have the capability of transferring files between jobs for "
+"this purpose. The Conan cache is not concurrent, sometimes for paralllel "
+"jobs different caches have to be used."
+msgstr ""
+
+#: ../../../devops/save_restore.rst:11
+msgid ""
+"For air-gapped setups, in which packages can only be transferred via client "
+"side."
+msgstr ""
+
+#: ../../../devops/save_restore.rst:12
+msgid ""
+"Developers directly sharing some packages with other developers for testing "
+"or inspection."
+msgstr ""
+
+#: ../../../devops/save_restore.rst:15
+msgid ""
+"The process of saving the packages is using the ``conan cache save`` "
+"command. It can use a pattern, like the ``conan list`` command, but it can "
+"also accept a package-list, like other commands like ``remove, upload, "
+"download``. For example:"
+msgstr ""
+
+#: ../../../devops/save_restore.rst:18
+msgid ""
+"$ conan cache save \"pkg/*:*\"\n"
+"Saving pkg/1.0: p/pkg1df6df1a3b33c\n"
+"Saving pkg/1.0:9a4eb3c8701508aa9458b1a73d0633783ecc2270: p/b/"
+"pkgd573962ec2c90/p\n"
+"Saving pkg/1.0:9a4eb3c8701508aa9458b1a73d0633783ecc2270 metadata: p/b/"
+"pkgd573962ec2c90/p\n"
+"...\n"
+"# creates conan_cache_save.tgz"
+msgstr ""
+
+#: ../../../devops/save_restore.rst:27
+msgid ""
+"The ``conan_cache_save.tgz`` file contains the packages named ``pkg`` (any "
+"version), the last recipe revision, and the last package revision of all the "
+"package binaries. The name of the file can be changed with the optional ``--"
+"file=xxxx`` argument. Some important considerations:"
+msgstr ""
+
+#: ../../../devops/save_restore.rst:30
+msgid ""
+"The command saves the contents of the cache \"recipe\" folders, containing "
+"the subfolders \"export\", \"export_sources\", \"download\", \"source\" and "
+"recipe \"metadata\"."
+msgstr ""
+
+#: ../../../devops/save_restore.rst:31
+msgid ""
+"The command saves the contents of the \"package\" and the package "
+"\"metadata\" folders, but not the binary \"build\" or \"download\", that are "
+"considered temporary folders."
+msgstr ""
+
+#: ../../../devops/save_restore.rst:32
+msgid ""
+"If the user doesn't want any of those folders to be saved, they can be "
+"cleaned before saving them with ``conan cache clean`` command"
+msgstr ""
+
+#: ../../../devops/save_restore.rst:33
+msgid ""
+"The command saves the cache files and artifacts as well as the metadata "
+"(revisions, package_id) to be able to restore those packages in another "
+"cache. But it doesn't save any other cache state like ``settings.yml``, "
+"``global.conf``, ``remotes``, etc. If the saved packages require any other "
+"specific configuration, it should be managed with ``conan config install``."
+msgstr ""
+
+#: ../../../devops/save_restore.rst:35
+msgid ""
+"We can move this ``conan_cache_save.tgz`` file to another Conan cache and "
+"restore it as:"
+msgstr ""
+
+#: ../../../devops/save_restore.rst:37
+msgid ""
+"$ conan cache restore conan_cache_save.tgz\n"
+"Restore: pkg/1.0 in p/pkg1df6df1a3b33c\n"
+"Restore: pkg/1.0:9a4eb3c8701508aa9458b1a73d0633783ecc2270 in p/b/"
+"pkg773791b8c97aa/p\n"
+"Restore: pkg/1.0:9a4eb3c8701508aa9458b1a73d0633783ecc2270 metadata in p/b/"
+"pkg773791b8c97aa/d/metadata\n"
+"..."
+msgstr ""
+"$ conan cache restore conan_cache_save.tgz\n"
+"Restore: pkg/1.0 in p/pkg1df6df1a3b33c\n"
+"Restore: pkg/1.0:9a4eb3c8701508aa9458b1a73d0633783ecc2270 in p/b/"
+"pkg773791b8c97aa/p\n"
+"Restore: pkg/1.0:9a4eb3c8701508aa9458b1a73d0633783ecc2270 metadata in p/b/"
+"pkg773791b8c97aa/d/metadata\n"
+"..."
+
+#: ../../../devops/save_restore.rst:45
+msgid ""
+"The restore process will overwrite existing packages if they already exist "
+"in the cache."
+msgstr ""
+
+#: ../../../devops/save_restore.rst:50
+msgid "**Best practices**"
+msgstr "**最佳實踐**"
+
+#: ../../../devops/save_restore.rst:52
+msgid ""
+"Saving and restoring packages is not a substitute for proper storage "
+"(upload) of packages in a Conan server repository. It is only intended as a "
+"transitory mechanism, in CI systems, to save an air-gap, etc., but not as a "
+"long-term storage and retrieval."
+msgstr ""
+
+#: ../../../devops/save_restore.rst:55
+msgid ""
+"Saving and restoring packages is not a substitute for proper backup of "
+"server repositories. The recommended way to implement long term backup of "
+"Conan packages is using some server side backup strategy."
+msgstr ""
+
+#: ../../../devops/save_restore.rst:57
+msgid ""
+"The storage format and serialization is not guaranteed at this moment to be "
+"future-proof and stable. It is expected to work in the same Conan version, "
+"but future Conan versions might break the storage format created with "
+"previous versions. (this is aligned with the above recommendation to not use "
+"it as a backup strategy)"
+msgstr ""

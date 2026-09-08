@@ -1,0 +1,176 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.18\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:5
+msgid "Cross-compiling from Linux to Windows with MinGW"
+msgstr ""
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:7
+msgid ""
+"It is possible to cross-build from Linux to Windows using the MinGW cross-"
+"compiler. Note that such a compiler won't be using the MSVC runtime, but the "
+"MinGW one, which uses the ``libstdc++6.dll`` runtime."
+msgstr ""
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:11
+msgid ""
+"This `blog post about Clang in Windows <https://blog.conan.io/2022/10/13/"
+"Different-flavors-Clang-compiler-Windows.html>`_ describes the different "
+"runtimes for the different Windows subsystems, which is equally applicable "
+"to MinGW."
+msgstr ""
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:14
+msgid ""
+"The first step would be to install the compiler. In Debian based systems:"
+msgstr ""
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:16
+msgid ""
+"$ sudo apt install gcc-mingw-w64-x86-64-posix\n"
+"$ sudo apt install g++-mingw-w64-x86-64-posix"
+msgstr ""
+"$ sudo apt install gcc-mingw-w64-x86-64-posix\n"
+"$ sudo apt install g++-mingw-w64-x86-64-posix"
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:21
+msgid ""
+"If the compiler is installed in the system path, then we could write a "
+"profile like:"
+msgstr ""
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:23
+msgid "mingw"
+msgstr ""
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:23
+msgid ""
+"[settings]\n"
+"os=Windows\n"
+"compiler=gcc\n"
+"compiler.version=10\n"
+"compiler.cppstd=gnu17\n"
+"compiler.libcxx=libstdc++11\n"
+"arch=x86_64\n"
+"build_type=Release\n"
+"\n"
+"[buildenv]\n"
+"CC=x86_64-w64-mingw32-gcc-posix\n"
+"CXX=x86_64-w64-mingw32-g++-posix"
+msgstr ""
+"[settings]\n"
+"os=Windows\n"
+"compiler=gcc\n"
+"compiler.version=10\n"
+"compiler.cppstd=gnu17\n"
+"compiler.libcxx=libstdc++11\n"
+"arch=x86_64\n"
+"build_type=Release\n"
+"\n"
+"[buildenv]\n"
+"CC=x86_64-w64-mingw32-gcc-posix\n"
+"CXX=x86_64-w64-mingw32-g++-posix"
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:40
+msgid ""
+"Then, let's say that we have a basic CMake project, which we can create with "
+"the ``conan new``:"
+msgstr ""
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:42
+msgid ""
+"$ conan new cmake_lib -d name=mypkg -d version=0.1\n"
+"$ conan create . -pr=mingw\n"
+"\n"
+"...\n"
+"-- Using Conan toolchain: .../conan_toolchain.cmake\n"
+"-- Conan toolchain: Defining architecture flag: -m64\n"
+"-- Conan toolchain: C++ Standard 17 with extensions ON\n"
+"-- The CXX compiler identification is GNU 10.0.0\n"
+"-- Check for working CXX compiler: /usr/bin/x86_64-w64-mingw32-g++-posix - "
+"skipped\n"
+"\n"
+"mypkg/0.1 (test package): Running CMake.build()\n"
+"mypkg/0.1 (test package): RUN: cmake --build ...\n"
+"gcc-10-x86_64-gnu17-release\" -- -j8\n"
+"[ 50%] Building CXX object CMakeFiles/example.dir/src/example.cpp.obj\n"
+"[100%] Linking CXX executable example.exe\n"
+"[100%] Built target example"
+msgstr ""
+"$ conan new cmake_lib -d name=mypkg -d version=0.1\n"
+"$ conan create . -pr=mingw\n"
+"\n"
+"...\n"
+"-- Using Conan toolchain: .../conan_toolchain.cmake\n"
+"-- Conan toolchain: Defining architecture flag: -m64\n"
+"-- Conan toolchain: C++ Standard 17 with extensions ON\n"
+"-- The CXX compiler identification is GNU 10.0.0\n"
+"-- Check for working CXX compiler: /usr/bin/x86_64-w64-mingw32-g++-posix - "
+"skipped\n"
+"\n"
+"mypkg/0.1 (test package): Running CMake.build()\n"
+"mypkg/0.1 (test package): RUN: cmake --build ...\n"
+"gcc-10-x86_64-gnu17-release\" -- -j8\n"
+"[ 50%] Building CXX object CMakeFiles/example.dir/src/example.cpp.obj\n"
+"[100%] Linking CXX executable example.exe\n"
+"[100%] Built target example"
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:61
+msgid ""
+"The example.exe will not be executed in the Linux machine, because the "
+"``test_package`` contains a ``if can_run(self)`` branch to not run it in "
+"cross-build scenarios."
+msgstr ""
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:64
+msgid "We can now take the ``example.exe`` and run it in a Windows machine:"
+msgstr ""
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:66
+msgid ""
+"mypkg/0.1: Hello World Release!\n"
+"mypkg/0.1: _M_X64 defined\n"
+"mypkg/0.1: __x86_64__ defined\n"
+"mypkg/0.1: _GLIBCXX_USE_CXX11_ABI 1\n"
+"mypkg/0.1: MSVC runtime: MultiThreadedDLL\n"
+"mypkg/0.1: __cplusplus201402\n"
+"mypkg/0.1: __GNUC__10\n"
+"mypkg/0.1: __MINGW32__1\n"
+"mypkg/0.1: __MINGW64__1"
+msgstr ""
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:81
+msgid ""
+"It is very possible that some recipes in ConanCenter are not prepared to be "
+"cross-built from Linux to Windows. The recommended way to build ConanCenter "
+"recipes is to build them with MSVC in Windows, as there might be limitations "
+"for the specific build-systems of the recipes, and MinGW support is not "
+"guaranteed."
+msgstr ""
+
+#: ../../../examples/cross_build/linux_to_windows_mingw.rst:85
+msgid ""
+"Trying to run the executables with some emulators like ``wine`` might "
+"require extra effort, because the runtime environment is intended to be "
+"Windows, and as such a ``conanrun.bat`` environment file will be created, "
+"but that cannot be executed in Linux. Using configurations like ``-c tools."
+"build.cross_building:can_run=True -c tools.microsoft.bash:subsystem=mingw -c "
+"tools.microsoft.bash:active=True`` can allow to force the generation and "
+"execution of ``conanrun.sh``."
+msgstr ""

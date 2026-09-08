@@ -1,0 +1,281 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:4
+msgid "cmake_layout"
+msgstr "cmake_layout"
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:6
+msgid ""
+"The ``cmake_layout()`` sets the :ref:"
+"`folders<conan_conanfile_attributes_folders>` and :ref:"
+"`cpp<conan_conanfile_attributes_cpp>` attributes to follow the structure of "
+"a typical CMake project."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:10
+msgid ""
+"from conan.tools.cmake import cmake_layout\n"
+"\n"
+"def layout(self):\n"
+"    cmake_layout(self)"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:20
+msgid ""
+"To try it you can use the ``conan new cmake_lib -d name=hello -d "
+"version=1.0`` template."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:24
+msgid ""
+"The assigned values depend on the CMake generator that will be used. It can "
+"be defined with the ``tools.cmake.cmaketoolchain:generator`` [conf] entry or "
+"passing it in the recipe to the ``cmake_layout(self, cmake_generator)`` "
+"function. The assigned values are different if it is a multi-config "
+"generator (like Visual Studio or Xcode), or a single-config generator (like "
+"Unix Makefiles)."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:29
+msgid "These are the values assigned by the ``cmake_layout``:"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:31
+msgid ""
+"``conanfile.folders.source``: *src_folder* argument or ``.`` if not "
+"specified."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:35
+#: ../../../reference/tools/cmake/cmake_layout.rst:84
+#: ../../../reference/tools/cmake/cmake_layout.rst:97
+msgid "``conanfile.folders.build``:"
+msgstr "``conanfile.folders.build``："
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:33
+msgid "``build``: if the cmake generator is multi-configuration."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:34
+msgid ""
+"``build/Debug`` or ``build/Release``: if the cmake generator is single-"
+"configuration, depending on the build_type."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:36
+msgid ""
+"The ``\"build\"`` string, can be defined to other value by the "
+"``build_folder`` argument."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:37
+#: ../../../reference/tools/cmake/cmake_layout.rst:86
+msgid "``conanfile.folders.generators``: ``build/generators``"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:38
+msgid "``conanfile.cpp.source.includedirs``: ``[\"include\"]``"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:42
+msgid "``conanfile.cpp.build.libdirs`` and ``conanfile.cpp.build.bindirs``:"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:40
+msgid ""
+"``[\"Release\"]`` or ``[\"Debug\"]`` for a multi-configuration cmake "
+"generator."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:41
+msgid "``.`` for a single-configuration cmake generator."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:45
+msgid "Reference"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/cmake/layout.py:docstring of
+#: conan.tools.cmake.layout.cmake_layout:0
+msgid "Parameters"
+msgstr "參數"
+
+#: ../../../conan_sources/conan/tools/cmake/layout.py:docstring of
+#: conan.tools.cmake.layout.cmake_layout:1
+msgid "The current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/cmake/layout.py:docstring of
+#: conan.tools.cmake.layout.cmake_layout:2
+msgid ""
+"Allow defining the CMake generator. In most cases it doesn't need to be "
+"passed, as it will get the value from the configuration              ``tools."
+"cmake.cmaketoolchain:generator``, or it will automatically deduce the "
+"generator from the ``settings``"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/cmake/layout.py:docstring of
+#: conan.tools.cmake.layout.cmake_layout:3
+msgid ""
+"Value for ``conanfile.folders.source``, change it if your source code (and "
+"CMakeLists.txt) is in a subfolder."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/cmake/layout.py:docstring of
+#: conan.tools.cmake.layout.cmake_layout:5
+msgid ""
+"Specify the name of the \"base\" build folder. The default is \"build\", but "
+"if that folder name is used by the project, a different one can be defined"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:54
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:56
+msgid "``cmake_layout`` is affected by these ``[conf]`` variables:"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:58
+msgid ""
+"**tools.cmake.cmake_layout:build_folder_vars** list of settings, options, "
+"``self.name`` and ``self.version`` and constants ``const.xxx`` to customize "
+"the ``conanfile.folders.build`` folder. See section :ref:"
+"`cmake_layout_multi_name` below."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:60
+msgid ""
+"**tools.cmake.cmake_layout:build_folder** (*new since Conan 2.2.0*)"
+"(*experimental*) uses its value as the base folder of the ``conanfile."
+"folders.build`` for local builds."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:62
+msgid ""
+"**tools.cmake.cmake_layout:test_folder** (*new since Conan 2.2.0*)"
+"(*experimental*) uses its value as the base folder of the ``conanfile."
+"folders.build`` for test_package builds. If that value is ``$TMP``, Conan "
+"will create and use a temporal folder."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:69
+msgid "Multi-setting/option cmake_layout"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:72
+msgid ""
+"The ``folders.build`` and ``conanfile.folders.generators`` can be customized "
+"to take into account the ``settings`` and ``options`` and not only the "
+"``build_type``. Use the ``tools.cmake.cmake_layout:build_folder_vars`` conf "
+"to declare a list of settings, options and/or ``self.name`` and ``self."
+"version`` and user constants:"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:76
+msgid ""
+"conan install . -c tools.cmake.cmake_layout:build_folder_vars=\"['settings."
+"compiler', 'options.shared']\""
+msgstr ""
+"conan install . -c tools.cmake.cmake_layout:build_folder_vars=\"['settings."
+"compiler', 'options.shared']\""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:80
+msgid ""
+"For the previous example, the values assigned by the ``cmake_layout`` "
+"(installing the Release/static default configuration) would be:"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:84
+msgid ""
+"``build/apple-clang-shared_false``: if the cmake generator is multi-"
+"configuration."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:85
+msgid ""
+"``build/apple-clang-shared_false/Debug``: if the cmake generator is single-"
+"configuration."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:88
+msgid "If we repeat the previous install with a different configuration:"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:90
+msgid ""
+"conan install . -o shared=True -c tools.cmake.cmake_layout:"
+"build_folder_vars=\"['settings.compiler', 'options.shared']\""
+msgstr ""
+"conan install . -o shared=True -c tools.cmake.cmake_layout:"
+"build_folder_vars=\"['settings.compiler', 'options.shared']\""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:94
+msgid ""
+"The values assigned by the ``cmake_layout`` (installing the Release/shared "
+"configuration) would be:"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:97
+msgid ""
+"``build/apple-clang-shared_true``: if the cmake generator is multi-"
+"configuration."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:98
+msgid ""
+"``build/apple-clang-shared_true/Debug``: if the cmake generator is single-"
+"configuration."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:99
+msgid ""
+"``conanfile.folders.generators``: ``build-apple-clang-shared_true/"
+"generators``"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:102
+msgid ""
+"So we can keep separated folders for any number of different configurations "
+"that we want to install. Recipe attributes like name and version and user "
+"constants can also be used:"
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:105
+msgid ""
+"$ conan install . -c tools.cmake.cmake_layout:build_folder_vars=\"['const."
+"myvalue, 'self.name']\""
+msgstr ""
+"$ conan install . -c tools.cmake.cmake_layout:build_folder_vars=\"['const."
+"myvalue, 'self.name']\""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:109
+msgid "And it will create folders like ``build/myvalue-pkgname``."
+msgstr ""
+
+#: ../../../reference/tools/cmake/cmake_layout.rst:111
+msgid ""
+"The ``CMakePresets.json`` file generated at the :ref:"
+"`CMakeToolchain<conan_tools_cmaketoolchain>` generator, will also take this "
+"``tools.cmake.cmake_layout:build_folder_vars`` config into account to "
+"generate different names for the presets, being very handy to install N "
+"configurations and building our project for any of them by selecting the "
+"chosen preset."
+msgstr ""

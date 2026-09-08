@@ -1,0 +1,415 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devops/devops_local_recipes_index.rst:4
+msgid "Local Recipes Index Repository"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:6
+msgid ""
+"The **Local Recipes Index** is a repository type introduced in Conan to "
+"enhance flexibility in managing C/C++ package recipes. This repository type "
+"allows users to use a local directory as a Conan remote, where the directory "
+"structure mirrors that of the `conan-center-index` GitHub repository."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:11
+msgid "This setup is particularly useful for:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:13
+msgid "Building binaries from a private `conan-center-index` fork."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:15
+msgid ""
+"Sharing your own recipes for certain libraries or tools that, due to "
+"licensing restrictions or proprietary nature, are not suitable for "
+"ConanCenter. Check how you can use it for this purpose in the dedicated "
+"section of the documentation :ref:`setup_local_recipes_index`."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:22
+msgid "Building Binaries from a private `conan-center-index` fork"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:24
+msgid ""
+"As we already introduced in the :ref:`previous section of the Conan DevOps "
+"Guide <devops>` some organizations, particularly large enterprises, prefer "
+"not to use binaries downloaded from the internet. Instead, they build their "
+"own binaries in-house using the `conan-center-index` recipes. These "
+"organizations often need to customize these recipes to meet unique "
+"requirements that are not applicable to the broader community, making such "
+"contributions unsuitable for the upstream repository."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:31
+msgid ""
+"The `local-recipes-index` allows users to maintain a local folder with the "
+"same structure as the `conan-center-index` GitHub repository, using it as a "
+"source for package recipes. This new type of repository is recipes-only, "
+"necessitating the construction of package binaries from source on each "
+"machine where the package is used. For sharing binaries across teams, we "
+"continue to recommend :ref:`using a Conan remote server like Artifactory "
+"<artifactory_ce_cpp>` for production purposes."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:42
+msgid ""
+"The `local-recipes-index` repository allows you to easily build binaries "
+"from a fork of `conan-center-index`, and then hosting them on a Conan remote "
+"repository like Artifactory. The main difference with the process explained "
+"in the :ref:`previous section <devops>` is the ability to immediately test "
+"multiple local changes without the need to export each time a recipe is "
+"modified."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:48
+msgid ""
+"Note that in this case, mixing binaries from ConanCenter with locally built "
+"binaries is not recommended for several reasons:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:51
+msgid ""
+"Binary compatibility: There may be small differences in setup between the "
+"ConanCenter CI and the user's CI. Maintaining a consistent setup for all "
+"binaries can mitigate some issues."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:55
+msgid ""
+"Full control over builds: Building all binaries yourself ensures you have "
+"complete control over the compilation environment and dependency versions."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:58
+msgid ""
+"Instead, it's recommended to build all your direct and transitive "
+"dependencies from the fork. To begin, remove the upstream ConanCenter as it "
+"will not be used, everything will come from our own fork:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:62
+msgid "$ conan remote remove conancenter"
+msgstr "$ conan remote remove conancenter"
+
+#: ../../../devops/devops_local_recipes_index.rst:66
+msgid ""
+"Then we will clone our fork (in this case, we are cloning directly the "
+"upstream for demo purposes, but you would be cloning your fork instead):"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:69
+msgid "$ git clone https://github.com/conan-io/conan-center-index"
+msgstr "$ git clone https://github.com/conan-io/conan-center-index"
+
+#: ../../../devops/devops_local_recipes_index.rst:73
+msgid "Add this as our `mycenter` remote:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:75
+msgid ""
+"# Add the mycenter remote pointing to the local folder\n"
+"$ conan remote add mycenter ./conan-center-index"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:80
+msgid ""
+"And that’s all! Now you're set to list and use packages from your `conan-"
+"center-index` local folder:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:82
+msgid ""
+"$ conan list \"zlib/*\" -r=mycenter\n"
+"mycenter\n"
+"zlib\n"
+"    zlib/1.2.11\n"
+"    zlib/1.2.12\n"
+"    zlib/1.2.13\n"
+"    zlib/1.3\n"
+"    zlib/1.3.1"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:93
+msgid "We can also install packages from this repo, for example we can do:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:95
+msgid ""
+"$ conan install --requires=zlib/1.3\n"
+"...\n"
+"======== Computing dependency graph ========\n"
+"zlib/1.3: Not found in local cache, looking in remotes...\n"
+"zlib/1.3: Checking remote: mycenter\n"
+"zlib/1.3: Downloaded recipe revision 5c0f3a1a222eebb6bff34980bcd3e024\n"
+"Graph root\n"
+"    cli\n"
+"Requirements\n"
+"    zlib/1.3#5c0f3a1a222eebb6bff34980bcd3e024 - Downloaded (mycenter)\n"
+"\n"
+"======== Computing necessary packages ========\n"
+"Requirements\n"
+"    zlib/1.3#5c0f3a1a222eebb6bff34980bcd3e024:72c852c5f0ae27ca0b1741e5fd7c8b8be91a590a "
+"- Missing\n"
+"ERROR: Missing binary: zlib/1.3:72c852c5f0ae27ca0b1741e5fd7c8b8be91a590a"
+msgstr ""
+"$ conan install --requires=zlib/1.3\n"
+"...\n"
+"======== Computing dependency graph ========\n"
+"zlib/1.3: Not found in local cache, looking in remotes...\n"
+"zlib/1.3: Checking remote: mycenter\n"
+"zlib/1.3: Downloaded recipe revision 5c0f3a1a222eebb6bff34980bcd3e024\n"
+"Graph root\n"
+"    cli\n"
+"Requirements\n"
+"    zlib/1.3#5c0f3a1a222eebb6bff34980bcd3e024 - Downloaded (mycenter)\n"
+"\n"
+"======== Computing necessary packages ========\n"
+"Requirements\n"
+"    zlib/1.3#5c0f3a1a222eebb6bff34980bcd3e024:72c852c5f0ae27ca0b1741e5fd7c8b8be91a590a "
+"- Missing\n"
+"ERROR: Missing binary: zlib/1.3:72c852c5f0ae27ca0b1741e5fd7c8b8be91a590a"
+
+#: ../../../devops/devops_local_recipes_index.rst:113
+msgid ""
+"As we can see, Conan managed to get the recipe for ``zlib/1.3`` from "
+"``mycenter``, but then it failed because there is no binary. This is "
+"expected, **the repository only contains the recipes, but not the "
+"binaries**. We can build the binary from source with ``--build=missing`` "
+"argument:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:118
+msgid ""
+"$ conan install --requires=zlib/1.3 --build=missing\n"
+"...\n"
+"zlib/1.3: package(): Packaged 2 '.h' files: zconf.h, zlib.h\n"
+"zlib/1.3: package(): Packaged 1 file: LICENSE\n"
+"zlib/1.3: package(): Packaged 1 '.a' file: libz.a\n"
+"zlib/1.3: Created package revision 0466b3475bcac5c2ce37bb5deda835c3\n"
+"zlib/1.3: Package '72c852c5f0ae27ca0b1741e5fd7c8b8be91a590a' created\n"
+"zlib/1.3: Full package reference: "
+"zlib/1.3#5c0f3a1a222eebb6bff34980bcd3e024:72c852c5f0ae27ca0b1741e5fd7c8b8be91a590a#0466b3475bcac5c2ce37bb5deda835c3\n"
+"zlib/1.3: Package folder /home/conan/.conan2/p/b/zlib1ed9fe13537a2/p\n"
+"WARN: deprecated: Usage of deprecated Conan 1.X features that will be "
+"removed in Conan 2.X:\n"
+"WARN: deprecated:     'cpp_info.names' used in: zlib/1.3\n"
+"\n"
+"======== Finalizing install (deploy, generators) ========\n"
+"cli: Generating aggregated env files\n"
+"cli: Generated aggregated env files: ['conanbuild.sh', 'conanrun.sh']\n"
+"Install finished successfully"
+msgstr ""
+"$ conan install --requires=zlib/1.3 --build=missing\n"
+"...\n"
+"zlib/1.3: package(): Packaged 2 '.h' files: zconf.h, zlib.h\n"
+"zlib/1.3: package(): Packaged 1 file: LICENSE\n"
+"zlib/1.3: package(): Packaged 1 '.a' file: libz.a\n"
+"zlib/1.3: Created package revision 0466b3475bcac5c2ce37bb5deda835c3\n"
+"zlib/1.3: Package '72c852c5f0ae27ca0b1741e5fd7c8b8be91a590a' created\n"
+"zlib/1.3: Full package reference: "
+"zlib/1.3#5c0f3a1a222eebb6bff34980bcd3e024:72c852c5f0ae27ca0b1741e5fd7c8b8be91a590a#0466b3475bcac5c2ce37bb5deda835c3\n"
+"zlib/1.3: Package folder /home/conan/.conan2/p/b/zlib1ed9fe13537a2/p\n"
+"WARN: deprecated: Usage of deprecated Conan 1.X features that will be "
+"removed in Conan 2.X:\n"
+"WARN: deprecated:     'cpp_info.names' used in: zlib/1.3\n"
+"\n"
+"======== Finalizing install (deploy, generators) ========\n"
+"cli: Generating aggregated env files\n"
+"cli: Generated aggregated env files: ['conanbuild.sh', 'conanrun.sh']\n"
+"Install finished successfully"
+
+#: ../../../devops/devops_local_recipes_index.rst:137
+msgid "We can see now the binary package in our local cache:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:139
+msgid ""
+"$ conan list zlib:*\n"
+"Local Cache\n"
+"zlib\n"
+"    zlib/1.3\n"
+"    revisions\n"
+"        5c0f3a1a222eebb6bff34980bcd3e024 (2024-04-10 11:50:34 UTC)\n"
+"        packages\n"
+"            72c852c5f0ae27ca0b1741e5fd7c8b8be91a590a\n"
+"            info\n"
+"                settings\n"
+"                arch: x86_64\n"
+"                build_type: Release\n"
+"                compiler: gcc\n"
+"                compiler.version: 9\n"
+"                os: Linux\n"
+"                options\n"
+"                fPIC: True\n"
+"                shared: False"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:160
+msgid ""
+"Finally, upload the binary package to our Artifactory repository to make it "
+"available for our organization, users and CI jobs:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:163
+msgid ""
+"$ conan remote add myartifactoryrepo <artifactory_url>\n"
+"$ conan upload zlib* -r=myartifactoryrepo -c"
+msgstr ""
+"$ conan remote add myartifactoryrepo <artifactory_url>\n"
+"$ conan upload zlib* -r=myartifactoryrepo -c"
+
+#: ../../../devops/devops_local_recipes_index.rst:168
+msgid ""
+"This way, consumers of the packages will not only enjoy the pre-compiled "
+"binaries and avoid having to always re-build from source all dependencies, "
+"but that will also provide stronger guarantees that the dependencies build "
+"and work correctly, that all dependencies and transitive dependencies play "
+"well together, etc. Decoupling the binary creation process from the binary "
+"consumption process is the way to achieve faster and more reliable usage of "
+"dependencies."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:175
+msgid ""
+"Remember, in a production setting, the `conan upload` command should be "
+"executed by CI, not developers, following the :ref:`Conan guidelines "
+"<guidelines>`. This approach ensures that package consumers enjoy pre-"
+"compiled binaries and consistency across dependencies."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:180
+msgid "Modifying the local-recipes-index repository files"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:182
+msgid ""
+"One of the advantages of this approach is that all the changes that we do in "
+"every single recipe are automatically available for the Conan client. For "
+"example, changes to the `recipes/zlib/config.yml` file are immediately "
+"recognized by the Conan client. If you edit that file and remove all "
+"versions but the latest and then we `list` the recipes:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:187
+msgid ""
+"$ conan list \"zlib/*\" -r=mycenter\n"
+"mycenter\n"
+"zlib\n"
+"    zlib/1.3.1"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:194
+msgid ""
+"When some of the recipes change, then note that the current Conan home "
+"already contains a cached copy of the package, so it will not update it "
+"unless we explicitly use the ``--update``, as any other Conan remote."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:198
+msgid ""
+"So if we do a change in the ``zlib`` recipe in ``recipes/zlib/all/conanfile."
+"py`` and repeat:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:201
+msgid ""
+"$ conan install --requires=zlib/1.3.1 -r=mycenter --update --build=missing"
+msgstr ""
+"$ conan install --requires=zlib/1.3.1 -r=mycenter --update --build=missing"
+
+#: ../../../devops/devops_local_recipes_index.rst:205
+msgid ""
+"We will immediately have the new package binary locally built from source "
+"from the new modified recipe in our Conan home."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:209
+msgid "Using local-recipes-index Repositories in Production"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:211
+msgid ""
+"Several important points should be considered when using this new feature:"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:213
+msgid ""
+"It is designed for **third-party packages**, where recipes in one repository "
+"are creating packages with sources located elsewhere. To package your own "
+"code, the standard practice of adding `conanfile.py` recipes along with the "
+"source code and using the standard `conan create` flow is recommended."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:218
+msgid ""
+"The `local-recipes-index` repositories point to **local folders in the "
+"filesystem**. While users may choose to sync that folder with a git "
+"repository or other version control mechanisms, Conan is agnostic to this, "
+"as it is only aware of the folder in the filesystem that points to the "
+"(current) state of the repository. Users may choose to run git commands "
+"directly to switch branches/commit/tags and Conan will automatically "
+"recognise the changes"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:225
+msgid ""
+"This approach operates at the source level and does not generate package "
+"binaries. For deployment for development and production environments, the "
+"use of a remote package server such as Artifactory is crucial. It's "
+"important to note that this feature is not a replacement for Conan's remote "
+"package servers, which play a vital role in hosting packages for regular use."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:231
+msgid ""
+"Also, note that a server remote can retain a history of changes storing "
+"multiple recipe revisions. In contrast, a `local-recipes-index` remote can "
+"only represent a single snapshot at any given time."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:235
+msgid ""
+"Furthermore, this feature does not support placing server URLs directly in "
+"recipes; remote repositories must be explicitly added with `conan remote "
+"add`. Decoupling abstract package requirements, such as \"zlib/1.3.1\", from "
+"their specific origins is crucial to resolving dependencies correctly and "
+"leveraging Conan's graph capabilities, including version conflict detection "
+"and resolution, version-ranges resolution, :ref:`opting into pre-releases "
+"<resolve_prereleases_summary>`, :ref:`platform_requires "
+"<reference_config_files_profiles_platform_requires>`, :ref:`replace_requires "
+"<reference_config_files_profiles_replace_requires>`, etc. This separation "
+"also facilitates the implementation of modern DevOps practices, such as "
+"package immutability, full relocatability and package promotions."
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:248
+msgid ""
+":ref:`Using Local-Recipes-Index repositories to share your libraries "
+"<setup_local_recipes_index>`"
+msgstr ""
+
+#: ../../../devops/devops_local_recipes_index.rst:249
+msgid ""
+"`Introducing the Local-Recipes-Index Post <https://blog.conan.io/2024/04/23/"
+"Introducing-local-recipes-index-remote.html>`_"
+msgstr ""

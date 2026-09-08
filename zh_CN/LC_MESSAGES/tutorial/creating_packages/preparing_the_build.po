@@ -1,0 +1,311 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.15\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:5
+msgid "Preparing the build"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:7
+msgid ""
+"In the :ref:`previous tutorial "
+"section<creating_packages_add_dependencies_to_packages>`, we added the `fmt "
+"<https://conan.io/center/fmt>`__ requirement to our Conan package to provide "
+"colour output to our \"Hello World\" C++ library. In this section, we focus "
+"on the ``generate()`` method of the recipe. The aim of this method is to "
+"generate all the information that could be needed while running the build "
+"step. That means things like:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:13
+msgid ""
+"Writing files to be used in the build step, like :ref:"
+"`scripts<conan_tools_env_environment_model>` that inject environment "
+"variables, files to pass to the build system, etc."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:16
+msgid ""
+"Configuring the toolchain to provide extra information based on the settings "
+"and options or removing information from the toolchain that Conan generates "
+"by default and may not apply for certain cases."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:21
+msgid ""
+"We explain how to use this method for a simple example based on the previous "
+"tutorial section. We add a `with_fmt` option to the recipe, and depending on "
+"its value we either require the `fmt` library or not. We use the "
+"``generate()`` method to modify the toolchain so that it passes a variable "
+"to CMake so that we can conditionally add that library and use `fmt` or not "
+"in the source code."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:27
+msgid ""
+"Please, first clone the sources to recreate this project. You can find them "
+"in the `examples2 repository <https://github.com/conan-io/examples2>`_ on "
+"GitHub:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:30
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/tutorial/creating_packages/preparing_the_build"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:35
+msgid ""
+"You will notice some changes in the `conanfile.py` file from the previous "
+"recipe. Let's check the relevant parts:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:38
+msgid ""
+"...\n"
+"from conan.tools.build import check_max_cppstd, check_min_cppstd\n"
+"...\n"
+"\n"
+"class helloRecipe(ConanFile):\n"
+"    name = \"hello\"\n"
+"    version = \"1.0\"\n"
+"\n"
+"    ...\n"
+"    options = {\"shared\": [True, False],\n"
+"               \"fPIC\": [True, False],\n"
+"               \"with_fmt\": [True, False]}\n"
+"\n"
+"    default_options = {\"shared\": False,\n"
+"                       \"fPIC\": True,\n"
+"                       \"with_fmt\": True}\n"
+"    ...\n"
+"\n"
+"    def validate(self):\n"
+"        if self.options.with_fmt:\n"
+"            check_min_cppstd(self, \"11\")\n"
+"            check_max_cppstd(self, \"14\")\n"
+"\n"
+"    def source(self):\n"
+"        git = Git(self)\n"
+"        git.clone(url=\"https://github.com/conan-io/libhello.git\", "
+"target=\".\")\n"
+"        # Please, be aware that using the head of the branch instead of an "
+"immutable tag\n"
+"        # or commit is not a good practice in general\n"
+"        git.checkout(\"optional_fmt\")\n"
+"\n"
+"    def requirements(self):\n"
+"        if self.options.with_fmt:\n"
+"            self.requires(\"fmt/8.1.1\")\n"
+"\n"
+"    def generate(self):\n"
+"        tc = CMakeToolchain(self)\n"
+"        if self.options.with_fmt:\n"
+"            tc.variables[\"WITH_FMT\"] = True\n"
+"        tc.generate()\n"
+"\n"
+"    ..."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:84
+msgid "As you can see:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:86
+msgid ""
+"We declare a new ``with_fmt`` option with the default value set to ``True``."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:88
+msgid "Based on the value of the ``with_fmt`` option:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:90
+msgid "We conditionally install the ``fmt/8.1.1`` Conan package."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:91
+msgid ""
+"We conditionally require a minimum and a maximum C++ standard as the *fmt* "
+"library requires at least C++11 and it will not compile if we try to use a "
+"standard above C++14 (just an example, *fmt* can actually build with more "
+"modern standards)."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:92
+msgid ""
+"We conditionally inject the ``WITH_FMT`` variable with the value ``True`` to "
+"the :ref:`CMakeToolchain<conan_tools_cmaketoolchain>` so that we can use it "
+"in the *CMakeLists.txt* of the **hello** library to add the CMake **fmt::"
+"fmt** target."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:95
+msgid ""
+"We are cloning another branch of the library. The *optional_fmt* branch "
+"contains some changes in the code. Let's see what changed on the CMake side:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:98
+msgid "**CMakeLists.txt**"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:98
+msgid ""
+"cmake_minimum_required(VERSION 3.15)\n"
+"project(hello CXX)\n"
+"\n"
+"add_library(hello src/hello.cpp)\n"
+"target_include_directories(hello PUBLIC include)\n"
+"set_target_properties(hello PROPERTIES PUBLIC_HEADER \"include/hello.h\")\n"
+"\n"
+"if (WITH_FMT)\n"
+"    find_package(fmt)\n"
+"    target_link_libraries(hello fmt::fmt)\n"
+"    target_compile_definitions(hello PRIVATE USING_FMT=1)\n"
+"endif()\n"
+"\n"
+"install(TARGETS hello)"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:117
+msgid ""
+"As you can see, we use the ``WITH_FMT`` we injected in the :ref:"
+"`CMakeToolchain<conan_tools_cmaketoolchain>`. Depending on the value we will "
+"try to find the fmt library and link our hello library with it. Also, check "
+"that we add the ``USING_FMT=1`` compile definition that we use in the source "
+"code depending on whether we choose to add support for ``fmt`` or not."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:123
+msgid "**hello.cpp**"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:123
+msgid ""
+"#include <iostream>\n"
+"#include \"hello.h\"\n"
+"\n"
+"#if USING_FMT == 1\n"
+"#include <fmt/color.h>\n"
+"#endif\n"
+"\n"
+"void hello(){\n"
+"    #if USING_FMT == 1\n"
+"        #ifdef NDEBUG\n"
+"        fmt::print(fg(fmt::color::crimson) | fmt::emphasis::bold, "
+"\"hello/1.0: Hello World Release! (with color!)\\n\");\n"
+"        #else\n"
+"        fmt::print(fg(fmt::color::crimson) | fmt::emphasis::bold, "
+"\"hello/1.0: Hello World Debug! (with color!)\\n\");\n"
+"        #endif\n"
+"    #else\n"
+"        #ifdef NDEBUG\n"
+"        std::cout << \"hello/1.0: Hello World Release! (without color)\" << "
+"std::endl;\n"
+"        #else\n"
+"        std::cout << \"hello/1.0: Hello World Debug! (without color)\" << "
+"std::endl;\n"
+"        #endif\n"
+"    #endif\n"
+"}"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:150
+msgid ""
+"Let's build the package from sources first using ``with_fmt=True`` and then "
+"using ``with_fmt=False``. When *test_package* runs it will show different "
+"messages depending on the value of the option."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:155
+msgid ""
+"$ conan create . --build=missing -o with_fmt=True\n"
+"-------- Exporting the recipe ----------\n"
+"...\n"
+"\n"
+"-------- Testing the package: Running test() ----------\n"
+"hello/1.0 (test package): Running test()\n"
+"hello/1.0 (test package): RUN: ./example\n"
+"hello/1.0: Hello World Release! (with color!)\n"
+"\n"
+"$ conan create . --build=missing -o with_fmt=False\n"
+"-------- Exporting the recipe ----------\n"
+"...\n"
+"\n"
+"-------- Testing the package: Running test() ----------\n"
+"hello/1.0 (test package): Running test()\n"
+"hello/1.0 (test package): RUN: ./example\n"
+"hello/1.0: Hello World Release! (without color)"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:175
+msgid ""
+"This is just a simple example of how to use the ``generate()`` method to "
+"customize the toolchain based on the value of one option, but there are lots "
+"of other things that you could do in the ``generate()`` method like:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:179
+msgid ""
+"Create a complete custom toolchain based on your needs to use in your build."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:181
+msgid "Access certain information about the package dependencies, like:"
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:183
+msgid ""
+"The configuration via :ref:`conf_info<conan_conanfile_model_conf_info>`."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:184
+msgid "The options of dependencies."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:185
+msgid ""
+"Import files from dependencies using the :ref:`copy "
+"tool<conan_tools_files_copy>`. You could also import the files to create "
+"manifests for the package, collecting all versions and licenses of "
+"dependencies."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:189
+msgid ""
+"Use the :ref:`Environment tools<conan_tools_env_environment_model>` to "
+"generate information for the system environment."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:192
+msgid ""
+"Adding custom configurations besides *Release* and *Debug*, taking into "
+"account the settings, like *ReleaseShared* or *DebugShared*."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:197
+msgid ""
+"Use the ``generate()`` method to :ref:`import files from "
+"dependencies<copy_resources_on_generate>`."
+msgstr ""
+
+#: ../../../tutorial/creating_packages/preparing_the_build.rst:198
+msgid ""
+":ref:`generate() method reference<reference_conanfile_methods_generate>`"
+msgstr ""

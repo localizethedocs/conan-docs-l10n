@@ -1,0 +1,265 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.20\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 08:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/cross_build/emscripten.rst:4
+msgid "Cross-building with Emscripten - WebAssembly and asm.js"
+msgstr "使用 Emscripten 進行交叉建置 - WebAssembly 和 asm.js"
+
+#: ../../../examples/cross_build/emscripten.rst:6
+msgid ""
+"This example demonstrates how to cross-build a simple C++ project using "
+"Emscripten and Conan."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:8
+msgid ""
+"Conan supports `WASM <https://webassembly.org>`_ cross compilation, giving "
+"you the flexibility to target different JavaScript/WebAssembly runtimes in "
+"the browser."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:11
+msgid ""
+"We recommend creating separate Conan profiles for each target. Below are "
+"recommended profiles and instructions on how to build with them."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:16
+msgid "Setting up Conan profile for WebAssembly (WASM)"
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:18
+msgid ""
+"[settings]\n"
+"arch=wasm\n"
+"build_type=Release\n"
+"compiler=emcc\n"
+"compiler.cppstd=17\n"
+"compiler.libcxx=libc++\n"
+"# Optional settings to enable multithreading (see note below)\n"
+"# compiler.threads=posix\n"
+"compiler.version=4.0.10\n"
+"os=Emscripten\n"
+"\n"
+"[tool_requires]\n"
+"emsdk/4.0.10\n"
+"\n"
+"[conf]\n"
+"# Optional settings to enable memory allocation\n"
+"tools.build:exelinkflags=['-sALLOW_MEMORY_GROWTH=1', '-sMAXIMUM_MEMORY=4GB', "
+"'-sINITIAL_MEMORY=64MB']\n"
+"tools.build:sharedlinkflags=['-sALLOW_MEMORY_GROWTH=1', '-"
+"sMAXIMUM_MEMORY=4GB', '-sINITIAL_MEMORY=64MB']"
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:42
+msgid ""
+"Conan also supports building for `asm.js <http://asmjs.org>`_ targets, which "
+"is a nowadays considered deprecated."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:44
+msgid "What’s the difference between asm.js and WASM?"
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:46
+msgid ""
+"**asm.js** is a subset of JavaScript optimized for speed. It is fully "
+"supported by all browsers (even older ones) and compiles to a large ``.js`` "
+"file."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:47
+msgid ""
+"**WebAssembly (WASM)** is a binary format that is smaller and faster to load "
+"and execute. Most modern browsers support it, and it is generally "
+"recommended for new projects. **WASM** is also easier to integrate with "
+"native browser APIs compared to **asm.js**."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:50
+msgid ""
+"Even though Emscripten is not a true runtime environment (like Linux or "
+"Windows), it is part of a toolchain ecosystem that compiles C/C++ to "
+"WebAssembly (WASM) and asm.js."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:54
+msgid "Conan uses ``os=Emscripten`` to:"
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:56
+msgid ""
+"Align with the toolchain: Emscripten integrates the compiler, runtime glue, "
+"and JavaScript environment, making it practical to treat as an \"OS-like\" "
+"target."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:58
+msgid ""
+"Support backward compatibility: Many recipes in Conan Center Index use "
+"``os=Emscripten`` to enable or disable features and dependencies that "
+"specifically target Emscripten."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:60
+msgid ""
+"Maintain stability: Changing this setting would break recipes that rely on "
+"it, and would complicate compatibility with alternative WASM toolchains."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:65
+msgid ""
+"``wasm`` arch refers to ``WASM 32-bit`` target architecture, which is the "
+"default. If you wish to target ``WASM64``, set ``arch=wasm64`` in your "
+"profile. **Note that WASM64 is still experimental** and requires Node.js "
+"v20+ and a browser that supports it."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:71
+msgid ""
+"According to `emscripten documentation <https://emscripten.org/docs/"
+"api_reference/wasm_workers.html>`_ Emscripten supports two multithreading "
+"APIs:"
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:73
+msgid "POSIX Threads API (``posix`` in conan profile)"
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:74
+msgid "Wasm Workers API (``wasm_workers`` in conan profile)"
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:76
+msgid ""
+"These two APIs are incompatible with each other and incompatibles with "
+"binaries compiled without threading support. This incompatibility "
+"necessitates the modeling of threading usage within the compiler's binary "
+"model, allowing conan to distinguish between binaries compiled with "
+"threading and those compiled without it."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:81
+msgid ""
+"Conan will automatically set compiler and linker flags to enable threading "
+"if configured in the profile."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:84
+msgid ""
+"The profiles above use the ``emsdk`` package from `Conan Center Index "
+"repository <https://conan.io/center/recipes/emsdk>`_, which provides the "
+"Emscripten SDK, including ``emcc``, ``em++``, and tools like ``emrun`` and "
+"``node``."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:86
+msgid ""
+"If you prefer to use your system-installed Emscripten instead of the Conan-"
+"provided one, ``tool_requires`` could be replaced by custom "
+"``compiler_executables`` and ``buildenv``:"
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:88
+msgid ""
+"[conf]\n"
+"tools.build:compiler_executables={'c':'/path/to/emcc', 'cpp':'/path/to/em+"
+"+'}\n"
+"\n"
+"[buildenv]\n"
+"CC=emcc\n"
+"CXX=em++\n"
+"AR=emar\n"
+"NM=emnm\n"
+"RANLIB=emranlib\n"
+"STRIP=emstrip"
+msgstr ""
+"[conf]\n"
+"tools.build:compiler_executables={'c':'/path/to/emcc', 'cpp':'/path/to/em+"
+"+'}\n"
+"\n"
+"[buildenv]\n"
+"CC=emcc\n"
+"CXX=em++\n"
+"AR=emar\n"
+"NM=emnm\n"
+"RANLIB=emranlib\n"
+"STRIP=emstrip"
+
+#: ../../../examples/cross_build/emscripten.rst:102
+msgid ""
+"This way conan could configure `emsdk` local installation to be used from "
+"`CMake`, `Meson`, `Autotools` or other build systems."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:104
+msgid ""
+"In some cases, you might also need the ``Emscripten.cmake`` toolchain file "
+"for advanced scenarios. This toolchais is already added in our packaged "
+"`emsdk` but if you are using your own Emscripten installation, you can "
+"specify it in the profile by using :ref:`tools.cmake.cmaketoolchain:"
+"user_toolchain<conan_cmake_user_toolchain>` and providing the absolute path "
+"to your toolchain file."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:113
+msgid ""
+"The ``tools.build:exelinkflags`` and ``tools.build:sharedlinkflags`` in "
+"previous profiles are recomendations but users can modify them or define "
+"their values in the CMakeLists.txt file using the "
+"``set_target_properties()`` command."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:118
+msgid ""
+"By enabling ``ALLOW_MEMORY_GROWTH`` we allow the runtime to grow its memory "
+"dynamically at runtime by calling ``emscripten_resize_heap()``. Without this "
+"flag, memory is allocated at startup and cannot grow."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:122
+msgid ""
+"The ``MAXIMUM_MEMORY`` and ``INITIAL_MEMORY`` values specifies the maximum "
+"and initial memory size for the Emscripten runtime. These values can be "
+"adjusted based on your application's needs."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:126
+msgid ""
+"Take into account that ``arch=wasm64`` has a theorical exabytes maximum "
+"memory size, but runtime currently limits it to 16GB, while ``arch=wasm32`` "
+"has a maximum memory size of 4GB and ``arch=asm.js`` has a maximum memory "
+"size of 2GB."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:133
+msgid ""
+"``emcc`` compiler does not guarantee any ABI compatibility between different "
+"versions (patches included) To ensure a new ``package_id`` is generated when "
+"the Emscripten version changes, it is recommended to update the ``compiler."
+"version`` setting in your profile accordingly."
+msgstr ""
+
+#: ../../../examples/cross_build/emscripten.rst:137
+msgid ""
+"This will ensure that the package ID is generated based on the Emscripten "
+"version, allowing Conan to detect changes in the Emscripten toolchain and "
+"rebuild the project accordingly."
+msgstr ""

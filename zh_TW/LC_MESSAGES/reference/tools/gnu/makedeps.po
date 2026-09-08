@@ -1,0 +1,246 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/gnu/makedeps.rst:4
+msgid "MakeDeps"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:10
+msgid ""
+"``MakeDeps`` is the dependencies generator for make. It generates a Makefile "
+"file named ``conandeps.mk`` containing a valid make file syntax with all "
+"dependencies listed, including their components."
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:13
+msgid "This generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:15
+msgid "conanfile.py"
+msgstr "conanfile.py"
+
+#: ../../../reference/tools/gnu/makedeps.rst:15
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"MakeDeps\""
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:21
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:21
+msgid ""
+"[generators]\n"
+"MakeDeps"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:27
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:29
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.gnu import MakeDeps\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"zlib/1.2.13\"\n"
+"\n"
+"    def generate(self):\n"
+"        pc = MakeDeps(self)\n"
+"        pc.generate()"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:44
+msgid "Generated files"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:46
+msgid ""
+"`make` format file named ``conandeps.mk``, containing a valid makefile file "
+"syntax. The ``prefix`` variable is automatically adjusted to the "
+"``package_folder``:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:49
+msgid ""
+"CONAN_DEPS = zlib\n"
+"\n"
+"# zlib/1.2.13\n"
+"CONAN_NAME_ZLIB = zlib\n"
+"CONAN_VERSION_ZLIB = 1.2.13\n"
+"CONAN_REFERENCE_ZLIB = zlib/1.2.13\n"
+"CONAN_ROOT_ZLIB = /home/conan/.conan2/p/b/zlib273508b343e8c/p\n"
+"CONAN_INCLUDE_DIRS_ZLIB = $(CONAN_INCLUDE_DIR_FLAG)$(CONAN_ROOT_ZLIB)/"
+"include\n"
+"CONAN_LIB_DIRS_ZLIB = $(CONAN_LIB_DIR_FLAG)$(CONAN_ROOT_ZLIB)/lib\n"
+"CONAN_BIN_DIRS_ZLIB = $(CONAN_BIN_DIR_FLAG)$(CONAN_ROOT_ZLIB)/bin\n"
+"CONAN_LIBS_ZLIB = $(CONAN_LIB_FLAG)z\n"
+"\n"
+"CONAN_INCLUDE_DIRS = $(CONAN_INCLUDE_DIRS_ZLIB)\n"
+"CONAN_LIB_DIRS = $(CONAN_LIB_DIRS_ZLIB)\n"
+"CONAN_BIN_DIRS = $(CONAN_BIN_DIRS_ZLIB)\n"
+"CONAN_LIBS = $(CONAN_LIBS_ZLIB)"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:69
+msgid "Properties"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:71
+msgid ""
+"Makefile variables will be generated for each property set in "
+"`package_info()` of all dependencies and their components. Let's take "
+"following receipt:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:73
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class MyLib(ConanFile):\n"
+"\n"
+"    name = \"mylib\"\n"
+"    version = \"1.0\"\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.set_property(\"my.prop\", \"some vale\")\n"
+"        self.cpp_info.components[\"mycomp\"].set_property(\"comp_prop\", "
+"\"comp_value\")"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:86
+msgid "The resulting makefile variable assignments would look like this:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:88
+msgid ""
+"# mylib/1.0\n"
+"\n"
+"#[...]\n"
+"CONAN_PROPERTY_MYLIB_MY_PROP = some value\n"
+"CONAN_PROPERTY_MYLIB_MYCOMP_COMP_PROP = comp_value"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:96
+msgid ""
+"When substituting package names, component names and property names into "
+"makefile variable names, the names are converted to uppercase and all "
+"characters except `A-Z`, `0-9` and `_` are replaced with `_` (see example "
+"above with a dot in the property name). The property value is not modified, "
+"it is put to the right side of the variable assignment literally. Any "
+"whitespace and special character remain unchagend, no quotation or escaping "
+"is applied, because GNU Make is not consistent in escaping spaces and cannot "
+"handle whitespaces in path names anyway. Because values with newlines would "
+"break the makefile they are skipped and a warning is displayed."
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:100
+msgid "Customization"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:103
+msgid "Flags"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:105
+msgid ""
+"By default, the ``conandeps.mk`` will contain all dependencies listed, "
+"including their ``cpp_info`` information, but will not pass any flags to the "
+"compiler."
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:107
+msgid "Thus, the consumer should pass the following flags to the compiler:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:109
+msgid "**CONAN_LIB_FLAG**: Add a prefix to all libs variables, e.g. ``-l``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:110
+msgid ""
+"**CONAN_DEFINE_FLAG**: Add a prefix to all defines variables, e.g. ``-D``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:111
+msgid ""
+"**CONAN_SYSTEM_LIB_FLAG**: Add a prefix to all system_libs variables, e.g. "
+"``-l``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:112
+msgid ""
+"**CONAN_INCLUDE_DIR_FLAG**: Add a prefix to all include dirs variables, e.g. "
+"``-I``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:113
+msgid ""
+"**CONAN_LIB_DIR_FLAG**: Add a prefix to all lib dirs variables, e.g. ``-L``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:114
+msgid ""
+"**CONAN_BIN_DIR_FLAG**: Add a prefix to all bin dirs variables, e.g. ``-L``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:116
+msgid ""
+"Those flags should be appended as prefixes to flags variables. For example, "
+"if the ``CONAN_LIB_FLAG`` is set to ``-l``, the ``CONAN_LIBS`` variable will "
+"be set to ``-lz``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/makedeps.rst:119
+msgid "Reference"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/makedeps.py:docstring of
+#: conan.tools.gnu.makedeps.MakeDeps:1
+msgid ""
+"Generates a Makefile with the variables needed to build a project with the "
+"specified."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/makedeps.py:docstring of
+#: conan.tools.gnu.makedeps.MakeDeps:0
+msgid "Parameters"
+msgstr "參數"
+
+#: ../../../conan_sources/conan/tools/gnu/makedeps.py:docstring of
+#: conan.tools.gnu.makedeps.MakeDeps:3
+msgid ""
+"``< ConanFile object >`` The current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/makedeps.py:docstring of
+#: conan.tools.gnu.makedeps.MakeDeps.generate:1
+msgid "Collects all dependencies and components, then, generating a Makefile"
+msgstr ""

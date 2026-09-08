@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/jfrog.rst:4
+msgid "|jfrog_logo| JFrog"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:70
+msgid "jfrog_logo"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:7
+msgid "Artifactory Build Info"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:11
+msgid ""
+"The support of Artifactory Build Info via extension commands is not covered "
+"by :ref:`the Conan stability commitment<stability>`."
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:13
+msgid ""
+"The `Artifactory build info <https://www.buildinfo.org/>`_ is a recollection "
+"of the metadata of a build. This json-formatted file includes all the "
+"details about the build broken down into segments like version history, "
+"artifacts, project modules, dependencies, and everything that was required "
+"to create the build."
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:17
+msgid ""
+"Build infos are identified with a ``build name`` and a ``build number``, "
+"similar to how many CI services identify the builds. They are conveniently "
+"stored in Artifactory to keep track of the build metadata to later perform "
+"different operations."
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:20
+msgid ""
+"Conan does not offer built-in support for the build info format. However, we "
+"have developed some :ref:`custom "
+"commands<reference_commands_custom_commands>` at at the `extensions "
+"repository <https://github.com/conan-io/conan-extensions>`_ using the "
+"feature, that provides support to create and manage the build info files."
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:24
+msgid "How to install the build info extension commands"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:26
+msgid ""
+"Using the dedicated repository for Conan extensions https://github.com/conan-"
+"io/conan-extensions, it is as easy as:"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:28
+msgid ""
+"$ conan config install https://github.com/conan-io/conan-extensions.git -"
+"sf=extensions/commands/art -tf=extensions/commands/art"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:33
+msgid "Generating a Build Info"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:35
+msgid "A Build Info can be generated from a create or install command:"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:37
+msgid ""
+"$ conan create . --format json -s build_type=Release > create_release.json"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:41
+msgid "Then upload the created package to your repository:"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:43
+msgid "$ conan upload ... -c -r ..."
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:47
+msgid ""
+"Now, using the JSON output from the create/install commands, a build info "
+"file can be generated:"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:49
+msgid ""
+"$ conan art:build-info create create_release.json mybuildname_release 1 "
+"<repo> --server my_artifactory --with-dependencies > mybuildname_release.json"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:53
+msgid "And then uploaded to Artifactory:"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:55
+msgid ""
+"$ conan art:build-info upload mybuildname_aggregated.json --server "
+"my_artifactory"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:59
+msgid ""
+"For more reference, see the full example at https://github.com/conan-io/"
+"conan-extensions/tree/main/extensions/commands/art#how-to-manage-build-infos-"
+"in-artifactory"
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:63
+msgid ""
+"JFrog Artifactory has a `dedicated API <https://jfrog.com/help/r/jfrog-rest-"
+"apis/build-info>`_ to manage build infos that has been integrated into the "
+"custom commands for Artifactory."
+msgstr ""
+
+#: ../../../integrations/jfrog.rst:66
+msgid ""
+"Check the ``conan art:build-info`` documentation for reference: https://"
+"github.com/conan-io/conan-extensions/blob/main/extensions/commands/art/"
+"readme_build_info.md"
+msgstr ""

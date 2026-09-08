@@ -1,0 +1,431 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:4
+msgid "Package Development Flow"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:6
+msgid ""
+"This section introduces the **Conan local development flow**, which allows "
+"you to work on packages in your local project directory without having to "
+"export the contents of the package to the Conan cache first."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:10
+msgid ""
+"This local workflow encourages users to perform trial-and-error in a local "
+"sub-directory relative to their recipe, much like how developers typically "
+"test building their projects with other build tools. The strategy is to test "
+"the `conanfile.py` methods individually during this phase."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:15
+msgid ""
+"Let's use this flow for the ``hello`` package we created in :ref:`the "
+"previous section<tutorial_creating_packages>`."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:18
+msgid ""
+"Please clone the sources to recreate this project. You can find them in the "
+"`examples2.0 repository <https://github.com/conan-io/examples2>`_ on GitHub:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:21
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/tutorial/developing_packages/local_package_development_flow"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:26
+msgid "You can check the contents of the folder:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:28
+msgid ""
+".\n"
+"├── conanfile.py\n"
+"└── test_package\n"
+"    ├── CMakeLists.txt\n"
+"    ├── conanfile.py\n"
+"    └── src\n"
+"        └── example.cpp"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:39
+msgid "conan source"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:41
+msgid ""
+"You will generally want to start with the :command:`conan source` command. "
+"The strategy here is that you’re testing your source method in isolation and "
+"downloading the files to a temporary sub-folder relative to the `conanfile."
+"py`. This relative folder is defined by the `self.folders.source` property "
+"in the `layout()` method. In this case, as we are using the pre-defined "
+"`cmake_layout` we set the value with the `src_folder` argument."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:49
+msgid ""
+"In this example we are packaging a third-party library from a remote "
+"repository. In the case you have your sources beside your recipe in the same "
+"repository, running :command:`conan source` will not be necessary for most "
+"of the cases."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:53
+msgid "Let's have a look at the recipe's `source()` and `layout()` method:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:55
+msgid ""
+"...\n"
+"\n"
+"def source(self):\n"
+"    # Please be aware that using the head of the branch instead of an "
+"immutable tag\n"
+"    # or commit is not a good practice in general.\n"
+"    get(self, \"https://github.com/conan-io/libhello/archive/refs/heads/main."
+"zip\",\n"
+"        strip_root=True)\n"
+"\n"
+"def layout(self):\n"
+"    cmake_layout(self, src_folder=\"src\")\n"
+"\n"
+"..."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:71
+msgid "Now run the :command:`conan source` command and check the results:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:73
+msgid ""
+"$ conan source .\n"
+"conanfile.py (hello/1.0): Calling source() in /Users/.../"
+"local_package_development_flow/src\n"
+"Downloading main.zip\n"
+"conanfile.py (hello/1.0): Unzipping 3.7KB\n"
+"Unzipping 100%"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:81
+msgid ""
+"You can see that a new `src` folder has appeared containing all the `hello` "
+"library sources."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:83
+msgid ""
+".\n"
+"├── conanfile.py\n"
+"├── src\n"
+"│   ├── CMakeLists.txt\n"
+"│   ├── LICENSE\n"
+"│   ├── README.md\n"
+"│   ├── include\n"
+"│   │   └── hello.h\n"
+"│   └── src\n"
+"│       └── hello.cpp\n"
+"└── test_package\n"
+"    ├── CMakeLists.txt\n"
+"    ├── conanfile.py\n"
+"    └── src\n"
+"        └── example.cpp"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:102
+msgid ""
+"Now it's easy to check the sources and validate them. Once you've got your "
+"source method right and it contains the files you expect, you can move on to "
+"testing the various attributes and methods related to downloading "
+"dependencies."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:107
+msgid "conan install"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:109
+msgid ""
+"After running the :command:`conan source` command, you can run the :command:"
+"`conan install` command. This command will install all the recipe "
+"requirements if needed and prepare all the files necessary for building by "
+"running the ``generate()`` method."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:113
+msgid ""
+"We can check all the parts from our recipe that are involved in this step:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:115
+msgid ""
+"...\n"
+"\n"
+"class helloRecipe(ConanFile):\n"
+"\n"
+"    ...\n"
+"\n"
+"    generators = \"CMakeDeps\"\n"
+"\n"
+"    ...\n"
+"\n"
+"    def layout(self):\n"
+"        cmake_layout(self, src_folder=\"src\")\n"
+"\n"
+"    def generate(self):\n"
+"        tc = CMakeToolchain(self)\n"
+"        tc.generate()\n"
+"\n"
+"    ..."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:136
+msgid "Now run the :command:`conan install` command and check the results:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:138
+msgid ""
+"$ conan install .\n"
+"...\n"
+"-------- Finalizing install (deploy, generators) --------\n"
+"conanfile.py (hello/1.0): Writing generators to ...\n"
+"conanfile.py (hello/1.0): Generator 'CMakeDeps' calling 'generate()'\n"
+"conanfile.py (hello/1.0): Calling generate()\n"
+"...\n"
+"conanfile.py (hello/1.0): Generating aggregated env files"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:149
+msgid ""
+"You can see that a new `build` folder appeared with all the files that Conan "
+"needs for building the library like a toolchain for `CMake` and several "
+"environment configuration files."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:153
+msgid ""
+".\n"
+"├── build\n"
+"│   └── Release\n"
+"│       └── generators\n"
+"│           ├── CMakePresets.json\n"
+"│           ├── cmakedeps_macros.cmake\n"
+"│           ├── conan_toolchain.cmake\n"
+"│           ├── conanbuild.sh\n"
+"│           ├── conanbuildenv-release-x86_64.sh\n"
+"│           ├── conanrun.sh\n"
+"│           ├── conanrunenv-release-x86_64.sh\n"
+"│           ├── deactivate_conanbuild.sh\n"
+"│           └── deactivate_conanrun.sh\n"
+"├── conanfile.py\n"
+"├── src\n"
+"│   ├── CMakeLists.txt\n"
+"│   ├── CMakeUserPresets.json\n"
+"│   ├── LICENSE\n"
+"│   ├── README.md\n"
+"│   ├── include\n"
+"│   │   └── hello.h\n"
+"│   └── src\n"
+"│       └── hello.cpp\n"
+"└── test_package\n"
+"    ├── CMakeLists.txt\n"
+"    ├── conanfile.py\n"
+"    └── src\n"
+"        └── example.cpp"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:185
+msgid ""
+"Now that all the files necessary for building are generated, you can move on "
+"to testing the `build()` method."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:189
+msgid "conan build"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:191
+msgid ""
+"Running the After :command:`conan build` command will invoke the `build()` "
+"method:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:193
+msgid ""
+"...\n"
+"\n"
+"class helloRecipe(ConanFile):\n"
+"\n"
+"    ...\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure()\n"
+"        cmake.build()\n"
+"\n"
+"    ..."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:208
+msgid "Let's run :command:`conan build`:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:210
+msgid ""
+"$ conan build .\n"
+"...\n"
+"-- Conan toolchain: C++ Standard 11 with extensions ON\n"
+"-- Conan toolchain: Setting BUILD_SHARED_LIBS = OFF\n"
+"-- Configuring done\n"
+"-- Generating done\n"
+"-- Build files have been ...\n"
+"conanfile.py (hello/1.0): CMake command: cmake --build ...\n"
+"conanfile.py (hello/1.0): RUN: cmake --build ...\n"
+"[100%] Built target hello"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:223
+msgid ""
+"For most of the recipes, the `build()` method should be very simple, and you "
+"can also invoke the build system directly, without invoking Conan, as you "
+"have all the necessary files available for building. If you check the "
+"contents of the `src` folder, you'll find a `CMakeUserPresets.json` file "
+"that you can use to configure and build the `conan-release` preset. Let's "
+"try it:"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:229
+msgid ""
+"$ cd src\n"
+"$ cmake --preset conan-release\n"
+"...\n"
+"-- Configuring done\n"
+"-- Generating done\n"
+"\n"
+"$ cmake --build --preset conan-release\n"
+"...\n"
+"[100%] Built target hello"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:241
+msgid ""
+"You can check that the results of invoking CMake directly are equivalent to "
+"the ones we got using the :command:`conan build` command."
+msgstr ""
+
+#: ../../../tutorial/cmake_presets_note.inc:3
+msgid ""
+"We use CMake presets in this example. This requires CMake >= 3.23 because "
+"the \"include\" from ``CMakeUserPresets.json`` to ``CMakePresets.json`` is "
+"only supported since that version. If you prefer not to use presets you can "
+"use something like:"
+msgstr ""
+
+#: ../../../tutorial/cmake_presets_note.inc:7
+msgid ""
+"cmake <path> -G <CMake generator> -DCMAKE_TOOLCHAIN_FILE=<path to\n"
+"conan_toolchain.cmake> -DCMAKE_BUILD_TYPE=Release"
+msgstr ""
+
+#: ../../../tutorial/cmake_presets_note.inc:12
+msgid ""
+"Conan will show the exact CMake command everytime you run ``conan install`` "
+"in case you can't use the presets feature."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:247
+msgid "conan export-pkg"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:249
+msgid ""
+"Now that we built the package binaries locally we can also package those "
+"artifacts in the Conan local cache using the :command:`conan export-pkg` "
+"command. Please note that this command will create the package in the Conan "
+"cache and test it running the `test_package` after that."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:254
+msgid ""
+"$ conan export-pkg .\n"
+"conanfile.py (hello/1.0) package(): Packaged 1 '.h' file: hello.h\n"
+"conanfile.py (hello/1.0) package(): Packaged 1 '.a' file: libhello.a\n"
+"conanfile.py (hello/1.0): Package 'b1d267f77ddd5d10d06d2ecf5a6bc433fbb7eeed' "
+"created\n"
+"conanfile.py (hello/1.0): Created package revision "
+"f09ef573c22f3919ba26ee91ae444eaa\n"
+"...\n"
+"conanfile.py (hello/1.0): Package folder /Users/...\n"
+"conanfile.py (hello/1.0): Exported package binary\n"
+"...\n"
+"[ 50%] Building CXX object CMakeFiles/example.dir/src/example.cpp.o\n"
+"[100%] Linking CXX executable example\n"
+"[100%] Built target example\n"
+"\n"
+"-------- Testing the package: Running test() --------\n"
+"hello/1.0 (test package): Running test()\n"
+"hello/1.0 (test package): RUN: ./example\n"
+"hello/1.0: Hello World Release!\n"
+"hello/1.0: __x86_64__ defined\n"
+"hello/1.0: __cplusplus201103\n"
+"hello/1.0: __GNUC__4\n"
+"hello/1.0: __GNUC_MINOR__2\n"
+"hello/1.0: __clang_major__14\n"
+"hello/1.0: __apple_build_version__14000029"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:280
+msgid ""
+"Now you can list the packages in the local cache and check that the "
+"``hello/1.0`` package was created."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:283
+msgid ""
+"$ conan list hello/1.0\n"
+"Local Cache\n"
+"  hello\n"
+"    hello/1.0"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:292
+msgid ""
+"Reference for conan :ref:`source<reference_commands_source>`, :ref:"
+"`install<reference_commands_install>`, :ref:"
+"`build<reference_commands_build>`, :ref:`export-"
+"pkg<reference_commands_export-pkg>` and :ref:`test<reference_commands_test>` "
+"commands."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:296
+msgid ""
+"Packaging prebuilt binaries :ref:`example<creating_packages_other_prebuilt>`"
+msgstr ""
+
+#: ../../../tutorial/developing_packages/local_package_development_flow.rst:297
+msgid ""
+"When you are locally developing packages, at some poing you might need to "
+"step-into dependencies code while debugging. Please read this :ref:`example "
+"how to debug and step-into dependencies <examples_dev_flow_debug_step_into>` "
+"for more information about this use case."
+msgstr ""

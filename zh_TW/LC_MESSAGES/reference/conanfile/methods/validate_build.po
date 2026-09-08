@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.16\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/validate_build.rst:5
+msgid "validate_build()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate_build.rst:7
+msgid ""
+"The ``validate_build()`` method is used to verify if a package binary can be "
+"**built** with the current configuration. It is different than the "
+"``validate()`` method which raises when the package cannot be **used** with "
+"the current configuration."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate_build.rst:10
+msgid ""
+"The ``validate_build()`` method can check the ``self.settings`` and ``self."
+"options`` values to raise ``ConanInvalidConfiguration`` if necessary."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate_build.rst:12
+msgid ""
+"from conan import ConanFile\n"
+"from conan.errors import ConanInvalidConfiguration\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    name = \"pkg\"\n"
+"    version = \"1.0\"\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def package_id(self):\n"
+"        # For this package, it doesn't matter the compiler used for the "
+"binary package\n"
+"        del self.info.settings.compiler\n"
+"\n"
+"    def validate_build(self):\n"
+"        # But we know this cannot be build with \"gcc\"\n"
+"        if self.settings.compiler == \"gcc\":\n"
+"            raise ConanInvalidConfiguration(\"This doesn't build in GCC\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate_build.rst:31
+msgid ""
+"This package cannot be created with the ``gcc`` compiler, but it can be "
+"created with other:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate_build.rst:33
+msgid ""
+"$ conan create . -s compiler=gcc\n"
+"...\n"
+"ERROR: There are invalid packages:\n"
+"pkg/1.0: Cannot build for this configuration: This doesn't build in GCC\n"
+"\n"
+"$ conan create . -s compiler=clang  # WORKS!"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate_build.rst:42
+msgid "Once the package has been built, it can be consumed with that compiler:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/validate_build.rst:44
+msgid "$ conan install --requires=pkg/1.0 -s compiler=gcc # WORKS!"
+msgstr ""

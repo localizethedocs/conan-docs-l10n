@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/lock/remove.rst:2
+msgid "conan lock remove"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:-1
+msgid ""
+"$ conan lock remove -h\n"
+"usage: conan lock remove [-h] [-v [V]] [-cc CORE_CONF] [--requires "
+"REQUIRES]\n"
+"                         [--build-requires BUILD_REQUIRES]\n"
+"                         [--python-requires PYTHON_REQUIRES]\n"
+"                         [--config-requires CONFIG_REQUIRES]\n"
+"                         [--lockfile-out LOCKFILE_OUT] [--lockfile "
+"LOCKFILE]\n"
+"\n"
+"Remove requires, build-requires or python-requires from an existing "
+"lockfile.\n"
+"References can be supplied with and without revisions like \"--\n"
+"requires=pkg/version\",\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  --requires REQUIRES   Remove references to lockfile.\n"
+"  --build-requires BUILD_REQUIRES\n"
+"                        Remove build-requires from lockfile\n"
+"  --python-requires PYTHON_REQUIRES\n"
+"                        Remove python-requires from lockfile\n"
+"  --config-requires CONFIG_REQUIRES\n"
+"                        Remove config-requires from lockfile\n"
+"  --lockfile-out LOCKFILE_OUT\n"
+"                        Filename of the created lockfile\n"
+"  --lockfile LOCKFILE   Filename of the input lockfile\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:8
+msgid ""
+"The ``conan lock remove`` command is able to remove ``requires``, "
+"``build_requires``, ``python_requires`` or ``config_requires`` items from an "
+"existing lockfile."
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:10
+msgid "For example, if we have the following ``conan.lock``:"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:12
+msgid ""
+"$ cat conan.lock\n"
+"{\n"
+"    \"version\": \"0.5\",\n"
+"    \"requires\": [\n"
+"        \"math/1.0#85d927a4a067a531b1a9c7619522c015%1702683583.3411012\",\n"
+"        \"engine/1.0#fd2b006646a54397c16a1478ac4111ac%1702683583.3544693\"\n"
+"    ],\n"
+"    \"build_requires\": [\n"
+"        \"cmake/1.0#85d927a4a067a531b1a9c7619522c015%1702683583.3411012\",\n"
+"        \"ninja/1.0#fd2b006646a54397c16a1478ac4111ac%1702683583.3544693\"\n"
+"    ],\n"
+"    \"python_requires\": [\n"
+"        \"mytool/1.0#85d927a4a067a531b1a9c7619522c015%1702683583.3411012\",\n"
+"        \"othertool/1.0#fd2b006646a54397c16a1478ac4111ac%1702683583.3544693\"\n"
+"    ]\n"
+"}"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:33
+msgid "The ``conan lock remove`` command:"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:35
+msgid ""
+"$ conan lock remove --requires=\"math/*\" --build-requires=cmake/1.0 --"
+"python-requires=\"*tool/*\""
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:39
+msgid "Will result in the following ``conan.lock``:"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:41
+msgid ""
+"$ cat conan.lock\n"
+"{\n"
+"    \"version\": \"0.5\",\n"
+"    \"requires\": [\n"
+"        \"engine/1.0#fd2b006646a54397c16a1478ac4111ac%1702683583.3544693\"\n"
+"    ],\n"
+"    \"build_requires\": [\n"
+"        \"ninja/1.0#fd2b006646a54397c16a1478ac4111ac%1702683583.3544693\"\n"
+"    ],\n"
+"    \"python_requires\": [\n"
+"    ]\n"
+"}"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:56
+msgid "It is possible to specify different patterns:"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:58
+msgid ""
+"Remove by version-ranges with expressions like ``--requires=\"math/[>=1.0 "
+"<2]\"``, and also"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:59
+msgid "Remove a specific revision: ``--requires=math/1.0#revision``"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:60
+msgid ""
+"Remove locked dependencies for a given \"team\" user ``--requires=*/*@team*``"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:62
+msgid "The ``conan lock remove`` can be useful for:"
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:64
+msgid ""
+"In combination with ``conan lock add``, it can be used to force the "
+"downgrade of a locked version to an older one. As ``conan lock add`` always "
+"adds and sorts the order, resulting in newer versions with high priority, it "
+"is not possible to force going back to an older version with just ``add``. "
+"But first using ``conan lock remove``, then ``conan lock add``, it is "
+"possible to do so."
+msgstr ""
+
+#: ../../../reference/commands/lock/remove.rst:67
+msgid ""
+"``conan lock remove`` can unlock certain dependencies, resulting in an "
+"incomplete lockfile, that can be used with ``--lockfile-partial`` to resolve "
+"to the latest available versions for the unlocked dependencies, while "
+"keeping locked the rest."
+msgstr ""

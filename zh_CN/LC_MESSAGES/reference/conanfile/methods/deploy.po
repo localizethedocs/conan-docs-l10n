@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.17\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/deploy.rst:4
+msgid "deploy()"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/deploy.rst:8
+msgid ""
+"The ``deploy()`` method is intended to deploy (copy) artifacts from the "
+"current package. It only executes at ``conan install`` time, when the ``--"
+"deployer-package`` argument is provided, otherwise ``deploy()`` is ignored."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/deploy.rst:11
+msgid ""
+"Artifacts should be deployed to the ``self.deploy_folder``, by default the "
+"current folder. A custom destination can be defined with ``--deployer-"
+"folder``. A basic ``deploy()`` method would copy all files from the package "
+"folder to the deploy folder:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/deploy.rst:14
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.files import copy\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"\n"
+"    def deploy(self):\n"
+"        copy(self, \"*\", src=self.package_folder, dst=self.deploy_folder)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/deploy.rst:25
+msgid ""
+"Refer to the documentation of the :ref:`conan install "
+"command<reference_commands_install_generators_deployers>` for more "
+"information."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/deploy.rst:29
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/deploy.rst:31
+msgid ""
+"Only \"binary\" package artifacts can be deployed, copying from the ``self."
+"package_folder``. It is recommended to copy only from the package folder, "
+"not other folders."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/deploy.rst:32
+msgid ""
+"The ``deploy()`` method is intended for final production deployments or the "
+"installation of binaries on the machine, as it extracts the files from the "
+"Conan cache. It is not intended for normal development operations, nor to "
+"build Conan packages against deployed binaries. The recommendation is to "
+"build against packages in the Conan cache."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/deploy.rst:33
+msgid ""
+"The ``self.deploy_folder`` should only be used from within the ``deploy()`` "
+"method."
+msgstr ""

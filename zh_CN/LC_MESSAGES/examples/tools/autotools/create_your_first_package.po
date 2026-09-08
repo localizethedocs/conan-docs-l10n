@@ -1,0 +1,236 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:4
+msgid "Create your first Conan package with Autotools"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:8
+msgid ""
+"This example will only work for Linux and OSX environments and does not "
+"support Windows directly, including msys2/cygwin subsystems. However, "
+"Windows Subsystem for Linux (WSL) should work since it provides a Linux "
+"environment. While Conan offers `win_bash = True` for some level of support "
+"in Windows environments with Autotools, it's not applicable in this tutorial."
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:13
+msgid ""
+"In the :ref:`Create your first Conan package "
+"tutorial<creating_packages_create_your_first_conan_package>` CMake was used "
+"as the build system. If you haven't read that section, read it first to "
+"familiarize yourself with the ``conanfile.py`` and ``test_package`` "
+"concepts, then come back to read about the specifics of the ``Autotools`` "
+"package creation."
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:18
+msgid ""
+"Use the :command:`conan new` command to create a \"Hello World\" C++ library "
+"example project:"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:20
+msgid "$ conan new autotools_lib -d name=hello -d version=0.1"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:25
+msgid "This will create a Conan package project with the following structure."
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:27
+msgid ""
+"├── conanfile.py\n"
+"├── configure.ac\n"
+"├── Makefile.am\n"
+"├── src\n"
+"│   ├── hello.h\n"
+"│   ├── hello.cpp\n"
+"│   └── Makefile.am\n"
+"└── test_package\n"
+"    ├── conanfile.py\n"
+"    ├── configure.ac\n"
+"    ├── mainc.pp\n"
+"    └── Makefile.am"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:43
+msgid "The structure and files are very similar to the previous CMake example:"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:45
+msgid ""
+"**conanfile.py**: On the root folder, there is a *conanfile.py* which is the "
+"main recipe file, responsible for defining how the package is built and "
+"consumed."
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:47
+msgid ""
+"**configure.ac**: An autotools configuration script, that contains the "
+"necessary macros and references the ``Makefiles`` it needs to configure."
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:49
+msgid ""
+"**Makefile.am**: A Makefile configuration file, defining only ``SUBDIRS = "
+"src``"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:50
+msgid ""
+"**src** folder: the folder that contains the simple C++ \"hello\" library."
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:51
+msgid ""
+"**src/Makefile.am**: Makefile configuration file containing the library "
+"definition and source files like ``libhello_la_SOURCES = hello.cpp hello.h``"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:53
+msgid ""
+"**test_package** folder: contains an *example* application that will require "
+"and link with the created package. In this case the ``test_package`` also "
+"contains an autotools project, but it is possible to have the "
+"``test_package`` using other build system as CMake if desired. It is not "
+"mandatory that the test_package is using the same build system as the "
+"package."
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:59
+msgid ""
+"Let's have a look at the package recipe *conanfile.py* (only the relevant "
+"new parts):"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:61
+msgid ""
+"exports_sources = \"configure.ac\", \"Makefile.am\", \"src/*\"\n"
+"\n"
+"def layout(self):\n"
+"    basic_layout(self)\n"
+"\n"
+"def generate(self):\n"
+"    at_toolchain = AutotoolsToolchain(self)\n"
+"    at_toolchain.generate()\n"
+"\n"
+"def build(self):\n"
+"    autotools = Autotools(self)\n"
+"    autotools.autoreconf()\n"
+"    autotools.configure()\n"
+"    autotools.make()\n"
+"\n"
+"def package(self):\n"
+"    autotools = Autotools(self)\n"
+"    autotools.install()\n"
+"    fix_apple_shared_install_name(self)"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:83
+msgid "Let's explain the different sections of the recipe briefly:"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:85
+msgid ""
+"The ``layout()`` defines a ``basic_layout()``, this is less flexible than a "
+"CMake one, so it doesn't allow any parametrization."
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:87
+msgid ""
+"The ``generate()`` method calls ``AutotoolsToolchain`` that can generate a "
+"``conanautotoolstoolchain`` environment script defining environment "
+"variables like ``CXXFLAGS`` or ``LDFLAGS`` that will be used by the "
+"``Makefiles`` to map the Conan input settings into compile flags. If the "
+"project had dependencies with Conan ``requires``, it should add "
+"``PkgConfigDeps`` too"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:91
+msgid ""
+"The ``build()`` method uses the ``Autotools()`` helper to drive the build, "
+"calling the different configure and build steps."
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:93
+msgid ""
+"The ``package()`` method uses the ``Autotools`` install functionality to "
+"define and copy to the package folder the final artifacts. Note the template "
+"also includes a call to ``fix_apple_shared_install_name()`` that uses OSX "
+"*install_name_tool* utility to set ``@rpath``to fix the ``LC_ID_DYLIB`` and "
+"``LC_LOAD_DYLIB`` fields on Apple dylibs, because it is very unusual that "
+"autotools project will manage to do this (CMake can do it) ."
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:99
+msgid ""
+"Let's build the package from sources with the current default configuration, "
+"and then let the ``test_package`` folder test the package:"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:102
+msgid ""
+"$ conan create .\n"
+"\n"
+"...\n"
+"======== Testing the package: Executing test ========\n"
+"hello/0.1 (test package): Running test()\n"
+"hello/0.1 (test package): RUN: ./main\n"
+"hello/0.1: Hello World Release!\n"
+"  hello/0.1: __x86_64__ defined\n"
+"  hello/0.1: _GLIBCXX_USE_CXX11_ABI 1\n"
+"  hello/0.1: __cplusplus201703\n"
+"  hello/0.1: __GNUC__11\n"
+"  hello/0.1: __GNUC_MINOR__1\n"
+"hello/0.1 test_package"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:119
+msgid ""
+"We can now validate that the recipe and the package binary are in the cache:"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:122
+msgid ""
+"$ conan list \"hello/1.0:*\"\n"
+"Local Cache:\n"
+"  hello\n"
+"    hello/1.0\n"
+"      revisions\n"
+"        5b151b3f08144bf25131266eb306ddff (2024-03-06 12:03:52 UTC)\n"
+"          packages\n"
+"            8631cf963dbbb4d7a378a64a6fd1dc57558bc2fe\n"
+"              info\n"
+"                settings\n"
+"                  arch: x86_64\n"
+"                  build_type: Release\n"
+"                  compiler: gcc\n"
+"                  compiler.cppstd: gnu17\n"
+"                  compiler.libcxx: libstdc++11\n"
+"                  compiler.version: 11\n"
+"                  os: Linux\n"
+"                options\n"
+"                  fPIC: True\n"
+"                  shared: False"
+msgstr ""
+
+#: ../../../examples/tools/autotools/create_your_first_package.rst:148
+msgid ":ref:`GNU built-in integrations reference<conan_tools_gnu>`."
+msgstr ""

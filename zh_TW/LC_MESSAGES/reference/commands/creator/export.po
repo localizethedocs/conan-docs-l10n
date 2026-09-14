@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.36\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/creator/export.rst:5
+msgid "conan export"
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:7
+msgid ""
+"$ conan export [-h] [-k] [-l LOCKFILE] [--lockfile-out LOCKFILE_OUT]\n"
+"               [--ignore-dirty]\n"
+"               path [reference]"
+msgstr ""
+"$ conan export [-h] [-k] [-l LOCKFILE] [--lockfile-out LOCKFILE_OUT]\n"
+"               [--ignore-dirty]\n"
+"               path [reference]"
+
+#: ../../../reference/commands/creator/export.rst:13
+msgid ""
+"Copies the recipe (conanfile.py & associated files) to your local cache."
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:15
+msgid ""
+"Use the 'reference' param to specify a user and channel where to export it. "
+"Once the recipe is in the local cache it can be shared, reused and to any "
+"remote with the 'conan upload' command."
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:19
+msgid ""
+"positional arguments:\n"
+"  path                  Path to a folder containing a conanfile.py or to a\n"
+"                        recipe file e.g., my_folder/conanfile.py\n"
+"  reference             user/channel, Pkg/version@user/channel (if name and\n"
+"                        version are not declared in the conanfile.py)\n"
+"                        Pkg/version@ if user/channel is not relevant.\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  -k, -ks, --keep-source\n"
+"                        Do not remove the source folder in the local cache,\n"
+"                        even if the recipe changed. Use this for testing\n"
+"                        purposes only\n"
+"  -l LOCKFILE, --lockfile LOCKFILE\n"
+"                        Path to a lockfile file.\n"
+"  --lockfile-out LOCKFILE_OUT\n"
+"                        Filename of the updated lockfile\n"
+"  --ignore-dirty        When using the \"scm\" feature with \"auto\" "
+"values,\n"
+"                        capture the revision and url even if there are\n"
+"                        uncommitted changes"
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:43
+msgid "The ``reference`` field can be:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:45
+msgid ""
+"A complete package reference: ``pkg/version@user/channel``. In this case, "
+"the recipe doesn't need to declare the name or the version. If the recipe "
+"declares them, they should match the provided values in the command line."
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:48
+msgid ""
+"The user and channel: ``user/channel``. The command will assume that the "
+"name and version are provided by the recipe."
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:50
+msgid ""
+"The version, user and channel: ``version@user/channel``. The recipe must "
+"provide the name, and if it does provide the version, it should match the "
+"command line one."
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:53
+msgid ""
+"There is also a \"recipe_linter\" hook in the `official hooks repository "
+"<https://github.com/conan-io/hooks>`_ that can be activated to run automatic "
+"linter checks on the recipes when they are exported."
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:56
+msgid "**Examples**"
+msgstr "**範例**"
+
+#: ../../../reference/commands/creator/export.rst:58
+msgid ""
+"Export a recipe using a full reference. Only valid if ``name`` and "
+"``version`` are not declared in the recipe:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:61
+msgid "$ conan export . mylib/1.0@myuser/channel"
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:65
+msgid ""
+"Same as above, but without any ``user/channel``. The ending ``@`` is here to "
+"disambiguate from the ``user/channel`` part:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:68
+msgid "$ conan export . mylib/1.0@"
+msgstr "$ conan export . mylib/1.0@"
+
+#: ../../../reference/commands/creator/export.rst:72
+msgid ""
+"Export a recipe from any folder directory, under the ``myuser/stable`` user "
+"and channel:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:74
+msgid "$ conan export ./folder_name myuser/stable"
+msgstr "$ conan export ./folder_name myuser/stable"
+
+#: ../../../reference/commands/creator/export.rst:78
+msgid "Export a recipe without removing the source folder in the local cache:"
+msgstr ""
+
+#: ../../../reference/commands/creator/export.rst:80
+msgid "$ conan export . fenix/stable -k"
+msgstr "$ conan export . fenix/stable -k"

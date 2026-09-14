@@ -1,0 +1,134 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:17+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../mastering/version_ranges.rst:5
+msgid "Version ranges"
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:7
+msgid ""
+"Version range expressions are supported, both in ``conanfile.txt`` and in "
+"``conanfile.py`` requirements."
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:9
+msgid ""
+"The syntax is using brackets. The square brackets are the way to specify "
+"conan that is a version range. Otherwise, versions are plain strings, they "
+"can be whatever you want them to be (up to limitations of length and allowed "
+"characters)."
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:11
+msgid ""
+"class HelloConan(ConanFile):\n"
+"   requires = \"Pkg/[>1.0,<1.8]@user/stable\""
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:17
+msgid ""
+"So when specifying ``Pkg/[expression]@user/stable`` it means that "
+"``expression`` will be evaluated as a version range. Otherwise it will be "
+"understand as plain text, so ``requires = \"Pkg/version@user/stable\"`` "
+"always means to use the version ``version`` literally."
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:19
+msgid ""
+"There are some packages that do not follow semver, a popular one would be "
+"the OpenSSL package with versions as ``1.0.2n``. They cannot be used with "
+"version-ranges, to require such packages you always have to use explicit "
+"versions (without brackets)."
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:21
+msgid ""
+"The process to manage plain versions vs version-ranges is also different. "
+"The second one requires a \"search\" in the remote, which is orders of "
+"magnitude slower than direct retrieval of the reference (plain versions), so "
+"take it into account if you plan to use it for very large projects."
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:24
+msgid ""
+"Expressions are those defined and implemented by https://pypi.org/project/"
+"node-semver/, but using a comma instead of spaces. Accepted expressions "
+"would be:"
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:27
+msgid ""
+">1.1,<2.1    # In such range\n"
+"2.8          # equivalent to =2.8\n"
+"~=3.0        # compatible, according to semver\n"
+">1.1 || 0.8  # conditions can be OR'ed"
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:34
+msgid ""
+"Version range expressions are evaluated at the time of building the "
+"dependency graph, from downstream to upstream dependencies. No joint-"
+"compatibility of the full graph is computed, instead, version ranges are "
+"evaluated when dependencies are first retrieved."
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:38
+msgid ""
+"This means, that if a package A depends on another package B (A->B), and A "
+"has a requirement for ``C/[>1.2,<1.8]``, this requirement is evaluated first "
+"and it can lead to get the version ``C/1.7``. If package B has the "
+"requirement to ``C/[>1.3,<1.6]``, this one will be overwritten by the "
+"downstream one, it will output a version incompatibility error. But the "
+"\"joint\" compatibility of the graph will not be obtained. Downstream "
+"packages or consumer projects can impose their own requirements to comply "
+"with upstream constraints, in this case a override dependency to ``C/[>1.3,"
+"<1.6]`` can be easily defined in the downstream package or project."
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:46
+msgid "The order of search for matching versions is as follows:"
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:48
+msgid ""
+"First, the local conan storage is searched for matching versions, unless "
+"the :command:`--update` flag is provided to :command:`conan install`."
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:49
+msgid ""
+"If a matching version is found, it is used in the dependency graph as a "
+"solution."
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:50
+msgid ""
+"If no matching version is locally found, it starts to search in the remotes, "
+"in order. If some remote is specified with :command:`-r=remote`, then only "
+"that remote will be used."
+msgstr ""
+
+#: ../../../mastering/version_ranges.rst:52
+msgid ""
+"If the :command:`--update` parameter is used, then the existing packages in "
+"the local conan cache will not be used, and the same search of the previous "
+"steps is carried out in the remotes. If new matching versions are found, "
+"they will be retrieved, so subsequent calls to :command:`install` will find "
+"them locally and use them."
+msgstr ""

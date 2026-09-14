@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.47\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/build_system/premake.rst:4
+msgid "|premake_logo| Premake"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:6
+msgid ""
+"Since Conan 1.9.0 the ``premake`` generator is built-in and works with :"
+"command:`premake5`, so the following should be enough to use it:"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:8
+msgid ""
+"[generators]\n"
+"premake"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:14
+msgid "Example"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:16
+msgid ""
+"We are going to use the same example from :ref:`getting_started`, a MD5 hash "
+"calculator app."
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:18
+msgid "This is the main source file for it:"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:20
+msgid "main.cpp"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:20
+msgid ""
+" #include \"Poco/MD5Engine.h\"\n"
+" #include \"Poco/DigestStream.h\"\n"
+"\n"
+" #include <iostream>\n"
+"\n"
+"\n"
+" int main(int argc, char** argv)\n"
+" {\n"
+"     Poco::MD5Engine md5;\n"
+"     Poco::DigestOutputStream ds(md5);\n"
+"     ds << \"abcdefghijklmnopqrstuvwxyz\";\n"
+"     ds.close();\n"
+"     std::cout << Poco::DigestEngine::digestToHex(md5.digest()) << std::"
+"endl;\n"
+"     return 0;\n"
+" }"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:39
+msgid ""
+"As this project relies on the Poco Libraries, we are going to create a "
+"*conanfile.txt* with our requirement and also declare the Premake generator:"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:42
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:42
+msgid ""
+" [requires]\n"
+" poco/1.9.4\n"
+"\n"
+" [generators]\n"
+" premake"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:51
+msgid ""
+"In order to use the new generator within your project, use the following "
+"Premake script as a reference:"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:53
+msgid "premake5.lua"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:53
+msgid ""
+" -- premake5.lua\n"
+"\n"
+" include(\"conanbuildinfo.premake.lua\")\n"
+"\n"
+" workspace(\"ConanPremakeDemo\")\n"
+"     conan_basic_setup()\n"
+"\n"
+"     project \"ConanPremakeDemo\"\n"
+"         kind \"ConsoleApp\"\n"
+"         language \"C++\"\n"
+"         targetdir \"bin/%{cfg.buildcfg}\"\n"
+"\n"
+"         linkoptions { conan_exelinkflags }\n"
+"\n"
+"         files { \"**.h\", \"**.cpp\" }\n"
+"\n"
+"         filter \"configurations:Debug\"\n"
+"         defines { \"DEBUG\" }\n"
+"         symbols \"On\"\n"
+"\n"
+"         filter \"configurations:Release\"\n"
+"         defines { \"NDEBUG\" }\n"
+"         optimize \"On\""
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:80
+msgid ""
+"Now we are going to let Conan retrieve the dependencies and generate the "
+"dependency information in a *conanbuildinfo.lua*:"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:82
+msgid "$ conan install ."
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:86
+msgid "Then let's call :command:`premake` to generate our project:"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:88
+msgid "Use this command for Windows Visual Studio:"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:90
+msgid "$ premake5 vs2017  # Generates a .sln"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:94
+msgid "Use this command for Linux or macOS:"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:96
+msgid "$ premake5 gmake  # Generates a makefile"
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:100
+msgid "Now you can build your project with Visual Studio or Make."
+msgstr ""
+
+#: ../../../integrations/build_system/premake.rst:107
+msgid ""
+"Check the complete reference of the :ref:`premake "
+"generator<premake_generator>`."
+msgstr ""

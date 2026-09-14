@@ -1,0 +1,351 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/profiles.rst:4
+msgid "Profiles"
+msgstr ""
+
+#: ../../../reference/profiles.rst:6
+msgid ""
+"Profiles allows users to set a complete configuration set for **settings**, "
+"**options**, **environment variables**, and **build requirements** in a "
+"file. They have this structure:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:9
+msgid ""
+"[settings]\n"
+"setting=value\n"
+"\n"
+"[options]\n"
+"MyLib:shared=True\n"
+"\n"
+"[env]\n"
+"env_var=value\n"
+"\n"
+"[build_requires]\n"
+"Tool1/0.1@user/channel\n"
+"Tool2/0.1@user/channel, Tool3/0.1@user/channel\n"
+"*: Tool4/0.1@user/channel"
+msgstr ""
+
+#: ../../../reference/profiles.rst:25
+msgid ""
+"Profile files can be used with ``-pr``/``--profile`` option in :command:"
+"`conan install` and :command:`conan create` commands."
+msgstr ""
+
+#: ../../../reference/profiles.rst:27
+msgid "$ conan create . demo/testing -pr=myprofile"
+msgstr ""
+
+#: ../../../reference/profiles.rst:31
+msgid ""
+"Profiles can be located in different folders. For example, the default "
+"*<userhome>/.conan/profiles*, and be referenced by absolute or relative path:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:34
+msgid ""
+"$ conan install . --profile /abs/path/to/profile  # abs path\n"
+"$ conan install . --profile ./relpath/to/profile  # resolved to current dir\n"
+"$ conan install . --profile profile  # resolved to user/.conan/profiles/"
+"profile"
+msgstr ""
+
+#: ../../../reference/profiles.rst:40
+msgid ""
+"Listing existing profiles in the *profiles* folder can be done like this:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:42
+msgid ""
+"$ conan profile list\n"
+"default\n"
+"myprofile1\n"
+"myprofile2\n"
+"..."
+msgstr ""
+
+#: ../../../reference/profiles.rst:50
+msgid "You can also show profile's content:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:52
+msgid ""
+"$ conan profile show myprofile1\n"
+"Configuration for profile myprofile1:\n"
+"\n"
+"[settings]\n"
+"os=Windows\n"
+"arch=x86_64\n"
+"compiler=Visual Studio\n"
+"compiler.version=15\n"
+"build_type=Release\n"
+"[options]\n"
+"[build_requires]\n"
+"[env]"
+msgstr ""
+
+#: ../../../reference/profiles.rst:67
+msgid ""
+"Use ``$PROFILE_DIR`` in your profile and it will be replaced with the "
+"absolute path to the profile file. It is useful to declare relative folders:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:70
+msgid ""
+"[env]\n"
+"PYTHONPATH=$PROFILE_DIR/my_python_tools"
+msgstr ""
+
+#: ../../../reference/profiles.rst:76
+msgid "Package settings and env vars"
+msgstr ""
+
+#: ../../../reference/profiles.rst:78
+msgid ""
+"Profiles also support **package settings** and **package environment "
+"variables** definition, so you can override some settings or environment "
+"variables for some specific package:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:81
+msgid "*.conan/profiles/zlib_with_clang*"
+msgstr ""
+
+#: ../../../reference/profiles.rst:81
+msgid ""
+" [settings]\n"
+" zlib:compiler=clang\n"
+" zlib:compiler.version=3.5\n"
+" zlib:compiler.libcxx=libstdc++11\n"
+" compiler=gcc\n"
+" compiler.version=4.9\n"
+" compiler.libcxx=libstdc++11\n"
+"\n"
+" [env]\n"
+" zlib:CC=/usr/bin/clang\n"
+" zlib:CXX=/usr/bin/clang++"
+msgstr ""
+
+#: ../../../reference/profiles.rst:96
+msgid ""
+"Your build tool will locate **clang** compiler only for the **zlib** package "
+"and **gcc** (default one) for the rest of your dependency tree."
+msgstr ""
+
+#: ../../../reference/profiles.rst:100
+msgid ""
+"If you want to override existing system environment variables, you should "
+"use the ``key=value`` syntax. If you need to pre-pend to the system "
+"environment variables you should use the syntax ``key=[value]`` or "
+"``key=[value1, value2, ...]``. A typical example is the ``PATH`` environment "
+"variable, when you want to add paths to the existing system PATH, not "
+"override it, you would use:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:104
+msgid ""
+"[env]\n"
+"PATH=[/some/path/to/my/tool]"
+msgstr ""
+
+#: ../../../reference/profiles.rst:110
+msgid "Profile includes"
+msgstr ""
+
+#: ../../../reference/profiles.rst:112
+msgid ""
+"You can include other profiles using the ``include()`` statement. The path "
+"can be relative to the current profile, absolute, or a profile name from the "
+"default profile location in the local cache."
+msgstr ""
+
+#: ../../../reference/profiles.rst:115
+msgid "The ``include()`` statement has to be at the top of the profile file:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:117 ../../../reference/profiles.rst:163
+msgid "*gcc_49*"
+msgstr ""
+
+#: ../../../reference/profiles.rst:117
+msgid ""
+" [settings]\n"
+" compiler=gcc\n"
+" compiler.version=4.9\n"
+" compiler.libcxx=libstdc++11"
+msgstr ""
+
+#: ../../../reference/profiles.rst:125 ../../../reference/profiles.rst:145
+#: ../../../reference/profiles.rst:173
+msgid "*myprofile*"
+msgstr ""
+
+#: ../../../reference/profiles.rst:125
+msgid ""
+" include(gcc_49)\n"
+"\n"
+" [settings]\n"
+" zlib:compiler=clang\n"
+" zlib:compiler.version=3.5\n"
+" zlib:compiler.libcxx=libstdc++11\n"
+"\n"
+" [env]\n"
+" zlib:CC=/usr/bin/clang\n"
+" zlib:CXX=/usr/bin/clang++"
+msgstr ""
+
+#: ../../../reference/profiles.rst:140
+msgid "Variable declaration"
+msgstr ""
+
+#: ../../../reference/profiles.rst:142
+msgid ""
+"In a profile you can declare variables that will be replaced automatically "
+"by Conan before the profile is applied. The variables have to be declared at "
+"the top of the file, after the ``include()`` statements."
+msgstr ""
+
+#: ../../../reference/profiles.rst:145
+msgid ""
+"include(gcc_49)\n"
+"CLANG=/usr/bin/clang\n"
+"\n"
+"[settings]\n"
+"zlib:compiler=clang\n"
+"zlib:compiler.version=3.5\n"
+"zlib:compiler.libcxx=libstdc++11\n"
+"\n"
+"[env]\n"
+"zlib:CC=$CLANG/clang\n"
+"zlib:CXX=$CLANG/clang++"
+msgstr ""
+
+#: ../../../reference/profiles.rst:160
+msgid ""
+"The variables will be inherited too, so you can declare variables in a "
+"profile and then include the profile in a different one, all the variables "
+"will be available:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:163
+msgid ""
+"GCC_PATH=/my/custom/toolchain/path/\n"
+"\n"
+"[settings]\n"
+"compiler=gcc\n"
+"compiler.version=4.9\n"
+"compiler.libcxx=libstdc++11"
+msgstr ""
+
+#: ../../../reference/profiles.rst:173
+msgid ""
+"include(gcc_49)\n"
+"\n"
+"[settings]\n"
+"zlib:compiler=clang\n"
+"zlib:compiler.version=3.5\n"
+"zlib:compiler.libcxx=libstdc++11\n"
+"\n"
+"[env]\n"
+"zlib:CC=$GCC_PATH/gcc\n"
+"zlib:CXX=$GCC_PATH/g++"
+msgstr ""
+
+#: ../../../reference/profiles.rst:188
+msgid "Examples"
+msgstr ""
+
+#: ../../../reference/profiles.rst:190
+msgid ""
+"If you are working with Linux and you usually work with **gcc** compiler, "
+"but you have installed **clang** compiler and want to install some package "
+"for ``clang`` compiler, you could do:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:193
+msgid "Create a ``.conan/profiles/clang`` file:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:195
+msgid ""
+"[settings]\n"
+"compiler=clang\n"
+"compiler.version=3.5\n"
+"compiler.libcxx=libstdc++11\n"
+"\n"
+"[env]\n"
+"CC=/usr/bin/clang\n"
+"CXX=/usr/bin/clang++"
+msgstr ""
+
+#: ../../../reference/profiles.rst:206
+msgid ""
+"Execute an install command passing the :command:`--profile` or :command:`-"
+"pr` parameter:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:208
+msgid "$ conan install . --profile clang"
+msgstr ""
+
+#: ../../../reference/profiles.rst:212
+msgid ""
+"Without profiles you would have needed to set CC and CXX variables in the "
+"environment to point to your clang compiler and use :command:`-s` parameters "
+"to specify the settings:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:215
+msgid ""
+"$ export CC=/usr/bin/clang\n"
+"$ export CXX=/usr/bin/clang++\n"
+"$ conan install -s compiler=clang -s compiler.version=3.5 -s compiler."
+"libcxx=libstdc++11"
+msgstr ""
+
+#: ../../../reference/profiles.rst:221
+msgid ""
+"A profile can also be used in :command:`conan create` and :command:`conan "
+"info`:"
+msgstr ""
+
+#: ../../../reference/profiles.rst:223
+msgid "$ conan create . demo/testing --profile clang"
+msgstr ""
+
+#: ../../../reference/profiles.rst:229
+msgid ""
+"Check the section :ref:`build_requires` to read more about its usage in a "
+"profile."
+msgstr ""
+
+#: ../../../reference/profiles.rst:230
+msgid "Check :ref:`conan_profile` for full reference."
+msgstr ""
+
+#: ../../../reference/profiles.rst:231
+msgid "Check :ref:`default_profile` for full reference."
+msgstr ""
+
+#: ../../../reference/profiles.rst:232
+msgid "Related section: :ref:`cross_building`."
+msgstr ""

@@ -1,0 +1,1510 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods.rst:4
+msgid "Methods"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:9
+msgid "source()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:11
+msgid ""
+"Method used to retrieve the source code from any other external origin like "
+"github using ``$ git clone`` or just a regular download."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:13
+msgid ""
+"For example, \"exporting\" the source code files, together with the "
+"*conanfile.py* file, can be handy if the source code is not under version "
+"control. But if the source code is available in a repository, you can "
+"directly get it from there:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:16
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    name = \"Hello\"\n"
+"    version = \"0.1\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"    def source(self):\n"
+"        self.run(\"git clone https://github.com/memsharded/hello.git\")\n"
+"        # You can also change branch, commit or whatever\n"
+"        # self.run(\"cd hello && git checkout 2fe5...\")\n"
+"        #\n"
+"        # Or using the Git class:\n"
+"        # git = tools.Git(folder=\"hello\")\n"
+"        # git.clone(\"https://github.com/memsharded/hello.git\", "
+"\"static_shared\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:35
+msgid ""
+"This will work, as long as git is in your current path (so in Win you "
+"probably want to run things in msysgit, cmder, etc). You can also use "
+"another VCS or direct download/unzip. For that purpose, we have provided "
+"some helpers, but you can use your own code or origin as well. This is a "
+"snippet of the conanfile of the Poco library:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:39
+msgid ""
+"from conans import ConanFile\n"
+"from conans.tools import download, unzip, check_md5, check_sha1, "
+"check_sha256\n"
+"import os\n"
+"import shutil\n"
+"\n"
+"class PocoConan(ConanFile):\n"
+"    name = \"Poco\"\n"
+"    version = \"1.6.0\"\n"
+"\n"
+"    def source(self):\n"
+"        zip_name = \"poco-1.6.0-release.zip\"\n"
+"        download(\"https://github.com/pocoproject/poco/archive/poco-1.6.0-"
+"release.zip\", zip_name)\n"
+"        # check_md5(zip_name, \"51e11f2c02a36689d6ed655b6fff9ec9\")\n"
+"        # check_sha1(zip_name, "
+"\"8d87812ce591ced8ce3a022beec1df1c8b2fac87\")\n"
+"        # check_sha256(zip_name, "
+"\"653f983c30974d292de58444626884bee84a2731989ff5a336b93a0fef168d79\")\n"
+"        unzip(zip_name)\n"
+"        shutil.move(\"poco-poco-1.6.0-release\", \"poco\")\n"
+"        os.unlink(zip_name)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:60
+msgid ""
+"The download, unzip utilities can be imported from conan, but you can also "
+"use your own code here to retrieve source code from any origin. You can even "
+"create packages for pre-compiled libraries you already have, even if you "
+"don't have the source code. You can download the binaries, skip the "
+"``build()`` method and define your ``package()`` and ``package_info()`` "
+"accordingly."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:65
+msgid ""
+"You can also use ``check_md5()``, ``check_sha1()`` and ``check_sha256()`` "
+"from the :ref:`tools <tools_check_with_algorithm_sum>` module to verify that "
+"a package is downloaded correctly."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:70
+msgid ""
+"It is very important to recall that the ``source()`` method will be executed "
+"just once, and the source code will be shared for all the package builds. So "
+"it is not a good idea to conditionally use settings or options to make "
+"changes or patches on the source code. Maybe the only setting that makes "
+"sense is the OS ``self.settings.os``, if not doing cross-building, for "
+"example to retrieve different sources:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:75
+msgid ""
+"def source(self):\n"
+"    if platform.system() == \"Windows\":\n"
+"        # download some Win source zip\n"
+"    else:\n"
+"        # download sources from Nix systems in a tgz"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:83
+msgid ""
+"If you need to patch the source code or build scripts differently for "
+"different variants of your packages, you can do it in the ``build()`` "
+"method, which uses a different folder and source code copy for each variant."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:87
+msgid "build()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:89
+msgid ""
+"This method is used to build the source code of the recipe using the desired "
+"commands. You can use your command line tools to invoke your build system or "
+"any of the build helpers provided with Conan."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:92
+msgid ""
+"def build(self):\n"
+"    cmake = CMake(self)\n"
+"    self.run(\"cmake . %s\" % (cmake.command_line))\n"
+"    self.run(\"cmake --build . %s\" % cmake.build_config)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:100
+msgid "Build helpers"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:102
+msgid ""
+"You can use these classes to prepare your build system's command invocation:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:104
+msgid "**CMake**: Prepares the invocation of cmake command with your settings."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:105
+msgid ""
+"**AutoToolsBuildEnvironment**: If you are using configure/Makefile to build "
+"your project you can use this helper. Read more: :ref:`Building with "
+"Autotools <autotools_reference>`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:107
+msgid ""
+"**MSBuild**: If you are using Visual Studio compiler directly to build your "
+"project you can use this helper :ref:`MSBuild() <msbuild>`. For lower level "
+"control, the **VisualStudioBuildEnvironment** can also be used: :ref:"
+"`VisualStudioBuildEnvironment <visual_studio_build>`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:111
+msgid "(Unit) Testing your library"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:113
+msgid ""
+"We have seen how to run package tests with conan, but what if we want to run "
+"full unit tests on our library before packaging, so that they are run for "
+"every build configuration? Nothing special is required here. We can just "
+"launch the tests from the last command in our ``build()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:118
+msgid ""
+"def build(self):\n"
+"    cmake = CMake(self)\n"
+"    cmake.configure()\n"
+"    cmake.build()\n"
+"    # here you can run CTest, launch your binaries, etc\n"
+"    cmake.test()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:130
+msgid "package()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:132
+msgid ""
+"The actual creation of the package, once that it is built, is done in the "
+"``package()`` method. Using the ``self.copy()`` method, artifacts are copied "
+"from the build folder to the package folder."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:135
+msgid "The syntax of ``self.copy`` inside ``package()`` is as follows:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:137
+msgid ""
+"self.copy(pattern, dst=\"\", src=\"\", keep_path=True, links=False, "
+"symlinks=None, excludes=None, ignore_case=False)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:154
+#: ../../../reference/conanfile/methods.rst:580
+msgid "Parameters:"
+msgstr "參數："
+
+#: ../../../reference/conanfile/methods.rst:142
+msgid ""
+"**pattern** (Required): A pattern following fnmatch syntax of the files you "
+"want to copy, from the build to the package folders. Typically something "
+"like ``*.lib`` or ``*.h``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:144
+msgid ""
+"**src** (Optional, Defaulted to ``\"\"``): The folder where you want to "
+"search the files in the build folder. If you know that your libraries when "
+"you build your package will be in *build/lib*, you will typically use "
+"``build/lib`` in this parameter. Leaving it empty means the root build "
+"folder in local cache."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:147
+msgid ""
+"**dst** (Optional, Defaulted to ``\"\"``): Destination folder in the "
+"package. They will typically be ``include`` for headers, ``lib`` for "
+"libraries and so on, though you can use any convention you like. Leaving it "
+"empty means the root package folder in local cache."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:149
+msgid ""
+"**keep_path** (Optional, Defaulted to ``True``): Means if you want to keep "
+"the relative path when you copy the files from the **src** folder to the "
+"**dst** one. Typically headers are packaged with relative path."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:151
+msgid ""
+"**symlinks** (Optional, Defaulted to ``None``): Set it to True to activate "
+"symlink copying, like typical lib.so->lib.so.9."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:152
+msgid ""
+"**excludes** (Optional, Defaulted to ``None``): Single pattern or a tuple of "
+"patterns to be excluded from the copy. If a file matches both the include "
+"and the exclude pattern, it will be excluded."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:154
+#: ../../../reference/conanfile/methods.rst:576
+msgid ""
+"**ignore_case** (Optional, Defaulted to ``False``): If enabled, it will do a "
+"case-insensitive pattern matching."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:156
+msgid "For example:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:158
+msgid ""
+"self.copy(\"*.h\", \"include\", \"build/include\") #keep_path default is True"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:162
+msgid ""
+"The final path in the package will be: ``include/mylib/path/header.h``, and "
+"as the *include* is usually added to the path, the includes will be in the "
+"form: ``#include \"mylib/path/header.h\"`` which is something desired."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:165
+msgid ""
+"``keep_path=False`` is something typically desired for libraries, both "
+"static and dynamic. Some compilers as MSVC, put them in paths as *Debug/x64/"
+"MyLib/Mylib.lib*. Using this option, we could write:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:168
+msgid "self.copy(\"*.lib\", \"lib\", \"\", keep_path=False)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:172
+msgid ""
+"And it will copy the lib to the package folder *lib/Mylib.lib*, which can be "
+"linked easily."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:176
+msgid ""
+"If you are using CMake and you have an install target defined in your "
+"CMakeLists.txt, you might be able to reuse it for this ``package()`` method. "
+"Please check :ref:`reuse_cmake_install`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:179
+msgid ""
+"This method copies files from build/source folder to the package folder "
+"depending on two situations:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:181
+msgid ""
+"**Build folder and source folder are the same**: Normally during :command:"
+"`conan create` source folder content is copied to the build folder. In this "
+"situation ``src`` parameter of ``self.copy()`` will point to the build "
+"folder in the local cache."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:184
+msgid ""
+"**Build folder is different from source folder**: When :ref:`developing a "
+"package recipe<package_dev_flow>` and source and build folder are different "
+"(:command:`conan package . --source-folder=source --build-folder=build`) or "
+"when :ref:`no_copy_source` is defined, ``package()`` method is called twice: "
+"One will copy from the source folder (``src`` parameter of ``self.copy()`` "
+"will point to the source folder), and the other will copy from the build "
+"folder (``src`` parameter of ``self.copy()`` will point to the build folder)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:192
+msgid "package_info()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:195
+msgid "cpp_info"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:197
+msgid ""
+"Each package has to specify certain build information for its consumers. "
+"This can be done in the ``cpp_info`` attribute within the ``package_info()`` "
+"method."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:200
+msgid ""
+"The ``cpp_info`` attribute has the following properties you can assign/"
+"append to:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:202
+msgid ""
+"self.cpp_info.includedirs = ['include']  # Ordered list of include paths\n"
+"self.cpp_info.libs = []  # The libs to link against\n"
+"self.cpp_info.libdirs = ['lib']  # Directories where libraries can be found\n"
+"self.cpp_info.resdirs = ['res']  # Directories where resources, data, etc "
+"can be found\n"
+"self.cpp_info.bindirs = ['bin']  # Directories where executables and shared "
+"libs can be found\n"
+"self.cpp_info.defines = []  # preprocessor definitions\n"
+"self.cpp_info.cflags = []  # pure C flags\n"
+"self.cpp_info.cppflags = []  # C++ compilation flags\n"
+"self.cpp_info.sharedlinkflags = []  # linker flags\n"
+"self.cpp_info.exelinkflags = []  # linker flags"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:215
+msgid ""
+"**includedirs**: List of relative paths (starting from the package root) of "
+"directories where headers can be found. By default it is initialized to "
+"``['include']``, and it is rarely changed."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:217
+msgid ""
+"**libs**: Ordered list of libs the client should link against. Empty by "
+"default, it is common that different configurations produce different "
+"library names. For example:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:220
+msgid ""
+"def package_info(self):\n"
+"    if not self.settings.os == \"Windows\":\n"
+"        self.cpp_info.libs = [\"libzmq-static.a\"] if self.options.static "
+"else [\"libzmq.so\"]\n"
+"    else:\n"
+"        ..."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:228
+msgid ""
+"**libdirs**: List of relative paths (starting from the package root) of "
+"directories in which to find library object binaries (\\*.lib, \\*.a, \\*."
+"so, \\*.dylib). By default it is initialized to ``['lib']``, and it is "
+"rarely changed."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:230
+msgid ""
+"**resdirs**: List of relative paths (starting from the package root) of "
+"directories in which to find resource files (images, xml, etc). By default "
+"it is initialized to ``['res']``, and it is rarely changed."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:232
+msgid ""
+"**bindirs**: List of relative paths (starting from the package root) of "
+"directories in which to find library runtime binaries (like Windows .dlls). "
+"By default it is initialized to ``['bin']``, and it is rarely changed."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:234
+msgid ""
+"**defines**: Ordered list of preprocessor directives. It is common that the "
+"consumers have to specify some sort of defines in some cases, so that "
+"including the library headers matches the binaries:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:236
+msgid ""
+"**cflags**, **cppflags**, **sharedlinkflags**, **exelinkflags**: List of "
+"flags that the consumer should activate for proper behavior. Usage of C++11 "
+"could be configured here, for example, although it is true that the consumer "
+"may want to do some flag processing to check if different dependencies are "
+"setting incompatible flags (c++11 after c++14)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:240
+msgid ""
+"if self.options.static:\n"
+"    if self.settings.compiler == \"Visual Studio\":\n"
+"        self.cpp_info.libs.append(\"ws2_32\")\n"
+"    self.cpp_info.defines = [\"ZMQ_STATIC\"]\n"
+"\n"
+"    if not self.settings.os == \"Windows\":\n"
+"        self.cpp_info.cppflags = [\"-pthread\"]"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:250
+msgid ""
+"If your recipe has requirements, you can access to your requirements "
+"``cpp_info`` as well using the ``deps_cpp_info`` object."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:252
+msgid ""
+"class OtherConan(ConanFile):\n"
+"    name = \"OtherLib\"\n"
+"    version = \"1.0\"\n"
+"    requires = \"MyLib/1.6.0@conan/stable\"\n"
+"\n"
+"    def build(self):\n"
+"        self.output.warn(self.deps_cpp_info[\"MyLib\"].libdirs)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:264
+msgid ""
+"Please take into account that defining ``self.cpp_info.bindirs`` "
+"directories, does not have any effect on system paths, PATH environment "
+"variable, nor will be directly accessible by consumers. ``self.cpp_info`` "
+"information is translated to build-systems information via generators, for "
+"example for CMake, it will be a variable in ``conanbuildinfo.cmake``. If you "
+"want a package to make accessible its executables to its consumers, you have "
+"to specify it with ``self.env_info`` as described in :ref:"
+"`method_package_info_env_info`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:272
+msgid "env_info"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:274
+msgid ""
+"Each package can also define some environment variables that the package "
+"needs to be reused. It's specially useful for :ref:`installer "
+"packages<create_installer_packages>`, to set the path with the \"bin\" "
+"folder of the packaged application. This can be done in the ``env_info`` "
+"attribute within the ``package_info()`` method."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:278
+msgid ""
+"self.env_info.path.append(\"ANOTHER VALUE\") # Append \"ANOTHER VALUE\" to "
+"the path variable\n"
+"self.env_info.othervar = \"OTHER VALUE\" # Assign \"OTHER VALUE\" to the "
+"othervar variable\n"
+"self.env_info.thirdvar.append(\"some value\") # Every variable can be set or "
+"appended a new value"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:284
+msgid ""
+"One of the most typical usages for the PATH environment variable, would be "
+"to add the current binary package directories to the path, so consumers can "
+"use those executables easily:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:287
+msgid ""
+"# assuming the binaries are in the \"bin\" subfolder\n"
+"self.env_info.PATH.append(os.path.join(self.package_folder, \"bin\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:292
+msgid ""
+"The :ref:`virtualenv<virtual_environment_generator>` generator will use the "
+"self.env_info variables to prepare a script to activate/deactive a virtual "
+"environment."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:295
+msgid ""
+"They will be automatically applied before calling the consumer *conanfile."
+"py* methods ``source()``, ``build()``, ``package()`` and ``imports()``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:298
+msgid ""
+"If your recipe has requirements, you can access to your requirements "
+"``env_info`` as well using the ``deps_env_info`` object."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:300
+msgid ""
+"class OtherConan(ConanFile):\n"
+"    name = \"OtherLib\"\n"
+"    version = \"1.0\"\n"
+"    requires = \"MyLib/1.6.0@conan/stable\"\n"
+"\n"
+"    def build(self):\n"
+"        self.output.warn(self.deps_env_info[\"MyLib\"].othervar)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:313
+msgid "user_info"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:315
+msgid ""
+"If you need to declare custom variables not related with C/C++ "
+"(``cpp_info``) and the variables are not environment variables "
+"(``env_info``), you can use the ``self.user_info`` object."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:318
+msgid ""
+"Currently only the ``cmake``, ``cmake_multi`` and ``txt`` generators "
+"supports ``user_info`` variables."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:320
+msgid ""
+"class MyLibConan(ConanFile):\n"
+"    name = \"MyLib\"\n"
+"    version = \"1.6.0\"\n"
+"\n"
+"    # ...\n"
+"\n"
+"    def package_info(self):\n"
+"        self.user_info.var1 = 2"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:332
+msgid ""
+"For the example above, in the ``cmake`` and ``cmake_multi`` generators, a "
+"variable ``CONAN_USER_MYLIB_var1`` will be declared. If your recipe has "
+"requirements, you can access to your requirements ``user_info`` using the "
+"``deps_user_info`` object."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:335
+msgid ""
+"class OtherConan(ConanFile):\n"
+"    name = \"OtherLib\"\n"
+"    version = \"1.0\"\n"
+"    requires = \"MyLib/1.6.0@conan/stable\"\n"
+"\n"
+"    def build(self):\n"
+"        self.out.warn(self.deps_user_info[\"MyLib\"].var1)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:348
+msgid "configure(), config_options()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:350
+msgid ""
+"If the package options and settings are related, and you want to configure "
+"either, you can do so in the ``configure()`` and ``config_options()`` "
+"methods."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:353
+msgid ""
+"class MyLibConan(ConanFile):\n"
+"    name = \"MyLib\"\n"
+"    version = \"2.5\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    options = {\"static\": [True, False],\n"
+"                \"header_only\": [True False]}\n"
+"\n"
+"    def configure(self):\n"
+"        # If header only, the compiler, etc, does not affect the package!\n"
+"        if self.options.header_only:\n"
+"            self.settings.clear()\n"
+"            self.options.remove(\"static\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:368
+msgid ""
+"The package has 2 options set, to be compiled as a static (as opposed to "
+"shared) library, and also not to involve any builds, because header-only "
+"libraries will be used. In this case, the settings that would affect a "
+"normal build, and even the other option (static vs shared) do not make "
+"sense, so we just clear them. That means, if someone consumes MyLib with the "
+"``header_only=True`` option, the package downloaded and used will be the "
+"same, irrespective of the OS, compiler or architecture the consumer is "
+"building with."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:373
+msgid ""
+"You can also restrict the settings used deleting any specific one. For "
+"example, it is quite common for C libraries to delete the ``libcxx`` as your "
+"library does not depend on any C++ standard library:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:377
+msgid ""
+"def configure(self):\n"
+"    del self.settings.compiler.libcxx"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:382
+msgid ""
+"The most typical usage would be the one with ``configure()`` while "
+"``config_options()`` should be used more sparingly. ``config_options()`` is "
+"used to configure or constraint the available options in a package, "
+"**before** they are given a value. So when a value is tried to be assigned "
+"it will raise an error. For example, let's suppose that a certain package "
+"library cannot be built as shared library in Windows, it can be done:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:387
+msgid ""
+"def config_options(self):\n"
+"    if self.settings.os == \"Windows\":\n"
+"        del self.options.shared"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:393
+msgid ""
+"This will be executed before the actual assignment of ``options`` (then, "
+"such ``options`` values cannot be used inside this function), so the "
+"command :command:`conan install -o Pkg:shared=True` will raise an exception "
+"in Windows saying that ``shared`` is not an option for such package."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:398
+msgid "requirements()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:400
+msgid ""
+"Besides the ``requires`` field, more advanced requirement logic can be "
+"defined in the ``requirements()`` optional method, using for example values "
+"from the package ``settings`` or ``options``:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:403
+msgid ""
+"def requirements(self):\n"
+"    if self.options.myoption:\n"
+"        self.requires(\"zlib/1.2@drl/testing\")\n"
+"    else:\n"
+"        self.requires(\"opencv/2.2@drl/stable\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:411
+msgid "This is a powerful mechanism for handling **conditional dependencies**."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:413
+msgid ""
+"When you are inside the method, each call to ``self.requires()`` will add "
+"the corresponding requirement to the current list of requirements. It also "
+"has optional parameters that allow defining the special cases, as is shown "
+"below:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:416
+msgid ""
+"def requirements(self):\n"
+"    self.requires(\"zlib/1.2@drl/testing\", private=True, override=False)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:425
+msgid "``self.requires()`` parameters:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:422
+msgid ""
+"**override** (Optional, Defaulted to ``False``): True means that this is not "
+"an actual requirement, but something to be passed upstream and override "
+"possible existing values."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:424
+msgid ""
+"**private** (Optional, Defaulted to ``False``): True means that this "
+"requirement will be somewhat embedded (like a static lib linked into a "
+"shared lib), so it is not required to link."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:428
+msgid "build_requirements()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:430
+msgid ""
+"Build requirements are requirements that are only installed and used when "
+"the package is built from sources. If there is an existing pre-compiled "
+"binary, then the build requirements for this package will not be retrieved."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:433
+msgid ""
+"This method is useful for defining conditional build requirements, for "
+"example:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:435
+msgid ""
+"class MyPkg(ConanFile):\n"
+"\n"
+"    def build_requirements(self):\n"
+"        if self.settings.os == \"Windows\":\n"
+"            self.build_requires(\"ToolWin/0.1@user/stable\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:445
+msgid ":ref:`Build requirements <build_requires>`"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:450
+msgid "system_requirements()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:452
+msgid ""
+"It is possible to install system-wide packages from conan. Just add a "
+"``system_requirements()`` method to your conanfile and specify what you need "
+"there."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:455
+msgid ""
+"For a special use case you can use also ``conans.tools.os_info`` object to "
+"detect the operating system, version and distribution (linux):"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:457
+msgid "``os_info.is_linux``: True if Linux."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:458
+msgid "``os_info.is_windows``: True if Windows."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:459
+msgid "``os_info.is_macos``: True if OSx."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:460
+msgid "``os_info.is_freebsd``: True if FreeBSD."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:461
+msgid "``os_info.is_solaris``: True if SunOS."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:462
+msgid "``os_info.os_version``: OS version."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:463
+msgid ""
+"``os_info.os_version_name``: Common name of the OS (Windows 7, Mountain "
+"Lion, Wheezy...)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:464
+msgid "``os_info.linux_distro``: Linux distribution name (None if not Linux)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:465
+msgid ""
+"``os_info.bash_path``: Returns the absolute path to a bash in the system."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:466
+msgid ""
+"``os_info.uname(options=None)``: Runs the \"uname\" command and returns the "
+"ouput. You can pass arguments with the `options` parameter."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:467
+msgid ""
+"``os_info.detect_windows_subsystem()``: Returns \"MSYS\", \"MSYS2\", "
+"\"CYGWIN\" or \"WSL\" if any of these Windows subsystems are detected."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:469
+msgid ""
+"You can also use ``SystemPackageTool`` class, that will automatically invoke "
+"the right system package tool: **apt**, **yum**, **pkg**, **pkgutil**, "
+"**brew** and **pacman** depending on the system we are running."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:472
+msgid ""
+"from conans.tools import os_info, SystemPackageTool\n"
+"\n"
+"def system_requirements(self):\n"
+"    pack_name = None\n"
+"    if os_info.linux_distro == \"ubuntu\":\n"
+"        if os_info.os_version > \"12\":\n"
+"            pack_name = \"package_name_in_ubuntu_10\"\n"
+"        else:\n"
+"            pack_name = \"package_name_in_ubuntu_12\"\n"
+"    elif os_info.linux_distro == \"fedora\" or os_info.linux_distro == "
+"\"centos\":\n"
+"        pack_name = \"package_name_in_fedora_and_centos\"\n"
+"    elif os_info.is_macos:\n"
+"        pack_name = \"package_name_in_macos\"\n"
+"    elif os_info.is_freebsd:\n"
+"        pack_name = \"package_name_in_freebsd\"\n"
+"    elif os_info.is_solaris:\n"
+"        pack_name = \"package_name_in_solaris\"\n"
+"\n"
+"    if pack_name:\n"
+"        installer = SystemPackageTool()\n"
+"        installer.install(pack_name) # Install the package, will update the "
+"package database if pack_name isn't already installed"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:496
+msgid ""
+"On Windows, there is no standard package manager, however **choco** can be "
+"invoked as an optional:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:498
+msgid ""
+"from conans.tools import os_info, SystemPackageTool, ChocolateyTool\n"
+"\n"
+"def system_requirements(self):\n"
+"    if os_info.is_windows:\n"
+"        pack_name = \"package_name_in_windows\"\n"
+"        installer = SystemPackageTool(tool=ChocolateyTool()) # Invoke choco "
+"package manager to install the package\n"
+"        installer.install(pack_name)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:509
+msgid "SystemPackageTool"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:511
+msgid "def SystemPackageTool(tool=None)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:515
+msgid ""
+"Available tool classes: **AptTool**, **YumTool**, **BrewTool**, **PkgTool**, "
+"**PkgUtilTool**, **ChocolateyTool**, **PacManTool**."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:522
+msgid "Methods:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:519
+msgid ""
+"**update()**: Updates the system package manager database. It's called "
+"automatically from the ``install()`` method by default."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:520
+msgid ""
+"**install(packages, update=True, force=False)**: Installs the ``packages`` "
+"(could be a list or a string). If ``update`` is True it will execute "
+"``update()`` first if it's needed. The packages won't be installed if they "
+"are already installed at least of ``force`` parameter is set to True. If "
+"``packages`` is a list the first available package will be picked (short-"
+"circuit like logical **or**)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:524
+msgid ""
+"The use of ``sudo`` in the internals of the ``install()`` and ``update()`` "
+"methods is controlled by the ``CONAN_SYSREQUIRES_SUDO`` environment "
+"variable, so if the users don't need sudo permissions, it is easy to opt-in/"
+"out."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:527
+msgid ""
+"Conan will keep track of the execution of this method, so that it is not "
+"invoked again and again at every Conan command. The execution is done per "
+"package, since some packages of the same library might have different system "
+"dependencies. If you are sure that all your binary packages have the same "
+"system requirements, just add the following line to your method:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:531
+msgid ""
+"def system_requirements(self):\n"
+"    self.global_system_requirements=True\n"
+"    if ..."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:540
+msgid "imports()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:542
+msgid ""
+"Importing files copies files from the local store to your project. This "
+"feature is handy for copying shared libraries (*dylib* in Mac, *dll* in Win) "
+"to the directory of your executable, so that you don't have to mess with "
+"your PATH to run them. But there are other use cases:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:545
+msgid ""
+"Copy an executable to your project, so that it can be easily run. A good "
+"example is the **Google's protobuf** code generator."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:546
+msgid ""
+"Copy package data to your project, like configuration, images, sounds... A "
+"good example is the **OpenCV** demo, in which face detection XML pattern "
+"files are required."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:549
+msgid ""
+"Importing files is also very convenient in order to redistribute your "
+"application, as many times you will just have to bundle your project's bin "
+"folder."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:552
+msgid "A typical ``imports()`` method for shared libs could be:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:554
+msgid ""
+"def imports(self):\n"
+"   self.copy(\"*.dll\", \"\", \"bin\")\n"
+"   self.copy(\"*.dylib\", \"\", \"lib\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:560
+msgid ""
+"The ``self.copy()`` method inside ``imports()`` supports the following "
+"arguments:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:562
+msgid ""
+"def copy(pattern, dst=\"\", src=\"\", root_package=None, folder=False, "
+"ignore_case=False, excludes=None, keep_path=True)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:567
+msgid ""
+"**pattern** (Required): An fnmatch file pattern of the files that should be "
+"copied."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:568
+msgid ""
+"**dst** (Optional, Defaulted to ``\"\"``): Destination local folder, with "
+"reference to current directory, to which the files will be copied."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:570
+msgid ""
+"**src** (Optional, Defaulted to ``\"\"``): Source folder in which those "
+"files will be searched. This folder will be stripped from the dst parameter. "
+"Eg.: lib/Debug/x86"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:572
+msgid ""
+"**root_package** (Optional, Defaulted to *all packages in deps*): An fnmatch "
+"pattern of the package name (\"OpenCV\", \"Boost\") from which files will be "
+"copied."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:574
+msgid ""
+"**folder** (Optional, Defaulted to ``False``): If enabled, it will copy the "
+"files from the local cache to a subfolder named as the package containing "
+"the files. Useful to avoid conflicting imports of files with the same name "
+"(e.g. License)."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:577
+msgid ""
+"**excludes** (Optional, Defaulted to ``None``): Allows defining a list of "
+"patterns (even a single pattern) to be excluded from the copy, even if they "
+"match the main ``pattern``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:579
+msgid ""
+"**keep_path** (Optional, Defaulted to ``True``): Means if you want to keep "
+"the relative path when you copy the files from the **src** folder to the "
+"**dst** one. Useful to ignore (``keep_path=False``) path of *library.dll* "
+"files in the package it is imported from."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:582
+msgid "Example to collect license files from dependencies:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:584
+msgid ""
+"def imports(self):\n"
+"    self.copy(\"license*\", dst=\"licenses\", folder=True, ignore_case=True)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:589
+msgid ""
+"If you want to be able to customize the output user directory to work with "
+"both the ``cmake`` and ``cmake_multi`` generators, then you can do:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:592
+msgid ""
+"def imports(self):\n"
+"    dest = os.getenv(\"CONAN_IMPORT_PATH\", \"bin\")\n"
+"    self.copy(\"*.dll\", dst=dest, src=\"bin\")\n"
+"    self.copy(\"*.dylib*\", dst=dest, src=\"lib\")"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:599
+msgid ""
+"And then use, for example: :command:`conan install . -e "
+"CONAN_IMPORT_PATH=Release -g cmake_multi`"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:601
+msgid ""
+"When a conanfile recipe has an ``imports()`` method and it builds from "
+"sources, it will do the following:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:603
+msgid ""
+"Before running ``build()`` it will execute ``imports()`` in the build "
+"folder, copying dependencies artifacts"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:604
+msgid "Run the ``build()`` method, which could use such imported binaries."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:605
+msgid "Remove the copied (imported) artifacts after ``build()`` is finished."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:607
+msgid ""
+"You can use the :ref:`keep_imports <keep_imports>` attribute to keep the "
+"imported artifacts, and maybe :ref:`repackage <repackage>` them."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:612
+msgid "package_id()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:614
+msgid ""
+"Creates a unique ID for the package. Default package ID is calculated using "
+"``settings``, ``options`` and ``requires`` properties. When a package "
+"creator specifies the values for any of thoses properties, it is telling "
+"that any value change will require a different binary package."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:618
+msgid ""
+"However, sometimes a package creator would need to alter the default "
+"behavior, for example, to have only one binary package for several different "
+"compiler versions. In that case you can set a custom ``self.info`` object "
+"implementing this method and the package ID will be computed with the given "
+"information:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:622
+msgid ""
+"def package_id(self):\n"
+"    v = Version(str(self.settings.compiler.version))\n"
+"    if self.settings.compiler == \"gcc\" and (v >= \"4.5\" and v < "
+"\"5.0\"):\n"
+"        self.info.settings.compiler.version = \"GCC 4 between 4.5 and 5.0\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:629
+msgid ""
+"Please, check the section :ref:`define_abi_compatibility` to get more "
+"details."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:632
+msgid "self.info"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:634
+msgid ""
+"This ``self.info`` object stores the information that will be used to "
+"compute the package ID."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:636
+msgid ""
+"This object can be manipulated to reflect the information you want in the "
+"computation of the package ID. For example, you can delete any setting or "
+"option:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:639
+msgid ""
+"def package_id(self):\n"
+"    del self.info.settings.compiler\n"
+"    del self.info.options.shared"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:646
+msgid "self.info.header_only()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:648
+msgid ""
+"The package will always be the same, irrespective of the OS, compiler or "
+"architecture the consumer is building with."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:650
+msgid ""
+"def package_id(self):\n"
+"    self.info.header_only()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:656
+msgid "self.info.vs_toolset_compatible() / self.info.vs_toolset_incompatible()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:658
+msgid ""
+"By default (``vs_toolset_compatible()`` mode) Conan will generate the same "
+"binary package when the compiler is Visual Studio and the ``compiler."
+"toolset`` matches the specified ``compiler.version``. For example, if we "
+"install some packages specifying the following settings:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:661
+msgid ""
+"def package_id(self):\n"
+"    self.info.vs_toolset_compatible()\n"
+"    # self.info.vs_toolset_incompatible()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:667
+msgid ""
+"compiler=\"Visual Studio\"\n"
+"compiler.version=14"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:672
+msgid "And then we install again specifying these settings:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:674
+msgid ""
+"compiler=\"Visual Studio\"\n"
+"compiler.version=15\n"
+"compiler.toolset=v140"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:680
+msgid ""
+"The compiler version is different, but Conan will not install a different "
+"package, because the used ``toolchain`` in both cases are considered the "
+"same. You can deactivate this default behavior using calling ``self.info."
+"vs_toolset_incompatible()``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:683
+msgid ""
+"This is the relation of Visual Studio versions and the compatible toolchain:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:686
+msgid "Visual Studio Version"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:686
+msgid "Compatible toolset"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:688
+msgid "15"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:688
+msgid "v141"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:690
+msgid "14"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:690
+msgid "v140"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:692
+msgid "13"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:692
+#: ../../../reference/conanfile/methods.rst:694
+msgid "v120"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:694
+msgid "12"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:696
+msgid "11"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:696
+msgid "v110"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:698
+msgid "10"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:698
+msgid "v100"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:700
+msgid "9"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:700
+msgid "v90"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:702
+msgid "8"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:702
+msgid "v80"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:708
+msgid "self.info.discard_build_settings() / self.info.include_build_settings()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:710
+msgid ""
+"By default (``discard_build_settings()``) Conan will generate the same "
+"binary when you change the ``os_build`` or ``arch_build`` when the ``os`` "
+"and ``arch`` are declared respectively. This is because ``os_build`` "
+"represent the machine running Conan, so, for the consumer, the only setting "
+"that matters is where the built software will run, not where is running the "
+"compilation. The same applies to ``arch_build``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:714
+msgid ""
+"With ``self.info.include_build_settings()``, Conan will generate different "
+"packages when you change the ``os_build`` or ``arch_build``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:716
+msgid ""
+"def package_id(self):\n"
+"    self.info.discard_build_settings()\n"
+"    # self.info.include_build_settings()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:725
+msgid "self.info.default_std_matching() / self.info.default_std_non_matching()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:727
+msgid ""
+"By default (``default_std_matching()``) Conan will detect the default C++ "
+"standard of your compiler to not generate different binary packages."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:730
+msgid ""
+"For example, you already built some ``gcc > 6.1`` packages, where the "
+"default std is ``gnu14``. If you introduce the ``cppstd`` setting in your "
+"recipes and specify the ``gnu14`` value, Conan won't generate new packages, "
+"because it was already the default of your compiler."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:734
+msgid ""
+"With ``self.info.default_std_non_matching()``, Conan will generate different "
+"packages when you specify the ``cppstd`` even if it matches with the default "
+"of the compiler being used:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:737
+msgid ""
+"def package_id(self):\n"
+"    self.info.default_std_non_matching()\n"
+"    # self.info.default_std_matching()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:747
+msgid "build_id()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:749
+msgid ""
+"In the general case, there is one build folder for each binary package, with "
+"the exact same hash/ID of the package. However this behavior can be changed, "
+"there are a couple of scenarios that this might be interesting:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:752
+msgid ""
+"You have a build script that generates several different configurations at "
+"once, like both debug and release artifacts, but you actually want to "
+"package and consume them separately. Same for different architectures or any "
+"other setting."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:754
+msgid ""
+"You build just one configuration (like release), but you want to create "
+"different binary packages for different consuming cases. For example, if you "
+"have created tests for the library in the build step, you might want to "
+"create two packages: one just containing the library for general usage, and "
+"another one also containing the tests. First package could be used as a "
+"reference and the other one as a tool to debug errors."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:759
+msgid ""
+"In both cases, if using different settings, the system will build twice (or "
+"more times) the same binaries, just to produce a different final binary "
+"package. With the ``build_id()`` method this logic can be changed. "
+"``build_id()`` will create a new package ID/hash for the build folder, and "
+"you can define the logic you want in it. For example:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:763
+msgid ""
+"settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"\n"
+"def build_id(self):\n"
+"    self.info_build.settings.build_type = \"Any\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:770
+msgid ""
+"So this recipe will generate a final different package for each debug/"
+"release configuration. But as the ``build_id()`` will generate the same ID "
+"for any ``build_type``, then just one folder and one build will be done. "
+"Such build should build both debug and release artifacts, and then the "
+"``package()`` method should package them accordingly to the ``self.settings."
+"build_type`` value. Different builds will still be executed if using "
+"different compilers or architectures. This method is basically an "
+"optimization of build time, avoiding multiple re-builds."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:775
+msgid "Other information like custom package options can also be changed:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:777
+msgid ""
+"def build_id(self):\n"
+"    self.info_build.options.myoption = 'MyValue' # any value possible\n"
+"    self.info_build.options.fullsource = 'Always'"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:783
+msgid ""
+"If the ``build_id()`` method does not modify the ``build_id``, and produce a "
+"different one than the ``package_id``, then the standard behavior will be "
+"applied. Consider the following:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:786
+msgid ""
+"settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"\n"
+"def build_id(self):\n"
+"    if self.settings.os == \"Windows\":\n"
+"        self.info_build.settings.build_type = \"Any\""
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:794
+msgid ""
+"This will only produce a build ID different if the package is for Windows. "
+"So the behavior in any other OS will be the standard one, as if the "
+"``build_id()`` method was not defined: the build folder will be wiped at "
+"each :command:`conan create` command and a clean build will be done."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:802
+msgid "deploy()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:804
+msgid ""
+"This method can be used in a *conanfile.py* to install in the system or user "
+"folder artifacts from packages."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:806
+msgid ""
+"def deploy(self):\n"
+"    self.copy(\"*.exe\")  # copy from current package\n"
+"    self.copy_deps(\"*.dll\") # copy from dependencies"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:812
+msgid "Where:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:814
+msgid ""
+"``self.copy()`` is the ``self.copy()`` method executed inside :ref:"
+"`package() method <method_package>`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:815
+msgid ""
+"``self.copy_deps()`` is the same as ``self.copy()`` method inside :ref:"
+"`imports() method <method_imports>`."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:817
+msgid ""
+"Both methods allow the definition of absolute paths (to install in the "
+"system), in the ``dst`` argument. By default, the ``dst`` destionation "
+"folder will be the current one."
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:820
+msgid ""
+"The ``deploy()`` method is designed to work on a package that is installed "
+"directly from its reference, as:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:822
+msgid ""
+"$ conan install Pkg/0.1@user/channel\n"
+"> ...\n"
+"> Pkg/0.1@user/testing deploy(): Copied 1 '.dll' files: mylib.dll\n"
+"> Pkg/0.1@user/testing deploy(): Copied 1 '.exe' files: myexe.exe"
+msgstr ""
+
+#: ../../../reference/conanfile/methods.rst:829
+msgid ""
+"All other packages and dependencies, even transitive dependencies of "
+"\"Pkg/0.1@user/testing\" will not be deployed, it is the responsibility of "
+"the installed package to deploy what it needs from its dependencies."
+msgstr ""

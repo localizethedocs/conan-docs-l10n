@@ -1,0 +1,248 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.50\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/intel.rst:5
+msgid "conan.tools.intel"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:9
+msgid "IntelCC"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:11
+msgid "Available since: `1.41.0 <https://github.com/conan-io/conan/releases>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:13
+msgid ""
+"This tool helps you to manage the new Intel oneAPI `DPC++/C++ <https://"
+"software.intel.com/content/www/us/en/develop/documentation/oneapi-dpcpp-cpp-"
+"compiler-dev-guide-and-reference/top.html>`_ and `Classic <https://software."
+"intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-"
+"guide-and-reference/top.html>`_ ecosystem in Conan."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:18
+msgid "This generator is **experimental** and subject to breaking changes."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:22
+msgid ""
+"macOS is not supported for the Intel oneAPI DPC++/C++ (icx/icpx or dpcpp) "
+"compilers. For macOS or Xcode support, you'll have to use the Intel C++ "
+"Classic Compiler."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:26
+msgid ""
+"Remember, you need to have installed previously the `Intel oneAPI software "
+"<https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits."
+"html>`_."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:30
+msgid ""
+"If you are using ``CMakeToolchain`` or ``MSBuildToolchain``, you don't need "
+"to use this generator. See :ref:`intel-cc compiler "
+"section<howto_intel_compiler>` for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:33
+msgid ""
+"This generator creates a ``conanintelsetvars.sh|bat`` wrapping the Intel "
+"script ``setvars.sh|bat`` that set the Intel oneAPI environment variables "
+"needed. That script is the first step to start using the Intel compilers "
+"because it's setting some important variables in your local environment."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:36
+msgid "In summary, the ``IntelCC`` generator:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:38
+msgid "Reads your profile ``[settings]`` and ``[conf]``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:39
+msgid ""
+"Uses that information to generate a ``conanintelsetvars.sh|bat`` script with "
+"the command to load the Intel ``setvars.sh|bat`` script."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:40
+msgid ""
+"Then, you or the chosen generator will be able to run that script and use "
+"any Intel compiler to compile the project."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:44
+msgid ""
+"You can launch the ``conanintelsetvars.sh|bat`` before calling your intel "
+"compiler to build a project. Also, Conan will automatically call it in the "
+"conanfile ``build(self)`` method when running any command with ``self.run``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:48
+msgid "At first, ensure you are using a *profile* like this one:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:50
+#: ../../../reference/conanfile/tools/intel.rst:111
+msgid "intelprofile"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:50
+msgid ""
+"[settings]\n"
+"...\n"
+"compiler=intel-cc\n"
+"compiler.mode=dpcpp\n"
+"compiler.version=2021.3\n"
+"compiler.libcxx=libstdc++\n"
+"build_type=Release\n"
+"[options]\n"
+"\n"
+"[tool_requires]\n"
+"[env]\n"
+"CC=dpcpp\n"
+"CXX=dpcpp\n"
+"\n"
+"[conf]\n"
+"tools.intel:installation_path=/opt/intel/oneapi"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:71
+msgid "The ``IntelCC`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:73
+#: ../../../reference/conanfile/tools/intel.rst:88
+msgid "conanfile.py"
+msgstr "conanfile.py"
+
+#: ../../../reference/conanfile/tools/intel.rst:73
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"IntelCC\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:80
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:80
+msgid ""
+"[generators]\n"
+"IntelCC"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:86
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:88
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.intel import IntelCC\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        intelcc = IntelCC(self)\n"
+"        intelcc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:102
+msgid ""
+"Now, running the command :command:`conan install . -pr intelprofile` will "
+"generate the ``conanintelsetvars.sh|bat`` script which will run the Intel "
+"*setvars* script and load all the variables into your local environment."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:107
+msgid "Custom configurations"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:109
+msgid ""
+"You can apply different installation paths and command arguments simply by "
+"changing the ``[conf]`` entries. For instance:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:111
+msgid ""
+"[settings]\n"
+"...\n"
+"compiler=intel-cc\n"
+"compiler.mode=dpcpp\n"
+"compiler.version=2021.3\n"
+"compiler.libcxx=libstdc++\n"
+"build_type=Release\n"
+"[options]\n"
+"\n"
+"[tool_requires]\n"
+"[env]\n"
+"CC=dpcpp\n"
+"CXX=dpcpp\n"
+"\n"
+"[conf]\n"
+"tools.intel:installation_path=/opt/intel/oneapi\n"
+"tools.intel:setvars_args=--config=\"full/path/to/your/config.txt\" --force"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:132
+msgid ""
+"If we run again a :command:`conan install . -pr intelprofile` then the "
+"``conanintelsetvars.sh`` script (if we are using Linux OS) will contain "
+"something like:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:134
+msgid "conanintelsetvars.sh"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:134
+msgid ""
+". \"/opt/intel/oneapi/setvars.sh\" --config=\"full/path/to/your/config.txt\" "
+"--force"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:141
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:143
+msgid "These are the two different entries for ``IntelCC``:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:145
+msgid ""
+"``tools.intel:installation_path``: **(required)** argument to tells Conan "
+"the installation path, if it's not defined, Conan will try to find it out "
+"automatically."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/intel.rst:146
+msgid ""
+"``tools.intel:setvars_args``: **(optional)** it is used to pass whatever we "
+"want as arguments to our `setvars.sh|bat` file. You can check out all the "
+"possible ones from the Intel official documentation."
+msgstr ""

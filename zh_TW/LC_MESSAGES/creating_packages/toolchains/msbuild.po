@@ -1,0 +1,203 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.31\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../creating_packages/toolchains/msbuild.rst:2
+msgid "MSBuildToolchain"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:6
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:9
+msgid "The ``MSBuildToolchain`` can be used in the ``toolchain()`` method:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:27
+msgid ""
+"from conans import ConanFile, MSBuildToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"    generators = \"msbuild\"\n"
+"    options = {\"shared\": [True, False]}\n"
+"    default_options = {\"shared\": False}\n"
+"\n"
+"    def toolchain(self):\n"
+"        tc = MSBuildToolchain(self)\n"
+"        tc.write_toolchain_files()"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:28
+msgid ""
+"The ``MSBuildToolchain`` will generate two files after a ``conan install`` "
+"command or before calling the ``build()`` method when the package is "
+"building in the cache:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:31
+msgid ""
+"The main *conan_toolchain.props* file, that can be used in the command line."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:32
+msgid ""
+"A *conan_toolchain_<config>.props* file, that will be conditionally included "
+"from the previous *conan_toolchain.props* file based on the configuration, "
+"platform and toolset, e.g.: *conan_toolchain_Release_x86_v140.props*"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:36
+msgid ""
+"Every invocation to ``conan install`` with different configuration will "
+"create a new properties ``.props`` file, that will also be conditionally "
+"included. This allows to install different sets of dependencies, then switch "
+"among them directly from the Visual Studio IDE."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:40
+msgid "The toolchain files can configure:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:42
+msgid ""
+"The Visual Studio runtime (MT/MD/MTd/MDd), obtained from Conan input settings"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:43
+msgid "The C++ standard, obtained from Conan input settings"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:47
+msgid "Generators"
+msgstr "生成器"
+
+#: ../../../creating_packages/toolchains/msbuild.rst:49
+msgid ""
+"The ``MSBuildToolchain`` only works with the ``msbuild`` generator. Please, "
+"do not use other generators, as they can have overlapping definitions that "
+"can conflict."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:54
+msgid "Using the toolchain in developer flow"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:56
+msgid ""
+"One of the advantages of using Conan toolchains is that they can help to "
+"achieve the exact same build with local development flows, than when the "
+"package is created in the cache."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:59
+msgid "With the ``MSBuildToolchain`` it is possible to do:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:74
+msgid ""
+"# Lets start in the folder containing the conanfile.py\n"
+"$ mkdir build && cd build\n"
+"# Install both debug and release deps and create the toolchain\n"
+"$ conan install ..\n"
+"$ conan install .. -s build_type=Debug\n"
+"# Add ``conan_toolchain.props`` in your IDE to the project properties\n"
+"# No need to add the configuration .props files. This needs to be done only "
+"once\n"
+"# If you have dependencies, you will need to add the .props files of the "
+"dependencies\n"
+"# too, check the \"msbuild\" generator\n"
+"# Open Visual Studio IDE and build, switching configurations directly in the "
+"IDE"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:76
+msgid "MSBuild build helper"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:78
+msgid ""
+"When using the toolchain feature, the ``MSBuild`` helper that is used in the "
+"``build()`` method will be a new, different one with new behavior."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:83
+msgid ""
+"The new ``MSBuild`` helper that is used with toolchains is experimental and "
+"subject to breaking changes in the future"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:86
+msgid "The ``MSBuild`` helper can be used like:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:100
+msgid ""
+"from conans import ConanFile, MSBuildToolchain, MSBuild\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    def toolchain(self):\n"
+"        ...\n"
+"\n"
+"    def build(self):\n"
+"        msbuild = MSBuild(self)\n"
+"        msbuild.build(\"MyProject.sln\")"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:101
+msgid ""
+"The ``MSBuild.build()`` method internally implements a call to ``msbuild`` "
+"like:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:107
+msgid ""
+"$ <vcvars-cmd> && msbuild \"MyProject.sln\" /p:Configuration=<conf> /p:"
+"Platform=<platform>"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:108
+msgid "Where:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:110
+msgid ""
+"``vcvars-cmd`` is calling the Visual Studio prompt that matches the current "
+"recipe ``settings``"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:111
+msgid ""
+"``conf`` is the configuration, typically Release, Debug, which will be "
+"obtained from ``settings.build_type`` but this will be configurable. Please "
+"open a `Github issue <https://github.com/conan-io/conan/issues>`_ if you "
+"want to define custom configurations."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/msbuild.rst:113
+msgid ""
+"``platform`` is the architecture, a mapping from the ``settings.arch`` to "
+"the common 'x86', 'x64', 'ARM', 'ARM64'. If your platform is unsupported, "
+"please report in `Github issues <https://github.com/conan-io/conan/issues>`_ "
+"as well:"
+msgstr ""

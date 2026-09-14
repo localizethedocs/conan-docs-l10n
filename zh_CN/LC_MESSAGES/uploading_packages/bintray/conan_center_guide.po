@@ -1,0 +1,337 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.14\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:4
+msgid "Contributing Packages to Conan-Center"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:6
+msgid ""
+"The `conan-center` is a moderated and curated repository that is not "
+"populated automatically. Initially, it is empty. To have your recipe or "
+"binary packages available on `conan-center`_, submit an inclusion request to "
+"Bintray and the Bintray team will review your request."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:10
+msgid ""
+"Your request is dealt with differently depending on the submitted package "
+"type:"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:12
+msgid ""
+"If you are the **author of an open source library**, your package will be "
+"approved. Keep in mind that it is your responsibility to maintain acceptable "
+"standards of quality for all packages you submit for inclusion in `conan-"
+"center`_."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:16
+msgid "If you are packaging a third-party library, follow these guidelines:"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:18
+msgid ""
+"Contributing a library to Conan-Center is really straightforward when you "
+"know how to :ref:`upload your packages to your own Bintray "
+"repository<uploading_to_bintray>`. All you have to do is to navigate to the "
+"main page of the package in Bintray and click the **\"Add to Conan "
+"Center\"** button to start the inclusion request process."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:26
+msgid "Inclusion Guidelines for Third-Party libraries"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:28
+msgid ""
+"During the inclusion request process, the JFrog staff will perform a general "
+"review and will make suggestions for improvements or better ways to "
+"implement the package."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:32
+msgid "A Single Conan Package Per OSS Library"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:34
+msgid ""
+"Before creating packages for third-party libraries, please read these "
+"general guidelines."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:36
+msgid ""
+"Ensure that there is no additional Conan package for the same library. If "
+"you are planning to support a new version of a library that already exists "
+"in the ``conan-center`` repository, please contact the package author and "
+"collaborate. All the versions of the same library have to be on the same "
+"Bintray Conan package."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:41
+msgid ""
+"It is recommended to contact the **library author** and suggest to maintain "
+"the Conan package. When possible, open a pull request to the original "
+"repository of the library with the required Conan files or suggest to open a "
+"new repository with the recipe."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:45
+msgid ""
+"If you are going to collaborate with different users to maintain the Conan "
+"package, open a Bintray organization."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:48
+msgid "Recipe Quality"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:50
+msgid ""
+"**Git public repository**: The recipe needs to be hosted in a public Git "
+"repository that supports collaboration."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:53
+msgid ""
+"**Recipe fields**: `description`, `license` and `url` are required. The "
+"`license` field refers to the library being packaged."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:56
+msgid ""
+"**Linter:** Is important to have a reasonably clean Linter, :command:`conan "
+"export` and  :command:`conan create` otherwise it will generate warnings and "
+"errors. Keep it as clean as possible to guarantee a recipe less prone to "
+"error and more coherent."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:60
+msgid ""
+"**Updated:** Don't use deprecated features and when possible use the latest "
+"Conan features, build helpers, etc."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:63
+msgid ""
+"**Clean:** The code style will be reviewed to guarantee the readability of "
+"the recipe."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:65
+msgid ""
+"**test_package:** The recipes must contain a :ref:"
+"`test_package<packaging_getting_started>`."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:67
+msgid ""
+"**Maintenance commitment:** You are responsible for keeping the recipe "
+"updated, fix issues etc., so be aware that a minimal commitment is required. "
+"The Conan organization reserves the right to unlink a poorly maintained "
+"package or replace it with better alternatives."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:71
+msgid ""
+"**Raise errors on invalid configurations:** If the library doesn't work for "
+"a specific configuration, e.g., requires **gcc>7**, the recipe must contain "
+"a ``configure(self)`` method  that raises an exception in case of invalid "
+"settings/options."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:75
+msgid ""
+"def configure(self):\n"
+"    if self.settings.compiler == \"gcc\" and self.settings.compiler.version "
+"< \"7.0\":\n"
+"        raise ConanException(\"GCC > 7.0 is required\")\n"
+"    if self.settings.os == \"Windows\":\n"
+"        raise ConanException(\"Windows not supported\")"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:83
+msgid ""
+"**Without version ranges**: Due to the fact that many libraries do not "
+"follow semantic versioning, and that dependency resolution of version ranges "
+"is not always clear, recipes in the Conan center should fix the version of "
+"their dependencies and not use version ranges."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:86
+msgid ""
+"**LICENSE of the recipe:** The public repository must contain a ``LICENSE`` "
+"file with an OSS license."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:89
+msgid ""
+"**LICENSE of the library:** Every built binary package must contain one or "
+"more ``license*`` file(s), so make sure that in the ``package()`` method of "
+"your recipe, you include the library licenses in the ``licenses`` subfolder."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:93
+msgid ""
+"def package(self):\n"
+"    self.copy(\"license*\", dst=\"licenses\",  ignore_case=True, "
+"keep_path=False)"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:98
+msgid ""
+"Sometimes there is no ``license`` file, for that, read :ref:`Howtos/Extract "
+"licenses from headers<extract_licenses_from_headers>`."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:100
+msgid ""
+"**Invalid configurations:** There is a special exception, ``conans.errors."
+"ConanInvalidConfiguration`` to be launched from ``configure()`` function in "
+"a recipe if the given configuration/options is known not to work. This way "
+"the recipe owner can declare an invalid configuration and consumers (e.g. CI "
+"tools like ``conan-package-tools``) will be able to handle it."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:107
+msgid "CI Integration"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:109
+msgid ""
+"If you are packaging a header-only library, you will only need to provide "
+"one CI configuration (e.g., Travis with gcc 6.1) to validate that the "
+"package is built correctly (use :command:`conan create`)."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:112
+msgid ""
+"Unless your library is a header-only library or doesn't support a concrete "
+"operating system or compiler, you will need to provide a CI systems "
+"integration to support:"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:115
+msgid ""
+"**Linux:** GCC, latest version recommended from each major (4.9, 5.4, 6.3)"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:116
+msgid "**Linux:** Clang, latest version recommended from each major (3.9, 4.0)"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:117
+msgid ""
+"**Mac OSX:** Two latest versions of apple-clang, e.g., (8.0, 8.1) or newer."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:118
+msgid "**Windows:** Visual Studio 12, 14 and 15 (or newer)"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:120
+msgid ""
+"The easiest way to provide the CI integration (with Appveyor for Windows "
+"builds, Travis.ci for Linux and OSX, and Gitlab for Linux) is to use the :"
+"ref:`conan new<conan_new>` command. Take a look at the options to generate a "
+"library layout with the required appveyor/travis/gitlab."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:124
+msgid ""
+"You can also copy the following files from this `zlib Conan package "
+"repository`_ and modify them:"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:126
+msgid "``.travis`` folder. No need to adjust anything."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:127
+msgid "``.travis.yml`` file. Adjust your username, library reference, etc."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:128
+msgid "``appveyor.yml`` file. Adjust your username, library reference, etc."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:130
+msgid ""
+"Take a look at the :ref:`Travis CI<travis_integration>`, :ref:"
+"`Appveyor<appveyor_ci>` and :ref:`GitLab CI<gitlab_integration>` integration "
+"guides."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:134
+msgid "Bintray Package Data"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:136
+msgid "In the Bintray page of your package, fill in the following fields:"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:138
+msgid "Description (description of the packaged library)"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:139
+msgid "Licenses (license of the packaged library)"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:140
+msgid "Tags"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:141
+msgid "Maturity"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:142
+msgid "Website: If any, website of the library"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:143
+msgid ""
+"Issues tracker: URL of the issue tracker from your github repository e.g., "
+"https://github.com/conan-community/community/issues"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:145
+msgid ""
+"Version control: URL of your recipe github repository, e.g., https://github."
+"com/conan-community/conan-zlib"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:147
+msgid "GitHub repo (user/repo): e.g., conan-community/conan-zlib"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:149
+msgid "For each version page (optional, but recommended):"
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:151
+msgid "Select the README from github."
+msgstr ""
+
+#: ../../../uploading_packages/bintray/conan_center_guide.rst:152
+msgid "Select the Release Notes."
+msgstr ""

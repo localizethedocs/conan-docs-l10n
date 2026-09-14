@@ -1,0 +1,136 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/capture_version.rst:3
+msgid "How to capture package version from SCM: git"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:5
+msgid ""
+"The ``Git()`` helper from tools, can be used to capture data from the git "
+"repo where the *conanfile.py* recipe lives, and use it to define the version "
+"of the conan package."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:8
+msgid ""
+"from conans import ConanFile, tools\n"
+"\n"
+"def get_version():\n"
+"    git = tools.Git()\n"
+"    try:\n"
+"        return \"%s_%s\" % (git.get_branch(), git.get_revision())\n"
+"    except:\n"
+"        return None\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    name = \"Hello\"\n"
+"    version = get_version()\n"
+"\n"
+"    def build(self):\n"
+"        ..."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:26
+msgid ""
+"In this example, the package created with :command:`conan create` will be "
+"called ``Hello/branch_commit@user/channel``. Note that the ``get_version()`` "
+"returns ``None`` if it is not able to get the git data. This is necessary, "
+"when the recipe is already in the conan cache, and the git repository might "
+"not be there, a ``None`` value makes conan get the version from the metadata."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:34
+msgid "How to capture package version from text or build files"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:36
+msgid ""
+"It is common that a library version number would be already encoded in a "
+"text file, in some build scripts, etc. Lets take as an example that we have "
+"the following library layout, that we want to create a package from it:"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:39
+msgid ""
+"conanfile.py\n"
+"CMakeLists.txt\n"
+"src\n"
+"   hello.cpp\n"
+"   ..."
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:48
+msgid ""
+"The *CMakeLists.txt* will have some variables to define the library version "
+"number. Lets assume for simplicity that it has some line like:"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:51
+msgid ""
+"cmake_minimum_required(VERSION 2.8)\n"
+"set(MY_LIBRARY_VERSION 1.2.3) # This is the version we want\n"
+"add_library(hello src/hello.cpp)"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:58
+msgid "We will typically have in our *conanfile.py* package recipe:"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:61
+msgid ""
+"class HelloConan(ConanFile):\n"
+"    name = \"Hello\"\n"
+"    version = \"1.2.3\""
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:68
+msgid ""
+"Usually this takes very little maintenance, and when the CMakeLists version "
+"is bumped, the *conanfile.py* version is bumped too. But if you want to only "
+"have to update the *CMakeLists.txt* version, you can extract the version "
+"dynamically, with:"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:72
+msgid ""
+"from conans import ConanFile\n"
+"from conans.tools import load\n"
+"import re\n"
+"\n"
+"def get_version():\n"
+"    try:\n"
+"        content = load(\"CMakeLists.txt\")\n"
+"        version = re.search(b\"set\\(MY_LIBRARY_VERSION (.*)\\)\", content)."
+"group(1)\n"
+"        return version.strip()\n"
+"    except Exception as e:\n"
+"        return None\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"    name = \"Hello\"\n"
+"    version = get_version()"
+msgstr ""
+
+#: ../../../howtos/capture_version.rst:91
+msgid ""
+"Even if the *CMakeLists.txt* file is not exported to the local cache, it "
+"will still work, as the ``get_version()`` function returns None when it is "
+"not found, then taking the version number from the package metadata (layout)."
+msgstr ""

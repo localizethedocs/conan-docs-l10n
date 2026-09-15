@@ -1,0 +1,505 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/cache.rst:4
+msgid "conan cache"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:6
+msgid ""
+"Perform file operations in the local cache (of recipes and/or packages)."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:10
+msgid "conan cache path"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:-1
+msgid ""
+"$ conan cache path -h\n"
+"usage: conan cache path [-h] [-f FORMAT] [-v [V]] [-cc CORE_CONF]\n"
+"                        [--folder {export_source,source,build,metadata}]\n"
+"                        reference\n"
+"\n"
+"Show the path to the Conan cache for a given reference.\n"
+"\n"
+"positional arguments:\n"
+"  reference             Recipe reference or Package reference\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -f FORMAT, --format FORMAT\n"
+"                        Select the output format: json\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  --folder {export_source,source,build,metadata}\n"
+"                        Path to show. The 'build' requires a package\n"
+"                        reference. If the argument is not passed, it shows\n"
+"                        'exports' path for recipe references and 'package'\n"
+"                        folder for package references.\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:16
+msgid ""
+"The ``conan cache path`` returns the path in the cache of a given reference. "
+"Depending on the reference, it could return the path of a recipe, or the "
+"path to a package binary."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:19
+msgid "Let's say that we have created a package in our current cache with:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:21
+msgid ""
+"$ conan new cmake_lib -d name=pkg -d version=0.1\n"
+"$ conan create .\n"
+"...\n"
+"Requirements\n"
+"    pkg/0.1#cdc0d9d0e8f554d3df2388c535137d77 - Cache\n"
+"\n"
+"Requirements\n"
+"    pkg/0.1#cdc0d9d0e8f554d3df2388c535137d77:2401fa1d188d289bb25c37cfa3317e13e377a351 "
+"- Build"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:33
+msgid ""
+"And now we are interested in obtaining the path where our ``pkg/0.1`` recipe "
+"``conanfile.py`` has been exported:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:35
+msgid ""
+"$ conan cache path pkg/0.1\n"
+"<path to conan cache>/p/5cb229164ec1d245/e\n"
+"\n"
+"$ ls <path to conan cache>/p/5cb229164ec1d245/e\n"
+"conanfile.py  conanmanifest.txt"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:43
+msgid ""
+"By default, if the recipe revision is not specified, it means the \"latest\" "
+"revision in the cache. This can also be made explicit by the literal "
+"``#latest``, and also any recipe revision can be explicitly defined, these "
+"commands are equivalent to the above:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:47
+msgid ""
+"$ conan cache path pkg/0.1#latest\n"
+"<path to conan cache>/p/5cb229164ec1d245/e\n"
+"\n"
+"# The recipe revision might be different in your case.\n"
+"# Check the \"conan create\" output to get yours\n"
+"$ conan cache path pkg/0.1#cdc0d9d0e8f554d3df2388c535137d77\n"
+"<path to conan cache>/p/5cb229164ec1d245/e"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:58
+msgid ""
+"Together with the recipe folder, there are a two other folders that are "
+"common to all the binaries produced with this recipe: the \"export_source\" "
+"folder and the \"source\" folder. Both can be obtained with:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:62
+msgid ""
+"$ conan cache path pkg/0.1 --folder=export_source\n"
+"<path to conan cache>/p/5cb229164ec1d245/es\n"
+"\n"
+"$ ls <path to conan cache>/p/5cb229164ec1d245/es\n"
+"CMakeLists.txt  include/  src/\n"
+"\n"
+"$ conan cache path pkg/0.1 --folder=source\n"
+"<path to conan cache>/p/5cb229164ec1d245/s\n"
+"\n"
+"$ ls <path to conan cache>/p/5cb229164ec1d245/s\n"
+"CMakeLists.txt  include/  src/"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:77
+msgid ""
+"In this case the contents of the \"source\" folder are identical to the ones "
+"of the \"export_source\" folder because the recipe did not implement any "
+"``source()`` method that could retrieve code or do any other operation over "
+"the code, like applying patches."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:81
+msgid ""
+"The recipe revision by default will be ``#latest``, this follows the same "
+"rules as above."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:83
+msgid ""
+"Note that these two folders will not exist if the package has not been built "
+"from source, like when a precompiled binary is retrieve from a server."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:87
+msgid ""
+"It is also possible to obtain the folders of the binary packages providing "
+"the ``package_id``:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:89
+msgid ""
+"# Your package_id might be different, it depends on the platform\n"
+"# Check the \"conan create\" output to obtain yours\n"
+"$ conan cache path pkg/0.1:2401fa1d188d289bb25c37cfa3317e13e377a351\n"
+"<path to conan cache>/p/1cae77d6250c23b7/p\n"
+"\n"
+"$ ls <path to conan cache>/p/1cae77d6250c23b7/p\n"
+"conaninfo.txt  conanmanifest.txt  include/  lib/"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:99
+msgid ""
+"As above, by default it will resolve to the \"latest\" recipe revision and "
+"package revision. The command above is equal to explicitly defining "
+"``#latest`` or the exact revisions. All the commands below are equivalent to "
+"the above one:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:103
+msgid ""
+"$ conan cache path pkg/0.1#latest:2401fa1d188d289bb25c37cfa3317e13e377a351\n"
+"<path to conan cache>/p/1cae77d6250c23b7/p\n"
+"\n"
+"$ conan cache path "
+"pkg/0.1#latest:2401fa1d188d289bb25c37cfa3317e13e377a351#latest\n"
+"<path to conan cache>/p/1cae77d6250c23b7/p\n"
+"\n"
+"$ conan cache path "
+"pkg/0.1#cdc0d9d0e8f554d3df2388c535137d77:2401fa1d188d289bb25c37cfa3317e13e377a351\n"
+"<path to conan cache>/p/1cae77d6250c23b7/p"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:115
+msgid ""
+"It is possible to access the \"build\" folder with all the temporary build "
+"artifacts:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:117
+msgid ""
+"$ conan cache path pkg/0.1:2401fa1d188d289bb25c37cfa3317e13e377a351 --"
+"folder=build\n"
+"<path to conan cache>/p/1cae77d6250c23b7/b\n"
+"\n"
+"ls -al <path to conan cache>/p/1cae77d6250c23b7/b\n"
+"build/  CMakeLists.txt  CMakeUserPresets.json  conaninfo.txt  include/  src/"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:125
+msgid ""
+"Again, the \"build\" folder will only exist if the package was built from "
+"source."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:130
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:132
+msgid ""
+"This ``conan cache path`` command is intended for eventual inspection of the "
+"cache, but the cache package storage must be considered **read-only**. Do "
+"not modify, change, remove or add files from the cache."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:134
+msgid ""
+"If you are using this command to obtain the path to artifacts and then "
+"copying them, consider the usage of a ``deployer`` instead. In the general "
+"case, extracting artifacts from the cache manually is discouraged."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:136
+msgid ""
+"Developers can use the ``conan list ... --format=compact`` to get the full "
+"references in a compact way that can be copied and pasted into the ``conan "
+"cache path`` command"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:141
+msgid "conan cache clean"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:-1
+msgid ""
+"$ conan cache clean -h\n"
+"usage: conan cache clean [-h] [-v [V]] [-cc CORE_CONF] [-s] [-b] [-d] [-t]\n"
+"                         [-bs] [-p PACKAGE_QUERY]\n"
+"                         [pattern]\n"
+"\n"
+"Remove non-critical folders from the cache, like source, build and/or "
+"download\n"
+"(.tgz store) ones.\n"
+"\n"
+"positional arguments:\n"
+"  pattern               Selection pattern for references to clean\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  -s, --source          Clean source folders\n"
+"  -b, --build           Clean build folders\n"
+"  -d, --download        Clean download and metadata folders\n"
+"  -t, --temp            Clean temporary folders\n"
+"  -bs, --backup-sources\n"
+"                        Clean backup sources\n"
+"  -p PACKAGE_QUERY, --package-query PACKAGE_QUERY\n"
+"                        Remove only the packages matching a specific query,\n"
+"                        e.g., os=Windows AND (arch=x86 OR compiler=gcc)\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:147
+msgid ""
+"This command will remove all temporary folders, along with the source, build "
+"and download folder that Conan generates in its execution. It will do so for "
+"every matching reference passed in *pattern*, unless a specific flag is "
+"supplied, in which case only the specified folders will be removed."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:152
+msgid "**Examples**:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:155
+msgid "Remove all non-critical files:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:157
+msgid "$ conan cache clean \"*\""
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:162
+msgid "Remove all temporary files:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:164
+msgid "$ conan cache clean \"*\" --temp"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:169
+msgid "Remove the download folders for the ``zlib`` recipe:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:171
+msgid "$ conan cache clean \"zlib/*\" --download"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:176
+msgid "Remove everything but the download folder for the ``zlib`` recipe:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:178
+msgid "$ conan cache clean \"zlib/*\" --source --build --temp"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:184
+msgid "conan cache check-integrity"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:-1
+msgid ""
+"$ conan cache check-integrity -h\n"
+"usage: conan cache check-integrity [-h] [-v [V]] [-cc CORE_CONF]\n"
+"                                   [-p PACKAGE_QUERY]\n"
+"                                   pattern\n"
+"\n"
+"Check the integrity of the local cache for the given references\n"
+"\n"
+"positional arguments:\n"
+"  pattern               Selection pattern for references to check integrity\n"
+"                        for\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  -p PACKAGE_QUERY, --package-query PACKAGE_QUERY\n"
+"                        Only the packages matching a specific query, e.g.,\n"
+"                        os=Windows AND (arch=x86 OR compiler=gcc)\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:190
+msgid ""
+"The ``conan cache check-integrity`` command checks the integrity of Conan "
+"packages in the local cache. This means that it will throw an error if any "
+"file included in the ``conanmanifest.txt`` is missing or does not match the "
+"declared checksum in that file."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:194
+msgid ""
+"For example, to verify the integrity of the whole Conan local cache, do:"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:196
+msgid ""
+"$ conan cache check-integrity \"*\"\n"
+"mypkg/1.0: Integrity checked: ok\n"
+"mypkg/1.0:454923cd42d0da27b9b1294ebc3e4ecc84020747: Integrity checked: ok\n"
+"mypkg/1.0:454923cd42d0da27b9b1294ebc3e4ecc84020747: Integrity checked: ok\n"
+"zlib/1.2.11: Integrity checked: ok\n"
+"zlib/1.2.11:6fe7fa69f760aee504e0be85c12b2327c716f9e7: Integrity checked: ok"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:207
+msgid "conan cache backup-upload"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:-1
+msgid ""
+"$ conan cache backup-upload -h\n"
+"usage: conan cache backup-upload [-h] [-v [V]] [-cc CORE_CONF]\n"
+"\n"
+"Upload all the source backups present in the cache\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:213
+msgid ""
+"The ``conan cache backup-upload`` will upload all source backups present in "
+"the local cache to the backup server, (excluding those which have been "
+"fetched from the excluded urls listed in the ``core.sources:exclude_urls`` "
+"conf), regardless of which package they belong to, if any."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:220
+msgid "conan cache save"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:-1
+msgid ""
+"$ conan cache save -h\n"
+"usage: conan cache save [-h] [-f FORMAT] [-v [V]] [-cc CORE_CONF] [-l LIST]\n"
+"                        [--file FILE]\n"
+"                        [pattern]\n"
+"\n"
+"Get the artifacts from a package list and archive them\n"
+"\n"
+"positional arguments:\n"
+"  pattern               A pattern in the form\n"
+"                        'pkg/version#revision:package_id#revision', e.g:\n"
+"                        zlib/1.2.13:* means all binaries for zlib/1.2.13. "
+"If\n"
+"                        revision is not specified, it is assumed latest "
+"one.\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -f FORMAT, --format FORMAT\n"
+"                        Select the output format: json\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  -l LIST, --list LIST  Package list of packages to save\n"
+"  --file FILE           Save to this tgz file\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:226
+#: ../../../reference/commands/cache.rst:236
+msgid "Read more in :ref:`devops_save_restore`."
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:230
+msgid "conan cache restore"
+msgstr ""
+
+#: ../../../reference/commands/cache.rst:-1
+msgid ""
+"$ conan cache restore -h\n"
+"usage: conan cache restore [-h] [-f FORMAT] [-v [V]] [-cc CORE_CONF] file\n"
+"\n"
+"Put the artifacts from an archive into the cache\n"
+"\n"
+"positional arguments:\n"
+"  file                  Path to archive to restore\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -f FORMAT, --format FORMAT\n"
+"                        Select the output format: json\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"\n"
+msgstr ""

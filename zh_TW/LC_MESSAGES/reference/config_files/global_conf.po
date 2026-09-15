@@ -1,0 +1,696 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.14\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/config_files/global_conf.rst:4
+msgid "global.conf"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:6
+msgid ""
+"The **global.conf** file is located in the Conan user home directory, e.g., "
+"*[CONAN_HOME]/global.conf*. If it does not already exist, a default one is "
+"automatically created."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:10
+msgid "Introduction to configuration"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:12
+msgid ""
+"*global.conf* is aimed to save some core/tools/user configuration variables "
+"that will be used by Conan. For instance:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:14
+msgid "Package ID modes."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:15
+msgid "General HTTP(python-requests) configuration."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:16
+msgid "Number of retries when downloading/uploading recipes."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:17
+msgid "Related tools configurations (used by toolchains, helpers, etc.)"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:18
+msgid "Others (required Conan version, CLI non-interactive, etc.)"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:20
+msgid "Let's briefly explain the three types of existing configurations:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:22
+msgid ""
+"``core.*``: aimed to configure values of Conan core behavior (download "
+"retries, package ID modes, etc.). Only definable in *global.conf* file."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:24
+msgid ""
+"``tools.*``: aimed to configure values of Conan tools (toolchains, build "
+"helpers, etc.) used in your recipes. Definable in both *global.conf* and :"
+"ref:`profiles <reference_config_files_profiles>`."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:26
+msgid ""
+"``user.*``: aimed to define personal user configurations. They can define "
+"whatever user wants. Definable in both *global.conf* and :ref:`profiles "
+"<reference_config_files_profiles>`."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:29
+msgid ""
+"To list all the possible configurations available, run :command:`conan "
+"config list`:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:-1
+msgid ""
+"$ conan config list\n"
+"core.cache:storage_path: Absolute path where the packages and database are "
+"stored\n"
+"core.download:download_cache: Define path to a file download cache\n"
+"core.download:parallel: Number of concurrent threads to download packages\n"
+"core.download:retry: Number of retries in case of failure when downloading "
+"from Conan server\n"
+"core.download:retry_wait: Seconds to wait between download attempts from "
+"Conan server\n"
+"core.gzip:compresslevel: The Gzip compression level for Conan artifacts "
+"(default=9)\n"
+"core.net.http:cacert_path: Path containing a custom Cacert file\n"
+"core.net.http:clean_system_proxy: If defined, the proxies system env-vars "
+"will be discarded\n"
+"core.net.http:client_cert: Path or tuple of files containing a client cert "
+"(and key)\n"
+"core.net.http:max_retries: Maximum number of connection retries (requests "
+"library)\n"
+"core.net.http:no_proxy_match: List of urls to skip from proxies "
+"configuration\n"
+"core.net.http:proxies: Dictionary containing the proxy configuration\n"
+"core.net.http:timeout: Number of seconds without response to timeout "
+"(requests library)\n"
+"core.package_id:config_mode: How the 'config_version' affects binaries. By "
+"default 'None'\n"
+"core.package_id:default_build_mode: By default, 'None'\n"
+"core.package_id:default_embed_mode: By default, 'full_mode'\n"
+"core.package_id:default_non_embed_mode: By default, 'minor_mode'\n"
+"core.package_id:default_python_mode: By default, 'minor_mode'\n"
+"core.package_id:default_unknown_mode: By default, 'semver_mode'\n"
+"core.scm:excluded: List of excluded patterns for builtin git dirty checks\n"
+"core.scm:local_url: By default allows to store local folders as remote url, "
+"but not upload them. Use 'allow' for allowing upload and 'block' to "
+"completely forbid it\n"
+"core.sources.patch:extra_path: Extra path to search for patch files for "
+"conan create\n"
+"core.sources:download_cache: Folder to store the sources backup\n"
+"core.sources:download_urls: List of URLs to download backup sources from\n"
+"core.sources:exclude_urls: URLs which will not be backed up\n"
+"core.sources:upload_url: Remote URL to upload backup sources to\n"
+"core.upload:parallel: Number of concurrent threads to upload packages\n"
+"core.upload:retry: Number of retries in case of failure when uploading to "
+"Conan server\n"
+"core.upload:retry_wait: Seconds to wait between upload attempts to Conan "
+"server\n"
+"core.version_ranges:resolve_prereleases: Whether version ranges can resolve "
+"to pre-releases or not\n"
+"core:allow_uppercase_pkg_names: Temporarily (will be removed in 2.X) allow "
+"uppercase names\n"
+"core:default_build_profile: Defines the default build profile ('default' by "
+"default)\n"
+"core:default_profile: Defines the default host profile ('default' by "
+"default)\n"
+"core:non_interactive: Disable interactive user input, raises error if input "
+"necessary\n"
+"core:required_conan_version: Raise if current version does not match the "
+"defined range.\n"
+"core:skip_warnings: Do not show warnings matching any of the patterns in "
+"this list. Current warning tags are 'network', 'deprecated', 'experimental'\n"
+"core:update_policy: (Legacy). If equal 'legacy' when multiple remotes, "
+"update based on order of remotes, only the timestamp of the first occurrence "
+"of each revision counts.\n"
+"core:warnings_as_errors: Treat warnings matching any of the patterns in this "
+"list as errors and then raise an exception. Current warning tags are "
+"'network', 'deprecated'\n"
+"tools.android:cmake_legacy_toolchain: Define to explicitly pass "
+"ANDROID_USE_LEGACY_TOOLCHAIN_FILE in CMake toolchain\n"
+"tools.android:ndk_path: Argument for the CMAKE_ANDROID_NDK\n"
+"tools.apple:enable_arc: (boolean) Enable/Disable ARC Apple Clang flags\n"
+"tools.apple:enable_bitcode: (boolean) Enable/Disable Bitcode Apple Clang "
+"flags\n"
+"tools.apple:enable_visibility: (boolean) Enable/Disable Visibility Apple "
+"Clang flags\n"
+"tools.apple:sdk_path: Path to the SDK to be used\n"
+"tools.build.cross_building:can_run: (boolean) Indicates whether is possible "
+"to run a non-native app on the same architecture. It's used by 'can_run' "
+"tool\n"
+"tools.build.cross_building:cross_build: (boolean) Decides whether cross-"
+"building or not regardless of arch/OS settings. Used by 'cross_building' "
+"tool\n"
+"tools.build:cflags: List of extra C flags used by different toolchains like "
+"CMakeToolchain, AutotoolsToolchain and MesonToolchain\n"
+"tools.build:compiler_executables: Defines a Python dict-like with the "
+"compilers path to be used. Allowed keys {'c', 'cpp', 'cuda', 'objc', "
+"'objcxx', 'rc', 'fortran', 'asm', 'hip', 'ispc'}\n"
+"tools.build:cxxflags: List of extra CXX flags used by different toolchains "
+"like CMakeToolchain, AutotoolsToolchain and MesonToolchain\n"
+"tools.build:defines: List of extra definition flags used by different "
+"toolchains like CMakeToolchain, AutotoolsToolchain and MesonToolchain\n"
+"tools.build:download_source: Force download of sources for every package\n"
+"tools.build:exelinkflags: List of extra flags used by different toolchains "
+"like CMakeToolchain, AutotoolsToolchain and MesonToolchain\n"
+"tools.build:jobs: Default compile jobs number -jX Ninja, Make, /MP VS "
+"(default: max CPUs)\n"
+"tools.build:linker_scripts: List of linker script files to pass to the "
+"linker used by different toolchains like CMakeToolchain, AutotoolsToolchain, "
+"and MesonToolchain\n"
+"tools.build:sharedlinkflags: List of extra flags used by different "
+"toolchains like CMakeToolchain, AutotoolsToolchain and MesonToolchain\n"
+"tools.build:skip_test: Do not execute CMake.test() and Meson.test() when "
+"enabled\n"
+"tools.build:sysroot: Pass the --sysroot=<tools.build:sysroot> flag if "
+"available. (None by default)\n"
+"tools.build:verbosity: Verbosity of build systems if set. Possible values "
+"are 'quiet' and 'verbose'\n"
+"tools.cmake.cmake_layout:build_folder: (Experimental) Allow configuring the "
+"base folder of the build for local builds\n"
+"tools.cmake.cmake_layout:build_folder_vars: Settings and Options that will "
+"produce a different build folder and different CMake presets names\n"
+"tools.cmake.cmake_layout:test_folder: (Experimental) Allow configuring the "
+"base folder of the build for test_package\n"
+"tools.cmake.cmakedeps:new: Use the new CMakeDeps generator\n"
+"tools.cmake.cmaketoolchain:enabled_blocks: Select the specific blocks to use "
+"in the conan_toolchain.cmake\n"
+"tools.cmake.cmaketoolchain:extra_variables: Dictionary with variables to be "
+"injected in CMakeToolchain (potential override of CMakeToolchain defined "
+"variables)\n"
+"tools.cmake.cmaketoolchain:find_package_prefer_config: Argument for the "
+"CMAKE_FIND_PACKAGE_PREFER_CONFIG\n"
+"tools.cmake.cmaketoolchain:generator: User defined CMake generator to use "
+"instead of default\n"
+"tools.cmake.cmaketoolchain:presets_environment: String to define wether to "
+"add or not the environment section to the CMake presets. Empty by default, "
+"will generate the environment section in CMakePresets. Can take values: "
+"'disabled'.\n"
+"tools.cmake.cmaketoolchain:system_name: Define CMAKE_SYSTEM_NAME in "
+"CMakeToolchain\n"
+"tools.cmake.cmaketoolchain:system_processor: Define CMAKE_SYSTEM_PROCESSOR "
+"in CMakeToolchain\n"
+"tools.cmake.cmaketoolchain:system_version: Define CMAKE_SYSTEM_VERSION in "
+"CMakeToolchain\n"
+"tools.cmake.cmaketoolchain:toolchain_file: Use other existing file rather "
+"than conan_toolchain.cmake one\n"
+"tools.cmake.cmaketoolchain:toolset_arch: Toolset architecture to be used as "
+"part of CMAKE_GENERATOR_TOOLSET in CMakeToolchain\n"
+"tools.cmake.cmaketoolchain:toolset_cuda: (Experimental) Path to a CUDA "
+"toolset to use, or version if installed at the system level\n"
+"tools.cmake.cmaketoolchain:user_presets: (Experimental) Select a different "
+"name instead of CMakeUserPresets.json, empty to disable\n"
+"tools.cmake.cmaketoolchain:user_toolchain: Inject existing user toolchains "
+"at the beginning of conan_toolchain.cmake\n"
+"tools.cmake:cmake_program: Path to CMake executable\n"
+"tools.cmake:install_strip: Add --strip to cmake.install()\n"
+"tools.compilation:verbosity: Verbosity of compilation tools if set. Possible "
+"values are 'quiet' and 'verbose'\n"
+"tools.deployer:symlinks: Set to False to disable deployers copying symlinks\n"
+"tools.env.virtualenv:powershell: If specified, it generates PowerShell "
+"launchers (.ps1). Use this configuration setting the PowerShell executable "
+"you want to use (e.g., 'powershell.exe' or 'pwsh'). Setting it to True or "
+"False is deprecated as of Conan 2.11.0.\n"
+"tools.files.download:retry: Number of retries in case of failure when "
+"downloading\n"
+"tools.files.download:retry_wait: Seconds to wait between download attempts\n"
+"tools.files.download:verify: If set, overrides recipes on whether to perform "
+"SSL verification for their downloaded files. Only recommended to be set "
+"while testing\n"
+"tools.files.unzip:filter: Define tar extraction filter: 'fully_trusted', "
+"'tar', 'data'\n"
+"tools.gnu:build_triplet: Custom build triplet to pass to Autotools scripts\n"
+"tools.gnu:define_libcxx11_abi: Force definition of GLIBCXX_USE_CXX11_ABI=1 "
+"for libstdc++11\n"
+"tools.gnu:host_triplet: Custom host triplet to pass to Autotools scripts\n"
+"tools.gnu:make_program: Indicate path to make program\n"
+"tools.gnu:pkg_config: Path to pkg-config executable used by PkgConfig build "
+"helper\n"
+"tools.google.bazel:bazelrc_path: List of paths to bazelrc files to be used "
+"as 'bazel --bazelrc=rcpath1 ... build'\n"
+"tools.google.bazel:configs: List of Bazel configurations to be used as "
+"'bazel build --config=config1 ...'\n"
+"tools.graph:skip_binaries: Allow the graph to skip binaries not needed in "
+"the current configuration (True by default)\n"
+"tools.graph:skip_build: (Experimental) Do not expand build/tool_requires\n"
+"tools.graph:skip_test: (Experimental) Do not expand test_requires. If "
+"building it might need 'tools.build:skip_test=True'\n"
+"tools.graph:vendor: (Experimental) If 'build', enables the computation of "
+"dependencies of vendoring packages to build them\n"
+"tools.info.package_id:confs: List of existing configuration to be part of "
+"the package ID\n"
+"tools.intel:installation_path: Defines the Intel oneAPI installation root "
+"path\n"
+"tools.intel:setvars_args: Custom arguments to be passed onto the setvars.sh|"
+"bat script from Intel oneAPI\n"
+"tools.meson.mesontoolchain:backend: Any Meson backend: ninja, vs, vs2010, "
+"vs2012, vs2013, vs2015, vs2017, vs2019, xcode\n"
+"tools.meson.mesontoolchain:extra_machine_files: List of paths for any "
+"additional native/cross file references to be appended to the existing Conan "
+"ones\n"
+"tools.microsoft.bash:active: If Conan is already running inside bash "
+"terminal in Windows\n"
+"tools.microsoft.bash:path: The path to the shell to run when conanfile."
+"win_bash==True\n"
+"tools.microsoft.bash:subsystem: The subsystem to be used when conanfile."
+"win_bash==True. Possible values: msys2, msys, cygwin, wsl, sfu\n"
+"tools.microsoft.msbuild:installation_path: VS install path, to avoid auto-"
+"detect via vswhere, like C:/Program Files (x86)/Microsoft Visual Studio/2019/"
+"Community. Use empty string to disable\n"
+"tools.microsoft.msbuild:max_cpu_count: Argument for the /m when running msvc "
+"to build parallel projects\n"
+"tools.microsoft.msbuild:vs_version: Defines the IDE version (15, 16, 17) "
+"when using the msvc compiler. Necessary if compiler.version specifies a "
+"toolset that is not the IDE default\n"
+"tools.microsoft.msbuilddeps:exclude_code_analysis: Suppress MSBuild code "
+"analysis for patterns\n"
+"tools.microsoft.msbuildtoolchain:compile_options: Dictionary with MSBuild "
+"compiler options\n"
+"tools.microsoft:msvc_update: Force the specific update irrespective of "
+"compiler.update (CMakeToolchain and VCVars)\n"
+"tools.microsoft:winsdk_version: Use this winsdk_version in vcvars\n"
+"tools.system.package_manager:mode: Mode for package_manager tools: 'check', "
+"'report', 'report-installed' or 'install'\n"
+"tools.system.package_manager:sudo: Use 'sudo' when invoking the package "
+"manager tools in Linux (False by default)\n"
+"tools.system.package_manager:sudo_askpass: Use the '-A' argument if using "
+"sudo in Linux to invoke the system package manager (False by default)\n"
+"tools.system.package_manager:tool: Default package manager tool: 'apk', 'apt-"
+"get', 'yum', 'dnf', 'brew', 'pacman', 'choco', 'zypper', 'pkg' or 'pkgutil'\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:37
+msgid "Description of configurations"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:40
+msgid "core.cache:storage_path"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:42
+msgid ""
+"Absolute path to a folder where the Conan packages and the database of the "
+"packages will be stored. This folder will be the heaviest Conan storage "
+"folder, as it stores the binary packages downloaded or created."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:45
+#: ../../../reference/config_files/global_conf.rst:58
+#: ../../../reference/config_files/global_conf.rst:73
+#: ../../../reference/config_files/global_conf.rst:159
+msgid "*global.conf*"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:45
+msgid "core.cache:storage_path = C:\\Users\\danielm\\my_conan_storage_folder"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:50
+msgid "**Default value:** ``<CONAN_HOME>/p``"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:53
+msgid "core.download:download_cache"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:55
+msgid ""
+"Absolute path to a folder where the Conan packages will be stored "
+"*compressed*. This is useful to avoid recurrent downloads of the same "
+"packages, especially in CI."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:58
+msgid "core.download:download_cache = C:\\Users\\danielm\\my_download_cache"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:63
+msgid "**Default value:** Not defined."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:67
+msgid "User/Tools configurations"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:69
+msgid ""
+"Tools and user configurations can be defined in both the *global.conf* file "
+"and :ref:`Conan profiles <reference_config_files_profiles_conf>`. They look "
+"like:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:73
+msgid ""
+"tools.build:verbosity=verbose\n"
+"tools.microsoft.msbuild:max_cpu_count=2\n"
+"tools.microsoft.msbuild:vs_version = 16\n"
+"tools.build:jobs=10\n"
+"# User conf variable\n"
+"user.confvar:something=False"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:85
+msgid ""
+"Profiles values will have priority over globally defined ones in global.conf."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:88
+msgid "These are some hints about configuration items scope and naming:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:90
+msgid ""
+"``core.xxx`` and ``tools.yyy`` are Conan built-ins, users cannot define "
+"their own ones in these scopes."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:91
+msgid ""
+"``core.xxx`` can be defined in ``global.conf`` or via the ``--core-conf`` "
+"CLI argument only, but not in profiles."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:92
+msgid ""
+"``tools.yyy`` can be defined in ``global.conf``, in profiles ``[conf]`` "
+"section and as CLI ``-c`` arguments"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:96
+msgid ""
+"``user.zzz`` can be defined everywhere, and they are totally at the user "
+"discretion, no established naming convention. However this would be more or "
+"less expected:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:94
+msgid ""
+"For open source libraries, specially those in conancenter, ``user."
+"packagename:conf`` might be expected, like the ``boost`` recipe defining "
+"``user.boost:conf`` conf"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:95
+msgid ""
+"For private usage, the recommendation could be to use something like ``user."
+"orgname:conf`` for global org configuration across all projects, ``user."
+"orgname.project:conf`` for project or package configuration, though ``user."
+"project:conf`` might be also good if the project name is unique enough."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:96
+msgid ""
+"They _must_ have one ``:`` separator, like ``user.myorg:conf``, but not "
+"``user.myorg.conf`` or ``user.myorg``. This is to disambiguate from "
+"patterns, which are discussed below."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:99
+msgid "Configuration file template"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:102
+msgid ""
+"It is possible to use **jinja2** template engine for *global.conf*. When "
+"Conan loads this file, it immediately parses and renders the template, which "
+"must result in a standard tools-configuration text."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:105
+msgid ""
+"# Using all the cores automatically\n"
+"tools.build:jobs={{os.cpu_count()}}\n"
+"# Using the current OS\n"
+"user.myconf.system:name = {{platform.system()}}"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:112
+msgid ""
+"Conan also injects ``detect_api`` (non-stable, read the reference) to the "
+"jinja rendering context. You can use it like this:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:114
+msgid ""
+"user.myteam:myconf1={{detect_api.detect_os()}}\n"
+"user.myteam:myconf2={{detect_api.detect_arch()}}"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:119
+msgid ""
+"For more information on how to use it, please check :ref:`the detect_api "
+"section <reference_config_files_profiles_detect_api>` in the profiles "
+"reference."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:122
+msgid ""
+"The Python packages passed to render the template are ``os`` and "
+"``platform`` for all platforms and ``distro`` in Linux platforms. "
+"Additionally, the variables ``conan_version`` and ``conan_home_folder`` are "
+"also available."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:127
+msgid "Configuration data types"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:130
+msgid ""
+"All the values will be interpreted by Conan as the result of the python "
+"built-in `eval()` function:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:132
+msgid ""
+"# String\n"
+"tools.build:verbosity=verbose\n"
+"# Boolean\n"
+"tools.system.package_manager:sudo=True\n"
+"# Integer\n"
+"tools.microsoft.msbuild:max_cpu_count=2\n"
+"# List of values\n"
+"user.myconf.build:ldflags=[\"--flag1\", \"--flag2\"]\n"
+"# Dictionary\n"
+"tools.microsoft.msbuildtoolchain:compile_options={\"ExceptionHandling\": "
+"\"Async\"}"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:149
+msgid "Configuration data operators"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:151
+msgid ""
+"It's also possible to use some extra operators when you're composing tool "
+"configurations in your *global.conf* or any of your profiles:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:154
+msgid ""
+"``+=`` == ``append``: appends values at the end of the existing value (only "
+"for lists)."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:155
+msgid ""
+"``=+`` == ``prepend``: puts values at the beginning of the existing value "
+"(only for lists)."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:156
+msgid ""
+"``*=`` == ``update``: updates the specified keys only, leaving the rest "
+"unmodified (only for dictionaries)"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:157
+msgid "``=!`` == ``unset``: gets rid of any configuration value."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:159
+msgid ""
+"# Define the value => [\"-f1\"]\n"
+"user.myconf.build:flags=[\"-f1\"]\n"
+"\n"
+"# Append the value [\"-f2\"] => [\"-f1\", \"-f2\"]\n"
+"user.myconf.build:flags+=[\"-f2\"]\n"
+"\n"
+"# Prepend the value [\"-f0\"] => [\"-f0\", \"-f1\", \"-f2\"]\n"
+"user.myconf.build:flags=+[\"-f0\"]\n"
+"\n"
+"# Unset the value\n"
+"user.myconf.build:flags=!\n"
+"\n"
+"# Define the value => {\"a\": 1, \"b\": 2}\n"
+"user.myconf.build:other={\"a\": 1, \"b\": 2}\n"
+"\n"
+"# Update b = 4 => {\"a\": 1, \"b\": 4}\n"
+"user.myconf.build:other*={\"b\": 4}"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:183
+msgid "Configuration patterns"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:185
+msgid ""
+"You can use package patterns to apply the configuration in those "
+"dependencies which are matching:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:187
+msgid ""
+"*:tools.cmake.cmaketoolchain:generator=Ninja\n"
+"zlib/*:tools.cmake.cmaketoolchain:generator=Visual Studio 16 2019"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:192
+msgid ""
+"This example shows you how to specify a general ``generator`` for all your "
+"packages except for ``zlib`` which is defining ``Visual Studio 16 2019`` as "
+"its generator."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:195
+msgid ""
+"Besides that, it's quite relevant to say that **the order matters**. So, if "
+"we change the order of the configuration lines above:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:198
+msgid ""
+"zlib/*:tools.cmake.cmaketoolchain:generator=Visual Studio 16 2019\n"
+"*:tools.cmake.cmaketoolchain:generator=Ninja"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:203
+msgid ""
+"The result is that you're specifying a general ``generator`` for all your "
+"packages, and that's it. The ``zlib`` line has no effect because it's the "
+"first one evaluated, and after that, Conan is overriding that specific "
+"pattern with the most general one, so it deserves to pay special attention "
+"to the order."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:209
+msgid "Information about built-in confs"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:211
+msgid "This section provides extra information about specific confs."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:214
+msgid "Networking confs"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:219
+msgid "Configuration of client certificates"
+msgstr "客戶端證書的組態"
+
+#: ../../../reference/config_files/global_conf.rst:221
+msgid ""
+"Conan supports client TLS certificates. You can configure the path to your "
+"existing *Cacert* file and/or your client certificate (and the key) using "
+"the following configuration variables:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:224
+msgid "``core.net.http:cacert_path``: Path containing a custom Cacert file."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:225
+msgid ""
+"``core.net.http:client_cert``: Path or tuple of files containing a client "
+"certificate (and the key). See more details in `Python requests and Client "
+"Side Certificates <https://requests.readthedocs.io/en/latest/user/advanced/"
+"#client-side-certificates>`_"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:228
+msgid "For instance:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:230
+msgid "**[CONAN_HOME]/global.conf**"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:230
+msgid ""
+"core.net.http:cacert_path=/path/to/cacert.pem\n"
+"core.net.http:client_cert=('/path/client.cert', '/path/client.key')"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:239
+msgid ""
+":ref:`Managing configuration in your recipes (self.conf_info) "
+"<conan_conanfile_model_conf_info>`"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:242
+msgid ""
+"``tools.files.download:verify``: Setting ``tools.files.download:"
+"verify=False`` constitutes a security risk if enabled, as it disables "
+"certificate validation. Do not use it unless you understand the implications "
+"(And even then, properly scoping the conf to only the required recipes is a "
+"good idea) or if you are using it for development purposes"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:249
+msgid "UX confs"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:254
+msgid "Skip warnings"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:256
+msgid ""
+"There are several warnings that Conan outputs in certain cases which can be "
+"omitted via the ``core:skip_warnings`` conf, by adding the warning tag to "
+"its value."
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:259
+msgid "Those warnings are:"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:261
+msgid ""
+"``deprecated``: Messages for deprecated features such as legacy generators"
+msgstr ""
+
+#: ../../../reference/config_files/global_conf.rst:262
+msgid "``network``: Messages related to network issues, such as retries"
+msgstr ""

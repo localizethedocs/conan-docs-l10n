@@ -1,0 +1,423 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tutorial/versioning/revisions.rst:2
+msgid "Revisions"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:4
+msgid ""
+"This sections introduces how doing modifications to a given recipe or source "
+"code without explicitly creating new versions, will still internally track "
+"those changes with a mechanism called revisions."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:9
+msgid "Creating different revisions"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:11
+msgid "Let's start with a basic \"hello\" package:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:13
+msgid ""
+"$ mkdir hello && cd hello\n"
+"$ conan remove hello* -c # clean possible existing ones\n"
+"$ conan new cmake_lib -d name=hello -d version=1.0\n"
+"$ conan create .\n"
+"hello/1.0: Hello World Release!\n"
+"..."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:22
+msgid "We can now list the existing recipe revisions in the cache:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:24
+msgid ""
+"$ conan list \"hello/1.0#*\"\n"
+"Local Cache\n"
+"  hello\n"
+"    hello/1.0\n"
+"      revisions\n"
+"        2475ece651f666f42c155623228c75d2 (2023-01-31 23:08:08 UTC)"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:33
+msgid ""
+"If we now edit the ``src/hello.cpp`` file, to change the output message from "
+"\"Hello\" to \"Bye\""
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:36
+msgid "hello/src/hello.cpp"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:36
+msgid ""
+"void hello(){\n"
+"\n"
+"    #ifdef NDEBUG\n"
+"    std::cout << \"hello/1.0: Bye World Release!\\n\";\n"
+"    ..."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:45
+msgid ""
+"So if we create the package again, without changing the version "
+"``hello/1.0``, we will get a new output:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:48
+msgid ""
+"$ conan create .\n"
+"hello/1.0: Bye World Release!\n"
+"..."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:54
+msgid ""
+"But even if the version is the same, internally a new revision "
+"``2b547b7f20f5541c16d0b5cbcf207502`` has been created."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:57
+msgid ""
+"$ conan list \"hello/1.0#*\"\n"
+"Local Cache\n"
+"  hello\n"
+"    hello/1.0\n"
+"      revisions\n"
+"        2475ece651f666f42c155623228c75d2 (2023-01-31 23:08:08 UTC)\n"
+"        2b547b7f20f5541c16d0b5cbcf207502 (2023-01-31 23:08:25 UTC)"
+msgstr ""
+"$ conan list \"hello/1.0#*\"\n"
+"Local Cache\n"
+"  hello\n"
+"    hello/1.0\n"
+"      revisions\n"
+"        2475ece651f666f42c155623228c75d2 (2023-01-31 23:08:08 UTC)\n"
+"        2b547b7f20f5541c16d0b5cbcf207502 (2023-01-31 23:08:25 UTC)"
+
+#: ../../../tutorial/versioning/revisions.rst:67
+msgid ""
+"This recipe **revision**  is the hash of the contents of the recipe, "
+"including the ``conanfile.py``, and the exported sources (``src/main.cpp``, "
+"``CMakeLists.txt``, etc., that is, all files exported in the recipe)."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:71
+msgid "We can now edit the ``conanfile.py``, to define the ``licence`` value:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:73
+msgid "hello/conanfile.py"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:73
+msgid ""
+"class helloRecipe(ConanFile):\n"
+"    name = \"hello\"\n"
+"    version = \"1.0\"\n"
+"\n"
+"    # Optional metadata\n"
+"    license = \"MIT\"\n"
+"    ..."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:85
+msgid ""
+"So if we create the package again, the output will be the same, but we will "
+"also get a new revision, as the ``conanfile.py`` changed:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:88
+msgid ""
+"$ conan create .\n"
+"hello/1.0: Bye World Release!\n"
+"...\n"
+"$ conan list \"hello/1.0#*\"\n"
+"Local Cache\n"
+"  hello\n"
+"    hello/1.0\n"
+"      revisions\n"
+"        2475ece651f666f42c155623228c75d2 (2023-01-31 23:08:08 UTC)\n"
+"        2b547b7f20f5541c16d0b5cbcf207502 (2023-01-31 23:08:25 UTC)\n"
+"        1d674b4349d2b1ea06aa6419f5f99dd9 (2023-01-31 23:08:34 UTC)"
+msgstr ""
+"$ conan create .\n"
+"hello/1.0: Bye World Release!\n"
+"...\n"
+"$ conan list \"hello/1.0#*\"\n"
+"Local Cache\n"
+"  hello\n"
+"    hello/1.0\n"
+"      revisions\n"
+"        2475ece651f666f42c155623228c75d2 (2023-01-31 23:08:08 UTC)\n"
+"        2b547b7f20f5541c16d0b5cbcf207502 (2023-01-31 23:08:25 UTC)\n"
+"        1d674b4349d2b1ea06aa6419f5f99dd9 (2023-01-31 23:08:34 UTC)"
+
+#: ../../../tutorial/versioning/revisions.rst:105
+msgid ""
+"The recipe **revision** is the hash of the contents. It can be changed to be "
+"the Git commit hash with ``revision_mode = \"scm\"``. But in any case it is "
+"critical that every revision represents an immutable source, including the "
+"recipe and the source code:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:109
+msgid ""
+"If the sources are managed with ``exports_sources``, then they will be "
+"automatically be part of the hash"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:111
+msgid ""
+"If the sources are retrieved from a external location, like a downloaded "
+"tarball or a git clone, that should guarantee uniqueness, by forcing the "
+"checkout of a unique immutable tag, or a commit. Moving targets like branch "
+"names or HEAD would be broken, as revisions are considered immutable."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:116
+msgid ""
+"Any change in source code or in recipe should always imply a new revision."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:120
+msgid "**Line Endings Issue**"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:122
+msgid ""
+"Git, by default, will checkout files on Windows systems using ``CRLF`` line "
+"endings. This results in different files compared to Linux systems where "
+"files will use ``LF`` line endings. Since the files are different, the Conan "
+"recipe revision computed on Windows will differ from the revisions on other "
+"platforms like Linux. Please, check more about this issue and how to solve "
+"it in the :ref:`FAQ dedicated section<faq_different_revisions>`."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:131
+msgid "Using revisions"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:133
+msgid ""
+"The recipe revisions are resolved by default to the latest revision for "
+"every given version. In the case above, we could have a ``chat/1.0`` package "
+"that consumes the above ``hello/1.0`` package:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:137
+msgid ""
+"$ cd ..\n"
+"$ mkdir chat && cd chat\n"
+"$ conan new cmake_lib -d name=chat -d version=1.0 -d requires=hello/1.0\n"
+"$ conan create .\n"
+"...\n"
+"Requirements\n"
+"chat/1.0#17b45a168519b8e0ed178d822b7ad8c8 - Cache\n"
+"hello/1.0#1d674b4349d2b1ea06aa6419f5f99dd9 - Cache\n"
+"...\n"
+"hello/1.0: Bye World Release!\n"
+"chat/1.0: Hello World Release!"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:151
+msgid ""
+"We can see that by default, it is resolving to the latest revision "
+"``1d674b4349d2b1ea06aa6419f5f99dd9``, so we also see the ``hello/1.0: Bye "
+"World`` modified message."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:154
+msgid ""
+"It is possible to explicitly depend on a given revision in the recipes, so "
+"it is possible to modify the ``chat/1.0`` recipe to define it requires the "
+"first created revision:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:158
+msgid "chat/conanfile.py"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:158
+msgid ""
+"def requirements(self):\n"
+"    self.requires(\"hello/1.0#2475ece651f666f42c155623228c75d2\")"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:165
+msgid "So creating ``chat`` will now force the first revision:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:167
+msgid ""
+"$ conan create .\n"
+"...\n"
+"Requirements\n"
+"chat/1.0#12f87e1b8a881da6b19cc7f229e16c76 - Cache\n"
+"hello/1.0#2475ece651f666f42c155623228c75d2 - Cache\n"
+"...\n"
+"hello/1.0: Hello World Release!\n"
+"chat/1.0: Hello World Release!"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:180
+msgid "Uploading revisions"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:182
+msgid "The upload command will upload only the latest revision by default:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:184
+msgid ""
+"# upload latest revision only, all package binaries\n"
+"$ conan upload hello/1.0 -c -r=myremote"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:189
+msgid ""
+"If for some reason we want to upload all existing revisions, it is possible "
+"with:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:191
+msgid ""
+"# upload all revisions, all binaries for each revision\n"
+"$ conan upload hello/1.0#* -c -r=myremote"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:196
+msgid ""
+"In the server side, the latest uploaded revision becomes the latest one, and "
+"the one that will be resolved by default. For this reason, the above command "
+"uploads the different revisions in order (from older revision to latest "
+"revision), so the relative order of revisions is respected in the server "
+"side."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:201
+msgid ""
+"Note that if another machine decides to upload a revision that was created "
+"some time ago, it will still become the latest in the server side, because "
+"it is created in the server side with that time."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:207
+msgid "Package revisions"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:208
+msgid ""
+"Package binaries when created also compute the hash of their contents, "
+"forming the **package revision**.  But they are very different in nature to "
+"**recipe revisions**. Recipe revisions are naturally expected, every change "
+"in source code or in the recipe would cause a new recipe revision. But "
+"package binaries shouldn't have more than one **package revision**, because "
+"binaries variability would be already encoded in a unique ``package_id``. "
+"Put in other words, if the recipe revision is the same (exact same input "
+"recipe and source code) and the ``package_id`` is the same (exact same "
+"configuration profile, settings, etc.), then that binary should be built "
+"only once."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:217
+msgid ""
+"As C and C++ build are not deterministic, it is possible that subsequents "
+"builds of the same package, without modifying anything will be creating new "
+"package revisions:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:220
+msgid ""
+"# Build again 2 times the latest\n"
+"$ conan create .\n"
+"$ conan create ."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:226
+msgid ""
+"In some OSs like Windows, this build will not be reproducible, and the "
+"resulting artifacts will have different checksums, resulting in new package "
+"revisions:"
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:230
+msgid ""
+"$ conan list \"hello/1.0:*#*\"\n"
+"Local Cache\n"
+"  hello\n"
+"    hello/1.0\n"
+"      revisions\n"
+"        1d674b4349d2b1ea06aa6419f5f99dd9 (2023-02-01 00:03:29 UTC)\n"
+"          packages\n"
+"            2401fa1d188d289bb25c37cfa3317e13e377a351\n"
+"              revisions\n"
+"                8b8c3deef5ef47a8009d4afaebfe952e (2023-01-31 23:08:40 UTC)\n"
+"                8e8d380347e6d067240c4c00132d42b1 (2023-02-01 00:03:12 UTC)\n"
+"                c347faaedc1e7e3282d3bfed31700019 (2023-02-01 00:03:35 UTC)\n"
+"              info\n"
+"                settings\n"
+"                arch: x86_64\n"
+"                build_type: Release\n"
+"                ..."
+msgstr ""
+"$ conan list \"hello/1.0:*#*\"\n"
+"Local Cache\n"
+"  hello\n"
+"    hello/1.0\n"
+"      revisions\n"
+"        1d674b4349d2b1ea06aa6419f5f99dd9 (2023-02-01 00:03:29 UTC)\n"
+"          packages\n"
+"            2401fa1d188d289bb25c37cfa3317e13e377a351\n"
+"              revisions\n"
+"                8b8c3deef5ef47a8009d4afaebfe952e (2023-01-31 23:08:40 UTC)\n"
+"                8e8d380347e6d067240c4c00132d42b1 (2023-02-01 00:03:12 UTC)\n"
+"                c347faaedc1e7e3282d3bfed31700019 (2023-02-01 00:03:35 UTC)\n"
+"              info\n"
+"                settings\n"
+"                arch: x86_64\n"
+"                build_type: Release\n"
+"                ..."
+
+#: ../../../tutorial/versioning/revisions.rst:250
+msgid ""
+"By default, the package revision will also be resolved to the latest one. "
+"However, it is not possible to pin a package revision explicitly in recipes, "
+"recipes can only require down to the recipe revision as we defined above."
+msgstr ""
+
+#: ../../../tutorial/versioning/revisions.rst:257
+msgid "**Best practices**"
+msgstr "**最佳實踐**"
+
+#: ../../../tutorial/versioning/revisions.rst:259
+msgid ""
+"Having more than 1 package revision for any given recipe revision + "
+"``package_id`` is a smell or a potential bad practice. It means that "
+"something was rebuilt when it was not necessary, wasting computing and "
+"storage resources. There are ways to avoid doing it, like ``conan create . --"
+"build=missing:hello*`` will only build that package binary if it doesn't "
+"exist already (or running ``conan graph info`` can also return information "
+"of what needs to be built.)"
+msgstr ""

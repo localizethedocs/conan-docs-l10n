@@ -1,0 +1,455 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.23\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-16 08:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/new.rst:4 ../../../reference/commands/new.rst:9
+msgid "conan new"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:6
+msgid ""
+"Create a new recipe (with a conanfile.py and other associated files) from "
+"either a predefined or a user-defined template."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:-1
+msgid ""
+"$ conan new -h\n"
+"usage: conan new [-h] [--out-file OUT_FILE]\n"
+"                 [-v [{quiet,error,warning,notice,status,verbose,debug,v,"
+"trace,vv}]]\n"
+"                 [-cc CORE_CONF] [-d DEFINE] [-f] [-o OUTPUT]\n"
+"                 template\n"
+"\n"
+"Create a new example recipe and source files from a template.\n"
+"\n"
+"positional arguments:\n"
+"  template              Template name, either a predefined built-in or a "
+"user-\n"
+"                        provided one. Available built-in templates: basic,\n"
+"                        cmake_lib, cmake_exe, header_lib, meson_lib,\n"
+"                        meson_exe, msbuild_lib, msbuild_exe, bazel_lib,\n"
+"                        bazel_exe, autotools_lib, autotools_exe, "
+"premake_lib,\n"
+"                        premake_exe, local_recipes_index, workspace. E.g.\n"
+"                        'conan new cmake_lib -d name=hello -d version=0.1'.\n"
+"                        You can define your own templates too by inputting "
+"an\n"
+"                        absolute path as your template, or a path relative "
+"to\n"
+"                        your conan home folder.\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  --out-file OUT_FILE   Write the output of the command to the specified "
+"file\n"
+"                        instead of stdout.\n"
+"  -v [{quiet,error,warning,notice,status,verbose,debug,v,trace,vv}]\n"
+"                        Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  -d DEFINE, --define DEFINE\n"
+"                        Define a template argument as key=value, e.g., -d\n"
+"                        name=mypkg\n"
+"  -f, --force           Overwrite file if it already exists\n"
+"  -o OUTPUT, --output OUTPUT\n"
+"                        Output folder for the generated files\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:15
+msgid ""
+"The ``conan new`` command creates a new recipe in the current working "
+"directory, plus extra example files such as *CMakeLists.txt* or the "
+"*test_package* folder (as necessary), to either be used as a basis for your "
+"own project or aiding in the debugging process."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:19
+msgid ""
+"Note that each template has some required and some [optional] user-defined "
+"variables used to customize the resulting files."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:21
+msgid "The available templates are:"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:23
+msgid ""
+"**basic**: Creates a simple recipe with some example code and helpful "
+"comments, and is a good starting point to avoid writing boilerplate code."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:27
+msgid ""
+"Its variables are: [name], [version], [description], [requires1, "
+"requires2, ...], [tool_requires1, tool_requires2, ...]"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:29
+msgid ""
+"**alias**: Creates the minimal recipe needed to define an alias to a target "
+"recipe"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:32
+msgid "Its variables are: name, [version], target"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:34
+msgid ""
+"**cmake_lib**: Creates a cmake library target that defines a function called "
+"``name``, which will print some information about the compilation "
+"environment to stdout. You can add requirements to this template in the form "
+"of"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:39
+msgid ""
+"``conan new cmake_lib -d name=ai -d version=1.0 -d requires=math/3.14 -d "
+"requires=magic/0.0``"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:41
+msgid ""
+"This will add requirements for both ``math/3.14`` and ``magic/0.0`` to the "
+"`requirements()` method, will add the necessary ``find_package``s in CMake, "
+"and add a call to ``math()`` and ``magic()`` inside the generated ``ai()`` "
+"function."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:45
+#: ../../../reference/commands/new.rst:58
+msgid ""
+"Its variables are: name, version, [requires1, requires2, ...], "
+"[tool_requires1, tool_requires2, ...]"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:47
+msgid ""
+"**cmake_exe**: Creates a cmake executable target that defines a function "
+"called ``name``, which will print some information about the compilation "
+"environment to stdout. You can add requirements to this template in the form "
+"of"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:52
+msgid ""
+"``conan new cmake_exe -d name=game -d version=1.0 -d requires=math/3.14 -d "
+"requires=ai/1.0``"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:54
+msgid ""
+"This will add requirements for both ``math/3.14`` and ``ai/1.0`` to the "
+"`requirements()` method, will add the necessary ``find_package``s in CMake, "
+"and add a call to ``math()`` and ``ai()`` inside the generated ``game()`` "
+"function."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:60
+msgid ""
+"**header_lib** Creates a header-only library that defines a function called "
+"``name``, which will print some output to stdout."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:64
+msgid "You can add requirements to this template in the form of"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:66
+msgid ""
+"``conan new header_lib -d name=foo -d version=1.0 -d requires=math/3.14 -d "
+"requires=magic/0.0``"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:68
+msgid ""
+"This will add requirements for both ``math/3.14`` and ``ai/1.0`` to the "
+"`requirements()` method, and add a call to ``math()`` and ``ai()`` inside "
+"the generated ``foo()`` function."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:71
+msgid "Its variables are: name, version, [requires1, requires2, ...]"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:73
+msgid "**autotools_lib**: Creates an Autotools library."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:76
+#: ../../../reference/commands/new.rst:81
+#: ../../../reference/commands/new.rst:87
+#: ../../../reference/commands/new.rst:93
+#: ../../../reference/commands/new.rst:98
+#: ../../../reference/commands/new.rst:103
+#: ../../../reference/commands/new.rst:108
+#: ../../../reference/commands/new.rst:113
+msgid "Its variables are: ``name``, ``version``"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:78
+msgid "**autotools_exe**: Creates an Autotools executable"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:83
+msgid ""
+"**bazel_lib**: **Bazel integration BazelDeps, BazelToolchain, Bazel is "
+"experimental**. Creates a Bazel library."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:89
+msgid ""
+"**bazel_exe**: **Bazel integration BazelDeps, BazelToolchain, Bazel is "
+"experimental**. Creates a Bazel executable"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:95
+msgid "**meson_lib**: Creates a Meson library."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:100
+msgid "**meson_exe**: Creates a Meson executable"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:105
+msgid "**msbuild_lib**: Creates a MSBuild library."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:110
+msgid "**msbuild_exe**: Creates a MSBuild executable"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:115
+msgid ""
+"**workspace**: Creates a ready-to-use workspace containing three editables: "
+"**liba**, **libb** (requires liba) and **app1** (requires libb), plus the "
+"top-level ``CMakeLists.txt``, ``conanws.yml`` and ``conanws.py`` that "
+"describe the workspace."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:119
+msgid ""
+"You can pass a ``requires`` variable like ``-d requires=mymath/0.1`` to add "
+"an external dependency to **liba**."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:121
+msgid ""
+"By default, all ``name`` and ``version`` variables are set to ``mypkg`` and "
+"``0.1``, respectively, if not provided by the user."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:126
+msgid ""
+"The output of the predefined built-in templates is **not stable**. It might "
+"change in future releases to adapt to the latest tools or good practices."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:131
+msgid "Examples"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:133
+msgid "$ conan new basic"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:138
+msgid ""
+"Generates a basic *conanfile.py* that does not implement any custom "
+"functionality"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:140
+msgid ""
+"$ conan new basic -d name=mygame -d requires=math/1.0 -d requires=ai/1.3"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:144
+msgid ""
+"Generates a *conanfile.py* for ``mygame`` that depends on the packages "
+"``math/1.0`` and ``ai/1.3``"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:147
+msgid "$ conan new cmake_lib"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:151
+msgid ""
+"Creates a basic CMake library with default package ``name = \"mypkg\"`` and "
+"default package version ``version = \"0.1\"``"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:154
+msgid ""
+"$ conan new cmake_exe -d name=game -d version=1.0 -d requires=math/3.14 -d "
+"requires=ai/1.0"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:158
+msgid ""
+"Generates the necessary files for a CMake executable target. This will add "
+"requirements for both ``math/3.14`` and ``ai/1.0`` to the ``requirements()`` "
+"method, will add the necessary ``find_package`` in CMake, and add a call to "
+"``math()`` and ``ai()`` inside the generated ``game()`` function."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:165
+msgid "Custom templates"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:167
+msgid ""
+"There's also the possibility of creating your templates. Templates in the "
+"Conan home should be located in the ``templates/command/new`` folder, and "
+"each template should have a folder named like the template one. If we create "
+"the ``templates/command/new/mytemplate`` folder, the command will be called "
+"with the following:"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:172
+msgid "$ conan new mytemplate"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:177
+msgid ""
+"As with other files in the Conan home, you can manage these templates with "
+"``conan config install <url>``, putting them in a git repo or an http server "
+"and sharing them with your team. It is also possible to use templates from "
+"any folder, just passing the full path to the template in the ``conan new "
+"<full_path>``, but in general it is more convenient to manage them in the "
+"Conan home."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:182
+msgid ""
+"The folder can contain as many files as desired. Both the filenames and the "
+"contents of the files can be templatized using Jinja2 syntax. The command ``-"
+"d/--define`` arguments will define the ``key=value`` inputs to the templates."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:186
+msgid "The file contents will be like (Jinja2 syntax):"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:188
+msgid ""
+"# File \"templates/command/new/mytemplate/conanfile.py\"\n"
+"from conan import ConanFile\n"
+"\n"
+"class Conan(ConanFile):\n"
+"    name = \"{{name}}\"\n"
+"    version = \"{{version}}\"\n"
+"    license = \"{{license}}\""
+msgstr ""
+
+#: ../../../reference/commands/new.rst:199
+msgid "And it will require passing these values:"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:201
+msgid "$ conan new mytemplate -d name=pkg -d version=0.1 -d license=MIT"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:205
+msgid "and it will generate in the current folder a file:"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:207
+msgid ""
+"# File \"<cwd>/conanfile.py\"\n"
+"from conan import ConanFile\n"
+"\n"
+"class Conan(ConanFile):\n"
+"    name = \"pkg\"\n"
+"    version = \"0.1\"\n"
+"    license = \"MIT\""
+msgstr ""
+
+#: ../../../reference/commands/new.rst:218
+msgid ""
+"There are some special ``-d/--defines`` names. The ``name`` one is always "
+"mandatory. The ``conan_version`` definition will always be automatically "
+"defined. The ``requires`` and ``tool_requires`` definitions, if existing, "
+"will be automatically converted to lists. The ``package_name`` will always "
+"be defined, by default equals to ``name``."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:223
+msgid ""
+"For parametrized filenames, the filenames themselves support Jinja2 syntax. "
+"For example if we store a file named literally ``{{name}}`` with the brackes "
+"in the template folder ``templates/command/new/mytemplate/``, instead of the "
+"``conanfile.py`` above:"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:228
+msgid "File: \"templates/command/new/mytemplate/{{name}}\""
+msgstr ""
+
+#: ../../../reference/commands/new.rst:228
+msgid "{{contents}}"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:233
+msgid "Then, executing"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:235
+msgid "$ conan new mytemplate -d name=file.txt -d contents=hello!"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:240
+msgid ""
+"will create a file called ``file.txt`` in the current dir containing the "
+"string ``hello!``."
+msgstr ""
+
+#: ../../../reference/commands/new.rst:242
+msgid ""
+"If there are files in the template not to be rendered with Jinja2, like "
+"image files, then their names should be added to a file called "
+"``not_templates`` inside the template directory, one filename per line. So "
+"we could have a folder with:"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:247
+msgid ""
+"templates/command/new/mytemplate\n"
+"                         |- not_templates\n"
+"                         |- conanfile.py\n"
+"                         |- image.png\n"
+"                         |- image2.png"
+msgstr ""
+
+#: ../../../reference/commands/new.rst:256
+msgid ""
+"And the ``not_templates`` contains the string ``*.png``, then ``conan new "
+"mytemplate ...`` will only render the ``conanfile.py`` through Jinja2, but "
+"both images will be copied as-is."
+msgstr ""

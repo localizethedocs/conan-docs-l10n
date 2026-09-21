@@ -1,0 +1,156 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.56\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../creating_packages/toolchains.rst:2
+msgid "Toolchains"
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:20
+msgid ""
+"Toolchains are the new, experimental way to integrate with build systems in "
+"Conan. Recipes can define a ``generate()`` method that will return an object "
+"which can generate files from the current configuration that can be used by "
+"the build systems. Conan *generators* provide information about "
+"dependencies, while toolchains provide a \"translation\" from the Conan "
+"settings and options, and the recipe defined configuration to something that "
+"the build system can understand. A recipe that does not have dependencies "
+"does not need a generator, but can still use a toolchain."
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:28
+msgid ""
+"A toolchain can be defined, among the built-ins toolchains, with an "
+"attribute with the name of the toolchain class to use."
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:34
+msgid "generators = \"<ToolChainClassName>\""
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:35
+msgid ""
+"For example, for using the CMake toolchain this should be declared in the "
+"recipe:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:40
+msgid "generators = \"CMakeToolchain\""
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:43
+msgid ""
+"At the moment (Conan 1.32), the available built-in toolchains are "
+"``CMakeToolchain``, ``MSBuildToolchain`` and ``MesonToolchain``."
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:46
+msgid ""
+"But in the more general case, and if it needs any specific configuration "
+"beyond the default one:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:59
+msgid ""
+"from conan.tools.cmake import CMakeToolchain\n"
+"\n"
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    # customize toolchain \"tc\"\n"
+"    tc.generate()"
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:60
+msgid ""
+"It is possible to use the ``generate()`` method to create your own files, "
+"which will typically be deduced from the current configuration of ``self."
+"settings`` and ``self.options``."
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:74
+msgid ""
+"from conans.tools import save\n"
+"\n"
+"def generate(self):\n"
+"    # Based on the self.settings, self.options, the user\n"
+"    # can generate their own files:\n"
+"    save(\"mytoolchain.tool\", \"my own toolchain contents, deduced from the "
+"settings and options\")\n"
+"    # The \"mytoolchain.tool\" file can be used by the build system to\n"
+"    # define the build"
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:75
+msgid ""
+"And as usual, you can create your own toolchain helpers, put them in a "
+"``python_requires`` package and reuse them in all your recipes."
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:79
+msgid "Toolchains have some important advantages:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:81
+msgid ""
+"They execute at :command:`conan install` time. They generate files, not "
+"command line arguments, providing better reproducibility and debugging of "
+"builds."
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:83
+msgid ""
+"They provide a better developer experience. The command line used by "
+"developers locally, like ``cmake ...`` will achieve the same build, with the "
+"same flags, as the :command:`conan build` or the build that is done in the "
+"cache with a :command:`conan create`."
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:86
+msgid "They are more extensible and configurable."
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:88
+msgid ""
+"The toolchains implement most of the build system logic, leaving the build "
+"helpers, like ``CMake()``, doing less work, and acting basically as a high "
+"level wrapper of the build system. Many of the existing arguments, "
+"attributes or methods of those build helpers will not be available. Check "
+"the documentation of each toolchain to check the associated build helper "
+"available functionality."
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:108
+msgid ""
+"from conan.tools.cmake import CMakeToolchain, CMake\n"
+"\n"
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    # customize toolchain \"tc\"\n"
+"    tc.generate()\n"
+"\n"
+"def build(self):\n"
+"    # NOTE: This is a simplified helper\n"
+"    # Not all arguments attributes and methods might be available\n"
+"    cmake = CMake(self)"
+msgstr ""
+
+#: ../../../creating_packages/toolchains.rst:109
+msgid ""
+"To learn more about existing built-in toolchains, read the reference in :ref:"
+"`conan_tools`."
+msgstr ""

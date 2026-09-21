@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.55\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:4
+msgid "conan.tools.files.AutoPackager"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:6
+msgid ""
+"Available since: `1.42.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.42.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:8
+msgid ""
+"The ``AutoPackager`` together with the :ref:`package "
+"layouts<package_layout>` feature, allow to automatically package the files "
+"following the declared information in the ``layout()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:11
+msgid "It will copy:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:13
+msgid ""
+"Files from ``self.cpp.local.includedirs`` to ``self.cpp.package.includedirs``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:14
+msgid "Files from ``self.cpp.local.libdirs`` to ``self.cpp.package.libdirs``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:15
+msgid "Files from ``self.cpp.local.bindirs`` to ``self.cpp.package.bindirs``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:16
+msgid "Files from ``self.cpp.local.srcdirs`` to ``self.cpp.package.srcdirs``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:17
+msgid ""
+"Files from ``self.cpp.local.builddirs`` to ``self.cpp.package.builddirs``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:18
+msgid "Files from ``self.cpp.local.resdirs`` to ``self.cpp.package.resdirs``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:19
+msgid ""
+"Files from ``self.cpp.local.frameworkdirs`` to ``self.cpp.package."
+"frameworkdirs``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:21
+msgid ""
+"The patterns of the files to be copied can be defined with the `.patterns` "
+"property of the ``AutoPackager`` instance. The default patterns are:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:34
+msgid ""
+"packager = AutoPackager(self)\n"
+"packager.patterns.include == [\"*.h\", \"*.hpp\", \"*.hxx\"]\n"
+"packager.patterns.lib == [\"*.so\", \"*.so.*\", \"*.a\", \"*.lib\", \"*."
+"dylib\"]\n"
+"packager.patterns.bin == [\"*.exe\", \"*.dll\"]\n"
+"packager.patterns.src == []\n"
+"packager.patterns.build == []\n"
+"packager.patterns.res == []\n"
+"packager.patterns.framework == []"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:35
+msgid "Usage:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files/autopackager.rst:54
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.files import AutoPackager\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"\n"
+"    def layout(self):\n"
+"        ...\n"
+"\n"
+"    def package(self):\n"
+"        packager = AutoPackager(self)\n"
+"        packager.patterns.include = [\"*.hpp\", \"*.h\", \"include3.h\"]\n"
+"        packager.patterns.lib = [\"*.a\"]\n"
+"        packager.patterns.bin = [\"*.exe\"]\n"
+"        packager.patterns.src = [\"*.cpp\"]\n"
+"        packager.patterns.framework = [\"sframe*\", \"bframe*\"]\n"
+"        packager.run()"
+msgstr ""

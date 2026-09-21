@@ -1,0 +1,1080 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.38\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../cheatsheet.rst:3
+msgid "Cheatsheet"
+msgstr ""
+
+#: ../../../cheatsheet.rst:6
+msgid "Single-Page Graphical Format"
+msgstr ""
+
+#: ../../../cheatsheet.rst:8
+msgid ""
+"JFrog has created the following visual cheatsheet for basic Conan commands "
+"and concepts which users can print out and use as a handy reference. It is "
+"available as both a PDF and PNG."
+msgstr ""
+
+#: ../../../cheatsheet.rst:12
+msgid ":download:`PDF Format <images/cheatsheet/conan-cheatsheet.pdf>`"
+msgstr ""
+
+#: ../../../cheatsheet.rst:14
+msgid ":download:`PNG Format <images/cheatsheet/conan-cheatsheet.png>`"
+msgstr ""
+
+#: ../../../cheatsheet.rst:22
+msgid "Community-Created Format"
+msgstr ""
+
+#: ../../../cheatsheet.rst:24
+msgid ""
+"Community contributors have also created the following extended cheatsheet "
+"providing a more narrative and workflow-centric cheatsheet. It is "
+"effectively, a single-page summary of other docs pages which community users "
+"found most relevant to daily Conan operations."
+msgstr ""
+
+#: ../../../cheatsheet.rst:33
+msgid "Setup and configuration"
+msgstr ""
+
+#: ../../../cheatsheet.rst:36
+msgid "Installation"
+msgstr ""
+
+#: ../../../cheatsheet.rst:38
+msgid ""
+"Conan is available as a Python package, and the recommended way to install "
+"is via pip:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:40
+msgid ""
+"$ pip install conan\n"
+"$ pip install conan --upgrade"
+msgstr ""
+
+#: ../../../cheatsheet.rst:45
+msgid ""
+"There are `other methods of installation <https://conan.io/downloads.html>`_ "
+"available, including standalone installers, which don't require a Python "
+"installation."
+msgstr ""
+
+#: ../../../cheatsheet.rst:48
+msgid ""
+"See `Install <https://docs.conan.io/en/latest/installation.html>`_ docs."
+msgstr ""
+
+#: ../../../cheatsheet.rst:51
+msgid "Configurations"
+msgstr ""
+
+#: ../../../cheatsheet.rst:53
+msgid ""
+"Configurations contain hooks_, profiles_, `remote repositories`_ and "
+"settings_, making them available for builds once installed. They are "
+"installed from a folder, zip, URL or git repo, and the installed items are "
+"recorded in ~/.conan/conan.conf."
+msgstr ""
+
+#: ../../../cheatsheet.rst:57
+msgid "Install configurations:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:59
+msgid ""
+"$ conan config install <item>  # Copy the relevant contents from <item> to "
+"the user's ~/.conan directory.\n"
+"\n"
+"$ conan config install ./my_config.conf"
+msgstr ""
+
+#: ../../../cheatsheet.rst:65
+msgid ""
+"Alternatively, copying files and editing conan.conf can be done manually."
+msgstr ""
+
+#: ../../../cheatsheet.rst:67
+msgid "Set up configurations:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:69
+msgid ""
+"$ conan config init     # Initialize Conan configuration files. If some are "
+"already present, missing files only are\n"
+"                        # created"
+msgstr ""
+
+#: ../../../cheatsheet.rst:74
+msgid "Set configuration values:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:76
+msgid ""
+"$ conan config set <section>.<config>=<value>\n"
+"\n"
+"$ conan config set log.level=10\n"
+"$ conan config set log.print_run_commands=False  # Make conan less verbose"
+msgstr ""
+
+#: ../../../cheatsheet.rst:83
+msgid "Inspect configurations:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:85
+msgid ""
+"$ conan config home     # See the Conan home directory\n"
+"\n"
+"$ conan config get [<section>.<config>]  # Show some or all configuration "
+"items\n"
+"\n"
+"$ conan config get                       # Show the full conan.conf file\n"
+"$ conan config get log.level             # Show the \"level\" item in the "
+"\"log\" section"
+msgstr ""
+
+#: ../../../cheatsheet.rst:94
+msgid ""
+"See `conan config <https://docs.conan.io/en/latest/reference/commands/"
+"consumer/config.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:97
+msgid "Profiles"
+msgstr ""
+
+#: ../../../cheatsheet.rst:99
+msgid ""
+"Profiles allow users to set aspects of the build configuration. This "
+"includes settings_, options_, environment variables and build requirements. "
+"They can be installed into ~/.conan/profiles. They can also be stored in "
+"project directories, which can be useful for specific compilation cases, for "
+"example cross-compiling."
+msgstr ""
+
+#: ../../../cheatsheet.rst:103
+msgid ""
+"Profiles are stored in text files with no file extension. An example profile:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:105
+msgid ""
+"CROSS_GCC=arm-linux-gnueabihf\n"
+"\n"
+"include(default)              # Can include other configurations, for "
+"example the default configuration\n"
+"\n"
+"[settings]\n"
+"os=Linux\n"
+"compiler=gcc\n"
+"compiler.version=6\n"
+"compiler.libcxx=libstdc++11\n"
+"build_type=Release\n"
+"arch=armv7\n"
+"os_build=Linus\n"
+"arch_build=x86_64\n"
+"OpenSSL:compiler.version=4.8  # Dependency-specific value\n"
+"\n"
+"[options]\n"
+"shared=True\n"
+"\n"
+"[env]                         # Environment variables\n"
+"CC=$CROSS_GCC-gcc             # Strings can be defined and substituted\n"
+"CXX=$CROSS_GCC-g++\n"
+"\n"
+"[build_requires]              # Requirements for package builds only\n"
+"cmake/3.16.3                  # Specifying build requirements here rather "
+"than in the recipe makes them less binding"
+msgstr ""
+
+#: ../../../cheatsheet.rst:132
+msgid "List profiles:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:134
+msgid "$ conan profile list"
+msgstr ""
+
+#: ../../../cheatsheet.rst:138
+msgid "Show a profile:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:140
+msgid ""
+"$ conan profile show <profile>\n"
+"\n"
+"$ conan profile show default"
+msgstr ""
+
+#: ../../../cheatsheet.rst:146
+msgid ""
+"Use profile while executing command (e.g., ``conan install`` or ``conan "
+"create``):"
+msgstr ""
+
+#: ../../../cheatsheet.rst:148
+msgid ""
+"$ conan <command> . -pr=<profile1> -pr=<profile2>  # Use installed profile "
+"name, or file path\n"
+"                                                   # Composable, last -pr "
+"wins for conflicts"
+msgstr ""
+
+#: ../../../cheatsheet.rst:153
+msgid ""
+"See `conan profile <https://docs.conan.io/en/latest/reference/commands/misc/"
+"profile.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:156
+msgid "Remote repositories"
+msgstr ""
+
+#: ../../../cheatsheet.rst:158
+msgid "Conan Center is configured by default."
+msgstr ""
+
+#: ../../../cheatsheet.rst:160
+msgid "List configured remotes:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:162
+msgid "$ conan remote list"
+msgstr ""
+
+#: ../../../cheatsheet.rst:166
+msgid "Add remote:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:168
+msgid "$ conan remote add <remote ID> <URL of remote repo>"
+msgstr ""
+
+#: ../../../cheatsheet.rst:172
+msgid ""
+"See `conan remote <https://docs.conan.io/en/latest/reference/commands/misc/"
+"remote.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:175
+msgid "Consuming packages"
+msgstr ""
+
+#: ../../../cheatsheet.rst:178
+msgid "Using packages in an application"
+msgstr ""
+
+#: ../../../cheatsheet.rst:180
+msgid "Write a conanfile.txt. This captures the project configuration:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:182
+msgid ""
+"[requires]                     # The Conan packages which are used in the "
+"application\n"
+"boost/1.72.0                   # Versions override versions upstream in the "
+"dependency graph\n"
+"poco/1.9.4\n"
+"\n"
+"[build_requires]               # The Conan packages which are used to build "
+"the application\n"
+"7zip/16.00\n"
+"\n"
+"[generators]                   # Generators create build system files that "
+"capture the dependency information,\n"
+"cmake                          # as well as configuration information from "
+"Conan settings and options\n"
+"\n"
+"[options]                      # Options here override options upstream in "
+"the dependency graph\n"
+"boost:shared=True              # Options can be specified on a per-package "
+"basis for dependencies\n"
+"poco:shared=True\n"
+"\n"
+"[imports]                      # Copies files from the cache to the current "
+"working directory\n"
+"bin, *.dll -> ./bin            # Copies all .dll files from the packages' "
+"bin/ folder to the local bin/ folder"
+msgstr ""
+
+#: ../../../cheatsheet.rst:201
+msgid "Get dependencies and generate build system files via ``conan install``"
+msgstr ""
+
+#: ../../../cheatsheet.rst:203
+msgid ""
+"$ conan install . [-o <package>:<option>=<value>]  # Specify options, e.g. "
+"shared=True\n"
+"                  [-s <package>:<setting>=<value>] # Specify settings, e.g. "
+"build_type=Debug\n"
+"                                                   # <package> is optional: "
+"if not specified, the option/setting\n"
+"                                                   # applies to all "
+"dependencies\n"
+"                  [-r=<remote ID>]                 # Download dependencies "
+"from only the specified remote\n"
+"                  [-g=<generator>]                 # Specify generators at "
+"the command line"
+msgstr ""
+
+#: ../../../cheatsheet.rst:212
+msgid "#include interface files to the Conan packages in the source code"
+msgstr ""
+
+#: ../../../cheatsheet.rst:213
+msgid "Modify the build system to use the files output from the Generator"
+msgstr ""
+
+#: ../../../cheatsheet.rst:214
+msgid "Build the application using the build system"
+msgstr ""
+
+#: ../../../cheatsheet.rst:217
+msgid "Downloading packages"
+msgstr ""
+
+#: ../../../cheatsheet.rst:219
+msgid "Download a package, if it isn't already in `the local cache`_:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:221
+msgid ""
+"$ conan install <package>/<version>@[<user>/<channel>#<revision>]\n"
+"                [-r=<remote ID>]                                    # "
+"Download dependencies from only the specified remote\n"
+"\n"
+"\n"
+"$ conan install .  # Install a package requirement from a conanfile.txt, "
+"saved in your current directory, with all\n"
+"                   # options and settings coming from your default profile\n"
+"\n"
+"$ conan install . -o pkg_name:use_debug_mode=on -s compiler=clang   # As "
+"above, but override one option and one\n"
+"                                                                    # setting"
+msgstr ""
+
+#: ../../../cheatsheet.rst:233
+msgid ""
+"See `conan install <https://docs.conan.io/en/latest/reference/commands/"
+"consumer/install.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:236
+msgid "The local cache"
+msgstr ""
+
+#: ../../../cheatsheet.rst:238
+msgid ""
+"The local package cache is located at ~/.conan/data by default (but this is "
+"configurable)."
+msgstr ""
+
+#: ../../../cheatsheet.rst:240
+msgid "Clear packages from cache:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:242
+msgid ""
+"$ conan remove \"<package>\" --force  # <package> can include wildcards\n"
+"\n"
+"$ conan remove 'boost/*'                     # Remove all versions of Boost\n"
+"$ conan remove 'mypackage/1.2@user/channel'  # Remove all revisions of "
+"mypackage/1.2@user/channel"
+msgstr ""
+
+#: ../../../cheatsheet.rst:249
+msgid ""
+"See `conan remove <https://docs.conan.io/en/latest/reference/commands/misc/"
+"remove.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:252
+msgid "Using packages as standalone applications"
+msgstr ""
+
+#: ../../../cheatsheet.rst:254
+msgid ""
+"Packages can either be copied to the local project folder and run from "
+"there, or run directly from the local cache."
+msgstr ""
+
+#: ../../../cheatsheet.rst:256
+msgid ""
+"In the `conanfile.txt`__, this can be done in the [imports] or [generators] "
+"section. See below for the relevant generators. In `the package recipe`_, "
+"this can be done using the ``imports()`` or ``deploy()`` methods."
+msgstr ""
+
+#: ../../../cheatsheet.rst:261
+msgid "Prepare packages for use via the command line:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:263
+msgid ""
+"$ conan install . -g=deploy         # Copy dependencies to current folder\n"
+"$ conan install . -g=virtualrunenv  # Create shell scripts to activate and "
+"deactivate environments where you can run\n"
+"                                    # dependencies from the local cache"
+msgstr ""
+
+#: ../../../cheatsheet.rst:270
+msgid "Searching and introspecting packages"
+msgstr ""
+
+#: ../../../cheatsheet.rst:273
+msgid "Searching packages"
+msgstr ""
+
+#: ../../../cheatsheet.rst:275
+msgid "Recipes and binaries can be searched in the local cache or remotes."
+msgstr ""
+
+#: ../../../cheatsheet.rst:277
+msgid "List names of packages in local cache:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:279
+msgid "$ conan search              # List names of packages in local cache"
+msgstr ""
+
+#: ../../../cheatsheet.rst:283
+msgid "Show package recipes or builds of a package:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:285
+msgid ""
+"$ conan search <package>/<revision>@<user>/<channel>  # Output depends on "
+"how much of a package reference is given.\n"
+"                                                      # Wildcards are "
+"supported\n"
+"               [--table=file.html]                    # Save output in an "
+"HTML file\n"
+"               [-r=<remote>]                          # Look in a remote "
+"repository (default is the local cache)\n"
+"\n"
+"$ conan search mylib/1.0@user/channel                 # Show all packages of "
+"mylib/1.0@user/channel in the local cache\n"
+"$ conan search \"zlib/*\" -r=all                        # Show all versions "
+"of zlib in all remotes"
+msgstr ""
+
+#: ../../../cheatsheet.rst:295
+msgid "Show revisions of a package:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:297
+msgid "$ conan search <package>/<revision>@<user>/<channel> --revisions"
+msgstr ""
+
+#: ../../../cheatsheet.rst:301
+msgid ""
+"See `conan search <https://docs.conan.io/en/latest/reference/commands/"
+"consumer/search.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:304
+msgid "Inspecting packages"
+msgstr ""
+
+#: ../../../cheatsheet.rst:306
+msgid "Print the package recipe in full:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:308
+msgid ""
+"$ conan get <package>/<revision>@<user>/<channel>\n"
+"\n"
+"$ conan get boost/1.74.0"
+msgstr ""
+
+#: ../../../cheatsheet.rst:314
+msgid "Print attributes of the package recipe:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:316
+msgid ""
+"$ conan inspect <package>/<revision>@<user>/<channel>\n"
+"\n"
+"$ conan inspect boost/1.74.0"
+msgstr ""
+
+#: ../../../cheatsheet.rst:322
+msgid ""
+"See `conan get <https://docs.conan.io/en/latest/reference/commands/consumer/"
+"get.html>`_ and `conan inspect <https://docs.conan.io/en/latest/reference/"
+"commands/misc/inspect.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:326
+msgid "Visualizing dependencies"
+msgstr ""
+
+#: ../../../cheatsheet.rst:328
+msgid "Show a dependency graph for the package or application:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:330
+msgid "$ conan info . [--graph=file.html]  # Save output in an HTML file"
+msgstr ""
+
+#: ../../../cheatsheet.rst:334
+msgid ""
+"See `conan info <https://docs.conan.io/en/latest/reference/commands/consumer/"
+"info.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:337
+msgid "Creating packages"
+msgstr ""
+
+#: ../../../cheatsheet.rst:340
+msgid "Package terminology"
+msgstr ""
+
+#: ../../../cheatsheet.rst:342
+msgid ""
+"Each package recipe relates to a single package. However, a package can be "
+"built in different ways."
+msgstr ""
+
+#: ../../../cheatsheet.rst:344
+msgid "A reference is used to identify packages:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:346
+msgid "<package>/<version>@<user>/<channel>#RREV:PACKAGE_ID#PREV"
+msgstr ""
+
+#: ../../../cheatsheet.rst:350
+msgid "The recipe reference is used to identify a certain version of a recipe:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:352
+msgid ""
+"<package>/<version>@<user>/<channel>  # <package> and <version> are defined "
+"in the recipe; <user> and <channel> are\n"
+"                                      # defined by the user when exporting "
+"the package\n"
+"\n"
+"lib/1.0@conan/stable"
+msgstr ""
+
+#: ../../../cheatsheet.rst:360
+msgid ""
+"The package ID is a SHA-1 hash calculated from the build options_ and "
+"settings_ and from dependencies (according to certain modes__)."
+msgstr ""
+
+#: ../../../cheatsheet.rst:365
+msgid ""
+"See `Revisions`_ for further details of the recipe revision and package "
+"revision (RREV and PREV)."
+msgstr ""
+
+#: ../../../cheatsheet.rst:368
+msgid "Creating a basic package"
+msgstr ""
+
+#: ../../../cheatsheet.rst:370
+msgid "Create a template package:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:372
+msgid ""
+"$ conan new <package>/<version>@[<user>/<channel>]  # <user>/<channel> is "
+"not specified in Conan Center, but otherwise they should be\n"
+"            [-t]                                    # Create a recipe for a "
+"basic test to verify the package was created successfully\n"
+"            [-s]                                    # Create a recipe/source "
+"template for a package with local source code"
+msgstr ""
+
+#: ../../../cheatsheet.rst:378
+msgid "Build a package from a `recipe`__ and store it in the local cache:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:382
+msgid ""
+"$ conan create . <user>/<channel> [-o <package>:<option>=<value>]   # "
+"Specify options, for example shared=True.\n"
+"                                  [-s <package>:<setting>=<value>]  # "
+"Specify settings, for example build_type=Debug.\n"
+"                                                                    # If "
+"<package> is not specified, the option and\n"
+"                                                                    # "
+"setting applies to all dependencies.\n"
+"                                  [-pr=<profile name>]              # If -pr "
+"is not specified, the default profile is used\n"
+"                                  [--build=missing]                 # Build "
+"all dependencies if they can't be downloaded"
+msgstr ""
+
+#: ../../../cheatsheet.rst:391
+msgid ""
+"See `conan new <https://docs.conan.io/en/latest/reference/commands/creator/"
+"new.html>`_ and `conan create <https://docs.conan.io/en/latest/reference/"
+"commands/creator/create.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:395
+msgid "The package recipe"
+msgstr ""
+
+#: ../../../cheatsheet.rst:397
+msgid ""
+"A package recipe is a Python class, defined in a file called conanfile.py:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:399
+msgid ""
+"class MypackageConan(ConanFile):\n"
+"    ...                                                # Various package "
+"metadata\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"  # Defines "
+"available settings\n"
+"    options = {\"shared\": [True, False]}                # Defines available "
+"options and defaults. \"shared\" is a common\n"
+"                                                       # option which "
+"specifies whether a library is static or shared\n"
+"\n"
+"    default_options = {\"shared\": False}\n"
+"    requires = \"requiredlib/0.1@user/stable\"           # Defines package "
+"requirements\n"
+"    build_requires = \"tool_a/0.2@user/testing\"         # Defines "
+"requirements that are only used when the package is\n"
+"                                                       # built. These should "
+"be build and test tools only\n"
+"    generators = \"cmake\"                               # Generator for the "
+"package: specifies which build system\n"
+"                                                       # type will be "
+"generated\n"
+"\n"
+"    def source(self):                                                # "
+"Obtains the source code for the project\n"
+"        self.run(\"git clone https://github.com/conan-io/hello.git\")  # "
+"self.run() executes any command in the native shell\n"
+"        tools.get(\"https://github.com/conan-io/hello/\" +             # "
+"tools.get() downloads, unzips, and then removes the .zip file\n"
+"                  \"archive/refs/heads/master.zip\")                   # The "
+"tools module contains a lot of helper methods for common\n"
+"        ...                                                          # "
+"tasks, and using them is often preferable to using self.run()\n"
+"                                                                     # See "
+"the link below for more information\n"
+"\n"
+"    def build_requirements(self):                                    # "
+"Responsible for specifying non-trivial build requirements logic\n"
+"        if self.options.myoption1:                                   # "
+"Specify a conditional build requirement\n"
+"            self.build_requires(\"zlib/1.2@user/testing\")\n"
+"\n"
+"    def build(self):                                                 # "
+"Responsible for invoking the build system\n"
+"        cmake = CMake(self)                                          # "
+"Helper classes are available for several build systems\n"
+"        ...\n"
+"\n"
+"        self.run(\"bin/unittests\")                                    # Run "
+"unit tests compiled earlier in the build() method\n"
+"\n"
+"    def package(self):                                               # "
+"Responsible for capturing build artifacts\n"
+"        self.copy(\"*.h\", dst=\"include\", src=\"hello\")                 # "
+"self.copy() copies files from the cache to the project folder\n"
+"        ...\n"
+"\n"
+"    def package_info(self):                                          # "
+"Responsible for defining variables that are\n"
+"                                                                     # "
+"passed to package consumers, for example\n"
+"                                                                     # "
+"library or include directories\n"
+"        self.cpp_info.libs = [\"hello\"]                               # The "
+"cpp_info dictionary contains these variables\n"
+"        ...\n"
+"\n"
+"    def requirements(self):                                          # "
+"Responsible for specifying non-trivial requirements logic\n"
+"        if self.options.myoption2:                                   # "
+"Specify a conditional requirement\n"
+"            self.requires(\"requiredlib2/0.3@user/stable\")\n"
+"\n"
+"    def package_id(self):                                            # "
+"Responsible for overriding the way the package\n"
+"                                                                     # ID is "
+"calculated from the default, for this package only\n"
+"        default_package_id_mode = full_version_mode\n"
+"        if self.settings.compiler.version == \"4.9\":                  # "
+"Make compiler versions 4.8 and 4.7 compatible\n"
+"                                                                     # with "
+"version4.9: i.e., they all result in the same package ID\n"
+"\n"
+"            for version in (\"4.8\", \"4.7\"):\n"
+"                compatible_pkg = self.info.clone()\n"
+"                compatible_pkg.settings.compiler.version = version\n"
+"                self.compatible_packages.append(compatible_pkg)      # The "
+"compatible_packages property is used to\n"
+"                                                                     # "
+"define this behaviour\n"
+"\n"
+"    def imports(self):                                               # "
+"Copies dependency files from the local cache\n"
+"        ...                                                          # to "
+"the project directory\n"
+"\n"
+"    def deploy(self):                                                # "
+"Installs the project, which can include\n"
+"        ...                                                          # "
+"copying build artifacts"
+msgstr ""
+
+#: ../../../cheatsheet.rst:463
+msgid ""
+"See `tools <https://docs.conan.io/en/1.36/reference/tools.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:466
+msgid "Python requires"
+msgstr ""
+
+#: ../../../cheatsheet.rst:468
+msgid ""
+"Python requires allow the re-use of python code across multiple recipes. "
+"Complex dependency graphs can be produced, and the `same concepts`__ apply "
+"with python requires as with normal package requirements."
+msgstr ""
+
+#: ../../../cheatsheet.rst:473
+msgid "Export a conanfile.py:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:475
+msgid "$ conan export . <user>/<channel>"
+msgstr ""
+
+#: ../../../cheatsheet.rst:479
+msgid "Use the exported conanfile.py:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:481
+msgid ""
+"class ConsumerConan(ConanFile):\n"
+"    python_requires = \"<package>/<version>@<user>/<channel>\"  # To use "
+"functions and variables from the exported conanfile.py\n"
+"    python_requires_extend = \"<package>.<base class name>\"    # To inherit "
+"from a full class in the exported conanfile.py\n"
+"\n"
+"        ...\n"
+"        self.python_requires[\"<package>\"].module.func()           # To "
+"call the method func() from the exported conanfile.py"
+msgstr ""
+
+#: ../../../cheatsheet.rst:490
+msgid ""
+"See `conan export <https://docs.conan.io/en/latest/reference/commands/"
+"creator/export.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:493
+msgid "Hooks"
+msgstr ""
+
+#: ../../../cheatsheet.rst:495
+msgid ""
+"Hooks are recipe methods which are defined globally. They should not affect "
+"the built binary. There are ``pre`` and ``post`` hooks for many methods in "
+"the recipe. Hooks reside in ~/.conan/hooks, and are include in ~/.conan/"
+"conan.conf under the [hooks] section."
+msgstr ""
+
+#: ../../../cheatsheet.rst:499
+msgid "Install a hook:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:501
+msgid ""
+"$ conan config install  # In the directory containing the python script with "
+"the hook"
+msgstr ""
+
+#: ../../../cheatsheet.rst:506
+msgid "Specifying build configuration items"
+msgstr ""
+
+#: ../../../cheatsheet.rst:509
+msgid "Settings"
+msgstr ""
+
+#: ../../../cheatsheet.rst:511
+msgid ""
+"Settings are configuration items which generally apply to all builds of all "
+"packages in the dependency tree. `compiler`, `os`, `arch`, and `build_type` "
+"(`Release`/`Debug`) are some of the most common."
+msgstr ""
+
+#: ../../../cheatsheet.rst:514
+msgid ""
+"Available settings are defined in a global settings file: ~/.conan/settings."
+"yml. The settings for a given package are defined in `the package recipe`_."
+msgstr ""
+
+#: ../../../cheatsheet.rst:517
+msgid ""
+"Settings can then be set via profiles_ or via arguments to `conan install`__ "
+"or `conan create`__."
+msgstr ""
+
+#: ../../../cheatsheet.rst:523
+msgid "Options"
+msgstr ""
+
+#: ../../../cheatsheet.rst:525
+msgid "Options are configuration items which are generally package-specific."
+msgstr ""
+
+#: ../../../cheatsheet.rst:527
+msgid ""
+"The available options for a package are defined in `the package recipe`_."
+msgstr ""
+
+#: ../../../cheatsheet.rst:529
+msgid ""
+"Options can then be set via profiles_, an application's `Conanfile.txt`__, "
+"or via arguments to `conan install`__ or `conan create`__."
+msgstr ""
+
+#: ../../../cheatsheet.rst:537
+msgid "Versioning"
+msgstr ""
+
+#: ../../../cheatsheet.rst:540
+msgid "Versions"
+msgstr ""
+
+#: ../../../cheatsheet.rst:542
+msgid ""
+"Packages are specified whenever a package is created, and whenever a recipe "
+"is consumed via a recipe reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:544
+msgid "Specify ranges:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:546
+msgid ""
+"[>min_ver <max_ver] - specify a version range\n"
+"[*]                 - specify any version\n"
+"[~maj.min]          - specify any patch in v[maj].[min]"
+msgstr ""
+
+#: ../../../cheatsheet.rst:552
+msgid "The version taken is otherwise the maximum available."
+msgstr ""
+
+#: ../../../cheatsheet.rst:555
+msgid "Revisions"
+msgstr ""
+
+#: ../../../cheatsheet.rst:557
+msgid ""
+"Revisions allow changes to a package without increasing the version number "
+"or overwriting the existing version number. They are disabled by default."
+msgstr ""
+
+#: ../../../cheatsheet.rst:560
+msgid "There are two types of revisions:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:562
+msgid "\"Recipe Revisions\" (RREV) - Revision of the recipe and sources"
+msgstr ""
+
+#: ../../../cheatsheet.rst:563
+msgid "\"Package Revisions\" (PREV) - Revision of a binary package"
+msgstr ""
+
+#: ../../../cheatsheet.rst:565
+msgid ""
+"The recipe revision (RREV) is a SHA-1 hash calculated over the "
+"`conan_manifest.txt`, which contains the individual hashes of the `conanfile."
+"py` and all the files exported with `exports` and `exports_sources`. If the "
+"`scm` feature is used, Conan can also formulate the recipe revision directly "
+"from the version control system. Conan only holds one recipe revision in the "
+"local cache. Many recipe revisions can be stored in remote repositories. "
+"This helps differentiate between packages that have been changed and built "
+"without changing the version number. Recipe revisions can be specified "
+"wherever a recipe is consumed. If a recipe revision is not specified, the "
+"latest revision is used."
+msgstr ""
+
+#: ../../../cheatsheet.rst:572
+msgid ""
+"The package revision (PREV) is a SHA-1 hash calculated over the binary "
+"contents of the package directory after the build and package steps are "
+"completed. Package revisions provide the most precise identification for a "
+"built package. They are very rarely used directly by users in commands or "
+"configurations, because it's fairly impactical to do so. Instead, they are "
+"generally managed by the use of \"Lockfiles\"."
+msgstr ""
+
+#: ../../../cheatsheet.rst:577
+msgid "Enable revisions:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:579
+msgid "$ conan config set general.revisions_enabled=True"
+msgstr ""
+
+#: ../../../cheatsheet.rst:584
+msgid "Managing dependencies"
+msgstr ""
+
+#: ../../../cheatsheet.rst:587
+msgid "Specifying dependencies"
+msgstr ""
+
+#: ../../../cheatsheet.rst:589
+msgid ""
+"Main application dependencies are set in the [requires] section of "
+"`Conanfile.txt`__."
+msgstr ""
+
+#: ../../../cheatsheet.rst:593
+msgid ""
+"Package dependencies - normal requirements, build requirements, conditional "
+"requirements - are set in `the package recipe`_."
+msgstr ""
+
+#: ../../../cheatsheet.rst:596
+msgid "Package ID calculation modes"
+msgstr ""
+
+#: ../../../cheatsheet.rst:598
+msgid ""
+"Conan performs dependency resolution via the calculation of package IDs. A "
+"package ID is calculated for a desired dependency, and then Conan searches "
+"for that package ID."
+msgstr ""
+
+#: ../../../cheatsheet.rst:601
+msgid ""
+"The package ID calculation, and therefore the dependency resolution, is "
+"affected by the default_package_id_mode and the "
+"default_python_requires_id_mode. They determine what exactly affects the "
+"calculation: which parts of version numbers; package revisions; immediate or "
+"transitive dependencies. This relates to both normal requirements and "
+"`Python requires`_. By default, only the main version number of direct "
+"dependencies are taken into account when calculating the package ID."
+msgstr ""
+
+#: ../../../cheatsheet.rst:607
+msgid ""
+"These modes can be set in the [general] section of configurations_, and in "
+"`the package recipe`_."
+msgstr ""
+
+#: ../../../cheatsheet.rst:610
+msgid "Resolving dependency conflicts"
+msgstr ""
+
+#: ../../../cheatsheet.rst:612
+msgid ""
+"Versions defined in the `conanfile.txt`__ take precedence over versions "
+"specified by dependencies. This can be used to resolve conflicts by "
+"dictating the use of only one version throughout the whole dependency graph."
+msgstr ""
+
+#: ../../../cheatsheet.rst:618
+msgid "Lockfiles"
+msgstr ""
+
+#: ../../../cheatsheet.rst:620
+msgid ""
+"Lockfiles allow a snapshot of a dependency graph used for a build to be "
+"taken, and the build to be reproduced exactly at a later time."
+msgstr ""
+
+#: ../../../cheatsheet.rst:623
+msgid "Create a lockfile:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:625
+msgid ""
+"$ conan lock create <package>/conanfile.py --user=<user> --channel=<channel>"
+msgstr ""
+
+#: ../../../cheatsheet.rst:629
+msgid "Use lockfile during ``conan create`` or ``conan install``:"
+msgstr ""
+
+#: ../../../cheatsheet.rst:631
+msgid "$ conan <command> --lockfile conan.lock"
+msgstr ""
+
+#: ../../../cheatsheet.rst:635
+msgid ""
+"See `conan lock <https://docs.conan.io/en/latest/reference/commands/misc/"
+"lock.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:638
+msgid "Uploading packages to a remote repository"
+msgstr ""
+
+#: ../../../cheatsheet.rst:640
+msgid ""
+"Packages are not uploaded to a remote repository automatically. This needs "
+"to be done manually."
+msgstr ""
+
+#: ../../../cheatsheet.rst:642
+msgid ""
+"$ conan upload \"<package>\" -r <remote ID>  # Wildcards can be specified to "
+"upload multiple packages\n"
+"               [--all]                     # Upload all binaries and their "
+"recipes (recipes only uploaded by default)\n"
+"               [--confirm]                 # Auto-confirm"
+msgstr ""
+
+#: ../../../cheatsheet.rst:648
+msgid ""
+"See `conan upload <https://docs.conan.io/en/latest/reference/commands/"
+"creator/upload.html>`_ reference."
+msgstr ""
+
+#: ../../../cheatsheet.rst:651
+msgid "Important points for enterprises"
+msgstr ""
+
+#: ../../../cheatsheet.rst:653
+msgid ""
+"Versioning, revisioning and dependency resolution should be consistent "
+"across a company. Configurations_ should be synchronised across all "
+"developers, in particular `package id calculation modes`_."
+msgstr ""
+
+#: ../../../cheatsheet.rst:656
+msgid ""
+"In a CI/CD system, use lockfiles_ throughout, so that builds are "
+"reproducible."
+msgstr ""

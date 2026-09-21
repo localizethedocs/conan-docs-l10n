@@ -1,0 +1,203 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/visual_studio.rst:5
+msgid "|visual_logo| Visual Studio"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:7
+msgid "Conan can be integrated with **Visual Studio** in two different ways:"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:9
+msgid "Using the ``cmake`` generator to create a *conanbuildinfo.cmake* file."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:10
+msgid ""
+"Using the ``visual_studio`` generator to create a *conanbuildinfo.props* "
+"file."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:13
+msgid "With CMake"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:15
+msgid ""
+"Use the ``cmake`` generator or ``cmake_multi`` if you are using CMake to "
+"machine-generate your Visual Studio projects."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:17
+msgid ""
+"Check the :ref:`generators` section to read about the ``cmake`` generator. "
+"Check the official `CMake docs`_ to find out more about generating Visual "
+"Studio projects with CMake."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:20
+msgid ""
+"However, beware of some current CMake limitations, such as not dealing well "
+"with find-packages, because CMake doesn't know how to handle finding both "
+"debug and release packages."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:24
+msgid ""
+"If you want to use the Visual Studio 2017 + CMake integration, :ref:`check "
+"this how-to<visual2017_cmake_howto>`"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:27
+msgid "With *visual_studio* generator"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:29
+msgid ""
+"Use this, or **visual_studio_multi**, if you are maintaining your Visual "
+"Studio projects, and want to use Conan to to tell Visual Studio how to find "
+"your third-party dependencies."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:31
+msgid ""
+"You can use the **visual_studio** generator to manage your requirements via "
+"your *Visual Studio*  project."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:34
+msgid ""
+"This generator creates a `Visual Studio project properties`_ file, with all "
+"the *include paths*, *lib paths*, *libs*, *flags* etc., that can be imported "
+"in your project."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:36
+msgid ""
+"Open ``conanfile.txt`` and change (or add) the ``visual_studio`` generator:"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:38
+msgid ""
+"[requires]\n"
+"Poco/1.7.8p3@pocoproject/stable\n"
+"\n"
+"[generators]\n"
+"visual_studio"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:46
+msgid "Install the requirements:"
+msgstr "安裝要求項："
+
+#: ../../../integrations/visual_studio.rst:48
+msgid "$ conan install ."
+msgstr "$ conan install ."
+
+#: ../../../integrations/visual_studio.rst:52
+msgid ""
+"Go to your Visual Studio project, and open the **Property Manager**, usually "
+"in **View -> Other Windows -> Property Manager**."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:56
+msgid ""
+"Click the **+** icon and select the generated ``conanbuildinfo.props`` file:"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:60
+msgid "Build your project as usual."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:64
+msgid ""
+"Remember to set your project's architecture and build type accordingly, "
+"explicitly or implicitly, when issuing the :command:`conan install` command. "
+"If these values don't match, you build will probably fail."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:67
+msgid "e.g. **Release/x64**"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:71
+msgid "Check the :ref:`visualstudio_generator` for the complete reference."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:74
+msgid "Calling Visual Studio compiler"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:76
+msgid ""
+"You can call your Visual Studio compiler from your ``build()`` method using "
+"the ``VisualStudioBuildEnvironment`` and the :ref:`tools_vcvars_command`."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:79
+msgid "Check the :ref:`msbuild` section for more info."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:84
+msgid "Build an existing Visual Studio project"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:86
+msgid ""
+"You can build an existing Visual Studio from your ``build()`` method using "
+"the :ref:`MSBuild()<msbuild>` build helper."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:88
+msgid ""
+"from conans import ConanFile, MSBuild\n"
+"\n"
+"class ExampleConan(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def build(self):\n"
+"        msbuild = MSBuild(self)\n"
+"        msbuild.build(\"MyProject.sln\")"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:100
+msgid "Toolsets"
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:102
+msgid ""
+"You can use the sub-setting ``toolset`` of the Visual Studio compiler to "
+"specify a custom toolset. It will be automatically applied when using the "
+"``CMake()`` and ``MSBuild()`` build helpers. The toolset can be also "
+"specified manually in these build helpers with the ``toolset`` parameter."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:106
+msgid ""
+"By default, Conan will not generate a new binary package if the specified "
+"``compiler.toolset`` matches an already generated package for the "
+"corresponding ``compiler.version``. Check the :ref:"
+"`package_id()<method_package_id>` reference to know more."
+msgstr ""
+
+#: ../../../integrations/visual_studio.rst:112
+msgid ""
+"Check the :ref:`CMake()<cmake_reference>` reference section for more info."
+msgstr ""

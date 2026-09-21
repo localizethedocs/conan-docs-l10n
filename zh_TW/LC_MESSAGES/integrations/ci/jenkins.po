@@ -1,0 +1,175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.31\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/ci/jenkins.rst:5
+msgid "|jenkins_logo| Jenkins"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:7
+msgid "You can use `Jenkins CI` both for:"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:9
+msgid ""
+"Building and testing your project, which manages dependencies with Conan, "
+"and probably a conanfile.txt file"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:10
+msgid ""
+"Building and testing conan binary packages for a given Conan package recipe "
+"(with a conanfile.py) and uploading to a Conan remote (Artifactory or "
+"conan_server)"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:13
+msgid ""
+"There is no need for any special setup for it, just install Conan and your "
+"build tools in the Jenkins machine and call the needed Conan commands."
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:18
+msgid ""
+"As reported in https://github.com/conan-io/conan/issues/6400, running Conan "
+"under Jenkins could have some unexpected issues running ``git clone`` of "
+"repositories requiring authentication. If that is the case, consider to use "
+"``ssh`` protocol instead of ``https``."
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:24
+msgid "Artifactory and Jenkins integration"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:27
+msgid ""
+"If you are using `Artifactory`_ you can take advantage of the `Jenkins "
+"Artifactory Plugin`_. Check `here how to install the plugin`_ and `here you "
+"can check the full documentation about the DSL`_."
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:30
+msgid ""
+"The Artifactory Jenkins plugin provides a powerful DSL (Domain Specific "
+"Language) to call Conan, connect with your Artifactory instance, upload and "
+"download your packages from Artifactory and manage your `build information`_."
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:36
+msgid "Example: Test your project getting requirements from Artifactory"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:38
+msgid ""
+"This is a template to use Jenkins with an Artifactory plugin and Conan to "
+"retrieve your package from Artifactory server and publish the `build "
+"information`_ about the downloaded packages to Artifactory."
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:41
+msgid ""
+"In this script we assume that we already have all our dependencies in the "
+"Artifactory server, and we are building our project that uses **Boost** and "
+"**Poco** libraries."
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:44
+msgid "Create a new Jenkins Pipeline task using this script:"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:47
+msgid ""
+"//Adjust your artifactory instance name/repository and your source code "
+"repository\n"
+"def artifactory_name = \"artifactory\"\n"
+"def artifactory_repo = \"conan-local\"\n"
+"def repo_url = 'https://github.com/memsharded/example-boost-poco.git'\n"
+"def repo_branch = 'master'\n"
+"\n"
+"node {\n"
+"    def server = Artifactory.server artifactory_name\n"
+"    def client = Artifactory.newConanClient()\n"
+"\n"
+"    stage(\"Get project\"){\n"
+"        git branch: repo_branch, url: repo_url\n"
+"    }\n"
+"\n"
+"    stage(\"Get dependencies and publish build info\"){\n"
+"        sh \"mkdir -p build\"\n"
+"        dir ('build') {\n"
+"          def b = client.run(command: \"install ..\")\n"
+"          server.publishBuildInfo b\n"
+"        }\n"
+"    }\n"
+"\n"
+"    stage(\"Build/Test project\"){\n"
+"        dir ('build') {\n"
+"          sh \"cmake ../ && cmake --build .\"\n"
+"        }\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:78
+msgid "|jenkins_stages|"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:82
+msgid "Example: Build a Conan package and upload it to Artifactory"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:84
+msgid ""
+"In this example we will call Conan :ref:`test "
+"package<creating_and_testing_packages>` command to create a binary packages "
+"and then upload it to Artifactory. We also upload the `build information`_:"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:88
+msgid ""
+"def artifactory_name = \"artifactory\"\n"
+"def artifactory_repo = \"conan-local\"\n"
+"def repo_url = 'https://github.com/conan-community/conan-zlib.git'\n"
+"def repo_branch = \"release/1.2.11\"\n"
+"\n"
+"node {\n"
+"    def server = Artifactory.server artifactory_name\n"
+"    def client = Artifactory.newConanClient()\n"
+"    def serverName = client.remote.add server: server, repo: "
+"artifactory_repo\n"
+"\n"
+"    stage(\"Get recipe\"){\n"
+"        git branch: repo_branch, url: repo_url\n"
+"    }\n"
+"\n"
+"    stage(\"Test recipe\"){\n"
+"        client.run(command: \"create\")\n"
+"    }\n"
+"\n"
+"    stage(\"Upload packages\"){\n"
+"        String command = \"upload \\\"*\\\" --all -r ${serverName} --"
+"confirm\"\n"
+"        def b = client.run(command: command)\n"
+"        server.publishBuildInfo b\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../integrations/ci/jenkins.rst:116
+msgid "|jenkins_stages_creator|"
+msgstr ""

@@ -1,0 +1,128 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.60\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/development/package.rst:5
+msgid "conan package"
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:7
+msgid ""
+"$ conan package [-h] [-bf BUILD_FOLDER] [-if INSTALL_FOLDER]\n"
+"                [-pf PACKAGE_FOLDER] [-sf SOURCE_FOLDER]\n"
+"                path"
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:13
+msgid "Calls your local conanfile.py 'package()' method."
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:15
+msgid ""
+"This command works in the user space and it will copy artifacts from the --"
+"build-folder and --source-folder folder to the --package-folder one.  It "
+"won't create a new package in the local cache, if you want to do it, use "
+"'conan create' or 'conan export-pkg' after a 'conan build' command."
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:21
+msgid ""
+"positional arguments:\n"
+"  path                  Path to a folder containing a conanfile.py or to a\n"
+"                        recipe file e.g., my_folder/conanfile.py\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  -bf BUILD_FOLDER, --build-folder BUILD_FOLDER\n"
+"                        Directory for the build process. Defaulted to the\n"
+"                        current directory. A relative path to the current\n"
+"                        directory can also be specified\n"
+"  -if INSTALL_FOLDER, --install-folder INSTALL_FOLDER\n"
+"                        Directory containing the conaninfo.txt and\n"
+"                        conanbuildinfo.txt files (from previous 'conan\n"
+"                        install'). Defaulted to --build-folder\n"
+"  -pf PACKAGE_FOLDER, --package-folder PACKAGE_FOLDER\n"
+"                        folder to install the package. Defaulted to the\n"
+"                        '{build_folder}/package' folder. A relative path "
+"can\n"
+"                        be specified (relative to the current directory). "
+"Also\n"
+"                        an absolute path is allowed.\n"
+"  -sf SOURCE_FOLDER, --source-folder SOURCE_FOLDER\n"
+"                        Directory containing the sources. Defaulted to the\n"
+"                        conanfile's directory. A relative path to the "
+"current\n"
+"                        directory can also be specified"
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:48
+msgid ""
+"The ``package()`` method might use `settings`, `options` and `environment "
+"variables` from the specified profile and dependencies information from the "
+"declared ``deps_XXX_info`` objects in the conanfile requirements."
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:52
+msgid ""
+"All that information is saved automatically in the *conaninfo.txt* and "
+"*conanbuildinfo.txt* files respectively, when you run :command:`conan "
+"install`. Those files have to be located in the specified :command:`--build-"
+"folder`."
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:55
+msgid "$ conan install . --build-folder=build"
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:59
+msgid "**Examples**"
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:61
+msgid ""
+"This example shows how ``package()`` works in a package which can be edited "
+"and built in user folders instead of the local cache."
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:63
+msgid ""
+"$ conan new hello/0.1 -s\n"
+"$ conan install . --install-folder=build_x86 -s arch=x86\n"
+"$ conan build . --build-folder=build_x86\n"
+"$ conan package . --build-folder=build_x86 --package-folder=package_x86\n"
+"$ ls package/x86\n"
+"> conaninfo.txt  conanmanifest.txt  include/  lib/"
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:74
+msgid ""
+"The packages created locally are just for the user, but cannot be directly "
+"consumed by other packages, nor they can be uploaded to a remote repository. "
+"In order to make these packages available to the system, they have to be put "
+"in the conan local cache, which can be done with the :command:`conan export-"
+"pkg` command instead of using :command:`conan package` command:"
+msgstr ""
+
+#: ../../../reference/commands/development/package.rst:79
+msgid ""
+"$ conan new hello/0.1 -s\n"
+"$ conan install . --install-folder=build_x86 -s arch=x86\n"
+"$ conan build . --build-folder=build_x86\n"
+"$ conan export-pkg . hello/0.1@user/stable --build-folder=build_x86 -s "
+"arch=x86"
+msgstr ""

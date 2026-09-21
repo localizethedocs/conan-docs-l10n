@@ -1,0 +1,532 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:4
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:16
+msgid "BazelDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:8
+msgid ""
+"This feature is still **under development**, while it is recommended and "
+"usable and we will try not to break them in future releases, some breaking "
+"changes might still happen if necessary to prepare for the *Conan 2.0 "
+"release*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:12
+msgid ""
+"Available since: `1.37.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.37.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:18
+msgid ""
+"The ``BazelDeps`` is the dependencies generator for Bazel. Generates a "
+"*<REPOSITORY>/BUILD.bazel* file per dependency, where the *<REPOSITORY>/* "
+"folder is the Conan recipe reference name by default, e.g., *mypkg/BUILD."
+"bazel*. Apart from that, it also generates a *dependencies.bzl* file which "
+"contains a Bazel function to load all your Conan dependencies."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:22
+msgid "The ``BazelDeps`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:24
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:143
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:276
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:24
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"BazelDeps\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:30
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:30
+msgid ""
+"[generators]\n"
+"BazelDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:36
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:38
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.google import BazelDeps\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"zlib/1.2.11\"\n"
+"\n"
+"    def generate(self):\n"
+"        bz = BazelDeps(self)\n"
+"        bz.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:51
+msgid ""
+"When the ``BazelDeps`` generator is used, every invocation of ``conan "
+"install`` will generate several bazel files. For the *conanfile.py* above, "
+"for example:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:55
+msgid ""
+"$ conan install .\n"
+".\n"
+"├── BUILD.bazel\n"
+"├── conanfile.py\n"
+"├── dependencies.bzl\n"
+"└── zlib\n"
+"    └── BUILD.bazel"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:65
+msgid "Every :command:`conan install` generates these files:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:67
+msgid ""
+"*BUILD.bazel*: An empty file aimed to be alongside the *dependencies.bzl* "
+"one. More information `here <https://bazel.build/concepts/build-files>`__."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:69
+msgid ""
+"*dependencies.bzl*: this file tells your Bazel *WORKSPACE* how to load the "
+"dependencies."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:70
+msgid ""
+"*zlib/BUILD.bazel*: contains all the targets that you can load from any of "
+"your *BUILD* files. More information in :ref:"
+"`conan_tools_google_bazeldeps_targets`."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:73
+msgid "Let's check the content of the files created:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:75
+msgid "dependencies.bzl"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:75
+msgid ""
+"# This Bazel module should be loaded by your WORKSPACE file.\n"
+"# Add these lines to your WORKSPACE one (assuming that you're using the "
+"\"bazel_layout\"):\n"
+"# load(\"@//conan:dependencies.bzl\", \"load_conan_dependencies\")\n"
+"# load_conan_dependencies()\n"
+"\n"
+"def load_conan_dependencies():\n"
+"    native.new_local_repository(\n"
+"        name=\"zlib\",\n"
+"        path=\"/path/to/conan/package/folder/\",\n"
+"        build_file=\"/your/current/working/directory/zlib/BUILD.bazel\",\n"
+"    )"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:90
+msgid ""
+"Given the example above, and imagining that your WORKSPACE is at the same "
+"directory, you would have to add these lines in there:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:92
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:179
+msgid "WORKSPACE"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:92
+msgid ""
+"load(\"@//:dependencies.bzl\", \"load_conan_dependencies\")\n"
+"load_conan_dependencies()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:99
+msgid "zlib/BUILD.bazel"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:99
+msgid ""
+"load(\"@rules_cc//cc:defs.bzl\", \"cc_import\", \"cc_library\")\n"
+"\n"
+"# Components precompiled libs\n"
+"# Root package precompiled libs\n"
+"cc_import(\n"
+"    name = \"z_precompiled\",\n"
+"    static_library = \"lib/libz.a\",\n"
+")\n"
+"\n"
+"# Components libraries declaration\n"
+"# Package library declaration\n"
+"cc_library(\n"
+"    name = \"zlib\",\n"
+"    hdrs = glob([\n"
+"        \"include/**\",\n"
+"    ]),\n"
+"    includes = [\n"
+"        \"include\",\n"
+"    ],\n"
+"    visibility = [\"//visibility:public\"],\n"
+"    deps = [\n"
+"        \":z_precompiled\",\n"
+"    ],\n"
+")\n"
+"\n"
+"# Filegroup library declaration\n"
+"filegroup(\n"
+"    name = \"zlib_binaries\",\n"
+"    srcs = glob([\n"
+"        \"bin/**\",\n"
+"    ]),\n"
+"    visibility = [\"//visibility:public\"],\n"
+")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:136
+msgid ""
+"As you can observe, the *zlib/BUILD.bazel* defines these global targets:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:138
+msgid ""
+"``zlib``: bazel library target. The label used to depend on it would be "
+"``@zlib//:zlib``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:139
+msgid ""
+"``zlib_binaries``: bazel filegroup target. The label used to depend on it "
+"would be ``@zlib//:zlib_binaries``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:141
+msgid ""
+"Since Conan 1.62.0, you can put all the files generated by ``BazelDeps`` "
+"into another folder using the ``bazel_layout``:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:143
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.google import BazelDeps, bazel_layout\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"zlib/1.2.11\"\n"
+"\n"
+"    def layout(self):\n"
+"        # DEPRECATED: Default generators folder will be \"conan\" in Conan 2."
+"x\n"
+"        self.folders.generators = \"conan\"\n"
+"        bazel_layout(self)\n"
+"\n"
+"    def generate(self):\n"
+"        bz = BazelDeps(self)\n"
+"        bz.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:163
+msgid ""
+"Running again the :command:`conan install` command, we now get this "
+"structure:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:165
+msgid ""
+"$ conan install .\n"
+".\n"
+"├── conan\n"
+"│   ├── BUILD.bazel\n"
+"│   ├── dependencies.bzl\n"
+"│   └── zlib\n"
+"│       └── BUILD.bazel\n"
+"└── conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:177
+msgid ""
+"Now your Conan-bazel files were generated in the *conan/* folder, so your "
+"WORKSPACE will look like:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:179
+msgid ""
+"load(\"@//conan:dependencies.bzl\", \"load_conan_dependencies\")\n"
+"load_conan_dependencies()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:188
+msgid "build_context_activated"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:190
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:231
+msgid ""
+"Available since: `1.62.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.62.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:192
+msgid ""
+"When you have a **build-requirement**, by default, the Bazel files are not "
+"generated. But you can activate it using the **build_context_activated** "
+"attribute:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:195
+msgid ""
+"def build_requirements(self):\n"
+"    self.tool_requires(\"my_tool/0.0.1\")\n"
+"\n"
+"def layout(self):\n"
+"    # DEPRECATED: Default generators folder will be \"conan\" in Conan 2.x\n"
+"    self.folders.generators = \"conan\"\n"
+"    bazel_layout(self)\n"
+"\n"
+"def generate(self):\n"
+"    bz = BazelDeps(self)\n"
+"    # generate the build-mytool/BUILD.bazel file for the tool require\n"
+"    bz.build_context_activated = [\"my_tool\"]\n"
+"    bz.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:212
+msgid ""
+"Running the :command:`conan install` command, the structure created is as "
+"follows:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:214
+msgid ""
+"$ conan install . -pr:b default\n"
+".\n"
+"├── conan\n"
+"│   ├── BUILD.bazel\n"
+"│   ├── build-my_tool\n"
+"│   │   └── BUILD.bazel\n"
+"│   └── dependencies.bzl\n"
+"└── conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:225
+msgid ""
+"Notice that *my_tool* Bazel folder is prefixed with ``build-`` which "
+"indicates that it's being used in the build context."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:229
+msgid "Properties"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:233
+msgid "The following properties affect the ``BazelDeps`` generator:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:235
+msgid ""
+"**bazel_target_name** property will define the name of the target declared "
+"in the ``<REPOSITORY>/BUILD.bazel``. This property can be defined at both "
+"global and component ``cpp_info`` level."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:237
+msgid ""
+"**bazel_repository_name** property will define the name of the folder where "
+"the dependency *BUILD.bazel* will be allocated. This property can only be "
+"defined at global ``cpp_info`` level."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:240
+msgid "Example:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:242
+msgid ""
+"def package_info(self):\n"
+"    self.cpp_info.set_property(\"bazel_target_name\", \"my_target\")\n"
+"    self.cpp_info.set_property(\"bazel_repository_name\", \"my_repo\")\n"
+"    self.cpp_info.components[\"mycomponent\"]."
+"set_property(\"bazel_target_name\", \"component_name\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:253
+msgid "Repository and target names"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:255
+msgid ""
+"The ``<REPOSITORY>/BUILD.bazel`` file contains all the targets declared by "
+"the dependency. Both the ``<REPOSITORY>/`` folder and the targets declared "
+"in there will be named following these rules by default:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:260
+msgid ""
+"For packages, it uses the package name as folder/target name, e.g., package "
+"``zlib/1.2.11`` will have:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:259
+msgid "Folder: ``zlib/BUILD.bazel``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:260
+msgid "Global target: ``zlib``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:261
+msgid "How it can be consumed: ``@zlib//:zlib``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:270
+msgid ""
+"For components, the package name + hyphen + component name, e.g., package "
+"``openssl/3.1.4`` will have:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:263
+msgid "Folder: ``openssl/BUILD.bazel``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:264
+msgid "Global target: ``openssl``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:265
+msgid "Components targets: ``openssl-ssl``, and ``openssl-crypto``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:270
+msgid "How it can be consumed:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:267
+msgid "``@openssl//:openssl`` (global one which includes all the components)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:268
+msgid "``@openssl//:openssl-ssl`` (component one)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:269
+msgid "``@openssl//:openssl-crypto`` (component one)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:272
+msgid ""
+"You can change that default behavior with the ``bazel_target_name`` and the "
+"``bazel_repository_name`` properties. For instance, if ``openssl/3.1.4`` "
+"recipe would have has these ``bazel_target_name`` and "
+"``bazel_repository_name`` properties already declared:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:276
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class OpenSSLConan(ConanFile):\n"
+"    name = \"openssl\"\n"
+"\n"
+"    # any code here\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.set_property(\"bazel_target_name\", "
+"\"local_openssl\")\n"
+"        self.cpp_info.set_property(\"bazel_repository_name\", \"OpenSSL\")\n"
+"        self.cpp_info.components[\"crypto\"]."
+"set_property(\"bazel_target_name\", \"libcrypto\")\n"
+"        self.cpp_info.components[\"ssl\"]."
+"set_property(\"bazel_target_name\", \"libssl\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:293
+msgid ""
+"Run :command:`conan install openssl/3.1.4@ -g BazelDeps` and check the ``*."
+"pc`` files created:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:295
+msgid ""
+"$ conan install . -pr:b default\n"
+".\n"
+"├── conan\n"
+"│   ├── BUILD.bazel\n"
+"│   ├── OpenSSL\n"
+"│   │   └── BUILD.bazel\n"
+"│   └── dependencies.bzl\n"
+"└── conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:306
+msgid "The labels to use in your personal *BUILD* file would be:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:308
+msgid "``@OpenSSL//:local_openssl``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:309
+msgid "``@OpenSSL//:libssl``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:310
+msgid "``@OpenSSL//:libcrypto``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:311
+msgid "``@OpenSSL//:local_openssl_binaries``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:313
+msgid ""
+"An example of a *BUILD* file consuming one of these targets could be "
+"something like this:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:315
+msgid "BUILD"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/google/bazeldeps.rst:315
+msgid ""
+"load(\"@rules_cc//cc:defs.bzl\", \"cc_binary\")\n"
+"\n"
+"cc_binary(\n"
+"    name = \"example\",\n"
+"    srcs = [\"example.cpp\"],\n"
+"    deps = [\n"
+"        \"@OpenSSL//:local_openssl\",\n"
+"    ],\n"
+")"
+msgstr ""

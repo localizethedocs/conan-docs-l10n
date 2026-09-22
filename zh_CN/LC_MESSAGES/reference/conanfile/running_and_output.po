@@ -1,0 +1,257 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/running_and_output.rst:5
+msgid "Running and output"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:8
+msgid "Output text from recipes"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:10
+msgid ""
+"Use the ``self.output`` attribute to output text from the recipes. Do "
+"**not** use Python's ``print()`` function. The ``self.output`` attribute has "
+"the following methods to express the level of the printed message:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:13
+msgid ""
+"trace(msg)\n"
+"debug(msg)\n"
+"verbose(msg)\n"
+"status(msg)\n"
+"info(msg)\n"
+"highlight(msg)\n"
+"success(msg)\n"
+"warning(msg, warn_tag=None)\n"
+"error(msg)"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:27
+msgid ""
+"These output functions will only output if the verbosity level with which "
+"Conan was launched is the same or higher than the message, so running with "
+"``-vwarning`` will output calls to ``warning()`` and ``error()``, but not "
+"``info()`` (Additionally, the ``highlight()`` and ``success()`` methods have "
+"a ``-vnotice`` verbosity level)"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:31
+msgid ""
+"Note that these methods return the output object again, so that you can "
+"chain output calls if needed."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:33
+msgid ""
+"Using the ``core:warnings_as_errors`` conf, you can make Conan raise an "
+"exception when either errors or a tagged warning matching any of the given "
+"patterns is printed. This is useful to make sure that recipes are not "
+"printing unexpected warnings or errors. Additionally, you can skip which "
+"warnings trigger an exception :ref:`with the *core:skip_warnings* "
+"conf<reference_config_files_global_conf_skip_warnings>`."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:37
+msgid ""
+"# Raise an exception if any warning or error is printed\n"
+"core:warnings_as_errors=['*']\n"
+"# But skip the deprecation warnings\n"
+"core:skip_warnings=['deprecated']"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:44
+msgid ""
+"Both confs accept a list of patterns to match against the warning tags. A "
+"special ``unknown`` value can be used to match any warning without a tag."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:47
+msgid ""
+"To tag a warning, use the ``warn_tag`` argument of the ``warning()`` method "
+"in your recipes:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:49
+msgid "self.output.warning(\"Extra warning\", warn_tag=\"custom_tag\")"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:56
+msgid ""
+"The common use of these functions from least specific to most specific, is:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:61
+msgid "**error(msg)**:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:59
+msgid ""
+"Indicates that a serious issue has occurred that prevents the system or "
+"application from continuing to function correctly. Typically, this "
+"represents a failure in the normal flow of execution, such as a service "
+"crash or a critical exception."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:66
+msgid "**warning(msg, warn_tag=None)**:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:64
+msgid ""
+"Highlights a potential issue that, while not stopping the system, could "
+"cause problems in the future or under certain conditions. Warnings signal "
+"abnormal situations that should be reviewed but don’t necessarily cause an "
+"immediate halt in operations."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:70
+msgid "**success(msg)**:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:69
+msgid ""
+"Shows that an operation has been completed successfully. This type of "
+"message is useful to confirm that key processes or tasks have finished "
+"correctly, which is essential for good application monitoring."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:74
+msgid "**highlight(msg)**:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:73
+msgid ""
+"Marks or emphasizes important events or processes that need to stand out but "
+"don’t necessarily indicate success or error. These messages draw attention "
+"to key points that may be relevant for the user or administrator."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:78
+msgid "**info(msg)**:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:77
+msgid ""
+"Provides general information about the system or ongoing operations. Info "
+"messages are basic and used to inform about common events, like the start or "
+"completion of processes, without implying specific problems or achievements."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:83
+msgid "**status(msg)**:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:81
+msgid ""
+"Reports the current state of the system or an ongoing operation. Status "
+"messages provide updates on how something is working, often in real time, to "
+"offer a clear view of the progress or situation of a process."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:85
+msgid ""
+"The following three methods are not shown by default and are usually "
+"reserved for scenarios that require a higher level of verbosity. You can "
+"display them using the arguments ``-v``, ``-vv``, and ``-vvv`` respectively."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:91
+msgid "**verbose(msg)**:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:89
+msgid ""
+"Displays additional and detailed information that, while not critical, can "
+"be useful for better understanding how the system is working. It’s "
+"appropriate for gaining more context without overloading the logs with "
+"excessive detail. Useful when more clarity is needed than a simple info."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:96
+msgid "**debug(msg)**:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:94
+msgid ""
+"With a high level of detail, it is mainly used for debugging code. These "
+"messages provide useful information for developers, such as variable values "
+"or execution flow details, to trace errors or analyze the program's behavior."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:103
+msgid "**trace(msg)**:"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:99
+msgid ""
+"This is the most extreme level of detail. Trace messages log every little "
+"step the system takes, including function entries and exits, variable "
+"changes, and other very specific events. It’s used when full visibility of "
+"everything happening in the system is required, but should be used carefully "
+"due to the large amount of information it can generate."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:106
+msgid "Running commands"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:108
+msgid ""
+"run(self, command, stdout=None, cwd=None, ignore_errors=False, env=\"\", "
+"quiet=False, shell=True, scope=\"build\", stderr=None)"
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:113
+msgid ""
+"``self.run()`` is a helper to run system commands while injecting the calls "
+"to activate the appropriate environment, and throw exceptions when errors "
+"occur so that command errors do not pass unnoticed. It also wraps the "
+"commands with the results of the :ref:`command wrapper "
+"plugin<reference_extensions_command_wrapper>`."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:118
+msgid ""
+"``command`` should be specified as a string which is passed to the system "
+"shell."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:119
+msgid ""
+"When the argument ``quiet`` is set to true, the invocation of ``self.run()`` "
+"will not print the command to be executed."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:121
+msgid ""
+"Use the ``stdout`` and ``stderr`` arguments to redirect the output of the "
+"command to a file-like object instead of the console."
+msgstr ""
+
+#: ../../../reference/conanfile/running_and_output.rst:123
+msgid ""
+"# Redirect stdout to a file\n"
+"with open(\"ninja_stdout.log\", \"w\") as stdout:\n"
+"    # Redirect stderr to a StringIO object to be able to read it later\n"
+"    stderr = StringIO()\n"
+"    self.run(\"ninja ...\", stdout=stdout, stderr=stderr)"
+msgstr ""

@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devops/conancenter/hosting_binaries.rst:4
+msgid "Creating and hosting your own ConanCenter binaries"
+msgstr "建立並託管您自己的 ConanCenter 二進位"
+
+#: ../../../devops/conancenter/hosting_binaries.rst:7
+msgid ""
+"Hosting your own copy of the packages you need in your server could be done "
+"by just downloading binaries from ConanCenter and then uploading them to "
+"your own server. However, it is much better to fully own the complete supply "
+"chain and create the binaries in your own CI systems. So the recommended "
+"flow to use ConanCenter packages in production would be:"
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:9
+msgid ""
+"Create a fork of the ConanCenter Github repository: https://github.com/conan-"
+"io/conan-center-index"
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:10
+msgid ""
+"Create a list of the packages and versions you need for your projects. This "
+"list can be added to the fork too, and maintained there (packages can be "
+"added and removed with PRs when the teams need them)."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:11
+msgid ""
+"Create a script that first ``conan export`` all the packages in your list, "
+"then ``conan create --build=missing`` them. Do not add ``user/channel`` to "
+"these packages, it is way simpler to use them as ``zlib/1.2.13`` without "
+"user-channel. The ``user/channel`` part would be mostly recommended for your "
+"own proprietary packages, but not for open source ConanCenter packages."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:12
+msgid ""
+"Upload your build packages to your own server, that you use in production, "
+"instead of ConanCenter."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:14
+msgid ""
+"This is the basic flow idea. We will be adding examples and tools to further "
+"automate this flow as soon as possible."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:17
+msgid ""
+"This flow is relatively straightforward, and has many advantages that "
+"mitigate the risks described before:"
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:19
+msgid "No central repository outage can affect your builds."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:20
+msgid ""
+"No changes in the central repository can break your projects, you are in "
+"full control when and how those changes are updated in your packages (as "
+"explained below)."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:21
+msgid ""
+"You can customize, adapt, fix and perfectly control what versions are used, "
+"and release fixes in minutes, not weeks. You can apply customizations that "
+"wouldn't be accepted in the central repository."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:22
+msgid ""
+"You fully control the binaries supply chain, from the source (recipes) to "
+"the binaries, eliminating in practice the majority of potential supply chain "
+"attacks of central repositories."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:26
+msgid "Updating from upstream"
+msgstr "從上游更新"
+
+#: ../../../devops/conancenter/hosting_binaries.rst:28
+msgid ""
+"Updating from the upstream ``conan-center-index`` Github repo is still "
+"possible, and it can be done in a fully controlled way:"
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:30
+msgid ""
+"Merge the latest changes in the upstream main fork of ``conan-center-index`` "
+"into your fork."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:31
+msgid ""
+"You can check and audit those changes if you want to, analyzing the diffs "
+"(some automation that trims the diffs of recipes that you don't use could be "
+"useful)"
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:32
+msgid ""
+"Firing the above process will efficiently rebuild the new binaries that are "
+"needed. If your recipes are not affected by changes, the process will avoid "
+"rebuilding binaries (thanks to ``--build=missing``)."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:33
+msgid ""
+"You can upload the packages to a secondary \"test\" server repository. Then "
+"test your project against that test server, to check that your project is "
+"not broken by the new ConanCenter packages."
+msgstr ""
+
+#: ../../../devops/conancenter/hosting_binaries.rst:34
+msgid ""
+"Once you verify that everything is good with the new packages, you can copy "
+"them from the secondary \"test\" repository to your main production "
+"repository to start using them."
+msgstr ""

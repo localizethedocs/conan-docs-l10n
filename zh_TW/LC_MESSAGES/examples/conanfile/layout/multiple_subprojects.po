@@ -1,0 +1,179 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.23\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-16 08:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:4
+msgid "Declaring the layout when we have multiple subprojects"
+msgstr ""
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:6
+msgid ""
+"Please, first clone the sources to recreate this project. You can find them "
+"in the `examples2 repository <https://github.com/conan-io/examples2>`_ in "
+"GitHub:"
+msgstr ""
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:9
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/examples/conanfile/layout/multiple_subprojects"
+msgstr ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/examples/conanfile/layout/multiple_subprojects"
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:14
+msgid ""
+"Let's say that we have a project that contains two subprojects: *hello* and "
+"*bye*, that need to access some information that is at their same level "
+"(sibling folders). Each subproject would be a Conan package. The structure "
+"could be something similar to this:"
+msgstr ""
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:18
+msgid ""
+".\n"
+"├── bye\n"
+"│   ├── CMakeLists.txt\n"
+"│   ├── bye.cpp        # contains an #include \"../common/myheader.h\"\n"
+"│   └── conanfile.py   # contains include(../common/myutils.cmake)\n"
+"├── common\n"
+"│   ├── myheader.h\n"
+"│   └── myutils.cmake\n"
+"└── hello\n"
+"    ├── CMakeLists.txt # contains include(../common/myutils.cmake)\n"
+"    ├── conanfile.py\n"
+"    └── hello.cpp      # contains an #include \"../common/myheader.h\""
+msgstr ""
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:34
+msgid ""
+"Both *hello* and *bye* subprojects needs to use some of the files located "
+"inside the ``common`` folder (that might be used and shared by other "
+"subprojects too), and it references them by their relative location. Note "
+"that ``common`` is not intended to be a Conan package. It is just some "
+"common code that will be copied into the different subproject packages."
+msgstr ""
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:40
+msgid ""
+"We can use the ``self.folders.root = \"..\"`` layout specifier to locate the "
+"root of the project, then use the ``self.folders.subproject = "
+"\"subprojectfolder\"`` to relocate back most of the layout to the current "
+"subproject folder, as it would be the one containing the build scripts, "
+"sources code, etc., so other helpers like ``cmake_layout()`` keep working. "
+"Let's see how the *conanfile.py* of *hello* could look like:"
+msgstr ""
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:47
+msgid "./hello/conanfile.py"
+msgstr "./hello/conanfile.py"
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:47
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"from conan.tools.cmake import cmake_layout, CMake\n"
+"from conan.tools.files import copy\n"
+"\n"
+"\n"
+"class hello(ConanFile):\n"
+"    name = \"hello\"\n"
+"    version = \"1.0\"\n"
+"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    generators = \"CMakeToolchain\"\n"
+"\n"
+"    def layout(self):\n"
+"        self.folders.root = \"..\"\n"
+"        self.folders.subproject = \"hello\"\n"
+"        cmake_layout(self)\n"
+"\n"
+"    def export_sources(self):\n"
+"        source_folder = os.path.join(self.recipe_folder, \"..\")\n"
+"        copy(self, \"hello/conanfile.py\", source_folder, self."
+"export_sources_folder)\n"
+"        copy(self, \"hello/CMakeLists.txt\", source_folder, self."
+"export_sources_folder)\n"
+"        copy(self, \"hello/hello.cpp\", source_folder, self."
+"export_sources_folder)\n"
+"        copy(self, \"common*\", source_folder, self.export_sources_folder)\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure()\n"
+"        cmake.build()\n"
+"        self.run(os.path.join(self.cpp.build.bindirs[0], \"hello\"))"
+msgstr ""
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:81
+msgid ""
+"Let's build *hello* and check that it's building correctly, using the "
+"contents of the common folder."
+msgstr ""
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:84
+msgid ""
+"$ conan install hello\n"
+"$ conan build hello\n"
+"...\n"
+"[100%] Built target hello\n"
+"conanfile.py (hello/1.0): RUN: ./hello\n"
+"hello WORLD"
+msgstr ""
+"$ conan install hello\n"
+"$ conan build hello\n"
+"...\n"
+"[100%] Built target hello\n"
+"conanfile.py (hello/1.0): RUN: ./hello\n"
+"hello WORLD"
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:93
+msgid ""
+"You can also run a :command:`conan create` and check that it works fine too:"
+msgstr ""
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:95
+msgid ""
+"$ conan create hello\n"
+"...\n"
+"[100%] Built target hello\n"
+"conanfile.py (hello/1.0): RUN: ./hello\n"
+"hello WORLD"
+msgstr ""
+"$ conan create hello\n"
+"...\n"
+"[100%] Built target hello\n"
+"conanfile.py (hello/1.0): RUN: ./hello\n"
+"hello WORLD"
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:105
+msgid ""
+"Note the importance of the ``export_sources()`` method, which is able to "
+"maintain the same relative layout of the ``hello`` and ``common`` folders, "
+"both in the local developer flow in the current folder, but also when those "
+"sources are copied to the Conan cache, to be built there with ``conan "
+"create`` or ``conan install --build=hello``. This is one of the design "
+"principles of the ``layout()``, the relative location of things must be "
+"consistent in the user folder and in the cache."
+msgstr ""
+
+#: ../../../examples/conanfile/layout/multiple_subprojects.rst:114
+msgid ""
+"Read more about the :ref:`layout method<reference_conanfile_methods_layout>` "
+"and :ref:`how the package layout works<tutorial_package_layout>`."
+msgstr ""

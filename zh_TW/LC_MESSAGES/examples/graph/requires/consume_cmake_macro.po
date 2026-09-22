@@ -1,0 +1,134 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.23\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-16 08:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:4
+msgid "Use a CMake macro packaged in a dependency"
+msgstr ""
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:6
+msgid ""
+"When a package recipe wants to provide a CMake functionality via a macro, it "
+"can be done as follows. Let's say that we have a ``pkg`` recipe, that will "
+"\"export\" and \"package\" a ``Macros.cmake`` file that contains a "
+"``pkg_macro()`` CMake macro:"
+msgstr ""
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:11
+msgid "pkg/conanfile.py"
+msgstr ""
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:11
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.files import copy\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    name = \"pkg\"\n"
+"    version = \"0.1\"\n"
+"    package_type = \"static-library\"\n"
+"    # Exporting, as part of the sources\n"
+"    exports_sources = \"*.cmake\"\n"
+"\n"
+"    def package(self):\n"
+"        # Make sure the Macros.cmake is packaged\n"
+"        copy(self, \"*.cmake\", src=self.source_folder, dst=self."
+"package_folder)\n"
+"\n"
+"    def package_info(self):\n"
+"        # We need to define that there are \"build-directories\", in this "
+"case\n"
+"        # the current package root folder, containing build files and "
+"scripts\n"
+"        self.cpp_info.builddirs = [\".\"]"
+msgstr ""
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:33
+msgid "pkg/Macros.cmake"
+msgstr "pkg/Macros.cmake"
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:33
+msgid ""
+"function(pkg_macro)\n"
+"    message(STATUS \"PKG MACRO WORKING!!!\")\n"
+"endfunction()"
+msgstr ""
+"function(pkg_macro)\n"
+"    message(STATUS \"PKG MACRO WORKING!!!\")\n"
+"endfunction()"
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:40
+msgid ""
+"When this package is created (``cd pkg && conan create .``), it can be "
+"consumed by other package recipes, for example this application:"
+msgstr ""
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:43
+msgid "app/conanfile.py"
+msgstr ""
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:43
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMake\n"
+"\n"
+"class App(ConanFile):\n"
+"    package_type = \"application\"\n"
+"    generators = \"CMakeToolchain\", \"CMakeDeps\"\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    requires = \"pkg/0.1\"\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure()\n"
+"        cmake.build()"
+msgstr ""
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:60
+msgid "That has this ``CMakeLists.txt``:"
+msgstr ""
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:62
+msgid "app/CMakeLists.txt"
+msgstr ""
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:62
+msgid ""
+"cmake_minimum_required(VERSION 3.15)\n"
+"project(App LANGUAGES NONE)\n"
+"\n"
+"include(Macros)  # include the file with the macro (note no .cmake "
+"extension)\n"
+"pkg_macro()  # call the macro"
+msgstr ""
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:72
+msgid ""
+"So when we run a local build, we will see how the file is included and the "
+"macro called:"
+msgstr ""
+
+#: ../../../examples/graph/requires/consume_cmake_macro.rst:75
+msgid ""
+"$ cd app\n"
+"$ conan build .\n"
+"PKG MACRO WORKING!!!"
+msgstr ""
+"$ cd app\n"
+"$ conan build .\n"
+"PKG MACRO WORKING!!!"

@@ -1,0 +1,711 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.17\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/list.rst:4
+msgid "conan list"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:-1
+msgid ""
+"$ conan list -h\n"
+"usage: conan list [-h] [-v [V]] [-cc CORE_CONF] [-f FORMAT]\n"
+"                  [--out-file OUT_FILE] [-p PACKAGE_QUERY]\n"
+"                  [-fp FILTER_PROFILE] [-fs FILTER_SETTINGS]\n"
+"                  [-fo FILTER_OPTIONS] [-r REMOTE] [-c] [-g GRAPH]\n"
+"                  [-gb GRAPH_BINARIES] [-gr GRAPH_RECIPES]\n"
+"                  [-gc {build,host,build-only,host-only}] [--lru LRU]\n"
+"                  [pattern]\n"
+"\n"
+"List existing recipes, revisions, or packages in the cache (by default) or "
+"the remotes.\n"
+"\n"
+"positional arguments:\n"
+"  pattern               A pattern in the form\n"
+"                        'pkg/version#revision:package_id#revision', e.g:\n"
+"                        \"zlib/1.2.13:*\" means all binaries for "
+"zlib/1.2.13. If\n"
+"                        revision is not specified, it is assumed latest "
+"one.\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  -f FORMAT, --format FORMAT\n"
+"                        Select the output format: json, html, compact\n"
+"  --out-file OUT_FILE   Write the output of the command to the specified "
+"file\n"
+"                        instead of stdout.\n"
+"  -p PACKAGE_QUERY, --package-query PACKAGE_QUERY\n"
+"                        List only the packages matching a specific query, e."
+"g,\n"
+"                        os=Windows AND (arch=x86 OR compiler=gcc)\n"
+"  -fp FILTER_PROFILE, --filter-profile FILTER_PROFILE\n"
+"                        Profiles to filter the binaries\n"
+"  -fs FILTER_SETTINGS, --filter-settings FILTER_SETTINGS\n"
+"                        Settings to filter the binaries\n"
+"  -fo FILTER_OPTIONS, --filter-options FILTER_OPTIONS\n"
+"                        Options to filter the binaries\n"
+"  -r REMOTE, --remote REMOTE\n"
+"                        Remote names. Accepts wildcards ('*' means all the\n"
+"                        remotes available)\n"
+"  -c, --cache           Search in the local cache\n"
+"  -g GRAPH, --graph GRAPH\n"
+"                        Graph json file\n"
+"  -gb GRAPH_BINARIES, --graph-binaries GRAPH_BINARIES\n"
+"                        Which binaries are listed\n"
+"  -gr GRAPH_RECIPES, --graph-recipes GRAPH_RECIPES\n"
+"                        Which recipes are listed\n"
+"  -gc {build,host,build-only,host-only}, --graph-context {build,host,build-"
+"only,host-only}\n"
+"                        Filter the results by the given context\n"
+"  --lru LRU             List recipes and binaries that have not been "
+"recently\n"
+"                        used. Use a time limit like --lru=5d (days) or\n"
+"                        --lru=4w (weeks), h (hours), m(minutes)\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:10
+msgid ""
+"The ``conan list`` command can list recipes and packages from the local "
+"cache, from the specified remotes or from both. This command uses a "
+"*reference pattern* as input. The structure of this pattern is based on a "
+"complete Conan reference that looks like:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:14
+msgid "``name/version@user/channel#rrev:pkgid#prev``"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:16
+msgid ""
+"This pattern supports using ``*`` as wildcard as well as ``#latest`` to "
+"specify the latest revision (though that might not be necessary in most "
+"cases, by default Conan will be listing the latest revisions)."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:19
+msgid "Using it you can list:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:21
+msgid "Recipe references (``name/version@user/channel``)."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:22
+msgid "Recipe revisions (``name/version@user/channel#rrev``)."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:23
+msgid ""
+"Package IDs and their configurations (``name/version@user/channel#rrev:"
+"pkgids``)."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:24
+msgid "Package revisions (``name/version@user/channel#rrev:pkgids#prev``)."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:28
+msgid ""
+"The json output of the ``conan list --format=json`` is in **preview**. See :"
+"ref:`the Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:32
+msgid "Let's see some examples on how to use this pattern:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:35
+msgid "Listing recipe references"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:37
+msgid "*list all references on local cache*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:37
+msgid ""
+"  # Make sure to quote the argument\n"
+"  $ conan list\n"
+"  Local Cache\n"
+"    hello\n"
+"      hello/2.26.1@mycompany/testing\n"
+"      hello/2.20.2@mycompany/testing\n"
+"      hello/1.0.4@mycompany/testing\n"
+"      hello/2.3.2@mycompany/stable\n"
+"      hello/1.0.4@mycompany/stable\n"
+"    string-view-lite\n"
+"      string-view-lite/1.6.0\n"
+"    zlib\n"
+"      zlib/1.2.11"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:54
+msgid ""
+"This command is equivalent to ``$ conan list \"*\"`` (make sure to quote the "
+"argument), if no argument is provided Conan will list all packages."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:58
+msgid "*list all versions of a reference*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:58
+msgid ""
+"  $ conan list zlib\n"
+"  Local Cache\n"
+"    zlib\n"
+"      zlib/1.2.11\n"
+"      zlib/1.2.12"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:68
+msgid ""
+"As we commented, you can also use the ``*`` wildcard inside the reference "
+"you want to search."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:71
+msgid "*list all versions of a reference, equivalent to the previous one*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:71
+msgid ""
+"# Make sure to quote the argument\n"
+"$ conan list \"zlib/*\"\n"
+"Local Cache\n"
+"  zlib\n"
+"    zlib/1.2.11\n"
+"    zlib/1.2.12"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:81
+msgid ""
+"You can also use version ranges in the version field to define the versions "
+"you want:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:83
+msgid "*list version ranges*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:83
+msgid ""
+"# Make sure to quote the argument\n"
+"$ conan list \"zlib/[<1.2.12]\" -r=conancenter\n"
+"Local Cache\n"
+"  zlib\n"
+"    zlib/1.2.11\n"
+"$ conan list \"zlib/[>1.2.11]\" -r=conancenter\n"
+"Local Cache\n"
+"  zlib\n"
+"    zlib/1.2.12\n"
+"    zlib/1.2.13"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:97
+msgid ""
+"Use the pattern for searching only references matching a specific channel:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:99
+msgid "*list references with 'stable' channel*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:99
+msgid ""
+"$ conan list \"*/*@*/stable\"\n"
+"Local Cache\n"
+"  hello\n"
+"    hello/2.3.2@mycompany/stable\n"
+"    hello/1.0.4@mycompany/stable"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:108
+msgid ""
+"Use the ``...@`` pattern for searching only references that don't have "
+"*user* and *channel*:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:110
+msgid "*list references without user and channel*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:110
+msgid ""
+"$ conan list \"*/*@\"\n"
+"Local Cache\n"
+"  string-view-lite\n"
+"    string-view-lite/1.6.0\n"
+"  zlib\n"
+"    zlib/1.2.11"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:121
+msgid "Listing recipe revisions"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:123
+msgid ""
+"To list recipe revisions the ``#<pattern>`` must be used. If we want just "
+"the latest revision we can use the ``#latest`` placeholder:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:126
+msgid "*list latest recipe revision*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:126
+msgid ""
+"$ conan list zlib/1.2.11#latest\n"
+"Local Cache\n"
+"  zlib\n"
+"    zlib/1.2.11\n"
+"      revisions\n"
+"        ffa77daf83a57094149707928bdce823 (2022-11-02 13:46:53 UTC)"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:136
+msgid "To list all recipe revisions use the ``*`` wildcard:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:138
+msgid "*list all recipe revisions*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:138
+msgid ""
+"  $ conan list \"zlib/1.2.11#*\"\n"
+"  Local Cache\n"
+"    zlib\n"
+"      zlib/1.2.11\n"
+"        revisions\n"
+"          ffa77daf83a57094149707928bdce823 (2022-11-02 13:46:53 UTC)\n"
+"          8b23adc7acd6f1d6e220338a78e3a19e (2022-10-19 09:19:10 UTC)\n"
+"          ce3665ce19f82598aa0f7ac0b71ee966 (2022-10-14 11:42:21 UTC)\n"
+"          31ee767cb2828e539c42913a471e821a (2022-10-12 05:49:39 UTC)\n"
+"          d77ee68739fcbe5bf37b8a4690eea6ea (2022-08-05 17:17:30 UTC)"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:154
+msgid "Listing package IDs"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:156
+msgid ""
+"The shortest way of listing all the package IDs belonging to the latest "
+"recipe revision is using ``name/version@user/channel:*`` as the pattern:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:159
+msgid "*list all package IDs for latest recipe revision*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:159
+msgid ""
+"  # Make sure to quote the argument\n"
+"  $ conan list \"zlib/1.2.11:*\"\n"
+"  Local Cache\n"
+"    zlib\n"
+"      zlib/1.2.11\n"
+"        revisions\n"
+"          d77ee68739fcbe5bf37b8a4690eea6ea (2022-08-05 17:17:30 UTC)\n"
+"          packages\n"
+"            d0599452a426a161e02a297c6e0c5070f99b4909\n"
+"              info\n"
+"                settings\n"
+"                  arch: x86_64\n"
+"                  build_type: Release\n"
+"                  compiler: apple-clang\n"
+"                  compiler.version: 12.0\n"
+"                  os: Macos\n"
+"                options\n"
+"                  fPIC: True\n"
+"                  shared: False\n"
+"            ebec3dc6d7f6b907b3ada0c3d3cdc83613a2b715\n"
+"              info\n"
+"                settings\n"
+"                  arch: x86_64\n"
+"                  build_type: Release\n"
+"                  compiler: gcc\n"
+"                  compiler.version: 11\n"
+"                  os: Linux\n"
+"                options\n"
+"                  fPIC: True\n"
+"                  shared: False"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:195
+msgid ""
+"Here the ``#latest`` for the recipe revision is implicit, i.e., that pattern "
+"is equivalent to ``zlib/1.2.11#latest:*``"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:199
+msgid ""
+"To list all the package IDs for all the recipe revisions use the ``*`` "
+"wildcard in the revision ``#`` part:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:202
+msgid "*list all the package IDs for all the recipe revisions*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:202
+msgid ""
+"  # Make sure to quote the argument\n"
+"  $ conan list \"zlib/1.2.11#*:*\"\n"
+"  Local Cache\n"
+"    zlib\n"
+"      zlib/1.2.11\n"
+"        revisions\n"
+"          d77ee68739fcbe5bf37b8a4690eea6ea (2022-08-05 17:17:30 UTC)\n"
+"            packages\n"
+"              d0599452a426a161e02a297c6e0c5070f99b4909\n"
+"                info\n"
+"                  settings\n"
+"                    arch: x86_64\n"
+"                    build_type: Release\n"
+"                    compiler: apple-clang\n"
+"                    compiler.version: 12.0\n"
+"                    os: Macos\n"
+"                  options\n"
+"                    fPIC: True\n"
+"                    shared: False\n"
+"          e4e1703f72ed07c15d73a555ec3a2fa1 (2022-07-04 21:21:45 UTC)\n"
+"            packages\n"
+"              d0599452a426a161e02a297c6e0c5070f99b4909\n"
+"                info\n"
+"                  settings\n"
+"                    arch: x86_64\n"
+"                    build_type: Release\n"
+"                    compiler: apple-clang\n"
+"                    compiler.version: 12.0\n"
+"                    os: Macos\n"
+"                  options\n"
+"                    fPIC: True\n"
+"                    shared: False"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:240
+msgid "Listing package revisions"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:242
+msgid ""
+"The shortest way of listing the latest package revision for a specific "
+"recipe revision and package ID is using the pattern ``name/version@user/"
+"channel#rrev:pkgid``"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:245
+msgid ""
+"*list latest package revision for a specific recipe revision and package ID*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:245
+msgid ""
+"  $ conan list zlib/1.2.11#8b23adc7acd6f1d6e220338a78e3a19e:"
+"fdb823f07bc228621617c6397210a5c6c4c8807b\n"
+"  Local Cache\n"
+"    zlib\n"
+"      zlib/1.2.11\n"
+"        revisions\n"
+"          8b23adc7acd6f1d6e220338a78e3a19e (2022-08-05 17:17:30 UTC)\n"
+"          packages\n"
+"            fdb823f07bc228621617c6397210a5c6c4c8807b\n"
+"              revisions\n"
+"                4834a9b0d050d7cf58c3ab391fe32e25 (2022-11-18 12:33:31 UTC)"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:260
+msgid "To list all the package revisions for for the latest recipe revision:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:262
+msgid ""
+"*list all the package revisions for all package-ids the latest recipe "
+"revision*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:262
+msgid ""
+"  # Make sure to quote the argument\n"
+"  $ conan list \"zlib/1.2.11:*#*\"\n"
+"  Local Cache\n"
+"    zlib\n"
+"      zlib/1.2.11\n"
+"        revisions\n"
+"          6a6451bbfcb0e591333827e9784d7dfa (2022-12-29 11:51:39 UTC)\n"
+"          packages\n"
+"            b1d267f77ddd5d10d06d2ecf5a6bc433fbb7eeed\n"
+"              revisions\n"
+"                67bb089d9d968cbc4ef69e657a03de84 (2022-12-29 11:47:36 UTC)\n"
+"                5e196dbea832f1efee1e70e058a7eead (2022-12-29 11:47:26 UTC)\n"
+"                26475a416fa5b61cb962041623748d73 (2022-12-29 11:02:14 UTC)\n"
+"            d15c4f81b5de757b13ca26b636246edff7bdbf24\n"
+"              revisions\n"
+"                a2eb7f4c8f2243b6e80ec9e7ee0e1b25 (2022-12-29 11:51:40 UTC)"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:284
+msgid ""
+"Here the ``#latest`` for the recipe revision is implicit, i.e., that pattern "
+"is equivalent to ``zlib/1.2.11#latest:*#*``"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:289
+msgid "Listing graph artifacts"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:291
+msgid ""
+"When the ``conan list --graph=<graph.json>`` graph json file is provided, "
+"the command will list the binaries in it. By default, it will list all "
+"recipes and binaries included in the dependency graph. But the ``--graph-"
+"recipes=<recipe-mode>`` and ``--graph-binaries=<binary-mode>`` allow "
+"specifying what artifacts have to be listed in the final result, some "
+"examples:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:295
+msgid ""
+"``conan list --graph=graph.json --graph-binaries=build`` list exclusively "
+"the recipes and binaries that have been built from sources"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:296
+msgid ""
+"``conan list --graph=graph.json --graph-recipes=\"*\"`` list exclusively the "
+"recipes, all recipes, but no binaries"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:297
+msgid ""
+"``conan list --graph=graph.json --graph-binaries=download`` list exclusively "
+"the binaries that have been downloaded in the last ``conan create`` or "
+"``conan install``"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:299
+msgid ""
+"Additionally, the ``--graph-context`` argument allows to filter the output "
+"by the context of the package, allowing to list either ``build`` packages, "
+"``host`` packages, and ``build-only`` packages or ``host-only`` packages "
+"when we want to list packages that are _only_ present in their respective "
+"context."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:304
+msgid "Filtering packages"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:306
+msgid ""
+"There are a few ways to filter the packages that are returned by the command:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:308
+msgid ""
+"The ``--package-query`` option allows to filter the packages that match a "
+"specific query, for example ``--package-query=\"os=Windows AND (arch=x86 OR "
+"compiler=gcc)\"`` would match only Windows packages where the architecture "
+"is x86 or the compiler is gcc."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:311
+msgid ""
+"You can filter packages by profiles (``--filter-profile``), settings (``--"
+"filter-settings``), or options (``--filter-options``). Note that only "
+"declared settings and options in the recipe will be considered for "
+"filtering, so that if for example a recipe does not declare the ``shared`` "
+"option, its packages will always be returned when using the ``--filter-"
+"options=\"*:shared=True\"`` filter (regardless of the ``shared`` value used)"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:317
+msgid ""
+"$ conan list \"zlib/1.3.1:*\" -fs=\"os=Macos\" -fo=\"*:shared=True\" -"
+"r=conancenter\n"
+"conancenter\n"
+"  zlib\n"
+"    zlib/1.3.1\n"
+"      revisions\n"
+"        f52e03ae3d251dec704634230cd806a2 (2024-02-22 09:20:06 UTC)\n"
+"          packages\n"
+"            24612164eb0760405fcd237df0102e554ed1cb2f\n"
+"              info\n"
+"                settings\n"
+"                  arch: x86_64\n"
+"                  build_type: Release\n"
+"                  compiler: apple-clang\n"
+"                  compiler.version: 13\n"
+"                  os: Macos\n"
+"                options\n"
+"                  shared: True\n"
+"            a3c9d80d887539fac38b81ff8cd4585fe42027e0\n"
+"              info\n"
+"                settings\n"
+"                  arch: armv8\n"
+"                  build_type: Release\n"
+"                  compiler: apple-clang\n"
+"                  compiler.version: 13\n"
+"                  os: Macos\n"
+"                options\n"
+"                  shared: True"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:348
+msgid ""
+"Both ways can be used together, and only the packages that match both "
+"filters will be listed"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:352
+msgid "List json output format"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:356
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:358
+msgid ""
+"The text output in the terminal should never be parsed or relied on for "
+"automation, and it is intended for human reading only. For any automation, "
+"the recommended way is using the formatted output as *json*"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:362
+msgid ""
+"The ``conan list ... --format=json`` will return a json output in ``stdout`` "
+"(which can be redirected to a file) with the following structure:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:366
+msgid ""
+"# Make sure to quote the argument\n"
+"$ conan list \"zlib/1.2.11:*#*\" --format=json\n"
+"{\n"
+"  \"Local Cache\": {\n"
+"    \"zli/1.0.0\": {\n"
+"      \"revisions\": {\n"
+"        \"b58eeddfe2fd25ac3a105f72836b3360\": {\n"
+"          \"timestamp\": \"2023-01-10 16:30:27 UTC\",\n"
+"          \"packages\": {\n"
+"            \"9a4eb3c8701508aa9458b1a73d0633783ecc2270\": {\n"
+"              \"revisions\": {\n"
+"                \"d9b1e9044ee265092e81db7028ae10e0\": {\n"
+"                  \"timestamp\": \"2023-01-10 22:45:49 UTC\"\n"
+"                }\n"
+"              },\n"
+"              \"info\": {\n"
+"                \"settings\": {\n"
+"                   \"os\": \"Linux\"\n"
+"                }\n"
+"              }\n"
+"            },\n"
+"            \"ebec3dc6d7f6b907b3ada0c3d3cdc83613a2b715\": {\n"
+"              \"revisions\": {\n"
+"                \"d9b1e9044ee265092e81db7028ae10e0\": {\n"
+"                  \"timestamp\": \"2023-01-10 22:45:49 UTC\"\n"
+"                }\n"
+"              },\n"
+"              \"info\": {\n"
+"                \"settings\": {\n"
+"                  \"os\": \"Windows\"\n"
+"                }\n"
+"              }\n"
+"            }\n"
+"          }\n"
+"        }\n"
+"      }\n"
+"    }\n"
+"  }\n"
+"}"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:410
+msgid "List html output format"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:412
+msgid ""
+"The ``conan list ... --format=html`` will return a html output in ``stdout`` "
+"(which can be redirected to a file) with the following structure:"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:415
+msgid "$ conan list \"zlib/1.2.13#*:*#*\" --format=html -c > list.html"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:419
+msgid "Here is the rendered generated HTML."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:425
+msgid "List compact output format"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:427
+msgid ""
+"For developers, it can be convenient to use the ``--format=compact`` output, "
+"because it allows to copy and paste full references into other commands "
+"(like for example ``conan cache path``):"
+msgstr ""
+
+#: ../../../reference/commands/list.rst:430
+msgid ""
+"$ conan list \"zlib/1.2.13:*\" -r=conancenter --format=compact\n"
+"conancenter\n"
+"  zlib/1.2.13\n"
+"    zlib/1.2.13#97d5730b529b4224045fe7090592d4c1%1692672717.68 (2023-08-22 "
+"02:51:57 UTC)\n"
+"      zlib/1.2.13#97d5730b529b4224045fe7090592d4c1:"
+"d62dff20d86436b9c58ddc0162499d197be9de1e\n"
+"        settings: Macos, x86_64, Release, apple-clang, 13\n"
+"        options(diff): fPIC=True, shared=False\n"
+"      zlib/1.2.13#97d5730b529b4224045fe7090592d4c1:"
+"abe5e2b04ea92ce2ee91bc9834317dbe66628206\n"
+"        settings: Linux, x86_64, Release, gcc, 11\n"
+"        options(diff): shared=True\n"
+"      zlib/1.2.13#97d5730b529b4224045fe7090592d4c1:"
+"ae9eaf478e918e6470fe64a4d8d4d9552b0b3606\n"
+"        settings: Windows, x86_64, Release, msvc, dynamic, Release, 192\n"
+"        options(diff): shared=True\n"
+"    ..."
+msgstr ""
+
+#: ../../../reference/commands/list.rst:448
+msgid ""
+"The ``--format=compact`` will show the list of values for ``settings``, and "
+"it will only show the differences (\"diff\") for options, that is, it will "
+"compute the common denominator of options for all displayed packages, and "
+"will print only those values that deviate from that common denominator."
+msgstr ""

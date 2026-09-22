@@ -1,0 +1,983 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.22\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-09 17:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../security/sanitizers.rst:4
+msgid "C, C++ Compiler Sanitizers"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:8
+msgid ""
+"Do not use sanitizers for production builds, especially for binaries with "
+"elevated privileges (e.g., SUID). Sanitizer runtimes rely on environment "
+"variables and can enable privilege escalation. Use only in development and "
+"testing."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:12
+msgid ""
+"Sanitizers are powerful runtime instrumentation tools that detect issues "
+"such as:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:14
+msgid "Buffer overflows (stack/heap), use-after-free, double-free"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:15
+msgid "Data races in multithreaded code"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:16
+msgid "Memory leaks"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:17
+msgid "Use of uninitialized memory"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:18
+msgid "A wide range of undefined behaviors"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:20
+msgid ""
+"Compilers such as GCC, Clang, and MSVC support sanitizers via compiler and "
+"linker flags."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:22
+msgid ""
+"This page explains recommended approaches for integrating compiler "
+"sanitizers into your workflow with Conan."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:25
+msgid "Compiler Sanitizer Support Comparison"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:29
+msgid ""
+"Always rebuild all dependencies when using MemorySanitizer (MSan) and "
+"generally for ThreadSanitizer (TSan) to avoid false positives/negatives. For "
+"AddressSanitizer, UBSan, and LeakSanitizer, mixing instrumented code with "
+"prebuilt libraries is typically safe, but may miss bugs inside those "
+"libraries."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:33
+msgid ""
+"Each compiler has different levels of support for various sanitizers, Clang "
+"being the most comprehensive so far. To help you choose the right sanitizer "
+"for your needs and compiler, here is a summary of the most common ones:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:37 ../../../security/sanitizers.rst:101
+msgid "Sanitizer"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:37 ../../../security/sanitizers.rst:77
+msgid "GCC"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:37 ../../../security/sanitizers.rst:77
+msgid "Clang"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:37 ../../../security/sanitizers.rst:77
+msgid "MSVC"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:37
+msgid "Notes"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:39
+msgid "**AddressSanitizer (ASan)**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:39 ../../../security/sanitizers.rst:41
+#: ../../../security/sanitizers.rst:43 ../../../security/sanitizers.rst:45
+#: ../../../security/sanitizers.rst:47 ../../../security/sanitizers.rst:49
+#: ../../../security/sanitizers.rst:51 ../../../security/sanitizers.rst:53
+#: ../../../security/sanitizers.rst:55 ../../../security/sanitizers.rst:79
+#: ../../../security/sanitizers.rst:81 ../../../security/sanitizers.rst:83
+#: ../../../security/sanitizers.rst:85
+msgid "YES"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:39
+msgid "MSVC: Supports x86, x64 and ARM64"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:41
+msgid "**ThreadSanitizer (TSan)**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:41 ../../../security/sanitizers.rst:43
+#: ../../../security/sanitizers.rst:45 ../../../security/sanitizers.rst:47
+#: ../../../security/sanitizers.rst:49 ../../../security/sanitizers.rst:53
+#: ../../../security/sanitizers.rst:55 ../../../security/sanitizers.rst:79
+#: ../../../security/sanitizers.rst:81 ../../../security/sanitizers.rst:83
+#: ../../../security/sanitizers.rst:85
+msgid "NO"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:41
+msgid "Detects data races"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:43
+msgid "**MemorySanitizer (MSan)**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:43
+msgid "Clang-only, requires `-O1`"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:45
+msgid "**UndefinedBehaviorSanitizer (UBSan)**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:45
+msgid "Wide range of undefined behavior checks"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:47
+msgid "**LeakSanitizer (LSan)**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:47
+msgid "Often integrated with ASan"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:49
+msgid "**HardwareAddressSanitizer (HWASan)**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:49
+msgid "ARM64 only, lower overhead than ASan"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:51
+msgid "**KernelAddressSanitizer (KASan)**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:51
+msgid "MSVC: Requires Windows 11"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:53
+msgid "**DataFlowSanitizer (DFSan)**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:53
+msgid "Dynamic data flow analysis"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:55
+msgid "**Control Flow Integrity (CFI)**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:55
+msgid "MSVC: `/guard:cf`"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:58
+msgid ""
+"Besides MSVC having more limited support for sanitizers, it encourages the "
+"community to vote for new features at `Developer Community <https://"
+"developercommunity.visualstudio.com/cpp>`_. Very recently Visual Studio 2026 "
+"added support for AddressSanitizer on ARM64 architecture. This support "
+"should be straightforward when using Conan with MSVC."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:62
+msgid "Also, you can consider the typical use cases for each sanitizer:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:64
+msgid ""
+"**AddressSanitizer (ASan)**: Great default for memory errors; often combined "
+"with UBSan for broader coverage."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:65
+msgid "**ThreadSanitizer (TSan)**: Find data races in multithreaded code."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:66
+msgid ""
+"**MemorySanitizer (MSan)**: Detects uninitialized memory reads (Clang-only). "
+"Requires all dependencies to be instrumented."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:67
+msgid ""
+"**LeakSanitizer (LSan)**: Often included with ASan on Clang/GCC, can be "
+"enabled explicitly. Typically used to find memory leaks."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:68
+msgid ""
+"**UndefinedBehaviorSanitizer (UBSan)**: Catches many undefined behaviors; "
+"often combined with ASan."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:71
+msgid "Common Sanitizer Combinations"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:73
+msgid ""
+"The sanitizers can often be combined to provide more comprehensive coverage, "
+"but not all combinations are supported by every compiler. Here are some "
+"common combinations and their compatibility mostly used with GCC and Clang:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:77
+msgid "Combination"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:77
+msgid "Compatibility"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:79
+msgid "**ASan + UBSan**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:79
+msgid "Most common combination"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:81
+msgid "**TSan + UBSan**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:81
+msgid "Good for multithreaded code"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:83
+msgid "**ASan + LSan**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:83
+msgid "LSan often enabled by default with ASan"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:85
+msgid "**MSan + UBSan**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:85
+msgid "Requires careful dependency management"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:88
+msgid "**Notes on combinations**:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:90
+msgid ""
+"AddressSanitizer (ASan), ThreadSanitizer (TSan), and MemorySanitizer (MSan) "
+"**are mutually exclusive with one another**."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:91
+msgid ""
+"MemorySanitizer often requires special flags such as ``-O1``, ``-fno-omit-"
+"frame-pointer`` and fully-instrumented dependencies; mixing with non-"
+"instrumented code leads to crashes/false positives."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:95
+msgid "Compiler-Specific Flags"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:97
+msgid ""
+"Each compiler requires specific flags to enable the desired sanitizers. Here "
+"is a summary of the most common sanitizers and their corresponding flags for "
+"GCC, Clang, and MSVC:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:101
+msgid "GCC Flag"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:101
+msgid "Clang Flag"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:101
+msgid "MSVC Flag"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:103
+msgid "**AddressSanitizer**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:103
+msgid "`-fsanitize=address`"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:103
+msgid "`/fsanitize=address`"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:105
+msgid "**ThreadSanitizer**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:105
+msgid "`-fsanitize=thread`"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:105 ../../../security/sanitizers.rst:107
+#: ../../../security/sanitizers.rst:109 ../../../security/sanitizers.rst:111
+msgid "N/A"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:107
+msgid "**MemorySanitizer**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:107
+msgid "`-fsanitize=memory`"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:109
+msgid "**UndefinedBehavior**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:109
+msgid "`-fsanitize=undefined`"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:111
+msgid "**LeakSanitizer**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:111
+msgid "`-fsanitize=leak`"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:114
+msgid ""
+"It may seem like a large number of options, but for Clang, these are only a "
+"portion. To obtain the complete list, please refer to the official "
+"documentation for each compiler:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:117
+msgid ""
+"Clang: `AddressSanitizer <https://clang.llvm.org/docs/AddressSanitizer."
+"html>`_, `ThreadSanitizer <https://clang.llvm.org/docs/ThreadSanitizer."
+"html>`_, `MemorySanitizer <https://clang.llvm.org/docs/MemorySanitizer."
+"html>`_, `UndefinedBehaviorSanitizer <https://clang.llvm.org/docs/"
+"UndefinedBehaviorSanitizer.html>`_."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:121
+msgid ""
+"GCC: `Instrumentation Options <https://gcc.gnu.org/onlinedocs/gcc/"
+"Instrumentation-Options.html>`_."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:122
+msgid ""
+"MSVC: `MSVC Sanitizers <https://learn.microsoft.com/en-us/cpp/sanitizers/>`_."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:125
+msgid "Binary Compatibility"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:128
+msgid "How sanitizers affect your binaries"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:130
+msgid ""
+"Sanitizers instrument your code at compile time, adding runtime checks and "
+"metadata. This changes your binary's **Application Binary Interface (ABI)**, "
+"making instrumented code incompatible with non-instrumented code."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:133
+msgid "**Key changes sanitizers make:**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:135
+msgid ""
+"**Memory layout**: Sanitizers add shadow memory, guard zones, or tracking "
+"metadata around your data"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:136
+msgid ""
+"**Function calls**: Standard library functions (``malloc``, ``free``, etc.) "
+"are wrapped or intercepted"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:137
+msgid ""
+"**Runtime dependencies**: Instrumented code requires sanitizer runtime "
+"libraries (``libasan``, ``libtsan``, etc.)"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:138
+msgid ""
+"**Linking**: Mixing instrumented and non-instrumented code can cause "
+"crashes, false positives, or undefined behavior"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:141
+msgid "Handling external code"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:143
+msgid ""
+"When using sanitizers, you must consider how to handle third-party "
+"dependencies. As mixing instrumented and non-instrumented code can lead to "
+"issues, here are some strategies:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:146
+msgid "**Always require full instrumentation:**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:148
+msgid "**MemorySanitizer (MSan)**: Changes function ABIs to pass shadow state."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:149
+msgid ""
+"**DataFlowSanitizer (DFSan)**: Explicitly modifies the ABI by appending "
+"label parameters to functions."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:150
+msgid ""
+"**ThreadSanitizer (TSan)**: Changes memory layout and intercepts "
+"synchronization primitives. Some code may not be instrumented by "
+"ThreadSanitizer, but not recommended."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:153
+msgid "**Usually require full instrumentation:**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:155
+msgid ""
+"**AddressSanitizer (ASan)**: Adds redzones and shadow memory; Works with non-"
+"instrumented code, but not recommended."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:156
+msgid ""
+"**HardwareAddressSanitizer (HWASan)**: Similar to ASan but uses hardware "
+"tagging. Mixing is possible but not recommended."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:158
+msgid "**Can often mix with non-instrumented code:**"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:160
+msgid ""
+"**UndefinedBehaviorSanitizer (UBSan)**: Adds runtime checks for undefined "
+"behavior; Minimal ABI changes, safer to mix."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:161
+msgid ""
+"**LeakSanitizer (LSan)**: Detects memory leaks at program exit; When "
+"standalone, has minimal ABI impact."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:163
+msgid ""
+"For reliable results, **always** rebuild your entire dependency tree with "
+"the same sanitizer configuration."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:166
+msgid "Enabling Sanitizers"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:168
+msgid ""
+"Conan cannot infer sanitizer flags from settings automatically. You have to "
+"pass the appropriate compiler and linker flags (e.g., ``-fsanitize=`` or ``/"
+"fsanitize=address``) via profiles or toolchains. Conan toolchains (e.g., "
+"``CMakeToolchain``, ``MesonToolchain``) will propagate flags defined in "
+"``[conf]`` sections."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:173
+msgid "Modeling and applying sanitizers using settings"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:175
+msgid ""
+"If you want to model sanitizer options so that the package ID is affected by "
+"them, you can :ref:`customize new compiler sub-settings "
+"<reference_config_files_customizing_settings>`. You should not need to "
+"modify ``settings.yml`` directly; instead add :ref:`the settings_user.yml "
+"<examples_config_files_settings_user>`."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:179
+msgid ""
+"This approach is preferred because enabling a sanitizer alters the package "
+"ID, allowing you to build and use the same binary package with or without "
+"sanitizers. This is ideal for development and debugging workflows."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:183
+msgid "Configuring sanitizers as part of settings"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:185
+msgid ""
+"If you typically use a specific set of sanitizers or combinations for your "
+"builds, you can specify a sub-setting as a list of values in your "
+"``settings_user.yml``. For example, for Clang, GCC and MSVC:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:188 ../../../security/sanitizers.rst:331
+msgid "settings_user.yml"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:188
+msgid ""
+"compiler:\n"
+"   clang:\n"
+"     sanitizer: [null, Address, Leak, Thread, Memory, UndefinedBehavior, "
+"HardwareAssistanceAddress, KernelAddress, AddressUndefinedBehavior, "
+"ThreadUndefinedBehavior]\n"
+"   gcc:\n"
+"     sanitizer: [null, Address, Leak, Thread, UndefinedBehavior, "
+"KernelAddress, AddressUndefinedBehavior, ThreadUndefinedBehavior]\n"
+"   msvc:\n"
+"     sanitizer: [null, Address, KernelAddress]"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:200
+msgid ""
+"This example defines a few common sanitizers. You can add any sanitizer your "
+"compiler supports. The ``null`` value represents a build without sanitizers. "
+"The above models for Clang the use of ``-fsanitize=address``, ``-"
+"fsanitize=thread``, ``-fsanitize=memory``, ``-fsanitize=leak``, ``-"
+"fsanitize=undefined``, ``-fsanitize=hwaddress``, ``-fsanitize=kernel-"
+"address``, as well as combinations like ``-fsanitize=address,undefined`` and "
+"``-fsanitize=thread,undefined``."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:205
+msgid ""
+"As the ``sanitizer`` setting is a list, it can be choose by one single value "
+"at time. As an workaround to support mutiple sanitizers at same time, you "
+"can define combinations like ``AddressUndefinedBehavior`` and "
+"``ThreadUndefinedBehavior``, as listed above. There is no limitation on the "
+"number of combinations you can define, but keep in mind that these are only "
+"tags to help you manage your builds. You still need to pass the appropriate "
+"flags to the compiler and linker accordingly."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:212
+msgid "Adding sanitizers as part of the profile"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:214
+msgid ""
+"Another option is to add the sanitizer values as part of a profile. This "
+"way, you can easily switch between different configurations by using "
+"dedicated profiles."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:217
+msgid "compiler_sanitizers/profiles/gcc_asan"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:217
+msgid ""
+"[settings]\n"
+"arch=x86_64\n"
+"os=Linux\n"
+"build_type=Debug\n"
+"compiler=gcc\n"
+"compiler.cppstd=gnu20\n"
+"compiler.libcxx=libstdc++11\n"
+"compiler.version=15\n"
+"compiler.sanitizer=Address\n"
+"\n"
+"[conf]\n"
+"tools.build:cflags+=[\"-fsanitize=address\", \"-fno-omit-frame-pointer\"]\n"
+"tools.build:cxxflags+=[\"-fsanitize=address\", \"-fno-omit-frame-pointer\"]\n"
+"tools.build:exelinkflags+=[\"-fsanitize=address\"]\n"
+"tools.build:sharedlinkflags+=[\"-fsanitize=address\"]\n"
+"\n"
+"[runenv]\n"
+"ASAN_OPTIONS=\"halt_on_error=1:detect_leaks=1\""
+msgstr ""
+
+#: ../../../security/sanitizers.rst:239
+msgid ""
+"For Visual Studio (MSVC) we can obtain an equivalent profile for "
+"AddressSanitizer:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:241
+msgid "compiler_sanitizers/profiles/msvc_asan"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:241
+msgid ""
+"[settings]\n"
+"arch=x86_64\n"
+"os=Windows\n"
+"build_type=Debug\n"
+"compiler=msvc\n"
+"compiler.version=194\n"
+"compiler.runtime=dynamic\n"
+"compiler.runtime_type=Release\n"
+"compiler.sanitizer=Address\n"
+"\n"
+"[conf]\n"
+"tools.build:cxxflags+=[\"/fsanitize=address\", \"/Zi\"]\n"
+"tools.build:exelinkflags+=[\"/fsanitize=address\"]"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:258
+msgid ""
+"The Conan client is not capable of deducing the necessary flags from the "
+"settings and applying them automatically during the build process. It is "
+"necessary to pass the expected sanitizer flags according to the ``compiler."
+"sanitizer`` value as part of the compiler and linker flags. Conan's built-in "
+"toolchains (like ``CMakeToolchain`` and ``MesonToolchain``) will "
+"automatically pick up the flags defined in the ``[conf]`` section and apply "
+"them to the build."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:265
+msgid "Managing sanitizers with a custom CMake toolchain"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:267
+msgid ""
+"Besides using Conan profiles to manage sanitizer settings, you can also use "
+"other approaches."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:269
+msgid ""
+"If you already have a :ref:`custom CMake toolchain file "
+"<conan_cmake_user_toolchain>` to manage compiler and build options, you can "
+"pass the necessary flags to enable sanitizers there instead of profiles."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:272
+msgid "cmake/my_toolchain.cmake"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:272
+msgid ""
+"# Apply to all targets; consider per-target options for finer control\n"
+"set(CMAKE_C_FLAGS \"${CMAKE_C_FLAGS} -fsanitize=address,undefined -fno-omit-"
+"frame-pointer\")\n"
+"set(CMAKE_CXX_FLAGS \"${CMAKE_CXX_FLAGS} -fsanitize=address,undefined -fno-"
+"omit-frame-pointer\")\n"
+"set(CMAKE_EXE_LINKER_FLAGS \"${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address,"
+"undefined\")\n"
+"set(CMAKE_SHARED_LINKER_FLAGS \"${CMAKE_SHARED_LINKER_FLAGS} -"
+"fsanitize=address,undefined\")"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:281
+msgid "Then, specify this toolchain file as part of your Conan profile:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:283 ../../../security/sanitizers.rst:339
+msgid "profiles/gcc_asan_ubsan"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:283
+msgid ""
+"[settings]\n"
+"arch=x86_64\n"
+"os=Linux\n"
+"build_type=Debug\n"
+"compiler=gcc\n"
+"compiler.cppstd=gnu20\n"
+"compiler.libcxx=libstdc++11\n"
+"compiler.version=15\n"
+"compiler.sanitizer=AddressUndefinedBehavior\n"
+"\n"
+"[conf]\n"
+"tools.cmake.cmaketoolchain:user_toolchain=[\"<path_to>/cmake/my_toolchain."
+"cmake\"]"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:299
+msgid ""
+"This way, you can keep your existing CMake toolchain file and still leverage "
+"Conan profiles to manage other settings."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:301
+msgid ""
+"Note that this approach only works if all dependencies are built using CMake "
+"and the ``CMakeToolchain`` integration. If you have dependencies using other "
+"build systems (e.g., Meson, Autotools), those dependencies will not receive "
+"the sanitizer flags defined in your custom CMake toolchain file."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:306
+msgid "Managing sanitizers as a custom CMake Build Type"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:308
+msgid ""
+"Another option, without using the custom ``compiler.sanitizer`` setting, is "
+"to define sanitizers as a custom CMake build type. In this approach, you "
+"select the sanitizer configuration by choosing the build type during the "
+"CMake configure step. To achieve this, you can create a custom CMake "
+"toolchain file that maps build types to sanitizer flags. For example:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:311
+msgid "cmake/sanitizer_toolchain.cmake"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:311
+msgid ""
+"if(CMAKE_BUILD_TYPE STREQUAL \"DebugASan\")\n"
+"    set(SANITIZER_FLAGS \"-g -fsanitize=address -fno-omit-frame-pointer\")\n"
+"elseif(CMAKE_BUILD_TYPE STREQUAL \"DebugUBSan\")\n"
+"    set(SANITIZER_FLAGS \"-g -fsanitize=undefined -fno-omit-frame-"
+"pointer\")\n"
+"elseif(CMAKE_BUILD_TYPE STREQUAL \"DebugASanUBSan\")\n"
+"    set(SANITIZER_FLAGS \"-g -fsanitize=address,undefined -fno-omit-frame-"
+"pointer\")\n"
+"else()\n"
+"    set(SANITIZER_FLAGS \"\")\n"
+"endif()\n"
+"\n"
+"set(CMAKE_C_FLAGS \"${CMAKE_C_FLAGS} ${SANITIZER_FLAGS}\")\n"
+"set(CMAKE_CXX_FLAGS \"${CMAKE_CXX_FLAGS} ${SANITIZER_FLAGS}\")\n"
+"set(CMAKE_EXE_LINKER_FLAGS \"${CMAKE_EXE_LINKER_FLAGS} "
+"${SANITIZER_FLAGS}\")\n"
+"set(CMAKE_SHARED_LINKER_FLAGS \"${CMAKE_SHARED_LINKER_FLAGS} "
+"${SANITIZER_FLAGS}\")"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:329
+msgid ""
+"Also, you will need to update your ``settings_user.yml`` to include the new "
+"build types:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:331
+msgid "build_type: [DebugASan, DebugUBSan, DebugASanUBSan]"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:337
+msgid "Then, in your Conan profile, specify this toolchain file:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:339
+msgid ""
+"[settings]\n"
+"arch=x86_64\n"
+"os=Linux\n"
+"build_type=DebugASan\n"
+"compiler=gcc\n"
+"compiler.cppstd=gnu20\n"
+"compiler.libcxx=libstdc++11\n"
+"compiler.version=15\n"
+"\n"
+"[conf]\n"
+"tools.cmake.cmaketoolchain:user_toolchain=[\"<path_to>/sanitizer_toolchain."
+"cmake\"]"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:354
+msgid ""
+"Be aware that this approach uses a custom build type, as a result, Conan "
+"will not automatically apply the standard flags associated with the Debug "
+"build type. Therefore, in your custom toolchain file, you need to also "
+"define the flags that correspond to the desired based build type, for "
+"example, that ``-g`` flag that matches the Debug ``build_type`` in gcc-like "
+"compilers."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:359
+msgid ""
+"Using this approach, you can easily switch between different sanitizer "
+"configurations and standard build types, preserving the package ID "
+"differentiation based on the build type."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:363
+msgid "Practical Usage Examples"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:365
+msgid ""
+"For practical examples of using sanitizers with Conan, please refer to the :"
+"ref:`Building Examples Using Sanitizers <examples_security_sanitizers>` "
+"section in the examples."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:369
+msgid "Additional recommendations"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:371
+msgid "Debug info and optimization:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:373
+msgid ""
+"For ASan/TSan and when using GCC or Clang, the compiler flags ``-O1`` or ``-"
+"O2`` generally works; for MSan, prefer ``-O1`` and avoid aggressive inlining."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:375
+msgid "``-fno-omit-frame-pointer`` helps stack traces."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:377
+msgid "Runtime symbolization:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:379
+msgid ""
+"Some sanitizers can be configured to provide better stack traces and error "
+"reports. These features can be enabled via environment variables, such as "
+"``ASAN_OPTIONS`` and ``UBSAN_OPTIONS`` for compilers like GCC and Clang."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:383
+msgid "Useful settings for CI:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:385
+msgid "``ASAN_OPTIONS=halt_on_error=1:detect_leaks=1:log_path=asan``."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:387
+msgid ""
+"This configuration makes AddressSanitizer stop execution on the first error, "
+"enables leak detection, and logs the output to a file named ``asan``."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:390
+msgid "``UBSAN_OPTIONS=print_stacktrace=1:halt_on_error=1:log_path=ubsan``."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:392
+msgid ""
+"This setup instructs UndefinedBehaviorSanitizer to print stack traces in a "
+"human-readable format, halt on the first error, and log the output to a file "
+"named ``ubsan``."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:396
+msgid "Suppressions:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:398
+msgid ""
+"If certain known issues are not relevant for your testing, you can create "
+"suppression files to filter them out from the sanitizer reports."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:401
+msgid "For ASan: ``ASAN_OPTIONS=suppressions=asan.supp``."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:403
+msgid "Create a file named ``asan.supp`` with the following content:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:405
+msgid "leak:FreeMyObject"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:409
+msgid "This example suppresses leak reports originating from ``FreeMyObject``."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:411
+msgid "For UBSan: ``UBSAN_OPTIONS=suppressions=ubsan.supp``."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:413
+msgid "Create a file named ``ubsan.supp`` with the following content:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:415
+msgid "signed-integer-overflow IncreaseCounter"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:419
+msgid ""
+"This example suppresses signed integer overflow reports from "
+"``IncreaseCounter``."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:421
+msgid "Third-party dependencies:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:423
+msgid ""
+"Mixed instrumented/uninstrumented code can lead to false positives or "
+"crashes, especially with MSan."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:424
+msgid ""
+"Prefer building dependencies with the same sanitizer or limit sanitizers to "
+"leaf applications."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:426
+msgid "MSVC and Windows notes:"
+msgstr ""
+
+#: ../../../security/sanitizers.rst:428
+msgid ""
+"ASan with MSVC/Clang-cl uses ``/fsanitize=address`` and PDBs via ``/Zi``. "
+"Not supported for 32-bit targets."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:429
+msgid "KAsan requires Windows 11."
+msgstr ""
+
+#: ../../../security/sanitizers.rst:430
+msgid ""
+"Some features are limited when using whole program optimization (``/GL``) or "
+"certain runtime libraries."
+msgstr ""

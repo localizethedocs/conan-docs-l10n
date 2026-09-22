@@ -1,0 +1,226 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.20\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 08:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/apple/other.rst:4
+msgid "conan.tools.apple.fix_apple_shared_install_name()"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.apple.fix_apple_shared_install_name:1
+msgid ""
+"Search for all the *dylib* files in the conanfile's *package_folder* and fix "
+"both the ``LC_ID_DYLIB`` and ``LC_LOAD_DYLIB`` fields on those files using "
+"the *install_name_tool* utility available in macOS to set ``@rpath``."
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:10
+msgid ""
+"This tool will search for all the *dylib* files in the conanfile's "
+"*package_folder* and fix the library *install names* (the ``LC_ID_DYLIB`` "
+"header). Libraries and executables inside the package folder will also have "
+"the ``LC_LOAD_DYLIB`` fields updated to reflect the patched install names. "
+"Executables inside the package will also get an ``LC_RPATH`` entry pointing "
+"to the relative location of the libraries inside the package folder. This is "
+"done using the *install_name_tool* utility available in macOS, as outlined "
+"below:"
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:17
+msgid ""
+"For ``LC_ID_DYLIB`` which is the field containing the install name of the "
+"library, it will change the install name to one that uses the ``@rpath``. "
+"For example, if the install name is ``/path/to/lib/libname.dylib``, the new "
+"install name will be ``@rpath/libname.dylib``. This is done by internally "
+"executing something like:"
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:22
+msgid "install_name_tool /path/to/lib/libname.dylib -id @rpath/libname.dylib"
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:26
+msgid ""
+"For ``LC_LOAD_DYLIB`` which is the field containing the path to the library "
+"dependencies, it will change the path of the dependencies to one that uses "
+"the ``@rpath``. For example, if a binary has a dependency on ``/path/to/lib/"
+"dependency.dylib``, this will be updated to be ``@rpath/dependency.dylib``. "
+"This is done for both libraries and executables inside the package folder, "
+"invoking `install_name_tool` as below:"
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:32
+msgid ""
+"install_name_tool /path/to/lib/libname.dylib -change /path/to/lib/dependency."
+"dylib @rpath/dependency.dylib"
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:36
+msgid ""
+"For ``LC_RPATH``, in those cases in which the packages also contain binary "
+"executables that depend on libraries within the same package, entries will "
+"be added to reflect the location of the libraries relative to the "
+"executable. If a package has executables in the `bin` subfolder and "
+"libraries in the `lib` subfolder, this can be performed with an invocation "
+"like this:"
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:42
+msgid ""
+"install_name_tool /path/to/bin/my_executable -add_rpath @executable_path/../"
+"lib"
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:47
+msgid ""
+"This tool is typically needed by recipes that use Autotools as the build "
+"system and in the case that the correct install names are not fixed in the "
+"library being packaged. Use this tool, if needed, in the conanfile's "
+"``package()`` method like:"
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:51
+msgid ""
+"from conan.tools.apple import fix_apple_shared_install_name\n"
+"\n"
+"class HelloConan(ConanFile):\n"
+"\n"
+"  ...\n"
+"\n"
+"  def package(self):\n"
+"      autotools = Autotools(self)\n"
+"      autotools.install()\n"
+"      fix_apple_shared_install_name(self)"
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:67
+msgid "conan.tools.apple.is_apple_os()"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.apple.is_apple_os:1
+msgid "returns True if OS is Apple one (Macos, iOS, watchOS, tvOS or visionOS)"
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:76
+msgid "conan.tools.apple.to_apple_arch()"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.apple.to_apple_arch:1
+msgid "converts conan-style architecture into Apple-style arch"
+msgstr ""
+
+#: ../../../reference/tools/apple/other.rst:85
+msgid "conan.tools.apple.XCRun()"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.apple.XCRun:1
+msgid ""
+"XCRun is a wrapper for the Apple **xcrun** tool used to get information for "
+"building."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.apple.XCRun:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.apple.XCRun:3
+msgid "Conanfile instance."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.apple.XCRun:4
+msgid ""
+"Will skip the flag when ``False`` is passed and will try to adjust the sdk "
+"it automatically if ``None`` is passed."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.apple.XCRun:6
+msgid ""
+"Try to use ``settings_target`` in case they exist (``False`` by default)"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.apple.XCRun.find:1
+msgid "find SDK tools (e.g. clang, ar, ranlib, lipo, codesign, etc.)"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.sdk_path:1
+msgid "obtain sdk path (aka apple sysroot or -isysroot"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.sdk_version:1
+msgid "obtain sdk version"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.sdk_platform_path:1
+msgid "obtain sdk platform path"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.sdk_platform_version:1
+msgid "obtain sdk platform version"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.cc:1
+msgid "path to C compiler (CC)"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.cxx:1
+msgid "path to C++ compiler (CXX)"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.ar:1
+msgid "path to archiver (AR)"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.ranlib:1
+msgid "path to archive indexer (RANLIB)"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.strip:1
+msgid "path to symbol removal utility (STRIP)"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.libtool:1
+msgid "path to libtool"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.otool:1
+msgid "path to otool"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/apple/apple.py:docstring of
+#: conan.tools.apple.XCRun.install_name_tool:1
+msgid "path to install_name_tool"
+msgstr ""

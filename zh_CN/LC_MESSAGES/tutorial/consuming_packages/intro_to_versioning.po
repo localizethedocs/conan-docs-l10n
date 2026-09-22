@@ -1,0 +1,334 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.12\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:4
+msgid "Introduction to versioning"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:6
+msgid ""
+"So far we have been using requires with fixed versions like ``requires = "
+"\"zlib/1.2.12\"``. But sometimes dependencies evolve, new versions are "
+"released and consumers want to update to those versions as easy as possible."
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:9
+msgid ""
+"It is always possible to edit the ``conanfiles`` and explicitly update the "
+"versions to the new ones, but there are mechanisms in Conan to allow such "
+"updates without even modifying the recipes."
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:14
+msgid "Version ranges"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:16
+msgid ""
+"A ``requires`` can express a dependency to a certain range of versions for a "
+"given package, with the syntax ``pkgname/[version-range-expression]``. Let's "
+"see an example, please, first clone the sources to recreate this project. "
+"You can find them in the `examples2 repository <https://github.com/conan-io/"
+"examples2>`_ in GitHub:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:20
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/tutorial/consuming_packages/versioning"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:25
+msgid "We can see that we have there:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:27
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:71
+msgid "**conanfile.py**"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:27
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"\n"
+"class CompressorRecipe(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    generators = \"CMakeToolchain\", \"CMakeDeps\"\n"
+"\n"
+"    def requirements(self):\n"
+"        self.requires(\"zlib/[~1.2]\")"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:40
+msgid ""
+"That ``requires`` contains the expression ``zlib/[~1.2]``, which means "
+"\"approximately\" ``1.2`` version, that means, it can resolve to any "
+"``zlib/1.2.8``, ``zlib/1.2.11`` or ``zlib/1.2.12``, but it will not resolve "
+"to something like ``zlib/1.3.0``. Among the available matching versions, a "
+"version range will always pick the latest one."
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:44
+msgid "If we do a :command:`conan install`, we would see something like:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:46
+msgid ""
+"$ conan install .\n"
+"\n"
+"Graph root\n"
+"    conanfile.py: .../conanfile.py\n"
+"Requirements\n"
+"    zlib/1.2.12#87a7211557b6690ef5bf7fc599dd8349 - Downloaded\n"
+"Resolved version ranges\n"
+"    zlib/[~1.2]: zlib/1.2.12"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:57
+msgid ""
+"If we tried instead to use ``zlib/[<1.2.12]``, that means that we would like "
+"to use a version lower than ``1.2.12``, but that one is excluded, so the "
+"latest one to satisfy the range would be ``zlib/1.2.11``:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:60
+msgid ""
+"$ conan install .\n"
+"\n"
+"Resolved version ranges\n"
+"    zlib/[<1.2.12]: zlib/1.2.11"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:68
+msgid ""
+"The same applies to other type of requirements, like ``tool_requires``. If "
+"we add now to the recipe:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:71
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"\n"
+"class CompressorRecipe(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    generators = \"CMakeToolchain\", \"CMakeDeps\"\n"
+"\n"
+"    def requirements(self):\n"
+"        self.requires(\"zlib/[~1.2]\")\n"
+"\n"
+"    def build_requirements(self):\n"
+"        self.tool_requires(\"cmake/[>3.10]\")"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:88
+msgid ""
+"Then we would see it resolved to the latest available CMake package, with at "
+"least version ``3.11``:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:90
+msgid ""
+"$ conan install .\n"
+"...\n"
+"Graph root\n"
+"    conanfile.py: .../conanfile.py\n"
+"Requirements\n"
+"    zlib/1.2.12#87a7211557b6690ef5bf7fc599dd8349 - Cache\n"
+"Build requirements\n"
+"    cmake/3.22.6#f305019023c2db74d1001c5afa5cf362 - Downloaded\n"
+"Resolved version ranges\n"
+"    cmake/[>3.10]: cmake/3.22.6\n"
+"    zlib/[~1.2]: zlib/1.2.12"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:106
+msgid "Revisions"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:108
+msgid ""
+"What happens when a package creator does some change to the package recipe "
+"or to the source code, but they don't bump the ``version`` to reflect those "
+"changes? Conan has an internal mechanism to keep track of those "
+"modifications, and it is called the **revisions**."
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:111
+msgid ""
+"The recipe revision is the hash that can be seen together with the package "
+"name and version in the form ``pkgname/version#recipe_revision`` or "
+"``pkgname/version@user/channel#recipe_revision``. The recipe revision is a "
+"hash of the contents of the recipe and the source code. So if something "
+"changes either in the recipe, its associated files or in the source code "
+"that this recipe is packaging, it will create a new recipe revision."
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:116
+msgid "You can list existing revisions with the :command:`conan list` command:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:118
+msgid ""
+"$ conan list \"zlib/1.2.12#*\" -r=conancenter\n"
+"conancenter\n"
+"  zlib\n"
+"    zlib/1.2.12\n"
+"      revisions\n"
+"        82202701ea360c0863f1db5008067122 (2022-03-29 15:47:45 UTC)\n"
+"        bd533fb124387a214816ab72c8d1df28 (2022-05-09 06:59:58 UTC)\n"
+"        3b9e037ae1c615d045a06c67d88491ae (2022-05-13 13:55:39 UTC)\n"
+"        ..."
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:131
+msgid ""
+"Revisions always resolve to the latest (chronological order of creation or "
+"upload to the server) revision. Though it is not a common practice, it is "
+"possible to explicitly pin a given recipe revision directly in the "
+"``conanfile``, like:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:134
+msgid ""
+"def requirements(self):\n"
+"    self.requires(\"zlib/1.2.12#87a7211557b6690ef5bf7fc599dd8349\")"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:139
+msgid ""
+"This mechanism can however be tedious to maintain and update when new "
+"revisions are created, so probably in the general case, this shouldn't be "
+"done."
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:146
+msgid "Lockfiles"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:148
+msgid ""
+"The usage of version ranges, and the possibility of creating new revisions "
+"of a given package without bumping the version allows to do automatic faster "
+"and more convenient updates, without need to edit recipes."
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:151
+msgid ""
+"But in some occasions, there is also a need to provide an immutable and "
+"reproducible set of dependencies. This process is known as \"locking\", and "
+"the mechanism to allow it is \"lockfile\" files. A lockfile is a file that "
+"contains a fixed list of dependencies, specifying the exact version and "
+"exact revision. So, for example, a lockfile will never contain a version "
+"range with an expression, but only pinned dependencies."
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:156
+msgid ""
+"A lockfile can be seen as a snapshot of a given dependency graph at some "
+"point in time. Such snapshot must be \"realizable\", that is, it needs to be "
+"a state that can be actually reproduced from the conanfile recipes. And this "
+"lockfile can be used at a later point in time to force that same state, even "
+"if there are new created package versions."
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:160
+msgid ""
+"Let's see lockfiles in action. First, let's pin the dependency to "
+"``zlib/1.2.11`` in our example:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:163
+msgid ""
+"def requirements(self):\n"
+"    self.requires(\"zlib/1.2.11\")"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:168
+msgid "And let's capture a lockfile:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:170
+msgid ""
+"conan lock create .\n"
+"\n"
+"-------- Computing dependency graph ----------\n"
+"Graph root\n"
+"    conanfile.py: .../conanfile.py\n"
+"Requirements\n"
+"    zlib/1.2.11#4524fcdd41f33e8df88ece6e755a5dcc - Cache\n"
+"\n"
+"Generated lockfile: .../conan.lock"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:182
+msgid "Let's see what the lockfile ``conan.lock`` contains:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:184
+msgid ""
+"{\n"
+"    \"version\": \"0.5\",\n"
+"    \"requires\": [\n"
+"        \"zlib/1.2.11#4524fcdd41f33e8df88ece6e755a5dcc%1650538915.154\"\n"
+"    ],\n"
+"    \"build_requires\": [],\n"
+"    \"python_requires\": []\n"
+"}"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:195
+msgid "Now, let's restore the original ``requires`` version range:"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:197
+msgid ""
+"def requirements(self):\n"
+"    self.requires(\"zlib/[~1.2]\")"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:203
+msgid ""
+"And run :command:`conan install .`, which by default will find the ``conan."
+"lock``, and run the equivalent :command:`conan install . --lockfile=conan."
+"lock`"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:205
+msgid ""
+"conan install .\n"
+"\n"
+"Graph root\n"
+"    conanfile.py: .../conanfile.py\n"
+"Requirements\n"
+"    zlib/1.2.11#4524fcdd41f33e8df88ece6e755a5dcc - Cache"
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:215
+msgid ""
+"Note how the version range is no longer resolved, and it doesn't get the "
+"``zlib/1.2.12`` dependency, even if it is the allowed range ``zlib/[~1.2]``, "
+"because the ``conan.lock`` lockfile is forcing it to stay in ``zlib/1.2.11`` "
+"and that exact revision too."
+msgstr ""
+
+#: ../../../tutorial/consuming_packages/intro_to_versioning.rst:221
+msgid ":ref:`Introduction to Versioning<tutorial_versioning>`"
+msgstr ""

@@ -1,0 +1,207 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.12\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/download.rst:4
+msgid "conan download"
+msgstr "conan download"
+
+#: ../../../reference/commands/download.rst:-1
+msgid ""
+"$ conan download -h\n"
+"usage: conan download [-h] [-v [V]] [-cc CORE_CONF] [-f FORMAT]\n"
+"                      [--out-file OUT_FILE] [--only-recipe] [-p "
+"PACKAGE_QUERY]\n"
+"                      -r REMOTE [-m METADATA] [-l LIST]\n"
+"                      [pattern]\n"
+"\n"
+"Download (without installing) a single conan package from a remote server.\n"
+"\n"
+"It downloads just the package, but not its transitive dependencies, and it "
+"will not call\n"
+"any generate, generators or deployers.\n"
+"It can download multiple packages if patterns are used, and also works with\n"
+"queries over the package binaries.\n"
+"\n"
+"positional arguments:\n"
+"  pattern               A pattern in the form\n"
+"                        'pkg/version#revision:package_id#revision', e.g:\n"
+"                        \"zlib/1.2.13:*\" means all binaries for "
+"zlib/1.2.13. If\n"
+"                        revision is not specified, it is assumed latest "
+"one.\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  -f FORMAT, --format FORMAT\n"
+"                        Select the output format: json\n"
+"  --out-file OUT_FILE   Write the output of the command to the specified "
+"file\n"
+"                        instead of stdout.\n"
+"  --only-recipe         Download only the recipe/s, not the binary "
+"packages.\n"
+"  -p PACKAGE_QUERY, --package-query PACKAGE_QUERY\n"
+"                        Only download packages matching a specific query. e."
+"g:\n"
+"                        os=Windows AND (arch=x86 OR compiler=gcc)\n"
+"  -r REMOTE, --remote REMOTE\n"
+"                        Download from this specific remote\n"
+"  -m METADATA, --metadata METADATA\n"
+"                        Download the metadata matching the pattern, even if\n"
+"                        the package is already in the cache and not "
+"downloaded\n"
+"  -l LIST, --list LIST  Package list file\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:10
+msgid ""
+"Downloads recipe and binaries to the local cache from the specified remote."
+msgstr ""
+
+#: ../../../reference/commands/download.rst:14
+msgid ""
+"Please, be aware that :command:`conan download` unlike :command:`conan "
+"install`, will not download any of the transitive dependencies of the "
+"downloaded package."
+msgstr ""
+
+#: ../../../reference/commands/download.rst:18
+msgid ""
+"The ``conan download`` command can download packages to 1 server repository "
+"specified by the ``-r=myremote`` argument."
+msgstr ""
+
+#: ../../../reference/commands/download.rst:20
+msgid "It has 2 possible and mutually exclusive inputs:"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:22
+msgid ""
+"The ``conan download <pattern>`` pattern-based matching of recipes, with a "
+"pattern similar to the ``conan list <pattern>``."
+msgstr ""
+
+#: ../../../reference/commands/download.rst:23
+msgid ""
+"The ``conan download --list=<pkglist>`` that will upload the artifacts "
+"specified in the ``pkglist`` json file"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:27
+msgid ""
+"You can use patterns to download specific references just like in other "
+"commands like :command:`conan list` (see the patterns documentation there :"
+"ref:`reference_commands_list`) or :command:`conan upload`:"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:30
+msgid ""
+"# download latest revision and packages for all openssl versions in foo "
+"remote\n"
+"$ conan download \"openssl/*\" -r foo"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:37
+msgid ""
+":command:`conan download` will download only the latest revision by default. "
+"If you want to download more revisions other than the latest one you can use "
+"wildcards in the revisions part of the reference pattern argument"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:41
+msgid ""
+"You may also just download recipes (in this case selecting all the revisions "
+"in the pattern, not just the latest one):"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:44
+msgid ""
+"# download all recipe revisions for zlib/1.2.13\n"
+"$ conan download \"zlib/1.2.13#*\" -r foo --only-recipe"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:50
+msgid ""
+"If you just want to download the packages belonging to a specific setting, "
+"use the ``--package-query`` argument:"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:52
+msgid ""
+"$ conan download \"zlib/1.2.13#*\" -r foo --package-query=\"os=Linux and "
+"arch=x86\""
+msgstr ""
+
+#: ../../../reference/commands/download.rst:57
+msgid ""
+"If the ``--format=json`` formatter is specified, the result will be a "
+"\"PackageList\", compatible with other Conan commands, for example the "
+"``conan upload`` command, so it is possible to concatenate a ``download + "
+"upload``, using the generated json file. See the :ref:`Packages Lists "
+"examples<examples_commands_pkglists>`."
+msgstr ""
+
+#: ../../../reference/commands/download.rst:61
+msgid "Downloading metadata"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:63
+msgid ""
+"The metadata files of the recipes and packages are not downloaded by "
+"default. It is possible to explicitly retrieve them with the ``conan "
+"download --metadata=xxx`` argument. The main arguments are the same as "
+"above, and Conan will download the specified packages, or skip them if they "
+"are already in the cache:"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:66
+msgid ""
+"$ conan download pkg/0.1 -r=default --metadata=\"*\"\n"
+"# will download pgkg/0.1 recipe with all the recipe metadata\n"
+"# And also all package binaries (latest package revision)\n"
+"# with all the binaries metadata"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:74
+msgid ""
+"If only one or several metadata folders or sets of files are desired, it can "
+"also be specified:"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:77
+msgid ""
+"$ conan download pkg/0.1 -r=default --metadata=\"logs/*\" --metadata=\"tests/"
+"*\"\n"
+"# Will download only the logs and tests metadata, but not other potential "
+"metadata files"
+msgstr ""
+
+#: ../../../reference/commands/download.rst:82
+msgid "For more information see the :ref:`metadata section<devops_metadata>`."
+msgstr ""

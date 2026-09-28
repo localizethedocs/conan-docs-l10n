@@ -1,0 +1,391 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.26\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../creating_packages/toolchains/cmake.rst:2
+msgid "CMakeToolchain"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:4
+msgid "The ``CMakeToolchain`` can be used in the ``toolchain()`` method:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:22
+msgid ""
+"from conans import ConanFile, CMake, CMakeToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"    generators = \"cmake_find_package_multi\"\n"
+"    options = {\"shared\": [True, False], \"fPIC\": [True, False]}\n"
+"    default_options = {\"shared\": False, \"fPIC\": True}\n"
+"\n"
+"    def toolchain(self):\n"
+"        tc = CMakeToolchain(self)\n"
+"        return tc"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:23
+msgid ""
+"The ``CMakeToolchain`` will generate 2 files, after a ``conan install`` "
+"command (or before calling the ``build()`` method when the package is being "
+"built in the cache):"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:26
+msgid ""
+"The main *conan_toolchain.cmake* file, that can be used in the command line."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:27
+msgid ""
+"A *conan_project_include.cmake* file, that will automatically be called "
+"right after the ``project()`` call for cmake>=3.15, containing definitions "
+"that only take effect after such call. For older cmake versions you should "
+"explicitly call ``include(.../conan_project_include.cmake)`` in your "
+"*CMakeLists.txt*."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:33
+msgid ""
+"These file will automatically manage the definition of cmake values "
+"according to current Conan settings:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:36
+msgid "Definition of the CMake generator platform and generator toolset"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:37
+msgid "Definition of the CMake ``build_type``"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:38
+msgid ""
+"Definition of the ``CMAKE_POSITION_INDEPENDENT_CODE``, based on ``fPIC`` "
+"option."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:39
+msgid "Definition of the C++ standard as necessary"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:40
+msgid "Definition of the standard library used for C++"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:41
+msgid "Deactivation of rpaths in OSX"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:43
+msgid ""
+"Most of these things will be configurable, please provide feedback at: "
+"https://github.com/conan-io/conan/issues"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:46
+#: ../../../creating_packages/toolchains/cmake.rst:160
+msgid "constructor"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:53
+msgid ""
+"def __init__(self, conanfile, generator=None, generator_platform=None, "
+"build_type=None,\n"
+"             cmake_system_name=True, toolset=None, parallel=True, "
+"make_program=None):"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:54
+msgid ""
+"Most of the arguments are optional and will be deduced from the current "
+"``settings``, and not necessary to define them."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:59
+msgid "definitions"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:61
+msgid ""
+"This attribute allows defining CMake variables, for multiple configurations "
+"(Debug, Release, etc)."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:71
+msgid ""
+"def toolchain(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    tc.definitions[\"MYVAR\"] = \"MyValue\"\n"
+"    tc.definitions.debug[\"MYCONFIGVAR\"] = \"MyDebugValue\"\n"
+"    tc.definitions.release[\"MYCONFIGVAR\"] = \"MyReleaseValue\"\n"
+"    return tc"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:72
+msgid "This will be translated to:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:74
+msgid ""
+"One ``set()`` definition for ``MYVAR`` in ``conan_toolchain.cmake`` file."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:75
+msgid ""
+"One ``set()`` definition, using a cmake generator expression in "
+"``conan_project_include.cmake`` file, using the different values for "
+"different configurations. It is important to recall that things that depend "
+"on the build type cannot be directly set in the toolchain."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:80
+msgid "generators"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:82
+msgid ""
+"The ``CMakeToolchain`` only works with the ``cmake_find_package`` and "
+"``cmake_find_package_multi`` generators. Using others will raise, as they "
+"can have overlapping definitions that can conflict."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:87
+msgid "Using the toolchain in developer flow"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:89
+msgid ""
+"One of the advantages of using Conan toolchains is that they can help to "
+"achieve the exact same build with local development flows, than when the "
+"package is created in the cache."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:92
+msgid ""
+"With the ``CMakeToolchain`` it is possible to do, for multi-configuration "
+"systems like Visual Studio (assuming we are using the "
+"``cmake_find_package_multi`` generator):"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:110
+msgid ""
+"# Lets start in the folder containing the conanfile.py\n"
+"$ mkdir build && cd build\n"
+"# Install both debug and release deps and create the toolchain\n"
+"$ conan install ..\n"
+"$ conan install .. -s build_type=Debug\n"
+"# the conan_toolchain.cmake is common for both configurations\n"
+"# Need to pass the generator WITHOUT the platform, that matches your default "
+"settings\n"
+"$ cmake .. -G \"Visual Studio 15\" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain."
+"cmake\n"
+"# Now you can open the IDE, select Debug or Release config and build\n"
+"# or, in the command line\n"
+"$ cmake --build . --config Release\n"
+"$ cmake --build . --config Debug"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:111
+msgid ""
+"**NOTE**: The platform (Win64), is already encoded in the toolchain. The "
+"command line shouldn't pass it, so using ``-G \"Visual Studio 15\"`` instead "
+"of the ``-G \"Visual Studio 15 Win64\"``"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:115
+msgid "For single-configuration build systems:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:136
+msgid ""
+"# Lets start in the folder containing the conanfile.py\n"
+"$ mkdir build_release && cd build_release\n"
+"$ conan install ..\n"
+"# the build type Release is encoded in the toolchain already.\n"
+"# This conan_toolchain.cmake is specific for release\n"
+"$ cmake .. -G \"Unix Makefiles\" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain."
+"cmake\n"
+"$ cmake --build .  # or just \"make\"\n"
+"\n"
+"# debug build requires its own folder\n"
+"$ cd .. && mkdir build_debug && cd build_debug\n"
+"$ conan install .. -s build_type=Debug\n"
+"# the build type Debug is encoded in the toolchain already.\n"
+"# This conan_toolchain.cmake is specific for debug\n"
+"$ cmake .. -G \"Unix Makefiles\" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain."
+"cmake\n"
+"$ cmake --build .  # or just \"make\""
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:138
+msgid "CMake build helper"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:140
+msgid ""
+"The ``CMake()`` build helper that works with the ``CMakeToolchain`` is also "
+"experimental, and subject to breaking change in the future. It will evolve "
+"to adapt and complement the toolchain functionality."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:144
+msgid ""
+"The helper is intended to be used in the ``build()`` method, to call CMake "
+"commands automatically when a package is being built directly by Conan "
+"(create, install)"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:156
+msgid ""
+"from conans import CMake\n"
+"\n"
+"def build(self):\n"
+"    cmake = CMake(self)\n"
+"    cmake.configure(source_folder=\"src\")\n"
+"    cmake.build()"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:157
+msgid "It supports the following methods:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:166
+msgid ""
+"def __init__(self, conanfile, generator=None, build_folder=None, "
+"parallel=True,\n"
+"             msbuild_verbosity=\"minimal\"):"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:167
+msgid "``conanfile``: the current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:168
+msgid ""
+"``generator``: CMake generator. Define it only to override the default one "
+"(like ``Visual Studio 15``). Note that as the platform (x64, Win32...) is "
+"now defined in the toolchain it is not necessary to specify it here."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:170
+msgid ""
+"``build_folder``: Relative path to a folder to contain the temporary build "
+"files"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:171
+msgid ""
+"``parallel``: Set it to ``False`` to deactivate using parallel builds. If "
+"activated, it will use ``cpu_count`` configuration as the number of parallel "
+"jobs to use."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:173
+msgid "``msbuild_verbosity``: Used to define the output of MSBuild builds."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:177
+msgid "configure()"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:182
+msgid "def configure(self, source_folder=None):"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:183
+msgid ""
+"Calls ``cmake``, with the given generator and passing ``-"
+"DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake``. It will also provide the "
+"CMake generator in the command like, like ``-G \"Visual Studio 15\"``. Note "
+"that it is not necessary to specify the platform, like ``-G \"Visual Studio "
+"15 Win64\"``, as the platform is already defined in the toolchain file."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:188
+msgid ""
+"``source_folder``: Relative path to the folder containing the root "
+"*CMakeLists.txt*"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:192
+msgid "build()"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:198
+msgid "def build(self, build_type=None, target=None):"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:199
+msgid ""
+"Calls the build system. Equivalent to :command:`cmake --build .` in the "
+"build folder."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:202
+msgid ""
+"``build_type``: Use it only to override the value defined in the ``settings."
+"build_type`` for a multi-configuration generator (e.g. Visual Studio, "
+"XCode). This value will be ignored for single-configuration generators, they "
+"will use the one defined in the toolchain file during the install step."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:204
+msgid "``target``: name of the build target to run."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:208
+msgid "install()"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:214
+msgid "def install(self, build_type=None):"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:215
+msgid "Equivalent to run ``cmake --build . --target=install``"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:217
+#: ../../../creating_packages/toolchains/cmake.rst:232
+msgid ""
+"``build_type``: Use it only to override the value defined in the ``settings."
+"build_type``. It can fail if the build is single configuration (e.g. Unix "
+"Makefiles), as in that case the build type must be specified at configure "
+"time, not build type."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:223
+msgid "test()"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:229
+msgid "def test(self, build_type=None, target=None, output_on_failure=False):"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:230
+msgid "Equivalent to running :command:`cmake --build . --target=RUN_TESTS`."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/cmake.rst:235
+msgid ""
+"``target``: name of the build target to run, by default ``RUN_TESTS`` or "
+"``test``."
+msgstr ""

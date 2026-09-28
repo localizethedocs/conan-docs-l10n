@@ -1,0 +1,201 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.26\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/ci/travisci.rst:6
+msgid "|travisci_logo| Travis CI"
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:8
+msgid ""
+"You can use the `Travis CI`_ cloud service to automatically build and test "
+"your project in Linux/MacOS environments in the cloud. It is free for OSS "
+"projects, and offers an easy integration with GitHub, so builds can be "
+"automatically fired in Travis-CI after a :command:`git push` to GitHub."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:12
+msgid "You can use Travis-CI both for:"
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:14
+msgid ""
+"Building and testing your project, which manages dependencies with Conan, "
+"and probably a *conanfile.txt* file."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:15
+msgid ""
+"Building and testing Conan binary packages for a given Conan package recipe "
+"(with a *conanfile.py*)."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:18
+msgid "Installing dependencies and building your project"
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:20
+msgid ""
+"A very common use case is to build your project after Conan takes care of "
+"installing your dependencies. Doing this process in Travis CI is quite "
+"convenient as you can do it with :command:`conan install`."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:23
+msgid ""
+"To enable **Travis CI** support, you need to create a *.travis.yml* file and "
+"paste this code in it:"
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:25
+msgid ""
+"os: linux\n"
+"language: python\n"
+"python: \"3.7\"\n"
+"dist: xenial\n"
+"compiler:\n"
+"  - gcc\n"
+"install:\n"
+"# Install conan\n"
+"  - pip install conan\n"
+"# Automatic detection of your arch, compiler, etc.\n"
+"  - conan user\n"
+"script:\n"
+"# Download dependencies and build project\n"
+"  - conan install .\n"
+"# Call your build system\n"
+"  - cmake . -G \"Unix Makefiles\"\n"
+"  - cmake --build .\n"
+"# Run your tests\n"
+"  - ctest ."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:47
+msgid ""
+"Travis will install the gcc compiler and the :command:`conan` client and "
+"will execute the :command:`conan install` command using the requirements and "
+"generators indicated in your *conanfile.py* or *conanfile.txt*. Then, the "
+"**script** section installs the requirements and then you can use your build "
+"system to compile the project (using :command:`make` in this example)."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:52
+msgid "Creating, testing and uploading Conan binary packages"
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:54
+msgid ""
+"You can also use Travis CI to automate building new Conan binary packages "
+"with every change you push to GitHub. You can probably set up your own way, "
+"but Conan has some utilities to help in the process."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:57
+msgid ""
+"The command :command:`conan new` has arguments to create a default working *."
+"travis.yml* file. Other setups might be possible, but for this example we "
+"are assuming that you are using GitHub and also uploading your final "
+"packages to Bintray."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:60
+msgid "You could follow these steps:"
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:62
+msgid ""
+"First, create an empty GitHub repository. Let's call it \"hello\", for "
+"creating a \"hello world\" package. GitHub allows creating it with a Readme "
+"and .gitignore."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:63
+msgid ""
+"Get the credentials User and API Key. (Remember, Bintray uses the API key as "
+"\"password\", not your main Bintray account password.)"
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:64
+msgid ""
+"Create a Conan repository in Bintray under your user or organization, and "
+"get its URL (\"Set me up\"). We will call it ``UPLOAD_URL``"
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:65
+msgid ""
+"Activate the repo in your Travis account, so it is built when we push "
+"changes to it."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:66
+msgid ""
+"Under *Travis More Options -> Settings->Environment Variables*, add the "
+"``CONAN_PASSWORD`` environment variable with the Bintray API Key. If your "
+"Bintray user is different from the package user, you can also define your "
+"Bintray username, defining the environment variable ``CONAN_LOGIN_USERNAME``."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:69
+msgid "Clone the repo: :command:`git clone <your_repo/hello> && cd hello`."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:70
+msgid ""
+"Create the package: :command:`conan new hello/0.1@<user>/testing -t -s -cilg "
+"-cis -ciu=UPLOAD_URL` where **user** is your Bintray username."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:71
+msgid ""
+"You can inspect the created files: both *.travis.yml*, *.travis/run.sh*, and "
+"``.travis/install.sh`` and the *build.py* script, that is used by **conan-"
+"package-tools** utility to split different builds with different "
+"configurations in different Travis CI jobs."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:73
+msgid "You can test locally, before pushing, with :command:`conan test`."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:74
+msgid ""
+"Add the changes, commit and push: :command:`git add . && git commit -m "
+"\"first commit\" && git push`."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:75
+msgid "Go to Travis and see the build, with the different jobs."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:76
+msgid ""
+"When it has finished, go to your Bintray repository, you should see there "
+"the uploaded packages for different configurations."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:77
+msgid ""
+"Check locally, searching in Bintray: :command:`conan search hello/0.1@<user>/"
+"testing -r=mybintray`."
+msgstr ""
+
+#: ../../../integrations/ci/travisci.rst:79
+msgid ""
+"If something fails, please report an issue in the ``conan-package-tools`` "
+"GitHub repository: https://github.com/conan-io/conan-package-tools"
+msgstr ""

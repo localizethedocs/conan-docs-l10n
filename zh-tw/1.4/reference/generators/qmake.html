@@ -1,0 +1,426 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>qmake &mdash; conan 1.4.5 說明文件</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="索引"
+              href="../../genindex.html"/>
+        <link rel="search" title="搜尋" href="../../search.html"/>
+    <link rel="top" title="conan 1.4.5 說明文件" href="../../index.html"/>
+        <link rel="up" title="生成器" href="../generators.html"/>
+        <link rel="next" title="scons" href="scons.html"/>
+        <link rel="prev" title="qbs" href="qbs.html"/>
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../ltd-flyout.js"></script>
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://conan.io">
+          
+
+          
+            
+            <img src="../../_static/conan_logo.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../conan1.0.html">Upgrading to conan 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">介紹</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using_packages.html">使用軟體包</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../creating_packages.html">Creating packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uploading_packages.html">Uploading packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howtos.html">Howtos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../commands.html">命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conanfile.html">conanfile.py</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../generators.html">生成器</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cmake.html"><cite>cmake</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmakemulti.html"><cite>cmake_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html"><cite>cmake_paths</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html"><cite>cmake_find_package</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualstudio.html">visual_studio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html"><cite>visual_studio_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualstudiolegacy.html">visual_studio_legacy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xcode.html">xcode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compiler_args.html">compiler_args</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gcc.html">gcc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="boost_build.html">Boost Build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qbs.html">qbs</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">qmake</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#methods-available-in-conanbuildinfo-pri">Methods available in conanbuildinfo.pri</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pkg_config.html">pkg_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">txt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="json.html">json</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_helpers.html">Build helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config_files.html">組態檔</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../env_vars.html">環境變數</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../videos.html">Videos and links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">變更日誌</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p>Sign up for release updates:</p>
+              <script src="https://app-lon04.marketo.com/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_1479"></form>
+              <script>MktoForms2.loadForm("https://app-lon04.marketo.com", "256-FNZ-187", 1479);</script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../reference.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../generators.html">生成器</a> &raquo;</li>
+        
+      <li>qmake</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/generators/qmake.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="qmake">
+<span id="qmake-generator"></span><h1>qmake<a class="headerlink" href="#qmake" title="本標頭的永久連結">¶</a></h1>
+<div class="out-reference-box docutils container">
+<p>This is the reference page for <code class="docutils literal notranslate"><span class="pre">qmake</span></code> generator.
+Go to <a class="reference internal" href="../../integrations/qmake.html#qmake"><span class="std std-ref">Integrations/Qmake</span></a> if you want to learn how to integrate your project or recipes with qmake.</p>
+</div>
+<p>Generates a file named <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.pri</span></code> that can be used for your qbs builds.
+The file contains:</p>
+<ul class="simple">
+<li><p>N groups of variables, one group per require, declaring the same individual values: include_paths, libs, bin dirs, libraries, defines etc.</p></li>
+<li><p>One group of global variables with the aggregated values for all requirements.</p></li>
+</ul>
+<p><strong>Package declared vars</strong></p>
+<p>For each requirement <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.pri</span></code> file declares the following variables.
+<code class="docutils literal notranslate"><span class="pre">XXX</span></code> is the name of the require in uppercase. e.k 「ZLIB」 for <code class="docutils literal notranslate"><span class="pre">zlib/1.2.8&#64;lasote/stable</span></code> requirement:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>NAME</p></th>
+<th class="head"><p>VALUE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CONAN_XXX_ROOT</p></td>
+<td><p>Abs path to root package folder.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONAN_INCLUDEPATH_XXX</p></td>
+<td><p>Header’s folders</p></td>
+</tr>
+<tr class="row-even"><td><p>CONAN_LIB_DIRS_XXX</p></td>
+<td><p>Library folders  (default {CONAN_XXX_ROOT}/lib)</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONAN_BINDIRS_XXX</p></td>
+<td><p>Binary folders  (default {CONAN_XXX_ROOT}/bin)</p></td>
+</tr>
+<tr class="row-even"><td><p>CONAN_LIBS_XXX</p></td>
+<td><p>Library names to link</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONAN_DEFINES_XXX</p></td>
+<td><p>Library defines</p></td>
+</tr>
+<tr class="row-even"><td><p>CONAN_COMPILE_DEFINITIONS_XXX</p></td>
+<td><p>編譯定義</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONAN_QMAKE_CXXFLAGS_XXX</p></td>
+<td><p>CXX 旗標</p></td>
+</tr>
+<tr class="row-even"><td><p>CONAN_QMAKE_LFLAGS_XXX</p></td>
+<td><p>Shared link flags</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONAN_QMAKE_CFLAGS_XXX</p></td>
+<td><p>C 旗標</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Global declared vars</strong></p>
+<p>Conan also declares some global variables with the aggregated values of all our requirements.
+The values are ordered in the right order according to the dependency tree.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>NAME</p></th>
+<th class="head"><p>VALUE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CONAN_INCLUDEPATH</p></td>
+<td><p>Aggregated header’s folders</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONAN_LIB_DIRS</p></td>
+<td><p>Aggregated library folders</p></td>
+</tr>
+<tr class="row-even"><td><p>CONAN_BINDIRS</p></td>
+<td><p>Aggregated binary folders</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONAN_LIBS</p></td>
+<td><p>Aggregated library names to link</p></td>
+</tr>
+<tr class="row-even"><td><p>CONAN_DEFINES</p></td>
+<td><p>Aggregated library defines</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONAN_COMPILE_DEFINITIONS</p></td>
+<td><p>Aggregated compile definitions</p></td>
+</tr>
+<tr class="row-even"><td><p>CONAN_QMAKE_CXXFLAGS</p></td>
+<td><p>Aggregated CXX flags</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONAN_QMAKE_LFLAGS</p></td>
+<td><p>Aggregated Shared link flags</p></td>
+</tr>
+<tr class="row-even"><td><p>CONAN_QMAKE_CFLAGS</p></td>
+<td><p>Aggregated C flags</p></td>
+</tr>
+</tbody>
+</table>
+<section id="methods-available-in-conanbuildinfo-pri">
+<span id="conanbuildinfoqmake-methods"></span><h2>Methods available in conanbuildinfo.pri<a class="headerlink" href="#methods-available-in-conanbuildinfo-pri" title="本標頭的永久連結">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>NAME</p></th>
+<th class="head"><p>DESCRIPTION</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>conan_basic_setup()</p></td>
+<td><p>Setup all the qmake vars according to our settings with the global approach</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scons.html" class="btn btn-neutral float-right" title="scons" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="qbs.html" class="btn btn-neutral" title="qbs" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2018, JFrog.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.4.5',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/sphinx_highlight.js"></script>
+      <script type="text/javascript" src="../../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+ 
+
+
+</body>
+</html>

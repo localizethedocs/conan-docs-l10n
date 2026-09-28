@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.45\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:4
+msgid "CMake"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:8
+msgid "These tools are **experimental** and subject to breaking changes."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:11
+msgid ""
+"The ``CMake`` build helper is a wrapper around the command line invocation "
+"of cmake. It will abstract the calls like ``cmake --build . --config "
+"Release`` into Python method calls. It will also add the argument ``-"
+"DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake`` to the ``configure()`` call."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:15
+msgid ""
+"The helper is intended to be used in the ``build()`` method, to call CMake "
+"commands automatically when a package is being built directly by Conan "
+"(create, install)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:19
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"    options = {\"shared\": [True, False], \"fPIC\": [True, False]}\n"
+"    default_options = {\"shared\": False, \"fPIC\": True}\n"
+"\n"
+"    def generate(self):\n"
+"        tc = CMakeToolchain(self)\n"
+"        tc.generate()\n"
+"        deps = CMakeDeps(self)\n"
+"        deps.generate()\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure()\n"
+"        cmake.build()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:41
+msgid ""
+"**Note:** This helper includes the additional flag `-DCMAKE_SH=\"CMAKE_SH-"
+"NOTFOUND\"` when using the `MinGW Makefiles` CMake's generator, to avoid the "
+"error of `sh` being in the PATH (CMake version < 3.17.0)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:44
+msgid "It supports the following methods:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:47
+msgid "constructor"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:52
+msgid "def __init__(self, conanfile, namespace=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:53
+msgid "``conanfile``: the current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:54
+msgid ""
+"``namespace``: this argument avoids collisions when you have multiple "
+"toolchain calls in the same recipe. By setting this argument the *conanbuild."
+"conf* file used to pass some information to the toolchain will be named as: "
+"*<namespace>_conanbuild.conf*. The default value is ``None`` meaning that "
+"the name of the generated file is *conanbuild.conf*. This namespace must be "
+"also set with the same value in the constructor of the :ref:"
+"`CMakeToolchain<conan-cmake-toolchain>` so that it reads the information "
+"from the proper file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:62
+msgid "configure()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:67
+msgid "def configure(self, build_script_folder=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:68
+msgid ""
+"Calls ``cmake``, with the generator defined in the ``cmake_generator`` field "
+"of the ``conanbuild.conf`` file, and passing ``-"
+"DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:73
+msgid ""
+"If ``conanbuild.conf`` file is not there, Conan will raise an exception "
+"because it's a mandatory one even though it's empty."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:76
+msgid ""
+"``build_script_folder``: Relative path to the folder containing the root "
+"*CMakeLists.txt*"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:80
+msgid "build()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:86
+msgid "def build(self, build_type=None, target=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:87
+msgid ""
+"Calls the build system. Equivalent to :command:`cmake --build .` in the "
+"build folder."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:90
+msgid ""
+"``build_type``: Use it only to override the value defined in the ``settings."
+"build_type`` for a multi-configuration generator (e.g. Visual Studio, "
+"XCode). This value will be ignored for single-configuration generators, they "
+"will use the one defined in the toolchain file during the install step."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:92
+msgid "``target``: name of the build target to run."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:96
+msgid "install()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:102
+msgid "def install(self, build_type=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:103
+msgid "Equivalent to run ``cmake --build . --target=install``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:105
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:120
+msgid ""
+"``build_type``: Use it only to override the value defined in the ``settings."
+"build_type``. It can fail if the build is single configuration (e.g. Unix "
+"Makefiles), as in that case the build type must be specified at configure "
+"time, not build type."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:111
+msgid "test()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:117
+msgid "def test(self, build_type=None, target=None):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:118
+msgid "Equivalent to running :command:`cmake --build . --target=RUN_TESTS`."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:123
+msgid ""
+"``target``: name of the build target to run, by default ``RUN_TESTS`` or "
+"``test``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:127
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:129
+msgid ""
+"``tools.microsoft.msbuild:verbosity`` will accept one of ``\"Quiet\", "
+"\"Minimal\", \"Normal\", \"Detailed\", \"Diagnostic\"`` to be passed to the "
+"``CMake.build()`` command, when a Visual Studio generator (MSBuild build "
+"system) is being used for CMake. It is passed as an argument to the "
+"underlying build system via the call ``cmake --build . --config Release -- /"
+"verbosity:Diagnostic``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:133
+msgid ""
+"``tools.build:jobs`` argument for the ``--jobs`` parameter when running "
+"Ninja generator."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmake.rst:135
+msgid ""
+"``tools.microsoft.msbuild:max_cpu_count`` argument for the ``/m`` (``/"
+"maxCpuCount``) when running ``MSBuild``"
+msgstr ""

@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.38\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/files.rst:4
+msgid "conan.tools.files"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:9
+msgid "conan.tools.files.patch()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:11
+msgid ""
+"def patch(conanfile, base_path=None, patch_file=None, patch_string=None,\n"
+"          strip=0, fuzz=False, **kwargs):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:16
+msgid ""
+"Applies a diff from file (*patch_file*)  or string (*patch_string*) in "
+"*base_path* directory. If *base_path* is not passed it is applied in the "
+"current directory."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:26
+#: ../../../reference/conanfile/tools/files.rst:87
+msgid "Parameters:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:20
+msgid "**base_path**: Base path where the patch should be applied."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:21
+msgid "**patch_file**: Patch file that should be applied."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:22
+msgid "**patch_string**: Patch string that should be applied."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:23
+msgid "**strip**: Number of folders to be stripped from the path."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:24
+msgid "**output**: Stream object."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:25
+msgid "**fuzz**: Should accept fuzzy patches."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:26
+msgid ""
+"**kwargs**: Extra parameters that can be added and will contribute to output "
+"information."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:31
+msgid "conan.tools.files.apply_conandata_patches()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:33
+msgid "def apply_conandata_patches(conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:37
+msgid ""
+"Applies patches stored in ``conanfile.conan_data`` (read from ``conandata."
+"yml`` file). It will apply all the patches under ``patches`` entry that "
+"matches the given ``conanfile.version``. If versions are not defined in "
+"``conandata.yml`` it will apply all the patches directly under ``patches`` "
+"keyword."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:41
+msgid "Example of ``conandata.yml`` without versions defined:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:43
+msgid ""
+"patches:\n"
+"- patch_file: \"patches/0001-buildflatbuffers-cmake.patch\"\n"
+"  base_path: \"source_subfolder\"\n"
+"- patch_file: \"patches/0002-implicit-copy-constructor.patch\"\n"
+"  base_path: \"source_subfolder\"\n"
+"  patch_type: backport\n"
+"  patch_source: https://github.com/google/flatbuffers/pull/5650\n"
+"  patch_description: Needed to build with modern clang compilers."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:54
+msgid ""
+"Example of ``conandata.yml`` with different patches for different versions:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:56
+msgid ""
+"patches:\n"
+"  \"1.11.0\":\n"
+"    - patch_file: \"patches/0001-buildflatbuffers-cmake.patch\"\n"
+"      base_path: \"source_subfolder\"\n"
+"    - patch_file: \"patches/0002-implicit-copy-constructor.patch\"\n"
+"      base_path: \"source_subfolder\"\n"
+"      patch_type: backport\n"
+"      patch_source: https://github.com/google/flatbuffers/pull/5650\n"
+"      patch_description: Needed to build with modern clang compilers.\n"
+"  \"1.12.0\":\n"
+"    - patch_file: \"patches/0001-buildflatbuffers-cmake.patch\"\n"
+"      base_path: \"source_subfolder\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:72
+msgid "conan.tools.rename()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:74
+msgid "def rename(conanfile, src, dst)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:78
+msgid ""
+"Utility functions to rename a file or folder *src* to *dst*. On Windows, it "
+"is very common that ``os.rename()`` raises an \"Access is denied\" "
+"exception, so this tool uses:command:`robocopy` if available. If that is not "
+"the case, or the rename is done in a non-Windows machine, it falls back to "
+"the ``os.rename()`` implementation."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:80
+msgid ""
+"def source(self):\n"
+"  tools.rename(self, \"lib-sources-abe2h9fe\", \"sources\")  # renaming a "
+"folder"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:86
+msgid "**conanfile**: Conanfile object."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:87
+msgid "**src** (Required): Path to be renamed."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/files.rst:88
+msgid "**dst** (Required): Path to be renamed to."
+msgstr ""

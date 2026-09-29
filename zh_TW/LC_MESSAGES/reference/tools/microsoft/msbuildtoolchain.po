@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:5
+msgid "MSBuildToolchain"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:7
+msgid ""
+"The ``MSBuildToolchain`` is the toolchain generator for MSBuild. It will "
+"generate MSBuild properties files that can be added to the Visual Studio "
+"solution projects. This generator translates the current package "
+"configuration, settings, and options, into MSBuild properties files syntax."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:11
+msgid "This generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:13
+msgid "**conanfile.py**"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:13
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"MSBuildToolchain\""
+msgstr ""
+"class Pkg(ConanFile):\n"
+"    generators = \"MSBuildToolchain\""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:19
+msgid "**conanfile.txt**"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:19
+msgid ""
+"[generators]\n"
+"MSBuildToolchain"
+msgstr ""
+"[generators]\n"
+"MSBuildToolchain"
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:26
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:28
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.microsoft import MSBuildToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = MSBuildToolchain(self)\n"
+"        tc.generate()"
+msgstr ""
+"from conan import ConanFile\n"
+"from conan.tools.microsoft import MSBuildToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = MSBuildToolchain(self)\n"
+"        tc.generate()"
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:41
+msgid ""
+"The ``MSBuildToolchain`` will generate three files after a ``conan install`` "
+"command:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:43
+msgid ""
+"$ conan install . # default is Release\n"
+"$ conan install . -s build_type=Debug"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:49
+msgid "The main *conantoolchain.props* file, to be added to the project."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:50
+msgid ""
+"A *conantoolchain_<config>.props* file, that will be conditionally included "
+"from the previous *conantoolchain.props* file based on the configuration and "
+"platform, e.g., *conantoolchain_release_x86.props*."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:52
+msgid ""
+"A *conanvcvars.bat* file with the ``vcvars`` invocation to define the build "
+"environment from the command line, or any other automated tools (might not "
+"be required if opening the IDE). This file will be automatically called by "
+"the ``MSBuild.build()`` method."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:56
+msgid ""
+"Every invocation with different configuration creates a new properties ``."
+"props`` file, that is also conditionally included. That allows to install "
+"different configurations, then switch among them directly from the Visual "
+"Studio IDE."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:59
+msgid "The MSBuildToolchain files can configure:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:61
+msgid ""
+"The Visual Studio runtime (*MT/MD/MTd/MDd*), obtained from Conan input "
+"settings."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:62
+msgid "The C++ standard, obtained from Conan input settings."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:64
+msgid ""
+"One of the advantages of using toolchains is that they help to achieve the "
+"exact same build with local development flows, than when the package is "
+"created in the cache."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:69
+msgid "Customization"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:72
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:74
+msgid "``MSBuildToolchain`` is affected by these ``[conf]`` variables:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:76
+msgid ""
+"``tools.microsoft.msbuildtoolchain:compile_options`` dict-like object of "
+"extra compile options to be added to ``<ClCompile>`` section. The dict will "
+"be translated as follows: ``<[KEY]>[VALUE]</[KEY]>``."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:78
+msgid ""
+"``tools.microsoft:winsdk_version`` value will define the "
+"``<WindowsTargetPlatformVersion>`` element in the toolchain file."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:79
+msgid ""
+"``tools.build:cxxflags`` list of extra C++ flags that will be appended to "
+"``<AdditionalOptions>`` section from ``<ClCompile>`` and "
+"``<ResourceCompile>`` one."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:80
+msgid ""
+"``tools.build:cflags`` list of extra of pure C flags that will be appended "
+"to ``<AdditionalOptions>`` section from ``<ClCompile>`` and "
+"``<ResourceCompile>`` one."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:81
+msgid ""
+"``tools.build:sharedlinkflags`` list of extra linker flags that will be "
+"appended to ``<AdditionalOptions>`` section from ``<Link>`` one."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:82
+msgid ""
+"``tools.build:exelinkflags`` list of extra linker flags that will be "
+"appended to ``<AdditionalOptions>`` section from ``<Link>`` one."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:83
+msgid ""
+"``tools.build:defines`` list of preprocessor definitions that will be "
+"appended to ``<PreprocessorDefinitions>`` section from ``<ResourceCompile>`` "
+"one."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:87
+msgid "Reference"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/toolchain.py:docstring of
+#: conan.tools.microsoft.toolchain.MSBuildToolchain:1
+msgid "MSBuildToolchain class generator"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/toolchain.py:docstring of
+#: conan.tools.microsoft.toolchain.MSBuildToolchain:0
+msgid "Parameters"
+msgstr "參數"
+
+#: ../../../conan_sources/conan/tools/microsoft/toolchain.py:docstring of
+#: conan.tools.microsoft.toolchain.MSBuildToolchain:3
+msgid ""
+"``< ConanFile object >`` The current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/microsoft/toolchain.py:docstring of
+#: conan.tools.microsoft.toolchain.MSBuildToolchain.generate:1
+msgid ""
+"Generates a ``conantoolchain.props``, a ``conantoolchain_<config>.props``, "
+"and, if ``compiler=msvc``, a ``conanvcvars.bat`` files. In the first two "
+"cases, they'll have the valid XML format with all the good settings like any "
+"other VS project ``*.props`` file. The last one emulates the ``vcvarsall."
+"bat`` env script. See also :class:`VCVars`."
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:95
+msgid "Attributes"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:97
+msgid ""
+"**properties**: Additional properties added to the generated ``.props`` "
+"files. You can define the properties in a key-value syntax like:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:100
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.microsoft import MSBuildToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        msbuild = MSBuildToolchain(self)\n"
+"        msbuild.properties[\"IncludeExternals\"] = \"true\"\n"
+"        msbuild.generate()"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:113
+msgid ""
+"Then, the generated *conantoolchain_<config>.props* file will contain the "
+"defined property in its contents:"
+msgstr ""
+
+#: ../../../reference/tools/microsoft/msbuildtoolchain.rst:117
+msgid ""
+"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+"<Project xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\n"
+"<ItemDefinitionGroup>\n"
+"...\n"
+"</ItemDefinitionGroup>\n"
+"<PropertyGroup Label=\"Configuration\">\n"
+"    ...\n"
+"    <IncludeExternals>true</IncludeExternals>\n"
+"    ...\n"
+"</PropertyGroup>\n"
+"</Project>"
+msgstr ""

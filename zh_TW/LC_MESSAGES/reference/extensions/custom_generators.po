@@ -1,0 +1,156 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/extensions/custom_generators.rst:4
+msgid "Custom Conan generators"
+msgstr "自訂 Conan 生成器"
+
+#: ../../../reference/extensions/custom_generators.rst:6
+msgid ""
+"In the case that you need to use a build system or tool that is not "
+"supported by Conan off-the-shelf, you could create your own custom "
+"integrations using a custom generator. This can be done in two different "
+"ways."
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:11
+msgid "Custom generators as python_requires"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:13
+msgid ""
+"One way of having your own custom generators in Conan is by using them as :"
+"ref:`python_requires<reference_extensions_python_requires>`. You could "
+"declare a *MyGenerator* class with all the logic to generate some files "
+"inside the *mygenerator/1.0* `python_requires` package:"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:18
+msgid "mygenerator/conanfile.py"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:18
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.files import save\n"
+"\n"
+"\n"
+"class MyGenerator:\n"
+"    def __init__(self, conanfile):\n"
+"        self._conanfile = conanfile\n"
+"\n"
+"    def generate(self):\n"
+"        deps_info = \"\"\n"
+"        for dep, _ in self._conanfile.dependencies.items():\n"
+"            deps_info += f\"{dep.ref.name}, {dep.ref.version}\\n\"\n"
+"        save(self._conanfile, \"deps.txt\", deps_info)\n"
+"\n"
+"\n"
+"class PyReq(ConanFile):\n"
+"    name = \"mygenerator\"\n"
+"    version = \"1.0\"\n"
+"    package_type = \"python-require\""
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:42
+msgid ""
+"And then ``conan create mygenerator`` and use it in the generate method of "
+"your own packages like this:"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:44
+msgid "pkg/conanfile.py"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:44
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"\n"
+"class MyPkg(ConanFile):\n"
+"    name = \"pkg\"\n"
+"    version = \"1.0\"\n"
+"\n"
+"    python_requires = \"mygenerator/1.0\"\n"
+"    requires = \"zlib/1.2.11\", \"bzip2/1.0.8\"\n"
+"\n"
+"    def generate(self):\n"
+"        mygenerator = self.python_requires[\"mygenerator\"].module."
+"MyGenerator(self)\n"
+"        mygenerator.generate()"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:61
+msgid ""
+"Then, doing a ``conan install pkg`` on this ``pkg`` recipe, will create a "
+"``deps.txt`` text file containing:"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:63
+msgid ""
+"zlib, 1.2.11\n"
+"bzip2, 1.0.8"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:69
+msgid ""
+"This has the advantage that you can version your own custom generators as "
+"packages and also that you can share those generators as Conan packages."
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:73
+msgid "Using global custom generators"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:75
+msgid ""
+"You can also use your custom generators globally if you store them in the "
+"``[CONAN_HOME]/extensions/generators`` folder. You can place them directly "
+"in that folder or install with the ``conan config install`` command."
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:79
+msgid "[CONAN_HOME]/extensions/generators/mygen.py"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:79
+msgid ""
+"from conan.tools.files import save\n"
+"\n"
+"\n"
+"class MyGenerator:\n"
+"    def __init__(self, conanfile):\n"
+"        self._conanfile = conanfile\n"
+"\n"
+"    def generate(self):\n"
+"        deps_info = \"\"\n"
+"        for dep, _ in self._conanfile.dependencies.items():\n"
+"            deps_info = f\"{dep.ref.name}, {dep.ref.version}\"\n"
+"        save(self._conanfile, \"deps.txt\", deps_info)"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:95
+msgid ""
+"Then you can use them by name in the recipes or in the command line using "
+"the *-g* argument:"
+msgstr ""
+
+#: ../../../reference/extensions/custom_generators.rst:98
+msgid "conan install --requires=zlib/1.2.13 -g MyGenerator"
+msgstr ""

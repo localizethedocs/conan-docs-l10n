@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../ci_tutorial/packages_pipeline.rst:2
+msgid "Packages pipeline"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline.rst:5
+msgid ""
+"The **packages pipeline** will build, create and upload the package binaries "
+"for the different configurations and platforms, when some developer is "
+"submitting some changes to one of the organization repositories source code. "
+"For example if a developer is doing some changes to the ``ai`` package, "
+"improving some of the library functionality, and bumping the version to "
+"``ai/1.1.0``. If the organization needs to support both Windows and Linux "
+"platforms, then the package pipeline will build the new ``ai/1.1.0`` both "
+"for Windows and Linux, before considering the changes are valid. If some of "
+"the configurations fail to build under a specific platform, it is common to "
+"consider the changes invalid and stop the processing of those changes, until "
+"the code is fixed."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline.rst:13
+msgid ""
+"For the ``package pipeline`` we will start with a simple source code change "
+"in the ``ai`` recipe, simulating some improvements in the ``ai`` package, "
+"providing some better algorithms for our game."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline.rst:16
+msgid "**Let's do the following changes in the ai package**:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline.rst:18
+msgid ""
+"Let's change the implementation of the ``ai/src/ai.cpp`` function and change "
+"the message from ``Some Artificial`` to ``SUPER BETTER Artificial``"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline.rst:19
+msgid ""
+"Let's change the default ``intelligence=0`` value in ``ai/include/ai.h`` to "
+"a new ``intelligence=50`` default."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline.rst:20
+msgid ""
+"Finally, let's bump the version. As we did some changes to the package "
+"public headers, it would be adviced to bump the ``minor`` version, so let`s "
+"edit the ``ai/conanfile.py`` file and define ``version = \"1.1.0\"`` there "
+"(instead of the previous ``1.0``). Note that if we did some breaking changes "
+"to the ``ai`` public API, the recommendation would be to change the major "
+"instead and create a new ``2.0`` version."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline.rst:25
+msgid ""
+"The **packages pipeline** will take care of building the different packages "
+"binaries for the new ``ai/1.1.0`` and upload them to the ``packages`` binary "
+"repository to avoid disrupting or causing potential issues to other "
+"developers and CI jobs. If the pipeline succeed it will promote (copy) them "
+"to the ``products`` binary repository, and stop otherwise."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline.rst:29
+msgid ""
+"There are different aspects that need to be taken into account when building "
+"these binary packages for ``ai/1.1.0``. The following tutorial sections do "
+"the same job, but under different hypothesis. They are explained in "
+"increasing complexity."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline.rst:32
+msgid ""
+"Note all of the commands can be found in the repository ``run_example.py`` "
+"file. This file is mostly intended for maintainers and testing, but it might "
+"be useful as a reference in case of issues."
+msgstr ""

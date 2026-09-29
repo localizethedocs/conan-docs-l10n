@@ -1,0 +1,385 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.16\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/extensions/custom_commands.rst:4
+msgid "Custom commands"
+msgstr "自訂命令"
+
+#: ../../../reference/extensions/custom_commands.rst:6
+msgid ""
+"It's possible to create your own Conan commands to solve self-needs thanks "
+"to Python and Conan public API powers altogether."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:9
+msgid "Location and naming"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:11
+msgid ""
+"All the custom commands must be located in ``[YOUR_CONAN_HOME]/extensions/"
+"commands/`` folder. If you don't know where ``[YOUR_CONAN_HOME]`` is "
+"located, you can run :command:`conan config home` to check it."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:14
+msgid ""
+"If _commands_ sub-directory is not created yet, you will have to create it. "
+"Those custom commands files must be Python files and start with the prefix "
+"``cmd_[your_command_name].py``. The call to the custom commands is like any "
+"other existing Conan one: :command:`conan your_command_name`."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:20
+msgid "Scoping"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:22
+msgid ""
+"It's possible to have another folder layer to group some commands under the "
+"same topic."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:24
+msgid "For instance:"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:26
+msgid ""
+"| - [YOUR_CONAN_HOME]/extensions/commands/greet/\n"
+"      | - cmd_hello.py\n"
+"      | - cmd_bye.py"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:32
+msgid ""
+"The call to those commands change a little bit: :command:`conan [topic_name]:"
+"your_command_name`. Following the previous example:"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:34
+msgid ""
+"$ conan greet:hello\n"
+"$ conan greet:bye"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:42
+msgid ""
+"It's possible for only one folder layer, so it won't work to have something "
+"like ``[YOUR_CONAN_HOME]/extensions/commands/topic1/topic2/cmd_command.py``"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:47
+msgid "Decorators"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:50
+msgid "conan_command(group=None, formatters=None)"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:52
+msgid ""
+"Main decorator to declare a function as a new Conan command. Where the "
+"parameters are:"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:54
+msgid ""
+"``group`` is the name of the group of commands declared under the same name. "
+"This grouping will appear executing the :command:`conan -h` command."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:56
+msgid ""
+"``formatters`` is a dict-like Python object where the ``key`` is the "
+"formatter name and the value is the function instance where will be "
+"processed the information returned by the command one."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:60
+#: ../../../reference/extensions/custom_commands.rst:94
+msgid "cmd_hello.py"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:60
+msgid ""
+"import json\n"
+"\n"
+"from conan.api.conan_api import ConanAPI\n"
+"from conan.api.output import ConanOutput\n"
+"from conan.cli.command import conan_command\n"
+"\n"
+"def output_json(msg):\n"
+"    return json.dumps({\"greet\": msg})\n"
+"\n"
+"\n"
+"@conan_command(group=\"Custom commands\", formatters={\"json\": "
+"output_json})\n"
+"def hello(conan_api: ConanAPI, parser, *args):\n"
+"    \"\"\"\n"
+"    Simple command to print \"Hello World!\" line\n"
+"    \"\"\"\n"
+"    msg = \"Hello World!\"\n"
+"    ConanOutput().info(msg)\n"
+"    return msg"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:85
+msgid ""
+"The function decorated by ``@conan_command(....)`` must have the same name "
+"as the suffix used by the Python file. For instance, the previous example, "
+"the file name is ``cmd_hello.py``, and the command function decorated is "
+"``def hello(....)``."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:90
+msgid "conan_subcommand(formatters=None)"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:92
+msgid ""
+"Similar to ``conan_command``, but this one is declaring a sub-command of an "
+"existing custom command. For instance:"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:94
+msgid ""
+"from conan.api.conan_api import ConanAPI\n"
+"from conan.api.output import ConanOutput\n"
+"from conan.cli.command import conan_command, conan_subcommand\n"
+"\n"
+"\n"
+"@conan_subcommand()\n"
+"def hello_moon(conan_api, parser, subparser, *args):\n"
+"    \"\"\"\n"
+"    Sub-command of \"hello\" that prints \"Hello Moon!\" line\n"
+"    \"\"\"\n"
+"    ConanOutput().info(\"Hello Moon!\")\n"
+"\n"
+"\n"
+"@conan_command(group=\"Custom commands\")\n"
+"def hello(conan_api: ConanAPI, parser, *args):\n"
+"    \"\"\"\n"
+"    Simple command \"hello\"\n"
+"    \"\"\""
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:116
+msgid "The command call looks like :command:`conan hello moon`."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:120
+msgid ""
+"Notice that to declare a sub-command is required an empty Python function "
+"acts as the main command."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:124
+msgid "Argument definition and parsing"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:126
+msgid ""
+"Commands can define their own arguments with the ``argparse`` Python library."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:129
+msgid ""
+"@conan_command(group='Creator')\n"
+"def build(conan_api, parser, *args):\n"
+"    \"\"\"\n"
+"    Command help\n"
+"    \"\"\"\n"
+"    parser.add_argument(\"path\", nargs=\"?\", help='help for command')\n"
+"    ...\n"
+"    args = parser.parse_args(*args)\n"
+"    # Use args.path"
+msgstr ""
+"@conan_command(group='Creator')\n"
+"def build(conan_api, parser, *args):\n"
+"    \"\"\"\n"
+"    Command help\n"
+"    \"\"\"\n"
+"    parser.add_argument(\"path\", nargs=\"?\", help='help for command')\n"
+"    ...\n"
+"    args = parser.parse_args(*args)\n"
+"    # Use args.path"
+
+#: ../../../reference/extensions/custom_commands.rst:142
+msgid ""
+"When there are sub-commands, the base command cannot define arguments, only "
+"the sub-commands can do it. If you have a set of common arguments to all sub-"
+"commands, you can define a function that adds them."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:146
+msgid ""
+"@conan_command(group=\"MyGroup\")\n"
+"def mycommand(conan_api, parser, *args):\n"
+"    \"\"\"\n"
+"    Command help\n"
+"    \"\"\"\n"
+"    # Do not define arguments in the base command\n"
+"    pass\n"
+"\n"
+"@conan_subcommand()\n"
+"def mycommand_mysubcommand(conan_api: ConanAPI, parser, subparser, *args):\n"
+"    \"\"\"\n"
+"    Subcommand help\n"
+"    \"\"\"\n"
+"    # Arguments are added to \"subparser\"\n"
+"    subparser.add_argument(\"reference\", help=\"Recipe reference or Package "
+"reference\")\n"
+"    # You can add common args with your helper\n"
+"    # add_my_common_args(subparser)\n"
+"    # But parsing all of them happens to \"parser\"\n"
+"    args = parser.parse_args(*args)\n"
+"    # use args.reference"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:171
+msgid "Formatters"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:173
+msgid ""
+"The return of the command will be passed as argument to the formatters. If "
+"there are different formatters that require different arguments, the "
+"approach is to return a dictionary, and let the formatters chose the "
+"arguments they need. For example, the ``graph info`` command uses several "
+"formatters like:"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:177
+msgid ""
+"def format_graph_html(result):\n"
+"    graph = result[\"graph\"]\n"
+"    conan_api = result[\"conan_api\"]\n"
+"    ...\n"
+"\n"
+"def format_graph_info(result):\n"
+"    graph = result[\"graph\"]\n"
+"    field_filter = result[\"field_filter\"]\n"
+"    package_filter = result[\"package_filter\"]\n"
+"    ...\n"
+"\n"
+"@conan_subcommand(formatters={\"text\": format_graph_info,\n"
+"                              \"html\": format_graph_html,\n"
+"                              \"json\": format_graph_json,\n"
+"                              \"dot\": format_graph_dot})\n"
+"def graph_info(conan_api, parser, subparser, *args):\n"
+"    ...\n"
+"    return {\"graph\": deps_graph,\n"
+"            \"field_filter\": args.filter,\n"
+"            \"package_filter\": args.package_filter,\n"
+"            \"conan_api\": conan_api}"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:203
+msgid "Commands parameters"
+msgstr "命令參數"
+
+#: ../../../reference/extensions/custom_commands.rst:205
+msgid ""
+"These are the passed arguments to any custom command and its sub-commands "
+"functions:"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:207
+msgid "cmd_command.py"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:207
+msgid ""
+"from conan.cli.command import conan_command, conan_subcommand\n"
+"\n"
+"\n"
+"@conan_subcommand()\n"
+"def command_subcommand(conan_api, parser, subparser, *args):\n"
+"    \"\"\"\n"
+"    subcommand information. This info will appear on ``conan command "
+"subcommand -h``.\n"
+"\n"
+"    :param conan_api: <object conan.api.conan_api.ConanAPI> instance\n"
+"    :param parser: root <object argparse.ArgumentParser> instance (coming "
+"from main command)\n"
+"    :param subparser: <object argparse.ArgumentParser> instance for sub-"
+"command\n"
+"    :param args: ``list`` of all the arguments passed after sub-command "
+"call\n"
+"    :return: (optional) whatever is returned will be passed to formatters "
+"functions (if declared)\n"
+"    \"\"\"\n"
+"    # ...\n"
+"\n"
+"\n"
+"@conan_command(group=\"Custom commands\")\n"
+"def command(conan_api, parser, *args):\n"
+"    \"\"\"\n"
+"    command information. This info will appear on ``conan command -h``.\n"
+"\n"
+"    :param conan_api: <object conan.api.conan_api.ConanAPI> instance\n"
+"    :param parser: root <object argparse.ArgumentParser> instance\n"
+"    :param args: ``list`` of all the arguments passed after command call\n"
+"    :return: (optional) whatever is returned will be passed to formatters "
+"functions (if declared)\n"
+"    \"\"\"\n"
+"    # ..."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:240
+msgid ""
+"``conan_api``: instance of ``ConanAPI`` class. See more about it in :ref:"
+"`conan.api.conan_api.ConanAPI section<reference_python_api_conan_api>`"
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:241
+msgid ""
+"``parser``: root instance of Python ``argparse.ArgumentParser`` class to be "
+"used by the main command function. See more information in `argparse "
+"official website <https://docs.python.org/3/library/argparse.html>`_."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:243
+msgid ""
+"``subparser`` (only for sub-commands): child instance of Python ``argparse."
+"ArgumentParser`` class for each sub-command function."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:244
+msgid ""
+"``*args``: list of all the arguments passed via command line to be parsed "
+"and used inside the command function. Normally, they'll be parsed as ``args "
+"= parser.parse_args(*args)``. For instance, running :command:`conan "
+"mycommand arg1 arg2 arg3`, the command function will receive them as a "
+"Python list-like ``[\"arg1\", \"arg2\", \"arg3\"]``."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:250
+msgid ""
+":ref:`Custom command to remove recipe and package revisions but the latest "
+"package one from the latest recipe "
+"one<examples_extensions_commands_clean_revisions>`."
+msgstr ""
+
+#: ../../../reference/extensions/custom_commands.rst:251
+msgid ""
+"You can check more examples of Conan custom command in the *conan-"
+"extensions* repository https://github.com/conan-io/conan-extensions"
+msgstr ""

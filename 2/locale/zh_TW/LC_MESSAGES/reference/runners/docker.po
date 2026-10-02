@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-09-29 15:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,28 +102,54 @@ msgid ""
 "for Mac Silicon users."
 msgstr ""
 
-#: ../../../reference/runners/docker.rst:29
+#: ../../../reference/runners/docker.rst:26
+msgid ""
+"``copy_config_files`` **(optional, default: empty)**: Comma-separated list "
+"of `fnmatch <https://docs.python.org/3/library/fnmatch.html>`_ patterns, "
+"relative to the Conan home folder, of extra host files/folders to copy into "
+"the container's Conan home, for the ``clean`` and ``copy`` cache modes. "
+"Disabled by default."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:28
+msgid ""
+"[runner]\n"
+"type=docker\n"
+"copy_config_files=extensions/*"
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:34
+msgid ""
+"A few files are never copied, even if a pattern matches them: the package "
+"cache storage folder, the sources backup cache, ``version.txt``, ``."
+"local_recipes_index/*``, and the local remote-login database. ``credentials."
+"json`` and ``source_credentials.json`` are also skipped by default for "
+"containing sensitive data, but are copied if their exact name is listed in "
+"``copy_config_files``."
+msgstr ""
+
+#: ../../../reference/runners/docker.rst:38
 msgid ""
 "The ``shared`` cache option may cause permission issues depending on the "
 "user inside and outside the container. It is recommended to use the ``copy`` "
 "cache for greater stability, despite a slight increase in setup time."
 msgstr ""
 
-#: ../../../reference/runners/docker.rst:30
+#: ../../../reference/runners/docker.rst:39
 msgid "The runner profile section does not impact the package ID."
 msgstr ""
 
-#: ../../../reference/runners/docker.rst:34
+#: ../../../reference/runners/docker.rst:43
 msgid "Extra configuration"
 msgstr ""
 
-#: ../../../reference/runners/docker.rst:36
+#: ../../../reference/runners/docker.rst:45
 msgid ""
 "For greater control over the build and execution of the container, "
 "additional parameters can be defined within a ``configfile`` YAML file."
 msgstr ""
 
-#: ../../../reference/runners/docker.rst:38
+#: ../../../reference/runners/docker.rst:47
 msgid ""
 "image: image_name # The image to build or run.\n"
 "build:\n"
@@ -157,29 +183,29 @@ msgid ""
 "    network: my-network # Specifies the network for the container."
 msgstr ""
 
-#: ../../../reference/runners/docker.rst:66
+#: ../../../reference/runners/docker.rst:75
 msgid "How to run a `conan create` in a runner"
 msgstr ""
 
-#: ../../../reference/runners/docker.rst:70
+#: ../../../reference/runners/docker.rst:79
 msgid ""
 "The docker runner feature is only supported by ``conan create`` command. The "
 "``conan install --build`` command is not supported."
 msgstr ""
 
-#: ../../../reference/runners/docker.rst:72
+#: ../../../reference/runners/docker.rst:81
 msgid ""
 "The following links provide examples of how to use a Conan Docker runner:"
 msgstr ""
 
-#: ../../../reference/runners/docker.rst:74
+#: ../../../reference/runners/docker.rst:83
 msgid ""
 ":ref:`Creating a Conan package using a Docker "
 "runner<examples_runners_docker_basic>`"
 msgstr ""
 ":ref:`使用 Docker 執行器建立 Conan 軟體包 <examples_runners_docker_basic>`"
 
-#: ../../../reference/runners/docker.rst:75
+#: ../../../reference/runners/docker.rst:84
 msgid ""
 ":ref:`Using a docker runner configfile to parameterize the Dockerfile base "
 "image<examples_runners_docker_configfile_build_args>`"

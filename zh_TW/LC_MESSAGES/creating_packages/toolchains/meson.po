@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.32\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../creating_packages/toolchains/meson.rst:4
+msgid "MesonToolchain"
+msgstr "MesonToolchain"
+
+#: ../../../creating_packages/toolchains/meson.rst:8
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:11
+msgid "The ``MesonToolchain`` can be used in the ``generate()`` method:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:29
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.meson import MesonToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"    options = {\"shared\": [True, False]}\n"
+"    default_options = {\"shared\": False}\n"
+"\n"
+"    def generate(self):\n"
+"        tc = MesonToolchain(self)\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:30
+msgid ""
+"The ``MesonToolchain`` will generate the following file during ``conan "
+"install`` command (or before calling the ``build()`` method when the package "
+"is being built in the cache): ``conan_meson_native.ini``"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:34
+msgid ""
+"``conan_meson_native.ini`` will contain the definitions of all the Meson "
+"properties related to the Conan options and settings for the current "
+"package, platform, etc. This includes but is not limited to the following:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:38
+msgid "Detection of ``default_library`` from Conan settings"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:40
+msgid "Based on existance/value of a option named ``shared``"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:42
+msgid "Detection of ``buildtype`` from Conan settings"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:44
+msgid "Definition of the C++ standard as necessary"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:46
+msgid ""
+"The Visual Studio runtime (``b_vscrt``), obtained from Conan input settings"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:49
+msgid "Generators"
+msgstr "生成器"
+
+#: ../../../creating_packages/toolchains/meson.rst:51
+msgid ""
+"The ``MesonToolchain`` only works with the ``pkg_config`` generator. Please, "
+"do not use other generators, as they can have overlapping definitions that "
+"can conflict."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:56
+msgid "Using the toolchain in developer flow"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:58
+msgid ""
+"One of the advantages of using Conan toolchains is that they can help to "
+"achieve the exact same build with local development flows, than when the "
+"package is created in the cache."
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:61
+msgid "With the ``MesonToolchain`` it is possible to do:"
+msgstr ""
+
+#: ../../../creating_packages/toolchains/meson.rst:72
+msgid ""
+"# Lets start in the folder containing the conanfile.py\n"
+"$ mkdir build && cd build\n"
+"# Install both debug and release deps and create the toolchain\n"
+"$ conan install ..\n"
+"# the build type Release is encoded in the toolchain already.\n"
+"# This conan_meson_native.iniis specific for release\n"
+"$ meson setup --native-file conan_meson_native.ini build .\n"
+"$ meson compile -C build"
+msgstr ""

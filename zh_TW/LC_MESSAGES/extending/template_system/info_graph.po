@@ -1,0 +1,287 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.40\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../extending/template_system/info_graph.rst:5
+msgid "Graph output for :command:`conan info` command"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:9
+msgid ""
+"This has to be an considered as an **experimental** feature, we might change "
+"the context provided to this templates once we have more exmpales from the "
+"community."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:14
+msgid ""
+"The :ref:`conan_info` command can generate a visualization of the dependency "
+"graph, it comes in two flavors: `html` and `dot` (GraphViz), but both take "
+"the same template parameters. Conan will use the following input files, if "
+"found, inside the Conan cache folder:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:19
+msgid "HTML output: *<cache>/templates/output/info_graph.html*."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:20
+msgid "DOT output: *<cache>/templates/output/info_graph.dot*."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:23
+msgid "Context"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:25
+msgid ""
+"These files should be valid `Jinja2 documentation <https://palletsprojects."
+"com/p/jinja/>`_ templates and they will be feed with the following context:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:28
+msgid ""
+"``base_template_path``: absolute path to the directory where the choosen "
+"template file is located. It is needed if your output file needs to link "
+"assets distributed together with the template file (see HTML example linking "
+"CSS and JS files)."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:31
+msgid ""
+"``graph``: this object contains all the information from the graph of "
+"dependencies. It offers the following API:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:34
+msgid ""
+"``graph.nodes``: list of ``Node`` objects with the information for each "
+"Conan package included in the graph (see below API for this ``Node`` object)."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:36
+msgid ""
+"``graph.edges``: list of tuples with all the connections in the dependency "
+"graph. First item in the tuple is the consumer ``Node`` and second item the "
+"required ``Node``."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:38
+msgid ""
+"``graph.binary_color(node)``: function that retrieves the Conan default "
+"color based on the ``node.binary`` value."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:41
+msgid ""
+"The ``Node`` objects in the context provide all the required information "
+"about each package:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:43
+msgid "``node.label``: display name for the conanfile."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:44
+msgid "``node.short_label``: ``name/version`` parts of the Conan reference."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:45
+msgid "``node.package_id``: the package identifier."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:46
+msgid "``node.is_build_requires``:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:47
+msgid ""
+"``node.binary``: it identifies where the binary comes from (cache, download, "
+"build,"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:48
+msgid "missing, update)."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:49
+msgid ""
+"``node.data()``: returns a dictionary that contains data from the recipe, "
+"members are ``url``, ``homepage``, ``license``, ``author`` and ``topics``."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:55
+msgid "Examples"
+msgstr "範例"
+
+#: ../../../extending/template_system/info_graph.rst:57
+msgid ""
+"This is are two examples of templates Conan is currently using for the basic "
+"functionality, you can refer to the `Jinja2 documentation <https://"
+"palletsprojects.com/p/jinja/>`_ for more information about the logic and "
+"filters your can use in these templates."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:61
+msgid ""
+"Let's us know if you have a cool template you want to share with the Conan "
+"community."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:65
+msgid "Dot files:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:67
+msgid ""
+"Default template for the DOT output contains just the node names and the "
+"edges:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:69
+msgid ""
+"digraph {\n"
+"    {%- for src, dst in graph.edges %}\n"
+"        \"{{ src.label }}\" -> \"{{ dst.label }}\"\n"
+"    {%- endfor %}\n"
+"}"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:78
+msgid "The output will compose a valid ``dot`` file:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:80
+msgid "conan info poco/1.10.0@ --graph=poco.dot"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:85
+msgid ""
+"digraph {\n"
+"        \"poco/1.10.0\" -> \"openssl/1.1.1g\"\n"
+"        \"virtual\" -> \"poco/1.10.0\"\n"
+"}"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:93
+msgid "Use ``dot`` to render the default view of the generated graph:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:95
+msgid "dot -Tpng poco.dot > poco.png"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:106
+msgid "HTML files:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:108
+msgid ""
+"HTML templates are more complicated than ``dot`` ones, but the HTML can "
+"provide a nicer view of the graph and easily include JavaScript to create an "
+"interactive view of the graph."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:111
+msgid ""
+"In this example we assume you have distributed the following files to your "
+"cache folder:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:113
+msgid ""
+"<cache>/templates/output/css/vis.min.css\n"
+"<cache>/templates/output/js/vis.min.js\n"
+"<cache>/templates/output/info_graph.html"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:120
+msgid ""
+"Our template will we the *info_graph.html* file, and it will use the assets "
+"from the local files provided in the cache (most use cases will use files "
+"from the internet using the full URL)."
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:124
+msgid ""
+"These are some snippets from the *info_graph.html* template, it uses the "
+"`vis.js <https://visjs.org/>`_ library:"
+msgstr ""
+
+#: ../../../extending/template_system/info_graph.rst:126
+msgid ""
+"<html lang=\"en\">\n"
+"    <head>\n"
+"        {# ... #}\n"
+"        <script type=\"text/javascript\" src=\"{{ base_template_path }}/js/"
+"vis.min.js\"></script>\n"
+"        <link href=\"{{ base_template_path }}/css/vis.min.css\" "
+"rel=\"stylesheet\" type=\"text/css\"/>\n"
+"    </head>\n"
+"\n"
+"    <body>\n"
+"        {# ... #}\n"
+"\n"
+"        <div style=\"width: 100%;\">\n"
+"            <div id=\"mynetwork\"></div>\n"
+"        </div>\n"
+"\n"
+"        {# ... #}\n"
+"\n"
+"        <script type=\"text/javascript\">\n"
+"            var nodes = new vis.DataSet([\n"
+"                {%- for node in graph.nodes %}\n"
+"                    {\n"
+"                        id: {{ node.id }},\n"
+"                        label: '{{ node.short_label }}',\n"
+"                        shape: '{% if node.is_build_requires %}ellipse{% "
+"else %}box{% endif %}',\n"
+"                        color: { background: '{{ graph."
+"binary_color(node) }}'},\n"
+"                        fulllabel: '<h3>{{ node.label }}</h3>' +\n"
+"                                '<ul>' +\n"
+"                                '    <li><b>id</b>: {{ node.package_id }}</"
+"li>' +\n"
+"                                {%- for key, value in node.data().items() "
+"%}\n"
+"                                {%- if value %}\n"
+"                                '    <li><b>{{ key }}</b>: {{ value }}</li>' "
+"+\n"
+"                                {%- endif %}\n"
+"                                {%- endfor %}\n"
+"                                '</ul>'\n"
+"                    }{%- if not loop.last %},{% endif %}\n"
+"                {%- endfor %}\n"
+"            ]);\n"
+"            var edges = new vis.DataSet([\n"
+"                {%- for src, dst in graph.edges %}\n"
+"                    { from: {{ src.id }}, to: {{ dst.id }} }{%- if not loop."
+"last %},{% endif %}\n"
+"                {%- endfor %}\n"
+"            ]);\n"
+"\n"
+"            var container = document.getElementById('mynetwork');\n"
+"            var data = {\n"
+"                nodes: nodes,\n"
+"                edges: edges\n"
+"            };\n"
+"            var network = new vis.Network(container, data, options);\n"
+"        </script>\n"
+"    </body>\n"
+"</html>"
+msgstr ""

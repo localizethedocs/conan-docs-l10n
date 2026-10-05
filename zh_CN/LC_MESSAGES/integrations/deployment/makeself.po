@@ -1,0 +1,117 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.55\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/deployment/makeself.rst:4
+msgid "Makeself"
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:6
+msgid ""
+"`Makeself <https://makeself.io>`_ is a small command-line utility to "
+"generate self-extracting archives for Unix. It is pretty popular and it is "
+"used by `VirtualBox <https://en.wikipedia.org/wiki/VirtualBox>`_ and `CMake "
+"<https://cmake.org/download/>`_ projects."
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:9
+msgid ""
+"Makeself creates archives that are just small startup scripts (*.run*, *."
+"bin* or *.sh*) concatenated with tarballs."
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:11
+msgid "When you run such self-extracting archive:"
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:13
+msgid ""
+"A small script (shim) extracts the embedded archive into the temporary "
+"directory"
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:14
+msgid ""
+"Script passes the execution to the entry point within the unpacked archive"
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:15
+msgid "application is being run"
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:16
+msgid "The temporary directory removed"
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:18
+msgid ""
+"Therefore, it transparently appears just like a normal application execution."
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:20
+msgid ""
+"With help of :ref:`deploy generator <deployable_deploy_generator>`, it's "
+"only needed to invoke ``makeself.sh`` in order to generate self-extracting "
+"archive for the further deployment:"
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:23
+msgid ""
+"TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`\n"
+"curl \"https://github.com/megastep/makeself/releases/download/release-2.4.0/"
+"makeself-2.4.0.run\" --output $TMPDIR/makeself.run -L\n"
+"chmod +x $TMPDIR/makeself.run\n"
+"$TMPDIR/makeself.run --target $TMPDIR/makeself\n"
+"$TMPDIR/makeself/makeself.sh $PREFIX md5.run \"conan-generated makeself.sh\" "
+"\"./conan-entrypoint.sh\""
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:31
+msgid ""
+"The ``PREFIX`` variable in the example points to the directory where binary "
+"artifacts are situated. The ``md5.run`` is an output SFX archive:"
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:33
+msgid ""
+"$ file md5.run\n"
+"md5.run: POSIX shell script executable (binary data)"
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:38
+msgid ""
+"The ``conan-entry-point.sh`` is a simple script which sets requires "
+"variables (like ``PATH`` or ``LD_LIBRARY_PATH``):"
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:40
+msgid ""
+"#!/usr/bin/env bash\n"
+"set -ex\n"
+"export PATH=$PATH:$PWD/bin\n"
+"export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/lib\n"
+"pushd $(dirname $PWD/md5)\n"
+"$(basename $PWD/md5)\n"
+"popd"
+msgstr ""
+
+#: ../../../integrations/deployment/makeself.rst:50
+msgid ""
+"Check out the complete example on `GitHub <https://github.com/conan-io/"
+"examples/tree/master/features>`_."
+msgstr ""

@@ -1,0 +1,95 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.55\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/check_conan_version_in_conanfile.rst:3
+msgid "How to check the version of the Conan client inside a conanfile"
+msgstr ""
+
+#: ../../../howtos/check_conan_version_in_conanfile.rst:5
+msgid ""
+"Sometimes it might be useful to check the Conan version that is running in "
+"that moment your recipe. Although we consider ConanCenter recipes only "
+"forward compatible, this kind of check makes sense to update them so they "
+"can maintain compatibility with old versions of Conan."
+msgstr ""
+
+#: ../../../howtos/check_conan_version_in_conanfile.rst:9
+msgid "Let's have a look at a basic example of this:"
+msgstr ""
+
+#: ../../../howtos/check_conan_version_in_conanfile.rst:11
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../howtos/check_conan_version_in_conanfile.rst:11
+msgid ""
+" from conans import ConanFile, CMake, __version__ as conan_version\n"
+" from conans.tools import Version\n"
+"\n"
+"\n"
+" class MyLibraryConan(ConanFile):\n"
+"     name = \"mylibrary\"\n"
+"     version = \"1.0\"\n"
+"\n"
+"     def build(self):\n"
+"         if conan_version < Version(\"0.29\"):\n"
+"             cmake = CMake(self.settings)\n"
+"         else:\n"
+"             cmake = CMake(self)\n"
+"     ..."
+msgstr ""
+
+#: ../../../howtos/check_conan_version_in_conanfile.rst:29
+msgid ""
+"Here it checks the Conan version to maintain compatibility of the CMake "
+"build helper for versions lower than Conan 0.29. It also uses the internal "
+"``Version()`` class to perform the semver comparison in the if-clause."
+msgstr ""
+
+#: ../../../howtos/check_conan_version_in_conanfile.rst:33
+msgid ""
+"You can also use it to take advantage of new features when the client is new "
+"enough, for example:"
+msgstr ""
+
+#: ../../../howtos/check_conan_version_in_conanfile.rst:36
+msgid ""
+"from conans import ConanFile, tools, __version__ as conan_version\n"
+"from conans.tools import Version\n"
+"\n"
+"class MyPackage(ConanFile):\n"
+"    name = \"package\"\n"
+"    ...\n"
+"\n"
+"    def package_id(self):\n"
+"        if conan_version >= Version(\"1.20\"):\n"
+"            if self.settings.compiler == \"gcc\" and self.settings.compiler."
+"version == \"4.9\":\n"
+"                compatible_pkg = self.info.clone()\n"
+"                compatible_pkg.settings.compiler.version = \"4.8\"\n"
+"                self.compatible_packages.append(compatible_pkg)"
+msgstr ""
+
+#: ../../../howtos/check_conan_version_in_conanfile.rst:53
+msgid ""
+"It can be useful to introduce new features in your recipes while all the "
+"consumers update their client version. Together with our :ref:`stability "
+"commitment for Conan 1.x<stability>` it should be easy to adopt new Conan "
+"versions while evolving your recipes."
+msgstr ""

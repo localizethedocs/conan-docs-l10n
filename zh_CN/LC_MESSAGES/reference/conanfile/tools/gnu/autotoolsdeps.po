@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.37\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:2
+msgid "AutotoolsDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:6
+msgid "These tools are **experimental** and subject to breaking changes."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:9
+msgid ""
+"The ``AutotoolsDeps`` is the dependencies generator for Autotools. It will "
+"generate shell scripts containing environment variable definitions that the "
+"autotools build system can understand."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:12
+msgid "The ``AutotoolsDeps`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:14
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:14
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"AutotoolsDeps\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:20
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:20
+msgid ""
+"[generators]\n"
+"AutotoolsDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:26
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:39
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.gnu import AutotoolsDeps\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = AutotoolsDeps(self)\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:40
+msgid ""
+"The ``AutotoolsDeps`` will generate after a ``conan install`` command the "
+"*conanautotoolsdeps.sh* or *conanautotoolsdeps.bat* files:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:42
+msgid ""
+"$ conan install conanfile.py # default is Release\n"
+"$ source conanautotoolsdeps.sh\n"
+"# or in Windows\n"
+"$ conanautotoolsdeps.bat"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:49
+msgid ""
+"This generator will define aggregated variables ``CPPFLAGS``, ``LIBS``, "
+"``LDFLAGS``, ``CXXFLAGS``, ``CFLAGS`` that accumulate all dependencies "
+"information, including transitive dependencies, with flags like ``-"
+"I<path>``, ``-L<path>``, etc."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/autotoolsdeps.rst:52
+msgid ""
+"At this moment, only the ``requires`` information is generated, the "
+"``build_requires`` one is not managed by this generator yet."
+msgstr ""

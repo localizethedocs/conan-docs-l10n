@@ -1,0 +1,326 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.61\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../versioning/lockfiles/configurations.rst:4
+msgid "Multiple configurations"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:8
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:10
+msgid ""
+"In the previous section we managed just 1 configuration, for the default "
+"profile. In many applications, packages need to be built with several "
+"different configurations, typically managed by different profile files."
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:16
+msgid ""
+"This section continues with the previous example with the :ref:"
+"`versioning_lockfiles_introduction`. The code used in this section, "
+"including a *build.py* script to reproduce it, is in the examples "
+"repository: https://github.com/conan-io/examples. You can go step by step "
+"reproducing this example while reading the below documentation."
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:None
+msgid ""
+"$ git clone https://github.com/conan-io/examples.git\n"
+"$ cd features/lockfiles/intro\n"
+"# $ python build.py only to run the full example, but better go step by step"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:28
+msgid ""
+"Lets start in the *features/lockfiles/intro* of the examples repository, "
+"remove the previous packages, and create both release and debug ``pkga`` "
+"packages:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:31
+msgid ""
+"$ conan remove \"pkg*\" -f\n"
+"$ conan create pkga pkga/0.1@user/testing\n"
+"$ conan create pkga pkga/0.1@user/testing -s build_type=Debug"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:38
+msgid ""
+"Now, we could (don't do it) create 2 different lockfiles, one for each "
+"configuration:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:41
+msgid ""
+"# DO NOT type these commands, we'll do it better below\n"
+"$ cd pkgb\n"
+"$ conan lock create conanfile.py --user=user --channel=testing --lockfile-"
+"out=locks/pkgb_release.lock\n"
+"$ conan lock create conanfile.py --user=user --channel=testing --lockfile-"
+"out=locks/pkgb_debug.lock -s build_type=Debug"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:51
+msgid ""
+"The dependency graph is different for each different configuration/profile. "
+"Not only the package-ids, but also because of conditional requirements, the "
+"dependencies can be different. Then, it is necessary to create a lockfile "
+"for every different configuration/profile."
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:56
+msgid ""
+"But, what if a new ``pkga/0.2@user/testing`` version was created in the time "
+"between both commands? Although this is unlikely to happen in this example, "
+"because everything is local. However, it could happen that ``pkga`` was in a "
+"server and the CI uploads a new ``pkga/0.2@user/testing`` version while we "
+"are running the above commands."
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:63
+msgid "Base lockfiles"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:65
+msgid ""
+"Conan proposes a \"base\" lockfile, with the :command:`--base` argument, "
+"that will capture only the versions and topology of the graph, but not the "
+"package-ids:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:68
+msgid ""
+"$ cd pkgb\n"
+"$ conan lock create conanfile.py --user=user --channel=testing --lockfile-"
+"out=locks/pkgb_base.lock --base"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:73
+msgid "Let's inspect the *locks/pkgb_base.lock* lockfile:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:75
+msgid ""
+"{\n"
+"    \"graph_lock\": {\n"
+"        \"nodes\": {\n"
+"            \"0\": {\n"
+"                \"ref\": \"pkgb/0.1@user/testing\",\n"
+"                \"requires\": [\"1\"],\n"
+"                \"path\": \"..\\\\conanfile.py\",\n"
+"                \"context\": \"host\"\n"
+"            },\n"
+"            \"1\": {\n"
+"                \"ref\": \"pkga/0.1@user/testing\",\n"
+"                \"context\": \"host\"\n"
+"            }\n"
+"        },\n"
+"        \"revisions_enabled\": false\n"
+"    },\n"
+"    \"version\": \"0.4\"\n"
+"}"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:96
+msgid ""
+"This lockfile is different to the ones in the previous section. It does not "
+"store the ``profile``, and it does not capture the package-ids or the "
+"options of the nodes. It captures the topology of the graph, and the package "
+"references and versions."
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:99
+msgid ""
+"At this point, the new ``pkga/0.2@user/testing`` version packages could be "
+"created:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:101
+msgid ""
+"$ cd ..\n"
+"# The recipe generates different package code depending on the version, "
+"automatically\n"
+"$ conan create pkga pkga/0.2@user/testing\n"
+"$ conan create pkga pkga/0.2@user/testing -s build_type=Debug"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:109
+msgid ""
+"Using the \"base\" *locks/pkgb_base.lock* lockfile, now we can obtain a new "
+"lockfile for both debug and release configurations, and it is guaranteed "
+"that both will use the ``pkga/0.1@user/testing`` dependency, and not the new "
+"one:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:112
+msgid ""
+"$ cd pkgb\n"
+"$ conan lock create conanfile.py --user=user --channel=testing --"
+"lockfile=locks/pkgb_base.lock --lockfile-out=locks/pkgb_deps_debug.lock -s "
+"build_type=Debug\n"
+"$ conan lock create conanfile.py --user=user --channel=testing --"
+"lockfile=locks/pkgb_base.lock --lockfile-out=locks/pkgb_deps_release.lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:118
+msgid ""
+"Now, we will have 2 lockfiles, *locks/pkgb_deps_debug.lock* and *locks/"
+"pkgb_deps_release.lock*. Each one will lock different profiles and different "
+"package-id of ``pkga/0.1@user/testing``."
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:122
+msgid ""
+"In Conan 1.X, if you are generating lockfiles with separate build and host "
+"profiles, your base lockfiles must also use separate build and host "
+"profiles. For example, here we are generating a base lockfile that will be "
+"used to generate lockfiles for a Linux and Windows build:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:125
+msgid ""
+"# The build and host profiles you choose for the base lockfile should\n"
+"# include all dependencies needed by all lockfiles you will generate\n"
+"# from the base lockfile.\n"
+"$ conan lock create conanfile.py -pr:b release -pr:h debug --lockfile-"
+"out=base.lock --base\n"
+"\n"
+"# Use the base lockfile to generate lockfiles for a Linux and Windows\n"
+"# build.\n"
+"$ conan lock create conanfile.py -pr:b linux-rel -pr:h linux-dbg --"
+"lockfile=base.lock --lockfile-out=linux.lock\n"
+"$ conan lock create conanfile.py -pr:b windows-rel -pr:h windows-dbg --"
+"lockfile=base.lock --lockfile-out=windows.lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:137
+msgid ""
+"For more information, please see `GitHub issue #9446 <https://github.com/"
+"conan-io/conan/issues/9446#issuecomment-904846681>`_."
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:140
+msgid "Locked configuration"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:142
+msgid ""
+"The lockfiles store the effective configuration, settings, options, "
+"resulting from the used profiles and command line arguments. That "
+"configuration arguments can be passed to the ``conan lock create`` command, "
+"but not when using lockfiles. For example:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:145
+msgid ""
+"$ mkdir build && cd build\n"
+"$ conan install .. --lockfile=../locks/pkgb_deps_debug.lock -s "
+"build_type=Debug\n"
+"ERROR: Cannot use profile, settings, options or env 'host' when using "
+"lockfile"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:151
+msgid ""
+"results in an error, because the *locks/pkgb_deps_debug.lock* already stores "
+"the ``settings.build_type`` and passing it in the command line could only "
+"result in inconsistencies and errors."
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:156
+msgid ""
+"Lockfiles store the full effective profile configuration. It is not possible "
+"to pass configuration, settings, options or profile arguments when using "
+"lockfiles (only when creating the lockfiles)"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:159
+msgid ""
+"With the two captured lockfiles, now we can locally build and run our "
+"``pkgb`` application for both configurations, guaranteeing the dependency to "
+"``pkga/0.1@user/testing``:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:162
+msgid ""
+"$ conan install .. --lockfile=../locks/pkgb_deps_release.lock\n"
+"$ cmake ../src -G \"Visual Studio 15 Win64\"\n"
+"$ cmake --build . --config Release\n"
+"$ ./bin/greet\n"
+"HelloA 0.1 Release\n"
+"HelloB Release!\n"
+"Greetings Release!\n"
+"$ conan install .. --lockfile=../locks/pkgb_deps_debug.lock\n"
+"$ cmake --build . --config Debug\n"
+"$ ./bin/greet\n"
+"HelloA 0.1 Debug\n"
+"HelloB Debug!\n"
+"Greetings Debug!"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:178
+msgid "We can create ``pkgb`` package again for both configurations:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:180
+msgid ""
+"$ cd ..\n"
+"$ conan create . user/testing --lockfile=locks/pkgb_deps_release.lock --"
+"lockfile-out=locks/pkgb_release.lock\n"
+"$ conan create . user/testing --lockfile=locks/pkgb_deps_debug.lock --"
+"lockfile-out=locks/pkgb_debug.lock"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:187
+msgid ""
+"And we could still use the lockfiles later in time to install the ``pkgb`` "
+"package with the same dependencies and configuration that were used to "
+"create that package:"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:191
+msgid ""
+"$ cd ..\n"
+"$ mkdir consume\n"
+"$ cd consume\n"
+"$ conan install pkgb/0.1@user/testing --lockfile=../pkgb/locks/pkgb_release."
+"lock\n"
+"$ ./bin/greet\n"
+"HelloA 0.1 Release\n"
+"HelloB Release!\n"
+"Greetings Release!\n"
+"$ conan install pkgb/0.1@user/testing --lockfile=../pkgb/locks/pkgb_debug."
+"lock\n"
+"$ ./bin/greet\n"
+"HelloA 0.1 Debug\n"
+"HelloB Debug!\n"
+"Greetings Debug!"
+msgstr ""
+
+#: ../../../versioning/lockfiles/configurations.rst:207
+msgid ""
+"As you can see, the immutability principle remains. If we try to use "
+"*pkgb_release.lock* to create the ``pkgb`` package again instead of the "
+"*pkgb_deps_release.lock* lockfile, it will error, as ``pkgb`` would be "
+"already fully locked in the former."
+msgstr ""

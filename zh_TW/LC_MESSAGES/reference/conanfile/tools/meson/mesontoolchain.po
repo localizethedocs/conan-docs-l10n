@@ -1,0 +1,507 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.58\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:4
+msgid "MesonToolchain"
+msgstr "MesonToolchain"
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:8
+msgid ""
+"This feature is still **under development**, while it is recommended and "
+"usable and we will try not to break them in future releases, some breaking "
+"changes might still happen if necessary to prepare for the *Conan 2.0 "
+"release*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:14
+msgid ""
+"This class will generate files that are only compatible with Meson versions "
+">= 0.55.0"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:17
+msgid ""
+"Available since: `1.33.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.33.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:20
+msgid "The ``MesonToolchain`` can be used in the ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:39
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.meson import MesonToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"    options = {\"shared\": [True, False]}\n"
+"    default_options = {\"shared\": False}\n"
+"\n"
+"    def generate(self):\n"
+"        tc = MesonToolchain(self)\n"
+"        tc.preprocessor_definitions[\"MYDEFINE\"] = \"MYDEF_VALUE\"\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:40
+msgid ""
+"The ``MesonToolchain`` will generate a file: -  *conan_meson_native.ini*: if "
+"doing a native build. -  *conan_meson_cross.ini*: if doing a cross-build (:"
+"ref:`cross_building_reference`)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:46
+msgid ""
+"This class will require very soon to define both the \"host\" and \"build\" "
+"profiles. It is very recommended to start defining both profiles immediately "
+"to avoid future breaking. Furthermore, some features, like trying to cross-"
+"compile might not work at all if the \"build\" profile is not provided."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:51
+msgid ""
+"``conan_meson_native.ini`` will contain the definitions of all the Meson "
+"properties related to the Conan options and settings for the current "
+"package, platform, etc. This includes but is not limited to the following:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:55
+msgid "Detection of ``default_library`` from Conan settings"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:57
+msgid "Based on existence/value of a option named ``shared``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:59
+msgid "Detection of ``buildtype`` from Conan settings"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:61
+msgid "Definition of the C++ standard as necessary"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:63
+msgid ""
+"The Visual Studio runtime (``b_vscrt``), obtained from Conan input settings"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:65
+msgid ""
+"*conan_meson_cross.ini* contains the same information as *conan_meson_native."
+"ini*, but with additional information to describe host, target, and build "
+"machines (such as the processor architecture)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:69
+msgid ""
+"Check out the meson documentation for more details on native and cross files:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:71
+msgid "`Machine files <https://mesonbuild.com/Machine-files.html>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:72
+msgid ""
+"`Native environments <https://mesonbuild.com/Native-environments.html>`_"
+msgstr "`原生環境 <https://mesonbuild.com/Native-environments.html>`_"
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:73
+msgid "`Cross compilation <https://mesonbuild.com/Cross-compilation.html>`_"
+msgstr "`交叉編譯 <https://mesonbuild.com/Cross-compilation.html>`_"
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:76
+msgid "constructor"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:81
+msgid "def __init__(self, conanfile, backend=None):"
+msgstr "def __init__(self, conanfile, backend=None):"
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:82
+msgid ""
+"Most of the arguments are optional and will be deduced from the current "
+"``settings``, and not necessary to define them."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:85
+msgid "``conanfile``: the current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:86
+msgid ""
+"``backend``: the meson `backend <https://mesonbuild.com/Configuring-a-build-"
+"directory.html>`_ to use. By default, ``ninja`` is used. Possible values: "
+"ninja, vs, vs2010, vs2015, vs2017, vs2019, xcode."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:89
+msgid "project_options"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:91
+msgid "This attribute allows defining Meson project options:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:99
+msgid ""
+"def generate(self):\n"
+"    tc = MesonToolchain(self)\n"
+"    tc.project_options[\"MYVAR\"] = \"MyValue\"\n"
+"    tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:100
+msgid ""
+"One project options definition for ``MYVAR`` in ``conan_meson_native.init`` "
+"or ``conan_meson_cross.ini`` file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:103
+msgid "preprocessor_definitions"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:105
+msgid ""
+"This attribute allows defining compiler preprocessor definitions, for "
+"multiple configurations (Debug, Release, etc)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:113
+msgid ""
+"def generate(self):\n"
+"    tc = MesonToolchain(self)\n"
+"    tc.preprocessor_definitions[\"MYDEF\"] = \"MyValue\"\n"
+"    tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:114
+msgid "This will be translated to:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:116
+msgid ""
+"One preprocessor definition for ``MYDEF`` in ``conan_meson_native.ini`` or "
+"``conan_meson_cross.ini`` file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:119
+msgid "Generators"
+msgstr "生成器"
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:121
+msgid ""
+"The ``MesonToolchain`` only works with the ``PkgConfigDeps`` generator. "
+"Please, do not use other generators, as they can have overlapping "
+"definitions that can conflict."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:126
+msgid "Default directories"
+msgstr "預設目錄"
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:128
+msgid ""
+"Since Conan 1.51, ``MesonToolchain`` manages some of the directories used by "
+"Meson. These are variables declared under the ``[project options]`` section "
+"of the files `conan_meson_native.ini` and `conan_meson_cross.ini` (see more "
+"information about `Meson directories <https://mesonbuild.com/Builtin-options."
+"html#directories>`__):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:133
+msgid ""
+"``bindir``: value coming from ``self.cpp.package.bindirs``. Defaulted to "
+"None. ``sbindir``: value coming from ``self.cpp.package.bindirs``. Defaulted "
+"to None. ``libexecdir``: value coming from ``self.cpp.package.bindirs``. "
+"Defaulted to None. ``datadir``: value coming from ``self.cpp.package."
+"resdirs``. Defaulted to None. ``localedir``: value coming from ``self.cpp."
+"package.resdirs``. Defaulted to None. ``mandir``: value coming from ``self."
+"cpp.package.resdirs``. Defaulted to None. ``infodir``: value coming from "
+"``self.cpp.package.resdirs``. Defaulted to None. ``includedir``: value "
+"coming from ``self.cpp.package.includedirs``. Defaulted to None. ``libdir``: "
+"value coming from ``self.cpp.package.libdirs``. Defaulted to None."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:143
+msgid ""
+"Notice that it needs a ``layout`` to be able to initialize those ``self.cpp."
+"package.xxxxx`` variables. For instance:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:162
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.meson import MesonToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def layout(self):\n"
+"        self.folders.build = \"build\"\n"
+"        self.cpp.package.resdirs = [\"res\"]\n"
+"\n"
+"    def generate(self):\n"
+"        tc = MesonToolchain(self)\n"
+"        self.output.info(tc.project_options[\"datadir\"])  # Will print "
+"'[\"res\"]'\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:165
+msgid ""
+"All of them are saved only if they have any value. If the values "
+"are``None``, they won't be mentioned in ``[project options]`` section."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:170
+msgid "Using the toolchain in developer flow"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:172
+msgid ""
+"One of the advantages of using Conan toolchains is that they can help to "
+"achieve the exact same build with local development flows, than when the "
+"package is created in the cache."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:175
+msgid "With the ``MesonToolchain`` it is possible to do:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:188
+msgid ""
+"# Lets start in the folder containing the conanfile.py\n"
+"$ mkdir build && cd build\n"
+"# Install both debug and release deps and create the toolchain\n"
+"$ conan install ..\n"
+"# the build type Release is encoded in the toolchain already.\n"
+"# This conan_meson_native.iniis specific for release\n"
+"$ meson setup --native-file conan_meson_native.ini build .\n"
+"$ meson compile -C build"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:190
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:192
+msgid ""
+"``MesonToolchain`` is affected by these :ref:`[conf]<global_conf>` variables:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:194
+msgid ""
+"``tools.meson.mesontoolchain:backend``. the meson `backend <https://"
+"mesonbuild.com/Configuring-a-build-directory.html>`_ to use. Possible "
+"values: ``ninja``, ``vs``, ``vs2010``, ``vs2015``, ``vs2017``, ``vs2019``, "
+"``xcode``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:197
+msgid ""
+"``tools.apple:sdk_path`` argument for SDK path in case of Apple cross-"
+"compilation. It will be used as value of the flag ``-isysroot``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:199
+msgid ""
+"``tools.android:ndk_path`` argument for NDK path in case of Android cross-"
+"compilation. It will be used to get some binaries like ``c``, ``cpp`` and "
+"``ar`` used in ``[binaries]`` section from *conan_meson_cross.ini*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:202
+msgid ""
+"Apart from that, since Conan 1.47, you can inject extra flags thanks to "
+"these ones:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:204
+msgid ""
+"``tools.build:cxxflags`` list of extra C++ flags that will be used by "
+"``cpp_args``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:205
+msgid ""
+"``tools.build:cflags`` list of extra of pure C flags that will be used by "
+"``c_args``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:206
+msgid ""
+"``tools.build:sharedlinkflags`` list of extra linker flags that will be used "
+"by ``c_link_args`` and ``cpp_link_args``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:207
+msgid ""
+"``tools.build:exelinkflags`` list of extra linker flags that will be used by "
+"``c_link_args`` and ``cpp_link_args``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:208
+msgid ""
+"``tools.build:linker_scripts`` list of linker scripts, each of which will be "
+"prefixed with ``-T`` and passed to ``c_link_args`` and ``cpp_link_args``. "
+"Only use this flag with linkers that supports specifying linker scripts with "
+"the ``-T`` flag, such as ``ld``, ``gold``, and ``lld``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:211
+msgid ""
+"``tools.build:compiler_executables`` (new in version 1.55) dict-like Python "
+"object which specifies the compiler as key and the compiler executable path "
+"as value. Those keys will be mapped as follows:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:214
+msgid ""
+"``c``: will set ``c`` in ``[binaries]`` section from *conan_meson_xxxx.ini*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:215
+msgid ""
+"``cpp``: will set ``cpp`` in ``[binaries]`` section from *conan_meson_xxxx."
+"ini*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:216
+msgid ""
+"``objc``: will set ``objc`` in ``[binaries]`` section from *conan_meson_xxxx."
+"ini*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:217
+msgid ""
+"``objcpp``: will set ``objcpp`` in ``[binaries]`` section from "
+"*conan_meson_xxxx.ini*."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:221
+msgid "Cross-building for Apple and Android"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:223
+msgid ""
+"It deserves a special mention because ``MesonToolchain`` is automatically "
+"adding all the flags needed to cross-compile for Apple (MacOS M1, iOS, etc.) "
+"and Android."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:226
+msgid "**Apple**"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:228
+msgid ""
+"It'll add link flags like ``-arch XXX``, ``-isysroot [SDK_PATH]`` and the "
+"minimum deployment target flag, e.g., ``-mios-version-min=8.0`` into Meson "
+"``c_args``, ``c_link_args``, ``cpp_args`` and ``cpp_link_args`` built-in "
+"options."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:231
+msgid "**Android**"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:233
+msgid ""
+"It'll initialize the ``c``, ``cpp`` and ``ar`` variables which are needed to "
+"cross-compile for Android. For instance:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:235
+msgid "``c == $TOOLCHAIN/bin/llvm-ar``"
+msgstr "``c == $TOOLCHAIN/bin/llvm-ar``"
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:236
+msgid "``cpp == $TOOLCHAIN/bin/$TARGET$API-clang``"
+msgstr "``cpp == $TOOLCHAIN/bin/$TARGET$API-clang``"
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:237
+msgid "``ar == $TOOLCHAIN/bin/$TARGET$API-clang++``"
+msgstr "``ar == $TOOLCHAIN/bin/$TARGET$API-clang++``"
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:239
+msgid "Where:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:241
+msgid ""
+"``$TOOLCHAIN``: ``[NDK_PATH]/toolchains/llvm/prebuilt/[OS_BUILD]-x86_64/"
+"bin``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:242
+msgid ""
+"``$TARGET``: target triple, e.g., for ``armv8`` will be ``aarch64-linux-"
+"android``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:243
+msgid "``$API``: Android API version."
+msgstr "``$API``：Android API 版本。"
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:245
+msgid ""
+"Besides that, you'll always be able to change any of these variables before "
+"being applied thanks to the ``MesonToolchain`` class interface. For instance:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:264
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.meson import MesonToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"    options = {\"shared\": [True, False]}\n"
+"    default_options = {\"shared\": False}\n"
+"\n"
+"    def generate(self):\n"
+"        tc = MesonToolchain(self)\n"
+"        tc.cpp = \"/path/to/other/compiler\"\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:266
+msgid "Objective-C arguments"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:268
+msgid ""
+"Since Conan 1.51, it's been introduced some specific Objective-C/Objective-C+"
+"+ arguments: ``objc``, ``objcpp``, ``objc_args``, ``objc_link_args``, "
+"``objcpp_args``, and ``objcpp_link_args``, as public attributes of the "
+"``MesonToolchain`` class, where the variables ``objc`` and ``objcpp`` are "
+"initialized as ``clang`` and ``clang++`` respectively by default."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/meson/mesontoolchain.rst:274
+msgid ""
+"They will be only initialized if the OS used belongs to any of the Apple "
+"ones."
+msgstr ""

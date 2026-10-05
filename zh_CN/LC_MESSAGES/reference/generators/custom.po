@@ -1,0 +1,185 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.36\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/generators/custom.rst:6
+msgid "Custom generator"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:8
+msgid ""
+"Don't see a generator that suit your needs? You can create a custom "
+"generator package and use it in your recipes!"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:10
+msgid ""
+"Basically a generator is a class that extends ``Generator`` and implements "
+"two properties:"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:12
+msgid ""
+"``filename`` (Required): Should return the name of the file that will be "
+"generated"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:13
+msgid ""
+"``content`` (Required): Should return the contents of the file with the "
+"desired format."
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:15
+msgid ""
+"The **name of the generator** itself will be taken literally from the class "
+"name. In the example below, the name will be ``MyGeneratorName``:"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:18
+msgid ""
+"from conans.model import Generator\n"
+"\n"
+"\n"
+"class MyGeneratorName(Generator):\n"
+"\n"
+"    @property\n"
+"    def filename(self):\n"
+"        return \"mygenerator.file\"\n"
+"\n"
+"    @property\n"
+"    def content(self):\n"
+"        return \"whatever contents the generator produces\""
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:33
+msgid ""
+"If you want to create a generator that creates more than one file, you can "
+"leave the ``filename`` property empty and return a dictionary of filenames "
+"and contents in the ``content`` property, like this:"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:36
+msgid "*conanfile.py*"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:36
+msgid ""
+" from conans import ConanFile\n"
+" from conans.model import Generator\n"
+"\n"
+"\n"
+" class MultiGenerator(Generator):\n"
+"\n"
+"     @property\n"
+"     def content(self):\n"
+"         return {\"filename1.txt\": \"contents of file1\",\n"
+"                 \"filename2.txt\": \"contents of file2\"}  # any number of "
+"files\n"
+"\n"
+"     @property\n"
+"     def filename(self):\n"
+"         pass\n"
+"\n"
+" class MyCustomGeneratorPackage(ConanFile):\n"
+"     name = \"multi_generator_package\"\n"
+"     version = \"0.1\"\n"
+"     url = \"https://github.com/...\"\n"
+"     license = \"MIT\""
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:60
+msgid ""
+"This class should be included in a *conanfile.py* that must contain also a "
+"``ConanFile`` class that implements the package itself, with the name of the "
+"package, the version, etc. This class typically has no ``source()``, "
+"``build()``, ``package()``, and even the ``package_info()`` method is "
+"overridden as it doesn't have to define any include paths or library paths. "
+"Then, it will work as a regular package."
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:65
+msgid "Attributes"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:67
+msgid "Ready only attributes available for use in the ``Generator`` class."
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:70
+msgid "conanfile"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:72
+msgid "To get the information from the requirements and the environment:"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:75
+msgid "Variable"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:75
+msgid "Description"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:77
+msgid "self.conanfile.deps_cpp_info"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:77
+msgid ":ref:`deps_cpp_info_attributes_reference`"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:79
+msgid "self.conanfile.deps_env_info"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:79
+msgid ":ref:`deps_env_info_attributes_reference`"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:81
+msgid "self.conanfile.deps_user_info"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:81
+msgid ":ref:`deps_user_info_attributes_reference`"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:83
+msgid "self.conanfile.env"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:83
+msgid ""
+"Dictionary with the applied environment variables declared in the "
+"requirements"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:87
+msgid "output_path"
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:89
+msgid ""
+"Path to the output folder where the files of the generator will be created."
+msgstr ""
+
+#: ../../../reference/generators/custom.rst:93
+msgid "Check :ref:`dyn_generators`."
+msgstr ""

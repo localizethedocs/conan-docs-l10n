@@ -1,0 +1,585 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.35\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../uploading_packages/running_your_server.rst:4
+msgid "Running conan_server"
+msgstr "執行 conan_server"
+
+#: ../../../uploading_packages/running_your_server.rst:6
+msgid ""
+"The *conan_server* is a free and open source server that implements Conan "
+"remote repositories. It is a very simple application, bundled with the "
+"regular Conan client installation. In most cases, it is recommended to use "
+"the free Artifactory Community Edition for C/C++ server, check :ref:"
+"`artifactory_ce` for more information."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:10
+msgid ""
+"Running the simple open source *conan_server* that comes with the Conan "
+"installers (or pip packages) is simple. Just open a terminal and type:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:16
+msgid "$ conan_server"
+msgstr "$ conan_server"
+
+#: ../../../uploading_packages/running_your_server.rst:19
+msgid ""
+"On Windows, you may experience problems with the server if you run it under "
+"bash/msys. It is better to launch it in a regular ``cmd`` window."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:22
+msgid ""
+"This server is mainly used for testing (though it might work fine for small "
+"teams). If you need a more stable, responsive and robust server, you should "
+"run it from source:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:26
+msgid "Running from Source (linux)"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:28
+msgid ""
+"The Conan installer includes a simple executable **conan_server** for a "
+"server quick start. But you can use the **conan server** through the WSGI "
+"application, which means that you can use gunicorn to run the app, for "
+"example."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:33
+msgid ""
+"First, clone the Conan repository from source and install the requirements:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:35
+msgid ""
+"$ git clone https://github.com/conan-io/conan.git\n"
+"$ cd conan\n"
+"$ git checkout master\n"
+"$ pip install -r conans/requirements.txt\n"
+"$ pip install -r conans/requirements_server.txt\n"
+"$ pip install gunicorn"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:45
+msgid ""
+"Run the server application with ``gunicorn``. In the following example, we "
+"run the server on port 9300 with four workers and a timeout of 5 minutes "
+"(300 seconds, for large uploads/downloads, you can also decrease it if you "
+"don't have very large binaries):"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:48
+msgid ""
+"$ gunicorn -b 0.0.0.0:9300 -w 4 -t 300 conans.server.server_launcher:app"
+msgstr ""
+"$ gunicorn -b 0.0.0.0:9300 -w 4 -t 300 conans.server.server_launcher:app"
+
+#: ../../../uploading_packages/running_your_server.rst:55
+msgid ""
+"Please note the timeout of ``-t 300`` seconds, resulting in a 5 minute "
+"parameter. If your transfers are very large or on a slow network, you might "
+"need to increase that value."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:57
+msgid ""
+"You can also bind to an IPv6 address or specify both IPv4 and IPv6 addresses:"
+msgstr "您也可以綁定至 IPv6 位址，或同時指定 IPv4 與 IPv6 位址："
+
+#: ../../../uploading_packages/running_your_server.rst:59
+msgid ""
+"$ gunicorn -b 0.0.0.0:9300 -b [::1]:9300 -w 4 -t 300 conans.server."
+"server_launcher:app"
+msgstr ""
+"$ gunicorn -b 0.0.0.0:9300 -b [::1]:9300 -w 4 -t 300 conans.server."
+"server_launcher:app"
+
+#: ../../../uploading_packages/running_your_server.rst:65
+msgid "Server Configuration"
+msgstr "伺服端組態"
+
+#: ../../../uploading_packages/running_your_server.rst:66
+msgid ""
+"Your server configuration is saved under ``~/.conan_server/server.conf``. "
+"You can change values there, prior to launching the server. Note that the "
+"server is not reloaded when the values are changed. You have to stop and "
+"restart it manually."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:70
+msgid "The server configuration file is by default:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:72
+msgid ""
+"[server]\n"
+"jwt_secret: MnpuzsExftskYGOMgaTYDKfw\n"
+"jwt_expire_minutes: 120\n"
+"\n"
+"ssl_enabled: False\n"
+"port: 9300\n"
+"public_port:\n"
+"host_name: localhost\n"
+"\n"
+"store_adapter: disk\n"
+"authorize_timeout: 1800\n"
+"\n"
+"# Just for disk storage adapter\n"
+"disk_storage_path: ~/.conan_server/data\n"
+"disk_authorize_timeout: 1800\n"
+"\n"
+"updown_secret: NyiSWNWnwumTVpGpoANuyyhR\n"
+"\n"
+"\n"
+"[write_permissions]\n"
+"# \"opencv/2.3.4@lasote/testing\": default_user,default_user2\n"
+"\n"
+"[read_permissions]\n"
+"# opencv/1.2.3@lasote/testing: default_user default_user2\n"
+"# By default all users can read all blocks\n"
+"*/*@*/*: *\n"
+"\n"
+"[users]\n"
+"demo: demo"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:106
+msgid "Server Parameters"
+msgstr "伺服端參數"
+
+#: ../../../uploading_packages/running_your_server.rst:114
+msgid "``port``: Port where **conan_server** will run."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:115
+msgid ""
+"The client server authorization is done with JWT. ``jwt_secret`` is a random "
+"string used to generate authentication tokens. You can change it safely "
+"anytime (in fact it is a good practice). The change will just force users to "
+"log in again. ``jwt_expire_minutes`` is the amount of time that users remain "
+"logged-in within the client without having to introduce their credentials "
+"again."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:121
+msgid ""
+"Other parameters (not recommended from Conan 1.1, but necessary for previous "
+"versions):"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:123
+msgid ""
+"``host_name``: If you set ``host_name``, you must use the machine's IP where "
+"you are running your server (or domain name), something like **host_name: "
+"192.168.1.100**. This IP (or domain name) has to be visible (and resolved) "
+"by the Conan client, so take it into account if your server has multiple "
+"network interfaces."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:128
+msgid ""
+"``public_port``:  Might be needed when running virtualized, Docker or any "
+"other kind of port redirection. File uploads/downloads are served with their "
+"own URLs, generated by the system, so the file storage backend is "
+"independent. Those URLs need the public port they have to communicate from "
+"the outside. If you leave it blank, the ``port`` value is used."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:133
+msgid ""
+"**Example:** Use conan_server in a Docker container that internally runs in "
+"the 9300 port but exposes the 9999 port (where the clients will connect to):"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:136
+msgid "docker run ... -p9300:9999 ... # Check Docker docs for that"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:141
+#: ../../../uploading_packages/running_your_server.rst:182
+#: ../../../uploading_packages/running_your_server.rst:215
+msgid "**server.conf**"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:143
+msgid ""
+"[server]\n"
+"\n"
+"ssl_enabled: False\n"
+"port: 9300\n"
+"public_port: 9999\n"
+"host_name: localhost"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:153
+msgid ""
+"``ssl_enabled`` Conan doesn't handle the SSL traffic by itself, but you can "
+"use a proxy like Nginx to redirect the SSL traffic to your Conan server. If "
+"your Conan clients are connecting with \"https\", set `ssl_enabled` to True. "
+"This way the conan_server will generate the upload/download urls with "
+"\"https\" instead of \"http\"."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:160
+msgid ""
+"**Important**: The Conan client, by default, will validate the server SSL "
+"certificates and won't connect if it's invalid. If you have self signed "
+"certificates you have two options:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:163
+msgid ""
+"Use the :command:`conan remote` command to disable the SSL certificate "
+"checks. E.g., *conan remote add/update myremote https://somedir False*"
+msgstr ""
+"使用 :command:`conan remote` 命令來停用 SSL 證書檢查。例如：*conan remote "
+"add/update myremote https://somedir False*"
+
+#: ../../../uploading_packages/running_your_server.rst:164
+msgid "Append the server *.crt* file contents to *~/.conan/cacert.pem* file."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:166
+msgid ""
+"To learn more, see :ref:`How to manage SSL (TLS) certificates "
+"<use_tls_certificates>`."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:168
+msgid ""
+"Conan has implemented an extensible storage backend based on the abstract "
+"class ``StorageAdapter``. Currently, the server only supports storage on "
+"``disk``. The folder in which the uploaded packages are stored (i.e., the "
+"folder you would want to backup) is defined in the ``disk_storage_path``."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:172
+msgid ""
+"The storage backend might use a different channel, and uploads/downloads are "
+"authorized up to a maximum of ``authorize_timeout`` seconds. The value "
+"should sufficient so that large downloads/uploads are not rejected, but not "
+"too big to prevent hanging up the file transfers. The value "
+"``disk_authorize_timeout`` is not currently used. File transfers are "
+"authorized with their own tokens, generated with the secret "
+"``updown_secret``. This value should be different from the above "
+"``jwt_secret``."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:180
+msgid "Running the Conan Server with SSL using Nginx"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:184
+#: ../../../uploading_packages/running_your_server.rst:217
+msgid ""
+"[server]\n"
+"port: 9300"
+msgstr ""
+"[server]\n"
+"port: 9300"
+
+#: ../../../uploading_packages/running_your_server.rst:190
+#: ../../../uploading_packages/running_your_server.rst:222
+msgid "**nginx conf file**"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:192
+msgid ""
+"server {\n"
+"    listen 443;\n"
+"    server_name myservername.mydomain.com;\n"
+"\n"
+"    location / {\n"
+"      proxy_pass http://0.0.0.0:9300;\n"
+"    }\n"
+"    ssl on;\n"
+"    ssl_certificate /etc/nginx/ssl/server.crt;\n"
+"    ssl_certificate_key /etc/nginx/ssl/server.key;\n"
+"}"
+msgstr ""
+"server {\n"
+"    listen 443;\n"
+"    server_name myservername.mydomain.com;\n"
+"\n"
+"    location / {\n"
+"      proxy_pass http://0.0.0.0:9300;\n"
+"    }\n"
+"    ssl on;\n"
+"    ssl_certificate /etc/nginx/ssl/server.crt;\n"
+"    ssl_certificate_key /etc/nginx/ssl/server.key;\n"
+"}"
+
+#: ../../../uploading_packages/running_your_server.rst:206
+#: ../../../uploading_packages/running_your_server.rst:239
+msgid "**remote configuration in Conan client**"
+msgstr "**Conan 客戶端中的遠端組態**"
+
+#: ../../../uploading_packages/running_your_server.rst:208
+msgid "$ conan remote add myremote https://myservername.mydomain.com"
+msgstr "$ conan remote add myremote https://myservername.mydomain.com"
+
+#: ../../../uploading_packages/running_your_server.rst:213
+msgid "Running the Conan Server with SSL using Nginx in a Subdirectory"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:224
+msgid ""
+"server {\n"
+"\n"
+"       listen 443;\n"
+"       ssl on;\n"
+"       ssl_certificate /usr/local/etc/nginx/ssl/server.crt;\n"
+"       ssl_certificate_key /usr/local/etc/nginx/ssl/server.key;\n"
+"       server_name myservername.mydomain.com;\n"
+"\n"
+"       location /subdir/ {\n"
+"          proxy_pass http://0.0.0.0:9300/;\n"
+"       }\n"
+"  }"
+msgstr ""
+"server {\n"
+"\n"
+"       listen 443;\n"
+"       ssl on;\n"
+"       ssl_certificate /usr/local/etc/nginx/ssl/server.crt;\n"
+"       ssl_certificate_key /usr/local/etc/nginx/ssl/server.key;\n"
+"       server_name myservername.mydomain.com;\n"
+"\n"
+"       location /subdir/ {\n"
+"          proxy_pass http://0.0.0.0:9300/;\n"
+"       }\n"
+"  }"
+
+#: ../../../uploading_packages/running_your_server.rst:241
+msgid "$ conan remote add myremote https://myservername.mydomain.com/subdir/"
+msgstr "$ conan remote add myremote https://myservername.mydomain.com/subdir/"
+
+#: ../../../uploading_packages/running_your_server.rst:246
+msgid "Running Conan Server using Apache"
+msgstr "使用 Apache 執行 Conan 伺服端"
+
+#: ../../../uploading_packages/running_your_server.rst:248
+msgid ""
+"You need to install ``mod_wsgi``. If you want to use Conan installed from "
+"``pip``, the conf file should be similar to the following example:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:250
+#: ../../../uploading_packages/running_your_server.rst:267
+msgid "**Apache conf file** (e.g., /etc/apache2/sites-available/0_conan.conf)"
+msgstr ""
+"**Apache 組態檔**\\ （例如：/etc/apache2/sites-available/0_conan.conf）"
+
+#: ../../../uploading_packages/running_your_server.rst:252
+msgid ""
+"<VirtualHost *:80>\n"
+"    WSGIScriptAlias / /usr/local/lib/python2.7/dist-packages/conans/server/"
+"server_launcher.py\n"
+"    WSGICallableObject app\n"
+"    WSGIPassAuthorization On\n"
+"\n"
+"    <Directory /usr/local/lib/python2.7/dist-packages/conans>\n"
+"        Require all granted\n"
+"    </Directory>\n"
+"</VirtualHost>"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:265
+msgid ""
+"If you want to use Conan checked out from source in, for example in `/srv/"
+"conan`, the conf file should be as follows:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:269
+msgid ""
+"<VirtualHost *:80>\n"
+"    WSGIScriptAlias / /srv/conan/conans/server/server_launcher.py\n"
+"    WSGICallableObject app\n"
+"    WSGIPassAuthorization On\n"
+"\n"
+"    <Directory /srv/conan/conans>\n"
+"        Require all granted\n"
+"    </Directory>\n"
+"</VirtualHost>"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:281
+msgid ""
+"The directive ``WSGIPassAuthorization On`` is needed to pass the HTTP basic "
+"authentication to Conan."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:283
+msgid ""
+"Also take into account that the server config files are located in the home "
+"of the configured Apache user, e.g., var/www/.conan_server, so remember to "
+"use that directory to configure your Conan server."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:287
+msgid "Permissions Parameters"
+msgstr "權限參數"
+
+#: ../../../uploading_packages/running_your_server.rst:289
+msgid ""
+"By default, the server configuration when set to Read can be done anonymous, "
+"but uploading requires you to be  registered users. Users can easily be "
+"registered in the ``[users]`` section, by defining a pair of ``login: "
+"password`` for each one. Plain text passwords are used at the moment, but as "
+"the server is on-premises (behind firewall), you just need to trust your "
+"sysadmin :)"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:294
+msgid ""
+"If you want to restrict read/write access to specific packages, configure "
+"the ``[read_permissions]`` and ``[write_permissions]`` sections. These "
+"sections specify the sequence of patterns and authorized users, in the form:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:298
+msgid ""
+"# use a comma-separated, no-spaces list of users\n"
+"package/version@user/channel: allowed_user1,allowed_user2"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:303
+msgid "E.g.:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:305
+msgid ""
+"*/*@*/*: * # allow all users to all packages\n"
+"PackageA/*@*/*: john,peter # allow john and peter access to any PackageA\n"
+"*/*@project/*: john # Allow john to access any package from the \"project\" "
+"user"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:311
+msgid ""
+"The rules are evaluated in order. If the left side of the pattern matches, "
+"the rule is applied and it will not continue searching for matches."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:315
+msgid "Authentication"
+msgstr "認證"
+
+#: ../../../uploading_packages/running_your_server.rst:317
+msgid ""
+"By default, Conan provides a simple ``user: password`` users list in the "
+"``server.conf`` file."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:319
+msgid ""
+"There is also a plugin mechanism for setting other authentication methods. "
+"The process to install any of them is a simple two-step process:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:322
+msgid ""
+"Copy the authenticator source file into the ``.conan_server/plugins/"
+"authenticator`` folder."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:323
+msgid ""
+"Add ``custom_authenticator: authenticator_name`` to the ``server.conf`` "
+"[server] section."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:325
+msgid ""
+"This is a list of available authenticators, visit their URLs to retrieve "
+"them, but also to report issues and collaborate:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:327
+msgid ""
+"**htpasswd**: Use your server Apache htpasswd file to authenticate users. "
+"Get it: https://github.com/d-schiffner/conan-htpasswd"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:328
+msgid ""
+"**LDAP**: Use your LDAP server to authenticate users. Get it: https://github."
+"com/uilianries/conan-ldap-authentication"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:331
+msgid "Create Your Own Custom Authenticator"
+msgstr "建立您自己的自訂認證器"
+
+#: ../../../uploading_packages/running_your_server.rst:333
+msgid ""
+"If you want to create your own Authenticator, create a Python module in ``~/."
+"conan_server/plugins/authenticator/my_authenticator.py``"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:336
+msgid "**Example:**"
+msgstr "**範例：**"
+
+#: ../../../uploading_packages/running_your_server.rst:338
+msgid ""
+"def get_class():\n"
+"    return MyAuthenticator()\n"
+"\n"
+"\n"
+"class MyAuthenticator(object):\n"
+"    def valid_user(self, username, plain_password):\n"
+"        return username == \"foo\" and plain_password == \"bar\""
+msgstr ""
+"def get_class():\n"
+"    return MyAuthenticator()\n"
+"\n"
+"\n"
+"class MyAuthenticator(object):\n"
+"    def valid_user(self, username, plain_password):\n"
+"        return username == \"foo\" and plain_password == \"bar\""
+
+#: ../../../uploading_packages/running_your_server.rst:348
+msgid "The module has to implement:"
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:350
+msgid ""
+"A factory function ``get_class()`` that returns a class with a "
+"``valid_user()`` method instance."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:351
+msgid ""
+"The class containing the ``valid_user()`` that has to return True if the "
+"user and password are valid or False otherwise."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:353
+msgid ""
+"Got any doubts? Please check out our :ref:`FAQ section <faq>` or |write_us|."
+msgstr ""
+
+#: ../../../uploading_packages/running_your_server.rst:356
+msgid "<a href=\"mailto:info@conan.io\" target=\"_blank\">write us</a>"
+msgstr ""

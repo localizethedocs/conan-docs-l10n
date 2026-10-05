@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.38\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:4
+msgid "VirtualEnv"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:8
+msgid ""
+"This is a **very experimental** feature and it will have breaking changes in "
+"future releases."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:11
+msgid "The ``VirtualEnv`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:13
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:27
+msgid "conanfile.py"
+msgstr "conanfile.py"
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:13
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"VirtualEnv\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:19
+msgid "conanfile.txt"
+msgstr "conanfile.txt"
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:19
+msgid ""
+"[generators]\n"
+"VirtualEnv"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:25
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:27
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.env import VirtualEnv\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    requires = \"zlib/1.2.11\", \"bzip2/1.0.8\"\n"
+"\n"
+"    def generate(self):\n"
+"        ms = VirtualEnv(self)\n"
+"        ms.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:41
+msgid ""
+"When the ``VirtualEnv`` generator is used, calling ``conan install`` will "
+"generate files containing environment variables information:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:44
+msgid ""
+"*conanbuildenv* .bat or .sh scripts, that are automatically loaded if "
+"existing by the ``self.run()`` recipes methods. *conanbuildenv* is the build "
+"time environment information. It is collected from the direct "
+"``build_requires`` in \"build\" context recipes from the ``self."
+"buildenv_info`` definition plus the ``self.runenv_info`` of the transitive "
+"dependencies of those ``build_requires``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:45
+msgid ""
+"*conanrunenv* .bat or .sh scripts, that can be explicitly opted-in in ``self."
+"run()`` recipes methods with ``self.run(..., env=[\"conanrunenv\"])``. "
+"*conanrunenv* is the runtime environment information, anything that is "
+"necessary in the environment to actually run the compiled executables and "
+"applications."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/env/virtualenv.rst:46
+msgid ""
+"In both cases, whenever the runtime environment information is necessary, it "
+"wil also be automatically deduced from the ``self.cpp_info`` definition of "
+"the package, to define ``PATH``, ``LD_LIBRARY_PATH``, ``DYLD_LIBRARY_PATH`` "
+"and ``DYLD_FRAMEWORK_PATH`` environment variables."
+msgstr ""

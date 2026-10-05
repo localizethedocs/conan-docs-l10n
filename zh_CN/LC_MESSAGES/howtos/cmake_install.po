@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/cmake_install.rst:4
+msgid "How to reuse cmake install for package() method"
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:6
+msgid ""
+"It is possible that your project's *CMakeLists.txt* has already defined some "
+"functionality that extracts the artifacts (headers, libraries, binaries) "
+"from the build and source folder to a predetermined place and does the post-"
+"processing (*e.g.*, strips rpaths). For example, one common practice is to "
+"use CMake `install <https://cmake.org/cmake/help/latest/command/install."
+"html>`_ directive to that end."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:10
+msgid ""
+"When using Conan, the install phase of CMake is wrapped in the ``package()`` "
+"method."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:12
+msgid ""
+"The following excerpt shows how to build and package with CMake within "
+"Conan. Mind that you need to configure CMake both in ``build()`` and in "
+"``package()`` since these methods are called independently."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:15
+msgid ""
+"def configure_cmake(self):\n"
+"    cmake = CMake(self)\n"
+"    cmake.definitions[\"SOME_DEFINITION\"] = True\n"
+"    cmake.configure()\n"
+"\n"
+"    return cmake\n"
+"\n"
+"def build(self):\n"
+"    cmake = self.configure_cmake()\n"
+"    cmake.build()\n"
+"\n"
+"def package(self):\n"
+"    cmake = self.configure_cmake()\n"
+"    cmake.install()\n"
+"\n"
+"def package_info(self):\n"
+"    self.cpp_info.libs = [\"libname\"]"
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:36
+msgid ""
+"The ``package_info()`` method specifies the list of the necessary libraries, "
+"defines and flags for different build configurations for the consumers of "
+"the package. This is necessary as there is no possible way to extract this "
+"information from the CMake install automatically."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:43
+msgid ""
+"Please mind that if you use ``cmake.install()`` in ``package()``, it will be "
+"called twice if you are using :ref:`no_copy_source` attribute in your "
+"conanfile."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:46
+msgid ""
+"CMake usually uses ``install`` directive to package both the artifacts and "
+"source code (*i.e.* header files) into the package folder. Hence calling "
+"``package()`` twice, while having no side effects, is wasting a couple of "
+"cycles, since source code is already copied in the first invocation of "
+"``package()`` and the install step will be done twice. Files will be simply "
+"overwritten, but install steps are sometimes time-expensive and this doubles "
+"the \"packaging\" time."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:51
+msgid ""
+"This might be unintuitive if you only use CMake, but mind that Conan needs "
+"to cater to many different build systems and scenarios (*e.g.* where you "
+"don't control the CMake configuration directly) and hence this workflow is "
+"indispensable."
+msgstr ""

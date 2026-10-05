@@ -1,0 +1,161 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.39\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:5
+msgid "conan.tools.gnu.pkgconfigdeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:9
+msgid "These tools are **experimental** and subject to breaking changes."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:13
+msgid "PkgConfigDeps"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:15
+msgid "Available since: `1.38.0 <https://github.com/conan-io/conan/releases>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:18
+msgid ""
+"The ``PkgConfigDeps`` is the dependencies generator for pkg-config. "
+"Generates pkg-config files named *<PKG-NAME>.pc* (where ``<PKG-NAME`` is the "
+"name declared by dependencies in ``cpp_info.name`` or in ``cpp_info."
+"names[\"pkg_config\"]`` if specified), containing a valid pkg-config file "
+"syntax. Indeed, it can also be defined using ``set_property`` and the "
+"property ``pkg_config_name`` (available since Conan 1.36), for instance:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:23
+msgid ""
+"self.cpp_info.components[\"mycomponent\"].set_property(\"pkg_config_name\", "
+"\"mypkg-config-name\")"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:29
+msgid ""
+"In Conan 2.0 that will be the default way of setting those properties and "
+"also passing custom properties to generators. Check the :ref:`cpp_info "
+"attributes reference <cpp_info_attributes_reference>` for more information."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:33
+msgid ""
+"The ``prefix`` variable is automatically adjusted to the ``package_folder``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:36
+msgid "The ``PkgConfigDeps`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:38
+msgid "conanfile.py"
+msgstr "conanfile.py"
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:38
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"PkgConfigDeps\""
+msgstr ""
+"class Pkg(ConanFile):\n"
+"    generators = \"PkgConfigDeps\""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:44
+msgid "conanfile.txt"
+msgstr "conanfile.txt"
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:44
+msgid ""
+"[generators]\n"
+"PkgConfigDeps"
+msgstr ""
+"[generators]\n"
+"PkgConfigDeps"
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:50
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:64
+msgid ""
+"from conans import ConanFile\n"
+"from conan.tools.gnu import PkgConfigDeps\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"zlib/1.2.11\"\n"
+"\n"
+"    def generate(self):\n"
+"        pc = PkgConfigDeps(self)\n"
+"        pc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:65
+msgid ""
+"The ``PkgConfigDeps`` will generate the ``*.pc`` file after a ``conan "
+"install`` command:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:67
+msgid ""
+"$ conan install .\n"
+"# Check the [PC_FILE_NAME].pc created in your current folder"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:72
+msgid ""
+"Now, running this command using the previous ``conanfile.py``, you can check "
+"the ``zlib.pc`` file created into your current folder:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:74
+msgid ""
+"prefix=/Users/YOUR_USER/.conan/data/zlib/1.2.11/_/_/"
+"package/647afeb69d3b0a2d3d316e80b24d38c714cc6900\n"
+"libdir=${prefix}/lib\n"
+"includedir=${prefix}/include\n"
+"\n"
+"Name: zlib\n"
+"Description: Conan package: zlib\n"
+"Version: 1.2.11\n"
+"Libs: -L\"${libdir}\" -lz  -Wl,-rpath,\"${libdir}\" -F Frameworks\n"
+"Cflags: -I\"${includedir}\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:88
+msgid "Components"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:90
+msgid ""
+"If a recipe uses :ref:`components<package_information_components>`, the "
+"files generated will be *<[PKG-NAME]-[COMP-NAME]>.pc* with their "
+"corresponding flags and require relations."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/gnu/pkgconfigdeps.rst:93
+msgid ""
+"Additionally, a *<PKG-NAME>.pc* is generated to maintain compatibility for "
+"consumers with recipes that start supporting components. This *<PKG-NAME>."
+"pc* file will declare all the components of the package as requires while "
+"the rest of the fields will be empty, relying on the propagation of flags "
+"coming from the components *<[PKG-NAME]-[COMP-NAME]>.pc* files."
+msgstr ""

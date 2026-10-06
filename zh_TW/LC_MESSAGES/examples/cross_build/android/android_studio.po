@@ -1,0 +1,515 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.18\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/cross_build/android/android_studio.rst:6
+msgid "Integrating Conan in Android Studio"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:8
+msgid ""
+"At the :ref:`Cross building to Android with the "
+"NDK<examples_cross_build_android_ndk>` we learned how to build a package for "
+"Android using the NDK. In this example we are going to learn how to do it "
+"with the Android Studio and how to use the libraries in a real Android "
+"application."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:14
+msgid "Creating a new project"
+msgstr "建立新專案"
+
+#: ../../../examples/cross_build/android/android_studio.rst:16
+msgid ""
+"First of all, download and install the `Android Studio IDE <https://"
+"developer.android.com/studio>`_."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:18
+msgid ""
+"Then create a ``new project`` selecting ``Native C++`` from the templates."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:20
+msgid ""
+"In the next wizard window, select a name for your application, for example "
+"`MyConanApplication`, you can leave the \"Minimum SDK\" with the suggested "
+"value (21 in our case), but remember the value as we are using it later in "
+"the Conan profile at ``os.api_level```"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:24
+msgid ""
+"In the \"Build configuration language\" you can choose between ``Groovy DSL "
+"(build.gradle)`` or ``Kotlin DSL (build.gradle.kts)`` in order to use "
+"`conanInstall` task bellow."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:27
+msgid ""
+"Select a \"C++ Standard\" in the next window, again, remember the choice as "
+"later we should use the same in the profile at ``compiler.cppstd``."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:30
+msgid ""
+"In the project generated with the wizard we have a folder ``cpp`` with a "
+"``native-lib.cpp``. We are going to modify that file to use ``zlib`` and "
+"print a message with the used ``zlib`` version. Copy only the highlighted "
+"lines, it is important to keep the function name."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:35
+msgid "native-lib.cpp"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:35
+msgid ""
+" #include <jni.h>\n"
+" #include <string>\n"
+" #include \"zlib.h\"\n"
+"\n"
+" extern \"C\" JNIEXPORT jstring JNICALL\n"
+" Java_com_example_myconanapp_MainActivity_stringFromJNI(\n"
+"         JNIEnv* env,\n"
+"         jobject /* this */) {\n"
+"     std::string hello = \"Hello from C++, zlib version: \";\n"
+"     hello.append(zlibVersion());\n"
+"     return env->NewStringUTF(hello.c_str());\n"
+" }"
+msgstr ""
+" #include <jni.h>\n"
+" #include <string>\n"
+" #include \"zlib.h\"\n"
+"\n"
+" extern \"C\" JNIEXPORT jstring JNICALL\n"
+" Java_com_example_myconanapp_MainActivity_stringFromJNI(\n"
+"         JNIEnv* env,\n"
+"         jobject /* this */) {\n"
+"     std::string hello = \"Hello from C++, zlib version: \";\n"
+"     hello.append(zlibVersion());\n"
+"     return env->NewStringUTF(hello.c_str());\n"
+" }"
+
+#: ../../../examples/cross_build/android/android_studio.rst:53
+msgid ""
+"Now we are going to learn how to introduce a requirement to the ``zlib`` "
+"library and how to prepare our project."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:56
+msgid "Introducing dependencies with Conan"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:59
+#: ../../../examples/cross_build/android/android_studio.rst:64
+msgid "conanfile.txt"
+msgstr "conanfile.txt"
+
+#: ../../../examples/cross_build/android/android_studio.rst:61
+msgid ""
+"We need to provide the ``zlib`` package with Conan. Create a file "
+"``conanfile.txt`` in the ``cpp`` folder:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:64
+#: ../../../examples/cross_build/android/android_studio.rst:333
+msgid ""
+"[requires]\n"
+"zlib/1.2.12\n"
+"\n"
+"[generators]\n"
+"CMakeToolchain\n"
+"CMakeDeps\n"
+"\n"
+"[layout]\n"
+"cmake_layout"
+msgstr ""
+"[requires]\n"
+"zlib/1.2.12\n"
+"\n"
+"[generators]\n"
+"CMakeToolchain\n"
+"CMakeDeps\n"
+"\n"
+"[layout]\n"
+"cmake_layout"
+
+#: ../../../examples/cross_build/android/android_studio.rst:79
+#: ../../../examples/cross_build/android/android_studio.rst:88
+#: ../../../examples/cross_build/android/android_studio.rst:246
+msgid "build.gradle"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:81
+msgid ""
+"We are going to automate calling ``conan install`` before building the "
+"Android project, so the requires are prepared, open the ``build.gradle`` "
+"file in the ``My_Conan_App.app`` (Find it in the `Gradle Scripts` section of "
+"the Android project view). Paste the ``task conanInstall`` contents after "
+"the ``plugins`` and before the ``android`` elements:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:88
+msgid ""
+"plugins {\n"
+" ...\n"
+"}\n"
+"\n"
+"task conanInstall {\n"
+"    def conanExecutable = \"conan\" // define the path to your conan "
+"installation\n"
+"    def buildDir = new File(\"app/build\")\n"
+"    buildDir.mkdirs()\n"
+"    [\"Debug\", \"Release\"].each { String build_type ->\n"
+"        [\"armv7\", \"armv8\", \"x86\", \"x86_64\"].each { String arch ->\n"
+"            def cmd = conanExecutable + \" install \" +\n"
+"                      \"../src/main/cpp --profile android -s build_type=\"+ "
+"build_type +\" -s arch=\" + arch +\n"
+"                      \" --build missing -c tools.cmake.cmake_layout:"
+"build_folder_vars=['settings.arch']\"\n"
+"            print(\">> ${cmd} \\n\")\n"
+"\n"
+"            def sout = new StringBuilder(), serr = new StringBuilder()\n"
+"            def proc = cmd.execute(null, buildDir)\n"
+"            proc.consumeProcessOutput(sout, serr)\n"
+"            proc.waitFor()\n"
+"            println \"$sout $serr\"\n"
+"            if (proc.exitValue() != 0) {\n"
+"                throw new Exception(\"out> $sout err> $serr\" + "
+"\"\\nCommand: ${cmd}\")\n"
+"            }\n"
+"        }\n"
+"    }\n"
+"}\n"
+"\n"
+"android {\n"
+"    compileSdk 32\n"
+"\n"
+"    defaultConfig {\n"
+"\n"
+"..."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:127
+msgid "build.gradle.kts"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:127
+msgid ""
+"plugins {\n"
+" ...\n"
+"}\n"
+"\n"
+"tasks.register(\"conanInstall\") {\n"
+"    val conanExecutable = \"conan\" // define the path to your conan "
+"installation\n"
+"    val buildDir = file(\"app/build\")\n"
+"    buildDir.mkdirs()\n"
+"\n"
+"    val buildTypes = listOf(\"Debug\", \"Release\")\n"
+"    val architectures = listOf(\"armv7\", \"armv8\", \"x86\", \"x86_64\")\n"
+"\n"
+"    doLast {\n"
+"        buildTypes.forEach { buildType ->\n"
+"            architectures.forEach { arch ->\n"
+"                val cmd = \"$conanExecutable install ../../src/main/cpp --"
+"profile android-studio \" +\n"
+"                          \"-s build_type=$buildType -s arch=$arch --build "
+"missing \" +\n"
+"                          \"-c tools.cmake.cmake_layout:"
+"build_folder_vars=['settings.arch']\"\n"
+"\n"
+"                println(\">> $cmd\")\n"
+"\n"
+"                val proc = ProcessBuilder(cmd.split(\" \"))\n"
+"                    .directory(buildDir)\n"
+"                    .start()\n"
+"\n"
+"                val result = proc.inputStream.bufferedReader().readText()\n"
+"                val errors = proc.errorStream.bufferedReader().readText()\n"
+"\n"
+"                proc.waitFor()\n"
+"\n"
+"                if (proc.exitValue() != 0) {\n"
+"                    throw Exception(\"Execution failed! Output: $result "
+"Error: $errors\")\n"
+"                }\n"
+"                println(result)\n"
+"                if (errors.isNotBlank()) {\n"
+"                    println(\"Errors: $errors\")\n"
+"                }\n"
+"            }\n"
+"        }\n"
+"    }\n"
+"}\n"
+"\n"
+"tasks.named(\"preBuild\").configure {\n"
+"    dependsOn(\"conanInstall\")\n"
+"}\n"
+"\n"
+"android {\n"
+"   compileSdk 32\n"
+"\n"
+"   defaultConfig {\n"
+"\n"
+"..."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:185
+msgid ""
+"The ``conanInstall`` task is calling :command:`conan install` for Debug/"
+"Release and for each architecture we want to build, you can adjust these "
+"values to match your requirements."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:188
+msgid "If we focus on the ``conan install`` task we can see:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:190
+msgid ""
+"We are passing a ``--profile android``, so we need to create the profile. Go "
+"to the ``profiles`` folder in the conan config home directory (check it "
+"running :command:`conan config home`) and create a file named ``android`` "
+"with the following contents:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:196
+msgid ""
+"include(default)\n"
+"\n"
+"[settings]\n"
+"os=Android\n"
+"os.api_level=21\n"
+"compiler=clang\n"
+"compiler.version=12\n"
+"compiler.libcxx=c++_static\n"
+"compiler.cppstd=14\n"
+"\n"
+"[conf]\n"
+"tools.android:ndk_path=/opt/homebrew/share/android-ndk"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:211
+msgid ""
+"include(default)\n"
+"\n"
+"[settings]\n"
+"os=Android\n"
+"os.api_level=21\n"
+"compiler=clang\n"
+"compiler.version=12\n"
+"compiler.libcxx=c++_static\n"
+"compiler.cppstd=14\n"
+"\n"
+"[tool_requires]\n"
+"*: android-ndk/r26d"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:227
+msgid "You might need to modify:"
+msgstr "您可能需要修改："
+
+#: ../../../examples/cross_build/android/android_studio.rst:229
+msgid ""
+"``tools.android:ndk_path`` conf: The location of the NDK provided by Android "
+"Studio. You should be able to see the path to the NDK if you open the ``cpp/"
+"includes`` folder in your IDE."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:231
+msgid ""
+"``compiler.version``: Check the NDK documentation or find a ``bin`` folder "
+"containing the compiler executables like ``x86_64-linux-android31-clang``. "
+"In a Macos installation it is found in the NDK path + ``toolchains/llvm/"
+"prebuilt/darwin-x86_64/bin``. Run ``./x86_64-linux-android31-clang --"
+"version`` to check the running ``clang`` version and adjust the profile."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:234
+msgid ""
+"``compiler.libcxx``: The supported values are ``c++_static`` and ``c+"
+"+_shared``."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:235
+msgid ""
+"``compiler.cppstd``: The C++ standard version, this should be the value you "
+"selected in the Wizard."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:236
+msgid "``os.api_level``: Use the same value you selected in the Wizard."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:238
+msgid ""
+"We are passing ``-c tools.cmake.cmake_layout:build_folder_vars=['settings."
+"arch']``, thanks to that, Conan will create a different folder for the "
+"specified ``settings.arch`` so we can have all the configurations available "
+"at the same time."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:243
+msgid ""
+"To make Conan work we need to pass CMake a custom toolchain. We can do it "
+"introducing a single line in the same file, in the ``android/defaultConfig/"
+"externalNativeBuild/cmake`` element:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:246
+msgid ""
+"android {\n"
+"    compileSdk 32\n"
+"\n"
+"    defaultConfig {\n"
+"        applicationId \"com.example.myconanapp\"\n"
+"        minSdk 21\n"
+"        targetSdk 21\n"
+"        versionCode 1\n"
+"        versionName \"1.0\"\n"
+"\n"
+"        testInstrumentationRunner \"androidx.test.runner."
+"AndroidJUnitRunner\"\n"
+"        externalNativeBuild {\n"
+"            cmake {\n"
+"                cppFlags '-v'\n"
+"                arguments(\"-DCMAKE_TOOLCHAIN_FILE=conan_android_toolchain."
+"cmake\")\n"
+"            }\n"
+"        }"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:270
+#: ../../../examples/cross_build/android/android_studio.rst:276
+msgid "conan_android_toolchain.cmake"
+msgstr "conan_android_toolchain.cmake"
+
+#: ../../../examples/cross_build/android/android_studio.rst:272
+msgid ""
+"Create a file called ``conan_android_toolchain.cmake`` in the ``cpp`` "
+"folder, that file will be responsible of including the right toolchain "
+"depending on the ``ANDROID_ABI`` variable that indicates the build "
+"configuration that the IDE is currently running:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:276
+msgid ""
+" # During multiple stages of CMake configuration, the toolchain file is "
+"processed and command-line\n"
+" # variables may not be always available. The script exits prematurely if "
+"essential variables are absent.\n"
+"\n"
+" if ( NOT ANDROID_ABI OR NOT CMAKE_BUILD_TYPE )\n"
+"     return()\n"
+" endif()\n"
+" if(${ANDROID_ABI} STREQUAL \"x86_64\")\n"
+"     include(\"${CMAKE_CURRENT_LIST_DIR}/build/x86_64/${CMAKE_BUILD_TYPE}/"
+"generators/conan_toolchain.cmake\")\n"
+" elseif(${ANDROID_ABI} STREQUAL \"x86\")\n"
+"     include(\"${CMAKE_CURRENT_LIST_DIR}/build/x86/${CMAKE_BUILD_TYPE}/"
+"generators/conan_toolchain.cmake\")\n"
+" elseif(${ANDROID_ABI} STREQUAL \"arm64-v8a\")\n"
+"     include(\"${CMAKE_CURRENT_LIST_DIR}/build/armv8/${CMAKE_BUILD_TYPE}/"
+"generators/conan_toolchain.cmake\")\n"
+" elseif(${ANDROID_ABI} STREQUAL \"armeabi-v7a\")\n"
+"     include(\"${CMAKE_CURRENT_LIST_DIR}/build/armv7/${CMAKE_BUILD_TYPE}/"
+"generators/conan_toolchain.cmake\")\n"
+" else()\n"
+"     message(FATAL \"Not supported configuration\")\n"
+" endif()"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:300
+#: ../../../examples/cross_build/android/android_studio.rst:304
+msgid "CMakeLists.txt"
+msgstr "CMakeLists.txt"
+
+#: ../../../examples/cross_build/android/android_studio.rst:302
+msgid ""
+"Finally, we need to modify the ``CMakeLists.txt`` to link with the ``zlib`` "
+"library:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:304
+msgid ""
+"cmake_minimum_required(VERSION 3.18.1)\n"
+"project(\"myconanapp\")\n"
+"add_library(myconanapp SHARED native-lib.cpp)\n"
+"\n"
+"find_library(log-lib log)\n"
+"\n"
+"find_package(ZLIB CONFIG)\n"
+"\n"
+"target_link_libraries(myconanapp ${log-lib} ZLIB::ZLIB)"
+msgstr ""
+"cmake_minimum_required(VERSION 3.18.1)\n"
+"project(\"myconanapp\")\n"
+"add_library(myconanapp SHARED native-lib.cpp)\n"
+"\n"
+"find_library(log-lib log)\n"
+"\n"
+"find_package(ZLIB CONFIG)\n"
+"\n"
+"target_link_libraries(myconanapp ${log-lib} ZLIB::ZLIB)"
+
+#: ../../../examples/cross_build/android/android_studio.rst:320
+msgid "Building the application"
+msgstr "建置應用程式"
+
+#: ../../../examples/cross_build/android/android_studio.rst:322
+msgid ""
+"If we build our project we can see that `conan install` is called multiple "
+"times building the different configurations of ``zlib``."
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:325
+msgid ""
+"Then if we run the application in a Virtual Device or in a real device "
+"pairing it with the QR code we can see:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:327
+msgid "|zlib1.2.11|"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:353
+msgid "Android application showing the zlib 1.2.11"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:329
+msgid ""
+"Once we have our project configured, it is very easy to change our "
+"dependencies and keep developing the application, for example, we can edit "
+"the ``conanfile.txt`` file and change the ``zlib`` to the version ``1.12.2``:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:346
+msgid ""
+"If we click build and then run the application, we will see that the zlib "
+"dependency has been updated:"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:348
+msgid "|zlib1.2.12|"
+msgstr ""
+
+#: ../../../examples/cross_build/android/android_studio.rst:356
+msgid "Android application showing the zlib 1.2.12"
+msgstr ""

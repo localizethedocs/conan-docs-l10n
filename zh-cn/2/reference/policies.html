@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Policies &mdash; conan 2.32.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=2da93098" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/conan.css?v=7d9e9f1e" />
+
+  
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/reference/policies.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=0d09b857"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Recipe tools" href="tools.html" />
+    <link rel="prev" title="Compiler flags mapper plugin" href="extensions/compiler_flags_plugin.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/conan-docs-logo-2.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci_tutorial/tutorial.html">CI 教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devops/devops.html">Devops guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="binary_model.html">Binary model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conanfile.html">conanfile.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conan_server.html">Conan Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config_files.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions.html">Extensions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html">Recipe tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runners.html">Runners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workspace.html">Workspace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../incubating.html">Incubating features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Conan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../reference.html">Reference</a></li>
+      <li class="breadcrumb-item active">Policies</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/develop2/reference/policies.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="policies">
+<span id="reference-policies"></span><h1>Policies<a class="headerlink" href="#policies" title="Link to this heading"></a></h1>
+<p>Policies are a set of rules to enforce certain behaviors from Conan.
+Policies are handled by the <code class="docutils literal notranslate"><span class="pre">core:policies</span></code> configuration in your <code class="docutils literal notranslate"><span class="pre">global.conf</span></code>,
+which is a list of strings, where each string is the name of a policy to be enabled.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">global.conf</span></code></span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">core</span><span class="p">:</span><span class="n">policies</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"required_conan_version&gt;=2.28"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<section id="list-of-current-policies">
+<h2>List of current policies<a class="headerlink" href="#list-of-current-policies" title="Link to this heading"></a></h2>
+<section id="required-conan-version-version">
+<h3>required_conan_version&gt;=version<a class="headerlink" href="#required-conan-version-version" title="Link to this heading"></a></h3>
+<p><em>Introduced in Conan 2.28</em></p>
+<p>This policy is unique, as the version specified in the policy is used to enable different behaviors based on the version.
+This allows to opt-in to bugfixes that can be considered breaking changes, without having to wait for a new Conan release to include them by default.</p>
+<p>The same behaviours are also enabled recipe-wise when the <code class="docutils literal notranslate"><span class="pre">required_conan_version</span></code> attribute is defined in the recipe,
+such that the policy can be enabled for specific recipes, without having to enable it globally.
+If both the policy and the recipe attribute are defined, the behavior will be enabled if either of them matches the required version range.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>If using <code class="docutils literal notranslate"><span class="pre">required_conan_version&gt;=2.28</span></code> or later, the following bugfixes will be enabled:</dt><dd><ul>
+<li><dl class="simple">
+<dt>Bugfix <a class="reference external" href="https://github.com/conan-io/conan/pull/19705">https://github.com/conan-io/conan/pull/19705</a>:</dt><dd><ul>
+<li><p>The computation of <code class="docutils literal notranslate"><span class="pre">package_id</span></code> for static libraries and non-embed mode was taking into account transitive (non-direct) dependencies,
+even if they were not being embedded and not contributing headers at all.
+See the docs for the <a class="reference internal" href="binary_model/dependencies.html#reference-binary-model-dependencies"><span class="std std-ref">effect of dependencies in the package_id</span></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Bugfix <a class="reference external" href="https://github.com/conan-io/conan/pull/19849">https://github.com/conan-io/conan/pull/19849</a>:</dt><dd><ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">VirtualBuildEnv</span></code> generator used to include the <code class="docutils literal notranslate"><span class="pre">bindir</span></code> paths of tool requires
+regardless of their <code class="docutils literal notranslate"><span class="pre">run</span></code> trait in the generated environment. With the bugfix enabled,
+only tool requires with the <code class="docutils literal notranslate"><span class="pre">run</span></code> trait set to <code class="docutils literal notranslate"><span class="pre">True</span></code> will have their <code class="docutils literal notranslate"><span class="pre">bindir</span></code> paths
+propagated.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Behaviour change <a class="reference external" href="https://github.com/conan-io/conan/pull/19286">https://github.com/conan-io/conan/pull/19286</a>:</dt><dd><ul>
+<li><p>For the new <code class="docutils literal notranslate"><span class="pre">consistent</span></code> trait, its default value currently keeps the old graph expansion behaviour,
+which had some inconsistencies regarding the handling of private dependencies.
+With the new behaviour enabled, the graph expansion is more consistent and private dependencies are handled in a more intuitive way,
+but some graphs can be expanded differently. For a detailed explanation of the changes,
+see <a class="reference internal" href="conanfile/methods/requirements.html#reference-conanfile-methods-requirements-consistent"><span class="std std-ref">the trait documentation section</span></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>If using <code class="docutils literal notranslate"><span class="pre">required_conan_version&gt;=2.30</span></code> or later, the following bugfixes will be enabled:</dt><dd><ul>
+<li><dl class="simple">
+<dt>Bugfix <a class="reference external" href="https://github.com/conan-io/conan/pull/20073">https://github.com/conan-io/conan/pull/20073</a>:</dt><dd><ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">transitive_headers</span></code> trait propagation of some diamond structures was not working correctly
+and unexpected headers were being propagated to consumers.
+With the bugfix enabled, the propagation of transitive headers is fixed and works as expected in all
+cases, but the consumer package_id can change if it was previously affected by this bug.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>This policy is independent of the <code class="docutils literal notranslate"><span class="pre">core:required_conan_version</span></code> conf,
+which is exclusively used to define the minimum required Conan version.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="extensions/compiler_flags_plugin.html" class="btn btn-neutral float-left" title="Compiler flags mapper plugin" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tools.html" class="btn btn-neutral float-right" title="Recipe tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2026, JFrog.
+      <span class="lastupdated">最后更新于 10月 06, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

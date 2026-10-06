@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en-US" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using PkgConfig.fill_cpp_info with PKG_CONFIG_PATH from a profile &mdash; conan 2.32.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=2da93098" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/conan.css?v=7d9e9f1e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/examples/tools/gnu/pkg_config_sysroot.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=bc5efa54"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Capturing Git scm information" href="../scm/git/capture_scm/git_capture_scm.html" />
+    <link rel="prev" title="GNU" href="gnu.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/conan-docs-logo-2.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ci_tutorial/tutorial.html">CI Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devops/devops.html">Devops guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../conanfile.html">ConanFile methods examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions.html">Conan extensions examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../tools.html">Conan recipe tools examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../cmake/cmake.html">CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../files/files.html">File interaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../meson/meson.html">Meson</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../google/bazel.html">Bazel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autotools/autotools.html">Autotools</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="gnu.html">GNU</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Using PkgConfig.fill_cpp_info with PKG_CONFIG_PATH from a profile</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../scm/git/capture_scm/git_capture_scm.html">Capturing Git scm information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microsoft/msbuild.html">MSBuild</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system/system.html">System Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cross_build.html">Cross-building examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph.html">Graph examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev_flow.html">Developer tools and flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../commands.html">Conan commands examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runners.html">Conan runners examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../security.html">Conan security examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../incubating.html">Incubating features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../whatsnew.html">What’s new in Conan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../examples.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="../../tools.html">Conan recipe tools examples</a></li>
+          <li class="breadcrumb-item"><a href="gnu.html">GNU</a></li>
+      <li class="breadcrumb-item active">Using PkgConfig.fill_cpp_info with PKG_CONFIG_PATH from a profile</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/develop2/examples/tools/gnu/pkg_config_sysroot.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-pkgconfig-fill-cpp-info-with-pkg-config-path-from-a-profile">
+<span id="examples-tools-gnu-pkg-config-sysroot"></span><h1>Using PkgConfig.fill_cpp_info with PKG_CONFIG_PATH from a profile<a class="headerlink" href="#using-pkgconfig-fill-cpp-info-with-pkg-config-path-from-a-profile" title="Link to this heading"></a></h1>
+<p>The <a class="reference internal" href="../../../reference/tools/gnu/pkgconfig.html#conan-tools-gnu-pkgconfig"><span class="std std-ref">PkgConfig</span></a> helper can read a <code class="docutils literal notranslate"><span class="pre">.pc</span></code> file and use
+its contents to fill a <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> object with <code class="docutils literal notranslate"><span class="pre">fill_cpp_info()</span></code>. When
+<code class="docutils literal notranslate"><span class="pre">pkg_config_path</span></code> is not passed explicitly, <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> locates the <code class="docutils literal notranslate"><span class="pre">.pc</span></code> file
+via the <code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_PATH</span></code> environment variable, which can be defined in the profile
+<code class="docutils literal notranslate"><span class="pre">[buildenv]</span></code> section.</p>
+<p>A common scenario is cross-compilation with an external toolchain: the toolchain provides
+a sysroot that already ships <code class="docutils literal notranslate"><span class="pre">.pc</span></code> files describing its libraries (<code class="docutils literal notranslate"><span class="pre">gl.pc</span></code>, <code class="docutils literal notranslate"><span class="pre">EGL.pc</span></code>,
+<code class="docutils literal notranslate"><span class="pre">zlib.pc</span></code>, …), and the host profile points <code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_PATH</span></code> at the sysroot’s
+<code class="docutils literal notranslate"><span class="pre">pkgconfig</span></code> folder. A wrapper recipe can then read those <code class="docutils literal notranslate"><span class="pre">.pc</span></code> files at <code class="docutils literal notranslate"><span class="pre">package()</span></code>
+time and expose the information to consumers without hard-coding include and library paths.</p>
+<p>The challenge comes when users try to define <code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_PATH</span></code> in the <code class="docutils literal notranslate"><span class="pre">[buildenv]</span></code> section
+of a profile, because that is not available in the <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method of the recipes,
+as the package information cannot rely on the “build environment”, as the build environment
+is only available when the package is being built, but not necessarily when the package is
+being consumed.</p>
+<p>The example below uses a fabricated <code class="docutils literal notranslate"><span class="pre">mylibastral.pc</span></code> next to the profile to keep it
+self-contained, but the mechanism is exactly the same as pointing to a real sysroot folder,
+to illustrate how this could be implemented if necessary.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This strategy is valid only for “system” packages, that is, recipes that act as a wrapper
+around a system or sysroot dependency (typical in cross-compilation with an external
+toolchain). Regular Conan packages that build and package their own artifacts should
+not use this.</p>
+</div>
+<p>The <strong>profile</strong> below adds a folder containing <code class="docutils literal notranslate"><span class="pre">.pc</span></code> files to <code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_PATH</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">profile_dir</span></code> Jinja variable resolves to the folder that contains the profile itself,
+so a <code class="docutils literal notranslate"><span class="pre">mypcs/</span></code> folder next to the profile can be used directly:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><em>myprofile</em></span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[settings]</span>
+<span class="na">os</span><span class="o">=</span><span class="s">Linux</span>
+<span class="na">arch</span><span class="o">=</span><span class="s">armv8</span>
+
+<span class="k">[buildenv]</span>
+<span class="na">PKG_CONFIG_PATH+</span><span class="o">=</span><span class="s">(path){{ profile_dir }}/mypcs</span>
+</pre></div>
+</div>
+</div>
+<p>In a real cross-compilation setup, that path would typically point to the sysroot
+folder shipped by the toolchain, for example <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">sysroot</span> <span class="pre">}}/usr/lib/pkgconfig</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.pc</span></code> file located in the <code class="docutils literal notranslate"><span class="pre">mypcs</span></code> folder besides the profile describes the library
+(include folders, library folders, libs, defines, link flags, …):</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><em>mypcs/mylibastral.pc</em></span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: mylibastral
+Description: Interface library for Astral data flows
+Version: 6.6.6
+Libs: -L${libdir}/libastral -lastral -lm -Wl,--whole-archive
+Cflags: -I${includedir}/libastral -D_USE_LIBASTRAL
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> recipe uses <code class="docutils literal notranslate"><span class="pre">PkgConfig</span></code> to read <code class="docutils literal notranslate"><span class="pre">mylibastral.pc</span></code> and populate a <code class="docutils literal notranslate"><span class="pre">CppInfo</span></code>
+object. It does it at <code class="docutils literal notranslate"><span class="pre">package()</span></code> time, when the package is being built (the policies are added so the
+package is automatically build when necessary in the current machine, and binaries are never uploaded, as
+the information from that .pc file will only be valid in the current machine).
+Notice that <code class="docutils literal notranslate"><span class="pre">pkg_config_path</span></code> is not passed: it is picked up from
+<code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_PATH</span></code> defined in the profile. The resulting <code class="docutils literal notranslate"><span class="pre">CppInfo</span></code> is serialized to
+the package folder in <code class="docutils literal notranslate"><span class="pre">package()</span></code>, and reloaded in <code class="docutils literal notranslate"><span class="pre">package_info()</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>conanfile.py</em></span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.gnu</span><span class="w"> </span><span class="kn">import</span> <span class="n">PkgConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">CppInfo</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">"mypkg"</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">"0.1"</span>
+    <span class="n">build_policy</span> <span class="o">=</span> <span class="s2">"missing"</span>
+    <span class="n">upload_policy</span> <span class="o">=</span> <span class="s2">"skip"</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># This method executes at package build time, it has</span>
+        <span class="c1"># available the build environment "buildenv"</span>
+        <span class="n">pkg_config</span> <span class="o">=</span> <span class="n">PkgConfig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"mylibastral"</span><span class="p">)</span>
+        <span class="n">cpp_info</span> <span class="o">=</span> <span class="n">CppInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">pkg_config</span><span class="o">.</span><span class="n">fill_cpp_info</span><span class="p">(</span><span class="n">cpp_info</span><span class="p">,</span> <span class="n">is_system</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">system_libs</span><span class="o">=</span><span class="p">[</span><span class="s2">"m"</span><span class="p">])</span>
+        <span class="n">cpp_info</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">"cpp_info.json"</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># This method executes at package consumption time, it will</span>
+        <span class="c1"># NOT have available the build environment, but it can load a file</span>
+        <span class="c1"># generated at build/package time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span> <span class="o">=</span> <span class="n">CppInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"cpp_info.json"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s now create and consume the package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>create<span class="w"> </span>.<span class="w"> </span>-pr<span class="o">=</span>myprofile
+$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>--requires<span class="o">=</span>mypkg/0.1<span class="w"> </span>-pr<span class="o">=</span>myprofile<span class="w"> </span>-g<span class="w"> </span>CMakeDeps
+</pre></div>
+</div>
+<p>The generated <code class="docutils literal notranslate"><span class="pre">mypkg-none-armv8-data.cmake</span></code> will contain the include/lib folders,
+libs, defines and link flags read from <code class="docutils literal notranslate"><span class="pre">mylibastral.pc</span></code>, something like:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">mypkg_INCLUDE_DIRS_NONE</span><span class="w"> </span><span class="s2">"/usr/local/include/libastral"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">mypkg_LIB_DIRS_NONE</span><span class="w"> </span><span class="s2">"/usr/local/lib/libastral"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">mypkg_LIBS_NONE</span><span class="w"> </span><span class="s">astral</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">mypkg_SYSTEM_LIBS_NONE</span><span class="w"> </span><span class="s">m</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">mypkg_DEFINITIONS_NONE</span><span class="w"> </span><span class="s2">"-D_USE_LIBASTRAL"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">mypkg_COMPILE_DEFINITIONS_NONE</span><span class="w"> </span><span class="s2">"_USE_LIBASTRAL"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">mypkg_SHARED_LINK_FLAGS_NONE</span><span class="w"> </span><span class="s2">"-Wl,--whole-archive"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gnu.html" class="btn btn-neutral float-left" title="GNU" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../scm/git/capture_scm/git_capture_scm.html" class="btn btn-neutral float-right" title="Capturing Git scm information" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2026, JFrog.
+      <span class="lastupdated">Last updated on Oct 06, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

@@ -92,7 +92,7 @@ msgstr ""
 
 #: ../../../reference/workspace.rst:50
 msgid "**Best practices**"
-msgstr ""
+msgstr "**最佳實踐**"
 
 #: ../../../reference/workspace.rst:52
 msgid ""
@@ -210,7 +210,7 @@ msgstr ""
 
 #: ../../../reference/workspace.rst:134
 msgid "conanws.py super-build ``ConanFile``"
-msgstr ""
+msgstr "conanws.py super-build ``ConanFile``"
 
 #: ../../../reference/workspace.rst:136
 msgid ""
@@ -278,7 +278,7 @@ msgstr ""
 
 #: ../../../reference/workspace.rst:185
 msgid "conanws.py super-build workspace packages"
-msgstr ""
+msgstr "conanws.py super-build workspace packages"
 
 #: ../../../reference/workspace.rst:187
 msgid ""
@@ -292,7 +292,7 @@ msgstr ""
 
 #: ../../../reference/workspace.rst:192
 msgid "pkga/conanfile.py"
-msgstr ""
+msgstr "pkga/conanfile.py"
 
 #: ../../../reference/workspace.rst:192
 msgid ""
@@ -310,10 +310,23 @@ msgid ""
 "      self.configure_toolchain(tc)\n"
 "      tc.generate()"
 msgstr ""
+"from conan import ConanFile\n"
+"\n"
+"class PkgA(ConanFile):\n"
+"   name = \"pkga\"\n"
+"   version = \"1.2.3\"\n"
+"\n"
+"   def configure_toolchain(self, tc):\n"
+"      tc.preprocessor_definitions[\"PKGA_SOME_DEFINITION\"] = self.version\n"
+"\n"
+"   def generate(self):\n"
+"      tc = CMakeToolchain(self)\n"
+"      self.configure_toolchain(tc)\n"
+"      tc.generate()"
 
 #: ../../../reference/workspace.rst:210
 msgid "pkgb/conanfile.py"
-msgstr ""
+msgstr "pkgb/conanfile.py"
 
 #: ../../../reference/workspace.rst:210
 msgid ""
@@ -330,6 +343,18 @@ msgid ""
 "      self.configure_toolchain(tc)\n"
 "      tc.generate()"
 msgstr ""
+"from conan import ConanFile\n"
+"class PkgB(ConanFile):\n"
+"   name = \"pkgb\"\n"
+"   version = \"2.3.4\"\n"
+"\n"
+"   def configure_toolchain(self, tc):\n"
+"      tc.preprocessor_definitions[\"SOME_PKGB_DEFINE\"] = self.version\n"
+"\n"
+"   def generate(self):\n"
+"      tc = CMakeToolchain(self)\n"
+"      self.configure_toolchain(tc)\n"
+"      tc.generate()"
 
 #: ../../../reference/workspace.rst:227
 msgid ""
@@ -349,6 +374,21 @@ msgid ""
 "   def root_conanfile(self):\n"
 "      return MyWs"
 msgstr ""
+"from conan import ConanFile\n"
+"from conan import Workspace\n"
+"from conan.tools.cmake import CMakeToolchain\n"
+"\n"
+"class MyWs(ConanFile):\n"
+"   settings = \"arch\", \"build_type\"\n"
+"   def generate(self):\n"
+"      tc = CMakeToolchain(self)\n"
+"      for ref, dep in self.workspace_packages.items():\n"
+"         dep.configure_toolchain(tc)\n"
+"      tc.generate()\n"
+"\n"
+"class Ws(Workspace):\n"
+"   def root_conanfile(self):\n"
+"      return MyWs"
 
 #: ../../../reference/workspace.rst:247
 msgid ""
@@ -454,7 +494,7 @@ msgstr ""
 
 #: ../../../reference/workspace.rst:301
 msgid "**packages options**"
-msgstr ""
+msgstr "**軟體包選項**"
 
 #: ../../../reference/workspace.rst:303
 msgid ""
@@ -501,6 +541,9 @@ msgid ""
 "> conanws.py base project Conanfile: Generating with opt dep/0.1:"
 "shared=True!!!!!!!!"
 msgstr ""
+"$ conan workspace super-install -of=build -o \"*:shared=True\"\n"
+"> conanws.py base project Conanfile: Generating with opt dep/0.1:"
+"shared=True!!!!!!!!"
 
 #: ../../../reference/workspace.rst:333
 msgid ""

@@ -1,0 +1,162 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.20\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 08:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:5
+msgid "Using CMakeToolchain with different generators: Ninja example"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:7
+msgid ""
+"This guide demonstrates how to use :ref:"
+"`CMakeToolchain<conan_tools_cmaketoolchain>` with predefined generators like "
+"`Ninja <https://ninja-build.org/>`_ and how to configure it to use different "
+"generators."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:11
+msgid ""
+"We assume you have already installed Ninja in your system. In case you do "
+"not have Ninja installed in your system, you can use the `Ninja Conan "
+"package <https://conan.io/center/recipes/ninja>`_ in your profile (default "
+"or custom) by adding :ref:`tool-requires "
+"<reference_config_files_profiles_tool_requires>`."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:16
+msgid "Understanding CMake generators"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:18
+msgid ""
+"The `CMake <https://cmake.org/>`_ client offers a variety of `generators "
+"<https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html>`_ to "
+"create build system files. If you want to use a generator other than the "
+"default chosen by CMake, you can configure ``tools.cmake.cmaketoolchain:"
+"generator``."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:23
+msgid ""
+"Please, note that `CMake <https://cmake.org/>`_ client is not the same as "
+"the Conan :ref:`CMake <conan_tools_cmake_helper>` helper."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:25
+msgid "To see which generators are available on your system, run:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:27
+msgid "$ cmake --help"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:31
+msgid ""
+"You can set this :ref:`configuration in your profile "
+"<reference_config_files_profiles_conf>`, directly in the command line, or "
+"even in your :ref:`global "
+"configuration<reference_config_files_global_conf_patterns>`."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:35
+msgid "Using the Ninja generator by default in a profile"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:37
+msgid ""
+"First, let's create a profile file name ``my_custom_profile``, so we can set "
+"the Ninja generator as the default for all Conan packages built with this "
+"profile."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:40
+msgid "$ conan profile detect --name=my_custom_profile"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:44
+msgid ""
+"To set the Ninja generator as the default in ``my_custom_profile`` profile, "
+"add the entry ``[conf]`` with the generator value in the file:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:47
+msgid ""
+"[settings]\n"
+"os=Linux\n"
+"arch=x86_64\n"
+"compiler=gcc\n"
+"compiler.version=13\n"
+"compiler.libcxx=libstdc++11\n"
+"compiler.cppstd=20\n"
+"build_type=Release\n"
+"\n"
+"[conf]\n"
+"tools.cmake.cmaketoolchain:generator=Ninja"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:61
+msgid ""
+"Now, we will create a basic project based on the ``cmake_exe`` template as "
+"an example of a C++ project:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:63
+msgid "$ conan new cmake_exe -d name=foo -d version=0.1.0"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:67
+msgid "Then, we can build your project using the profile we just created:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:69
+msgid "$ conan create . -pr=my_custom_profile"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:73
+msgid ""
+"This configuration will be passed to the ``conan_toolchain.cmake`` file, "
+"generated by ``CMakeToolchain``, then the Ninja generator will be used. You "
+"should see the following output snippet indicating the Ninja generator is "
+"being used:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:76
+msgid ""
+"Profile host:\n"
+"[settings]\n"
+"...\n"
+"[conf]\n"
+"tools.cmake.cmaketoolchain:generator=Ninja\n"
+"\n"
+"...\n"
+"foo/0.1.0: Calling build()\n"
+"foo/0.1.0: Running CMake.configure()\n"
+"foo/0.1.0: RUN: cmake -G \"Ninja\" ..."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:89
+msgid ""
+"Note that same configuration can be passed to the default profile, and used "
+"for all Conan packages built with that profile."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_different_toolchain_generator.rst:91
+msgid ""
+"In case passing the generator configuration by command line, the same will "
+"override the profile configuration."
+msgstr ""

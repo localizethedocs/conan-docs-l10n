@@ -1,0 +1,249 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.21\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-09 17:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:4
+msgid "CMakeToolchain: Using xxx-config.cmake files inside packages"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:6
+msgid ""
+"Conan relies in the general case in the ``package_info()`` abstraction to "
+"allow packages built with any build system to be usable from any other "
+"package built with any other build system. In the CMake case, Conan relies "
+"on the ``CMakeDeps`` generator to generate ``xxxx-config.cmake`` files for "
+"every dependency, even if those dependencies didn't generate one or aren't "
+"built with CMake at all."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:11
+msgid ""
+"ConanCenter users this abstraction, not packaging the ``xxx-config.cmake`` "
+"files, and using the information in ``package_info()``. This is very "
+"important to provide as build-system agnostic as possible packages and be "
+"fair with different build systems, vendors and users. For example, there are "
+"many Conan users happily using native MSBuild (VS) projects without any "
+"CMake at all. If ConanCenter packages were only built using the in-package "
+"``config.cmake`` files, this wouldn't be possible."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:16
+msgid ""
+"But the fact that ConanCenter does that, doesn't mean that this is not "
+"possible or mandatory. It is perfectly possible to use the in-packages ``xxx-"
+"config.cmake`` files, dropping the usage of ``CMakeDeps`` generator."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:20
+msgid ""
+"You can find the sources to recreate this example in the `examples2 "
+"repository <https://github.com/conan-io/examples2>`_ in GitHub:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:23
+msgid ""
+"$ git clone https://github.com/conan-io/examples2.git\n"
+"$ cd examples2/examples/tools/cmake/pkg_config_files"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:29
+msgid "If we have a look to the ``conanfile.py``:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:31
+msgid ""
+"class pkgRecipe(ConanFile):\n"
+"    name = \"pkg\"\n"
+"    version = \"0.1\"\n"
+"    ...\n"
+"\n"
+"    def package_info(self):\n"
+"        # No information provided, only the in-package .cmake is used here\n"
+"        # Other build systems or CMake via CMakeDeps will fail\n"
+"        self.cpp_info.builddirs = [\"pkg/cmake\"]\n"
+"        self.cpp_info.set_property(\"cmake_find_mode\", \"none\")"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:45
+msgid ""
+"This is a very typical recipe, the main difference is the ``package_info()`` "
+"method. Three important things to notice:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:47
+msgid ""
+"It doesn't define fields like ``self.cpp_info.libs = [\"mypkg\"]``. Conan "
+"will not be propagating this information to the consumer, the only place "
+"this information will be is inside the in-package ``xxx-config.cmake`` file"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:49
+msgid ""
+"Just in case there are some users still instantiating ``CMakeDeps``, it is "
+"disabling the client side generation of the ``xxx-config.cmake`` file with "
+"``set_property(\"cmake_find_mode\", \"none\")``"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:51
+msgid ""
+"It is defining that it will contain the build scripts (like the ``xxx-config."
+"cmake`` package) inside that folder, to be located by consumers."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:54
+msgid ""
+"So the responsibility of defining the package details has been transferred "
+"to the ``CMakeLists.txt`` that contains:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:56
+msgid ""
+"add_library(mylib src/pkg.cpp)  # Use a different name than the package, to "
+"make sure\n"
+"\n"
+"set_target_properties(mylib PROPERTIES PUBLIC_HEADER \"include/pkg.h\")\n"
+"target_include_directories(mylib PUBLIC\n"
+"        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>\n"
+"        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>\n"
+"    )\n"
+"\n"
+"# Use non default mypkgConfig name\n"
+"install(TARGETS mylib EXPORT mypkgConfig)\n"
+"export(TARGETS mylib\n"
+"    NAMESPACE mypkg::  # to simulate a different name and see it works\n"
+"    FILE \"${CMAKE_CURRENT_BINARY_DIR}/mypkgConfig.cmake\"\n"
+")\n"
+"install(EXPORT mypkgConfig\n"
+"    DESTINATION \"${CMAKE_INSTALL_PREFIX}/pkg/cmake\"\n"
+"    NAMESPACE mypkg::\n"
+")"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:77
+msgid "With that information, when ``conan create`` is executed:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:79
+msgid "The ``build()`` method will build the package"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:80
+msgid ""
+"The ``package()`` method will call ``cmake install``, which will create the "
+"``mypkgConfig.cmake`` file"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:81
+msgid ""
+"It will be created in the package folder ``pkg/cmake/mypkgConfig.cmake`` file"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:82
+msgid ""
+"It will contain enough information for the headers, and it will create a "
+"``mypkg::mylib`` target."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:84
+msgid ""
+"Note that the details of the config filename, the namespace and the target "
+"are also not known by Conan, so this is also something that the consumer "
+"build scripts should know."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:88
+msgid ""
+"This is enough to have a package with an internal ``mypkgConfig.cmake`` file "
+"that can be used by consumers. In this example code, the consumer is just "
+"the ``test_package/conanfile.py``, but exactly the same wouldn apply to any "
+"arbitrary consumer."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:92
+msgid ""
+"The consumer ``conanfile.py`` doesn't need to use ``CMakeDeps`` at all, only "
+"``generators = \"CMakeToolchain\"``. Note that the ``CMakeToolchain`` "
+"generator is still necessary, because the ``mypkgConfig.cmake`` needs to be "
+"found inside the Conan cache. The ``CMakeToolchain`` generated "
+"``conan_toolchain.cmake`` file contains these paths defined."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:97
+msgid "The consumer ``CMakeLists.txt`` would be standard:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:99
+msgid ""
+"find_package(mypkg CONFIG REQUIRED)\n"
+"\n"
+"add_executable(example src/example.cpp)\n"
+"target_link_libraries(example mypkg::mylib)"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:107
+msgid "You can verify it works with:"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:109
+msgid ""
+"$ conan create .\n"
+"\n"
+"======== Testing the package: Executing test ========\n"
+"pkg/0.1 (test package): Running test()\n"
+"pkg/0.1 (test package): RUN: Release\\example\n"
+"pkg/0.1: Hello World Release!\n"
+"pkg/0.1: _M_X64 defined\n"
+"pkg/0.1: MSVC runtime: MultiThreadedDLL\n"
+"pkg/0.1: _MSC_VER1939\n"
+"pkg/0.1: _MSVC_LANG201402\n"
+"pkg/0.1: __cplusplus199711\n"
+"pkg/0.1 test_package"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:126
+msgid "Important considerations"
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:128
+msgid ""
+"The presented approach has one limitation, it doesn't work for multi-"
+"configuration IDEs. Implementing this approach won't allow developers to "
+"directly switch from IDEs like Visual Studio from Release to Debug and vice "
+"versa, and it will require a ``conan install`` to change. It is not an issue "
+"at all for single-config setups, but for VS developers it can be a bit "
+"inconvenient. The team is working on the VS plugin that might help to "
+"mitigate this. The reason is a CMake limitation, ``find_package()`` can only "
+"find one configuration, and with ``CMakeDeps`` being dropped here, there is "
+"nothing that Conan can do to avoid this limitation."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:135
+msgid ""
+"It is important to know that it is also the package author and the package "
+"``CMakeLists.txt`` responsibility to correctly manage transitivity to other "
+"dependencies, and this is not trivial in some cases. There are risks that if "
+"not done correctly the in-package ``xxx-config.cmake`` file can locate its "
+"transitive dependencies elsewhere, like in the system, but not in the "
+"transitive Conan package dependencies."
+msgstr ""
+
+#: ../../../examples/tools/cmake/cmake_toolchain/use_package_config_cmake.rst:140
+msgid ""
+"Finally, recall that these packages won't be usable by other build systems "
+"rather than CMake."
+msgstr ""

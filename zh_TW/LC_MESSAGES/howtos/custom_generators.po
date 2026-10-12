@@ -1,0 +1,403 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.65\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/custom_generators.rst:4
+msgid "How to create and share a custom generator with generator packages"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:8
+#: ../../../howtos/custom_generators.rst:241
+msgid ""
+"This is a **deprecated** feature. Please refer to the :ref:`Migration "
+"Guidelines<conan2_migration_guide>` to find the feature that replaced this "
+"one."
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:11
+msgid ""
+"There are several built-in generators, like ``cmake``, ``visual_studio``, "
+"``xcode``... But what if your build system is not included or the existing "
+"built-in ones doesn't satisfy your needs? This **how to** will show you how "
+"to create a generator for Premake_ build system."
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:17
+msgid ""
+"Check the reference of the :ref:`custom_generator` section to know the "
+"syntax and attributes available."
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:20
+msgid "Creating a Premake generator"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:22
+msgid "Create a folder with a new *conanfile.py* with the following contents:"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:24
+msgid "$ mkdir conan-premake && cd conan-premake"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:28
+msgid "*conanfile.py*"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:28
+msgid ""
+" from conans.model import Generator\n"
+" from conans import ConanFile\n"
+"\n"
+"\n"
+" class PremakeDeps(object):\n"
+"     def __init__(self, deps_cpp_info):\n"
+"         self.include_paths = \",\\n\".join('\"%s\"' % p.replace(\"\\\\\", "
+"\"/\")\n"
+"                                         for p in deps_cpp_info."
+"include_paths)\n"
+"         self.lib_paths = \",\\n\".join('\"%s\"' % p.replace(\"\\\\\", \"/"
+"\")\n"
+"                                     for p in deps_cpp_info.lib_paths)\n"
+"         self.bin_paths = \",\\n\".join('\"%s\"' % p.replace(\"\\\\\", \"/"
+"\")\n"
+"                                     for p in deps_cpp_info.bin_paths)\n"
+"         self.libs = \", \".join('\"%s\"' % p for p in deps_cpp_info.libs)\n"
+"         self.defines = \", \".join('\"%s\"' % p for p in deps_cpp_info."
+"defines)\n"
+"         self.cppflags = \", \".join('\"%s\"' % p for p in deps_cpp_info."
+"cppflags)\n"
+"         self.cflags = \", \".join('\"%s\"' % p for p in deps_cpp_info."
+"cflags)\n"
+"         self.sharedlinkflags = \", \".join('\"%s\"' % p for p in "
+"deps_cpp_info.sharedlinkflags)\n"
+"         self.exelinkflags = \", \".join('\"%s\"' % p for p in deps_cpp_info."
+"exelinkflags)\n"
+"\n"
+"         self.rootpath = \"%s\" % deps_cpp_info.rootpath.replace(\"\\\\\", "
+"\"/\")\n"
+"\n"
+"\n"
+" class premake(Generator):\n"
+"\n"
+"     @property\n"
+"     def filename(self):\n"
+"         return \"conanpremake.lua\"\n"
+"\n"
+"     @property\n"
+"     def content(self):\n"
+"         deps = PremakeDeps(self.deps_build_info)\n"
+"\n"
+"         template = ('conan_includedirs{dep} = {{{deps.include_paths}}}\\n'\n"
+"                     'conan_libdirs{dep} = {{{deps.lib_paths}}}\\n'\n"
+"                     'conan_bindirs{dep} = {{{deps.bin_paths}}}\\n'\n"
+"                     'conan_libs{dep} = {{{deps.libs}}}\\n'\n"
+"                     'conan_cppdefines{dep} = {{{deps.defines}}}\\n'\n"
+"                     'conan_cppflags{dep} = {{{deps.cppflags}}}\\n'\n"
+"                     'conan_cflags{dep} = {{{deps.cflags}}}\\n'\n"
+"                     'conan_sharedlinkflags{dep} = {{{deps."
+"sharedlinkflags}}}\\n'\n"
+"                     'conan_exelinkflags{dep} = {{{deps."
+"exelinkflags}}}\\n')\n"
+"\n"
+"         sections = [\"#!lua\"]\n"
+"         all_flags = template.format(dep=\"\", deps=deps)\n"
+"         sections.append(all_flags)\n"
+"         template_deps = template + 'conan_rootpath{dep} = \"{deps."
+"rootpath}\"\\n'\n"
+"\n"
+"         for dep_name, dep_cpp_info in self.deps_build_info.dependencies:\n"
+"             deps = PremakeDeps(dep_cpp_info)\n"
+"             dep_name = dep_name.replace(\"-\", \"_\")\n"
+"             dep_flags = template_deps.format(dep=\"_\" + dep_name, "
+"deps=deps)\n"
+"             sections.append(dep_flags)\n"
+"\n"
+"         return \"\\n\".join(sections)\n"
+"\n"
+"\n"
+" class MyPremakeGeneratorPackage(ConanFile):\n"
+"     name = \"premakegen\"\n"
+"     version = \"0.1\"\n"
+"     url = \"https://github.com/memsharded/conan-premake\"\n"
+"     license = \"MIT\""
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:93
+msgid ""
+"This is a full working example. Note the ``PremakeDeps`` class as a helper. "
+"The generator is creating Premake information for each individual library "
+"separately, then also an aggregated information for all dependencies. This "
+"``PremakeDeps`` wraps a single item of such information."
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:97
+msgid ""
+"Note the **name of the package** will be **premakegen/0.1@<user>/<channel>** "
+"as that is the name given to it, while the generator name is **premake** "
+"(the name of the class that inherits from ``Generator``). You can give the "
+"package any name you want, even the same as the generator's name if desired."
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:101
+msgid ""
+"You ``export`` the package recipe to the local cache, so it can be used by "
+"other projects as usual:"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:103
+msgid "$ conan export . myuser/testing"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:108
+msgid "Using the generator"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:110
+msgid ""
+"Let's create a test project that uses this generator. We will use a simple "
+"application that will use a \"Hello World\" library package as a requirement."
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:113
+msgid "First, let's create the \"Hello World\" library package:"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:115
+msgid ""
+"$ mkdir conan-hello && cd conan-hello\n"
+"$ conan new hello/0.1\n"
+"$ conan create . myuser/testing"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:121
+msgid ""
+"Now, let's create a folder for the application that will use Premake as "
+"build system:"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:123
+msgid ""
+"$ cd ..\n"
+"$ mkdir premake-project && cd premake-project"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:128
+msgid ""
+"Put the following files inside. Note the ``premakegen@0.1@myuser/testing`` "
+"package reference in your *conanfile.txt*."
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:130
+msgid "*conanfile.txt*"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:130
+msgid ""
+" [requires]\n"
+" hello/0.1@myuser/testing\n"
+" premakegen@0.1@myuser/testing\n"
+"\n"
+" [generators]\n"
+" premake"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:140
+msgid "*main.cpp*"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:140
+msgid ""
+" #include \"hello.h\"\n"
+"\n"
+" int main (void) {\n"
+"     hello();\n"
+" }"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:149
+msgid "*premake4.lua*"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:149
+msgid ""
+" -- premake4.lua\n"
+"\n"
+" require 'conanpremake'\n"
+"\n"
+" -- A solution contains projects, and defines the available configurations "
+"solution \"MyApplication\"\n"
+"\n"
+" configurations { \"Debug\", \"Release\" }\n"
+" includedirs { conan_includedirs }\n"
+" libdirs { conan_libdirs }\n"
+" links { conan_libs }\n"
+"\n"
+" -- A project defines one build target\n"
+"\n"
+" project \"MyApplication\"\n"
+"     kind \"ConsoleApp\"\n"
+"     language \"C++\"\n"
+"     files { \"**.h\", \"**.cpp\" }\n"
+"\n"
+"     configuration \"Debug\"\n"
+"         defines { \"DEBUG\" }\n"
+"         flags { \"Symbols\" }\n"
+"\n"
+"     configuration \"Release\"\n"
+"         defines { \"NDEBUG\" }\n"
+"         flags { \"Optimize\" }"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:178
+msgid "Let's install the requirements:"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:180
+msgid ""
+"$ conan install . -s compiler=gcc -s compiler.version=4.9 -s compiler."
+"libcxx=libstdc++ --build"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:184
+msgid ""
+"This generates the *premake4.lua* file with the requirements information for "
+"building."
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:186
+msgid "Now we are ready to build the project:"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:188
+msgid ""
+"$ premake4 gmake\n"
+"$ make (or mingw32-make if in windows-mingw)\n"
+"$ ./MyApplication\n"
+"Hello World Release!"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:195
+msgid "Now everything works, so you might want to share your generator:"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:197
+msgid "$ conan upload premakegen/0.1@myuser/testing"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:203
+msgid ""
+"This is a regular Conan package, so you could create a *test_package* folder "
+"with a *conanfile.py* to test the generator as done in the example above "
+"(invoke the Premake build in the ``build()`` method)."
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:207
+msgid "Using template files for custom generators"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:209
+msgid ""
+"If your generator has a lot of common, non-parameterized text, you might "
+"want to use files that contain the template. It is possible to do this as "
+"long as the template file is exported in the recipe. The following example "
+"uses a simple text file, but you could use other templating formats:"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:213
+msgid ""
+"import os\n"
+"from conans import ConanFile, load\n"
+"from conans.model import Generator\n"
+"\n"
+"\n"
+"class MyCustomGenerator(Generator):\n"
+"\n"
+"    @property\n"
+"    def filename(self):\n"
+"        return \"customfile.gen\"\n"
+"\n"
+"    @property\n"
+"    def content(self):\n"
+"        template = load(os.path.join(os.path.dirname(__file__), \"mytemplate."
+"txt\"))\n"
+"        return template % \"Hello\"\n"
+"\n"
+"class MyCustomGeneratorPackage(ConanFile):\n"
+"    name = \"custom_generator\"\n"
+"    version = \"0.1\"\n"
+"    exports = \"mytemplate.txt\""
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:237
+msgid "Storing generators in the Conan local cache"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:244
+msgid ""
+"In addition to distributing them using Conan packages, custom generators can "
+"be stored in the generators folder in the Conan local cache (by default ``~/."
+"conan/generators``)."
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:247
+msgid ""
+"Generators stored in the local cache can be used in the same ways as the :"
+"ref:`built-in generators<generators_reference>`, i.e. they can be referenced "
+"on the command line with :command:`conan install` when using the :command:`--"
+"generator` option, and do not require installing a package to use. Instead, "
+"these generators can be distributed using :command:`conan config install`."
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:252
+msgid ""
+"*A custom generator which saves all environment variables defined in a "
+"package to a json file*"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:252
+msgid ""
+"import json\n"
+"from conans.model import Generator\n"
+"\n"
+"\n"
+"# The generator name will be the literal class name (not the filename)\n"
+"class custom_generator(Generator):\n"
+"    @property\n"
+"    def filename(self):\n"
+"        return \"custom_generator_output.json\"\n"
+"\n"
+"    @property\n"
+"    def content(self):\n"
+"        return json.dumps(self.deps_env_info.vars)"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:269
+msgid "*Using the custom generator at install time*"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:269
+msgid "$ conan install <path_or_reference> --generator custom_generator"
+msgstr ""
+
+#: ../../../howtos/custom_generators.rst:276
+msgid ""
+"Generators loaded from the local cache do not need to be accompanied by a "
+"recipe class. Additionally, more than one generator can be loaded from the "
+"same python module when loaded from the local cache."
+msgstr ""

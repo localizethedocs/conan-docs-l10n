@@ -1,0 +1,500 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.41\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../extending/python_requires.rst:4
+msgid "Python requires"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:8
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:13
+msgid ""
+"This syntax supersedes the :ref:`legacy "
+"python_requires()<python_requires_legacy>` syntax. The most important "
+"changes are:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:16
+msgid ""
+"These new python_requires affect the consumers ``package_id``. So different "
+"binaries can be managed, and CI systems can re-build affected packages "
+"according to package ID modes and versioning policies."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:19
+msgid ""
+"The syntax defines a *class attribute* instead of a module function call, so "
+"recipes are cleaner and more aligned with other types of requirements."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:21
+msgid ""
+"The new python_requires will play better with lockfiles and deterministic "
+"dependency graphs."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:22
+msgid ""
+"They are able to extend base classes more naturally without conflicts of "
+"ConanFile classes."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:27
+msgid "Introduction"
+msgstr "介紹"
+
+#: ../../../extending/python_requires.rst:29
+msgid ""
+"The ``python_requires`` feature is a very convenient way to share files and "
+"code between different recipes. A python requires is similar to any other "
+"recipe, it is the way it is required from the consumer what makes the "
+"difference."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:33
+msgid "A very simple recipe that we want to reuse could be:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:35
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"myvar = 123\n"
+"\n"
+"def myfunct():\n"
+"    return 234\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    pass"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:47
+msgid ""
+"And then we will make it available to other packages with ``conan export``. "
+"Note that we are not calling ``conan create``, because this recipe doesn't "
+"have binaries. It is just the python code that we want to reuse."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:51
+#: ../../../extending/python_requires.rst:119
+msgid "$ conan export . pyreq/0.1@user/channel"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:56
+msgid ""
+"We can reuse the above recipe functionality declaring the dependency in the "
+"``python_requires`` attribute and we can access its members using ``self."
+"python_requires[\"<name>\"].module``:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:59
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    python_requires = \"pyreq/0.1@user/channel\"\n"
+"\n"
+"    def build(self):\n"
+"        v = self.python_requires[\"pyreq\"].module.myvar  # v will be 123\n"
+"        f = self.python_requires[\"pyreq\"].module.myfunct()  # f will be "
+"234\n"
+"        self.output.info(\"%s, %s\" % (v, f))"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:71
+msgid ""
+"$ conan create . pkg/0.1@user/channel\n"
+"...\n"
+"pkg/0.1@user/channel: 123, 234"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:78
+msgid ""
+"It is also possible to require more than one python-require, and use the "
+"package name to address the functionality:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:81
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    python_requires = \"pyreq/0.1@user/channel\", \"other/1.2@user/"
+"channel\"\n"
+"\n"
+"    def build(self):\n"
+"        v = self.python_requires[\"pyreq\"].module.myvar  # v will be 123\n"
+"        f = self.python_requires[\"other\"].module.otherfunc(\"some-args\")"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:94
+msgid "Extending base classes"
+msgstr "擴充基底類別"
+
+#: ../../../extending/python_requires.rst:96
+msgid ""
+"A common use case would be to declare a base class with methods we want to "
+"reuse in several recipes via inheritance. We'd write this base class in a "
+"python-requires package:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:99
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class MyBase(object):\n"
+"    def source(self):\n"
+"        self.output.info(\"My cool source!\")\n"
+"    def build(self):\n"
+"        self.output.info(\"My cool build!\")\n"
+"    def package(self):\n"
+"        self.output.info(\"My cool package!\")\n"
+"    def package_info(self):\n"
+"        self.output.info(\"My cool package_info!\")\n"
+"\n"
+"class PyReq(ConanFile):\n"
+"    name = \"pyreq\"\n"
+"    version = \"0.1\""
+msgstr ""
+
+#: ../../../extending/python_requires.rst:117
+msgid "And make it available for reuse with:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:124
+msgid "Note that there are two classes in the recipe file:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:126
+msgid ""
+"``MyBase`` is the one intended for inheritance and doesn't extend "
+"``ConanFile``."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:127
+msgid ""
+"``PyReq`` is the one that defines the current package being exported, it is "
+"the recipe for the reference ``pyreq/0.1@user/channel``."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:131
+msgid ""
+"Once the package with the base class we want to reuse is available we can "
+"use it in other recipes to inherit the functionality from that base class. "
+"We'd need to declare the ``python_requires`` as we did before and we'd need "
+"to tell Conan the base classes to use in the attribute "
+"``python_requires_extend``. Here our recipe will inherit from the class "
+"``MyBase``:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:138
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    python_requires = \"pyreq/0.1@user/channel\"\n"
+"    python_requires_extend = \"pyreq.MyBase\""
+msgstr ""
+
+#: ../../../extending/python_requires.rst:147
+msgid ""
+"The resulting inheritance is equivalent to declare our ``Pkg`` class as "
+"``class Pkg(pyreq.MyBase, ConanFile)``. So creating the package we can see "
+"how the methods from the base class are reused:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:150
+msgid ""
+"$ conan create . pkg/0.1@user/channel\n"
+"...\n"
+"pkg/0.1@user/channel: My cool source!\n"
+"pkg/0.1@user/channel: My cool build!\n"
+"pkg/0.1@user/channel: My cool package!\n"
+"pkg/0.1@user/channel: My cool package_info!\n"
+"..."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:161
+msgid ""
+"If there is extra logic needed to extend from a base class, like composing "
+"the base class settings with the current recipe, the ``init()`` method can "
+"be used for it:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:164
+msgid ""
+"class PkgTest(ConanFile):\n"
+"    license = \"MIT\"\n"
+"    settings = \"arch\", # tuple!\n"
+"    python_requires = \"base/1.1@user/testing\"\n"
+"    python_requires_extend = \"base.MyConanfileBase\"\n"
+"\n"
+"    def init(self):\n"
+"        base = self.python_requires[\"base\"].module.MyConanfileBase\n"
+"        self.settings = base.settings + self.settings  # Note, adding 2 "
+"tuples = tuple\n"
+"        self.license = base.license  # License is overwritten"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:178
+msgid ""
+"For more information about the ``init()`` method visit :ref:`method_init`"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:182
+msgid "Limitations"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:184
+msgid "There are a few limitations that should be taken into account:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:186
+msgid ""
+"``name`` and ``version`` fields shouldn't be inherited. ``set_name()`` and "
+"``set_version()`` might be used."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:188
+msgid ""
+"``short_paths`` cannot be inherited from a ``python_requires``. Make sure to "
+"specify it directly in the recipes that need the paths shortened in Windows."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:190
+msgid ""
+"``exports``, ``exports_sources`` shouldn't be inherited from a base class, "
+"but explictly defined directly in the recipes. A reusable alternative might "
+"be using the ``SCM`` component."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:192
+msgid ""
+"``build_policy`` shouldn't be inherited from a base class, but explictly "
+"defined directly in the recipes."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:197
+msgid "Reusing files"
+msgstr "重新使用檔案"
+
+#: ../../../extending/python_requires.rst:199
+msgid ""
+"It is possible to access the files exported by a recipe that is used with "
+"``python_requires``. We could have this recipe, together with a *myfile.txt* "
+"file containing the \"Hello\" text."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:202
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class PyReq(ConanFile):\n"
+"    exports = \"*\""
+msgstr ""
+
+#: ../../../extending/python_requires.rst:209
+msgid ""
+"$ echo \"Hello\" > myfile.txt\n"
+"$ conan export . pyreq/0.1@user/channel"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:215
+msgid ""
+"Now the recipe has been exported, we can access its path (the place where "
+"*myfile.txt* is) with the ``path`` attribute:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:218
+msgid ""
+"import os\n"
+"from conans import ConanFile, load\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    python_requires = \"pyreq/0.1@user/channel\"\n"
+"\n"
+"    def build(self):\n"
+"        pyreq_path = self.python_requires[\"pyreq\"].path\n"
+"        myfile_path = os.path.join(pyreq_path, \"myfile.txt\")\n"
+"        content = load(myfile_path)  # content = \"Hello\"\n"
+"        self.output.info(content)\n"
+"        # we could also copy the file, instead of reading it"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:234
+msgid ""
+"Note that only ``exports`` work for this case, but not ``exports_sources``."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:237
+msgid "PackageID"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:239
+msgid ""
+"The ``python-requires`` will affect the ``package_id`` of the packages using "
+"those dependencies. By default, the policy is ``minor_mode``, which means:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:242
+msgid ""
+"Changes to the **patch** version of a python-require will not affect the "
+"package ID. So depending on ``\"pyreq/1.2.3\"`` or ``\"pyreq/1.2.4\"`` will "
+"result in identical package ID (both will be mapped to ``\"pyreq/1.2.Z\"`` "
+"in the hash computation). Bump the patch version if you want to change your "
+"common code, but you don't want the consumers to be affected or to fire a re-"
+"build of the dependants."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:246
+msgid ""
+"Changes to the **minor** or **major** version will produce a different "
+"package ID. So if you depend on ``\"pyreq/1.2.3\"``, and you bump the "
+"version to ``\"pyreq/1.3.0\"``, then, you will need to build new binaries "
+"that are using that new python-require. Bump the minor or major version if "
+"you want to make sure that packages requiring this python-require will be "
+"built using these changes in the code."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:250
+msgid ""
+"Both changing the **minor** and **major** requires a new package ID, and "
+"then a build from source. You could use changes in the **minor** to indicate "
+"that it should be source compatible, and consumers wouldn't need to do "
+"changes, and changes in the **major** for source incompatible changes."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:254
+msgid ""
+"As with the regular ``requires``, this default can be customized. First you "
+"can customize it at attribute global level, modifying the *conan.conf* "
+"``[general]`` variable ``default_python_requires_id_mode``, which can take "
+"the values ``unrelated_mode``, ``semver_mode``, ``patch_mode``, "
+"``minor_mode``, ``major_mode``, ``full_version_mode``, ``full_recipe_mode`` "
+"and ``recipe_revision_mode``."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:260
+msgid ""
+"For example, if you want to make the package IDs never be affected by any "
+"change in the versions of python-requires, you could do:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:263
+msgid "*conan.conf* configuration file"
+msgstr "*conan.conf* 組態檔"
+
+#: ../../../extending/python_requires.rst:263
+msgid ""
+"[general]\n"
+"default_python_requires_id_mode=unrelated_mode"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:270
+msgid "Read more about these modes in :ref:`package_id_mode`."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:272
+msgid ""
+"It is also possible to customize the effect of ``python_requires`` per "
+"package, using the ``package_id()`` method:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:275
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    python_requires =\"pyreq/[>=1.0]\"\n"
+"    def package_id(self):\n"
+"        self.info.python_requires.patch_mode()"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:286
+msgid "Resolution of python-requires"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:288
+msgid ""
+"There are few things that should be taken into account when using ``python-"
+"requires``:"
+msgstr ""
+
+#: ../../../extending/python_requires.rst:290
+msgid ""
+"Python requires recipes are loaded by the interpreter just once, and they "
+"are common to all consumers. Do not use any global state in the ``python-"
+"requires`` recipes."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:292
+msgid ""
+"Python requires are private to the consumers. They are not transitive. "
+"Different consumers can require different versions of the same python-"
+"require."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:294
+msgid "``python-requires`` can use version ranges expressions."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:295
+msgid ""
+"``python-requires`` can ``python-require`` other recipes too, but this "
+"should probably be limited to very few cases, we recommend to use the "
+"simplest possible structure."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:297
+msgid ""
+"``python-requires`` can conflict if they require other recipes and create "
+"conflicts in different versions."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:299
+msgid ""
+"``python-requires`` cannot use regular ``requires`` or ``build_requires``."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:300
+msgid "It is possible to use ``python-requires`` without user and channel."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:301
+msgid ""
+"``python-requires`` can use native python ``import`` to other python files, "
+"as long as these are exported together with the recipe."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:303
+msgid ""
+"``python-requires`` should not create packages, but use ``export`` only."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:304
+msgid "``python-requires`` can be used as editable packages too."
+msgstr ""
+
+#: ../../../extending/python_requires.rst:305
+msgid "``python-requires`` are locked in lockfiles."
+msgstr ""

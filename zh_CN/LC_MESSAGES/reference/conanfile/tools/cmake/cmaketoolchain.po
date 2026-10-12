@@ -1,0 +1,947 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.52\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:4
+msgid "CMakeToolchain"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:8
+msgid ""
+"These tools are still **experimental** (so subject to breaking changes) but "
+"with very stable syntax. We encourage the usage of it to be prepared for "
+"Conan 2.0."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:11
+msgid ""
+"Available since: `1.32.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.32.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:13
+msgid ""
+"The ``CMakeToolchain`` is the toolchain generator for CMake. It will "
+"generate toolchain files that can be used in the command line invocation of "
+"CMake with the ``-DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake``. This "
+"generator translates the current package configuration, settings, and "
+"options, into CMake toolchain syntax."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:20
+msgid ""
+"This class will require very soon to define both the \"host\" and \"build\" "
+"profiles. It is very recommended to start defining both profiles immediately "
+"to avoid future breaking. Furthermore, some features, like trying to cross-"
+"compile might not work at all if the \"build\" profile is not provided."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:24
+msgid "It can be declared as:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:26
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    generators = \"CMakeToolchain\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:33
+msgid "Or fully instantiated in the ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:35
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMakeToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"    generators = \"CMakeDeps\"\n"
+"    options = {\"shared\": [True, False], \"fPIC\": [True, False]}\n"
+"    default_options = {\"shared\": False, \"fPIC\": True}\n"
+"\n"
+"    def generate(self):\n"
+"        tc = CMakeToolchain(self)\n"
+"        tc.variables[\"MYVAR\"] = \"MYVAR_VALUE\"\n"
+"        tc.preprocessor_definitions[\"MYDEFINE\"] = \"MYDEF_VALUE\"\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:54
+msgid ""
+"This will generate the following files after a call to ``conan install`` (or "
+"when building the package in the cache) with the information provided in the "
+"``generate()`` method as well as information translated from the current "
+"``settings``:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:58
+msgid ""
+"*conan_toolchain.cmake* file, containing the translation of Conan settings "
+"to CMake variables. Some things that will be defined in this file:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:61
+msgid "Definition of the CMake generator platform and generator toolset"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:62
+msgid ""
+"Definition of the ``CMAKE_POSITION_INDEPENDENT_CODE``, based on ``fPIC`` "
+"option."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:63
+msgid "Definition of the C++ standard as necessary"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:64
+msgid "Definition of the standard library used for C++"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:65
+msgid "Deactivation of rpaths in OSX"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:67
+msgid ""
+"*conanvcvars.bat*: In some cases, the Visual Studio environment needs to be "
+"defined correctly for building, like when using the Ninja or NMake "
+"generators. If necessary, the ``CMakeToolchain`` will generate this script, "
+"so defining the correct Visual Studio prompt is easier."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:71
+msgid ""
+"*CMakePresets.json*: The toolchain also generates a ``CMakePresets.json`` "
+"standard file, check the documentation `here <https://cmake.org/cmake/help/"
+"latest/manual/cmake-presets.7.html>`_. It is currently using version \"3\" "
+"of the JSON schema. Conan creates a ``default`` configure preset with the "
+"following information:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:76
+msgid "The CMake ``generator`` to be used."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:77
+msgid "The path to the generated ``conan_toolchain.cmake`` file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:78
+msgid ""
+"Some cache variables corresponding to the specified settings cannot work if "
+"specified in the toolchain."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:79
+msgid ""
+"The ``CMAKE_BUILD_TYPE`` variable when using single-configuration generators."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:80
+msgid ""
+"The ``BUILD_TESTING`` variable set to ``OFF``, when configuration ``tools."
+"build:skip_test`` is true."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:82
+msgid ""
+"*CMakeUserPresets.json*:  If you declare a ``layout()`` in the recipe and "
+"your ``CMakeLists.txt`` file is found in the ``conanfile.source_folder`` "
+"folder, Conan will place a ``CMakeUserPresets.json`` to include the "
+"``CMakePresets.json`` generated with the above specification. This will "
+"allow your IDE to allow your IDE (Visual Studio, Visual Studio Code, "
+"CLion...) or ``cmake`` tool to locate the  Conan-generated ``CMakePresets."
+"json``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:87
+msgid ""
+"Note: Conan will skip the generation of the ``CMakeUserPresets.json`` if it "
+"already exists and was not generated by Conan."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:90
+msgid ""
+"By default, the version schema of the generated ``CMakeUserPresets.json`` is "
+"4 and the schema for the ``CMakePresets.json`` is 3, so they require CMake "
+">= 3.23. You can control the version of the generated ``CMakePresets.json`` "
+"and ``CMakeUserPresets.json`` with a configuration ``tools.cmake."
+"cmaketoolchain.presets:max_schema_version``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:95
+msgid ""
+"It can be set in the :ref:`global.conf<global_conf>` or with `-c` in the :"
+"command:`conan install` command. The minimum accepted value for this conf is "
+"``2``:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:101
+msgid ""
+"conan install . -c tools.cmake.cmaketoolchain.presets:max_schema_version=2"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:103
+msgid "constructor"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:108
+msgid "def __init__(self, conanfile):"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:109
+msgid "``conanfile``: the current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:113
+msgid "preprocessor_definitions"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:115
+msgid ""
+"This attribute allows defining compiler preprocessor definitions, for "
+"multiple configurations (Debug, Release, etc)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:125
+msgid ""
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    tc.preprocessor_definitions[\"MYDEF\"] = \"MyValue\"\n"
+"    tc.preprocessor_definitions.debug[\"MYCONFIGDEF\"] = \"MyDebugValue\"\n"
+"    tc.preprocessor_definitions.release[\"MYCONFIGDEF\"] = "
+"\"MyReleaseValue\"\n"
+"    tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:126
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:146
+msgid "This will be translated to:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:128
+msgid ""
+"One ``add_definitions()`` definition for ``MYDEF`` in ``conan_toolchain."
+"cmake`` file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:129
+msgid ""
+"One ``add_definitions()`` definition, using a cmake generator expression in "
+"``conan_toolchain.cmake`` file, using the different values for different "
+"configurations."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:133
+msgid "variables"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:135
+msgid ""
+"This attribute allows defining CMake variables, for multiple configurations "
+"(Debug, Release, etc)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:145
+msgid ""
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    tc.variables[\"MYVAR\"] = \"MyValue\"\n"
+"    tc.variables.debug[\"MYCONFIGVAR\"] = \"MyDebugValue\"\n"
+"    tc.variables.release[\"MYCONFIGVAR\"] = \"MyReleaseValue\"\n"
+"    tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:148
+msgid ""
+"One ``set()`` definition for ``MYVAR`` in ``conan_toolchain.cmake`` file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:149
+msgid ""
+"One ``set()`` definition, using a cmake generator expression in "
+"``conan_toolchain.cmake`` file, using the different values for different "
+"configurations."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:152
+msgid ""
+"The booleans assigned to a variable will be translated to ``ON`` and ``OFF`` "
+"symbols in CMake:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:162
+msgid ""
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    tc.variables[\"FOO\"] = True\n"
+"    tc.variables[\"VAR\"] = False\n"
+"    tc.generate()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:163
+msgid ""
+"Will generate the sentences: ``set(FOO ON ...)`` and ``set(VAR OFF ...)``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:167
+msgid "cache_variables"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:169
+msgid ""
+"Available since: `1.50.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.50.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:171
+msgid ""
+"This attribute allows defining CMake cache-variables. These variables, "
+"unlike the ``variables``, are single-config. They will be stored in the "
+"``CMakePresets.json`` file (at the `cacheVariables` in the "
+"`configurePreset`) and will be applied with ``-D`` arguments when calling "
+"``cmake.configure`` using the :ref:`CMake() build helper<conan-cmake-build-"
+"helper>`."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:183
+msgid ""
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    tc.cache_variables[\"foo\"] = True\n"
+"    tc.cache_variables[\"foo2\"] = False\n"
+"    tc.cache_variables[\"var\"] = \"23\""
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:184
+msgid ""
+"The booleans assigned to a cache_variable will be translated to ``ON`` and "
+"``OFF`` symbols in CMake."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:188
+msgid "Generators"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:190
+msgid ""
+"The ``CMakeToolchain`` is intended to run with the ``CMakeDeps`` "
+"dependencies generator. Please do not use other CMake legacy generators "
+"(like ``cmake``, or ``cmake_paths``) with it."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:195
+msgid "Using a custom toolchain file"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:197
+msgid "There are two ways of providing custom CMake toolchain files:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:199
+msgid ""
+"The ``conan_toolchain.cmake`` file can be completely skipped and replaced by "
+"a user one, defining the ``tools.cmake.cmaketoolchain:"
+"toolchain_file=<filepath>`` configuration value."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:201
+msgid ""
+"A custom user toolchain file can be added (included from) to the "
+"``conan_toolchain.cmake`` one, by using the ``user_toolchain`` block "
+"described below, and defining the ``tools.cmake.cmaketoolchain:"
+"user_toolchain=[\"<filepath>\"]`` configuration value."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:205
+msgid ""
+"The configuration ``tools.cmake.cmaketoolchain:"
+"user_toolchain=[\"<filepath>\"]`` can be defined in the :ref:`global."
+"conf<global_conf>` but also creating a Conan package for your toolchain and "
+"using ``self.conf_info`` to declare the toolchain file:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:None
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"class MyToolchainPackage(ConanFile):\n"
+"    ...\n"
+"    def package_info(self):\n"
+"        f = os.path.join(self.package_folder, \"mytoolchain.cmake\")\n"
+"        self.conf_info.define(\"tools.cmake.cmaketoolchain:user_toolchain\", "
+"[f])"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:219
+msgid ""
+"If you declare the previous package as a ``tool_require``, the toolchain "
+"will be automatically applied."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:220
+msgid ""
+"If you have more than one ``tool_requires`` defined, you can easily append "
+"all the user toolchain values together using the ``append`` method in each "
+"of them, for instance:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:None
+msgid ""
+"import os\n"
+"from conan import ConanFile\n"
+"class MyToolRequire(ConanFile):\n"
+"    ...\n"
+"    def package_info(self):\n"
+"        f = os.path.join(self.package_folder, \"mytoolchain.cmake\")\n"
+"        # Appending the value to any existing one\n"
+"        self.conf_info.append(\"tools.cmake.cmaketoolchain:user_toolchain\", "
+"f)"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:235
+msgid ""
+"So, they'll be automatically applied by your ``CMakeToolchain`` generator "
+"without writing any extra code:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:None
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMake\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    exports_sources = \"CMakeLists.txt\"\n"
+"    tool_requires = \"toolchain1/0.1\", \"toolchain2/0.1\"\n"
+"    generators = \"CMakeToolchain\"\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.configure()"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:253
+msgid "Using the toolchain in developer flow"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:255
+msgid ""
+"One of the advantages of using Conan toolchains is that they can help to "
+"achieve the exact same build with local development flows, than when the "
+"package is created in the cache."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:267
+msgid ""
+"# Lets start in the folder containing the conanfile.py\n"
+"$ mkdir build && cd build\n"
+"# Install both debug and release deps and create the toolchain\n"
+"$ conan install ..\n"
+"$ conan install .. -s build_type=Debug\n"
+"# the conan_toolchain.cmake is common for both configurations"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:268
+msgid "If you are using a multi-configuration generator:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:279
+msgid ""
+"# Need to pass the generator WITHOUT the platform, that matches your default "
+"settings\n"
+"$ cmake .. -G \"Visual Studio 15\" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain."
+"cmake\n"
+"# Now you can open the IDE, select Debug or Release config and build\n"
+"# or, in the command line\n"
+"$ cmake --build . --config Release\n"
+"$ cmake --build . --config Debug"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:280
+msgid ""
+"**NOTE**: The platform (Win64), is already encoded in the toolchain. The "
+"command line shouldn't pass it, so using ``-G \"Visual Studio 15\"`` instead "
+"of the ``-G \"Visual Studio 15 Win64\"``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:284
+msgid "If you are using a single-configuration generator:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:291
+msgid ""
+"$ cmake ..  -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -"
+"DCMAKE_BUILD_TYPE=Release\n"
+"$ cmake --build"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:292
+msgid ""
+"It is recommended to use the ``cmake_layout(self)`` in the ``layout()`` "
+"method of your ``conanfile.py``. If a layout is declared, the "
+"``CMakeUserPresets.json`` file will be generated in the same folder of your "
+"``CMakeLists.txt`` file, so you can use the ``--preset`` argument from "
+"``cmake >= 3.23`` or use an IDE:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:314
+msgid ""
+"# The conan_toolchain.cmake is common for both configurations and will be "
+"located at \"build/generators\"\n"
+"$ conan install .\n"
+"$ conan install . -s build_type=Debug\n"
+"\n"
+"# For single-configuration generator\n"
+"$ cmake --preset debug\n"
+"$ cmake --build --preset debug\n"
+"$ cmake --preset release\n"
+"$ cmake --build --preset release\n"
+"\n"
+"# For multi-configuration generator\n"
+"$ cmake --preset default\n"
+"$ cmake --build --preset debug\n"
+"$ cmake --build --preset release"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:316
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:318
+msgid ""
+"``CMakeToolchain`` is affected by these :ref:`[conf]<global_conf>` variables:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:320
+msgid ""
+"``tools.cmake.cmaketoolchain:generator`` CMake generator to be used by cmake "
+"CLI. See all the CMake generators `here <https://cmake.org/cmake/help/latest/"
+"manual/cmake-generators.7.html#cmake-generators>`__."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:321
+msgid ""
+"``tools.cmake.cmaketoolchain:toolchain_file`` user toolchain file to replace "
+"the ``conan_toolchain.cmake`` one."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:322
+msgid ""
+"``tools.cmake.cmaketoolchain:user_toolchain`` list of user toolchains to be "
+"included from the ``conan_toolchain.cmake`` file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:323
+msgid "``tools.android:ndk_path`` value for ``ANDROID_NDK_PATH``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:324
+msgid ""
+"``tools.cmake.cmaketoolchain:system_name`` is not necessary in most cases "
+"and is only used to force-define ``CMAKE_SYSTEM_NAME``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:325
+msgid ""
+"``tools.cmake.cmaketoolchain:system_version`` is not necessary in most cases "
+"and is only used to force-define ``CMAKE_SYSTEM_VERSION``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:326
+msgid ""
+"``tools.cmake.cmaketoolchain:system_processor`` is not necessary in most "
+"cases and is only used to force-define ``CMAKE_SYSTEM_PROCESSOR``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:327
+msgid ""
+"``tools.cmake.cmaketoolchain:toolset_arch``: Will add the ``,host=xxx`` "
+"specifier in the ``CMAKE_GENERATOR_TOOLSET`` variable of ``conan_toolchain."
+"cmake`` file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:328
+msgid ""
+"``tools.cmake.cmake_layout:build_folder_vars``: Settings and Options that "
+"will produce a different build folder and different CMake presets names."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:329
+msgid ""
+"``tools.cmake.cmaketoolchain.presets:max_schema_version``: Generate "
+"CMakeUserPreset.json compatible with the supplied schema version."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:330
+msgid ""
+"``tools.build:cxxflags`` list of extra C++ flags that will be appended to "
+"``CMAKE_CXX_FLAGS_INIT``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:331
+msgid ""
+"``tools.build:cflags`` list of extra of pure C flags that will be appended "
+"to ``CMAKE_C_FLAGS_INIT``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:332
+msgid ""
+"``tools.build:sharedlinkflags`` list of extra linker flags that will be "
+"appended to ``CMAKE_SHARED_LINKER_FLAGS_INIT``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:333
+msgid ""
+"``tools.build:exelinkflags`` list of extra linker flags that will be "
+"appended to ``CMAKE_EXE_LINKER_FLAGS_INIT``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:334
+msgid ""
+"``tools.build:defines`` list of preprocessor definitions that will be used "
+"by ``add_definitions()``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:335
+msgid ""
+"``tools.build:tools.apple:enable_bitcode`` boolean value to enable/disable "
+"Bitcode Apple Clang flags, e.g., ``CMAKE_XCODE_ATTRIBUTE_ENABLE_BITCODE``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:336
+msgid ""
+"``tools.build:tools.apple:enable_arc`` boolean value to enable/disable ARC "
+"Apple Clang flags, e.g., ``CMAKE_XCODE_ATTRIBUTE_CLANG_ENABLE_OBJC_ARC``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:337
+msgid ""
+"``tools.build:tools.apple:enable_visibility`` boolean value to enable/"
+"disable Visibility Apple Clang flags, e.g., "
+"``CMAKE_XCODE_ATTRIBUTE_GCC_SYMBOLS_PRIVATE_EXTERN``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:338
+msgid "``tools.build:sysroot`` defines the value of ``CMAKE_SYSROOT``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:341
+msgid "Extending and customizing CMakeToolchain"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:343
+msgid ""
+"Since Conan 1.36, ``CMakeToolchain`` implements a powerful capability for "
+"extending and customizing the resulting toolchain file."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:345
+msgid "The following predefined blocks are available, and added in this order:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:347
+msgid ""
+"``user_toolchain``: Allows to include user toolchains from the "
+"``conan_toolchain.cmake`` file. If the configuration ``tools.cmake."
+"cmaketoolchain:user_toolchain=[\"xxxx\", \"yyyy\"]`` is defined, its values "
+"will be ``include(xxx)\\ninclude(yyyy)`` as the first lines in "
+"``conan_toolchain.cmake``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:350
+msgid ""
+"``generic_system``: Defines ``CMAKE_SYSTEM_NAME``, ``CMAKE_SYSTEM_VERSION``, "
+"``CMAKE_SYSTEM_PROCESSOR``, ``CMAKE_GENERATOR_PLATFORM``, "
+"``CMAKE_GENERATOR_TOOLSET``, ``CMAKE_C_COMPILER``, ``CMAKE_CXX_COMPILER``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:353
+msgid ""
+"``android_system``: Defines ``ANDROID_PLATFORM``, ``ANDROID_STL``, "
+"``ANDROID_ABI`` and includes ``ANDROID_NDK_PATH/build/cmake/android."
+"toolchain.cmake`` where ``ANDROID_NDK_PATH`` comes defined in ``tools."
+"android:ndk_path`` configuration value."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:355
+msgid ""
+"``apple_system``: Defines ``CMAKE_OSX_ARCHITECTURES``, ``CMAKE_OSX_SYSROOT`` "
+"for Apple systems."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:356
+msgid ""
+"``fpic``: Defines the ``CMAKE_POSITION_INDEPENDENT_CODE`` when there is a "
+"``options.fPIC``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:357
+msgid "``arch_flags``: Defines C/C++ flags like ``-m32, -m64`` when necessary."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:358
+msgid ""
+"``libcxx``: Defines ``-stdlib=libc++`` flag when necessary as well as "
+"``_GLIBCXX_USE_CXX11_ABI``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:359
+msgid ""
+"``vs_runtime``: Defines the ``CMAKE_MSVC_RUNTIME_LIBRARY`` variable, as a "
+"generator expression for multiple configurations."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:360
+msgid "``cppstd``: defines ``CMAKE_CXX_STANDARD``, ``CMAKE_CXX_EXTENSIONS``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:361
+msgid "``parallel``: defines ``/MP`` parallel build flag for Visual."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:362
+msgid ""
+"``cmake_flags_init``: defines ``CMAKE_XXX_FLAGS`` variables based on "
+"previously defined Conan variables. The blocks above only define "
+"``CONAN_XXX`` variables, and this block will define CMake ones like "
+"``set(CMAKE_CXX_FLAGS_INIT \"${CONAN_CXX_FLAGS}\" CACHE STRING \"\" "
+"FORCE)```."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:363
+msgid ""
+"``try_compile``: Stop processing the toolchain, skipping the blocks below "
+"this one, if ``IN_TRY_COMPILE`` CMake property is defined."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:364
+msgid ""
+"``find_paths``: Defines ``CMAKE_FIND_PACKAGE_PREFER_CONFIG``, "
+"``CMAKE_MODULE_PATH``, ``CMAKE_PREFIX_PATH`` so the generated files from "
+"``CMakeDeps`` are found."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:365
+msgid ""
+"``rpath``: Defines ``CMAKE_SKIP_RPATH``. By default it is disabled, and it "
+"is needed to define ``self.blocks[\"rpath\"].skip_rpath=True`` if you want "
+"to activate ``CMAKE_SKIP_RPATH``"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:366
+msgid "``shared``: defines ``BUILD_SHARED_LIBS``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:367
+msgid "``output_dirs``: Define the ``CMAKE_INSTALL_XXX`` variables."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:369
+msgid ""
+"**CMAKE_INSTALL_PREFIX**: Is set with the ``package_folder``, so if a "
+"\"cmake install\" operation is run, the artifacts go to that location."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:371
+msgid ""
+"**CMAKE_INSTALL_BINDIR**, **CMAKE_INSTALL_SBINDIR** and "
+"**CMAKE_INSTALL_LIBEXECDIR**: Set by default to ``bin``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:372
+msgid "**CMAKE_INSTALL_LIBDIR**: Set by default to ``lib``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:373
+msgid ""
+"**CMAKE_INSTALL_INCLUDEDIR** and **CMAKE_INSTALL_OLDINCLUDEDIR**: Set by "
+"default to ``include``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:374
+msgid "**CMAKE_INSTALL_DATAROOTDIR**: Set by default to ``res``."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:376
+msgid ""
+"If you want to change the default values, adjust the ``cpp.package`` object "
+"at the ``layout()`` method:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:None
+msgid ""
+"def layout(self):\n"
+"    ...\n"
+"    # For CMAKE_INSTALL_BINDIR, CMAKE_INSTALL_SBINDIR and "
+"CMAKE_INSTALL_LIBEXECDIR, takes the first value:\n"
+"    self.cpp.package.bindirs = [\"mybin\"]\n"
+"    # For CMAKE_INSTALL_LIBDIR, takes the first value:\n"
+"    self.cpp.package.libdirs = [\"mylib\"]\n"
+"    # For CMAKE_INSTALL_INCLUDEDIR, CMAKE_INSTALL_OLDINCLUDEDIR, takes the "
+"first value:\n"
+"    self.cpp.package.includedirs = [\"myinclude\"]\n"
+"    # For CMAKE_INSTALL_DATAROOTDIR, takes the first value:\n"
+"    self.cpp.package.resdirs = [\"myres\"]"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:392
+msgid ""
+"It is **not valid** to change the self.cpp_info  at the ``package_info()`` "
+"method."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:396
+msgid ""
+"In Conan 1.45 the CMakeToolchain doesn't append the root package folder of "
+"the dependencies (declared in the cpp_info.builddirs) to the "
+"``CMAKE_PREFIX_PATH`` variable. That interfered with the ``find_file``, "
+"``find_path`` and ``find_program``, making, for example, impossible to "
+"locate only the executables from the build context. In Conan 2.0, the "
+"``cppinfo.builddirs`` won't contain by default the ``''`` entry (root "
+"package)."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:402
+msgid "Blocks can be customized in different ways:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:469
+msgid ""
+"# remove an existing block\n"
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    tc.blocks.remove(\"generic_system\")\n"
+"\n"
+"# modify the template of an existing block\n"
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    tmp = tc.blocks[\"generic_system\"].template\n"
+"    new_tmp = tmp.replace(...)  # replace, fully replace, append...\n"
+"    tc.blocks[\"generic_system\"].template = new_tmp\n"
+"\n"
+"# modify one or more variables of the context\n"
+"def generate(self):\n"
+"    tc = CMakeToolchain(conanfile)\n"
+"    # block.values is the context dictionary\n"
+"    toolset = tc.blocks[\"generic_system\"].values[\"toolset\"]\n"
+"    tc.blocks[\"generic_system\"].values[\"toolset\"] = \"other_toolset\"\n"
+"\n"
+"# modify the whole context values\n"
+"def generate(self):\n"
+"    tc = CMakeToolchain(conanfile)\n"
+"    tc.blocks[\"generic_system\"].values = {\"toolset\": \"other_toolset\"}\n"
+"\n"
+"# modify the context method of an existing block\n"
+"import types\n"
+"\n"
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    generic_block = toolchain.blocks[\"generic_system\"]\n"
+"\n"
+"    def context(self):\n"
+"        assert self  # Your own custom logic here\n"
+"        return {\"toolset\": \"other_toolset\"}\n"
+"    generic_block.context = types.MethodType(context, generic_block)\n"
+"\n"
+"# completely replace existing block\n"
+"from conan.tools.cmake import CMakeToolchain\n"
+"\n"
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    # this could go to a python_requires\n"
+"    class MyGenericBlock:\n"
+"        template = \"HelloWorld\"\n"
+"\n"
+"        def context(self):\n"
+"            return {}\n"
+"\n"
+"    tc.blocks[\"generic_system\"] = MyGenericBlock\n"
+"\n"
+"# add a completely new block\n"
+"from conan.tools.cmake import CMakeToolchain\n"
+"def generate(self):\n"
+"    tc = CMakeToolchain(self)\n"
+"    # this could go to a python_requires\n"
+"    class MyBlock:\n"
+"        template = \"Hello {{myvar}}!!!\"\n"
+"\n"
+"        def context(self):\n"
+"            return {\"myvar\": \"World\"}\n"
+"\n"
+"    tc.blocks[\"mynewblock\"] = MyBlock"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:470
+msgid ""
+"Recall that this is a very **experimental** feature, and these interfaces "
+"might change in the following releases."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:472
+msgid ""
+"For more information about these blocks, please have a look at the source "
+"code."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:476
+msgid "Cross building"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:478
+msgid ""
+"The ``generic_system`` block contains some basic cross-building "
+"capabilities. In the general case, the user would want to provide their own "
+"user toolchain defining all the specifics, which can be done with the "
+"configuration ``tools.cmake.cmaketoolchain:user_toolchain``. If this conf "
+"value is defined, the ``generic_system`` block will include the provided "
+"file or files, but no further define any CMake variable for cross-building."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:484
+msgid ""
+"If ``user_toolchain`` is not defined and Conan detects it is cross-building, "
+"because the build and host profiles contain different OS or architecture, it "
+"will try to define the following variables:"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:488
+msgid ""
+"``CMAKE_SYSTEM_NAME``: ``tools.cmake.cmaketoolchain:system_name`` "
+"configuration if defined, otherwise, it will try to autodetect it. This "
+"block will consider cross-building if Android systems (that is managed by "
+"other blocks), and not 64bits to 32bits builds in x86_64, sparc and ppc "
+"systems."
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:492
+msgid ""
+"``CMAKE_SYSTEM_VERSION``: ``tools.cmake.cmaketoolchain:system_version`` conf "
+"if defined, otherwise ``os.version`` subsetting (host) when defined"
+msgstr ""
+
+#: ../../../reference/conanfile/tools/cmake/cmaketoolchain.rst:494
+msgid ""
+"``CMAKE_SYSTEM_PROCESSOR``: ``tools.cmake.cmaketoolchain:system_processor`` "
+"conf if defined, otherwise ``arch`` setting (host) if defined"
+msgstr ""

@@ -1,0 +1,209 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.33\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/misc/user.rst:5
+msgid "conan user"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:7
+msgid ""
+"$ conan user [-h] [-c] [-p [PASSWORD]] [-r REMOTE] [-j JSON] [-s] [name]"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:11
+msgid "Authenticates against a remote with user/pass, caching the auth token."
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:13
+msgid ""
+"Useful to avoid the user and password being requested later. e.g. while "
+"you're uploading a package.  You can have one user for each remote. Changing "
+"the user, or introducing the password is only necessary to perform changes "
+"in remote packages."
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:18
+msgid ""
+"positional arguments:\n"
+"  name                  Username you want to use. If no name is provided it\n"
+"                        will show the current user\n"
+"\n"
+"optional arguments:\n"
+"  -h, --help            show this help message and exit\n"
+"  -c, --clean           Remove user and tokens for all remotes\n"
+"  -p [PASSWORD], --password [PASSWORD]\n"
+"                        User password. Use double quotes if password with\n"
+"                        spacing, and escape quotes if existing. If empty, "
+"the\n"
+"                        password is requested interactively (not exposed)\n"
+"  -r REMOTE, --remote REMOTE\n"
+"                        Use the specified remote server\n"
+"  -j JSON, --json JSON  json file path where the user list will be written "
+"to\n"
+"  -s, --skip-auth       Skips the authentication with the server if there "
+"are\n"
+"                        local stored credentials. It doesn't check if the\n"
+"                        current credentials are valid or not"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:39
+msgid ""
+"After a successful login the auth token is stored in the local database "
+"(see :ref:`env_vars_conan_login_encryption_key` to add a basic level of "
+"security)."
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:43
+msgid "**Examples**:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:45
+msgid "List my user for each remote:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:47
+msgid ""
+"$ conan user\n"
+"Current user of remote 'conan-center' set to: 'None' (anonymous)\n"
+"Current user of remote 'myprivateremote' set to: 'danimtb' [Authenticated]\n"
+"Current user of remote 'otherremote' set to: 'None' (anonymous)"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:54
+msgid "Change **bar** remote user to **foo**:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:56
+msgid ""
+"$ conan user foo -r bar\n"
+"Changed user of remote 'bar' from 'None' (anonymous) to 'foo'"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:61
+msgid ""
+"Change **bar** remote user to **foo**, authenticating against the remote and "
+"storing the user and authentication token locally, so a later upload won't "
+"require entering credentials:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:64
+msgid "$ conan user foo -r bar -p mypassword"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:69
+msgid ""
+"Authenticate against the remote only if we don't have credentials stored "
+"locally. It will not check if the credentials are valid or not:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:72
+msgid "$ conan user foo -r bar -p mypassword --skip-auth"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:76
+msgid "Clean all local users and tokens:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:78
+msgid "$ conan user --clean"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:82
+msgid ""
+"Change **bar** remote user to **foo**, **asking user password** to "
+"authenticate against the remote and storing the user and authentication "
+"token locally, so a later upload won't require entering credentials:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:85
+msgid ""
+"$ conan user foo -r bar -p\n"
+"Please enter a password for \"foo\" account:\n"
+"Change 'bar' user from None (anonymous) to foo"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:93
+msgid ""
+"The password is not stored in the client computer at any moment. Conan uses "
+"`JWT <https://en.wikipedia.org/wiki/JSON_Web_Token>`_, so it gets a token "
+"(expirable by the server) checking the password against the remote "
+"credentials. If the password is correct, an authentication token will be "
+"obtained, and that token is the information cached locally. For any "
+"subsequent interaction with the remotes, the Conan client will only use that "
+"JWT token."
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:100
+msgid "Using environment variables"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:102
+msgid ""
+"The :ref:`CONAN_LOGIN_USERNAME <env_vars_conan_login_username>` and :ref:"
+"`CONAN_PASSWORD <env_vars_conan_password>` environment variables allow "
+"defining the user and the password in the environment. If those environment "
+"variables are defined, the user input will no be necessary whenever the user "
+"or password are requested. Values for user and password will be "
+"automatically taken from the environment variables without any interactive "
+"input."
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:108
+msgid ""
+"This applies also to the ``conan user`` command, if you want to force the "
+"authentication in some scripts, without requiring to put the password in "
+"plain text, the following can be done:"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:112
+msgid ""
+"$ conan user --clean  # remove previous auth tokens\n"
+"$ export CONAN_PASSWORD=mypassword\n"
+"$ conan user mysyusername -p -r=myremote\n"
+"Please enter a password for \"mysusername\" account: Got password '******' "
+"from environment\n"
+"Changed user of remote 'myremote' from 'None' (anonymous) to 'mysusername'\n"
+"$ conan upload zlib* -r=myremote --all --confirm"
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:121
+msgid ""
+"In this example, :command:`conan user mysyusername -p -r=myremote` will "
+"interactively request a password if ``CONAN_PASSWORD`` is not defined."
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:124
+msgid ""
+"The environment variable :ref:`env_vars_non_interactive` (or ``general."
+"non_interactive`` in *conan.conf*) can be defined to guarantee that an error "
+"will be raise if user input is required, to avoid stalls in CI builds."
+msgstr ""
+
+#: ../../../reference/commands/misc/user.rst:128
+msgid ""
+"Note that defining ``CONAN_LOGIN_USERNAME`` and/or ``CONAN_PASSWORD`` do not "
+"perform in any case an authentication request against the server. Only when "
+"the server request credentials (or a explicit :command:`conan user -p` is "
+"done), they will be used as an alternative source rather than interactive "
+"user input. This means that for servers like Artifactory that allow enabling "
+"*\"Hide Existence of Unauthorized Resource\"* modes, it will be necessary to "
+"explicitly call :command:`conan user -p` before downloading or uploading "
+"anything from the server, otherwise, Artifactory will return 404 errors "
+"instead of requesting authentication."
+msgstr ""

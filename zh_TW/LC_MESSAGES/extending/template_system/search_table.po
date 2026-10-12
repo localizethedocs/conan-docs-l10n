@@ -1,0 +1,201 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.33\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../extending/template_system/search_table.rst:5
+msgid "HTML output for :command:`conan search` table"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:9
+msgid ""
+"This has to be an considered as an **experimental** feature, we might change "
+"the context provided to this templates once we have more examples from the "
+"community."
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:14
+msgid ""
+"The :ref:`conan_search` command can generate an HTML table with the results "
+"of the query when looking for binaries"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:23
+msgid ""
+"This is the default Conan provides, but you can use your own `Jinja2 "
+"documentation <https://palletsprojects.com/p/jinja/>`_ template to customize "
+"this output to your needs:"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:27
+msgid "*<cache>/templates/output/search_table.html*."
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:31
+msgid "Context"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:33
+msgid ""
+"Conan feeds this template with the information about the packages found, "
+"this information is called context and it contains these objects:"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:36
+msgid ""
+"``base_template_path``: absolute path to the directory where the chosen "
+"template file is located. It is needed if your output file needs to link "
+"assets distributed together with the template file."
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:39
+msgid ""
+"``search``: it contains the pattern used in the command line to search "
+"packages."
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:40
+msgid ""
+"``results``: this object contains all the information retrieved from the "
+"remotes, it is used to get the headers and the rows."
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:44
+msgid ""
+"When the output is a table, the first thing needed are the headers, these "
+"can be a single row or two rows like the image above. In order to get the "
+"headers you should use ``results.get_headers(keys)`` with a list of extra "
+"``keys`` you want to include (see example below). Conan will always return a "
+"header for all the different settings and options values, with this ``keys`` "
+"list variable you can retrieve other information that might be useful in "
+"your table like ``remote``, ``reference``, ``outdated`` or ``package_id``."
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:51
+msgid "Then you can use the returned object to get the actual headers:"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:53
+msgid ""
+"single row headers: it just returns a list with all the headers, it is "
+"straightforward to use:"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:55
+msgid ""
+"<thead>\n"
+"    <tr>\n"
+"        {%- set headers = results.get_headers(keys=['remote', 'package_id', "
+"'outdated']) %}\n"
+"        {%- for header in headers.row(n_rows=1) %}\n"
+"        <th>{{ header }}</th>\n"
+"        {%- endfor %}\n"
+"    </tr>\n"
+"</thead>"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:66
+msgid "two-rows headers: it returns a list of tuples like the following one:"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:68
+msgid ""
+"[('os', ['']), ('arch', ['']), ('compiler', ['', 'version', 'libcxx']),]"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:72
+msgid ""
+"The first element for this tuple is intended for the top row, while the "
+"second element lists all the sub-settings in the top header category. An "
+"empty string means there is no category, like ``compiler=Visual Studio``."
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:76
+msgid ""
+"Composing the table headers in HTML requires some more code in the template:"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:78
+msgid ""
+"<thead>\n"
+"    {%- set headers = results.get_headers(keys=['remote', 'package_id', "
+"'outdated']) %}\n"
+"    {%- set headers2rows = headers.row(n_rows=2) %}\n"
+"    <tr>\n"
+"        {%- for category, subheaders in headers2rows %}\n"
+"            <th rowspan=\"{% if subheaders|length == 1 and not subheaders[0] "
+"%}2{% else %}1{% endif %}\" colspan=\"{{ subheaders|length }}\">\n"
+"                {{ category }}\n"
+"            </th>\n"
+"        {%- endfor %}\n"
+"    </tr>\n"
+"    <tr>\n"
+"        {%- for category, subheaders in headers2rows %}\n"
+"            {%- if subheaders|length != 1 or subheaders[0] != '' %}\n"
+"                {%- for subheader in subheaders %}\n"
+"                    <th>{{ subheader|default(category, true) }}</th>\n"
+"                {%- endfor %}\n"
+"            {%- endif %}\n"
+"        {%- endfor %}\n"
+"    </tr>\n"
+"</thead>"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:102
+msgid ""
+"Once the headers are done, iterating the rows is easy. You should use "
+"``results.packages()`` to get an iterable with the list of results and then, "
+"for each of the rows, the fields. You need to provide the ``headers`` to "
+"retrieve the fields you need in the proper order according to the table "
+"headers:"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:108
+msgid ""
+"<tbody>\n"
+"    {%- for package in results.packages() %}\n"
+"        <tr>\n"
+"            {%- for item in package.row(headers) %}\n"
+"                <td>{{ item if item != None else ''}}</td>\n"
+"            {%- endfor %}\n"
+"        </tr>\n"
+"    {%- endfor %}\n"
+"</tbody>"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:121
+msgid ""
+"Additionally, the ``package`` object in the snippet above that represents "
+"one of the query results contain some fields that can be useful to compose "
+"the text for an ``alt`` field in the HTML:"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:124
+msgid "``remote``"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:125
+msgid "``reference`` or ``recipe``"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:126
+msgid "``package_id``"
+msgstr ""
+
+#: ../../../extending/template_system/search_table.rst:127
+msgid "``outdated``"
+msgstr ""

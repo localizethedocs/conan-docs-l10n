@@ -1,0 +1,270 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/other_languages_package_manager/go.rst:4
+msgid "Conan: A Go package manager"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:7
+msgid "The source code"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:9
+msgid "You can just clone the following example repository:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:11
+msgid "$ git clone https://github.com/lasote/conan-goserver-example"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:15
+msgid ""
+"Or, alternatively, manually create the folder and copy the following files "
+"inside:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:17
+msgid ""
+"$ mkdir conan-goserver-example\n"
+"$ cd conan-goserver-example\n"
+"$ mkdir src\n"
+"$ mkdir src/server"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:24
+msgid "The files are:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:26
+msgid ""
+"*src/server/main.go* is a small http server that will answer \"Hello world!"
+"\" if we connect to it."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:28
+msgid ""
+"package main\n"
+"\n"
+"import \"github.com/go-martini/martini\"\n"
+"\n"
+"func main() {\n"
+"  m := martini.Classic()\n"
+"  m.Get(\"/\", func() string {\n"
+"    return \"Hello world!\"\n"
+"  })\n"
+"  m.Run()\n"
+"}"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:43
+msgid "Declaring and installing dependencies"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:45
+msgid "Create a *conanfile.txt*, with the following content:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:47
+msgid "*conanfile.txt*"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:47
+msgid ""
+" [requires]\n"
+" go-martini/1.0@lasote/stable\n"
+"\n"
+" [imports]\n"
+" src, * -> ./deps/src"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:56
+msgid ""
+"Our project requires a package, **go-martini/1.0@lasote/stable**, and we "
+"indicate that all **src contents** from all our requirements have to be "
+"copied to *./deps/src*."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:59
+msgid ""
+"The package go-martini depends on go-inject, so Conan will handle "
+"automatically the go-inject dependency."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:61
+msgid "$ conan install ."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:65
+msgid ""
+"This command will download our packages and will copy the contents in the *./"
+"deps/src* folder."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:68
+msgid "Running our server"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:70
+msgid "Just add the **deps** folder to ``GOPATH``:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:72
+msgid ""
+"# Linux / Macos\n"
+"$ export GOPATH=${GOPATH}:${PWD}/deps\n"
+"\n"
+"# Windows\n"
+"$ SET GOPATH=%GOPATH%;%CD%/deps"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:80
+msgid "And run the server:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:82
+msgid ""
+"$ cd src/server\n"
+"$ go run main.go"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:87
+msgid "Open your browser and go to `localhost:9300`"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:89
+msgid "Hello World!"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:94
+msgid "Generating Go packages"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:96
+msgid ""
+"Creating a Conan package for a Go library is very simple. In a Go project, "
+"you compile all the code from sources in the project itself, including all "
+"of its dependencies."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:99
+msgid ""
+"So we don't need to take care of settings at all. Architecture, compiler, "
+"operating system, etc. are only relevant for pre-compiled binaries. Source "
+"code packages are settings agnostic."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:102
+msgid "Let's take a look at the *conanfile.py* of the **go inject** library:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:104
+#: ../../../howtos/other_languages_package_manager/go.rst:141
+msgid "*conanfile.py*"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:104
+msgid ""
+" from conans import ConanFile\n"
+"\n"
+" class InjectConan(ConanFile):\n"
+"     name = \"go-inject\"\n"
+"     version = \"1.0\"\n"
+"\n"
+"     def source(self):\n"
+"         self.run(\"git clone https://github.com/codegangsta/inject.git\")\n"
+"         self.run(\"cd inject && git checkout v1.0-rc1\")  # TAG v1.0-rc1\n"
+"\n"
+"     def package(self):\n"
+"         self.copy(pattern='*', dst='src/github.com/codegangsta/inject', "
+"src=\"inject\", keep_path=True)"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:120
+msgid ""
+"If you have read the :ref:`Building a hello world package "
+"<packaging_getting_started>`, the previous code may look quite simple to you."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:122
+msgid ""
+"We want to pack **version 1.0** of the **go inject** library, so the "
+"**version** variable is **\"1.0\"**. In the ``source()`` method, we declare "
+"how to obtain the source code of the library, in this case just by cloning "
+"the github repository and making a checkout of the **v1.0-rc1** tag. In the "
+"``package()`` method, we are just copying all the sources to a folder named "
+"\"src/github.com/codegangsta/inject\"."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:126
+msgid "This way, we can keep importing the library in the same way:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:128
+msgid "import \"github.com/codegangsta/inject\""
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:132
+msgid "We can export and upload the package to a remote and we are done:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:134
+msgid ""
+"$ conan export . lasote/stable  # Or any other user/channel\n"
+"$ conan upload go-inject/1.0@lasote/stable --all"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:139
+msgid "Now look at the **go martini** conanfile:"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:141
+msgid ""
+" from conans import ConanFile\n"
+"\n"
+" class InjectConan(ConanFile):\n"
+"     name = \"go-martini\"\n"
+"     version = \"1.0\"\n"
+"     requires = 'go-inject/1.0@lasote/stable'\n"
+"\n"
+"     def source(self):\n"
+"         self.run(\"git clone https://github.com/go-martini/martini.git\")\n"
+"         self.run(\"cd martini && git checkout v1.0\")  # TAG v1.0\n"
+"\n"
+"     def package(self):\n"
+"         self.copy(pattern='*', dst='src/github.com/go-martini/martini', "
+"src=\"martini\", keep_path=True)"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:158
+msgid ""
+"It is very similar. The only difference is the ``requires`` variable. It "
+"defines the **go-inject/1.0@lasote/stable** library, as a requirement."
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:161
+msgid ""
+"$ conan export . lasote/stable  # Or any other user/channel\n"
+"$ conan upload go-martini/1.0@lasote/stable  --all"
+msgstr ""
+
+#: ../../../howtos/other_languages_package_manager/go.rst:166
+msgid ""
+"Now we are able to use them easily and without the problems of versioning "
+"with github checkouts."
+msgstr ""

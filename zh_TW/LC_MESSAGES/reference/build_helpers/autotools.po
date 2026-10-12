@@ -1,0 +1,497 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/build_helpers/autotools.rst:4
+msgid "AutoToolsBuildEnvironment (configure/make)"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:6
+msgid ""
+"If you are using **configure**/**make** you can use "
+"**AutoToolsBuildEnvironment** helper. This helper sets ``LIBS``, "
+"``LDFLAGS``, ``CFLAGS``, ``CXXFLAGS`` and ``CPPFLAGS`` environment variables "
+"based on your requirements."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:9
+msgid ""
+"from conans import ConanFile, AutoToolsBuildEnvironment\n"
+"\n"
+"class ExampleConan(ConanFile):\n"
+"   settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"   requires = \"Poco/1.9.0@pocoproject/stable\"\n"
+"   default_options = \"Poco:shared=True\", \"OpenSSL:shared=True\"\n"
+"\n"
+"   def imports(self):\n"
+"      self.copy(\"*.dll\", dst=\"bin\", src=\"bin\")\n"
+"      self.copy(\"*.dylib*\", dst=\"bin\", src=\"lib\")\n"
+"\n"
+"   def build(self):\n"
+"      autotools = AutoToolsBuildEnvironment(self)\n"
+"      autotools.configure()\n"
+"      autotools.make()"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:28
+msgid ""
+"It also works using the :ref:`environment_append <environment_append_tool>` "
+"context manager applied to your **configure and make** commands, calling "
+"`configure` and `make` manually:"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:31
+msgid ""
+"from conans import ConanFile, AutoToolsBuildEnvironment\n"
+"\n"
+"class ExampleConan(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def build(self):\n"
+"        env_build = AutoToolsBuildEnvironment(self)\n"
+"        with tools.environment_append(env_build.vars):\n"
+"            self.run(\"./configure\")\n"
+"            self.run(\"make\")"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:44
+msgid ""
+"You can change some variables like ``fpic``, ``libs``, ``include_paths`` and "
+"``defines`` before accessing the ``vars`` to override an automatic value or "
+"add new values:"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:47
+msgid ""
+" from conans import ConanFile, AutoToolsBuildEnvironment\n"
+"\n"
+" class ExampleConan(ConanFile):\n"
+"     ...\n"
+"\n"
+"     def build(self):\n"
+"         env_build = AutoToolsBuildEnvironment(self)\n"
+"         env_build.fpic = True\n"
+"         env_build.libs.append(\"pthread\")\n"
+"         env_build.defines.append(\"NEW_DEFINE=23\")\n"
+"         env_build.configure()\n"
+"         env_build.make()"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:63
+msgid ""
+"You can use it also with ``MSYS2``/``MinGW`` subsystems installed by setting "
+"the `win_bash` parameter in the constructor. It will run the the "
+"``configure`` and ``make`` commands inside a ``bash`` that has to be in the "
+"path or declared in ``CONAN_BASH_PATH``:"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:68
+msgid ""
+"from conans import ConanFile, AutoToolsBuildEnvironment\n"
+"import platform\n"
+"\n"
+"class ExampleConan(ConanFile):\n"
+"   settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"\n"
+"   def imports(self):\n"
+"     self.copy(\"*.dll\", dst=\"bin\", src=\"bin\")\n"
+"     self.copy(\"*.dylib*\", dst=\"bin\", src=\"lib\")\n"
+"\n"
+"   def build(self):\n"
+"      in_win = platform.system() == \"Windows\"\n"
+"      env_build = AutoToolsBuildEnvironment(self, win_bash=in_win)\n"
+"      env_build.configure()\n"
+"      env_build.make()"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:88
+msgid "Constructor"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:90
+msgid ""
+"class AutoToolsBuildEnvironment(object):\n"
+"\n"
+"    def __init__(self, conanfile, win_bash=False)"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:98
+#: ../../../reference/build_helpers/autotools.rst:224
+#: ../../../reference/build_helpers/autotools.rst:242
+msgid "Parameters:"
+msgstr "參數："
+
+#: ../../../reference/build_helpers/autotools.rst:97
+msgid ""
+"**conanfile** (Required): Conanfile object. Usually ``self`` in a conanfile."
+"py"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:98
+msgid ""
+"**win_bash**: (Optional, Defaulted to ``False``): When True, it will run the "
+"configure/make commands inside a bash."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:101
+msgid "Attributes"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:103
+msgid ""
+"You can adjust the automatically filled values modifying the attributes like "
+"this:"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:105
+msgid ""
+" from conans import ConanFile, AutoToolsBuildEnvironment\n"
+"\n"
+" class ExampleConan(ConanFile):\n"
+"     ...\n"
+"\n"
+"     def build(self):\n"
+"         autotools = AutoToolsBuildEnvironment(self)\n"
+"         autotools.fpic = True\n"
+"         autotools.libs.append(\"pthread\")\n"
+"         autotools.defines.append(\"NEW_DEFINE=23\")\n"
+"         autotools.configure()\n"
+"         autotools.make()"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:122
+msgid "fpic"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:125
+msgid ""
+"**Defaulted to**: ``True`` if ``fPIC`` option exists and ``True`` or when "
+"``fPIC`` exists and"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:125
+msgid ""
+"``False`` but option ``shared`` exists and ``True``. Otherwise ``None``."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:127
+msgid "Set it to ``True`` if you want to append the ``-fPIC`` flag."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:130
+msgid "libs"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:132
+msgid "List with library names of the requirements (``-l`` in ``LIBS``)."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:135
+msgid "include_paths"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:137
+msgid "List with the include paths of the requires (-I in CPPFLAGS)."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:140
+msgid "library_paths"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:142
+msgid "List with library paths of the requirements  (-L in LDFLAGS)."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:145
+msgid "defines"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:147
+msgid "List with variables that will be defined with ``-D``  in ``CPPFLAGS``."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:150
+msgid "flags"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:152
+msgid "List with compilation flags (``CFLAGS`` and ``CXXFLAGS``)."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:155
+msgid "cxx_flags"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:157
+msgid "List with only C++ compilation flags (``CXXFLAGS``)."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:160
+msgid "link_flags"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:162
+msgid "List with linker flags"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:165
+msgid "Properties"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:168
+msgid "vars"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:170
+msgid ""
+"Environment variables ``CPPFLAGS``, ``CXXFLAGS``, ``CFLAGS``, ``LDFLAGS``, "
+"``LIBS`` generated by the build helper to use them in the configure, make "
+"and install steps. This variables are generated dynamically with the values "
+"of the attributes and can also be modified to be used in the following "
+"configure, make or install steps:"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:174
+msgid ""
+"def build():\n"
+"    auotools = AutoToolsBuildEnvironment()\n"
+"    autotools.fpic = True\n"
+"    env_build_vars = autotools.vars\n"
+"    env_build_vars['RCFLAGS'] = '-O COFF'\n"
+"    autotools.configure(vars=env_build_vars)\n"
+"    autotools.make(vars=env_build_vars)\n"
+"    autotools.install(vars=env_build_vars)"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:186
+msgid "vars_dict"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:188
+msgid ""
+"Same behavior as ``vars`` but this property returns each variable "
+"``CPPFLAGS``, ``CXXFLAGS``, ``CFLAGS``, ``LDFLAGS``, ``LIBS`` as "
+"dictionaries."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:192
+msgid "Methods"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:195
+msgid "configure()"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:197
+msgid ""
+"def configure(self, configure_dir=None, args=None, build=None, host=None, "
+"target=None,\n"
+"              pkg_config_paths=None, vars=None)"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:202
+msgid "Configures `Autotools` project with the given parameters."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:206
+msgid ""
+"This method sets by default the ``--prefix`` argument to ``self."
+"package_folder`` whenever ``--prefix`` is not provided in the ``args`` "
+"parameter during the configure step."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:210
+msgid ""
+"**configure_dir** (Optional, Defaulted to ``None``): Directory where the "
+"``configure`` script is. If ``None``, it will use the current directory."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:212
+msgid ""
+"**args** (Optional, Defaulted to ``None``): A list of additional arguments "
+"to be passed to the ``configure`` script. Each argument will be escaped "
+"according to the current shell. No extra arguments will be added if "
+"``args=None``."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:214
+msgid ""
+"**build** (Optional, Defaulted to ``None``): To specify a value for the "
+"parameter ``--build``. If ``None`` it will try to detect the value if cross-"
+"building is detected according to the settings. If ``False``, it will not "
+"use this argument at all."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:216
+msgid ""
+"**host** (Optional, Defaulted to ``None``): To specify a value for the "
+"parameter ``--host``. If ``None`` it will try to detect the value if cross-"
+"building is detected according to the settings. If ``False``, it will not "
+"use this argument at all."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:218
+msgid ""
+"**target** (Optional, Defaulted to ``None``): To specify a value for the "
+"parameter ``--target``. If ``None`` it will try to detect the value if cross-"
+"building is detected according to the settings. If ``False``, it will not "
+"use this argument at all."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:220
+msgid ""
+"**pkg_config_paths** (Optional, Defaulted to ``None``): Specify folders (in "
+"a list) of relative paths to the install folder or absolute ones where to "
+"find ``*.pc`` files (by using the env var ``PKG_CONFIG_PATH``). If ``None`` "
+"is specified but the conanfile is using the ``pkg_config`` generator, the "
+"``self.install_folder`` will be added to the ``PKG_CONFIG_PATH`` in order to "
+"locate the pc files of the requirements of the conanfile."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:224
+msgid ""
+"**vars** (Optional, Defaulted to ``None``): Overrides custom environment "
+"variables in the configure step."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:227
+msgid "make()"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:229
+msgid "def make(self, args=\"\", make_program=None, target=None, vars=None)"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:233
+msgid "Builds `Autotools` project with the given parameters."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:236
+#: ../../../reference/build_helpers/autotools.rst:254
+msgid ""
+"**args** (Optional, Defaulted to ``\"\"``): A list of additional arguments "
+"to be passed to the ``make`` command. Each argument will be escaped "
+"accordingly to the current shell. No extra arguments will be added if "
+"``args=\"\"``."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:238
+#: ../../../reference/build_helpers/autotools.rst:256
+msgid ""
+"**make_program** (Optional, Defaulted to ``None``): Allows to specify a "
+"different ``make`` executable, e.j: ``mingw32-make``. The environment "
+"variable :ref:`CONAN_MAKE_PROGRAM<conan_make_program>` can be used too."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:240
+msgid ""
+"**target** (Optional, Defaulted to ``None``): Choose which target to build. "
+"This allows building of e.g. docs, shared libraries or install for some "
+"AutoTools projects."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:242
+msgid ""
+"**vars** (Optional, Defaulted to ``None``): Overrides custom environment "
+"variables in the make step."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:245
+msgid "install()"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:247
+msgid "def install(self, args=\"\", make_program=None, vars=None)"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:251
+msgid ""
+"Performs the install step of autotools calling ``make(target=\"install\")``."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:258
+msgid "Paramenters:"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:258
+msgid ""
+"**vars** (Optional, Defaulted to ``None``): Overrides custom environment "
+"variables in the install step."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:261
+msgid "Environment variables"
+msgstr "環境變數"
+
+#: ../../../reference/build_helpers/autotools.rst:263
+msgid ""
+"The following environment variables will also affect the "
+"`AutoToolsBuildEnvironment` helper class."
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:266
+msgid "NAME"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:266
+msgid "DESCRIPTION"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:268
+msgid "LIBS"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:268
+msgid "Library names to link"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:270
+msgid "LDFLAGS"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:270
+msgid "Link flags, (-L, -m64, -m32)"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:272
+msgid "CFLAGS"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:272
+msgid "Options for the C compiler (-g, -s, -m64, -m32, -fPIC)"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:274
+msgid "CXXFLAGS"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:274
+msgid "Options for the C++ compiler (-g, -s, -stdlib, -m64, -m32, -fPIC, -std)"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:276
+msgid "CPPFLAGS"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:276
+msgid "Preprocessor definitions (-D, -I)"
+msgstr ""
+
+#: ../../../reference/build_helpers/autotools.rst:281
+msgid ":ref:`Reference/Tools/environment_append <environment_append_tool>`"
+msgstr ""

@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.62\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/cmake_install.rst:4
+msgid "How to reuse cmake install for package() method"
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:6
+msgid ""
+"It is possible that your project's *CMakeLists.txt* has already defined some "
+"functionality that extracts the artifacts (headers, libraries, binaries) "
+"from the build and source folder to a predetermined place and does the post-"
+"processing (*e.g.*, strips rpaths). For example, one common practice is to "
+"use CMake `install <https://cmake.org/cmake/help/latest/command/install."
+"html>`_ directive to that end."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:10
+msgid ""
+"When using Conan, the install phase of CMake is wrapped in the ``package()`` "
+"method. That way the flags like :command:`conan create --keep-build` or the "
+"commands for the :ref:`package_dev_flow` are consistent with every step of "
+"the packaging process."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:14
+msgid ""
+"The following excerpt shows how to build and package with CMake within "
+"Conan. Mind that you need to configure CMake both in ``build()`` and in "
+"``package()``, since these methods are called independently."
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:17
+msgid ""
+"def _configure_cmake(self):\n"
+"    cmake = CMake(self)\n"
+"    cmake.definitions[\"SOME_DEFINITION\"] = \"VALUE\"\n"
+"    cmake.configure()\n"
+"    return cmake\n"
+"\n"
+"def build(self):\n"
+"    cmake = self._configure_cmake()\n"
+"    cmake.build()\n"
+"\n"
+"def package(self):\n"
+"    cmake = self._configure_cmake()\n"
+"    cmake.install()\n"
+"\n"
+"def package_info(self):\n"
+"    self.cpp_info.libs = [\"libname\"]"
+msgstr ""
+
+#: ../../../howtos/cmake_install.rst:37
+msgid ""
+"The ``package_info()`` method specifies the list of the necessary libraries, "
+"defines and flags for different build configurations for the consumers of "
+"the package. This is necessary as there is no possible way to extract this "
+"information from the CMake install automatically."
+msgstr ""

@@ -1,0 +1,1000 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.18\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/build_helpers/cmake.rst:4
+msgid "CMake"
+msgstr "CMake"
+
+#: ../../../reference/build_helpers/cmake.rst:6
+msgid ""
+"The `CMake` class helps us to invoke `cmake` command with the generator, "
+"flags and definitions, reflecting the specified Conan settings."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:8
+msgid "There are two ways to invoke your cmake tools:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:10
+msgid ""
+"Using the helper attributes ``cmake.command_line`` and ``cmake."
+"build_config``:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:12
+msgid ""
+"from conans import ConanFile, CMake\n"
+"\n"
+" class ExampleConan(ConanFile):\n"
+"     ...\n"
+"\n"
+"     def build(self):\n"
+"         cmake = CMake(self)\n"
+"         self.run('cmake \"%s\" %s' % (self.source_folder, cmake."
+"command_line))\n"
+"         self.run('cmake --build . %s' % cmake.build_config)\n"
+"         self.run('cmake --build . --target install')"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:25
+msgid "Using the helper methods:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:27
+msgid ""
+"from conans import ConanFile, CMake\n"
+"\n"
+"class ExampleConan(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        # same as cmake.configure(source_folder=self.source_folder, "
+"build_folder=self.build_folder)\n"
+"        cmake.configure()\n"
+"        cmake.build()\n"
+"        cmake.test() # Build the \"RUN_TESTS\" or \"test\" target\n"
+"        # Build the \"install\" target, defining CMAKE_INSTALL_PREFIX to "
+"self.package_folder\n"
+"        cmake.install()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:45
+msgid "Constructor"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:47
+msgid ""
+"class CMake(object):\n"
+"\n"
+"    def __init__(self, conanfile, generator=None, cmake_system_name=True,\n"
+"                 parallel=True, build_type=None, toolset=None, "
+"make_program=None,\n"
+"                 set_cmake_flags=False, msbuild_verbosity='minimal', "
+"cmake_program=None,\n"
+"                 generator_platform=None)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:72
+#: ../../../reference/build_helpers/cmake.rst:308
+#: ../../../reference/build_helpers/cmake.rst:322
+#: ../../../reference/build_helpers/cmake.rst:337
+#: ../../../reference/build_helpers/cmake.rst:351
+msgid "Parameters:"
+msgstr "參數："
+
+#: ../../../reference/build_helpers/cmake.rst:57
+msgid ""
+"**conanfile** (Required): Conanfile object. Usually ``self`` in a *conanfile."
+"py*"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:58
+msgid ""
+"**generator** (Optional, Defaulted to ``None``): Specify a custom generator "
+"instead of autodetect it. e.g., \"MinGW Makefiles\""
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:59
+msgid ""
+"**cmake_system_name** (Optional, Defaulted to ``True``): Specify a custom "
+"value for ``CMAKE_SYSTEM_NAME`` instead of autodetect it."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:60
+msgid ""
+"**parallel** (Optional, Defaulted to ``True``): If ``True``, will append the "
+"`-jN` attribute for parallel building being N the :ref:"
+"`cpu_count()<tools_cpu_count>`. Also applies to parallel test execution (by "
+"defining ``CTEST_PARALLEL_LEVEL`` environment variable)."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:62
+msgid ""
+"**build_type** (Optional, Defaulted to ``None``): Force the build type "
+"instead of taking the value from the settings. Note that "
+"``CMAKE_BUILD_TYPE`` will not be declared when using CMake multi-"
+"configuration generators such as Visual Studio or XCode as it will not have "
+"effect."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:65
+msgid ""
+"**toolset** (Optional, Defaulted to ``None``): Specify a toolset for Visual "
+"Studio."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:66
+msgid ""
+"**make_program** (Optional, Defaulted to ``None``): Indicate path to "
+"``make``."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:67
+msgid ""
+"**set_cmake_flags** (Optional, Defaulted to ``None``): Whether or not to set "
+"CMake flags like ``CMAKE_CXX_FLAGS``, ``CMAKE_C_FLAGS``, etc."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:68
+msgid ""
+"**msbuild_verbosity** (Optional, Defaulted to ``minimal``): verbosity level "
+"for MSBuild (in case of Visual Studio generator). Set this parameter to "
+"``None`` to avoid using it in the command line."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:71
+msgid ""
+"**cmake_program** (Optional, Defaulted to ``None``): Path to the custom "
+"cmake executable."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:72
+msgid ""
+"**generator_platform** (Optional, Defaulted to ``None``): Generator platform "
+"name or none to autodetect (-A cmake option)."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:75
+msgid "Attributes"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:78
+msgid "generator"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:80
+msgid ""
+"Specifies a custom CMake generator to use, see also `cmake-generators "
+"documentation <https://cmake.org/cmake/help/latest/manual/cmake-generators.7."
+"html>`_."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:83
+msgid "generator_platform"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:85
+msgid ""
+"Specifies a custom CMake generator platform to use, see also "
+"`CMAKE_GENERATOR_PLATFORM documentation <https://cmake.org/cmake/help/latest/"
+"variable/CMAKE_GENERATOR_PLATFORM.html>`_."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:88
+msgid "verbose"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:90
+msgid "**Defaulted to**: ``False``"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:92
+msgid ""
+"Set it to ``True`` or ``False`` to automatically set the definition "
+"``CMAKE_VERBOSE_MAKEFILE``."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:94
+msgid ""
+"from conans import ConanFile, CMake\n"
+"\n"
+"class ExampleConan(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.verbose = True\n"
+"        cmake.configure()\n"
+"        cmake.build()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:109
+msgid "build_folder (Read only)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:111
+msgid ""
+"Build folder where the ``configure()`` and ``build()`` methods will be "
+"called."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:114
+msgid "build_type [Deprecated]"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:116
+msgid ""
+"Build type can be forced with this variable instead of taking it from the "
+"settings."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:119
+msgid "flags (Read only)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:121
+msgid ""
+"Flag conversion of ``definitions`` to be used in the command line invocation "
+"(``-D``)."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:124
+msgid "is_multi_configuration (Read only)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:126
+msgid ""
+"Indicates whether the generator selected allows builds with multi "
+"configuration: Release, Debug... Multi configuration generators are Visual "
+"Studio and Xcode ones."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:130
+msgid "command_line (Read only)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:132
+msgid ""
+"Arguments and flags calculated by the build helper that will be applied. It "
+"indicates the generator, the Conan definitions and the flags converted from "
+"the specified Conan settings. For example:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:135
+msgid ""
+"-G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Release ... -DCONAN_C_FLAGS=-m64 -"
+"Wno-dev"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:140
+msgid "build_config (Read only)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:142
+msgid ""
+"Value for :command:`--config` option for Multi-configuration IDEs. This flag "
+"will only be set if the generator ``is_multi_configuration`` and "
+"``build_type`` was not forced in constructor class."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:145
+msgid "An example of the value of this property could be:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:147
+msgid "--config Release"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:152
+msgid "parallel"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:154
+msgid "**Defaulted to**: ``True``"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:156
+msgid ""
+"Run CMake process in parallel for compilation, installation and testing. "
+"This is translated into the proper command line argument: For ``Unix "
+"Makefiles`` it is ``-jX`` and for ``Visual Studio`` it is ``/m:X``."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:159
+msgid "However, the parallel executing can be changed for testing like this:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:161
+msgid ""
+"cmake = CMake(self)\n"
+"cmake.configure()\n"
+"cmake.build()  # 'parallel' is enabled by default\n"
+"cmake.parallel = False\n"
+"cmake.test()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:169
+msgid ""
+"In the case of ``cmake.test()`` this flag sets the ``CTEST_PARALLEL_LEVEL`` "
+"variable to the according value in :ref:`tools_cpu_count`."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:172
+msgid "definitions"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:174
+msgid ""
+"The CMake helper will automatically append some definitions based on your "
+"settings:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:177
+#: ../../../reference/build_helpers/cmake.rst:235
+msgid "Variable"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:177
+#: ../../../reference/build_helpers/cmake.rst:235
+msgid "Description"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:179
+msgid "CMAKE_BUILD_TYPE"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:179
+msgid ""
+"Debug, Release... from ``self.settings.build_type`` or ``build_type`` "
+"attribute **only** if ``is_multi_configuration``"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:181
+msgid "CMAKE_OSX_ARCHITECTURES"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:181
+msgid "``i386`` if architecture is x86 in an OSX system"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:183
+msgid "BUILD_SHARED_LIBS"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:183
+msgid "Only if your recipe has a ``shared`` option"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:185
+msgid "CONAN_COMPILER"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:185
+msgid "Conan internal variable to check the compiler"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:187
+msgid "CMAKE_SYSTEM_NAME"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:187
+msgid "Set to ``self.settings.os`` value if cross-building is detected"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:189
+msgid "CMAKE_SYSTEM_VERSION"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:189
+msgid "Set to ``self.settings.os_version`` value if cross-building is detected"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:191
+msgid "CMAKE_ANDROID_ARCH_ABI"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:191
+msgid "Set to a suitable value if cross-building to an Android is detected"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:193
+msgid "CONAN_LIBCXX"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:193
+msgid "Set to ``self.settings.compiler.libcxx`` value"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:195
+msgid "CONAN_CMAKE_SYSTEM_PROCESSOR"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:195
+#: ../../../reference/build_helpers/cmake.rst:197
+#: ../../../reference/build_helpers/cmake.rst:199
+#: ../../../reference/build_helpers/cmake.rst:201
+#: ../../../reference/build_helpers/cmake.rst:203
+msgid "Definition set only if same environment variable is declared by user"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:197
+msgid "CONAN_CMAKE_FIND_ROOT_PATH"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:199
+msgid "CONAN_CMAKE_FIND_ROOT_PATH_MODE_PROGRAM"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:201
+msgid "CONAN_CMAKE_FIND_ROOT_PATH_MODE_LIBRARY"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:203
+msgid "CONAN_CMAKE_FIND_ROOT_PATH_MODE_INCLUDE"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:205
+msgid "CONAN_CMAKE_POSITION_INDEPENDENT_CODE"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:205
+msgid ""
+"Set when ``fPIC`` option exists and ``True`` or ``fPIC`` exists and "
+"``False`` but ``shared`` option exists and ``True``"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:207
+msgid "CONAN_SHARED_LINKER_FLAGS"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:207
+msgid "Set to ``-m32`` or ``-m64`` values based on the architecture"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:209
+msgid "CONAN_C_FLAGS"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:209
+#: ../../../reference/build_helpers/cmake.rst:211
+msgid ""
+"Set to ``-m32`` or ``-m64`` values based on the architecture and ``/MP`` for "
+"MSVS"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:211
+msgid "CONAN_CXX_FLAGS"
+msgstr "CONAN_CXX_FLAGS"
+
+#: ../../../reference/build_helpers/cmake.rst:213
+msgid "CONAN_LINK_RUNTIME"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:213
+msgid ""
+"Set to the runtime value from ``self.settings.compiler.runtime`` for MSVS"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:215
+msgid "CONAN_CMAKE_CXX_STANDARD"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:215
+msgid ""
+"Set to the ``self.settings.compiler.cppstd`` value (or ``self.settings."
+"cppstd`` for backward compatibility)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:217
+msgid "CONAN_CMAKE_CXX_EXTENSIONS"
+msgstr "CONAN_CMAKE_CXX_EXTENSIONS"
+
+#: ../../../reference/build_helpers/cmake.rst:217
+msgid ""
+"Set to ``ON`` or ``OFF`` value when GNU extensions for the given C++ "
+"standard are enabled"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:219
+msgid "CONAN_STD_CXX_FLAG"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:219
+msgid ""
+"Set to the flag corresponding to the C++ standard defined in ``self.settings."
+"compiler.cppstd``. Used for CMake < 3.1)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:221
+msgid "CMAKE_EXPORT_NO_PACKAGE_REGISTRY"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:221
+msgid "Defined by default to disable the package registry"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:223
+msgid "CONAN_IN_LOCAL_CACHE"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:223
+msgid ""
+"``ON`` if the build runs in local cache, ``OFF`` if running in a user folder"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:225
+msgid "CONAN_EXPORTED"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:225
+msgid "Defined when CMake is called using Conan CMake helper"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:227
+msgid "ANDROID_ABI"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:227
+msgid "Just alias for CMAKE_ANDROID_ARCH_ABI"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:229
+msgid "ANDROID_NDK"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:229
+msgid ""
+"Defined when one of ANDROID_NDK_ROOT or ANDROID_NDK_HOME environment "
+"variables presented"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:232
+msgid ""
+"There are some definitions set to be used later on the the ``install()`` "
+"step too:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:237
+msgid "CMAKE_INSTALL_PREFIX"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:237
+msgid "Set to ``conanfile.package_folder`` value."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:239
+msgid "CMAKE_INSTALL_BINDIR"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:239
+#: ../../../reference/build_helpers/cmake.rst:241
+#: ../../../reference/build_helpers/cmake.rst:243
+msgid "Set to *bin* inside the package folder."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:241
+msgid "CMAKE_INSTALL_SBINDIR"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:243
+msgid "CMAKE_INSTALL_LIBEXECDIR"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:245
+msgid "CMAKE_INSTALL_LIBDIR"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:245
+msgid "Set to *lib* inside the package folder."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:247
+msgid "CMAKE_INSTALL_INCLUDEDIR"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:247
+#: ../../../reference/build_helpers/cmake.rst:249
+msgid "Set to *include* inside the package folder."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:249
+msgid "CMAKE_INSTALL_OLDINCLUDEDIR"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:251
+msgid "CMAKE_INSTALL_DATAROOTDIR"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:251
+msgid "Set to *share* inside the package folder."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:254
+msgid ""
+"But you can change the automatic definitions after the ``CMake()`` object "
+"creation using the ``definitions`` property or even add your own ones:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:257
+msgid ""
+"from conans import ConanFile, CMake\n"
+"\n"
+"class ExampleConan(ConanFile):\n"
+"    ...\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        cmake.definitions[\"CMAKE_SYSTEM_NAME\"] = \"Generic\"\n"
+"        cmake.definitions[\"MY_CUSTOM_DEFINITION\"] = True\n"
+"        cmake.configure()\n"
+"        cmake.build()\n"
+"        cmake.install()  # Build --target=install"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:272
+msgid ""
+"Note that definitions changed **after** the ``configure()`` call will "
+"**not** take effect later on the ``build()``, ``test()`` or ``install()`` "
+"ones."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:276
+msgid "Methods"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:279
+msgid "configure()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:281
+msgid ""
+"def configure(self, args=None, defs=None, source_dir=None, build_dir=None,\n"
+"              source_folder=None, build_folder=None, "
+"cache_build_folder=None,\n"
+"              pkg_config_paths=None)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:287
+msgid "Configures `CMake` project with the given parameters."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:290
+#: ../../../reference/build_helpers/cmake.rst:320
+msgid ""
+"**args** (Optional, Defaulted to ``None``): A list of additional arguments "
+"to be passed to the ``cmake`` command. Each argument will be escaped "
+"according to the current shell. No extra arguments will be added if "
+"``args=None``"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:291
+msgid ""
+"**defs** (Optional, Defaulted to ``None``): A dict that will be converted to "
+"a list of CMake command line variable definitions of the form ``-"
+"DKEY=VALUE``. Each value will be escaped according to the current shell and "
+"can be either ``str``, ``bool`` or of numeric type"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:292
+msgid ""
+"**source_dir** (Optional, Defaulted to ``None``): **[DEPRECATED]** Use "
+"``source_folder`` instead. CMake's source directory where *CMakeLists.txt* "
+"is located. The default value is the ``build`` folder if ``None`` is "
+"specified (or the ``source`` folder if ``no_copy_source`` is specified). "
+"Relative paths are allowed and will be relative to ``build_folder``."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:295
+msgid ""
+"**build_dir** (Optional, Defaulted to ``None``): **[DEPRECATED]** Use "
+"``build_folder`` instead. CMake's output directory. The default value is the "
+"package ``build`` root folder if ``None`` is specified. The ``CMake`` object "
+"will store ``build_folder`` internally for subsequent calls to ``build()``."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:298
+msgid ""
+"**source_folder**: CMake's source directory where ``CMakeLists.txt`` is "
+"located. The default value is the ``self.source_folder``. Relative paths are "
+"allowed and will be relative to ``self.source_folder``."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:300
+msgid ""
+"**build_folder**: CMake's output directory. The default value is the ``self."
+"build_folder`` if ``None`` is specified. The ``CMake`` object will store "
+"``build_folder`` internally for subsequent calls to ``build()``."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:302
+msgid ""
+"**cache_build_folder** (Optional, Defaulted to ``None``): Use the given "
+"subfolder as build folder when building the package in the local cache. This "
+"argument doesn't have effect when the package is being built in user folder "
+"with :command:`conan build` but overrides **build_folder** when working in "
+"the local cache. See :ref:`self.in_local_cache<in_local_cache>`."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:305
+msgid ""
+"**pkg_config_paths** (Optional, Defaulted to ``None``): Specify folders (in "
+"a list) of relative paths to the install folder or absolute ones where to "
+"find ``*.pc`` files (by using the env var ``PKG_CONFIG_PATH``). If ``None`` "
+"is specified but the conanfile is using the ``pkg_config`` generator, the "
+"``self.install_folder`` will be added to the ``PKG_CONFIG_PATH`` in order to "
+"locate the pc files of the requirements of the conanfile."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:311
+msgid "build()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:313
+msgid "def build(self, args=None, build_dir=None, target=None)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:317
+msgid "Builds `CMake` project with the given parameters."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:321
+msgid ""
+"**build_dir** (Optional, Defaulted to ``None``): CMake's output directory. "
+"If ``None`` is specified the ``build_dir`` from ``configure()`` will be used."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:322
+msgid ""
+"**target** (Optional, Defaulted to ``None``): Specifies the target to "
+"execute. The default *all* target will be built if ``None`` is specified. "
+"``\"install\"`` can be used to relocate files to aid packaging."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:325
+msgid "test()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:327
+msgid ""
+"def test(args=None, build_dir=None, target=None, output_on_failure=False)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:331
+msgid ""
+"Build `CMake` test target (could be RUN_TESTS in multi-config projects or "
+"``test`` in single-config projects), which usually means building and "
+"running unit tests"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:334
+#: ../../../reference/build_helpers/cmake.rst:349
+msgid ""
+"**args** (Optional, Defaulted to ``None``): A list of additional arguments "
+"to be passed to the ``cmake`` command. Each argument will be escaped "
+"according to the current shell. No extra arguments will be added if "
+"``args=None``."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:335
+#: ../../../reference/build_helpers/cmake.rst:350
+msgid ""
+"**build_dir** (Optional, Defaulted to ``None``): CMake's output directory. "
+"If ``None`` is specified the ``build_folder`` from ``configure()`` will be "
+"used."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:336
+msgid ""
+"**target** (Optional, default to ``None``). Alternative target name for "
+"running the tests. If not defined RUN_TESTS or ``test`` will be used."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:337
+msgid ""
+"**output_on_failure** (Optional, default to ``False``). Enables ctest to "
+"show output of failed tests by defining ``CTEST_OUTPUT_ON_FAILURE`` "
+"environment variable (same effect as ``ctest --output-on-failure``)."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:340
+msgid "install()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:342
+msgid "def install(args=None, build_dir=None)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:346
+msgid "Installs `CMake` project with the given parameters."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:357
+msgid "patch_config_paths() [EXPERIMENTAL]"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:359
+msgid "def patch_config_paths()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:365
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:367
+msgid ""
+"This method changes references to the absolute path of the installed package "
+"in exported CMake config files to the appropriate Conan variable. Method "
+"also changes references to other packages installation paths in export CMake "
+"config files to Conan variable with their installation roots. This makes "
+"most CMake config files portable."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:372
+msgid ""
+"For example, if a package foo installs a file called *fooConfig.cmake* to be "
+"used by cmake's ``find_package()`` method, normally this file will contain "
+"absolute paths to the installed package folder, for example it will contain "
+"a line such as:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:375
+msgid "SET(Foo_INSTALL_DIR /home/developer/.conan/data/Foo/1.0.0/...)"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:379
+msgid ""
+"This will cause cmake's ``find_package()`` method to fail when someone else "
+"installs the package via Conan. This function will replace such paths to:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:382
+msgid "SET(Foo_INSTALL_DIR ${CONAN_FOO_ROOT})"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:386
+msgid ""
+"Which is a variable that is set by *conanbuildinfo.cmake*, so that "
+"``find_package()`` now correctly works on this Conan package."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:388
+msgid ""
+"For dependent packages method replaces lines with references to dependencies "
+"installation paths such as:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:390
+msgid ""
+"SET_TARGET_PROPERTIES(foo PROPERTIES INTERFACE_INCLUDE_DIRECTORIES \"/home/"
+"developer/.conan/data/Bar/1.0.0/user/channel/id/include\")"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:394
+msgid "to following lines:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:396
+msgid ""
+"SET_TARGET_PROPERTIES(foo PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "
+"\"${CONAN_BAR_ROOT}/include\")"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:400
+msgid ""
+"If the ``install()`` method of the CMake object in the conanfile is used, "
+"this function should be called **after** that invocation. For example:"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:403
+msgid ""
+"def build(self):\n"
+"    cmake = CMake(self)\n"
+"    cmake.configure()\n"
+"    cmake.build()\n"
+"    cmake.install()\n"
+"    cmake.patch_config_paths()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:413
+msgid "get_version()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:415
+msgid ""
+"@staticmethod\n"
+"def get_version()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:420
+msgid ""
+"Returns the CMake version in a ``conans.model.Version`` object as it is "
+"evaluated by the command line. Will raise if cannot resolve it to valid "
+"version."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:424
+msgid "Environment variables"
+msgstr "環境變數"
+
+#: ../../../reference/build_helpers/cmake.rst:426
+msgid ""
+"There are some environment variables that will also affect the ``CMake()`` "
+"helper class. Check them in the :ref:`CMAKE RELATED "
+"VARIABLES<cmake_related_variables>` section."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:430
+msgid "Example"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:431
+msgid ""
+"The following example of ``conanfile.py`` shows you how to manage a project "
+"with conan and CMake."
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:433
+msgid ""
+"from conans import ConanFile, CMake\n"
+"\n"
+"class SomePackage(ConanFile):\n"
+"    name = \"SomePackage\"\n"
+"    version = \"1.0.0\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    generators = \"cmake\"\n"
+"\n"
+"def configure_cmake(self):\n"
+"    cmake = CMake(self)\n"
+"\n"
+"    # put definitions here so that they are re-used in cmake between\n"
+"    # build() and package()\n"
+"    cmake.definitions[\"SOME_DEFINITION_NAME\"] = \"On\"\n"
+"\n"
+"    cmake.configure()\n"
+"    return cmake\n"
+"\n"
+"def build(self):\n"
+"    cmake = self.configure_cmake()\n"
+"    cmake.build()\n"
+"\n"
+"    # run unit tests after the build\n"
+"    cmake.test()\n"
+"\n"
+"    # run custom make command\n"
+"    self.run(\"make -j3 check)\n"
+"\n"
+"def package(self):\n"
+"    cmake = self.configure_cmake()\n"
+"    cmake.install()"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:468
+msgid "Default used generators"
+msgstr ""
+
+#: ../../../reference/build_helpers/cmake.rst:470
+msgid ""
+"When a compiler or its version is not detected, the CMake helper uses a "
+"default generator based on the platform operating system. For Unix systems "
+"it generates ``Unix Makefiles``. For Windows there is no default generator, "
+"it will be detected by CMake automatically."
+msgstr ""

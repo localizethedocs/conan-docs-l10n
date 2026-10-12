@@ -1,0 +1,264 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.39\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:2
+msgid "Manage RPATHs"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:4
+msgid ""
+"The **rpath** is encoded inside dynamic libraries and executables and helps "
+"the linker to find its required shared libraries."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:7
+msgid ""
+"If we have an executable, **my_exe**, that requires a shared library, "
+"**shared_lib_1**, and **shared_lib_1**, in turn, requires another "
+"**shared_lib_2**."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:10
+msgid "So the **rpaths** values are:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:13
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:62
+msgid "File"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:13
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:62
+msgid "rpath"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:15
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:64
+msgid "my_exe"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:15
+msgid "/path/to/shared_lib_1"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:17
+msgid "shared_lib_1"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:17
+msgid "/path/to/shared_lib_2"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:19
+msgid "shared_lib_2"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:22
+msgid ""
+"In **Linux** if the linker doesn't find the library in **rpath**, it will "
+"continue the search in **system defaults paths** (LD_LIBRARY_PATH... etc) In "
+"OSX, if the linker detects an invalid **rpath** (the file does not exist "
+"there), it will fail."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:27
+msgid "Default Conan approach"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:29
+msgid ""
+"The consumer project of dependencies with shared libraries needs to import "
+"them to the executable directory to be able to run it:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:32
+msgid "**conanfile.txt**"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:34
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"\n"
+"[imports]\n"
+"bin, *.dll -> ./bin # Copies all dll files from packages bin folder to my "
+"\"bin\" folder\n"
+"lib, *.dylib* -> ./bin # Copies all dylib files from packages lib folder to "
+"my \"bin\" folder"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:43
+msgid ""
+"On **Windows** this approach works well, importing the shared library to the "
+"directory containing your executable is a very common procedure."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:46
+msgid ""
+"On **Linux** there is an additional problem, the dynamic linker doesn't look "
+"by default in the executable directory, and you will need to adjust the "
+"`LD_LIBRARY_PATH` environment variable like this:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:50
+msgid "LD_LIBRARY_PATH=$(pwd) && ./mybin"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:54
+msgid ""
+"On **OSX** if absolute rpaths are hardcoded in an executable or shared "
+"library and they don't exist the executable will fail to run. This is the "
+"most common problem when we reuse packages in a different environment from "
+"where the artifacts have been generated."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:58
+msgid ""
+"So for **OSX**, Conan, by default, when you build your library with "
+"**CMake**, the rpaths will be generated without any path:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:64
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:66
+msgid "shared_lib_1.dylib"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:66
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:68
+msgid "shared_lib_2.dylib"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:71
+msgid ""
+"The ``conan_basic_setup()`` macro will set the ``set(CMAKE_SKIP_RPATH 1)`` "
+"in OSX."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:73
+msgid ""
+"You can skip this default behavior by passing the ``KEEP_RPATHS`` parameter "
+"to the ``conan_basic_setup`` macro:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:75
+msgid ""
+"include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+"conan_basic_setup(KEEP_RPATHS)\n"
+"\n"
+"add_executable(timer timer.cpp)\n"
+"target_link_libraries(timer ${CONAN_LIBS})"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:84
+msgid ""
+"If you are using ``autotools`` Conan won't auto-adjust the rpaths behavior. "
+"if you want to follow this default behavior you will probably need to "
+"replace the ``install_name`` in the **configure** or **MakeFile** generated "
+"files in your recipe to not use $rpath:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:88
+msgid ""
+"replace_in_file(\"./configure\", r\"-install_name \\$rpath/\", \"-"
+"install_name \")"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:95
+msgid "Different approaches"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:97
+msgid ""
+"You can adjust the **rpaths** in the way that adapts better to your needs."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:99
+msgid ""
+"If you are using ``CMake`` take a look to the `CMake RPATH handling`_ guide."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:101
+msgid ""
+"Remember to pass the ``KEEP_RPATHS`` variable to the ``conan_basic_setup``:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:103
+msgid ""
+"include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\n"
+"conan_basic_setup(KEEP_RPATHS)"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:108
+msgid ""
+"Then, you could, for example, use the ``@executable_path`` in OSX and "
+"``$ORIGIN`` in Linux  to adjust a relative path from the executable. Also, "
+"enabling `CMAKE_BUILD_WITH_INSTALL_RPATH`_ will build the application with "
+"the RPATH value of ``CMAKE_INSTALL_RPATH`` and avoid the need to be relinked "
+"when installed."
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:112
+msgid ""
+"if (APPLE)\n"
+"    set(CMAKE_INSTALL_RPATH \"@executable_path/../lib\")\n"
+"else()\n"
+"    set(CMAKE_INSTALL_RPATH \"$ORIGIN/../lib\")\n"
+"endif()\n"
+"\n"
+"set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:122
+msgid "You can use this imports statements in the consumer project:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:124
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"\n"
+"[imports]\n"
+"bin, *.dll -> ./bin # Copies all dll files from packages bin folder to my "
+"\"bin\" folder\n"
+"lib, *.dylib* -> ./lib # Copies all dylib files from packages lib folder to "
+"my \"lib\" folder\n"
+"lib, *.so* -> ./lib # Copies all so files from packages lib folder to my "
+"\"lib\" folder"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:134
+msgid "And your final application can follow this layout:"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:137
+msgid ""
+"bin\n"
+" |_____ my_executable\n"
+" |_____ mylib.dll\n"
+" |\n"
+"lib\n"
+" |_____ libmylib.so\n"
+" |_____ libmylib.dylib"
+msgstr ""
+
+#: ../../../howtos/manage_shared_libraries/rpaths.rst:148
+msgid ""
+"You could move the entire application folder to any location and the shared "
+"libraries will be located correctly."
+msgstr ""

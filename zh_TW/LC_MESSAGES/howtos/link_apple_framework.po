@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.30\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/link_apple_framework.rst:4
+msgid "How to link with Apple Frameworks"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:6
+msgid ""
+"It is common in MacOS that your Conan package needs to link with a complete "
+"Apple framework, and, of course, you want to propagate this information to "
+"all projects/libraries that use your package."
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:9
+msgid ""
+"With regular libraries, use ``self.cpp_info.libs`` object to append to it "
+"all the libraries:"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:11
+msgid ""
+"def package_info(self):\n"
+"\n"
+"    self.cpp_info.libs = [\"SDL2\"]\n"
+"    self.cpp_info.libs.append(\"OpenGL32\")"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:18
+msgid ""
+"With frameworks we need to use ``self.cpp_info.frameworks`` in a similar "
+"manner:"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:20
+msgid ""
+"def package_info(self):\n"
+"\n"
+"    self.cpp_info.libs = [\"SDL2\"]\n"
+"\n"
+"    self.cpp_info.frameworks.extend([\"Carbon\", \"CoreAudio\", "
+"\"Security\", \"IOKit\"])"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:33
+msgid "How to package Apple Frameworks"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:35
+msgid ""
+"To package a **MyFramework** Apple framework, copy/create a folder "
+"``MyFramework.framework`` to your package folder, where you should put all "
+"the subdirectories (``Headers``, ``Modules``, etc)."
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:39
+msgid ""
+"def package(self):\n"
+"    # If you have the framework folder built in your build_folder:\n"
+"    self.copy(\"MyFramework.framework/*\", symlinks=True)\n"
+"    # Or build the destination folder:\n"
+"    tools.mkdir(\"MyFramework.framework/Headers\")\n"
+"    self.copy(\"*.h\", dst=\"MyFramework.framework/Headers\")\n"
+"    # ..."
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:49
+msgid ""
+"Declare the framework in the ``cpp_info`` object, the directory of the "
+"framework folder (self.package_folder) into the ``cpp_info.frameworkdirs`` "
+"and the framework name into the ``cpp_info.frameworks``."
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:53
+msgid ""
+"def package_info(self):\n"
+"    ...\n"
+"    self.cpp_info.frameworkdirs.append(self.package_folder)\n"
+"    self.cpp_info.frameworks.append(\"MyFramework\")"
+msgstr ""

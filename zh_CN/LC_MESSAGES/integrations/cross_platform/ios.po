@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.35\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/cross_platform/ios.rst:4
+msgid "iOS, tvOS, watchOS"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:9
+msgid "Using Darwin toolchain package (build require)"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:13
+#: ../../../integrations/cross_platform/ios.rst:46
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:15
+msgid ""
+"One example of a build requires implementing a toolchain to cross-compile to "
+"iOS, tvOS or watchOS, is the `Darwin Toolchain <https://github.com/"
+"theodelrieu/conan-darwin-toolchain>`_  package. Although this package is not "
+"in Conan Center Index you can check it to see an example of how to use a "
+"toolchain for cross-compilation by using a build requires. You can use a "
+"profile like the following to cross-build your packages for ``iOS``,  "
+"``watchOS`` and ``tvOS``:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:21
+msgid "ios_profile"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:21
+msgid ""
+"include(default)\n"
+"\n"
+"[settings]\n"
+"os=iOS\n"
+"os.version=9.0\n"
+"arch=armv7\n"
+"\n"
+"[build_requires]\n"
+"darwin-toolchain/1.0@theodelrieu/stable"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:35
+msgid "$ conan install . --profile ios_profile"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:42
+msgid "Use built-in Conan toolchain"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:48
+msgid ""
+"Conan will generate a toolchain for iOS if the recipe is using a :ref:`conan-"
+"cmake-toolchain`. This toolchain provides a minimal implementation "
+"supporting only the CMake XCode generator. It will be extended in the future "
+"but at the current version (1.31.0) is just for testing purpouses."
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:52
+msgid "For using it, create a regular profile for the *host* context:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:54
+msgid "**profile_host_ios**"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:54
+msgid ""
+"[settings]\n"
+" os=iOS\n"
+" os.version=12.0\n"
+" arch=armv8\n"
+" compiler=apple-clang\n"
+" compiler.version=12.0\n"
+" compiler.libcxx=libc++\n"
+" build_type=Release"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:66
+msgid ""
+"Together with the files created by the generators that make it possible to "
+"find and link the requirements, :command:`conan install` command will "
+"generate a toolchain file like the following one:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:69
+msgid "**conan_toolchain.cmake** (some parts are stripped)"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:69
+msgid ""
+" set(CMAKE_BUILD_TYPE \"Release\" CACHE STRING \"Choose the type of build.\" "
+"FORCE)\n"
+"\n"
+" # set cmake vars\n"
+" set(CMAKE_SYSTEM_NAME iOS)\n"
+" set(CMAKE_SYSTEM_VERSION 12.0)\n"
+" set(DEPLOYMENT_TARGET ${CONAN_SETTINGS_HOST_MIN_OS_VERSION})\n"
+" # Set the architectures for which to build.\n"
+" set(CMAKE_OSX_ARCHITECTURES arm64)\n"
+" # Setting CMAKE_OSX_SYSROOT SDK, when using Xcode generator the name is "
+"enough\n"
+" # but full path is necessary for others\n"
+" set(CMAKE_OSX_SYSROOT iphoneos)"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:87
+msgid ""
+"With this toolchain file you can execute CMake's command to generate the "
+"binaries:"
+msgstr ""
+
+#: ../../../integrations/cross_platform/ios.rst:89
+msgid ""
+"conan install <conanfile> --profile:host=profile_host_ios --profile:"
+"build=default\n"
+"cmake . -GXcode -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake\n"
+"cmake --build . --config Release"
+msgstr ""

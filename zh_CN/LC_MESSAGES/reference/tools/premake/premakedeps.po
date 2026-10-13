@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.15\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/premake/premakedeps.rst:4
+msgid "PremakeDeps"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/tools/premake/premakedeps.rst:8
+msgid "The ``PremakeDeps`` is the dependencies generator for Premake."
+msgstr ""
+
+#: ../../../reference/tools/premake/premakedeps.rst:10
+msgid "The ``PremakeDeps`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/tools/premake/premakedeps.rst:12
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/tools/premake/premakedeps.rst:12
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"PremakeDeps\""
+msgstr ""
+
+#: ../../../reference/tools/premake/premakedeps.rst:19
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/tools/premake/premakedeps.rst:19
+msgid ""
+"[generators]\n"
+"PremakeDeps"
+msgstr ""
+
+#: ../../../reference/tools/premake/premakedeps.rst:25
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/tools/premake/premakedeps.rst:27
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.premake import PremakeDeps\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"zlib/1.2.11\"\n"
+"\n"
+"    def generate(self):\n"
+"        bz = PremakeDeps(self)\n"
+"        bz.generate()"
+msgstr ""
+
+#: ../../../reference/tools/premake/premakedeps.rst:41
+msgid "Generated files"
+msgstr "生成的文件"
+
+#: ../../../reference/tools/premake/premakedeps.rst:43
+msgid ""
+"When the ``PremakeDeps`` generator is used, every invocation of ``conan "
+"install`` will generate a ``include('conandeps.premake5.lua')`` that can be "
+"included and used in the project:"
+msgstr ""
+
+#: ../../../reference/tools/premake/premakedeps.rst:47
+msgid ""
+"-- premake5.lua\n"
+"\n"
+"include('conandeps.premake5.lua')\n"
+"\n"
+"workspace \"HelloWorld\"\n"
+"    conan_setup()\n"
+"    configurations { \"Debug\", \"Release\" }\n"
+"    platforms { \"x86_64\" }"
+msgstr ""

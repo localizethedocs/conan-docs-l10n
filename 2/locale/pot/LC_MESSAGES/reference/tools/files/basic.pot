@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 15:09+0000\n"
+"POT-Creation-Date: 2026-10-13 16:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -132,8 +132,8 @@ msgstr ""
 #: ../../../reference/tools/files/basic.rst:164
 #: ../../../reference/tools/files/basic.rst:183
 #: ../../../reference/tools/files/basic.rst:202
-#: ../../../reference/tools/files/basic.rst:306
-#: ../../../reference/tools/files/basic.rst:336
+#: ../../../reference/tools/files/basic.rst:315
+#: ../../../reference/tools/files/basic.rst:345
 msgid "Usage:"
 msgstr ""
 
@@ -696,6 +696,20 @@ msgid ""
 "recommendation while downloading sources from the internet."
 msgstr ""
 
+#: ../../../reference/tools/files/basic.rst:262
+msgid ""
+"By default, if no ``extract_filter`` argument or ``tools.files.unzip:"
+"filter`` conf is defined, Conan extracts ``tar`` files using the "
+"``fully_trusted`` filter, also with Python 3.14 or later. This is done to "
+"avoid breaking existing packages (the ``data`` filter, for example, removes "
+"setuid/setgid/sticky bits and group/other write permissions) and because the "
+"extracted contents (source code or binaries) are going to be compiled or "
+"executed anyway, so archives must always be fully trusted. This default is "
+"not applied to ``.zip`` files, which are extracted with Python ``zipfile`` "
+"and are not affected by these filters. Read more in :ref:`the security "
+"guidelines<security_archive_extraction>`."
+msgstr ""
+
 #: ../../../conan_sources/conan/tools/files/files.py:docstring of
 #: conan.tools.files.files.unzip:1
 msgid "Extract different compressed formats"
@@ -753,11 +767,11 @@ msgid ""
 "see fnmatch documentation for more details."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:267
+#: ../../../reference/tools/files/basic.rst:276
 msgid "conan.tools.files.update_conandata()"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:269
+#: ../../../reference/tools/files/basic.rst:278
 msgid ""
 "This function reads the ``conandata.yml`` inside the exported folder in the "
 "conan cache, if it exists. If the ``conandata.yml`` does not exist, it will "
@@ -767,7 +781,7 @@ msgid ""
 "saved in the same place."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:275
+#: ../../../reference/tools/files/basic.rst:284
 msgid ""
 "This helper can only be used within the ``export()`` method, it can raise "
 "otherwise. One application is to capture in the ``conandata.yml`` the scm "
@@ -801,7 +815,7 @@ msgstr ""
 msgid "(Required) A dictionary (can be nested), of values to update"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:286
+#: ../../../reference/tools/files/basic.rst:295
 msgid "conan.tools.files.trim_conandata()"
 msgstr ""
 
@@ -812,20 +826,20 @@ msgid ""
 "current version only"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:295
+#: ../../../reference/tools/files/basic.rst:304
 msgid ""
 "The ``conan.tools.files.trim_conandata()`` function is in **preview**. See :"
 "ref:`the Conan stability<stability>` section for more information."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:299
+#: ../../../reference/tools/files/basic.rst:308
 msgid ""
 "This function modifies the ``conandata.yml`` inside the exported folder in "
 "the conan cache, if it exists, and keeps only the information related to the "
 "currently built version."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:302
+#: ../../../reference/tools/files/basic.rst:311
 msgid ""
 "This helper can only be used within the ``export()`` method or "
 "``post_export()`` :ref:`hook<reference_extensions_hooks>`, it may raise in "
@@ -834,7 +848,7 @@ msgid ""
 "recipe revisions of the rest."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:308
+#: ../../../reference/tools/files/basic.rst:317
 msgid ""
 "from conan import ConanFile\n"
 "from conan.tools.files import trim_conandata\n"
@@ -848,7 +862,7 @@ msgid ""
 "        trim_conandata(self)"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:325
+#: ../../../reference/tools/files/basic.rst:334
 msgid "conan.tools.files.collect_libs()"
 msgstr ""
 
@@ -881,7 +895,7 @@ msgstr ""
 msgid "A list with the library names"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:333
+#: ../../../reference/tools/files/basic.rst:342
 msgid ""
 "This tool collects the libraries searching directly inside the package "
 "folder and returns them in no specific order. If libraries are inter-"
@@ -889,7 +903,7 @@ msgid ""
 "correct linking order."
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:338
+#: ../../../reference/tools/files/basic.rst:347
 msgid ""
 "from conan.tools.files import collect_libs\n"
 "\n"
@@ -899,7 +913,7 @@ msgid ""
 "    self.cpp_info.libs = collect_libs(self)"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:346
+#: ../../../reference/tools/files/basic.rst:355
 msgid ""
 "For UNIX libraries starting with **lib**, like *libmath.a*, this tool will "
 "collect the library name **math**. Regarding symlinks, this tool will keep "
@@ -909,7 +923,7 @@ msgid ""
 "list:"
 msgstr ""
 
-#: ../../../reference/tools/files/basic.rst:352
+#: ../../../reference/tools/files/basic.rst:361
 msgid ""
 "-rwxr-xr-x libmath.1.0.0.dylib lrwxr-xr-x libmath.1.dylib -> libmath.1.0.0."
 "dylib\n"

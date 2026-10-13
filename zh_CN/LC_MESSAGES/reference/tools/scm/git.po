@@ -1,0 +1,361 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.19\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/scm/git.rst:4
+msgid "Git"
+msgstr ""
+
+#: ../../../reference/tools/scm/git.rst:6
+msgid ""
+"The ``Git`` helper is a thin wrapper over the ``git`` command. It can be "
+"used for different purposes:"
+msgstr ""
+
+#: ../../../reference/tools/scm/git.rst:8
+msgid ""
+"Obtaining the current tag in the ``set_version()`` method to assign it to "
+"``self.version``"
+msgstr ""
+
+#: ../../../reference/tools/scm/git.rst:9
+msgid ""
+"Clone sources in third-party or open source package recipes in the "
+"``source()`` method (in general, doing a ``download()`` or ``get()`` to "
+"fetch release tarballs will be preferred)"
+msgstr ""
+
+#: ../../../reference/tools/scm/git.rst:10
+msgid ""
+"Capturing the \"scm\" coordinates (url, commit) of your own package sources "
+"in the ``export()`` method, to be able to reproduce a build from source "
+"later, retrieving the code in the ``source()`` method. See the :ref:`example "
+"of git-scm capture<examples_tools_scm_git_capture>`."
+msgstr ""
+
+#: ../../../reference/tools/scm/git.rst:12
+msgid ""
+"The ``Git()`` constructor receives the current folder as argument, but that "
+"can be changed if necessary, for example, to clone the sources of some repo "
+"in ``source()``:"
+msgstr ""
+
+#: ../../../reference/tools/scm/git.rst:15
+msgid ""
+"def source(self):\n"
+"   git = Git(self)  # by default, the current folder \".\"\n"
+"   git.clone(url=\"<repourl>\", target=\"target\") # git clone url target\n"
+"   # we need to cd directory for next command \"checkout\" to work\n"
+"   git.folder = \"target\"                       # cd target\n"
+"   git.checkout(commit=\"<commit>\")             # git checkout commit"
+msgstr ""
+
+#: ../../../reference/tools/scm/git.rst:25
+msgid "An alternative, equivalent approach would be:"
+msgstr ""
+
+#: ../../../reference/tools/scm/git.rst:27
+msgid ""
+"def source(self):\n"
+"   git = Git(self, \"target\")\n"
+"   # Cloning in current dir, not a children folder\n"
+"   git.clone(url=\"<repourl>\", target=\".\")\n"
+"   git.checkout(commit=\"<commit>\")"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git:1
+msgid "Git is a wrapper for several common patterns used with *git* tool."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git:0 conan.tools.scm.git.Git.checkout:0
+#: conan.tools.scm.git.Git.clone:0 conan.tools.scm.git.Git.commit_in_remote:0
+#: conan.tools.scm.git.Git.coordinates_to_conandata:0
+#: conan.tools.scm.git.Git.fetch_commit:0 conan.tools.scm.git.Git.get_commit:0
+#: conan.tools.scm.git.Git.get_remote_url:0
+#: conan.tools.scm.git.Git.get_url_and_commit:0
+#: conan.tools.scm.git.Git.is_dirty:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git:3
+msgid "Conanfile instance."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git:4
+msgid "Current directory, by default ``.``, the current working directory."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git:5
+msgid ""
+"Files to be excluded from the \"dirty\" checks. It will compose with the "
+"configuration ``core.scm:excluded`` (the configuration has higher priority). "
+"It is a list of patterns to ``fnmatch``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.run:1
+msgid "Executes ``git <cmd>``"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.commit_in_remote:0
+#: conan.tools.scm.git.Git.get_commit:0
+#: conan.tools.scm.git.Git.get_remote_url:0
+#: conan.tools.scm.git.Git.get_repo_root:0
+#: conan.tools.scm.git.Git.get_url_and_commit:0
+#: conan.tools.scm.git.Git.included_files:0 conan.tools.scm.git.Git.is_dirty:0
+#: conan.tools.scm.git.Git.run:0
+msgid "Returns"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.run:3
+msgid "The console output of the command."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_commit:1
+#: conan.tools.scm.git.Git.get_url_and_commit:24
+msgid ""
+"By default gets the commit of the defined folder, use repo=True to get the "
+"commit of the repository instead."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_commit:3
+msgid ""
+"The current commit, with ``git rev-list HEAD -n 1 -- <folder>``. The latest "
+"commit is returned, irrespective of local not committed changes."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_remote_url:1
+msgid ""
+"Obtains the URL of the remote git remote repository, with ``git remote -v``"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_remote_url:3
+#: conan.tools.scm.git.Git.get_url_and_commit:16
+msgid ""
+"**Warning!** Be aware that This method will get the output from ``git remote "
+"-v``. If you added tokens or credentials to the remote in the URL, they will "
+"be exposed. Credentials shouldn’t be added to git remotes definitions, but "
+"using a credentials manager or similar mechanism. If you still want to use "
+"this approach, it is your responsibility to strip the credentials from the "
+"result."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.commit_in_remote:5
+#: conan.tools.scm.git.Git.get_remote_url:10
+#: conan.tools.scm.git.Git.get_url_and_commit:23
+msgid "Name of the remote git repository ('origin' by default)."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_remote_url:11
+msgid "URL of the remote git remote repository."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.commit_in_remote:1
+msgid ""
+"Checks that the given commit exists in the remote, with ``branch -r --"
+"contains <commit>`` and checking an occurrence of a branch in that remote "
+"exists."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.commit_in_remote:4
+msgid "Commit to check."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.commit_in_remote:6
+msgid "True if the given commit exists in the remote, False otherwise."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.is_dirty:1
+msgid ""
+"Returns if the current folder is dirty, running ``git status -s`` The "
+"``Git(..., excluded=[])`` argument and the ``core.scm:excluded`` "
+"configuration will define file patterns to be skipped from this check."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.is_dirty:5
+msgid ""
+"By default checks if the current folder is dirty. If repository=True it will "
+"check the root repository folder instead, not the current one."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.is_dirty:7
+msgid "True, if the current folder is dirty. Otherwise, False."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_url_and_commit:1
+msgid ""
+"This is an advanced method, that returns both the current commit, and the "
+"remote repository url. This method is intended to capture the current remote "
+"coordinates for a package creation, so that can be used later to build again "
+"from sources from the same commit. This is the behavior:"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_url_and_commit:5
+msgid ""
+"If the repository is dirty, it will raise an exception. Doesn’t make sense "
+"to capture coordinates of something dirty, as it will not be reproducible. "
+"If there are local changes, and the user wants to test a local conan create, "
+"should commit the changes first (locally, not push the changes)."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_url_and_commit:9
+msgid ""
+"If the repository is not dirty, but the commit doesn’t exist in the given "
+"remote, the method will return that commit and the URL of the local user "
+"checkout. This way, a package can be conan create created locally, testing "
+"everything works, before pushing some changes to the remote."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_url_and_commit:13
+msgid ""
+"If the repository is not dirty, and the commit exists in the specified "
+"remote, it will return that commit and the url of the remote."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_url_and_commit:26
+msgid "(url, commit) tuple"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_repo_root:1
+msgid ""
+"Get the current repository top folder with ``git rev-parse --show-toplevel``"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.get_repo_root:3
+msgid "Repository top folder."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.clone:1
+msgid ""
+"Performs a ``git clone <url> <args> <target>`` operation, where target is "
+"the target directory."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.clone:3 conan.tools.scm.git.Git.fetch_commit:4
+msgid "URL of remote repository."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.clone:4
+msgid "Target folder."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.clone:5
+msgid "Extra arguments to pass to the git clone as a list."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.clone:6 conan.tools.scm.git.Git.fetch_commit:6
+msgid ""
+"Hides the URL from the log output to prevent accidental credential leaks. "
+"Can be disabled by passing ``False``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.fetch_commit:1
+msgid ""
+"Experimental: does a single commit fetch and checkout, instead of a full "
+"clone, should be faster."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.fetch_commit:5
+msgid "The commit ref to checkout."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.checkout:1
+msgid "Checkouts the given commit using ``git checkout <commit>``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.checkout:3
+msgid "Commit to checkout."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.included_files:2
+msgid ""
+"Run ``git ls-files --full-name --others --cached --exclude-standard`` to the "
+"get the list"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.included_files:2
+msgid "of files not ignored by ``.gitignore``"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.included_files:4
+msgid "List of files."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.coordinates_to_conandata:1
+msgid ""
+"Capture the \"url\" and \"commit\" from the Git repo, calling "
+"``get_url_and_commit()``, and then store those in the ``conandata.yml`` "
+"under the \"scm\" key. This information can be used later to clone and "
+"checkout the exact source point that was used to create this package, and "
+"can be useful even if the recipe uses ``exports_sources`` as mechanism to "
+"embed the sources."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.coordinates_to_conandata:7
+msgid ""
+"By default gets the commit of the defined folder, use repository=True to get "
+"the commit of the repository instead."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/scm/git.py:docstring of
+#: conan.tools.scm.git.Git.checkout_from_conandata_coordinates:1
+msgid ""
+"Reads the \"scm\" field from the ``conandata.yml``, that must contain at "
+"least \"url\" and \"commit\" and then do a ``clone(url, target=\".\")``, "
+"``fetch <commit>``, followed by a ``checkout(commit)``."
+msgstr ""

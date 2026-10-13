@@ -1,0 +1,555 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.13\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/create.rst:4
+msgid "conan create"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:-1
+msgid ""
+"$ conan create -h\n"
+"usage: conan create [-h] [-v [V]] [-cc CORE_CONF] [-f FORMAT]\n"
+"                    [--out-file OUT_FILE] [--name NAME] [--version VERSION]\n"
+"                    [--user USER] [--channel CHANNEL] [-l LOCKFILE]\n"
+"                    [--lockfile-partial] [--lockfile-out LOCKFILE_OUT]\n"
+"                    [--lockfile-clean]\n"
+"                    [--lockfile-overrides LOCKFILE_OVERRIDES] [-b BUILD]\n"
+"                    [-r REMOTE | -nr] [-u [UPDATE]] [-pr PROFILE]\n"
+"                    [-pr:b PROFILE_BUILD] [-pr:h PROFILE_HOST]\n"
+"                    [-pr:a PROFILE_ALL] [-o OPTIONS] [-o:b OPTIONS_BUILD]\n"
+"                    [-o:h OPTIONS_HOST] [-o:a OPTIONS_ALL] [-s SETTINGS]\n"
+"                    [-s:b SETTINGS_BUILD] [-s:h SETTINGS_HOST]\n"
+"                    [-s:a SETTINGS_ALL] [-c CONF] [-c:b CONF_BUILD]\n"
+"                    [-c:h CONF_HOST] [-c:a CONF_ALL] [--build-require]\n"
+"                    [-tf TEST_FOLDER] [-tm] [-bt BUILD_TEST]\n"
+"                    path\n"
+"\n"
+"Create a package.\n"
+"\n"
+"positional arguments:\n"
+"  path                  Path to a folder containing a recipe (conanfile.py)\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  -f FORMAT, --format FORMAT\n"
+"                        Select the output format: json\n"
+"  --out-file OUT_FILE   Write the output of the command to the specified "
+"file\n"
+"                        instead of stdout.\n"
+"  --name NAME           Provide a package name if not specified in "
+"conanfile\n"
+"  --version VERSION     Provide a package version if not specified in\n"
+"                        conanfile\n"
+"  --user USER           Provide a user if not specified in conanfile\n"
+"  --channel CHANNEL     Provide a channel if not specified in conanfile\n"
+"  -l LOCKFILE, --lockfile LOCKFILE\n"
+"                        Path to a lockfile. Use --lockfile=\"\" to avoid\n"
+"                        automatic use of existing 'conan.lock' file\n"
+"  --lockfile-partial    Do not raise an error if some dependency is not "
+"found\n"
+"                        in lockfile\n"
+"  --lockfile-out LOCKFILE_OUT\n"
+"                        Filename of the updated lockfile\n"
+"  --lockfile-clean      Remove unused entries from the lockfile\n"
+"  --lockfile-overrides LOCKFILE_OVERRIDES\n"
+"                        Overwrite lockfile overrides\n"
+"  -b BUILD, --build BUILD\n"
+"                        Optional, specify which packages to build from "
+"source.\n"
+"                        Combining multiple '--build' options on one command\n"
+"                        line is allowed. Possible values: --build=never\n"
+"                        Disallow build for all packages, use binary "
+"packages\n"
+"                        or fail if a binary package is not found, it cannot "
+"be\n"
+"                        combined with other '--build' options. --"
+"build=missing\n"
+"                        Build packages from source whose binary package is "
+"not\n"
+"                        found. --build=cascade Build packages from source "
+"that\n"
+"                        have at least one dependency being built from "
+"source.\n"
+"                        --build=[pattern] Build packages from source whose\n"
+"                        package reference matches the pattern. The pattern\n"
+"                        uses 'fnmatch' style wildcards, so '--build=\"*\"' "
+"will\n"
+"                        build everything from source. --build=~[pattern]\n"
+"                        Excluded packages, which will not be built from the\n"
+"                        source, whose package reference matches the "
+"pattern.\n"
+"                        The pattern uses 'fnmatch' style wildcards.\n"
+"                        --build=missing:[pattern] Build from source if a\n"
+"                        compatible binary does not exist, only for packages\n"
+"                        matching pattern. --build=compatible:[pattern]\n"
+"                        (Experimental) Build from source if a compatible\n"
+"                        binary does not exist, and the requested package is\n"
+"                        invalid, the closest package binary following the\n"
+"                        defined compatibility policies (method and\n"
+"                        compatibility.py)\n"
+"  -r REMOTE, --remote REMOTE\n"
+"                        Look in the specified remote or remotes server\n"
+"  -nr, --no-remote      Do not use remote, resolve exclusively in the cache\n"
+"  -u [UPDATE], --update [UPDATE]\n"
+"                        Will install newer versions and/or revisions in the\n"
+"                        local cache for the given reference name, or all\n"
+"                        references in the graph if no argument is supplied.\n"
+"                        When using version ranges, it will install the "
+"latest\n"
+"                        version that satisfies the range. It will update to\n"
+"                        the latest revision for the resolved version range.\n"
+"  -pr PROFILE, --profile PROFILE\n"
+"                        Apply the specified profile. By default, or if\n"
+"                        specifying -pr:h (--profile:host), it applies to "
+"the\n"
+"                        host context. Use -pr:b (--profile:build) to "
+"specify\n"
+"                        the build context, or -pr:a (--profile:all) to "
+"specify\n"
+"                        both contexts at once\n"
+"  -pr:b PROFILE_BUILD, --profile:build PROFILE_BUILD\n"
+"  -pr:h PROFILE_HOST, --profile:host PROFILE_HOST\n"
+"  -pr:a PROFILE_ALL, --profile:all PROFILE_ALL\n"
+"  -o OPTIONS, --options OPTIONS\n"
+"                        Apply the specified options. By default, or if\n"
+"                        specifying -o:h (--options:host), it applies to the\n"
+"                        host context. Use -o:b (--options:build) to specify\n"
+"                        the build context, or -o:a (--options:all) to "
+"specify\n"
+"                        both contexts at once. Example:\n"
+"                        -o=\"pkg/*:with_qt=True\"\n"
+"  -o:b OPTIONS_BUILD, --options:build OPTIONS_BUILD\n"
+"  -o:h OPTIONS_HOST, --options:host OPTIONS_HOST\n"
+"  -o:a OPTIONS_ALL, --options:all OPTIONS_ALL\n"
+"  -s SETTINGS, --settings SETTINGS\n"
+"                        Apply the specified settings. By default, or if\n"
+"                        specifying -s:h (--settings:host), it applies to "
+"the\n"
+"                        host context. Use -s:b (--settings:build) to "
+"specify\n"
+"                        the build context, or -s:a (--settings:all) to "
+"specify\n"
+"                        both contexts at once. Example: -s=\"compiler=gcc\"\n"
+"  -s:b SETTINGS_BUILD, --settings:build SETTINGS_BUILD\n"
+"  -s:h SETTINGS_HOST, --settings:host SETTINGS_HOST\n"
+"  -s:a SETTINGS_ALL, --settings:all SETTINGS_ALL\n"
+"  -c CONF, --conf CONF  Apply the specified conf. By default, or if "
+"specifying\n"
+"                        -c:h (--conf:host), it applies to the host context.\n"
+"                        Use -c:b (--conf:build) to specify the build "
+"context,\n"
+"                        or -c:a (--conf:all) to specify both contexts at "
+"once.\n"
+"                        Example:\n"
+"                        -c=\"tools.cmake.cmaketoolchain:generator=Xcode\"\n"
+"  -c:b CONF_BUILD, --conf:build CONF_BUILD\n"
+"  -c:h CONF_HOST, --conf:host CONF_HOST\n"
+"  -c:a CONF_ALL, --conf:all CONF_ALL\n"
+"  --build-require       Whether the package being created is a build-"
+"require\n"
+"                        (to be used as tool_requires() by other packages)\n"
+"  -tf TEST_FOLDER, --test-folder TEST_FOLDER\n"
+"                        Alternative test folder name. By default it is\n"
+"                        \"test_package\". Use \"\" to skip the test stage\n"
+"  -tm, --test-missing   Run the test_package checks only if the package is\n"
+"                        built from source but not if it already existed "
+"(using\n"
+"                        --build=missing)\n"
+"  -bt BUILD_TEST, --build-test BUILD_TEST\n"
+"                        Same as '--build' but only for the test_package\n"
+"                        requires. By default if not specified it will take "
+"the\n"
+"                        '--build' value if specified\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:10
+msgid ""
+"The ``conan create`` command creates a package from the recipe specified in "
+"``path``."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:12
+msgid ""
+"This command will first :command:`export` the recipe to the local cache and "
+"then build and create the package. If a ``test_package`` folder (you can "
+"change the folder name with the ``-tf`` argument or with the "
+"``test_package_folder`` recipe attribute) is found, the command will run the "
+"consumer project to ensure that the package has been created correctly. "
+"Check :ref:`testing Conan packages <tutorial_creating_test>` section to know "
+"more about how to test your Conan packages."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:20
+msgid ""
+"Sometimes you want to **skip/disable the test stage**. In that case you can "
+"skip/disable the test package stage by passing an empty value as the ``-tf`` "
+"argument:"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:23
+msgid "$ conan create . --test-folder=\"\""
+msgstr ""
+
+#: ../../../reference/commands/create.rst:27
+msgid ""
+"You might also want to do ``conan create . --build=missing`` so the package "
+"is not built if a binary already exists in the servers. If you want to also "
+"avoid the ``test_package`` step when the binary already exists, you can "
+"apply the ``conan create . --build=missing --test-missing``, and it will "
+"only launch the test-package when the binary is built from source."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:34
+msgid "Using conan create with build requirements"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:36
+msgid ""
+"The ``--build-require`` argument allows to create the package using the "
+"configuration and settings of the \"build\" context, as it was a "
+"``build_require``. This feature allows to create packages in a way that is "
+"consistent with the way they will be used later."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:40
+msgid "$ conan create . --name=cmake --version=3.23.1 --build-require"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:46
+msgid "Conan create output"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:48
+msgid ""
+"The ``conan create ... --format=json`` creates a json output containing the "
+"full dependency graph information. This json is the same as the one created "
+"with ``conan graph info`` (see the :ref:`graph info json "
+"format<reference_commands_graph_info_json_format>`) with extended "
+"information about the binaries, like a more complete ``cpp_info`` field. "
+"This resulting json is the dependency graph of the package recipe being "
+"created, excluding all the ``test_package`` and other possible dependencies "
+"of the ``test_package/conanfile.py``. These dependencies only exist in the "
+"``test_package`` functionality, and as such, are not part of the \"main\" "
+"product or package. If you are interested in capturing the dependency graph "
+"including the ``test_package`` (most likely not necessary in most cases), "
+"then you can do it running the ``conan test`` command separately."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:53
+msgid ""
+"The same happens for lockfiles created with ``--lockfile-out`` argument. The "
+"lockfile will only contain the created package and its transitive "
+"dependencies versions, but it will not contain the ``test_package`` or the "
+"transitive dependencies of the ``test_package/conanfile.py``. It is possible "
+"to capture a lockfile which includes those with the ``conan test`` command "
+"(though again, this might not be really necessary)"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:57
+msgid "**Best practice**"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:59
+msgid ""
+"In general, having ``test_package/conanfile.py`` with dependencies other "
+"than the tested one should be avoided. The ``test_package`` functionality "
+"should serve as a simple check to ensure the package is correctly created. "
+"Adding extra dependencies to ``test_package`` might indicate that the check "
+"is not straightforward or that its functionality is being misused. If, for "
+"any reason, your ``test_package`` has additional dependencies, you can "
+"control their build using the ``--build-test`` argument."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:68
+msgid "Methods execution order"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:70
+msgid ""
+"The ``conan create`` executes :ref:`methods <reference_conanfile_methods>` "
+"of a *conanfile.py* in the following order:"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:76
+msgid "Export recipe to the cache"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:73
+msgid "``init()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:74
+msgid "``set_name()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:75
+msgid "``set_version()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:76
+msgid "``export()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:77
+msgid "``export_sources()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:82
+#: ../../../reference/commands/create.rst:116
+msgid "Compute dependency graph"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:79
+#: ../../../reference/commands/create.rst:113
+msgid "``ìnit()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:80
+#: ../../../reference/commands/create.rst:114
+msgid "``config_options()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:81
+#: ../../../reference/commands/create.rst:115
+msgid "``configure()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:82
+#: ../../../reference/commands/create.rst:116
+msgid "``requirements()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:83
+#: ../../../reference/commands/create.rst:117
+msgid "``build_requirements()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:88
+#: ../../../reference/commands/create.rst:127
+msgid "Compute necessary packages"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:85
+#: ../../../reference/commands/create.rst:119
+msgid "``validate_build()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:86
+#: ../../../reference/commands/create.rst:120
+msgid "``validate()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:87
+#: ../../../reference/commands/create.rst:121
+msgid "``package_id()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:88
+#: ../../../reference/commands/create.rst:122
+msgid "``layout()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:89
+#: ../../../reference/commands/create.rst:127
+msgid "``system_requirements()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:96
+#: ../../../reference/commands/create.rst:132
+msgid "Install packages"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:91
+msgid "``source()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:92
+#: ../../../reference/commands/create.rst:130
+msgid "``build_id()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:93
+#: ../../../reference/commands/create.rst:131
+msgid "``generate()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:94
+#: ../../../reference/commands/create.rst:132
+msgid "``build()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:95
+msgid "``package()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:96
+#: ../../../reference/commands/create.rst:133
+msgid "``package_info()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:98
+msgid ""
+"Steps ``generate()``,  ``build()``, ``package()`` from *Install packages* "
+"step will not be called if the package is not being built from sources."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:101
+msgid ""
+"After that, if you have a folder named *test_package* in your project or you "
+"call the ``conan create`` command with the ``--test-folder`` flag, the "
+"command will invoke the methods of the *conanfile.py* file inside the folder "
+"in the following order:"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:106
+msgid "Launch test_package"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:105
+msgid "(test package) ``init()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:106
+msgid "(test package) ``set_name()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:107
+msgid "(test package) ``set_version()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:109
+msgid "(test package) ``config_options()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:110
+msgid "(test package) ``configure()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:111
+msgid "(test package) ``requirements()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:112
+msgid "(test package) ``build_requirements()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:123
+msgid "(test package) ``validate_build()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:124
+msgid "(test package) ``validate()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:125
+msgid "(test package) ``package_id()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:126
+msgid "(test package) ``layout()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:128
+msgid "(test package) ``system_requirements()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:136
+msgid "Test the package"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:135
+msgid "(test package) ``build()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:136
+msgid "(test package) ``test()``"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:138
+msgid ""
+"The functions with *(test package)* belong to the *conanfile.py* in the "
+"*test_package* folder. The steps ``build_id()``, ``generate()``, ``build()`` "
+"inside the *Install packages* step will be skipped if the project is already "
+"installed. Typically, it should be installed just as it was installed in the "
+"previous \"install packages\" step."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:144
+msgid "Build modes"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:146
+msgid ""
+"The ``conan create --build=<xxxx>`` build modes are very similar to the "
+"``conan install`` ones documented in :ref:`Build "
+"Modes<reference_commands_build_modes>`, with some differences."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:149
+msgid ""
+"By default, ``conan create`` defines the ``--build=current_pkg/"
+"current_version`` to force the build from source for the current revision. "
+"This assumes that the source code (recipe, C/C++ code) was changed and it "
+"will create a new revision. If that is not the case, then the ``--"
+"build=missing:current_pkg/current_version`` would be recommended to avoid "
+"rebuilding from source an already existing binary."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:154
+msgid ""
+"When a ``--build=xxx`` argument is defined in the command line, then the "
+"automatically defined ``--build=current_pkg/current_version`` is no longer "
+"passed, and it should be passed as a explicit argument too."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:159
+msgid "**Best practices**"
+msgstr "**最佳實踐**"
+
+#: ../../../reference/commands/create.rst:161
+msgid ""
+"Having more than a ``package_revision`` for a given ``recipe_revision`` and "
+"``package_id`` is discouraged in most cases, as it implies unnecessarily "
+"rebuilding from sources binaries that were already existing. For that "
+"reason, using ``conan create`` repeatedly over the same recipe without any "
+"source changes that would cause a new ``recipe_revision`` is discouraged, "
+"and using ``conan create . --build=missing:[pattern]`` would be the "
+"recommended approach."
+msgstr ""
+
+#: ../../../reference/commands/create.rst:170
+msgid ""
+"Read more about creating packages in the :ref:`dedicated "
+"tutorial<tutorial_creating_packages>`"
+msgstr ""
+
+#: ../../../reference/commands/create.rst:172
+msgid "Read more about :ref:`testing Conan packages <tutorial_creating_test>`"
+msgstr ""

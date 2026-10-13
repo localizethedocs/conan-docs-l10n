@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-13 16:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:4
+msgid "Customize the full_deploy deployer: handling editable packages"
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:6
+msgid ""
+"The built-in :ref:`full_deploy<reference_extensions_deployer_full_deploy>` "
+"deployer copies the ``package_folder`` of every dependency to the deployer "
+"output folder. This is what it does with the different kinds of dependencies:"
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:9
+msgid "Packages in the Conan cache: the package contents are copied."
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:10
+msgid ""
+"Dependencies with ``package_folder=None``, which happens when the binary is "
+"skipped because it is not necessary: they are not deployed, as there is no "
+"folder to copy."
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:12
+msgid ""
+"Packages in :ref:`editable mode<editable_packages>`: the ``package_folder`` "
+"is the local project root folder, where the ``conanfile.py`` of the editable "
+"is. There is no actual \"package\" there, but ``full_deploy`` copies the "
+"whole folder, including sources, build artifacts and anything else in it."
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:16
+msgid ""
+"Deploying editables is not recommended in general. Deployers are intended to "
+"be customized. For real production needs, it is recommended to use your own "
+"deployer, and install it with ``conan config install`` or ``conan config "
+"install-pkg``."
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:20
+msgid ""
+"This is the implementation of the built-in ``full_deploy``, slightly "
+"simplified, with some extra code to handle editables. Copy it to a "
+"``my_full_deploy.py`` file:"
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:23
+msgid "**my_full_deploy.py**"
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:23
+msgid ""
+"import os\n"
+"import shutil\n"
+"\n"
+"from conan.errors import ConanException\n"
+"from conan.tools.files import rmdir\n"
+"\n"
+"\n"
+"def deploy(graph, output_folder, **kwargs):\n"
+"    conanfile = graph.root.conanfile\n"
+"    conanfile.output.info(f\"Custom full deployer to {output_folder}\")\n"
+"    symlinks = conanfile.conf.get(\"tools.deployer:symlinks\", "
+"check_type=bool, default=True)\n"
+"    for dep in conanfile.dependencies.values():\n"
+"        # Skipped binaries, there is nothing to deploy\n"
+"        if dep.package_folder is None:\n"
+"            continue\n"
+"        # Editable packages: the package_folder is the local project folder, "
+"not a package.\n"
+"        # Raise a ConanException instead of \"continue\" to fail when there "
+"are editables\n"
+"        if dep.recipe == \"Editable\":\n"
+"            conanfile.output.warning(f\"Skipping deploy of editable package "
+"{dep}\")\n"
+"            continue\n"
+"\n"
+"        folder_name = os.path.join(\"full_deploy\", dep.context, dep.ref."
+"name, str(dep.ref.version))\n"
+"        build_type = dep.info.settings.get_safe(\"build_type\")\n"
+"        arch = dep.info.settings.get_safe(\"arch\")\n"
+"        if build_type:\n"
+"            folder_name = os.path.join(folder_name, build_type)\n"
+"        if arch:\n"
+"            folder_name = os.path.join(folder_name, arch)\n"
+"\n"
+"        new_folder = os.path.join(output_folder, folder_name)\n"
+"        rmdir(conanfile, new_folder)\n"
+"        try:\n"
+"            shutil.copytree(dep.package_folder, new_folder, "
+"symlinks=symlinks)\n"
+"        except Exception as e:\n"
+"            raise ConanException(f\"full_deploy: The copy of '{dep}' files "
+"failed: {e}.\\n\"\n"
+"                                 f\"You can use 'tools.deployer:symlinks' "
+"conf to disable symlinks\")\n"
+"        # Generators running after the deployer will point to the deployed "
+"folder\n"
+"        dep.set_deploy_folder(new_folder)"
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:65
+msgid "Then it can be used as any other deployer:"
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:67
+msgid "$ conan install . --deployer=my_full_deploy"
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:71
+msgid "Some notes about the code:"
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:73
+msgid ""
+"``dep.package_folder`` can be ``None`` for skipped binaries, so any deployer "
+"needs to check it."
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:74
+msgid ""
+"``dep.recipe == \"Editable\"`` is a valid way to detect editable packages. "
+"It can also be used to implement other behaviors, like deploying only the "
+"artifacts defined in the ``cpp_info`` of the editable package (``dep."
+"cpp_info.includedirs``, ``dep.cpp_info.libdirs``, etc.) instead of the whole "
+"folder."
+msgstr ""
+
+#: ../../../examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst:77
+msgid ""
+"Generators like ``CMakeDeps`` do not need conditionals for editables: the "
+"``layout()`` method makes ``cpp_info`` work transparently for packages in "
+"the cache and editable packages."
+msgstr ""

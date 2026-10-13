@@ -1,0 +1,226 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile_txt.rst:4
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:6
+msgid ""
+"The ``conanfile.txt`` file is a simplified version of ``conanfile.py``, "
+"aimed at simple consumption of dependencies, but it cannot be used to create "
+"a package. Also, it is not necessary to have a ``conanfile.txt`` for "
+"consuming dependencies, a ``conanfile.py`` is perfectly suited for simple "
+"consumption of dependencies."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:10
+msgid ""
+"It also provides a simplified functionality, for example it is not possible "
+"to express conditional requirements in ``conanfile.txt``, and it will be "
+"necessary to use a ``conanfile.py`` for that. Read :ref:"
+"`consuming_packages_flexibility_of_conanfile_py` for more information about "
+"this."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:15
+msgid "[requires]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:17
+msgid ""
+"List of requirements, specifying the full reference. Equivalent to ``self."
+"requires(<ref>)`` in ``conanfile.py``."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:19
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"zlib/1.2.11"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:26
+msgid "This section supports references with version-ranges too:"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:28
+msgid ""
+"[requires]\n"
+"poco/[>1.0 <1.9]\n"
+"zlib/1.2.11"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:34
+msgid "And specific recipe revisions can be pinned too:"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:36
+msgid ""
+"[requires]\n"
+"zlib/1.2.13#revision1\n"
+"boost/1.70.0#revision2"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:43
+msgid "[tool_requires]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:45
+msgid ""
+"List of tool requirements (executable tools) specifying the full reference. "
+"Equivalent to ``self.tool_requires()`` in ``conanfile.py``."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:48
+msgid ""
+"[tool_requires]\n"
+"7zip/16.00\n"
+"cmake/3.23.0"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:54
+msgid ""
+"This section also supports version ranges and pinned recipe revisions, as "
+"above."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:56
+msgid ""
+"In practice the ``[tool_requires]`` will be always installed (same as "
+"``[requires]``) as installing from a *conanfile.txt* means that something is "
+"going to be built, so the tool requirements are indeed needed. Note however, "
+"that by default ``tool_requires`` live in the \"build\" context, they cannot "
+"be libraries to built with, just executable tools, and for example, using "
+"the ``CMakeDeps`` generator, they will not create CMake config files for "
+"them (an exception is possible, but it requires using a ``conanfile.py``, "
+"read the :ref:`CMakeDeps reference<conan_tools_cmakedeps>` for more "
+"information)."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:64
+msgid "[test_requires]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:66
+msgid ""
+"List of test requirements specifying the full reference. Equivalent to "
+"``self.test_requires()`` in ``conanfile.py``."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:69
+msgid ""
+"[test_requires]\n"
+"gtest/1.12.1"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:74
+msgid ""
+"This section also supports version ranges and pinned recipe revisions, as "
+"above. The behavior of ``test_requires`` is totally equivalent to the "
+"``[requires]`` section above, as the only difference is that "
+"``test_requires`` are not propagated to consumers, but as a ``conanfile."
+"txt`` is never creating a package that can be consumed, it is irrelevant. It "
+"is provided to maintain the equivalence with ``conanfile.py``"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:81
+msgid "[generators]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:83
+msgid ""
+"List of built-in generators to be used, equivalent to the ``conanfile.py`` "
+"``generators = \"CMakeDeps\", ...`` attribute."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:85
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"zlib/1.2.13\n"
+"\n"
+"[generators]\n"
+"CMakeDeps\n"
+"CMakeToolchain"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:98
+msgid "[options]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:100
+msgid ""
+"List of options scoped for each package with a pattern like **package_name*:"
+"option = Value**."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:102
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"zlib/1.2.11\n"
+"\n"
+"[generators]\n"
+"CMakeDeps\n"
+"CMakeToolchain\n"
+"\n"
+"[options]\n"
+"poco*:shared=True\n"
+"openssl*:shared=True"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:116
+msgid ""
+"For example using ``*:shared=True`` will define ``shared=True`` for all "
+"packages in the dependency graph that have this option defined."
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:121
+msgid "[layout]"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:124
+msgid ""
+"You can specify one name of a predefined layout. The available values are:"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:126
+msgid "cmake_layout"
+msgstr "cmake_layout"
+
+#: ../../../reference/conanfile_txt.rst:127
+msgid "vs_layout"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:128
+msgid "bazel_layout (experimental)"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:131
+msgid ""
+"[layout]\n"
+"cmake_layout"
+msgstr ""
+
+#: ../../../reference/conanfile_txt.rst:139
+msgid ""
+"Read :ref:`consuming_packages_flexibility_of_conanfile_py` for more "
+"information about conanfile.txt vs conanfile.py."
+msgstr ""

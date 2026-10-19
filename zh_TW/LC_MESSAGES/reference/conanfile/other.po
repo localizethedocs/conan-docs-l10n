@@ -1,0 +1,231 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.64\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/other.rst:2
+msgid "Python requires"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:4
+msgid ""
+"It is possible to reuse python code existing in other *conanfile.py* recipes "
+"with the ``python_requires`` functionality, doing something like:"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:7
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    python_requires = \"pyreq/0.1@user/channel\"\n"
+"\n"
+"    def build(self):\n"
+"        v = self.python_requires[\"pyreq\"].module.myvar # myvar defined in "
+"pyreq's conanfile.py\n"
+"        f = self.python_requires[\"pyreq\"].module.myfunct() # myfunct "
+"defined in pyreq's conanfile.py\n"
+"        self.output.info(\"%s,%s\" % (v, f))"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:19
+msgid ""
+"See this section: :ref:`Python requires: reusing python code in "
+"recipes<python_requires>`"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:24
+msgid "Output and Running"
+msgstr "輸出與執行"
+
+#: ../../../reference/conanfile/other.rst:29
+msgid "Output contents"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:31
+msgid "Use the `self.output` to print contents to the output."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:33
+msgid ""
+"self.output.success(\"This is a good, should be green\")\n"
+"self.output.info(\"This is a neutral, should be white\")\n"
+"self.output.warn(\"This is a warning, should be yellow\")\n"
+"self.output.error(\"Error, should be red\")\n"
+"self.output.rewrite_line(\"for progress bars, issues a cr\")"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:41
+msgid ""
+"Check the source code. You might be able to produce different outputs with "
+"different colors."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:46
+msgid "Running commands"
+msgstr "執行命令"
+
+#: ../../../reference/conanfile/other.rst:48
+msgid ""
+"run(self, command, output=True, cwd=None, win_bash=False, subsystem=None, "
+"msys_mingw=True,\n"
+"    ignore_errors=False, run_environment=False, with_login=True, "
+"env=\"conanbuild\"):"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:54
+msgid ""
+"``self.run()`` is a helper to run system commands and throw exceptions when "
+"errors occur, so that command errors do not pass unnoticed. It is just a "
+"wrapper for ``subprocess.call()``."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:58
+msgid ""
+"When the environment variable ``CONAN_PRINT_RUN_COMMANDS`` is set to true "
+"(or its equivalent ``print_run_commands`` *conan.conf* configuration "
+"variable, under ``[general]``) then all the invocations of ``self.run()`` "
+"will print to output the command to be executed."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:62
+msgid ""
+"The ``command`` can be specified as a string which is passed to the system "
+"shell. Alternatively it can be specified as a sequence of strings, the first "
+"of which is interpreted as the name of the program to be executed and the "
+"remaining ones are passed as arguments. Unless you are relying on shell-"
+"specific features such as redirection or command substitution, providing a "
+"sequence of strings is generally preferred as it allows Conan to take care "
+"of any required escaping and quoting of arguments (e.g. to permit spaces in "
+"file names)."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:70
+msgid "Optional parameters:"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:73
+msgid ""
+"**output** (Optional, Defaulted to ``True``) When True it will write in "
+"stdout."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:73
+msgid ""
+"You can pass any stream that accepts a ``write`` method like a ``six."
+"StringIO()``:"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:75
+msgid ""
+"from six import StringIO  # Python 2 and 3 compatible\n"
+"mybuf = StringIO()\n"
+"self.run(\"mycommand\", output=mybuf)\n"
+"self.output.warn(mybuf.getvalue())"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:82
+msgid ""
+"**cwd** (Optional, Defaulted to ``.`` current directory): Current directory "
+"to run the command."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:83
+msgid ""
+"**win_bash** (Optional, Defaulted to ``False``): When True, it will run the "
+"configure/make commands inside a bash."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:84
+msgid ""
+"**subsystem** (Optional, Defaulted to ``None`` will autodetect the "
+"subsystem): Used to escape the command according to the specified subsystem."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:85
+msgid ""
+"**msys_mingw** (Optional, Defaulted to ``True``) If the specified subsystem "
+"is MSYS2, will start it in MinGW mode (native windows development)."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:86
+msgid ""
+"**ignore_errors** (Optional, Defaulted to ``False``). This method raises an "
+"exception if the command fails. If ``ignore_errors=True``, it will not raise "
+"an exception. Instead, the user can use the return code to check for errors."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:88
+msgid ""
+"**run_environment** (Optional, Defaulted to ``False``). Applies a "
+"``RunEnvironment``, so the environment variables PATH, LD_LIBRARY_PATH and "
+"DYLIB_LIBRARY_PATH are defined in the command execution adding the values of "
+"the \"lib\" and \"bin\" folders of the dependencies. Allows executables to "
+"be easily run using shared libraries from its dependencies."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:91
+msgid ""
+"**with_login** (Optional, Defaulted to ``True``): Pass the ``--login`` flag "
+"to :command:`bash` command when using ``win_bash`` parameter. This might "
+"come handy when you don't want to create a fresh user session for running "
+"the command."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:93
+msgid ""
+"**env** (Optional, Defaulted to ``conanbuild``): the environment or list of "
+"environment activations scripts to pre-pend to the given ``command``. If "
+"``None``, no environment will be pre-pended."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:100
+msgid "Requiring a Conan version for the recipe"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:102
+msgid ""
+"Available since: `1.28.0 <https://github.com/conan-io/conan/releases/"
+"tag/1.28.0>`_"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:104
+msgid ""
+"A required Conan version can be declared in the `conanfile.py` using "
+"``required_conan_version`` to throw an error when the Conan version "
+"installed does not meet the criteria established by the variable. To add "
+"``required_conan_version`` to a `conanfile.py` just declare it before the "
+"recipe class definition:"
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:109
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"required_conan_version = \">=1.27.1\"\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
+"    ..."
+msgstr ""
+
+#: ../../../reference/conanfile/other.rst:120
+msgid ""
+"It is also possible to declare ``required_conan_version`` at configuration "
+"level for the whole client adding it to the :ref:`conan.conf<conan_conf>` "
+"file."
+msgstr ""

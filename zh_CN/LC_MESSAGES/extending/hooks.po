@@ -1,0 +1,333 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.60\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../extending/hooks.rst:4
+msgid "Hooks"
+msgstr ""
+
+#: ../../../extending/hooks.rst:8
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../extending/hooks.rst:10
+msgid ""
+"The Conan hooks is a feature intended to extend the Conan functionalities "
+"and let users customize the client behavior at determined points."
+msgstr ""
+
+#: ../../../extending/hooks.rst:14
+msgid "Hook structure"
+msgstr ""
+
+#: ../../../extending/hooks.rst:16
+msgid ""
+"A hook is a Python function that will be executed at certain points of Conan "
+"workflow to customize the client behavior without modifying the client "
+"sources or the recipe ones. In the :ref:`hooks reference <hooks_reference>` "
+"you can find the full list of hook functions and exhaustive documentation "
+"about their arguments."
+msgstr ""
+
+#: ../../../extending/hooks.rst:21
+msgid ""
+"Hooks can implement any functionality: it could be Conan commands, recipe "
+"interactions such as exporting or packaging, or interactions with the "
+"remotes."
+msgstr ""
+
+#: ../../../extending/hooks.rst:24
+msgid "Here is an example of a simple hook:"
+msgstr ""
+
+#: ../../../extending/hooks.rst:26
+msgid "*example_hook.py*"
+msgstr ""
+
+#: ../../../extending/hooks.rst:26
+msgid ""
+" from conans import tools\n"
+"\n"
+"\n"
+" def pre_export(output, conanfile, conanfile_path, reference, **kwargs):\n"
+"     test = \"%s/%s\" % (reference.name, reference.version)\n"
+"     for field in [\"url\", \"license\", \"description\"]:\n"
+"         field_value = getattr(conanfile, field, None)\n"
+"         if not field_value:\n"
+"             output.error(\"%s Conanfile doesn't have '%s'. It is "
+"recommended to add it as attribute: %s\"\n"
+"                         % (test, field, conanfile_path))\n"
+"\n"
+" def pre_source(output, conanfile, conanfile_path, **kwargs):\n"
+"     conanfile_content = tools.load(conanfile_path)\n"
+"     if \"def source(self):\" in conanfile_content:\n"
+"         test = \"[IMMUTABLE SOURCES]\"\n"
+"         valid_content = [\".zip\", \".tar\", \".tgz\", \".tbz2\", \"."
+"txz\"]\n"
+"         invalid_content = [\"git checkout master\", \"git checkout devel\", "
+"\"git checkout develop\"]\n"
+"         if \"git clone\" in conanfile_content and \"git checkout\" in "
+"conanfile_content:\n"
+"             fixed_sources = True\n"
+"             for invalid in invalid_content:\n"
+"                 if invalid in conanfile_content:\n"
+"                     fixed_sources = False\n"
+"         else:\n"
+"             fixed_sources = False\n"
+"             for valid in valid_content:\n"
+"                 if valid in conanfile_content:\n"
+"                     fixed_sources = True\n"
+"\n"
+"         if not fixed_sources:\n"
+"             output.error(\"%s Source files does not come from and immutable "
+"place. Checkout to a \"\n"
+"                         \"commit/tag or download a compressed source file "
+"for %s\" % (test, str(reference)))"
+msgstr ""
+
+#: ../../../extending/hooks.rst:61
+msgid ""
+"This hook checks the recipe content prior to it being exported and prior to "
+"downloading the sources. Basically the ``pre_export()`` function checks the "
+"attributes of the ``conanfile`` object to see if there is an URL, a license "
+"and a description and if missing, warns the user with a message through the "
+"``output``. This is done **before** the recipe is exported to the local "
+"cache."
+msgstr ""
+
+#: ../../../extending/hooks.rst:65
+msgid ""
+"The ``pre_source()`` function checks if the recipe contains a ``source()`` "
+"method (this time it is using the *conanfile.py* content instead of the "
+"``conanfile`` object) and in that case it checks if the download of the "
+"sources are likely coming from immutable places (a compressed file or a "
+"determined :command:`git checkout`). This is done **before** the "
+"**source()** method of the recipe is called."
+msgstr ""
+
+#: ../../../extending/hooks.rst:69
+msgid ""
+"Any kind of Python script can be executed. You can create global functions "
+"and call them from different hook functions, import from a relative module "
+"and warn, error or even raise to abort the Conan client execution."
+msgstr ""
+
+#: ../../../extending/hooks.rst:73
+msgid ""
+"Other useful task where a hook may come handy are the upload and download "
+"actions. There are **pre** and **post** functions for every download/upload "
+"as a whole and for fine download tasks such as recipe and package downloads/"
+"uploads."
+msgstr ""
+
+#: ../../../extending/hooks.rst:76
+msgid ""
+"For example they can be used to sign the packages (including a file with the "
+"signature) when the package is created and check that signature every time "
+"they are downloaded."
+msgstr ""
+
+#: ../../../extending/hooks.rst:79
+msgid "*signing_hook.py*"
+msgstr ""
+
+#: ../../../extending/hooks.rst:79
+msgid ""
+" import os\n"
+" from conans import tools\n"
+"\n"
+" SIGNATURE = \"this is my signature\"\n"
+"\n"
+" def post_package(output, conanfile, conanfile_path, **kwargs):\n"
+"     sign_path = os.path.join(conanfile.package_folder, \".sign\")\n"
+"     tools.save(sign_path, SIGNATURE)\n"
+"     output.success(\"Package signed successfully\")\n"
+"\n"
+" def post_download_package(output, conanfile_path, reference, package_id, "
+"remote_name, **kwargs):\n"
+"     package_path = os.path.abspath(os.path.join(os.path."
+"dirname(conanfile_path), \"..\", \"package\", package_id))\n"
+"     sign_path = os.path.join(package_path, \".sign\")\n"
+"     content = tools.load(sign_path)\n"
+"     if content != SIGNATURE:\n"
+"         raise Exception(\"Wrong signature\")"
+msgstr ""
+
+#: ../../../extending/hooks.rst:100
+msgid "Importing from a module"
+msgstr ""
+
+#: ../../../extending/hooks.rst:102
+msgid ""
+"The hook interface should always be placed inside a Python file with the "
+"name of the hook and stored in the *~/.conan/hooks* folder. However, you can "
+"use functionalities from imported modules if you have them installed in your "
+"system or if they are installed with Conan:"
+msgstr ""
+
+#: ../../../extending/hooks.rst:105
+msgid "example_hook.py"
+msgstr ""
+
+#: ../../../extending/hooks.rst:105
+msgid ""
+" import requests\n"
+" from conans import tools\n"
+"\n"
+" def post_export(output, conanfile, conanfile_path, reference, **kwargs):\n"
+"     cmakelists_path = os.path.join(os.path.dirname(conanfile_path), "
+"\"CMakeLists.txt\")\n"
+"     tools.replace_in_file(cmakelists_path, \"PROJECT(MyProject)\", "
+"\"PROJECT(MyProject CPP)\")\n"
+"     r = requests.get('https://api.github.com/events')"
+msgstr ""
+
+#: ../../../extending/hooks.rst:116
+msgid "You can also import functionalities from a relative module:"
+msgstr ""
+
+#: ../../../extending/hooks.rst:118
+msgid ""
+"hooks\n"
+"├── custom_module\n"
+"│   ├── custom.py\n"
+"│   └── __init__.py\n"
+"└── my_hook.py"
+msgstr ""
+
+#: ../../../extending/hooks.rst:126
+msgid "Inside the *custom.py* from my *custom_module* there is:"
+msgstr ""
+
+#: ../../../extending/hooks.rst:128
+msgid ""
+"def my_printer(output):\n"
+"    output.info(\"my_printer(): CUSTOM MODULE\")"
+msgstr ""
+
+#: ../../../extending/hooks.rst:133
+msgid ""
+"And it can be used in the hook importing the module, just like regular "
+"Python:"
+msgstr ""
+
+#: ../../../extending/hooks.rst:135
+msgid ""
+"from custom_module.custom import my_printer\n"
+"\n"
+"def pre_export(output, conanfile, conanfile_path, reference, **kwargs):\n"
+"    my_printer(output)"
+msgstr ""
+
+#: ../../../extending/hooks.rst:144
+msgid "Storage, activation and sharing"
+msgstr ""
+
+#: ../../../extending/hooks.rst:146
+msgid ""
+"Hooks are Python files stored under *~/.conan/hooks* folder and **their file "
+"name should be the same used for activation** (the *.py* extension could be "
+"indicated or not)."
+msgstr ""
+
+#: ../../../extending/hooks.rst:149
+msgid ""
+"The activation of the hooks is done in the *conan.conf* section named "
+"``[hooks]``. The hook names or paths listed under this section will be "
+"considered activated."
+msgstr ""
+
+#: ../../../extending/hooks.rst:152
+msgid "*conan.conf*"
+msgstr ""
+
+#: ../../../extending/hooks.rst:152
+msgid ""
+" ...\n"
+" [hooks]\n"
+" attribute_checker.py\n"
+" conan-center.py\n"
+" my_custom_hook/hook.py"
+msgstr ""
+
+#: ../../../extending/hooks.rst:161
+msgid ""
+"They can be easily activated and deactivated from the command line using "
+"the :command:`conan config set` command:"
+msgstr ""
+
+#: ../../../extending/hooks.rst:163
+msgid ""
+"$ conan config set hooks.my_custom_hook/hook  # Activates 'my_custom_hook'\n"
+"\n"
+"$ conan config rm hooks.my_custom_hook/hook  # Deactivates 'my_custom_hook'"
+msgstr ""
+
+#: ../../../extending/hooks.rst:169
+msgid ""
+"There is also an environment variable :ref:`env_vars_conan_hooks` that you "
+"can use to declare which hooks should be activated."
+msgstr ""
+
+#: ../../../extending/hooks.rst:172
+msgid ""
+"Hooks are considered part of the Conan client configuration and can be "
+"shared as usual with the :ref:`conan_config_install` command. However, they "
+"can also be managed in isolated Git repositories cloned into the *~/.conan/"
+"hooks* folder:"
+msgstr ""
+
+#: ../../../extending/hooks.rst:175
+msgid ""
+"$ cd ~/.conan/hooks\n"
+"$ git clone https://github.com/conan-io/hooks.git conan_hooks\n"
+"$ conan config set hooks.conan_hooks/hooks/conan-center.py"
+msgstr ""
+
+#: ../../../extending/hooks.rst:181
+msgid "This way you can easily change from one version to another."
+msgstr ""
+
+#: ../../../extending/hooks.rst:184
+msgid "Official Hooks"
+msgstr ""
+
+#: ../../../extending/hooks.rst:186
+msgid ""
+"There are some officially maintained hooks in its own repository in `GitHub "
+"<https://github.com/conan-io/hooks>`_, including the ``attribute_checker`` "
+"that has been packaged with Conan sources for several versions (although it "
+"is distributed with Conan still, it is no longer maintained and we may "
+"remove it in the future, so we encourage you to install the one in the hooks "
+"repository and activate it)."
+msgstr ""
+
+#: ../../../extending/hooks.rst:191
+msgid ""
+"Using the hooks in the official repository is as easy as installing them and "
+"activating the ones of interest:"
+msgstr ""
+
+#: ../../../extending/hooks.rst:193
+msgid ""
+"conan config install https://github.com/conan-io/hooks.git -sf hooks -tf "
+"hooks\n"
+"conan config set hooks.attribute_checker"
+msgstr ""

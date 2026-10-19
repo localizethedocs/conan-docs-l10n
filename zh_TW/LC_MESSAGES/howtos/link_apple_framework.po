@@ -1,0 +1,125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.14\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../howtos/link_apple_framework.rst:4
+msgid "How to link with Apple Frameworks"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:6
+msgid ""
+"It is common in MacOS that your Conan package needs to link with a complete "
+"Apple framework, and, of course, you want to propagate this information to "
+"all projects/libraries that use your package."
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:9
+msgid ""
+"With regular libraries, use ``self.cpp_info.libs`` object to append to it "
+"all the libraries:"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:11
+msgid ""
+"def package_info(self):\n"
+"\n"
+"    self.cpp_info.libs = [\"SDL2\"]\n"
+"    self.cpp_info.libs.append(\"OpenGL32\")"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:18
+msgid ""
+"With frameworks we need to declare the \"-framework flag\" as a linker flag:"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:20
+msgid ""
+"def package_info(self):\n"
+"\n"
+"    self.cpp_info.libs = [\"SDL2\"]\n"
+"\n"
+"    self.cpp_info.exelinkflags.append(\"-framework Carbon\")\n"
+"    self.cpp_info.exelinkflags.append(\"-framework CoreAudio\")\n"
+"    self.cpp_info.exelinkflags.append(\"-framework Security\")\n"
+"    self.cpp_info.exelinkflags.append(\"-framework IOKit\")\n"
+"\n"
+"    self.cpp_info.sharedlinkflags = self.cpp_info.exelinkflags"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:33
+msgid ""
+"In the previous example we are using ``self.cpp_info.exelinkflags``. If we "
+"are using CMake to consume this package, it will only link those frameworks "
+"if we are building an executable and ``sharedlinkflags`` will only apply if "
+"we are building a shared library."
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:36
+msgid ""
+"If we are not using CMake to consume this package ``sharedlinkflags`` and "
+"``exelinkflags`` are used indistinctly. In the example above, in the last "
+"line we are assigning ``sharedlinkflags`` with ``exelinkflags``, so no "
+"matter what the consumer will build, it will indicate to the linker to link "
+"with the specified frameworks."
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:45
+msgid "How to package Apple Frameworks"
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:47
+msgid ""
+"To package a **MyFramework** Apple framework, copy/create a folder "
+"``MyFramework.framework`` to your package folder, where you should put all "
+"the subdirectories (``Headers``, ``Modules``, etc)."
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:51
+msgid ""
+"def package(self):\n"
+"    # If you have the framework folder built in your build_folder:\n"
+"    self.copy(\"MyFramework.framework/*\", symlinks=True)\n"
+"    # Or build the destination folder:\n"
+"    tools.mkdir(\"MyFramework.framework/Headers\")\n"
+"    self.copy(\"*.h\", dst=\"MyFramework.framework/Headers\")\n"
+"    # ..."
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:61
+msgid ""
+"Declare the framework in the ``cpp_info`` object, pass a compiler flag ``-"
+"F`` with the directory of the framework folder (self.package_folder) and "
+"linker flags with the ``-F`` and ``-framework`` with the framework name."
+msgstr ""
+
+#: ../../../howtos/link_apple_framework.rst:65
+msgid ""
+"def package_info(self):\n"
+"    ...\n"
+"    # Note that -F flags are not automatically adjusted in \"cmake\"\n"
+"    # generator so it will be needed to declare its path like this:\n"
+"    # self.cpp_info.exelinkflags.append(\"-F path/to/the/framework -"
+"framework MyFramework\")\n"
+"\n"
+"    f_location = '-F \"%s\"' % self.package_folder\n"
+"    self.cpp_info.cflags.append(f_location) # or cpp_info.cppflags if cpp "
+"library\n"
+"    self.cpp_info.sharedlinkflags.extend([f_location, \"-framework "
+"MyFramework\"])\n"
+"    self.cpp_info.exelinkflags = self.cpp_info.sharedlinkflags"
+msgstr ""

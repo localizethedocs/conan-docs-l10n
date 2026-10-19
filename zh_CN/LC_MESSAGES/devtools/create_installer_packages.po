@@ -1,0 +1,324 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devtools/create_installer_packages.rst:4
+msgid "Creating conan packages to install dev tools"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:6
+msgid ""
+"Conan 1.0 introduced two new settings, ``os_build`` and ``arch_build``. "
+"These settings represent the machine where Conan is running, and are "
+"important settings when we are packaging tools."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:9
+msgid ""
+"These settings are different from ``os`` and ``arch``. These mean where the "
+"built software by the Conan recipe will run. When we are packaging a tool, "
+"it usually makes no sense, because we are not building any software, but it "
+"makes sense if you are :ref:`cross building software<cross_building>`."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:13
+msgid ""
+"We recommend the use of ``os_build`` and ``arch_build`` settings instead of "
+"``os`` and ``arch`` if you are packaging a tool involved in the building "
+"process, like a compiler, a build system etc. If you are building a package "
+"to be run on the **host** system you can use ``os`` and ``arch``."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:17
+msgid ""
+"A Conan package for a tool follows always a similar structure, this is a "
+"recipe for packaging the ``nasm`` tool for building assembler:"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:19
+msgid ""
+"import os\n"
+"from conans import ConanFile\n"
+"from conans.client import tools\n"
+"\n"
+"\n"
+"class NasmConan(ConanFile):\n"
+"    name = \"nasm\"\n"
+"    version = \"2.13.01\"\n"
+"    license = \"BSD-2-Clause\"\n"
+"    url = \"https://github.com/lasote/conan-nasm-installer\"\n"
+"    settings = \"os_build\", \"arch_build\"\n"
+"    build_policy = \"missing\"\n"
+"    description=\"Nasm for windows. Useful as a build_require.\"\n"
+"\n"
+"    def configure(self):\n"
+"        if self.settings.os_build != \"Windows\":\n"
+"            raise Exception(\"Only windows supported for nasm\")\n"
+"\n"
+"    @property\n"
+"    def nasm_folder_name(self):\n"
+"        return \"nasm-%s\" % self.version\n"
+"\n"
+"    def build(self):\n"
+"        suffix = \"win32\" if self.settings.arch_build == \"x86\" else "
+"\"win64\"\n"
+"        nasm_zip_name = \"%s-%s.zip\" % (self.nasm_folder_name, suffix)\n"
+"        tools.download(\"http://www.nasm.us/pub/nasm/releasebuilds/\"\n"
+"                       \"%s/%s/%s\" % (self.version, suffix, nasm_zip_name), "
+"nasm_zip_name)\n"
+"        self.output.warn(\"Downloading nasm: \"\n"
+"                         \"http://www.nasm.us/pub/nasm/releasebuilds\"\n"
+"                         \"/%s/%s/%s\" % (self.version, suffix, "
+"nasm_zip_name))\n"
+"        tools.unzip(nasm_zip_name)\n"
+"        os.unlink(nasm_zip_name)\n"
+"\n"
+"    def package(self):\n"
+"        self.copy(\"*\", dst=\"\", keep_path=True)\n"
+"        self.copy(\"license*\", dst=\"\", src=self.nasm_folder_name, "
+"keep_path=False, ignore_case=True)\n"
+"\n"
+"    def package_info(self):\n"
+"        self.output.info(\"Using %s version\" % self.nasm_folder_name)\n"
+"        self.env_info.path.append(os.path.join(self.package_folder, self."
+"nasm_folder_name))"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:62
+msgid "There are some remarkable things in the recipe:"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:64
+msgid ""
+"The configure method discards some combinations of settings and options, by "
+"throwing an exception. In this case this package is only for Windows."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:66
+msgid "``build()`` downloads the appropriate file and unzips it."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:67
+msgid "``package()`` copies all the files from the zip to the package folder."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:68
+msgid ""
+"``package_info()`` uses ``self.env_info`` to append to the environment "
+"variable ``path`` the package's bin folder."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:70
+msgid ""
+"This package has only 2 differences from a regular Conan library package:"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:72
+msgid ""
+"``source()`` method is missing. That’s because when you compile a library, "
+"the source code is always the same for all the generated packages, but in "
+"this case we are downloading the binaries, so we do it in the build method "
+"to download the appropriate zip file according to each combination of "
+"settings/options. Instead of actually building the tools, we just download "
+"them. Of course, if you want to build it from source, you can do it too by "
+"creating your own package recipe."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:76
+msgid ""
+"The ``package_info()`` method uses the new ``self.env_info`` object. With "
+"``self.env_info`` the package can declare environment variables that will be "
+"set automatically before `build()`, `package()`, `source()` and `imports()` "
+"methods of a package requiring this build tool. This is a convenient method "
+"to use these tools without having to mess with the system path."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:81
+msgid "Using the tool packages in other recipes"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:83
+msgid ""
+"The ``self.env_info`` variables will be automatically applied when you "
+"require a recipe that declares them. For example, take a look at the MinGW "
+"*conanfile.py* recipe (https://github.com/conan-community/conan-mingw-"
+"installer):"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:86
+msgid ""
+" class MingwInstallerConan(ConanFile):\n"
+"     name = \"mingw_installer\"\n"
+"     ...\n"
+"\n"
+"     build_requires = \"7z_installer/1.0@conan/stable\"\n"
+"\n"
+"     def build(self):\n"
+"         keychain = \"%s_%s_%s_%s\" % (str(self.settings.compiler.version)."
+"replace(\".\", \"\"),\n"
+"                                     self.settings.arch_build,\n"
+"                                     self.settings.compiler.exception,\n"
+"                                     self.settings.compiler.threads)\n"
+"\n"
+"         files = {\n"
+"            ...        }\n"
+"\n"
+"         tools.download(files[keychain], \"file.7z\")\n"
+"         self.run(\"7z x file.7z\")\n"
+"\n"
+"     ..."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:109
+msgid ""
+"We are requiring a ``build_require`` to another package: ``7z_installer``. "
+"In this case it will be used to unzip the 7z compressed files after "
+"downloading the appropriate MinGW installer."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:112
+msgid ""
+"That way, after the download of the installer, the 7z executable will be in "
+"the PATH, because the ``7z_installer`` dependency declares the *bin* folder "
+"in its ``package_info()``."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:117
+msgid ""
+"Some build requires will need settings such as ``os``, ``compiler`` or "
+"``arch`` to build themselves from sources. In that case the recipe might "
+"look like this:"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:120
+msgid ""
+"class MyAwesomeBuildTool(ConanFile):\n"
+"    settings = \"os_build\", \"arch_build\", \"arch\", \"compiler\"\n"
+"    ...\n"
+"\n"
+"    def build(self):\n"
+"        cmake = CMake(self)\n"
+"        ...\n"
+"\n"
+"    def package_id(self):\n"
+"        self.info.include_build_settings()\n"
+"        del self.info.settings.compiler\n"
+"        del self.info.settings.arch"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:135
+msgid ""
+"Note ``package_id()`` deletes not needed information for the computation of "
+"the package ID and includes the build settings ``os_build`` and "
+"``arch_build`` that are excluded by default. Read more about :ref:`self.info."
+"include_build_settings() <info_discard_include_build_settings>` in the "
+"reference section."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:140
+msgid "Using the tool packages in your system"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:142
+msgid ""
+"You can use the :ref:`virtualenv generator <virtualenv_generator>` to get "
+"the requirements applied in your system. For example: Working in Windows "
+"with MinGW and CMake."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:145
+msgid ""
+"Create a separate folder from your project, this folder will handle our "
+"global development environment."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:147
+msgid ""
+"$ mkdir my_cpp_environ\n"
+"$ cd my_cpp_environ"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:152
+msgid "Create a *conanfile.txt* file:"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:154
+msgid ""
+"[requires]\n"
+"mingw_installer/1.0@conan/stable\n"
+"cmake_installer/3.10.0@conan/stable\n"
+"\n"
+"[generators]\n"
+"virtualenv"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:163
+msgid ""
+"Note that you can adjust the ``options`` and retrieve a different "
+"configuration of the required packages, or leave them unspecified in the "
+"file and pass them as command line parameters."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:166
+msgid "Install them:"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:168
+msgid "$ conan install ."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:172
+msgid "Activate the virtual environment in your shell:"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:174
+msgid ""
+"$ activate\n"
+"(my_cpp_environ)$"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:179
+msgid "Check that the tools are in the path:"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:181
+msgid ""
+"(my_cpp_environ)$ gcc --version\n"
+"\n"
+"> gcc (x86_64-posix-seh-rev1, Built by MinGW-W64 project) 4.9.2\n"
+"\n"
+" Copyright (C) 2014 Free Software Foundation, Inc.\n"
+" This is free software; see the source for copying conditions.  There is NO\n"
+" warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR "
+"PURPOSE.\n"
+"\n"
+"(my_cpp_environ)$ cmake --version\n"
+"\n"
+"> cmake version 3.10\n"
+"\n"
+"  CMake suite maintained and supported by Kitware (kitware.com/cmake)."
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:197
+msgid ""
+"You can deactivate the virtual environment with the *deactivate.bat* script"
+msgstr ""
+
+#: ../../../devtools/create_installer_packages.rst:199
+msgid "(my_cpp_environ)$ deactivate"
+msgstr ""

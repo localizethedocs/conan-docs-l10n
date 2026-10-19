@@ -1,0 +1,407 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 18:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/plugins.rst:4
+msgid "Plugins [EXPERIMENTAL]"
+msgstr ""
+
+#: ../../../reference/plugins.rst:8
+msgid ""
+"This is an **experimental** feature subject to breaking changes in future "
+"releases."
+msgstr ""
+
+#: ../../../reference/plugins.rst:10
+msgid ""
+"The Conan plugins are Python functions that are intended to extend the Conan "
+"functionalities and let users customize the client behavior at determined "
+"execution points."
+msgstr ""
+
+#: ../../../reference/plugins.rst:14
+msgid "Plugin interface"
+msgstr ""
+
+#: ../../../reference/plugins.rst:16
+msgid ""
+"Here you can see a complete example of all the plugin functions available "
+"and the different parameters for each of them depending on the context:"
+msgstr ""
+
+#: ../../../reference/plugins.rst:19
+msgid ""
+"def pre_export(output, conanfile, conanfile_path, reference, **kwargs):\n"
+"    assert conanfile\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"\n"
+"def post_export(output, conanfile, conanfile_path, reference, **kwargs):\n"
+"    assert conanfile\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"\n"
+"def pre_source(output, conanfile, conanfile_path, **kwargs):\n"
+"    assert conanfile\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    if conanfile.in_local_cache:\n"
+"        output.info(\"reference=%s\" % str(kwargs[\"reference\"]))\n"
+"\n"
+"def post_source(output, conanfile, conanfile_path, **kwargs):\n"
+"    assert conanfile\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    if conanfile.in_local_cache:\n"
+"        output.info(\"reference=%s\" % str(kwargs[\"reference\"]))\n"
+"\n"
+"def pre_build(output, conanfile, **kwargs):\n"
+"    assert conanfile\n"
+"    if conanfile.in_local_cache:\n"
+"        output.info(\"reference=%s\" % str(kwargs[\"reference\"]))\n"
+"        output.info(\"package_id=%s\" % kwargs[\"package_id\"])\n"
+"    else:\n"
+"        output.info(\"conanfile_path=%s\" % kwargs[\"conanfile_path\"])\n"
+"\n"
+"def post_build(output, conanfile, **kwargs):\n"
+"    assert conanfile\n"
+"    if conanfile.in_local_cache:\n"
+"        output.info(\"reference=%s\" % str(kwargs[\"reference\"]))\n"
+"        output.info(\"package_id=%s\" % kwargs[\"package_id\"])\n"
+"    else:\n"
+"        output.info(\"conanfile_path=%s\" % kwargs[\"conanfile_path\"])\n"
+"\n"
+"def pre_package(output, conanfile, conanfile_path, **kwargs):\n"
+"    assert conanfile\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    if conanfile.in_local_cache:\n"
+"        output.info(\"reference=%s\" % str(kwargs[\"reference\"]))\n"
+"        output.info(\"package_id=%s\" % kwargs[\"package_id\"])\n"
+"\n"
+"def post_package(output, conanfile, conanfile_path, **kwargs):\n"
+"    assert conanfile\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    if conanfile.in_local_cache:\n"
+"        output.info(\"reference=%s\" % str(kwargs[\"reference\"]))\n"
+"        output.info(\"package_id=%s\" % kwargs[\"package_id\"])\n"
+"\n"
+"def pre_upload(output, conanfile_path, reference, remote, **kwargs):\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"remote.name=%s\" % remote.name)\n"
+"\n"
+"def post_upload(output, conanfile_path, reference, remote, **kwargs):\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"remote.name=%s\" % remote.name)\n"
+"\n"
+"def pre_upload_recipe(output, conanfile_path, reference, remote, **kwargs):\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"remote.name=%s\" % remote.name)\n"
+"\n"
+"def post_upload_recipe(output, conanfile_path, reference, remote, "
+"**kwargs):\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"remote.name=%s\" % remote.name)\n"
+"\n"
+"def pre_upload_package(output, conanfile_path, reference, package_id, "
+"remote, **kwargs):\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"package_id=%s\" % package_id)\n"
+"    output.info(\"remote.name=%s\" % remote.name)\n"
+"\n"
+"def post_upload_package(output, conanfile_path, reference, package_id, "
+"remote, **kwargs):\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"package_id=%s\" % package_id)\n"
+"    output.info(\"remote.name=%s\" % remote.name)\n"
+"\n"
+"def pre_download(output, reference, remote, **kwargs):\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"remote.name=%s\" % remote.name)\n"
+"\n"
+"def post_download(output, conanfile_path, reference, remote, **kwargs):\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"remote.name=%s\" % remote.name)\n"
+"\n"
+"def pre_download_recipe(output, reference, remote, **kwargs):\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"remote.name=%s\" % remote.name)\n"
+"\n"
+"def post_download_recipe(output, conanfile_path, reference, remote, "
+"**kwargs):\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"remote.name=%s\" % remote.name)\n"
+"\n"
+"def pre_download_package(output, conanfile_path, reference, package_id, "
+"remote, **kwargs):\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"package_id=%s\" % package_id)\n"
+"    output.info(\"remote.name=%s\" % remote.name)\n"
+"\n"
+"def post_download_package(output, conanfile_path, reference, package_id, "
+"remote, **kwargs):\n"
+"    output.info(\"conanfile_path=%s\" % conanfile_path)\n"
+"    output.info(\"reference=%s\" % str(reference))\n"
+"    output.info(\"package_id=%s\" % package_id)\n"
+"    output.info(\"remote.name=%s\" % remote.name)"
+msgstr ""
+
+#: ../../../reference/plugins.rst:135
+msgid ""
+"Functions of the plugins are intended to be self-descriptive regarding to "
+"the execution of them. For example, the ``pre_package()`` function is called "
+"just before the ``package()`` method of the recipe is executed."
+msgstr ""
+
+#: ../../../reference/plugins.rst:138
+msgid ""
+"For download/upload functions, the ``pre_download()``/``pre_upload()`` "
+"function is executed first in an :command:`conan download`/:command:`conan "
+"upload` command. Then **pre** and **post** ``download_recipe()``/"
+"``upload_recipe()`` and its subsequent **pre**/**post** "
+"``download_package()``/``upload_package()`` if that is the case. Finally the "
+"general ``post_download()``/``post_upload()`` function is called to wrap up "
+"the whole execution."
+msgstr ""
+
+#: ../../../reference/plugins.rst:145
+msgid ""
+"**Pre** and **post** ``download_recipe()``/``download_package()`` are also "
+"executed when installing new recipes/packages from remotes using :command:"
+"`conan create` or :command:`conan install`."
+msgstr ""
+
+#: ../../../reference/plugins.rst:149
+msgid "Function parameters"
+msgstr ""
+
+#: ../../../reference/plugins.rst:151
+msgid "Here you can find the description for each parameter:"
+msgstr ""
+
+#: ../../../reference/plugins.rst:153
+msgid ""
+"**output**: :ref:`Output object<conanfile_output>` to print formatted "
+"messages during execution with the name of the plugin and the function "
+"executed, e.g., ``[PLUGIN - complete_plugin] post_download_package(): This "
+"is the remote name: default``."
+msgstr ""
+
+#: ../../../reference/plugins.rst:156
+msgid ""
+"**conanfile**: It is a regular ``ConanFile`` object loaded from the recipe "
+"that received the Conan command. It has its normal attributes and dynamic "
+"objects such as ``build_folder``, ``package_folder``..."
+msgstr ""
+
+#: ../../../reference/plugins.rst:159
+msgid ""
+"**conanfile_path**: Path to the *conanfile.py* file whether it is in local "
+"cache or in user space."
+msgstr ""
+
+#: ../../../reference/plugins.rst:161
+msgid ""
+"**reference**: Named tuple with attributes ``name``, ``version``, ``user, "
+"and ``channel``. It's representation will be a reference like: "
+"``box2d/2.1.0@user/channel``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:164
+msgid "**package_id**: String with the computed package ID."
+msgstr ""
+
+#: ../../../reference/plugins.rst:166
+msgid ""
+"**remote**: Named tuple with attributes ``name``, ``url`` and ``verify_ssl``."
+msgstr ""
+
+#: ../../../reference/plugins.rst:0
+msgid "Availability of parameters for"
+msgstr ""
+
+#: ../../../reference/plugins.rst:0
+msgid "each Plugin function depending on"
+msgstr ""
+
+#: ../../../reference/plugins.rst:0
+msgid "the context"
+msgstr ""
+
+#: ../../../reference/plugins.rst:169
+msgid "**Plugin Functions***"
+msgstr ""
+
+#: ../../../reference/plugins.rst:171
+msgid "``export()``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:171
+msgid "``source()``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:171
+msgid "``build()``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:171
+msgid "``package()``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:0
+msgid "``upload()``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:0
+msgid "``upload_recipe()``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:0
+msgid "``upload_package()``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:0
+msgid "``download()``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:0
+msgid "``download_recipe()``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:0
+msgid "``download_package()``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:175
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../../reference/plugins.rst:175
+msgid "``conanfile``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:175 ../../../reference/plugins.rst:177
+#: ../../../reference/plugins.rst:179 ../../../reference/plugins.rst:181
+#: ../../../reference/plugins.rst:183
+msgid "Yes"
+msgstr ""
+
+#: ../../../reference/plugins.rst:175 ../../../reference/plugins.rst:181
+#: ../../../reference/plugins.rst:183
+msgid "No"
+msgstr ""
+
+#: ../../../reference/plugins.rst:175 ../../../reference/plugins.rst:177
+msgid "post"
+msgstr ""
+
+#: ../../../reference/plugins.rst:177
+msgid "``conanfile_path``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:177
+msgid "pre / post"
+msgstr ""
+
+#: ../../../reference/plugins.rst:177
+msgid "user space"
+msgstr ""
+
+#: ../../../reference/plugins.rst:179
+msgid "``reference``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:179 ../../../reference/plugins.rst:181
+msgid "cache"
+msgstr ""
+
+#: ../../../reference/plugins.rst:181
+msgid "``package_id``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:183
+msgid "``remote``"
+msgstr ""
+
+#: ../../../reference/plugins.rst:186
+msgid ""
+"\\*Plugin functions are indicated without ``pre`` and ``post`` prefixes for "
+"simplicity."
+msgstr ""
+
+#: ../../../reference/plugins.rst:196
+msgid "Table legend:"
+msgstr ""
+
+#: ../../../reference/plugins.rst:189
+msgid "**Yes**: Availability in ``pre`` and ``post`` functions in any context."
+msgstr ""
+
+#: ../../../reference/plugins.rst:190
+msgid "**No**: Not available."
+msgstr ""
+
+#: ../../../reference/plugins.rst:191
+msgid ""
+"**pre / post**: Availability in both ``pre`` and ``post`` functions with "
+"**different values**. e.g. ``conanfile_path`` pointing to user space in "
+"``pre`` and to local cache in ``post``."
+msgstr ""
+
+#: ../../../reference/plugins.rst:193
+msgid "**post**: Only available in ``post`` function."
+msgstr ""
+
+#: ../../../reference/plugins.rst:194
+msgid ""
+"**cache**: Only available when the context of the command executed is the "
+"local cache. e.g. :command:`conan create`, :command:`conan install`..."
+msgstr ""
+
+#: ../../../reference/plugins.rst:196
+msgid ""
+"**user space**: Only available when the context of the command executed is "
+"the user space. e.g. :command:`conan build`"
+msgstr ""
+
+#: ../../../reference/plugins.rst:200
+msgid ""
+"Path to the different folders of the Conan execution flow may be accessible "
+"as usual through the ``conanfile`` object. See :ref:"
+"`folders_attributes_reference` to learn more."
+msgstr ""
+
+#: ../../../reference/plugins.rst:203
+msgid ""
+"Some of this parameters does not appear in the signature of the function as "
+"they may not be always available (Mostly depending on the recipe living in "
+"the local cache or in user space). However, they can be checked with the "
+"``kwargs`` parameter."
+msgstr ""
+
+#: ../../../reference/plugins.rst:208
+msgid ""
+"Plugin functions should have a ``**kwargs`` parameter to keep compatibility "
+"of new parameters that may be introduced in future versions of Conan."
+msgstr ""

@@ -1,0 +1,203 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2019, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.17\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/ci/appveyor.rst:5
+msgid "|appveyor_logo| Appveyor"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:9
+msgid ""
+"You can use the `AppVeyor`_ cloud service to automatically build and test "
+"your project in a Windows environment in the cloud. It is free for OSS "
+"projects, and offers an easy integration with Github, so builds can be "
+"automatically fired in Appveyor after a :command:`git push` to Github."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:13
+msgid "You can use Appveyor both for:"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:15
+msgid ""
+"Building and testing your project, which manages dependencies with Conan, "
+"and probably a conanfile.txt file"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:16
+msgid ""
+"Building and testing Conan binary packages for a given Conan package recipe "
+"(with a conanfile.py)"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:20
+msgid "Building and testing your project"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:22
+msgid ""
+"We are going to use an example with GTest package, with **AppVeyor** support "
+"to run the tests."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:25
+msgid "Clone the project from github:"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:28
+msgid "$ git clone https://github.com/lasote/conan-gtest-example"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:33
+msgid "Create an ``appveyor.yml`` file and paste this code in it:"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:36
+msgid ""
+"version: 1.0.{build}\n"
+"    platform:\n"
+"      - x64\n"
+"\n"
+"    install:\n"
+"      - cmmd: echo \"Downloading conan...\"\n"
+"      - cmmd: set PATH=%PATH%;%PYTHON%/Scripts/\n"
+"      - cmmd: pip.exe install conan\n"
+"      - cmmd: conan user # Create the conan data directory\n"
+"      - cmmd: conan --version\n"
+"\n"
+"    build_script:\n"
+"      - cmmd: mkdir build\n"
+"      - cmmd: conan install . -o gtest:shared=True\n"
+"      - cmmd: cd build\n"
+"      - cmmd: cmake ../ -DBUILD_TEST=TRUE  -G \"Visual Studio 14 2015 "
+"Win64\"\n"
+"      - cmmd: cmake --build . --config Release\n"
+"\n"
+"    test_script:\n"
+"      - cmmd: cd bin\n"
+"      - cmmd: encryption_test.exe"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:61
+msgid ""
+"Appveyor will install the **Conan** tool and will execute the **conan "
+"install** command. Then, the **build_script** section creates the build "
+"folder, compiles the project with **cmake** and the section **test_script** "
+"runs the **tests**."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:65
+msgid "Creating, testing and uploading Conan binary packages"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:67
+msgid ""
+"You can use Appveyor to automate the building of binary packages, which will "
+"be created in the cloud after pushing to Github. You can probably set up "
+"your own way, but Conan has some utilities to help in the process."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:70
+msgid ""
+"The command :command:`conan new` has arguments to create a default working "
+"*appveyor.yml* file. Other setups might be possible, but for this example we "
+"are assuming that you are using GitHub and also uploading your final "
+"packages to Bintray. You could follow these steps:"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:73
+msgid ""
+"First, create an empty github repository. Let's call it \"hello\", for "
+"creating a \"hello world\" package. Github allows to create it with a Readme "
+"and .gitignore."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:74
+msgid ""
+"Get the credentials User and API Key. (Remember, Bintray uses the API key as "
+"\"password\", not your main Bintray account password.)"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:75
+msgid ""
+"Create a Conan repository in Bintray under your user or organization, and "
+"get its URL (\"Set me up\"). We will call it ``UPLOAD_URL``"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:76
+msgid ""
+"Activate the repo in your Appveyor account, so it is built when we push "
+"changes to it."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:77
+msgid ""
+"Under *Appveyor Settings->Environment*, add the ``CONAN_PASSWORD`` "
+"environment variable with the Bintray API Key, and encrypt it.  If your "
+"Bintray user is different from the package user, you can define your Bintray "
+"username too, defining the environment variable ``CONAN_LOGIN_USERNAME``"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:78
+msgid "Clone the repo: ``$ git clone <your_repo/hello> && cd hello``"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:79
+msgid ""
+"Create the package: :command:`conan new Hello/0.1@<user>/testing -t -s -ciw -"
+"cis -ciu=UPLOAD_URL` where **user** is your Bintray username"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:80
+msgid ""
+"You can inspect the created files: both *appveyor.yml* and the *build.py* "
+"script, that is used by **conan-package-tools** utility to split different "
+"builds with different configurations in different appveyor jobs."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:82
+msgid "You can test locally, before pushing, with :command:`conan create`"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:83
+msgid ""
+"Add the changes, commit and push: :command:`git add . && git commit -m "
+"\"first commit\" && git push`"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:84
+msgid "Go to Appveyor and see the build, with the different jobs."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:85
+msgid ""
+"When it finish, go to your Bintray repository, you should see there the "
+"uploaded packages for different configurations"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:86
+msgid ""
+"Check locally, searching in Bintray: :command:`conan search Hello/0.1@<user>/"
+"testing -r=mybintray`"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:88
+msgid ""
+"If something fails, please report an issue in the ``conan-package-tools`` "
+"github repository: https://github.com/conan-io/conan-package-tools"
+msgstr ""

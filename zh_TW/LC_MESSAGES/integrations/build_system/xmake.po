@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.55\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/build_system/xmake.rst:4
+msgid "|xmake_logo| XMake"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:8
+msgid "Install third-party packages:"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:10
+msgid ""
+"After version 2.2.5, xmake supports installing for dependency libraries of "
+"conan package manager."
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:12
+#: ../../../integrations/build_system/xmake.rst:52
+msgid "xmake.lua"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:12
+msgid ""
+" -- xmake.lua\n"
+"\n"
+" add_requires(\"conan::zlib/1.2.11@conan/stable\", {alias = \"zlib\", debug "
+"= true})\n"
+" add_requires(\"conan::openssl/1.1.1g\", {alias = \"openssl\",\n"
+"     configs = {options = \"OpenSSL:shared=True\"}})\n"
+"\n"
+" target(\"test\")\n"
+"     set_kind(\"binary\")\n"
+"     add_files(\"src/*.c\")\n"
+"     add_packages(\"openssl\", \"zlib\")"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:27
+msgid "After executing xmake to compile:"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:29
+msgid ""
+"$ xmake\n"
+"checking for the architecture ... x86_64\n"
+"checking for the Xcode directory ... /Applications/Xcode.app\n"
+"checking for the SDK version of Xcode ... 10.14\n"
+"note: try installing these packages (pass -y to skip confirm)?\n"
+"  -> conan::zlib/1.2.11@conan/stable  (debug)\n"
+"  -> conan::openssl/1.1.1g\n"
+"please input: y (y/n)\n"
+"\n"
+"  => installing conan::zlib/1.2.11@conan/stable .. ok\n"
+"  => installing conan::openssl/1.1.1g .. ok\n"
+"\n"
+"[  0%]: ccache compiling.release src/main.c\n"
+"[100%]: linking.release test"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:48
+msgid "Find a conan package"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:50
+msgid ""
+"XMake v2.2.6 and later versions also support finding the specified package "
+"in the Conan cache:"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:52
+msgid ""
+" ...\n"
+" find_packages(\"conan::openssl/1.1.1g\")"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:59
+msgid "Test command for finding package"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:61
+msgid "We can also add a third-party package manager prefix to test:"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:63
+msgid "xmake l find_packages conan::openssl/1.1.1g"
+msgstr ""
+
+#: ../../../integrations/build_system/xmake.rst:69
+msgid ""
+"**Note:** It should be noted that if the find_package command is executed in "
+"the project directory with xmake.lua, there will be a cache. If the search "
+"fails, the next lookup will also use the cached result. If you want to force "
+"a retest every time, Please switch to the non-project directory to execute "
+"the above command."
+msgstr ""

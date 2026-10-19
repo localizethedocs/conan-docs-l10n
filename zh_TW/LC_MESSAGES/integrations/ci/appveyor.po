@@ -1,0 +1,197 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.55\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/ci/appveyor.rst:5
+msgid "|appveyor_logo| Appveyor"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:9
+msgid ""
+"You can use the `AppVeyor`_ cloud service to automatically build and test "
+"your project in a Windows environment in the cloud. It is free for OSS "
+"projects, and offers an easy integration with Github, so builds can be "
+"automatically fired in Appveyor after a :command:`git push` to Github."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:13
+msgid "You can use Appveyor both for:"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:15
+msgid ""
+"Building and testing your project, which manages dependencies with Conan, "
+"and probably a conanfile.txt file"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:16
+msgid ""
+"Building and testing Conan binary packages for a given Conan package recipe "
+"(with a conanfile.py)"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:20
+msgid "Building and testing your project"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:22
+msgid ""
+"We are going to use an example with GTest package, with **AppVeyor** support "
+"to run the tests."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:25
+msgid "Clone the project from github:"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:28
+msgid "$ git clone https://github.com/lasote/conan-gtest-example"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:33
+msgid "Create an ``appveyor.yml`` file and paste this code in it:"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:36
+msgid ""
+"version: 1.0.{build}\n"
+"    platform:\n"
+"      - x64\n"
+"\n"
+"    install:\n"
+"      - cmd: echo \"Downloading conan...\"\n"
+"      - cmd: set PATH=%PATH%;%PYTHON%/Scripts/\n"
+"      - cmd: pip.exe install conan\n"
+"      - cmd: conan user # Create the conan data directory\n"
+"      - cmd: conan --version\n"
+"\n"
+"    build_script:\n"
+"      - cmd: mkdir build\n"
+"      - cmd: conan install . -o gtest:shared=True\n"
+"      - cmd: cd build\n"
+"      - cmd: cmake ../ -DBUILD_TEST=TRUE  -G \"Visual Studio 14 2015 "
+"Win64\"\n"
+"      - cmd: cmake --build . --config Release\n"
+"\n"
+"    test_script:\n"
+"      - cmd: cd bin\n"
+"      - cmd: encryption_test.exe"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:61
+msgid ""
+"Appveyor will install the **Conan** tool and will execute the **conan "
+"install** command. Then, the **build_script** section creates the build "
+"folder, compiles the project with **cmake** and the section **test_script** "
+"runs the **tests**."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:65
+msgid "Creating, testing and uploading Conan binary packages"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:67
+msgid ""
+"You can use Appveyor to automate the building of binary packages, which will "
+"be created in the cloud after pushing to Github. You can probably set up "
+"your own way, but Conan has some utilities to help in the process."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:70
+msgid ""
+"The command :command:`conan new` has arguments to create a default working "
+"*appveyor.yml* file. Other setups might be possible, but for this example we "
+"are assuming that you are using GitHub and also uploading your final "
+"packages to your own free Artifactory CE repository. You could follow these "
+"steps:"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:73
+msgid ""
+"First, create an empty github repository. Let's call it \"hello\", for "
+"creating a \"hello world\" package. Github allows to create it with a Readme "
+"and .gitignore."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:74
+msgid ""
+"Create a Conan repository in your Artifactory CE, and get its URL (\"Set me "
+"up\"). We will call it ``UPLOAD_URL``"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:75
+msgid ""
+"Activate the repo in your Appveyor account, so it is built when we push "
+"changes to it."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:76
+msgid ""
+"Under *Appveyor Settings->Environment*, add the ``CONAN_LOGIN_USERNAME`` and "
+"``CONAN_PASSWORD`` environment variables with the Artifactory CE user and "
+"password."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:77
+msgid "Clone the repo: ``$ git clone <your_repo/hello> && cd hello``"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:78
+msgid ""
+"Create the package: :command:`conan new hello/0.1@myteam/testing -t -s -ciw -"
+"cis -ciu=UPLOAD_URL`"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:79
+msgid ""
+"You can inspect the created files: both *appveyor.yml* and the *build.py* "
+"script, that is used by **conan-package-tools** utility to split different "
+"builds with different configurations in different appveyor jobs."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:81
+msgid "You can test locally, before pushing, with :command:`conan create`"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:82
+msgid ""
+"Add the changes, commit and push: :command:`git add . && git commit -m "
+"\"first commit\" && git push`"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:83
+msgid "Go to Appveyor and see the build, with the different jobs."
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:84
+msgid ""
+"When it finish, go to your Artifactory CE repository, you should see there "
+"the uploaded packages for different configurations"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:85
+msgid ""
+"Check locally, searching in Artifactory CE: :command:`conan search "
+"hello/0.1@myteam/testing -r=myrepo`"
+msgstr ""
+
+#: ../../../integrations/ci/appveyor.rst:87
+msgid ""
+"If something fails, please report an issue in the ``conan-package-tools`` "
+"github repository: https://github.com/conan-io/conan-package-tools"
+msgstr ""

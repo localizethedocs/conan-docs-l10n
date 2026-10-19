@@ -1,0 +1,496 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2022, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.59\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../using_packages/conanfile_txt.rst:4
+msgid "Installing dependencies"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:8
+msgid ""
+"We are actively working to finalize the *Conan 2.0 Release*. Some of the "
+"information on this page references **deprecated** features which will not "
+"be carried forward with the new release. It's important to check the :ref:"
+"`Migration Guidelines<conan2_migration_guide>` to ensure you are using the "
+"most up to date features."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:12
+msgid ""
+"In :ref:`Getting started<getting_started>` we used the :command:`conan "
+"install` command to download the **Poco** library and build an example."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:15
+msgid ""
+"If you inspect the ``conanbuildinfo.cmake`` file that was created when "
+"running :command:`conan install`, you can see there that there are many "
+"CMake variables declared. For example ``CONAN_INCLUDE_DIRS_ZLIB``, that "
+"defines the include path to the zlib headers, and ``CONAN_INCLUDE_DIRS`` "
+"that defines include paths for all dependencies headers."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:25
+msgid ""
+"If you check the full path that each of these variables defines, you will "
+"see that it points to a folder under your ``<userhome>`` folder. Together, "
+"these folders are the **local cache**. This is where package recipes and "
+"binary packages are stored and cached, so they don't have to be retrieved "
+"again. You can inspect the **local cache** with :command:`conan search`, and "
+"remove packages from it with :command:`conan remove` command."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:31
+msgid ""
+"If you navigate to the folders referenced in ``conanbuildinfo.cmake`` you "
+"will find the headers and libraries for each package."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:34
+msgid ""
+"If you execute a :command:`conan install poco/1.9.4@` command in your shell, "
+"Conan will download the Poco package and its dependencies (*openssl/1.0.2t* "
+"and *zlib/1.2.11*) to your local cache and print information about the "
+"folder where they are installed. While you can install each of your "
+"dependencies individually like that, the recommended approach for handling "
+"dependencies is to use a ``conanfile.txt`` file. The structure of "
+"``conanfile.txt`` is described below."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:42
+msgid "Requires"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:44
+msgid ""
+"The required dependencies should be specified in the **[requires]** section. "
+"Here is an example:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:47
+msgid ""
+"[requires]\n"
+"mypackage/1.0.0@company/stable"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:52
+msgid "Where:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:54
+msgid ""
+"``mypackage`` is the name of the package which is usually the same as the "
+"project/library."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:55
+msgid ""
+"``1.0.0`` is the version which usually matches that of the packaged project/"
+"library. This can be any string; it does not have to be a number, so, for "
+"example, it could indicate if this is a \"develop\" or \"master\" version. "
+"Packages can be overwritten, so it is also OK to have packages like "
+"\"nightly\" or \"weekly\", that are regenerated periodically."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:59
+msgid ""
+"``company`` is the owner of this package. It is basically a namespace that "
+"allows different users to have their own packages for the same library with "
+"the same name."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:61
+msgid ""
+"``stable`` is the channel. Channels provide another way to have different "
+"variants of packages for the same library and use them interchangeably. They "
+"usually denote the maturity of the package as an arbitrary string such as "
+"\"stable\" or \"testing\", but they can be used for any purpose such as "
+"package revisions (e.g., the library version has not changed, but the "
+"package recipe has evolved)."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:68
+msgid "Optional user/channel"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:70
+msgid ""
+"If the package was created and uploaded without specifying the ``user`` and "
+"``channel`` you can omit the ``user/channel`` when specifying a reference:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:74
+msgid ""
+"[requires]\n"
+"packagename/1.2.0"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:82
+msgid "Overriding requirements"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:84
+msgid ""
+"You can specify multiple requirements and **override** transitive "
+"\"require's requirements\". In our example, Conan installed the Poco package "
+"and all its requirements transitively:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:88
+msgid "**openssl/1.0.2t**"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:89
+msgid "**zlib/1.2.11**"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:93
+msgid ""
+"This is a good example of overriding requirements given the importance of "
+"keeping the OpenSSL library updated."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:96
+msgid ""
+"Consider that a new release of the OpenSSL library has been released, and a "
+"new corresponding Conan package is available. In our example, we do not need "
+"to wait until `pocoproject`_ (the author) generates a new package of POCO "
+"that includes the new OpenSSL library."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:100
+msgid "We can simply enter the new version in the **[requires]** section:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:102
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"openssl/1.0.2u"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:108
+msgid ""
+"The second line will override the openssl/1.0.2t required by POCO with the "
+"currently non-existent **openssl/1.0.2u**."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:110
+msgid ""
+"Another example in which we may want to try some new zlib alpha features: we "
+"could replace the zlib requirement with one from another user or channel."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:113
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"openssl/1.0.2u\n"
+"zlib/1.2.11@otheruser/alpha"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:122
+msgid ""
+"You can use environment variable :ref:"
+"`CONAN_ERROR_ON_OVERRIDE<env_vars_conan_error_on_override>` to raise an "
+"error for every overridden requirement not marked explicitly with the "
+"``override`` keyword."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:129
+msgid "Generators"
+msgstr "生成器"
+
+#: ../../../using_packages/conanfile_txt.rst:131
+msgid ""
+"Conan reads the **[generators]** section from ``conanfile.txt`` and creates "
+"files for each generator with all the information needed to link your "
+"program with the specified requirements. The generated files are usually "
+"temporary, created in build folders and not committed to version control, as "
+"they have paths to local folders that will not exist in another machine. "
+"Moreover, it is very important to highlight that generated files match the "
+"given configuration (Debug/Release, x86/x86_64, etc) specified when running :"
+"command:`conan install`. If the configuration changes, the files will change "
+"accordingly."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:139
+msgid ""
+"For a full list of generators, please refer to the complete :ref:"
+"`generators<generators_reference>` reference."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:144
+msgid "Options"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:146
+msgid ""
+"We have already seen that there are some **settings** that can be specified "
+"during installation. For example, :command:`conan install .. -s "
+"build_type=Debug`. These settings are typically a project-wide configuration "
+"defined by the client machine, so they cannot have a default value in the "
+"recipe. For example, it doesn't make sense for a package recipe to declare "
+"\"Visual Studio\" as a default compiler because that is something defined by "
+"the end consumer, and unlikely to make sense if they are working in Linux."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:153
+msgid ""
+"On the other hand, **options** are intended for package specific "
+"configuration that can be set to a default value in the recipe. For example, "
+"one package can define that its default linkage is static, and this is the "
+"linkage that should be used if consumers don't specify otherwise."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:159
+msgid ""
+"You can see the available options for a package by inspecting the recipe "
+"with :command:`conan get <reference>` command:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:161
+msgid "$ conan get poco/1.9.4@"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:165
+msgid ""
+"To see only specific fields of the recipe you can use the :command:`conan "
+"inspect` command instead:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:167
+msgid ""
+"$ conan inspect poco/1.9.4@ -a=options\n"
+"$ conan inspect poco/1.9.4@ -a=default_options"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:172
+msgid ""
+"For example, we can modify the previous example to use dynamic linkage "
+"instead of the default one, which was static, by editing the **[options]** "
+"section in ``conanfile.txt``:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:175
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"\n"
+"[generators]\n"
+"cmake\n"
+"\n"
+"[options]\n"
+"poco:shared=True # PACKAGE:OPTION=VALUE\n"
+"openssl:shared=True"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:187
+msgid ""
+"Install the requirements and compile from the build folder (change the CMake "
+"generator if not in Windows):"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:189
+msgid ""
+"$ conan install ..\n"
+"$ cmake .. -G \"Visual Studio 14 Win64\"\n"
+"$ cmake --build . --config Release"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:195
+msgid ""
+"As an alternative to defining options in the ``conanfile.txt`` file, you can "
+"specify them directly in the command line:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:198
+msgid ""
+"$ conan install .. -o poco:shared=True -o openssl:shared=True\n"
+"# or even with wildcards, to apply to many packages\n"
+"$ conan install .. -o *:shared=True"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:204
+msgid ""
+"Conan will install the binaries of the shared library packages, and the "
+"example will link with them. You can again inspect the different binaries "
+"installed. For example, :command:`conan search zlib/1.2.11@`."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:207
+msgid "Finally, launch the executable:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:209
+msgid "$ ./bin/md5"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:213
+msgid ""
+"What happened? It fails because it can't find the shared libraries in the "
+"path. Remember that shared libraries are used at runtime, so the operating "
+"system, which is running the application, must be able to locate them."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:216
+msgid ""
+"We could inspect the generated executable, and see that it is using the "
+"shared libraries. For example, in Linux, we could use the `objdump` tool and "
+"see the *Dynamic section*:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:219
+msgid ""
+"$ cd bin\n"
+"$ objdump -p md5\n"
+"...\n"
+"Dynamic Section:\n"
+" NEEDED               libPocoUtil.so.31\n"
+" NEEDED               libPocoXML.so.31\n"
+" NEEDED               libPocoJSON.so.31\n"
+" NEEDED               libPocoMongoDB.so.31\n"
+" NEEDED               libPocoNet.so.31\n"
+" NEEDED               libPocoCrypto.so.31\n"
+" NEEDED               libPocoData.so.31\n"
+" NEEDED               libPocoDataSQLite.so.31\n"
+" NEEDED               libPocoZip.so.31\n"
+" NEEDED               libPocoFoundation.so.31\n"
+" NEEDED               libpthread.so.0\n"
+" NEEDED               libdl.so.2\n"
+" NEEDED               librt.so.1\n"
+" NEEDED               libssl.so.1.0.0\n"
+" NEEDED               libcrypto.so.1.0.0\n"
+" NEEDED               libstdc++.so.6\n"
+" NEEDED               libm.so.6\n"
+" NEEDED               libgcc_s.so.1\n"
+" NEEDED               libc.so.6"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:248
+msgid "Imports"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:252
+msgid ""
+"This is a **deprecated** feature. Please refer to the :ref:`Migration "
+"Guidelines<conan2_migration_guide>` to find the feature that replaces this "
+"one."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:255
+msgid ""
+"There are some differences between shared libraries on Linux (\\*.so), "
+"Windows (\\*.dll) and MacOS (\\*.dylib). The shared libraries must be "
+"located in a folder where they can be found, either by the linker, or by the "
+"OS runtime."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:259
+msgid ""
+"You can add the libraries' folders to the path (LD_LIBRARY_PATH environment "
+"variable in Linux, DYLD_LIBRARY_PATH in OSX, or system PATH in Windows), or "
+"copy those shared libraries to some system folder where they can be found by "
+"the OS. But these operations are only related to the deployment or "
+"installation of apps; they are not relevant during development. Conan is "
+"intended for developers, so it avoids such manipulation of the OS "
+"environment."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:265
+msgid ""
+"In Windows and OSX, the simplest approach is to copy the shared libraries to "
+"the executable folder, so they are found by the executable, without having "
+"to modify the path."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:268
+msgid "This is done using the **[imports]** section in ``conanfile.txt``."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:270
+msgid ""
+"To demonstrate this, edit the ``conanfile.txt`` file and paste the following "
+"**[imports]** section:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:272
+msgid ""
+"[requires]\n"
+"poco/1.9.4\n"
+"\n"
+"[generators]\n"
+"cmake\n"
+"\n"
+"[options]\n"
+"poco:shared=True\n"
+"openssl:shared=True\n"
+"\n"
+"[imports]\n"
+"bin, *.dll -> ./bin # Copies all dll files from packages bin folder to my "
+"\"bin\" folder\n"
+"lib, *.dylib* -> ./bin # Copies all dylib files from packages lib folder to "
+"my \"bin\" folder"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:290
+msgid ""
+"You can explore the package folder in your local cache (~/.conan/data) and "
+"see where the shared libraries are. It is common that **\\*.dll** are copied "
+"to **/bin**. The rest of the libraries should be found in the **/lib** "
+"folder, however, this is just a convention, and different layouts are "
+"possible."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:295
+msgid ""
+"Install the requirements (from the ``build`` folder), and run the binary "
+"again:"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:297
+msgid ""
+"$ conan install ..\n"
+"$ ./bin/md5"
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:302
+msgid ""
+"Now look at the ``build/bin`` folder and verify that the required shared "
+"libraries are there."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:304
+msgid ""
+"As you can see, the **[imports]** section is a very generic way to import "
+"files from your requirements to your project."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:307
+msgid ""
+"This method can be used for packaging applications and copying the resulting "
+"executables to your bin folder, or for copying assets, images, sounds, test "
+"static files, etc. Conan is a generic solution for package management, not "
+"only for (but focused on) C/C++ libraries."
+msgstr ""
+
+#: ../../../using_packages/conanfile_txt.rst:313
+msgid ""
+"To learn more about working with shared libraries, please refer to :ref:"
+"`Howtos/Manage shared libraries<manage_shared>`."
+msgstr ""

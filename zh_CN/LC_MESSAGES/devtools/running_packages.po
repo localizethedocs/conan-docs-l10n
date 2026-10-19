@@ -1,0 +1,400 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devtools/running_packages.rst:4
+msgid "Running and deploying packages"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:5
+msgid ""
+"Executables and applications including shared libraries can be also "
+"distributed, deployed and run with conan. This might have some advantages "
+"compared to deploying with other systems:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:8
+msgid ""
+"A unified development and distribution tool, for all systems and platforms"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:9
+msgid ""
+"Manage any number of different deployment configurations in the same way you "
+"manage them for development"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:10
+msgid ""
+"Use a conan server remote to store all your applications and runtimes for "
+"all Operating Systems, platforms and targets"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:12
+msgid "There are different approaches:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:15
+msgid "Using virtual environments"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:17
+msgid ""
+"We can create a package that contains an executable, for example from the "
+"default package template created by :command:`conan new`:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:19
+msgid "$ conan new Hello/0.1"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:23
+msgid ""
+"The source code used contains an executable called ``greet``, but it is not "
+"packaged by default. Let's modify the recipe ``package()`` method to also "
+"package the executable:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:26
+msgid ""
+"def package(self):\n"
+"    self.copy(\"*greet*\", src=\"hello/bin\", dst=\"bin\", keep_path=False)"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:32
+msgid ""
+"Now we create the package as usual, but if we try to run the executable it "
+"won't be found:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:34
+msgid ""
+"$ conan create . user/testing\n"
+"...\n"
+"Hello/0.1@user/testing package(): Copied 1 '.h' files: hello.h\n"
+"Hello/0.1@user/testing package(): Copied 1 '.exe' files: greet.exe\n"
+"Hello/0.1@user/testing package(): Copied 1 '.lib' files: hello.lib\n"
+"\n"
+"$ greet\n"
+"> ... not found..."
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:46
+msgid ""
+"By default, Conan does not modify by default the environment, it will just "
+"create the package in the local cache, and that is not in the system PATH, "
+"so the ``greet`` executable is not found."
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:49
+msgid ""
+"The ``virtualrunenv`` generator generates files that add the package's "
+"default binary locations to the necessary paths:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:51
+msgid ""
+"It adds the dependencies ``lib`` subfolder to the ``DYLD_LIBRARY_PATH`` "
+"environment variable (for OSX shared libraries)"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:52
+msgid ""
+"It adds the dependencies ``lib`` subfolder to the ``LD_LIBRARY_PATH`` "
+"environment variable (for Linux shared libraries)"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:53
+msgid ""
+"It adds the dependencies ``bin`` subfolder to the ``PATH`` environment "
+"variable (for executables)"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:55
+msgid "So if we install the package, specifying such ``virtualrunenv`` like:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:57
+msgid "$ conan install Hello/0.1@user/testing -g virtualrunenv"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:61
+msgid ""
+"This will generate a few files that can be called to activate and deactivate "
+"the required environment variables"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:63
+msgid ""
+"$ activate_run.sh # $ source activate_run.sh in Unix/Linux\n"
+"$ greet\n"
+"> Hello World!\n"
+"$ deactivate_run.sh # $ source deactivate_run.sh in Unix/Linux"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:71
+msgid "Imports"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:72
+msgid ""
+"It is possible to define a custom conanfile (either .txt or .py), with an "
+"``imports`` section, that can retrieve from local cache the desired files. "
+"This approach, requires a user conanfile. For more details see example "
+"below :ref:`runtime packages<repackage>`"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:78
+msgid "Deployable packages"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:79
+msgid ""
+"With the ``deploy()`` method, a package can specify which files and "
+"artifacts to copy to user space or to other locations in the system. Let's "
+"modify the example recipe adding the ``deploy()`` method:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:82
+msgid ""
+"def deploy(self):\n"
+"    self.copy(\"*\", dst=\"bin\", src=\"bin\")"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:87
+msgid "And run :command:`conan create`"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:89
+msgid "$ conan create . user/testing"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:93
+msgid ""
+"With that method in our package recipe, it will copy the executable when "
+"installed directly:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:95
+msgid ""
+"$ conan install Hello/0.1@user/testing\n"
+"...\n"
+"> Hello/0.1@user/testing deploy(): Copied 1 '.exe' files: greet.exe\n"
+"$ bin\\greet.exe\n"
+"> Hello World!"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:103
+msgid ""
+"The deploy will create a *deploy_manifest.txt* file with the files that have "
+"been deployed."
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:105
+msgid ""
+"Sometimes it is useful to adjust the package ID of the deployable package in "
+"order to deploy it regardless of the compiler it was compiled with:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:108
+msgid ""
+"def package_id(self):\n"
+"    del self.info.settings.compiler"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:115
+msgid "Read more about the :ref:`deploy() <method_deploy>` method."
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:118
+msgid "Running from packages"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:120
+msgid ""
+"If a dependency has an executable that we want to run in the conanfile it "
+"can be done directly in code using the ``run_environment=True`` argument. It "
+"internally uses a ``RunEnvironment`` helper. For example, if we want to "
+"execute the ``greet`` app while building the ``Consumer`` package:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:124
+msgid ""
+"from conans import ConanFile, tools, RunEnvironment\n"
+"\n"
+"class ConsumerConan(ConanFile):\n"
+"    name = \"Consumer\"\n"
+"    version = \"0.1\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    requires = \"Hello/0.1@user/testing\"\n"
+"\n"
+"    def build(self):\n"
+"        self.run(\"greet\", run_environment=True)"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:138
+msgid ""
+"Now run :command:`conan install` and :command:`conan build` for this "
+"consumer recipe:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:140
+msgid ""
+"$ conan install . && conan build .\n"
+"...\n"
+"Project: Running build()\n"
+"Hello World!"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:147
+msgid ""
+"Instead of using the environment, it is also possible to explicitly access "
+"the path of the dependencies:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:149
+msgid ""
+"def build(self):\n"
+"    path = os.path.join(self.deps_cpp_info[\"Hello\"].rootpath, \"bin\")\n"
+"    self.run(\"%s/greet\" % path)"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:155
+msgid ""
+"Note that this might not be enough if shared libraries exist. Using the "
+"``run_environment=True`` helper above is a more complete solution."
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:158
+msgid ""
+"Finally, there is another approach: the package containing the executable "
+"can add its *bin* folder directly to the ``PATH``. In this case the "
+"**Hello** package conanfile would contain:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:161
+msgid ""
+"def package_info(self):\n"
+"    self.cpp_info.libs = [\"hello\"]\n"
+"    self.env_info.PATH = os.path.join(self.package_folder, \"bin\")"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:167
+msgid ""
+"We may also define ``DYLD_LIBRARY_PATH`` and ``LD_LIBRARY_PATH`` if they are "
+"required for the executable."
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:169
+msgid ""
+"The consumer package is simple, as the ``PATH`` environment variable "
+"contains the ``greet`` executable:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:171
+msgid ""
+"def build(self):\n"
+"    self.run(\"greet\")"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:180
+msgid "Runtime packages and re-packaging"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:181
+msgid ""
+"It is possible to create packages that contain only runtime binaries, "
+"getting rid of all build-time dependencies. If we want to create a package "
+"from the above \"Hello\" one, but only containing the executable (remember "
+"that the above package also contains a library, and the headers), we could "
+"do:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:185
+msgid ""
+"from conans import ConanFile\n"
+"\n"
+"class HellorunConan(ConanFile):\n"
+"    name = \"HelloRun\"\n"
+"    version = \"0.1\"\n"
+"    build_requires = \"Hello/0.1@user/testing\"\n"
+"    keep_imports = True\n"
+"\n"
+"    def imports(self):\n"
+"        self.copy(\"*.exe\", dst=\"bin\")\n"
+"\n"
+"    def package(self):\n"
+"        self.copy(\"*\")"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:202
+msgid "This recipe has the following characteristics:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:204
+msgid ""
+"It includes the ``Hello/0.1@user/testing`` package as ``build_requires``. "
+"That means that it will be used to build this `HelloRun` package, but once "
+"the `HelloRun` package is built, it will not be necessary to retrieve it."
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:207
+msgid ""
+"It is using ``imports()`` to copy from the dependencies, in this case, the "
+"executable"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:208
+msgid ""
+"It is using the ``keep_imports`` attribute to define that imported artifacts "
+"during the ``build()`` step (which is not define, then using the default "
+"empty one), are kept and not removed after build"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:210
+msgid ""
+"The ``package()`` method packages the imported artifacts that will be in the "
+"build folder."
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:212
+msgid "To create and upload this package to a remote:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:214
+msgid ""
+"$ conan create . user/testing\n"
+"$ conan upload HelloRun* --all -r=my-remote"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:220
+msgid ""
+"Installing and running this package can be done using any of the methods "
+"presented above. For example:"
+msgstr ""
+
+#: ../../../devtools/running_packages.rst:222
+msgid ""
+"$ conan install HelloRun/0.1@user/testing -g virtualrunenv\n"
+"# You can specify the remote with -r=my-remote\n"
+"# It will not install Hello/0.1@...\n"
+"$ activate_run.sh # $ source activate_run.sh in Unix/Linux\n"
+"$ greet\n"
+"> Hello World!\n"
+"$ deactivate_run.sh # $ source deactivate_run.sh in Unix/Linux"
+msgstr ""

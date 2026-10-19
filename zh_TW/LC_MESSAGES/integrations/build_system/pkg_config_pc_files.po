@@ -1,0 +1,316 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.40\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:4
+msgid ":command:`pkg-config` and *.pc* files"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:6
+msgid ""
+"If you are creating a Conan package for a library (A) and the build system "
+"uses *.pc* files to locate its dependencies (B and C) that are Conan "
+"packages too, you can follow different approaches."
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:9
+msgid ""
+"The main issue to address is the absolute paths. When a user installs a "
+"package in the local cache, the directory will probably be different from "
+"the directory where the package was created. This could be because of the "
+"different computer, the change in Conan home directory or even a different "
+"user or channel:"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:13
+msgid "For example, in the machine where the packages were created:"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:15
+msgid "/home/user/lasote/.data/storage/zlib/1.2.11/conan/stable"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:19
+msgid "In the machine where the library is being reused:"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:21
+msgid "/custom/dir/.data/storage/zlib/1.2.11/conan/testing"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:25
+msgid ""
+"You can see that *.pc* files containing absolute paths won't work with "
+"locating the dependencies."
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:27
+msgid "Example of a *.pc* file with an absolute path:"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:29
+msgid ""
+"prefix=/Users/lasote/.conan/data/zlib/1.2.11/lasote/stable/package/"
+"b5d68b3533204ad67e01fa587ad28fb8ce010527\n"
+"exec_prefix=${prefix}\n"
+"libdir=${exec_prefix}/lib\n"
+"sharedlibdir=${libdir}\n"
+"includedir=${prefix}/include\n"
+"\n"
+"Name: zlib\n"
+"Description: zlib compression library\n"
+"Version: 1.2.11\n"
+"\n"
+"Requires:\n"
+"Libs: -L${libdir} -L${sharedlibdir} -lz\n"
+"Cflags: -I${includedir}"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:45
+msgid ""
+"To solve this problem there are different approaches that can be followed."
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:48
+msgid "Approach 1: Import and patch the prefix in the *.pc* files"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:50
+msgid ""
+"In this approach your **library A** will import to a local directory the *."
+"pc* files from **B** and **C**, then, as they will contain absolute paths, "
+"the recipe for **A** will patch the paths to match the current installation "
+"directory."
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:54
+msgid ""
+"You will need to package the *.pc* files from your dependencies. You can "
+"adjust the ``PKG_CONFIG_PATH`` to let :command:`pkg-config` tool locate them."
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:57
+msgid ""
+"import os\n"
+"from conans import ConanFile, tools\n"
+"\n"
+"class LibAConan(ConanFile):\n"
+"    name = \"libA\"\n"
+"    version = \"1.0\"\n"
+"    settings = \"os\", \"compiler\", \"build_type\", \"arch\"\n"
+"    exports_sources = \"*.cpp\"\n"
+"    requires = \"libB/1.0@conan/stable\"\n"
+"\n"
+"    def build(self):\n"
+"        lib_b_path = self.deps_cpp_info[\"libB\"].rootpath\n"
+"        copyfile(os.path.join(lib_b_path, \"libB.pc\"), \"libB.pc\")\n"
+"        # Patch copied file with the libB path\n"
+"        tools.replace_prefix_in_pc_file(\"libB.pc\", lib_b_path)\n"
+"\n"
+"        with tools.environment_append({\"PKG_CONFIG_PATH\": os.getcwd()}):\n"
+"           # CALL YOUR BUILD SYSTEM (configure, make etc)\n"
+"           # E.g., self.run('g++ main.cpp $(pkg-config libB --libs --cflags) "
+"-o main')"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:80
+msgid "Approach 2: Prepare and package *.pc* files before packaging them"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:82
+msgid ""
+"With this approach you will patch the *.pc* files from B and C before "
+"packaging them. The goal is to replace the absolute path (the variable part "
+"of the path) with a variable placeholder. Then in the consumer package A, "
+"declare the variable using ``--define-variable`` when calling the :command:"
+"`pkg-config` command."
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:87
+msgid ""
+"This approach is cleaner than approach 1, because the packaged files are "
+"already prepared to be reused with or without Conan by declaring the needed "
+"variable. And it's unneeded to import the *.pc* files to the consumer "
+"package. However, you need B and C libraries to package the *.pc* files "
+"correctly."
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:91
+msgid "Library B recipe (preparing the *.pc* file):"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:93
+msgid ""
+"from conans import ConanFile, tools\n"
+"\n"
+"class LibBConan(ConanFile):\n"
+"    ....\n"
+"\n"
+"    def build(self):\n"
+"        ...\n"
+"        tools.replace_prefix_in_pc_file(\"mypcfile.pc\", "
+"\"${package_root_path_lib_b}\")\n"
+"\n"
+"    def package(self):\n"
+"        self.copy(pattern=\"*.pc\", dst=\"\", keep_path=False)"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:107
+msgid "Library A recipe (importing and consuming *.pc* file):"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:109
+msgid ""
+"class LibAConan(ConanFile):\n"
+"    ....\n"
+"\n"
+"    requires = \"libB/1.0@conan/stable, libC/1.0@conan/stable\"\n"
+"\n"
+"    def build(self):\n"
+"\n"
+"        args = '--define-variable package_root_path_lib_b=%s' % self."
+"deps_cpp_info[\"libB\"].rootpath\n"
+"        args += ' --define-variable package_root_path_lib_c=%s' % self."
+"deps_cpp_info[\"libC\"].rootpath\n"
+"        pkgconfig_exec = 'pkg-config ' + args\n"
+"\n"
+"        vars = {'PKG_CONFIG': pkgconfig_exec, # Used by autotools\n"
+"                'PKG_CONFIG_PATH': \"%s:%s\" % (self.deps_cpp_info[\"libB\"]."
+"rootpath,\n"
+"                                              self.deps_cpp_info[\"libC\"]."
+"rootpath)}\n"
+"\n"
+"        with tools.environment_append(vars):\n"
+"            # Call autotools (./configure ./make, will read PKG_CONFIG)\n"
+"            # Or directly declare the variables:\n"
+"            self.run('g++ main.cpp $(pkg-config %s libB --libs --cflags) -o "
+"main' % args)"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:132
+msgid "Approach 3: Use :command:`--define-prefix`"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:134
+msgid ""
+"If you have available :command:`pkg-config` >= 0.29 and you have only one "
+"dependency, you can directly use the :command:`--define-prefix` option to "
+"declare a custom ``prefix`` variable. With this approach you won't need to "
+"patch anything, just declare the correct variable."
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:139
+msgid "Approach 4: Use ``PKG_CONFIG_$PACKAGE_$VARIABLE``"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:141
+msgid ""
+"If you have :command:`pkg-config` >= 0.29.1 available, you can manage "
+"multiple dependencies declaring **N** variables with the prefixes:"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:144
+msgid ""
+"class LibAConan(ConanFile):\n"
+"    ....\n"
+"\n"
+"    requires = \"libB/1.0@conan/stable, libC/1.0@conan/stable\"\n"
+"\n"
+"    def build(self):\n"
+"\n"
+"        vars = {'PKG_CONFIG_libB_PREFIX': self.deps_cpp_info[\"libB\"]."
+"rootpath,\n"
+"                'PKG_CONFIG_libC_PREFIX': self.deps_cpp_info[\"libC\"]."
+"rootpath,\n"
+"                'PKG_CONFIG_PATH': \"%s:%s\" % (self.deps_cpp_info[\"libB\"]."
+"rootpath,\n"
+"                                              self.deps_cpp_info[\"libC\"]."
+"rootpath)}\n"
+"\n"
+"        with tools.environment_append(vars):\n"
+"            # Call the build system"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:164
+msgid "Approach 5: Use the ``pkg_config`` generator"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:166
+msgid ""
+"If you use ``package_info()`` in library B and library C, and specify all "
+"the library names and any other needed flag, you can use the ``pkg_config`` "
+"generator for **library A**. Those files doesn't need to be patched, because "
+"they are dynamically generated with the correct path."
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:170
+msgid ""
+"So it can be a good solution in case you are building **library A** with a "
+"build system that manages *.pc* files like :ref:`Meson "
+"Build<meson_build_tool>` or :ref:`AutoTools<autotools_build_tool>`:"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:173
+msgid "**Meson Build**"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:175
+msgid ""
+" from conans import ConanFile, tools, Meson\n"
+" import os\n"
+"\n"
+" class ConanFileToolsTest(ConanFile):\n"
+"     generators = \"pkg_config\"\n"
+"     requires = \"lib_a/0.1@conan/stable\"\n"
+"     settings = \"os\", \"compiler\", \"build_type\"\n"
+"\n"
+"     def build(self):\n"
+"         meson = Meson(self)\n"
+"         meson.configure()\n"
+"         meson.build()"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:191
+msgid "**Autotools**"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:193
+msgid ""
+" from conans import ConanFile, tools, AutoToolsBuildEnvironment\n"
+" import os\n"
+"\n"
+" class ConanFileToolsTest(ConanFile):\n"
+"     generators = \"pkg_config\"\n"
+"     requires = \"lib_a/0.1@conan/stable\"\n"
+"     settings = \"os\", \"compiler\", \"build_type\"\n"
+"\n"
+"     def build(self):\n"
+"         autotools = AutoToolsBuildEnvironment(self)\n"
+"         # When using the pkg_config generator, self.build_folder will be "
+"added to PKG_CONFIG_PATH\n"
+"         # so pkg_config will be able to locate the generated pc files from "
+"the requires (LIB_A)\n"
+"         autotools.configure()\n"
+"         autotools.make()"
+msgstr ""
+
+#: ../../../integrations/build_system/pkg_config_pc_files.rst:213
+msgid ""
+"Check the :ref:`tools_pkgconfig`, a wrapper of the :command:`pkg-config` "
+"tool that allows to extract flags, library paths, etc. for any *.pc* file."
+msgstr ""

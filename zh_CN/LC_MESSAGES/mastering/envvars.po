@@ -1,0 +1,169 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 1.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 10:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../mastering/envvars.rst:2
+msgid "Environment variables"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:4
+msgid "There are several use cases for environment variables:"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:6
+msgid ""
+"Conan global configuration environment variables (e.g. "
+"``CONAN_COMPRESSION_LEVEL``). They can be configured in *conan.conf* or as "
+"system environment variables, and control conan behavior."
+msgstr ""
+
+#: ../../../mastering/envvars.rst:8
+msgid ""
+"Package recipes can access environment variables to determine their "
+"behavior. A typical example would be when launching CMake, it will check for "
+"CC and CXX environment variables to define the compiler to use. These "
+"variables are mostly transparent for conan, and just used by the package "
+"recipes."
+msgstr ""
+
+#: ../../../mastering/envvars.rst:15
+msgid "Environment variables can be set in different ways:"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:12
+msgid ""
+"global, at the OS level, with :command:`export VAR=Value` or in Windows :"
+"command:`SET VAR=Value`."
+msgstr ""
+
+#: ../../../mastering/envvars.rst:13
+msgid "In the conan command line: :command:`conan install -e VAR=Value`."
+msgstr ""
+
+#: ../../../mastering/envvars.rst:14
+msgid "In profile files."
+msgstr ""
+
+#: ../../../mastering/envvars.rst:15
+msgid ""
+"In package recipes in the ``self.env_info`` field, so they are activated for "
+"dependent recipes."
+msgstr ""
+
+#: ../../../mastering/envvars.rst:18
+msgid "Defining environment variables"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:20
+msgid ""
+"You can use :ref:`profiles<profiles>` to define environment variables that "
+"will apply to your recipes. You can also use :command:`-e` parameter in :"
+"command:`conan install`, :command:`conan info` and :command:`conan create` "
+"commands."
+msgstr ""
+
+#: ../../../mastering/envvars.rst:23
+msgid ""
+"[env]\n"
+"CC=/usr/bin/clang\n"
+"CXX=/usr/bin/clang++"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:29
+msgid ""
+"If you want to override an environment variable that a package has inherited "
+"from its requirements, you can use either **profiles** or :command:`-e` to "
+"do it:"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:32
+msgid "conan install -e MyPackage:PATH=/other/path"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:36
+msgid ""
+"If you want to define an environment variable but you want to append the "
+"variables declared in your requirements you can use the ``[]`` syntax:"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:39
+msgid "$ conan install -e PYTHONPATH=[/other/path]"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:43
+msgid ""
+"This way the first entry in the PYTHONPATH variable will be */other/path* "
+"but the PYTHONPATH values declared in the requirements of the project will "
+"be appended at the end using the system path separator."
+msgstr ""
+
+#: ../../../mastering/envvars.rst:47
+msgid "Automatic environment variables inheritance"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:49
+msgid ""
+"If your dependencies define some ``env_info`` variables in the "
+"``package_info()`` method they will be automatically applied before calling "
+"the consumer *conanfile.py* methods ``source()``, ``build()``, ``package()`` "
+"and ``imports()``. You can read more about ``env_info`` object :ref:`here "
+"<method_package_info_env_info>`."
+msgstr ""
+
+#: ../../../mastering/envvars.rst:53
+msgid ""
+"For example, if you are creating a package for a tool, you can define the "
+"variable ``PATH``:"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:55
+msgid ""
+"class ToolExampleConan(ConanFile):\n"
+"   name = \"my_tool_installer\"\n"
+"   ...\n"
+"\n"
+"   def package_info(self):\n"
+"       self.env_info.path.append(os.path.join(self.package_folder, \"bin\"))"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:65
+msgid ""
+"If another conan recipe requires the `my_tool_installer` in the "
+"``source()``, ``build()``, ``package()`` and ``imports()`` the bin folder of "
+"the ``my_tool_installer`` package will be automatically appended to the "
+"system PATH. If ``my_tool_installer`` packages an executable called "
+"``my_tool_executable`` in the *bin* of the package folder we can directly "
+"call the tool, because it will be available in the path:"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:69
+msgid ""
+"class MyLibExample(ConanFile):\n"
+"   name = \"my_lib_example\"\n"
+"   ...\n"
+"\n"
+"   def build(self):\n"
+"       self.run(\"my_tool_executable some_arguments\")"
+msgstr ""
+
+#: ../../../mastering/envvars.rst:78
+msgid ""
+"You could also set ``CC``, ``CXX`` variables if we are packing a compiler to "
+"define what compiler to use or any other environment variable. Read more "
+"about tool packages :ref:`here<create_installer_packages>`."
+msgstr ""

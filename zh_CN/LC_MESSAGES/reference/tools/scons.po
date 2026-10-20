@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.22\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-09 17:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/scons.rst:4
+msgid "conan.tools.scons"
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:7
+msgid "SConsDeps"
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:9
+msgid ""
+"The ``SConsDeps`` is the dependency generator for `SCons <https://scons.org/"
+">`_. It will generate a `SConscript_conandeps` file containing the necessary "
+"information for SCons to build against the desired dependencies."
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:13
+msgid "The ``SConsDeps`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:15
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:15
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    generators = \"SConsDeps\""
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:23
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:23
+msgid ""
+"[generators]\n"
+"SConsDeps"
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:29
+msgid ""
+"It can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:31
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.scons import SConsDeps\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = SConsDeps(self)\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:43
+msgid ""
+"After executing the ``conan install`` command, the ``SConsDeps`` generator "
+"will create the `SConscript_conandeps` file. This file will provide the "
+"following information for `SCons`: ``CPPPATH``, ``LIBPATH``, ``BINPATH``, "
+"``LIBS``, ``FRAMEWORKS``, ``FRAMEWORKPATH``, ``CPPDEFINES``, ``CXXFLAGS``, "
+"``CCFLAGS``, ``SHLINKFLAGS``, and ``LINKFLAGS``. This information is "
+"generated for the accumulated list of all dependencies and also for each one "
+"of the requirements. You can load it in your consumer `SConscript` like this:"
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:50
+msgid "consumer `SConscript`"
+msgstr ""
+
+#: ../../../reference/tools/scons.rst:50
+msgid ""
+"...\n"
+"info = SConscript('./SConscript_conandeps')\n"
+"# You can use conandeps to get the information\n"
+"# for all the dependencies.\n"
+"flags = info[\"conandeps\"]\n"
+"\n"
+"# Or use the name of the requirement if\n"
+"# you only want the information about that one.\n"
+"flags = info[\"zlib\"]\n"
+"\n"
+"env.MergeFlags(flags)\n"
+"..."
+msgstr ""

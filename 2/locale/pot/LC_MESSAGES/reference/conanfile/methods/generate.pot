@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 15:09+0000\n"
+"POT-Creation-Date: 2026-10-20 13:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -220,9 +220,10 @@ msgstr ""
 #: ../../../reference/conanfile/methods/generate.rst:119
 msgid ""
 "Accessing dependencies ``self.dependencies[\"mydep\"].package_folder`` is "
-"possible, but it will be ``None`` when the dependency \"mydep\" is in "
-"\"editable\" mode. If you plan to use editable packages, make sure to always "
-"reference the ``cpp_info.xxxdirs`` instead."
+"possible, but it can be ``None`` (see the ``package_folder`` field below). "
+"Always check for ``None`` before using it, and prefer referencing the "
+"``cpp_info.xxxdirs`` instead, which are always defined and are resolved "
+"transparently for both packages in the cache and \"editable\" packages."
 msgstr ""
 
 #: ../../../reference/conanfile/methods/generate.rst:124
@@ -319,141 +320,172 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods/generate.rst:178
 msgid ""
-"**package_folder**: The folder location of the dependency package binary"
+"**package_folder**: The folder location of the dependency package binary. It "
+"can be ``None`` in some cases:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:179
+#: ../../../reference/conanfile/methods/generate.rst:180
+msgid ""
+"When the dependency binary is skipped because it is not necessary (for "
+"example, a static library that is a transitive dependency of a shared "
+"library). The binary is not even downloaded from the server, so there is no "
+"folder to point to."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:182
+msgid ""
+"It is **not** ``None`` for packages in :ref:`editable "
+"mode<editable_packages>`. In that case it points to the local project root "
+"folder (where the ``conanfile.py`` of the editable package is). Note that "
+"there is no actual \"package\" there: the files are not laid out as in a "
+"package, and the folder can contain sources, build files and any other "
+"project file. Consumers that need to locate artifacts should use "
+"``cpp_info`` (defined in the ``layout()`` method), which works transparently "
+"for editable and cache packages."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:188
+msgid ""
+"Any recipe, generator or deployer accessing ``package_folder`` must be "
+"prepared for these cases."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/generate.rst:189
 msgid ""
 "**recipe_folder**: The folder containing the ``conanfile.py`` (and other "
 "exported files) of the dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:180
+#: ../../../reference/conanfile/methods/generate.rst:190
 msgid ""
 "**recipe_metadata_folder**: The folder containing optional recipe metadata "
 "files of the dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:181
+#: ../../../reference/conanfile/methods/generate.rst:191
 msgid ""
 "**package_metadata_folder**: The folder containing optional package metadata "
 "files of the dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:182
+#: ../../../reference/conanfile/methods/generate.rst:192
 msgid ""
 "**immutable_package_folder**: The folder containing the immutable artifacts "
 "when ``finalize()`` method exists"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:183
+#: ../../../reference/conanfile/methods/generate.rst:193
 msgid ""
 "**ref**: A :ref:`RecipeReference<conan.api.model.RecipeReference>` object "
 "that contains ``name``, ``version``, ``user``, ``channel`` and ``revision`` "
 "(recipe revision)"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:184
+#: ../../../reference/conanfile/methods/generate.rst:194
 msgid ""
 "**pref**: An object that contains ``ref``, ``package_id`` and ``revision`` "
 "(package revision)"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:185
+#: ../../../reference/conanfile/methods/generate.rst:195
 msgid ""
 "**buildenv_info**: ``Environment`` object with the information of the "
 "environment necessary to build"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:186
+#: ../../../reference/conanfile/methods/generate.rst:196
 msgid ""
 "**runenv_info**: ``Environment`` object with the information of the "
 "environment necessary to run the app"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:187
+#: ../../../reference/conanfile/methods/generate.rst:197
 msgid "**cpp_info**: includedirs, libdirs, etc for the dependency."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:188
+#: ../../../reference/conanfile/methods/generate.rst:198
 msgid "**settings**: The actual settings values of this dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:189
+#: ../../../reference/conanfile/methods/generate.rst:199
 msgid "**settings_build**: The actual build settings values of this dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:190
+#: ../../../reference/conanfile/methods/generate.rst:200
 msgid "**options**: The actual options values of this dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:191
+#: ../../../reference/conanfile/methods/generate.rst:201
 msgid "**context**: The context (build, host) of this dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:192
+#: ../../../reference/conanfile/methods/generate.rst:202
 msgid ""
 "**conf_info**: Configuration information of this dependency, intended to be "
 "applied to consumers."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:193
+#: ../../../reference/conanfile/methods/generate.rst:203
 msgid "**dependencies**: The transitive dependencies of this dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:194
+#: ../../../reference/conanfile/methods/generate.rst:204
 msgid "**is_build_context**: Return ``True`` if ``context == \"build\"``."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:195
+#: ../../../reference/conanfile/methods/generate.rst:205
 msgid ""
 "**conan_data**: The ``conan_data`` attribute of the dependency that comes "
 "from its ``conandata.yml`` file"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:196
+#: ../../../reference/conanfile/methods/generate.rst:206
 msgid "**license**: The ``license`` attribute of the dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:197
+#: ../../../reference/conanfile/methods/generate.rst:207
 msgid "**description**: The ``description`` attribute of the dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:198
+#: ../../../reference/conanfile/methods/generate.rst:208
 msgid "**homepage**: The ``homepage`` attribute of the dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:199
+#: ../../../reference/conanfile/methods/generate.rst:209
 msgid "**url**: The ``url`` attribute of the dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:200
+#: ../../../reference/conanfile/methods/generate.rst:210
 msgid "**package_type**: The ``package_type`` of the dependency"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:201
+#: ../../../reference/conanfile/methods/generate.rst:211
 msgid "**languages**: The ``languages`` of the dependency."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:202
+#: ../../../reference/conanfile/methods/generate.rst:212
 msgid ""
 "**extension_properties**: The ``extension_properties`` of the dependency. "
 "Should be treated as read-only."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:203
+#: ../../../reference/conanfile/methods/generate.rst:213
 msgid ""
-"**recipe**: The ``recipe`` type of the dependency (e.g., \"Cache\"). This "
-"should only be used for `informational <https://github.com/conan-io/conan/"
-"issues/18996>`_ or reporting purposes. Using it for any kind of conditional "
-"logic on the consumers side is considered bad practice and unsupported."
+"**recipe**: The ``recipe`` type of the dependency (e.g., \"Cache\", "
+"\"Editable\"). This should only be used for `informational <https://github."
+"com/conan-io/conan/issues/18996>`_ or reporting purposes. For most cases, "
+"the contents of the dependency are abstracted from the type of the "
+"dependency, so using it for any kind of conditional logic on the consumers "
+"side is discouraged in most cases, except for checking when a dependency is "
+"``Editable`` from a custom ``deployer``, to prevent deploying such editable "
+"package."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:207
+#: ../../../reference/conanfile/methods/generate.rst:217
 msgid "Iterating dependencies"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:209
+#: ../../../reference/conanfile/methods/generate.rst:219
 msgid ""
 "It is possible to iterate in a dict-like fashion all dependencies of a "
 "recipe. Take into account that ``self.dependencies`` contains all the "
@@ -462,11 +494,11 @@ msgid ""
 "``self.dependencies``."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:214
+#: ../../../reference/conanfile/methods/generate.rst:224
 msgid "Iterating the dependencies can be done as:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:216
+#: ../../../reference/conanfile/methods/generate.rst:226
 msgid ""
 "requires = \"zlib/1.3.1\", \"poco/1.9.4\"\n"
 "\n"
@@ -476,11 +508,11 @@ msgid ""
 "direct, dependency.ref))"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:224
+#: ../../../reference/conanfile/methods/generate.rst:234
 msgid "will output:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:226
+#: ../../../reference/conanfile/methods/generate.rst:236
 msgid ""
 "conanfile.py (hello/0.1): Dependency is direct=True: zlib/1.3.1\n"
 "conanfile.py (hello/0.1): Dependency is direct=True: poco/1.9.4\n"
@@ -491,79 +523,79 @@ msgid ""
 "conanfile.py (hello/0.1): Dependency is direct=False: bzip2/1.0.8"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:237
+#: ../../../reference/conanfile/methods/generate.rst:247
 msgid ""
 "Where the ``require`` dictionary key is a \"requirement\", and can contain "
 "specifiers of the relation between the current recipe and the dependency. At "
 "the moment they can be:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:240
+#: ../../../reference/conanfile/methods/generate.rst:250
 msgid ""
 "``require.direct``: boolean, ``True`` if it is direct dependency or "
 "``False`` if it is a transitive one."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:241
+#: ../../../reference/conanfile/methods/generate.rst:251
 msgid ""
 "``require.build``: boolean, ``True`` if it is a ``build_require`` in the "
 "build context, as ``cmake``."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:242
+#: ../../../reference/conanfile/methods/generate.rst:252
 msgid ""
 "``require.test``: boolean, ``True`` if its a ``build_require`` in the host "
 "context (defined with ``self.test_requires()``), as ``gtest``."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:244
+#: ../../../reference/conanfile/methods/generate.rst:254
 msgid ""
 "The ``dependency`` dictionary value is the read-only object described above "
 "that access the dependency attributes."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:246
+#: ../../../reference/conanfile/methods/generate.rst:256
 msgid ""
 "The ``self.dependencies`` contains some helpers to filter based on some "
 "criteria:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:248
+#: ../../../reference/conanfile/methods/generate.rst:258
 msgid ""
 "``self.dependencies.host``: Will filter out requires with ``build=True``, "
 "leaving regular dependencies like ``zlib`` or ``poco``."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:249
+#: ../../../reference/conanfile/methods/generate.rst:259
 msgid ""
 "``self.dependencies.direct_host``: Will filter out requires with "
 "``build=True`` or ``direct=False``"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:250
+#: ../../../reference/conanfile/methods/generate.rst:260
 msgid ""
 "``self.dependencies.build``: Will filter out requires with ``build=False``, "
 "leaving only ``tool_requires`` in the build context, as ``cmake``."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:251
+#: ../../../reference/conanfile/methods/generate.rst:261
 msgid ""
 "``self.dependencies.direct_build``: Will filter out requires with "
 "``build=False`` or ``direct=False``"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:252
+#: ../../../reference/conanfile/methods/generate.rst:262
 msgid ""
 "``self.dependencies.test``: Will filter out requires with ``build=True`` or "
 "with ``test=False``, leaving only test requirements as ``gtest`` in the host "
 "context."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:255
+#: ../../../reference/conanfile/methods/generate.rst:265
 msgid "They can be used in the same way:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:257
+#: ../../../reference/conanfile/methods/generate.rst:267
 msgid ""
 "requires = \"zlib/1.3.1\", \"poco/1.9.4\"\n"
 "\n"
@@ -573,7 +605,7 @@ msgid ""
 "        # do something, only build deps here"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:268
+#: ../../../reference/conanfile/methods/generate.rst:278
 msgid ""
 "By default, indexing into ``self.dependencies[...]`` returns dependencies in "
 "the *host* context. If you need to access dependencies that belong to the "
@@ -581,18 +613,18 @@ msgid ""
 "filter helper, as shown in the example above."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:274
+#: ../../../reference/conanfile/methods/generate.rst:284
 msgid "Dependencies ``cpp_info`` interface"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:276
+#: ../../../reference/conanfile/methods/generate.rst:286
 msgid ""
 "The ``cpp_info`` interface is heavily used by build systems to access the "
 "data. This object defines global and per-component attributes to access "
 "information like the include folders:"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:280
+#: ../../../reference/conanfile/methods/generate.rst:290
 msgid ""
 "def generate(self):\n"
 "    cpp_info = self.dependencies[\"mydep\"].cpp_info\n"
@@ -603,13 +635,13 @@ msgid ""
 "    cpp_info.components[\"mycomp\"].libdirs"
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:291
+#: ../../../reference/conanfile/methods/generate.rst:301
 msgid ""
 "All the paths declared in the ``cppinfo`` object (like ``cpp_info."
 "includedirs``) are absolute paths and works whether the dependency is in the "
 "cache or is an :ref:`editable package<editable_packages>`."
 msgstr ""
 
-#: ../../../reference/conanfile/methods/generate.rst:296
+#: ../../../reference/conanfile/methods/generate.rst:306
 msgid ":ref:`CppInfo<conan_conanfile_model_cppinfo>` model."
 msgstr ""

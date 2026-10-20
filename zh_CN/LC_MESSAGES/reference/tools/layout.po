@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.15\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/layout.rst:4
+msgid "conan.tools.layout"
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:9
+msgid "Predefined layouts"
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:11
+msgid ""
+"There are some pre-defined common :ref:"
+"`layouts<reference_conanfile_methods_layout>`, ready to be simply used in "
+"recipes:"
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:13
+msgid ""
+"``cmake_layout()``: :ref:`a layout for a typical CMake project "
+"<cmake_layout>`"
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:14
+msgid "``vs_layout()``: a layout for a typical Visual Studio project"
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:15
+msgid ""
+"``basic_layout()``: :ref:`a very basic layout for a generic project "
+"<conan_tools_basic_layout>`"
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:17
+msgid ""
+"The pre-defined layouts define the Conanfile ``.folders`` and ``.cpp`` "
+"attributes with typical values. To check which values are set by these pre-"
+"defined layouts please check the reference for the :ref:"
+"`layout()<reference_conanfile_methods_layout>` method. For example in the "
+"``cmake_layout()`` the source folder is set to ``\".\"``, meaning that Conan "
+"will expect the sources in the same directory where the conanfile is (most "
+"likely the project root, where a ``CMakeLists.txt`` file will be typically "
+"found). If you have a different folder where the ``CMakeLists.txt`` is "
+"located, you can use the ``src_folder`` argument:"
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:25
+msgid ""
+"from conan.tools.cmake import cmake_layout\n"
+"\n"
+"def layout(self):\n"
+"    cmake_layout(self, src_folder=\"mysrcfolder\")"
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:33
+msgid ""
+"Even if this pre-defined layout doesn't suit your specific projects layout, "
+"checking how they implement their logic shows how you could implement your "
+"own logic (and probably put it in a common ``python_require`` if you are "
+"going to use it in multiple packages)."
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:38
+msgid ""
+"To learn more about the layouts and how to use them while developing "
+"packages, please check the Conan package layout :ref:`tutorial "
+"<developing_packages_layout>`."
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:44
+msgid "basic_layout"
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:46
+msgid "Usage:"
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:48
+msgid ""
+"from conan.tools.layout import basic_layout\n"
+"\n"
+"def layout(self):\n"
+"    basic_layout(self)"
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:56
+msgid ""
+"The current layout implementation is very simple, basically sets a different "
+"build folder for different build_types and sets the generators output folder "
+"inside the build folder. This way we avoid to clutter our project while "
+"working locally."
+msgstr ""
+
+#: ../../../reference/tools/layout.rst:61
+msgid ""
+"def basic_layout(conanfile, src_folder=\".\"):\n"
+"    conanfile.folders.build = \"build\"\n"
+"    if conanfile.settings.get_safe(\"build_type\"):\n"
+"        conanfile.folders.build += \"-{}\".format(str(conanfile.settings."
+"build_type).lower())\n"
+"    conanfile.folders.generators = os.path.join(conanfile.folders.build, "
+"\"conan\")\n"
+"    conanfile.cpp.build.bindirs = [\".\"]\n"
+"    conanfile.cpp.build.libdirs = [\".\"]\n"
+"    conanfile.folders.source = src_folder"
+msgstr ""

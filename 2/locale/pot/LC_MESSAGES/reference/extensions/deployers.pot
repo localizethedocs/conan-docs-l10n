@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 15:09+0000\n"
+"POT-Creation-Date: 2026-10-20 13:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,45 +99,79 @@ msgid ""
 "`examples_extensions_builtin_deployers_development`."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:52
-msgid "direct_deploy"
+#: ../../../reference/extensions/deployers.rst:51
+msgid "**Editable packages and skipped binaries**"
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:53
+msgid ""
+"Dependencies whose ``package_folder`` is ``None`` (for example, skipped "
+"binaries that are not necessary) are not deployed."
 msgstr ""
 
 #: ../../../reference/extensions/deployers.rst:54
+msgid ""
+"Dependencies in :ref:`editable mode<editable_packages>` are **not** skipped. "
+"Their ``package_folder`` is the local project root folder, so the whole "
+"contents of that folder (sources, build outputs, etc.) will be copied to the "
+"deployed folder. This is generally harmless, but it is usually not what is "
+"wanted, and the general recommendation is to not deploy editable packages."
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:57
+msgid ""
+"If a different behavior is needed, such as skipping editables or raising an "
+"error, use a custom deployer. See :ref:"
+"`examples_extensions_deployers_full_deploy_editables` for the full "
+"implementation of ``full_deploy`` and how to adapt it."
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:60
+msgid ""
+"The built-in deployers are mostly a convenience and an example. For real "
+"production needs, the expectation is to provide custom deployers and install "
+"them with ``conan config install`` or ``conan config install-pkg``."
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:66
+msgid "direct_deploy"
+msgstr ""
+
+#: ../../../reference/extensions/deployers.rst:68
 msgid ""
 "Same as ``full_deploy``, but only processes your recipe's *direct* "
 "dependencies. This deployer will output your dependencies in a tree folder "
 "such as:"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:57
+#: ../../../reference/extensions/deployers.rst:71
 msgid "``[OUTPUT_FOLDER]/direct_deploy/dep``"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:62
+#: ../../../reference/extensions/deployers.rst:76
 msgid "runtime_deploy"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:64
+#: ../../../reference/extensions/deployers.rst:78
 msgid ""
 "New since `Conan 2.5.0 <https://github.com/conan-io/conan/releases/"
 "tag/2.5.0>`__"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:66
+#: ../../../reference/extensions/deployers.rst:80
 msgid ""
 "Copies all shared libraries and executables from dependencies (such as .so, ."
 "dll, or .dylib files) into a flattened directory structure."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:69
+#: ../../../reference/extensions/deployers.rst:83
 msgid ""
 "Since Conan 2.20.0, subdirectories are maintained and preserved as-is. Files "
 "are only included in environment generators when correctly specified through "
 "``cpp_info.bindirs`` and ``cpp_info.libdirs`` configuration."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:75
+#: ../../../reference/extensions/deployers.rst:89
 msgid ""
 "``runtime_deploy`` only copies dependencies whose requirement has the "
 "``run`` trait set to ``True``. A ``static-library`` dependency is skipped by "
@@ -147,11 +181,11 @@ msgid ""
 "recipe."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:84
+#: ../../../reference/extensions/deployers.rst:98
 msgid "cyclone_1.6 and cyclone_1.4"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:86
+#: ../../../reference/extensions/deployers.rst:100
 msgid ""
 "The ``cyclone_1.6`` and ``cyclone_1.4`` deployers are available to generate "
 "a CycloneDX 1.6 or 1.4 SBOM file respectively, with the information of the "
@@ -162,18 +196,18 @@ msgid ""
 "module with default arguments."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:92
+#: ../../../reference/extensions/deployers.rst:106
 msgid ""
 "If you want to customize the generated SBOM, you can either create your own "
 "custom deployer that calls these functions with the desired arguments, or "
 "use the documented hook approach from the previous link to generate the SBOM."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:98
+#: ../../../reference/extensions/deployers.rst:112
 msgid "configuration"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:100
+#: ../../../reference/extensions/deployers.rst:114
 msgid ""
 "The ``full_deploy``, ``direct_deploy`` and ``runtime_deploy`` understand "
 "when the conf ``tools.deployer:symlinks`` is set to ``False`` to disable "
@@ -181,74 +215,74 @@ msgid ""
 "support symlinks and could fail if deploying packages that contain symlinks."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:106
+#: ../../../reference/extensions/deployers.rst:120
 msgid "Custom deployers"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:108
+#: ../../../reference/extensions/deployers.rst:122
 msgid ""
 "Custom deployers can be managed via ``conan config install``. When looking "
 "for a specific deployer, Conan will look in these locations for the deployer "
 "in the following order:"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:111
+#: ../../../reference/extensions/deployers.rst:125
 msgid "Absolute paths"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:112
+#: ../../../reference/extensions/deployers.rst:126
 msgid "Relative to cwd"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:113
+#: ../../../reference/extensions/deployers.rst:127
 msgid "In the ``[CONAN_HOME]/extensions/deployers`` folder"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:114
+#: ../../../reference/extensions/deployers.rst:128
 msgid "As built-in deployers"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:116
+#: ../../../reference/extensions/deployers.rst:130
 msgid ""
 "Conan will look for a ``deploy()`` method to call for each installed file. "
 "The function signature of your custom deployers should be as follows:"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:120
+#: ../../../reference/extensions/deployers.rst:134
 msgid "**my_custom_deployer.py**"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:120
+#: ../../../reference/extensions/deployers.rst:134
 msgid "def deploy(graph, output_folder: str, **kwargs):"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:125
+#: ../../../reference/extensions/deployers.rst:139
 msgid ""
 "(Note that the arguments are passed as named parameters, so both the "
 "``graph`` and ``output_folder`` names are mandatory)"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:127
+#: ../../../reference/extensions/deployers.rst:141
 msgid ""
 "The ``**kwargs`` is mandatory even if not used, as new arguments can be "
 "added in future Conan versions, and those would break if ``**kwargs`` is not "
 "defined."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:130
+#: ../../../reference/extensions/deployers.rst:144
 msgid ""
 "You can access your conanfile object with ``graph.root.conanfile``. See :ref:"
 "`ConanFile.dependencies<conan_conanfile_model_dependencies>` for information "
 "on how to iterate over its dependencies."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:133
+#: ../../../reference/extensions/deployers.rst:147
 msgid ""
 "If you need to run binaries from your build dependencies, the recommended "
 "approach is to apply the env from a ``VirtualBuildEnv``, such as:"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:136
+#: ../../../reference/extensions/deployers.rst:150
 msgid ""
 "from conan.tools.env import VirtualBuildEnv\n"
 "\n"
@@ -258,7 +292,7 @@ msgid ""
 "        self.run(\"mytool\")"
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:146
+#: ../../../reference/extensions/deployers.rst:160
 msgid ""
 "Your custom deployer can now be invoked as if it were a built-in deployer "
 "using the filename in which it's found, in this case ``conan install . --"
@@ -266,7 +300,7 @@ msgid ""
 "optional."
 msgstr ""
 
-#: ../../../reference/extensions/deployers.rst:149
+#: ../../../reference/extensions/deployers.rst:163
 msgid ""
 "See the :ref:`custom deployers<examples_extensions_deployers>` section for "
 "examples on how to implement your own deployers."

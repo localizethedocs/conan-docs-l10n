@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.12\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../ci_tutorial/packages_pipeline/single_configuration.rst:2
+msgid "Package pipeline: single configuration"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/single_configuration.rst:4
+msgid ""
+"We will start with the most simple case, in which we only had to build 1 "
+"configuration, and that configuration can be built in the current CI machine."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/single_configuration.rst:7
+msgid ""
+"As we described before while presenting the different server binary "
+"repositories, the idea is that package builds will use by default the "
+"``develop`` repo only, which is considered the stable one for developer and "
+"CI jobs."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/single_configuration.rst:10
+msgid ""
+"This pipeline starts from a clean state, with no packages in the cache, and "
+"only the ``develop`` repository enabled."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/single_configuration.rst:12
+msgid "With this configuration the CI job could just do:"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/single_configuration.rst:14
+msgid ""
+"$ cd ai\n"
+"$ conan create . --build=\"missing:ai/*\"\n"
+"...\n"
+"ai/1.1.0: SUPER BETTER Artificial Intelligence for aliens (Release)!\n"
+"ai/1.1.0: Intelligence level=50"
+msgstr ""
+"$ cd ai\n"
+"$ conan create . --build=\"missing:ai/*\"\n"
+"...\n"
+"ai/1.1.0: SUPER BETTER Artificial Intelligence for aliens (Release)!\n"
+"ai/1.1.0: Intelligence level=50"
+
+#: ../../../ci_tutorial/packages_pipeline/single_configuration.rst:23
+msgid ""
+"Note the ``--build=\"missing:ai/*\"`` might not be fully necessary in some "
+"cases, but it can save time in other situations. For example, if the "
+"developer did some changes just to the repo README, and didn't bump the "
+"version at all, Conan will not generate a new ``recipe revision``, and "
+"detect this as a no-op, avoiding having to unnecessarily rebuild binaries "
+"from source."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/single_configuration.rst:27
+msgid ""
+"If we are in a single-configuration scenario and it built correctly, for "
+"this simple case we don't need a promotion, and just uploading directly the "
+"built packages to the ``products`` repository will be enough, where the "
+"``products pipeline`` will pick it later."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/single_configuration.rst:32
+msgid ""
+"# We don't want to disrupt developers or CI, upload to products\n"
+"$ conan remote enable products\n"
+"$ conan upload \"ai*\" -r=products -c\n"
+"$ conan remote disable products"
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/single_configuration.rst:39
+msgid ""
+"As the cache was initially clean, all ``ai`` packages would be the ones that "
+"were built in this pipeline."
+msgstr ""
+
+#: ../../../ci_tutorial/packages_pipeline/single_configuration.rst:90
+msgid ""
+"This was a very simple scenario, let's move to a more realistic one: having "
+"to build more than one configuration."
+msgstr ""

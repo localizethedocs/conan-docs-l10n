@@ -1,0 +1,325 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.12\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/intel.rst:4
+msgid "conan.tools.intel"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:7
+msgid "IntelCC"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:9
+msgid ""
+"This tool helps you to manage the new Intel oneAPI `DPC++/C++ <https://"
+"software.intel.com/content/www/us/en/develop/documentation/oneapi-dpcpp-cpp-"
+"compiler-dev-guide-and-reference/top.html>`_ and `Classic <https://software."
+"intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-"
+"guide-and-reference/top.html>`_ ecosystem in Conan."
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:14
+msgid "This generator is **experimental** and subject to breaking changes."
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:18
+msgid ""
+"macOS is not supported for the Intel oneAPI DPC++/C++ (icx/icpx or dpcpp) "
+"compilers. For macOS or Xcode support, you'll have to use the Intel C++ "
+"Classic Compiler."
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:22
+msgid ""
+"Remember, you need to have installed previously the `Intel oneAPI software "
+"<https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits."
+"html>`_."
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:26
+msgid ""
+"This generator creates a ``conanintelsetvars.sh|bat`` wrapping the Intel "
+"script ``setvars.sh|bat`` that sets the Intel oneAPI environment variables "
+"needed. That script is the first step to start using the Intel compilers "
+"because it's setting some important variables in your local environment."
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:30
+msgid "In summary, the ``IntelCC`` generator:"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:32
+msgid "Reads your profile ``[settings]`` and ``[conf]``."
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:33
+msgid ""
+"Uses that information to generate a ``conanintelsetvars.sh|bat`` script with "
+"the command to load the Intel ``setvars.sh|bat`` script."
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:34
+msgid ""
+"Then, you or the chosen generator will be able to run that script and use "
+"any Intel compiler to compile the project."
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:38
+msgid ""
+"You can launch the ``conanintelsetvars.sh|bat`` before calling your intel "
+"compiler to build a project. Conan will also call it in the conanfile "
+"``build(self)`` method when running any command with ``self.run``."
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:42
+msgid "At first, ensure you are using a *profile* like this one:"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:44
+msgid "*intelprofile*"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:44
+msgid ""
+"[settings]\n"
+"...\n"
+"compiler=intel-cc\n"
+"compiler.mode=dpcpp\n"
+"compiler.version=2021.3\n"
+"compiler.libcxx=libstdc++\n"
+"build_type=Release\n"
+"\n"
+"[buildenv]\n"
+"CC=dpcpp\n"
+"CXX=dpcpp\n"
+"\n"
+"[conf]\n"
+"tools.intel:installation_path=/opt/intel/oneapi"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:63
+msgid "The ``IntelCC`` generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:65 ../../../reference/tools/intel.rst:80
+msgid "*conanfile.py*"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:65
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"IntelCC\""
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:72
+msgid "*conanfile.txt*"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:72
+msgid ""
+"[generators]\n"
+"IntelCC"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:78
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:80
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.intel import IntelCC\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        intelcc = IntelCC(self)\n"
+"        intelcc.generate()"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:94
+msgid ""
+"Now, running the command :command:`conan install . -pr intelprofile` "
+"generates the ``conanintelsetvars.sh|bat`` script which runs the Intel "
+"*setvars* script and loads all the variables into your local environment."
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:99
+msgid "Custom configurations"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:101
+msgid ""
+"Apply different installation paths and command arguments simply by changing "
+"the ``[conf]`` entries. For instance:"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:103
+msgid "intelprofile"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:103
+msgid ""
+"[settings]\n"
+"...\n"
+"compiler=intel-cc\n"
+"compiler.mode=dpcpp\n"
+"compiler.version=2021.3\n"
+"compiler.libcxx=libstdc++\n"
+"build_type=Release\n"
+"\n"
+"[buildenv]\n"
+"CC=dpcpp\n"
+"CXX=dpcpp\n"
+"\n"
+"[conf]\n"
+"tools.intel:installation_path=/opt/intel/oneapi\n"
+"tools.intel:setvars_args=--config=\"full/path/to/your/config.txt\" --force"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:122
+msgid ""
+"Run again a :command:`conan install . -pr intelprofile`, then the "
+"``conanintelsetvars.sh`` script (if we are using Linux OS) will contain "
+"something like:"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:125
+msgid "conanintelsetvars.sh"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:125
+msgid ""
+". \"/opt/intel/oneapi/setvars.sh\" --config=\"full/path/to/your/config.txt\" "
+"--force"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:132
+msgid "Reference"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.intel_cc.IntelCC:1
+msgid ""
+"Class that manages Intel oneAPI DPC++/C++/Classic Compilers vars generation"
+msgstr ""
+
+#: ../../../docstring of conan.tools.intel.IntelCC.arch:1
+msgid "arch setting"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.IntelCC.ms_toolset:1
+msgid "Get Microsoft Visual Studio Toolset depending on the mode selected"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.intel_cc.IntelCC.generate:1
+msgid ""
+"Generate the Conan Intel file to be loaded in build environment by default"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.IntelCC.installation_path:1
+msgid "Get the Intel oneAPI installation root path"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.IntelCC.command:1
+msgid ""
+"The Intel oneAPI DPC++/C++ Compiler includes environment configuration "
+"scripts to configure your build and development environment variables:"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.IntelCC.command:4
+msgid "On Linux, the file is a shell script called setvars.sh."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.IntelCC.command:5
+msgid "On Windows, the file is a batch file called setvars.bat."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.IntelCC.command:7
+msgid ""
+"Linux -> ``>> . /<install-dir>/setvars.sh <arg1> <arg2> … <argn><arg1> "
+"<arg2> … <argn>`` The compiler environment script file accepts an optional "
+"target architecture argument <arg>: - intel64: Generate code and use "
+"libraries for Intel 64 architecture-based targets. - ia32: Generate code and "
+"use libraries for IA-32 architecture-based targets."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.IntelCC.command:13
+msgid ""
+"Windows -> ``>> call <install-dir>\\setvars.bat [<arg1>] [<arg2>]`` Where "
+"<arg1> is optional and can be one of the following: - intel64: Generate code "
+"and use libraries for Intel 64 architecture (host and target). - ia32: "
+"Generate code and use libraries for IA-32 architecture (host and target)."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.IntelCC.command:18
+msgid "With the dpcpp compiler, <arg1> is intel64 by default."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.IntelCC.command:20
+msgid ""
+"The <arg2> is optional. If specified, it is one of the following: - vs2019: "
+"Microsoft Visual Studio* 2019 - vs2017: Microsoft Visual Studio 2017"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.IntelCC.command:0
+msgid "Returns"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/intel/intel_cc.py:docstring of
+#: conan.tools.intel.IntelCC.command:24
+msgid "`str` setvars.sh|bat command to be run"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:141
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:143
+msgid ""
+"``IntelCC`` uses these :ref:`configuration entries "
+"<reference_config_files_global_conf>`:"
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:145
+msgid ""
+"``tools.intel:installation_path``: **(required)** argument to tell Conan the "
+"installation path, if it's not defined, Conan will try to find it out "
+"automatically."
+msgstr ""
+
+#: ../../../reference/tools/intel.rst:147
+msgid ""
+"``tools.intel:setvars_args``: **(optional)** it is used to pass whatever we "
+"want as arguments to our `setvars.sh|bat` file. You can check out all the "
+"possible ones from the Intel official documentation."
+msgstr ""

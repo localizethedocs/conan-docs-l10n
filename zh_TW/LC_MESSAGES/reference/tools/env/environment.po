@@ -1,0 +1,392 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-30 08:27+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/env/environment.rst:4
+msgid "Environment"
+msgstr "Environment"
+
+#: ../../../reference/tools/env/environment.rst:7
+msgid ""
+"``Environment`` is a generic class that helps to define modifications to the "
+"environment variables. This class is used by other tools like the `conan."
+"tools.gnu` :ref:`Autotools<conan_tools_gnu_build_helper>` helpers and the :"
+"ref:`VirtualBuildEnv<conan_tools_env_virtualbuildenv>` and :ref:"
+"`VirtualRunEnv<conan_tools_env_virtualrunenv>` generator. It is important to "
+"highlight that this is a generic class, to be able to use it, a "
+"specialization for the current context (shell script, bat file, path "
+"separators, etc), a ``EnvVars`` object needs to be obtained from it."
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:16
+msgid "Variable declaration"
+msgstr "變數宣告"
+
+#: ../../../reference/tools/env/environment.rst:18
+msgid ""
+"from conan.tools.env import Environment\n"
+"\n"
+"def generate(self):\n"
+"    env = Environment()\n"
+"    env.define(\"MYVAR1\", \"MyValue1\")  # Overwrite previously existing "
+"MYVAR1 with new value\n"
+"    env.append(\"MYVAR2\", \"MyValue2\")  # Append to existing MYVAR2 the "
+"new value\n"
+"    env.prepend(\"MYVAR3\", \"MyValue3\") # Prepend to existing MYVAR3 the "
+"new value\n"
+"    env.remove(\"MYVAR3\", \"MyValue3\")  # Remove the MyValue3 from MYVAR3\n"
+"    env.unset(\"MYVAR4\")               # Remove MYVAR4 definition from "
+"environment\n"
+"\n"
+"    # And the equivalent with paths\n"
+"    env.define_path(\"MYPATH1\", \"path/one\")  # Overwrite previously "
+"existing MYPATH1 with new value\n"
+"    env.append_path(\"MYPATH2\", \"path/two\")  # Append to existing MYPATH2 "
+"the new value\n"
+"    env.prepend_path(\"MYPATH3\", \"path/three\") # Prepend to existing "
+"MYPATH3 the new value"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:35
+msgid ""
+"The \"normal\" variables (the ones declared with ``define``, ``append`` and "
+"``prepend``) will be appended with a space, by default, but the "
+"``separator`` argument can be provided to define a custom one."
+msgstr ""
+"「普通」變數（即使用 ``define``、``append`` 和 ``prepend`` 宣告的變數）預設會"
+"以空格進行追加，但也可以提供 ``separator`` 引數來定義自訂的分隔符號。"
+
+#: ../../../reference/tools/env/environment.rst:38
+msgid ""
+"The \"path\" variables (the ones declared with ``define_path``, "
+"``append_path`` and ``prepend_path``) will be appended with the default "
+"system path separator, either ``:`` or ``;``, but it also allows defining "
+"which one."
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:42
+msgid "Generation of environment files"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:44
+msgid ""
+"The generation of environment script files (like ``envfile.bat|.sh|.ps1|."
+"env``) can be done indirectly by the ``EnvVars`` class, which can be "
+"obtained with:"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:47
+msgid ""
+"from conan.tools.env import Environment\n"
+"\n"
+"env1 = Environment()\n"
+"...\n"
+"envvars = env1.vars(self)  # An EnvVars object\n"
+"# Generate a .bat|.sh|.ps1|.env file depending on current\n"
+"# settings and Conan configuration\n"
+"envars.save_script(\"mybuild\")\n"
+"# or decide to be explicit and generate some of the files:\n"
+"envvars.save_dotenv(\"myenv.env\")"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:60
+msgid ""
+"These files can be used also automatically by subsequent ``self.run()`` "
+"calls. For more information see the ``EnvVars`` class documentation."
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:65
+msgid "Composition"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:67
+msgid "Environments can be composed:"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:69
+msgid ""
+"from conan.tools.env import Environment\n"
+"\n"
+"env1 = Environment()\n"
+"env1.define(...)\n"
+"env2 = Environment()\n"
+"env2.append(...)\n"
+"\n"
+"env1.compose_env(env2) # env1 has priority, and its modifications will "
+"prevail"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:82
+msgid "Obtaining environment variables"
+msgstr "獲取環境變數"
+
+#: ../../../reference/tools/env/environment.rst:84
+msgid ""
+"You can obtain an ``EnvVars`` object with the ``vars()`` method like this:"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:86
+msgid ""
+"from conan.tools.env import Environment\n"
+"\n"
+"def generate(self):\n"
+"    env = Environment()\n"
+"    env.define(\"MYVAR1\", \"MyValue1\")\n"
+"    envvars = env.vars(self, scope=\"build\")\n"
+"    # use the envvars object"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:96
+msgid ""
+"The default ``scope`` is equal ``\"build\"``, which means that if this "
+"``envvars`` generate a script to activate the variables, such script will be "
+"automatically added to the ``conanbuild.sh|bat`` one, for users and recipes "
+"convenience. Conan generators use ``build`` and ``run`` scope, but it might "
+"be possible to manage other scopes too."
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:103
+msgid "Environment definition"
+msgstr "Environment 定義"
+
+#: ../../../reference/tools/env/environment.rst:105
+msgid ""
+"There are some other places where ``Environment`` can be defined and used:"
+msgstr "還有其他一些地方可以定義和使用 ``Environment``："
+
+#: ../../../reference/tools/env/environment.rst:107
+msgid ""
+"In recipes ``package_info()`` method, in new ``self.buildenv_info`` and "
+"``self.runenv_info``, this environment will be propagated via "
+"``VirtualBuildEnv`` and ``VirtualRunEnv`` respectively to packages depending "
+"on this recipe."
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:110
+msgid ""
+"In generators like ``AutootoolsDeps``, ``AutotoolsToolchain``, that need to "
+"define environment for the current recipe."
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:112
+msgid "In profiles ``[buildenv]`` section."
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:113
+msgid "In profiles ``[runenv]`` section."
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:116
+msgid ""
+"The definition in ``package_info()`` is as follow, taking into account that "
+"both ``self.buildenv_info`` and ``self.runenv_info`` are objects of "
+"``Environment()`` class."
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:119
+msgid ""
+"from conan import ConanFile\n"
+"\n"
+"class App(ConanFile):\n"
+"    name = \"mypkg\"\n"
+"    version = \"1.0\"\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def package_info(self):\n"
+"        # This is information needed by consumers to build using this "
+"package\n"
+"        self.buildenv_info.append(\"MYVAR\", \"MyValue\")\n"
+"        self.buildenv_info.prepend_path(\"MYPATH\", \"some/path/folder\")\n"
+"\n"
+"        # This is information needed by consumers to run apps that depends "
+"on this package\n"
+"        # at runtime\n"
+"        self.runenv_info.define(\"MYPKG_DATA_DIR\", os.path.join(self."
+"package_folder,\n"
+"                                                               \"datadir\"))"
+msgstr ""
+
+#: ../../../reference/tools/env/environment.rst:140
+msgid "Reference"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment:1
+msgid ""
+"Generic class that helps to define modifications to the environment "
+"variables."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.dumps:0
+#: conan.tools.env.environment.Environment.vars:0
+msgid "Returns"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.dumps:1
+msgid ""
+"A string with a profile-like original definition, not the full environment "
+"values"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.define:1
+msgid "Define `name` environment variable with value `value`"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.append:0
+#: conan.tools.env.environment.Environment.append_path:0
+#: conan.tools.env.environment.Environment.compose_env:0
+#: conan.tools.env.environment.Environment.define:0
+#: conan.tools.env.environment.Environment.prepend:0
+#: conan.tools.env.environment.Environment.prepend_path:0
+#: conan.tools.env.environment.Environment.remove:0
+#: conan.tools.env.environment.Environment.unset:0
+#: conan.tools.env.environment.Environment.vars:0
+msgid "Parameters"
+msgstr "參數"
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.define:3
+#: conan.tools.env.environment.Environment.remove:3
+msgid "Name of the variable"
+msgstr "變數的名稱"
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.define:4
+msgid "Value that the environment variable will take"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.define:5
+msgid "The character to separate appended or prepended values"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.unset:1
+msgid "clears the variable, equivalent to a unset or set XXX="
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.unset:3
+msgid "Name of the variable to unset"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.append:1
+msgid "Append the `value` to an environment variable `name`"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.append:3
+#: conan.tools.env.environment.Environment.append_path:3
+msgid "Name of the variable to append a new value"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.append:4
+#: conan.tools.env.environment.Environment.append_path:4
+#: conan.tools.env.environment.Environment.prepend:4
+#: conan.tools.env.environment.Environment.prepend_path:4
+msgid "New value"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.append:5
+msgid ""
+"The character to separate the appended value with the previous value. By "
+"default it will use a blank space."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.append_path:1
+msgid ""
+"Similar to \"append\" method but indicating that the variable is a "
+"filesystem path. It will automatically handle the path separators depending "
+"on the operating system."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.prepend:1
+msgid "Prepend the `value` to an environment variable `name`"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.prepend:3
+#: conan.tools.env.environment.Environment.prepend_path:3
+msgid "Name of the variable to prepend a new value"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.prepend:5
+msgid "The character to separate the prepended value with the previous value"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.prepend_path:1
+msgid ""
+"Similar to \"prepend\" method but indicating that the variable is a "
+"filesystem path. It will automatically handle the path separators depending "
+"on the operating system."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.remove:1
+msgid "Removes the `value` from the variable `name`."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.remove:4
+msgid "Value to be removed."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.compose_env:1
+msgid ""
+"Compose an Environment object with another one. ``self`` has precedence, the "
+"\"other\" will add/append if possible and not conflicting, but ``self`` "
+"mandates what to do. If ``self`` has ``define()``, without placeholder, that "
+"will remain."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.compose_env:6
+msgid "the \"other\" Environment"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.vars:1
+msgid "Instance of a conanfile, usually ``self`` in a recipe"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.vars:2
+msgid "Determine the scope of the declared variables."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.vars:3
+msgid "An EnvVars object from the current Environment object"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/env/environment.py:docstring of
+#: conan.tools.env.environment.Environment.deploy_base_folder:1
+msgid "Make the paths relative to the deploy_folder"
+msgstr ""

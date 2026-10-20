@@ -1,0 +1,136 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.16\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/conanfile/methods/package.rst:4
+msgid "package()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:6
+msgid ""
+"The ``package()`` method is in charge of copying files from the "
+"``source_folder`` and the temporary ``build_folder`` to the "
+"``package_folder``, copying only those files and artifacts that will be part "
+"of the final package, like headers, compiler static and shared libraries, "
+"executables, license files, etc."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:8
+msgid ""
+"The ``package()`` method will be called once per different configuration "
+"that is creating a new package binary, which happens with ``conan install --"
+"build=pkg*``, ``conan create`` and ``conan export-pkg`` commands."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:10
+msgid ""
+"There are 2 main ways the ``package()`` method can do such a copy. The first "
+"one is an explicit ``copy()`` from the origin ``source_folder`` and "
+"``build_folder`` to the ``package folder``:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:12
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.files import copy\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"\n"
+"    def package(self):\n"
+"        # copying headers from source_folder\n"
+"        copy(self, \"*.h\", join(self.source_folder, \"include\"), join(self."
+"package_folder, \"include\"))\n"
+"        # copying compiled .lib from build folder\n"
+"        copy(self, \"*.lib\", self.build_folder, join(self.package_folder, "
+"\"lib\"), keep_path=False)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:25
+msgid ""
+"The second way is to use the ``install`` functionality of some build "
+"systems, provided that the build scripts implement such functionality. For "
+"example if the ``CMakeLists.txt`` of a package implements the correct CMake "
+"``INSTALL`` instructions, it is possible to do:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:27
+msgid ""
+"def package(self):\n"
+"    cmake = CMake(self)\n"
+"    cmake.install()"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:33
+msgid ""
+"Also, it is possible to combine both approaches, doing ``cmake.install()`` "
+"and also adding some ``copy()`` calls, for example to make sure some "
+"\"License.txt\" file is packaged that was not taken into account by the "
+"CMakeLists.txt script."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:35
+msgid ""
+"It is also possible to use conditionals in the ``package()`` method, because "
+"different platforms might have different artifacts in different locations:"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:38
+msgid ""
+"def package(self):\n"
+"    if self.settings.os == \"Windows\":\n"
+"        copy(self, \"*.lib\", src=os.path.join(self.build_folder, "
+"\"libs\"), ...)\n"
+"        copy(self, \"*.dll\", ....)\n"
+"    else:\n"
+"        copy(self, \"*.lib\", src=os.path.join(self.build_folder, \"build\", "
+"\"libs\"), ...)"
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:47
+msgid ""
+"Though in most situations it might not be necessary, because pattern based "
+"copy will likely not find wrong artifacts like ``*.dll`` in a non-Windows "
+"build."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:49
+msgid ""
+"The ``package()`` method is also the one called when packaging precompiled "
+"binaries with ``conan export-pkg``. In this case the ``self.source_folder`` "
+"and ``self.build_folder`` refer to user space folders, as defined by the "
+"``layout()`` method and the only folder in the Conan cache will be ``self."
+"package_folder``."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:53
+msgid "**Best practices**"
+msgstr "**最佳實踐**"
+
+#: ../../../reference/conanfile/methods/package.rst:55
+msgid ""
+"The ``cmake.install()`` functionality should be called in the ``package()`` "
+"method, not in the ``build()`` method. It is not necessary to reuse the "
+"``CMake(self)`` object, it shouldn't be reused among methods. Creating a new "
+"instance in every method is the recommended approach."
+msgstr ""
+
+#: ../../../reference/conanfile/methods/package.rst:60
+msgid ""
+"See :ref:`the package() method tutorial<creating_packages_package_method>` "
+"for more information."
+msgstr ""

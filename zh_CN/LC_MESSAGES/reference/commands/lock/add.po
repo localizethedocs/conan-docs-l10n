@@ -1,0 +1,196 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/commands/lock/add.rst:2
+msgid "conan lock add"
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:-1
+msgid ""
+"$ conan lock add -h\n"
+"usage: conan lock add [-h] [-v [V]] [-cc CORE_CONF] [--requires REQUIRES]\n"
+"                      [--build-requires BUILD_REQUIRES]\n"
+"                      [--python-requires PYTHON_REQUIRES]\n"
+"                      [--config-requires CONFIG_REQUIRES]\n"
+"                      [--lockfile-out LOCKFILE_OUT] [--lockfile LOCKFILE]\n"
+"\n"
+"Add requires, build-requires or python-requires to an existing or new\n"
+"lockfile. The resulting lockfile will be ordered, newer versions/revisions\n"
+"first. References can be supplied with and without revisions like \"--\n"
+"requires=pkg/version\", but they must be package references, including at "
+"least\n"
+"the version, and they cannot contain a version range.\n"
+"\n"
+"options:\n"
+"  -h, --help            show this help message and exit\n"
+"  -v [V]                Level of detail of the output. Valid options from "
+"less\n"
+"                        verbose to more verbose: -vquiet, -verror, -"
+"vwarning,\n"
+"                        -vnotice, -vstatus, -v or -vverbose, -vv or -"
+"vdebug,\n"
+"                        -vvv or -vtrace\n"
+"  -cc CORE_CONF, --core-conf CORE_CONF\n"
+"                        Define core configuration, overwriting global.conf\n"
+"                        values. E.g.: -cc core:non_interactive=True\n"
+"  --requires REQUIRES   Add references to lockfile.\n"
+"  --build-requires BUILD_REQUIRES\n"
+"                        Add build-requires to lockfile\n"
+"  --python-requires PYTHON_REQUIRES\n"
+"                        Add python-requires to lockfile\n"
+"  --config-requires CONFIG_REQUIRES\n"
+"                        Add config-requires to lockfile\n"
+"  --lockfile-out LOCKFILE_OUT\n"
+"                        Filename of the created lockfile\n"
+"  --lockfile LOCKFILE   Filename of the input lockfile\n"
+"\n"
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:8
+msgid ""
+"The ``conan lock add`` command is able to add a package version to an "
+"existing or new lockfile ``requires``, ``build_requires``, "
+"``python_requires`` or ``config_requires``."
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:10
+msgid ""
+"For example, the following is able to create a lockfile (by default, named "
+"``conan.lock``):"
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:12
+msgid ""
+"$ conan lock add --requires=pkg/1.1 --build-requires=tool/2.2 --python-"
+"requires=mypytool/3.3\n"
+"Generated lockfile: ...conan.lock\n"
+"\n"
+"$cat conan.lock\n"
+"{\n"
+"    \"version\": \"0.5\",\n"
+"    \"requires\": [\n"
+"        \"pkg/1.1\"\n"
+"    ],\n"
+"    \"build_requires\": [\n"
+"        \"tool/2.2\"\n"
+"    ],\n"
+"    \"python_requires\": [\n"
+"        \"mypytool/3.3\"\n"
+"    ]\n"
+"}"
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:32
+msgid ""
+"The ``conan lock add`` command also allows to provide an existing lockfile "
+"as an input, and it will add the arguments to the existing lockfile, "
+"maintaining the package versions sorted:"
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:36
+msgid ""
+"$ conan lock add --build-requires=tool/2.3 --lockfile=conan.lock\n"
+"Using lockfile: '.../conan.lock'\n"
+"Generated lockfile: .../conan.lock\n"
+"\n"
+"$ cat conan.lock\n"
+"{\n"
+"    \"version\": \"0.5\",\n"
+"    \"requires\": [\n"
+"        \"pkg/1.1\"\n"
+"    ],\n"
+"    \"build_requires\": [\n"
+"        \"tool/2.3\",\n"
+"        \"tool/2.2\"\n"
+"    ],\n"
+"    \"python_requires\": [\n"
+"        \"mypytool/3.3\"\n"
+"    ]\n"
+"}"
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:58
+msgid ""
+"The ``conan lock add`` command does not perform any checking on the "
+"lockfile, the packages, the existence of packages, the existence of package "
+"versions, or the existence of those packages in a given dependency graph, it "
+"is a basic manipulation of the json information. When that lockfile is "
+"applied to resolve a dependency graph, it is possible that the added "
+"versions do not exist, or do not resolve for the ``conanfile.py`` recipes "
+"defined version ranges."
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:63
+msgid ""
+"Moreover, the list of versions is still sorted. Adding an older version like "
+"``tool/2.1`` to the previous lockfile won't make that version being used "
+"automatically if the recipes contain the version range ``tool/[>=2.0 <3]``, "
+"because the ``tool/2.2`` version is listed there and the range will resolve "
+"to it, not to the older ``tool/2.1``."
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:67
+msgid ""
+"Note that a lockfile created with ``conan lock add`` can be incomplete and "
+"not contain all necessary locked versions that a full dependency graph would "
+"need. For those cases, recall that the ``--lockfile-partial`` argument can "
+"be applied. Note also that if a ``conan.lock`` file exist in the current "
+"folder, Conan commands like ``conan install`` will automatically use it. "
+"Please have a look to the :ref:`lockfiles "
+"tutorial<tutorial_versioning_lockfiles>`."
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:72
+msgid ""
+"If explicitly adding revisions, please recall that the revisions are "
+"timestamp sorted. If more than one revision exists in the lockfile, it is "
+"mandatory to provide the timestamps of those revisions, so the sorting makes "
+"sense, which can be done with:"
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:76
+msgid "$ conan lock add --requires=pkg/1.1#revision%timestamp"
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:83
+msgid ""
+"It is forbidden to manually manipulate a Conan lockfile, changing the strict "
+"sorting of references, and that could result in any arbitrary undefined "
+"behavior."
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:85
+msgid ""
+"Recall that it is not possible to ``conan lock add`` a version range. The "
+"version might be not fully complete (like not providing the revision), but "
+"it must be an exact version."
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:91
+msgid "**Best practices**"
+msgstr ""
+
+#: ../../../reference/commands/lock/add.rst:93
+msgid ""
+"This command will not be necessary in many situations. The existing ``conan "
+"install``, ``conan create``, ``conan lock``, ``conan export``, ``conan "
+"graph`` commands can directly update or produce new lockfiles with the new "
+"information of the packages they are creating, and those new or updated "
+"lockfiles can be used to continue with the processing."
+msgstr ""

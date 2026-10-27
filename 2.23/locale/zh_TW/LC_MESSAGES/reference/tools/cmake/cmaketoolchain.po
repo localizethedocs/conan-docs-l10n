@@ -136,11 +136,11 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:75
 msgid ""
-"**CMakePresets.json**: This toolchain generates a standard `CMakePresets."
-"json` file. For more information, refer to the documentation `here <https://"
-"cmake.org/cmake/help/latest/manual/cmake-presets.7.html>`_. It currently "
-"uses version \"3\" of the JSON schema. Conan adds *configure*, *build*, and "
-"*test* preset entries to the JSON file:"
+"**CMakePresets.json**: This toolchain generates a standard "
+"`CMakePresets.json` file. For more information, refer to the documentation "
+"`here <https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html>`_. "
+"It currently uses version \"3\" of the JSON schema. Conan adds *configure*, "
+"*build*, and *test* preset entries to the JSON file:"
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:106
@@ -167,8 +167,8 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:87
 msgid ""
-"The `BUILD_TESTING` variable set to `OFF` when the configuration `tools."
-"build:skip_test` is true."
+"The `BUILD_TESTING` variable set to `OFF` when the configuration "
+"`tools.build:skip_test` is true."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:89
@@ -176,10 +176,10 @@ msgid ""
 "An environment section, setting all the environment information related to "
 "the :ref:`VirtualBuildEnv<conan_tools_env_virtualbuildenv>`, if applicable. "
 "This environment can be modified in the `generate()` method of the recipe by "
-"passing an environment through the `CMakeToolchain."
-"presets_build_environment` attribute. Generation of this section can be "
-"skipped by using the `tools.cmake.cmaketoolchain:presets_environment` "
-"configuration."
+"passing an environment through the "
+"`CMakeToolchain.presets_build_environment` attribute. Generation of this "
+"section can be skipped by using the "
+"`tools.cmake.cmaketoolchain:presets_environment` configuration."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:95
@@ -190,20 +190,20 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:97
 msgid ""
-"Preset names are controlled by the `layout()` `self.folders."
-"build_folder_vars` definition, which can contain a list of settings, "
-"options, ``self.name`` and ``self.version`` and constants ``const.xxx`` like "
-"`[\"settings.compiler\", \"settings.arch\", \"options.shared\", \"const."
-"myname\"]`."
+"Preset names are controlled by the `layout()` "
+"`self.folders.build_folder_vars` definition, which can contain a list of "
+"settings, options, ``self.name`` and ``self.version`` and constants "
+"``const.xxx`` like `[\"settings.compiler\", \"settings.arch\", "
+"\"options.shared\", \"const.myname\"]`."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:101
 msgid ""
-"If CMake is found as a direct `tool_requires` dependency, or if `tools.cmake:"
-"cmake_program` is set, the configure preset will include a `cmakeExecutable` "
-"field. This field represents the path to the CMake executable to be used for "
-"this preset. As stated in the CMake documentation, this field is reserved "
-"for use by IDEs and is not utilized by CMake itself."
+"If CMake is found as a direct `tool_requires` dependency, or if "
+"`tools.cmake:cmake_program` is set, the configure preset will include a "
+"`cmakeExecutable` field. This field represents the path to the CMake "
+"executable to be used for this preset. As stated in the CMake documentation, "
+"this field is reserved for use by IDEs and is not utilized by CMake itself."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:109
@@ -227,8 +227,8 @@ msgid ""
 "passing an environment through the `CMakeToolchain.presets_run_environment` "
 "attribute. Please note that since this preset inherits from a "
 "`configurePreset`, it will also inherit its environment. Generation of this "
-"section can be skipped by using the`tools.cmake.cmaketoolchain:"
-"presets_environment` configuration."
+"section can be skipped by using "
+"the`tools.cmake.cmaketoolchain:presets_environment` configuration."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:121
@@ -238,14 +238,15 @@ msgid ""
 "folder, a ``CMakeUserPresets.json`` file will be generated (if doesn't exist "
 "already) including automatically the ``CMakePresets.json`` (at the "
 "``conanfile.generators_folder``) to allow your IDE (Visual Studio, Visual "
-"Studio Code, CLion...) or ``cmake`` tool to locate the ``CMakePresets."
-"json``. The location of the generated ``CMakeUserPresets.json`` can be "
-"further tweaked by the ``user_presets_path`` attribute, as documented below. "
-"The version schema of the generated ``CMakeUserPresets.json`` is \"4\" and "
-"requires CMake >= 3.23. The file name of this file can be configured with "
-"the ``CMakeToolchain.user_presets_path = \"CMakeUserPresets.json\"`` "
-"attribute, so if you want to generate a \"ConanPresets.json\" instead to be "
-"included from your own file, you can define ``tc.user_presets_path = "
+"Studio Code, CLion...) or ``cmake`` tool to locate the "
+"``CMakePresets.json``. The location of the generated "
+"``CMakeUserPresets.json`` can be further tweaked by the "
+"``user_presets_path`` attribute, as documented below. The version schema of "
+"the generated ``CMakeUserPresets.json`` is \"4\" and requires CMake >= 3.23. "
+"The file name of this file can be configured with the "
+"``CMakeToolchain.user_presets_path = \"CMakeUserPresets.json\"`` attribute, "
+"so if you want to generate a \"ConanPresets.json\" instead to be included "
+"from your own file, you can define ``tc.user_presets_path = "
 "\"ConanPresets.json\"`` in the ``generate()`` method. See :ref:`extending "
 "your own CMake presets<examples-tools-cmake-toolchain-build-project-extend-"
 "presets>` for a full example."
@@ -387,12 +388,12 @@ msgstr ""
 msgid ""
 "This attribute allows defining CMake variables, for multiple configurations "
 "(Debug, Release, etc). These variables should be used to define things "
-"related to the toolchain and for the majority of cases :ref:"
-"`cache_variables<conan-cmake-toolchain-cache_variables>` is what you "
-"probably want to use. Also, take into account that as these variables are "
-"defined inside the *conan_toolchain.cmake* file, and the toolchain is loaded "
-"several times by CMake, the definition of these variables will be done at "
-"those points as well."
+"related to the toolchain and for the majority of "
+"cases :ref:`cache_variables<conan-cmake-toolchain-cache_variables>` is what "
+"you probably want to use. Also, take into account that as these variables "
+"are defined inside the *conan_toolchain.cmake* file, and the toolchain is "
+"loaded several times by CMake, the definition of these variables will be "
+"done at those points as well."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:232
@@ -463,8 +464,8 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:271
 msgid ""
-"For example, we can prevent the generator from creating ``CMakeUserPresets."
-"json`` in the following way:"
+"For example, we can prevent the generator from creating "
+"``CMakeUserPresets.json`` in the following way:"
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:274
@@ -491,9 +492,9 @@ msgstr ""
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:287
 msgid ""
 "These attributes enable the modification of the build and run environments "
-"associated with the presets, respectively, by assigning an :ref:"
-"`Environment<conan_tools_env_environment_model>`. This can be accomplished "
-"in the `generate()` method."
+"associated with the presets, respectively, by assigning "
+"an :ref:`Environment<conan_tools_env_environment_model>`. This can be "
+"accomplished in the `generate()` method."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:292
@@ -626,30 +627,32 @@ msgstr ""
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:375
 msgid ""
 "The ``conan_toolchain.cmake`` file can be completely skipped and replaced by "
-"a user one, defining the ``tools.cmake.cmaketoolchain:"
-"toolchain_file=<filepath>`` configuration value. Note this approach will "
-"translate all the toolchain responsibility to the user provided toolchain, "
-"but things like locating the necessary ``xxx-config.cmake`` files from "
-"dependencies can be challenging without some help. For this reason, using "
-"the following ``tools.cmake.cmaketoolchain:user_toolchain`` is recommended "
-"in most cases, and if necessary, using ``tools.cmake.cmaketoolchain:"
-"enabled_blocks`` can be used."
+"a user one, defining the "
+"``tools.cmake.cmaketoolchain:toolchain_file=<filepath>`` configuration "
+"value. Note this approach will translate all the toolchain responsibility to "
+"the user provided toolchain, but things like locating the necessary ``xxx-"
+"config.cmake`` files from dependencies can be challenging without some help. "
+"For this reason, using the following "
+"``tools.cmake.cmaketoolchain:user_toolchain`` is recommended in most cases, "
+"and if necessary, using ``tools.cmake.cmaketoolchain:enabled_blocks`` can be "
+"used."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:381
 msgid ""
 "A custom user toolchain file can be added (included from) to the "
 "``conan_toolchain.cmake`` one, by using the ``user_toolchain`` block "
-"described below, and defining the ``tools.cmake.cmaketoolchain:"
-"user_toolchain=[\"<filepath>\"]`` configuration value."
+"described below, and defining the "
+"``tools.cmake.cmaketoolchain:user_toolchain=[\"<filepath>\"]`` configuration "
+"value."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:385
 msgid ""
-"The configuration ``tools.cmake.cmaketoolchain:"
-"user_toolchain=[\"<filepath>\"]`` can be defined in the ``global.conf``. but "
-"also creating a Conan package for your toolchain and using ``self."
-"conf_info`` to declare the toolchain file:"
+"The configuration "
+"``tools.cmake.cmaketoolchain:user_toolchain=[\"<filepath>\"]`` can be "
+"defined in the ``global.conf``. but also creating a Conan package for your "
+"toolchain and using ``self.conf_info`` to declare the toolchain file:"
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:388
@@ -761,10 +764,10 @@ msgstr ""
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:455
 msgid ""
 "**user_toolchain**: Allows to include user toolchains from the "
-"``conan_toolchain.cmake`` file. If the configuration ``tools.cmake."
-"cmaketoolchain:user_toolchain=[\"xxxx\", \"yyyy\"]`` is defined, its values "
-"will be ``include(xxx)\\ninclude(yyyy)`` as the first lines in "
-"``conan_toolchain.cmake``."
+"``conan_toolchain.cmake`` file. If the configuration "
+"``tools.cmake.cmaketoolchain:user_toolchain=[\"xxxx\", \"yyyy\"]`` is "
+"defined, its values will be ``include(xxx)\\ninclude(yyyy)`` as the first "
+"lines in ``conan_toolchain.cmake``."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:458
@@ -783,15 +786,15 @@ msgstr ""
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:461
 msgid ""
 "**android_system**: Defines ``ANDROID_PLATFORM``, ``ANDROID_STL``, "
-"``ANDROID_ABI`` and includes ``ANDROID_NDK_PATH/build/cmake/android."
-"toolchain.cmake`` where ``ANDROID_NDK_PATH`` comes defined in ``tools."
-"android:ndk_path`` configuration value."
+"``ANDROID_ABI`` and includes ``ANDROID_NDK_PATH/build/cmake/"
+"android.toolchain.cmake`` where ``ANDROID_NDK_PATH`` comes defined in "
+"``tools.android:ndk_path`` configuration value."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:463
 msgid ""
-"**apple_system**: Defines ``CMAKE_OSX_ARCHITECTURES`` (see the :ref:"
-"`universal binaries "
+"**apple_system**: Defines ``CMAKE_OSX_ARCHITECTURES`` (see "
+"the :ref:`universal binaries "
 "section<conan_tools_cmaketoolchain_universal_binaries>`), "
 "``CMAKE_OSX_SYSROOT`` for Apple systems."
 msgstr ""
@@ -838,9 +841,9 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:472
 msgid ""
-"**extra_flags**: Adds extra definitions, compile and link flags from ``tools."
-"build:cxxflags``, ``tools.build:cflags``, ``tools.build:defines``, ``tools."
-"build:sharedlinkflags``, etc."
+"**extra_flags**: Adds extra definitions, compile and link flags from "
+"``tools.build:cxxflags``, ``tools.build:cflags``, ``tools.build:defines``, "
+"``tools.build:sharedlinkflags``, etc."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:473
@@ -853,8 +856,8 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:474
 msgid ""
-"**extra_variables**: Definition of extra CMake variables from ``tools.cmake."
-"cmaketoolchain:extra_variables``"
+"**extra_variables**: Definition of extra CMake variables from "
+"``tools.cmake.cmaketoolchain:extra_variables``"
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:475
@@ -872,9 +875,9 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:477
 msgid ""
-"**pkg_config**: Defines ``PKG_CONFIG_EXECUTABLE`` based on ``tools.gnu:"
-"pkg_config`` and adds ``CMAKE_CURRENT_LIST_DIR`` to ``ENV{PKG_CONFIG_PATH}`` "
-"to let pkg-config find generated .pc files."
+"**pkg_config**: Defines ``PKG_CONFIG_EXECUTABLE`` based on "
+"``tools.gnu:pkg_config`` and adds ``CMAKE_CURRENT_LIST_DIR`` to "
+"``ENV{PKG_CONFIG_PATH}`` to let pkg-config find generated .pc files."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:478
@@ -954,8 +957,8 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:510
 msgid ""
-"**preprocessor**: Define preprocessor directives from ``CMakeToolchain."
-"preprocessor_definitions`` attribute"
+"**preprocessor**: Define preprocessor directives from "
+"``CMakeToolchain.preprocessor_definitions`` attribute"
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:514
@@ -964,8 +967,8 @@ msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:516
 msgid ""
-"Every block can be customized in different ways (recall to call ``tc."
-"generate()`` after the customization):"
+"Every block can be customized in different ways (recall to call "
+"``tc.generate()`` after the customization):"
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:518
@@ -1264,12 +1267,12 @@ msgid ""
 "**tools.android:cmake_legacy_toolchain**: boolean value for "
 "``ANDROID_USE_LEGACY_TOOLCHAIN_FILE``. It will only be defined in "
 "``conan_toolchain.cmake`` if given a value. This is taken into account by "
-"the CMake toolchain inside the Android NDK specified in the ``tools.android:"
-"ndk_path`` config, for versions ``r23c`` and above. It may be useful to set "
-"this to ``False`` if compiler flags are defined via ``tools.build:cflags`` "
-"or ``tools.build:cxxflags`` to prevent Android's legacy CMake toolchain from "
-"overriding the values. If setting this to ``False``, please ensure you are "
-"using CMake 3.21 or above."
+"the CMake toolchain inside the Android NDK specified in the "
+"``tools.android:ndk_path`` config, for versions ``r23c`` and above. It may "
+"be useful to set this to ``False`` if compiler flags are defined via "
+"``tools.build:cflags`` or ``tools.build:cxxflags`` to prevent Android's "
+"legacy CMake toolchain from overriding the values. If setting this to "
+"``False``, please ensure you are using CMake 3.21 or above."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:739
@@ -1363,22 +1366,22 @@ msgstr ""
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:779
 msgid ""
 "**tools.cmake.cmaketoolchain:toolset_arch**: Will add the ``,host=xxx`` "
-"specifier in the ``CMAKE_GENERATOR_TOOLSET`` variable of ``conan_toolchain."
-"cmake`` file."
+"specifier in the ``CMAKE_GENERATOR_TOOLSET`` variable of "
+"``conan_toolchain.cmake`` file."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:780
 msgid ""
-"**tools.cmake.cmaketoolchain:toolset_cuda**: (Experimental) Will add the ``,"
-"cuda=xxx`` specifier in the ``CMAKE_GENERATOR_TOOLSET`` variable of "
+"**tools.cmake.cmaketoolchain:toolset_cuda**: (Experimental) Will add the "
+"``,cuda=xxx`` specifier in the ``CMAKE_GENERATOR_TOOLSET`` variable of "
 "``conan_toolchain.cmake`` file."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:781
 msgid ""
-"**tools.cmake.cmake_layout:build_folder_vars**: Settings, Options, ``self."
-"name`` and ``self.version`` and constants ``const.uservalue`` that will "
-"produce a different build folder and different CMake presets names."
+"**tools.cmake.cmake_layout:build_folder_vars**: Settings, Options, "
+"``self.name`` and ``self.version`` and constants ``const.uservalue`` that "
+"will produce a different build folder and different CMake presets names."
 msgstr ""
 
 #: ../../../reference/tools/cmake/cmaketoolchain.rst:782

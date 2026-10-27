@@ -92,12 +92,12 @@ msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:45
 msgid ""
-"The main difference here is that we are not using the predefined :ref:"
-"`cmake_layout()<cmake_layout>` in the ``say/1.0`` ConanFile, but instead, we "
-"are declaring our own custom layout. Let's see how we describe the "
-"information in the ``layout()`` method so that it works both when we create "
-"the package in the Conan local cache and also when the package is in "
-"editable mode."
+"The main difference here is that we are not using the "
+"predefined :ref:`cmake_layout()<cmake_layout>` in the ``say/1.0`` ConanFile, "
+"but instead, we are declaring our own custom layout. Let's see how we "
+"describe the information in the ``layout()`` method so that it works both "
+"when we create the package in the Conan local cache and also when the "
+"package is in editable mode."
 msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:51
@@ -124,8 +124,8 @@ msgid ""
 "        ## define project folder structure\n"
 "\n"
 "        self.folders.source = \".\"\n"
-"        self.folders.build = os.path.join(\"build\", str(self.settings."
-"build_type))\n"
+"        self.folders.build = os.path.join(\"build\", "
+"str(self.settings.build_type))\n"
 "        self.folders.generators = os.path.join(self.folders.build, "
 "\"generators\")\n"
 "\n"
@@ -196,8 +196,8 @@ msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:124
 msgid ""
-"As we have our ``CMakeLists.txt`` in the ``.`` folder, ``self.folders."
-"source`` is set to ``.``."
+"As we have our ``CMakeLists.txt`` in the ``.`` folder, "
+"``self.folders.source`` is set to ``.``."
 msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:126
@@ -219,8 +219,8 @@ msgid ""
 "Please note that the values above are for a single-configuration CMake "
 "generator. To support multi-configuration generators, such as Visual Studio, "
 "you should make some changes to this layout. For a complete layout that "
-"supports both single-config and multi-config, please check the :ref:"
-"`cmake_layout()<cmake_layout>` in the Conan documentation."
+"supports both single-config and multi-config, please check "
+"the :ref:`cmake_layout()<cmake_layout>` in the Conan documentation."
 msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:142
@@ -250,8 +250,8 @@ msgstr ""
 #: ../../../tutorial/developing_packages/package_layout.rst:156
 msgid ""
 "``self.cpp.package.libs``: we add the ``say`` library so that consumers know "
-"that they should link with it. This is equivalent to declaring ``self."
-"cpp_info.libs`` in the ``package_info()`` method."
+"that they should link with it. This is equivalent to declaring "
+"``self.cpp_info.libs`` in the ``package_info()`` method."
 msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:160
@@ -259,8 +259,8 @@ msgid ""
 "``self.cpp.package.libdirs``: we add the ``lib`` folder so that consumers "
 "know that they should search there for the libraries. This is equivalent to "
 "declaring ``self.cpp_info.libdirs`` in the ``package_info()`` method. Note "
-"that the default value for ``libdirs`` in both ``cpp_info`` and ``cpp."
-"package`` is ``[\"lib\"]``, so we could have omitted that declaration."
+"that the default value for ``libdirs`` in both ``cpp_info`` and "
+"``cpp.package`` is ``[\"lib\"]``, so we could have omitted that declaration."
 msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:166
@@ -275,8 +275,8 @@ msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:172
 msgid ""
-"To check how this information affects consumers, we are going to first do a :"
-"command:`conan create` on the ``say`` package:"
+"To check how this information affects consumers, we are going to first do "
+"a :command:`conan create` on the ``say`` package:"
 msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:175
@@ -297,9 +297,9 @@ msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:188
 msgid ""
-"You could get the exact locations for these folders using the :command:"
-"`conan cache` command or checking the output of the :command:`conan create` "
-"command."
+"You could get the exact locations for these folders using "
+"the :command:`conan cache` command or checking the output of "
+"the :command:`conan create` command."
 msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:191
@@ -345,8 +345,8 @@ msgid ""
 "\n"
 "...\n"
 "-- Conan: Target declared 'say::say'\n"
-"-- Conan: Library say found <YOUR_CONAN_HOME>p/say8938ceae216fc/p/lib/libsay."
-"a\n"
+"-- Conan: Library say found <YOUR_CONAN_HOME>p/say8938ceae216fc/p/lib/"
+"libsay.a\n"
 "-- Created target CONAN_LIB::say_say_RELEASE STATIC IMPORTED\n"
 "-- Conan: Found: <YOUR_CONAN_HOME>p/p/say8938ceae216fc/p/lib/libsay.a\n"
 "-- Configuring done\n"
@@ -484,12 +484,12 @@ msgstr ""
 #: ../../../tutorial/developing_packages/package_layout.rst:335
 msgid ""
 "Please, note that we did not define ``self.cpp.build.libs = [\"say\"]``. "
-"This is because the information set in ``self.cpp.source`` and ``self.cpp."
-"build`` will be merged with the information set in ``self.cpp.package`` so "
-"that you only have to define things that change for the editable package. "
-"For the same reason, you could also omit setting ``self.cpp.source."
-"includedirs = [\"include\"]`` but we left it there to show the use of ``cpp."
-"source``."
+"This is because the information set in ``self.cpp.source`` and "
+"``self.cpp.build`` will be merged with the information set in "
+"``self.cpp.package`` so that you only have to define things that change for "
+"the editable package. For the same reason, you could also omit setting "
+"``self.cpp.source.includedirs = [\"include\"]`` but we left it there to show "
+"the use of ``cpp.source``."
 msgstr ""
 
 #: ../../../tutorial/developing_packages/package_layout.rst:344

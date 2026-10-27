@@ -31,9 +31,9 @@ msgstr ""
 msgid ""
 "The ``BazelDeps`` is the dependencies generator for Bazel. Generates a "
 "*<REPOSITORY>/BUILD.bazel* file per dependency, where the *<REPOSITORY>/* "
-"folder is the Conan recipe reference name by default, e.g., *mypkg/BUILD."
-"bazel*. Apart from that, it also generates Bazel 6.x compatible file like "
-"*dependencies.bzl*, and other Bazel >= 7.1 compatible ones like "
+"folder is the Conan recipe reference name by default, e.g., *mypkg/"
+"BUILD.bazel*. Apart from that, it also generates Bazel 6.x compatible file "
+"like *dependencies.bzl*, and other Bazel >= 7.1 compatible ones like "
 "*conan_deps_module_extension.bzl* and *conan_deps_repo_rules.bzl*. All of "
 "them contain the logic to load all your Conan dependencies through your "
 "*WORKSPACE* | *MODULE.bazel*."
@@ -118,8 +118,8 @@ msgstr ""
 #: ../../../reference/tools/google/bazeldeps.rst:65
 msgid ""
 "*zlib/BUILD.bazel*: contains all the targets that you can load from any of "
-"your *BUILD* files. More information in :ref:"
-"`conan_tools_google_bazeldeps_customization`."
+"your *BUILD* files. More information "
+"in :ref:`conan_tools_google_bazeldeps_customization`."
 msgstr ""
 
 #: ../../../reference/tools/google/bazeldeps.rst:67
@@ -232,8 +232,8 @@ msgid ""
 "    conan_dependency_repo(\n"
 "        name = \"zlib\",\n"
 "        package_path = \"/path/to/conan/package/folder/\",\n"
-"        build_file_path = \"/your/current/working/directory/zlib/BUILD."
-"bazel\",\n"
+"        build_file_path = \"/your/current/working/directory/zlib/"
+"BUILD.bazel\",\n"
 "    )\n"
 "\n"
 "    return mctx.extension_metadata(\n"
@@ -267,8 +267,9 @@ msgstr ""
 
 #: ../../../reference/tools/google/bazeldeps.rst:168
 msgid ""
-"Given the examples above, and imagining that your *WORKSPACE* | *MODULE."
-"bazel* is at the same directory, you would have to add these lines in there:"
+"Given the examples above, and imagining that your *WORKSPACE* | "
+"*MODULE.bazel* is at the same directory, you would have to add these lines "
+"in there:"
 msgstr ""
 
 #: ../../../reference/tools/google/bazeldeps.rst:173
@@ -289,8 +290,8 @@ msgstr ""
 
 #: ../../../reference/tools/google/bazeldeps.rst:182
 msgid ""
-"load_conan_dependencies = use_extension(\"//:conan_deps_module_extension."
-"bzl\", \"conan_extension\")\n"
+"load_conan_dependencies = "
+"use_extension(\"//:conan_deps_module_extension.bzl\", \"conan_extension\")\n"
 "# use_repo(load_conan_dependencies, \"dep1\", \"dep2\", ..., \"depN\")\n"
 "use_repo(load_conan_dependencies, \"zlib\")"
 msgstr ""
@@ -412,8 +413,8 @@ msgstr ""
 
 #: ../../../reference/tools/google/bazeldeps.rst:278
 msgid ""
-"load_conan_dependencies = use_extension(\"//conan:"
-"conan_deps_module_extension.bzl\", \"conan_extension\")\n"
+"load_conan_dependencies = use_extension(\"//"
+"conan:conan_deps_module_extension.bzl\", \"conan_extension\")\n"
 "use_repo(load_conan_dependencies, \"zlib\")"
 msgstr ""
 
@@ -521,8 +522,8 @@ msgstr ""
 #: ../../../conan_sources/conan/tools/google/bazeldeps.py:docstring of
 #: conan.tools.google.bazeldeps.BazelDeps.generate:5
 msgid ""
-"In case of bazel < 7, it's important to highlight that the ``dependencies."
-"bzl`` file should be loaded by your WORKSPACE Bazel file:"
+"In case of bazel < 7, it's important to highlight that the "
+"``dependencies.bzl`` file should be loaded by your WORKSPACE Bazel file:"
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/google/bazeldeps.py:docstring of
@@ -632,8 +633,8 @@ msgid ""
 "def package_info(self):\n"
 "    self.cpp_info.set_property(\"bazel_target_name\", \"my_target\")\n"
 "    self.cpp_info.set_property(\"bazel_repository_name\", \"my_repo\")\n"
-"    self.cpp_info.components[\"mycomponent\"]."
-"set_property(\"bazel_target_name\", \"component_name\")"
+"    self.cpp_info.components[\"mycomponent\"].set_property(\"bazel_target_name\", "
+"\"component_name\")"
 msgstr ""
 
 #: ../../../reference/tools/google/bazeldeps.rst:384

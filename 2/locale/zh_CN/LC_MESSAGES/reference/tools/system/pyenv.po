@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: conan 2.25\n"
+"Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:00+0000\n"
+"POT-Creation-Date: 2026-10-29 05:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,22 +60,37 @@ msgstr ""
 
 #: ../../../conan_sources/conan/tools/system/python_manager.py:docstring of
 #: conan.tools.system.python_manager.PyEnv:1
-msgid "The current conanfile \"self\""
+msgid "The current conanfile ``self``"
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/system/python_manager.py:docstring of
 #: conan.tools.system.python_manager.PyEnv:2
-msgid "Optional folder, by default the \"build_folder\""
+msgid "Optional folder, by default the ``build_folder``"
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/system/python_manager.py:docstring of
 #: conan.tools.system.python_manager.PyEnv:3
-msgid "Optional name for the virtualenv, by default \"conan_pyenv\""
+msgid "Optional name for the virtualenv, by default ``conan_pyenv``"
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/system/python_manager.py:docstring of
 #: conan.tools.system.python_manager.PyEnv:4
 msgid "Optional python version to create the virtualenv using UV"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/system/python_manager.py:docstring of
+#: conan.tools.system.PyEnv.env_dir:1
+msgid "Root directory of the virtual environment."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/system/python_manager.py:docstring of
+#: conan.tools.system.PyEnv.env_exe:1
+msgid "Path to the Python executable inside the virtual environment."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/system/python_manager.py:docstring of
+#: conan.tools.system.PyEnv.bin_path:1
+msgid "Path to the bin or Scripts directory inside the virtual environment."
 msgstr ""
 
 #: ../../../conan_sources/conan/tools/system/python_manager.py:docstring of
@@ -147,6 +162,7 @@ msgid ""
 msgstr ""
 
 #: ../../../reference/tools/system/pyenv.rst:45
+#: ../../../reference/tools/system/pyenv.rst:113
 msgid "conanfile.py"
 msgstr ""
 
@@ -165,21 +181,22 @@ msgid ""
 "        basic_layout(self)\n"
 "\n"
 "    def generate(self):\n"
-"        PyEnv(self).install([\"meson==1.9.1\"])\n"
-"        PyEnv(self).generate()\n"
+"        pyenv = PyEnv(self)\n"
+"        pyenv.install([\"meson==1.9.1\"])\n"
+"        pyenv.generate()\n"
 "\n"
 "    def build(self):\n"
 "        self.run(\"meson --version\")"
 msgstr ""
 
-#: ../../../reference/tools/system/pyenv.rst:67
+#: ../../../reference/tools/system/pyenv.rst:68
 msgid ""
 "If we run a ``conan build`` we can see how our Python package is installed "
 "when the generate step, and how it is called in the build step as if it were "
 "installed on the system."
 msgstr ""
 
-#: ../../../reference/tools/system/pyenv.rst:69
+#: ../../../reference/tools/system/pyenv.rst:70
 msgid ""
 "$ conan build .\n"
 "\n"
@@ -206,4 +223,71 @@ msgid ""
 "conanfile.py (pip_install/0.1): Calling build()\n"
 "conanfile.py (pip_install/0.1): RUN: meson --version\n"
 "1.9.1"
+msgstr ""
+
+#: ../../../reference/tools/system/pyenv.rst:98
+msgid "Using the PyEnv Python from CMake"
+msgstr ""
+
+#: ../../../reference/tools/system/pyenv.rst:100
+msgid ""
+"Calling ``PyEnv.generate()`` adds the **bin** (or **Scripts** on Windows) "
+"folder of the virtual environment to the ``PATH`` of the Conan Environment. "
+"This is enough to run the installed tools from a ``self.run()`` call, but it "
+"is **not always enough** for CMake's ``find_package(Python)``:"
+msgstr ""
+
+#: ../../../reference/tools/system/pyenv.rst:104
+msgid ""
+"CMake's `FindPython <https://cmake.org/cmake/help/latest/module/"
+"FindPython.html>`_ does not always prioritize the ``python`` found in the "
+"``PATH``, so it may prefer a different Python installation."
+msgstr ""
+
+#: ../../../reference/tools/system/pyenv.rst:106
+msgid ""
+"The ``VirtualBuildEnv`` is generated automatically by Conan *after* the "
+"``generate()`` method. If the profile modifies the ``PATH`` with something "
+"like ``[buildenv]`` ``PATH=+(path)C:/Python313``, that folder will have a "
+"higher priority than the virtual environment. To avoid it, generate the "
+"``VirtualBuildEnv`` explicitly **before** calling ``PyEnv.generate()``."
+msgstr ""
+
+#: ../../../reference/tools/system/pyenv.rst:110
+msgid ""
+"To make sure that CMake uses the Python from the virtual environment, pass "
+"its path explicitly with :ref:`CMakeToolchain<conan_tools_cmaketoolchain>`, "
+"using the ``env_exe`` attribute of ``PyEnv``:"
+msgstr ""
+
+#: ../../../reference/tools/system/pyenv.rst:113
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.cmake import CMakeToolchain\n"
+"from conan.tools.env import VirtualBuildEnv\n"
+"from conan.tools.system import PyEnv\n"
+"\n"
+"\n"
+"class Pkg(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        # Generate it first, so the PyEnv path has priority over the profile "
+"[buildenv] PATH\n"
+"        buildenv = VirtualBuildEnv(self)\n"
+"        buildenv.generate()\n"
+"\n"
+"        pyenv = PyEnv(self)\n"
+"        pyenv.install([\"html5lib~=1.0\"])\n"
+"        pyenv.generate()\n"
+"\n"
+"        tc = CMakeToolchain(self)\n"
+"        tc.cache_variables[\"Python_EXECUTABLE\"] = pyenv.env_exe\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/tools/system/pyenv.rst:138
+msgid ""
+"Alternatively, ``Python_ROOT_DIR`` can be set to ``pyenv.env_dir``, the root "
+"folder of the virtual environment."
 msgstr ""

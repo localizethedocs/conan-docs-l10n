@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: conan 2.25\n"
+"Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:00+0000\n"
+"POT-Creation-Date: 2026-10-29 05:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr ""
 #: conan.api.subapi.cache.CacheAPI.build_path:6
 #: conan.api.subapi.cache.CacheAPI.export_path:3
 #: conan.api.subapi.cache.CacheAPI.export_source_path:6
-#: conan.api.subapi.cache.CacheAPI.package_path:3
+#: conan.api.subapi.cache.CacheAPI.package_path:7
 #: conan.api.subapi.cache.CacheAPI.source_path:6
 msgid ""
 "This folder is exclusively for **read-only** access, typically for debugging "
@@ -115,7 +115,7 @@ msgstr ""
 #: conan.api.subapi.cache.CacheAPI.export_path:8
 #: conan.api.subapi.cache.CacheAPI.export_source_path:11
 #: conan.api.subapi.cache.CacheAPI.package_metadata_path:10
-#: conan.api.subapi.cache.CacheAPI.package_path:9
+#: conan.api.subapi.cache.CacheAPI.package_path:13
 #: conan.api.subapi.cache.CacheAPI.recipe_metadata_path:9
 #: conan.api.subapi.cache.CacheAPI.source_path:11
 msgid "path to the folder, as a string"
@@ -138,7 +138,7 @@ msgstr ""
 #: conan.api.subapi.cache.CacheAPI.export_path:9
 #: conan.api.subapi.cache.CacheAPI.export_source_path:12
 #: conan.api.subapi.cache.CacheAPI.package_metadata_path:11
-#: conan.api.subapi.cache.CacheAPI.package_path:10
+#: conan.api.subapi.cache.CacheAPI.package_path:14
 #: conan.api.subapi.cache.CacheAPI.recipe_metadata_path:10
 #: conan.api.subapi.cache.CacheAPI.source_path:12
 msgid "ConanExcepcion if the folder doesn't exist"
@@ -196,7 +196,7 @@ msgstr ""
 #: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
 #: conan.api.subapi.cache.CacheAPI.build_path:9
 #: conan.api.subapi.cache.CacheAPI.package_metadata_path:7
-#: conan.api.subapi.cache.CacheAPI.package_path:6
+#: conan.api.subapi.cache.CacheAPI.package_path:10
 msgid ""
 "PkgReference. If it includes recipe revision, that exact revision will be "
 "returned, if it doesn't include recipe revision, it will return the latest "
@@ -219,6 +219,14 @@ msgstr ""
 #: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
 #: conan.api.subapi.cache.CacheAPI.package_path:1
 msgid "Returns the path of the package folder in the Conan cache"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
+#: conan.api.subapi.cache.CacheAPI.package_path:3
+msgid ""
+"If the recipe implements the :ref:`finalize() "
+"<reference_conanfile_methods_finalize>` method and it has already been "
+"executed, the path of the finalized folder is returned instead."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
@@ -248,6 +256,16 @@ msgid ""
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
+#: conan.api.subapi.cache.CacheAPI.sign:1
+msgid "Sign packages with the package signing plugin"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
+#: conan.api.subapi.cache.CacheAPI.verify:1
+msgid "Verify packages with the package signing plugin"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
 #: conan.api.subapi.cache.CacheAPI.clean:1
 msgid ""
 "Remove non critical folders from the cache, like source, build and download "
@@ -256,28 +274,37 @@ msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
 #: conan.api.subapi.cache.CacheAPI.clean:4
-msgid "the package lists that should be cleaned"
-msgstr ""
-
-#: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
-#: conan.api.subapi.cache.CacheAPI.clean:5
-#: conan.api.subapi.cache.CacheAPI.clean:9
-msgid "boolean, remove the \"source\" folder if True"
-msgstr ""
-
-#: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
-#: conan.api.subapi.cache.CacheAPI.clean:6
-msgid "boolean, remove the \"build\" folder if True"
+msgid ""
+"the package list that should be cleaned. If ``None``, the whole cache is "
+"cleaned, and with ``backup_sources`` all the backup sources files are "
+"removed, including the ones that do not belong to any recipe in the cache"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
 #: conan.api.subapi.cache.CacheAPI.clean:7
-msgid "boolean, remove the \"download (.tgz)\" folder if True"
+msgid "boolean, remove the \"source\" folder if True"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
 #: conan.api.subapi.cache.CacheAPI.clean:8
+msgid "boolean, remove the \"build\" folder if True"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
+#: conan.api.subapi.cache.CacheAPI.clean:9
+msgid "boolean, remove the \"download (.tgz)\" folder if True"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
+#: conan.api.subapi.cache.CacheAPI.clean:10
 msgid "boolean, remove the temporary folders"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
+#: conan.api.subapi.cache.CacheAPI.clean:11
+msgid ""
+"boolean, remove the backup sources files if True. If a ``package_list`` is "
+"given, only the ones downloaded by its recipes"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
@@ -362,10 +389,14 @@ msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
 #: conan.api.subapi.cache.CacheAPI.get_backup_sources:9
-msgid "if True, only return the files for packages that are set to be uploaded"
+msgid ""
+"if True, only take into account the recipes and packages of the package_list "
+"that are set to be uploaded. Not used if no package_list is given"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/cache.py:docstring of
-#: conan.api.subapi.cache.CacheAPI.get_backup_sources:10
-msgid "A list of files that need to be uploaded"
+#: conan.api.subapi.cache.CacheAPI.get_backup_sources:11
+msgid ""
+"A list with the paths of the backup source files and their associated json "
+"files"
 msgstr ""

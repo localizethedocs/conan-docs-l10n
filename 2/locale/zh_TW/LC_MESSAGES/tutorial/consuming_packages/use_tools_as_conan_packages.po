@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: conan 2.25\n"
+"Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:00+0000\n"
+"POT-Creation-Date: 2026-10-29 05:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,25 +135,28 @@ msgstr ""
 
 #: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:92
 msgid ""
-"**PowerShell** users need to add ``--"
+"**PowerShell** users will find the ``.ps1`` files generated next to the "
+"``.bat`` (Windows) or ``.sh`` (Linux, Mac) ones for the local ``conanfile``, "
+"in any platform (Windows, Linux and Mac). Conan itself always uses the "
+"``.bat`` files in its subprocesses, unless ``--"
 "conf=tools.env.virtualenv:powershell=<executable>`` (e.g., "
-"``powershell.exe`` or ``pwsh``) to the previous command to generate ``.ps1`` "
-"files instead of ``.bat`` files. Setting this configuration to ``True`` or "
-"``False`` is deprecated as of Conan 2.11.0."
+"``powershell.exe`` or ``pwsh``) is defined, which makes it generate and use "
+"the ``.ps1`` files for all packages. Setting this configuration to ``True`` "
+"or ``False`` is no longer supported."
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:97
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:98
 msgid ""
 "To avoid the need to add this line every time, we recommend configuring it "
 "in the ``[conf]`` section of your profile. For detailed information, please "
 "refer to the :ref:`profiles section<reference_config_files_profiles>`."
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:101
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:102
 msgid "You can check the output:"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:103
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:104
 msgid ""
 "-------- Computing dependency graph ----------\n"
 "cmake/3.27.9: Not found in local cache, looking in remotes...\n"
@@ -200,42 +203,42 @@ msgid ""
 "conanfile.txt: Generating aggregated env files"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:142
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:143
 msgid ""
 "Now, if you check the folder you will see that Conan generated a new file "
-"called ``conanbuild.sh/bat``. This is the result of automatically invoking a "
-"``VirtualBuildEnv`` generator when we declared the ``tool_requires`` in the "
-"**conanfile.txt**. This file sets some environment variables like a new "
+"called ``conanbuild.{sh,bat}``. This is the result of automatically invoking "
+"a ``VirtualBuildEnv`` generator when we declared the ``tool_requires`` in "
+"the **conanfile.txt**. This file sets some environment variables like a new "
 "``PATH`` that we can use to inject the location of CMake v3.27.9 into our "
 "environment."
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:148
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:149
 msgid ""
 "Activate the virtual environment, and run ``cmake --version`` to check that "
 "you have installed the new CMake version in the path."
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:151
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:178
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:212
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:152
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:179
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:213
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:151
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:152
 msgid ""
 "$ cd build\n"
 "$ conanbuild.bat\n"
 "# conanbuild.ps1 if using Powershell"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:158
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:193
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:217
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:159
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:194
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:218
 msgid "Linux, macOS"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:158
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:159
 msgid ""
 "$ cd build\n"
 "$ source conanbuild.sh\n"
@@ -243,18 +246,18 @@ msgid ""
 "Configuring environment variables"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:166
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:167
 msgid "Run ``cmake`` and check the version:"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:168
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:169
 msgid ""
 "$ cmake --version\n"
 "cmake version 3.27.9\n"
 "..."
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:174
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:175
 msgid ""
 "As you can see, after activating the environment, the CMake v3.27.9 binary "
 "folder was added to the path and is the currently active version now. Now "
@@ -262,7 +265,7 @@ msgid ""
 "use CMake 3.27.9 to build it:"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:178
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:179
 msgid ""
 "# assuming Visual Studio 15 2017 is your VS version and that it matches your "
 "default profile\n"
@@ -279,7 +282,7 @@ msgid ""
 "ZLIB VERSION: 1.3.1"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:193
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:194
 msgid ""
 "$ cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake "
 "-DCMAKE_BUILD_TYPE=Release\n"
@@ -294,80 +297,80 @@ msgid ""
 "ZLIB VERSION: 1.3.1"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:208
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:209
 msgid ""
 "Note that when we activated the environment, a new file named "
-"``deactivate_conanbuild.sh/bat`` was created in the same folder. If you "
+"``deactivate_conanbuild.{sh,bat}`` was created in the same folder. If you "
 "source this file you can restore the environment as it was before."
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:212
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:213
 msgid "$ deactivate_conanbuild.bat"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:217
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:218
 msgid ""
 "$ source deactivate_conanbuild.sh\n"
 "Restoring environment"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:224
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:225
 msgid ""
 "Run ``cmake`` and check the version, it will be the version that was "
 "installed previous to the environment activation:"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:227
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:228
 msgid ""
 "$ cmake --version\n"
 "cmake version 3.22.0\n"
 "..."
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:236
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:237
 msgid "**Best practice**"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:238
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:239
 msgid ""
 "``tool_requires`` and tool packages are intended for executable "
 "applications, like ``cmake`` or ``ninja``. Do not use ``tool_requires`` to "
 "depend on library or library-like dependencies."
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:244
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:245
 msgid ""
 "`JFrog Academy Conan 2 Essentials Module 1, Lesson 4: Using Build Tools As "
 "Conan Packages <https://academy.jfrog.com/path/conan-cc-package-manager/"
 "conan-2-essentials?utm_source=Conan+Docs>`__"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:245
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:246
 msgid ""
 ":ref:`Using [platform_tool_requires] in your profiles "
 "<reference_config_files_profiles_platform_tool_requires>`."
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:246
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:247
 msgid ""
 ":ref:`Creating recipes for tool_requires: packaging build tools "
 "<tutorial_other_tool_requires_packages>`."
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:247
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:248
 msgid ":ref:`examples_graph_tool_requires_protobuf`"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:248
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:249
 msgid ":ref:`examples_dev_flow_tool_requires_mingw`"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:249
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:250
 msgid ""
 ":ref:`Using tool_requires in profiles "
 "<reference_config_files_profile_patterns>`"
 msgstr ""
 
-#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:250
+#: ../../../tutorial/consuming_packages/use_tools_as_conan_packages.rst:251
 msgid "Using conf to set a toolchain from a tool requires"
 msgstr ""

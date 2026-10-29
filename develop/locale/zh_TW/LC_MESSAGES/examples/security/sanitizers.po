@@ -1,0 +1,296 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-02 08:40+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/security/sanitizers.rst:4
+msgid "Using Compiler Sanitizers with Conan"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:6
+msgid ""
+"To better illustrate the :ref:`sanitizers integration with Conan "
+"<security_sanitizers>`, this section provides practical examples using "
+"AddressSanitizer (ASan) and UndefinedBehaviorSanitizer (UBSan) with simple C+"
+"+ programs."
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:10
+msgid ""
+"As a first step, please clone the sources to recreate this project. You can "
+"find them in the `examples2 repository <https://github.com/conan-io/"
+"examples2>`_ on GitHub:"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:13
+msgid ""
+"git clone https://github.com/conan-io/examples2.git\n"
+"cd examples2/examples/security/sanitizers/compiler_sanitizers"
+msgstr ""
+"git clone https://github.com/conan-io/examples2.git\n"
+"cd examples2/examples/security/sanitizers/compiler_sanitizers"
+
+#: ../../../examples/security/sanitizers.rst:18
+msgid ""
+"In this example we will see how to prepare Conan to use sanitizers in "
+"different ways."
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:20
+msgid ""
+"To show how to use sanitizers in your builds, let's consider two examples."
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:23
+msgid "AddressSanitizer: index out of bounds"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:25
+msgid ""
+"In this example, we will build a simple C++ program that intentionally "
+"accesses an out-of-bounds index in an array, which should trigger ASan when "
+"running the program. We will be using a Conan profile to enable ASan:"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:28
+msgid "profiles/gcc_asan"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:28
+msgid ""
+" [settings]\n"
+" arch=x86_64\n"
+" os=Linux\n"
+" build_type=Debug\n"
+" compiler=gcc\n"
+" compiler.cppstd=gnu20\n"
+" compiler.libcxx=libstdc++11\n"
+" compiler.version=15\n"
+" compiler.sanitizer=Address\n"
+"\n"
+" [conf]\n"
+" tools.build:cflags=['-fsanitize=address']\n"
+" tools.build:cxxflags=['-fsanitize=address']\n"
+" tools.build:exelinkflags=['-fsanitize=address']\n"
+" tools.build:sharedlinkflags+=[\"-fsanitize=address\"]\n"
+"\n"
+" [runenv]\n"
+" ASAN_OPTIONS=halt_on_error=1:detect_leaks=1"
+msgstr ""
+" [settings]\n"
+" arch=x86_64\n"
+" os=Linux\n"
+" build_type=Debug\n"
+" compiler=gcc\n"
+" compiler.cppstd=gnu20\n"
+" compiler.libcxx=libstdc++11\n"
+" compiler.version=15\n"
+" compiler.sanitizer=Address\n"
+"\n"
+" [conf]\n"
+" tools.build:cflags=['-fsanitize=address']\n"
+" tools.build:cxxflags=['-fsanitize=address']\n"
+" tools.build:exelinkflags=['-fsanitize=address']\n"
+" tools.build:sharedlinkflags+=[\"-fsanitize=address\"]\n"
+"\n"
+" [runenv]\n"
+" ASAN_OPTIONS=halt_on_error=1:detect_leaks=1"
+
+#: ../../../examples/security/sanitizers.rst:51
+msgid ""
+"Note that in this profile we set the ``compiler.sanitizer=Address`` does not "
+"define what compiler flags to use, but it is a settings to make explicit "
+"that both ASan and UBSan are intended to be used."
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:55
+msgid ""
+"And for further illustration, we also use environment variable "
+"``ASAN_OPTIONS=halt_on_error=1:detect_leaks=1`` for runtime configuration, "
+"to manage ASan to halt execution on the first error and to detect memory "
+"leaks when the program exits."
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:60
+msgid "index_out_of_bounds/main.cpp"
+msgstr "index_out_of_bounds/main.cpp"
+
+#: ../../../examples/security/sanitizers.rst:60
+msgid ""
+"#include <iostream>\n"
+"#include <cstdlib>\n"
+"\n"
+"int main() {\n"
+"#ifdef __SANITIZE_ADDRESS__\n"
+"  std::cout << \"Address sanitizer enabled\\n\";\n"
+"#else\n"
+"  std::cout << \"Address sanitizer not enabled\\n\";\n"
+"#endif\n"
+"\n"
+"  int foo[100];\n"
+"  foo[100] = 42; // Out-of-bounds write\n"
+"\n"
+"  return EXIT_SUCCESS;\n"
+"}"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:80
+msgid ""
+"**Note:** The preprocessor check above is portable for GCC, Clang and MSVC. "
+"The define ``__SANITIZE_ADDRESS__`` is present when **ASan** is active;"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:83
+msgid "**To build and run this example using Conan:**"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:85
+msgid ""
+"cd index_out_of_bounds/\n"
+"conan build . -pr ../profiles/gcc_asan\n"
+"build/Debug/index_out_of_bounds"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:91
+#: ../../../examples/security/sanitizers.rst:163
+msgid "**Expected output (abbreviated):**"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:93
+msgid ""
+"Address sanitizer enabled\n"
+"==32018==ERROR: AddressSanitizer: stack-buffer-overflow on address "
+"0x7fffbe04a6d0 ...\n"
+"WRITE of size 4 at 0x7fffbe04a6d0 thread T0\n"
+"#0 ... in main .../index_out_of_bounds+0x12ea\n"
+"...\n"
+"SUMMARY: AddressSanitizer: stack-buffer-overflow ... in main\n"
+"This frame has 1 object(s):\n"
+"[48, 448) 'foo' (line 11) <== Memory access at offset 448 overflows this "
+"variable"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:105
+msgid "UndefinedBehaviorSanitizer: signed integer overflow"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:107
+msgid ""
+"This example demonstrates how to use UBSan to detect signed integer "
+"overflow. It combines ASan and UBSan. Create a dedicated profile:"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:110
+msgid "profiles/gcc_asan_ubsan"
+msgstr "profiles/gcc_asan_ubsan"
+
+#: ../../../examples/security/sanitizers.rst:110
+msgid ""
+"[settings]\n"
+"arch=x86_64\n"
+"os=Linux\n"
+"build_type=Debug\n"
+"compiler=gcc\n"
+"compiler.cppstd=gnu20\n"
+"compiler.libcxx=libstdc++11\n"
+"compiler.version=15\n"
+"compiler.sanitizer=AddressUndefinedBehavior\n"
+"\n"
+"[conf]\n"
+"tools.build:cflags+=[\"-fsanitize=address,undefined\", \"-fno-omit-frame-"
+"pointer\"]\n"
+"tools.build:cxxflags+=[\"-fsanitize=address,undefined\", \"-fno-omit-frame-"
+"pointer\"]\n"
+"tools.build:exelinkflags+=[\"-fsanitize=address,undefined\"]\n"
+"tools.build:sharedlinkflags+=[\"-fsanitize=address,undefined\"]"
+msgstr ""
+"[settings]\n"
+"arch=x86_64\n"
+"os=Linux\n"
+"build_type=Debug\n"
+"compiler=gcc\n"
+"compiler.cppstd=gnu20\n"
+"compiler.libcxx=libstdc++11\n"
+"compiler.version=15\n"
+"compiler.sanitizer=AddressUndefinedBehavior\n"
+"\n"
+"[conf]\n"
+"tools.build:cflags+=[\"-fsanitize=address,undefined\", \"-fno-omit-frame-"
+"pointer\"]\n"
+"tools.build:cxxflags+=[\"-fsanitize=address,undefined\", \"-fno-omit-frame-"
+"pointer\"]\n"
+"tools.build:exelinkflags+=[\"-fsanitize=address,undefined\"]\n"
+"tools.build:sharedlinkflags+=[\"-fsanitize=address,undefined\"]"
+
+#: ../../../examples/security/sanitizers.rst:130
+msgid "It is supported by GCC and Clang. MSVC does not support UBSan."
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:132
+msgid "**Source code:**"
+msgstr "**來源碼：**"
+
+#: ../../../examples/security/sanitizers.rst:134
+msgid "signed_integer_overflow/main.cpp"
+msgstr "signed_integer_overflow/main.cpp"
+
+#: ../../../examples/security/sanitizers.rst:134
+msgid ""
+"#include <iostream>\n"
+"#include <cstdlib>\n"
+"#include <climits>\n"
+"\n"
+"int main() {\n"
+"#ifdef __SANITIZE_ADDRESS__\n"
+"  std::cout << \"Address sanitizer enabled\\n\";\n"
+"#else\n"
+"  std::cout << \"Address sanitizer not enabled\\n\";\n"
+"#endif\n"
+"\n"
+"  int x = INT_MAX;\n"
+"  x += 42;                     // signed integer overflow\n"
+"\n"
+"  return EXIT_SUCCESS;\n"
+"}"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:155
+msgid "**Build and run:**"
+msgstr "**建置並執行：**"
+
+#: ../../../examples/security/sanitizers.rst:157
+msgid ""
+"cd signed_integer_overflow/\n"
+"conan build . -pr ../profiles/gcc_asan_ubsan\n"
+"build/Debug/signed_integer_overflow"
+msgstr ""
+"cd signed_integer_overflow/\n"
+"conan build . -pr ../profiles/gcc_asan_ubsan\n"
+"build/Debug/signed_integer_overflow"
+
+#: ../../../examples/security/sanitizers.rst:165
+msgid ""
+"Address sanitizer enabled\n"
+".../main.cpp:16:9: runtime error: signed integer overflow: 2147483647 + 1 "
+"cannot be represented in type 'int'"
+msgstr ""
+
+#: ../../../examples/security/sanitizers.rst:170
+msgid ""
+"When executing the example application, UBSan detects the signed integer "
+"overflow and reports it as expected."
+msgstr ""

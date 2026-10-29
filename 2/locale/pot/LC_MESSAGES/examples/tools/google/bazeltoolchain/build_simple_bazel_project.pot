@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: conan 2.25\n"
+"Project-Id-Version: conan 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 13:00+0000\n"
+"POT-Creation-Date: 2026-10-29 05:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,47 +22,51 @@ msgid "Build a simple Bazel project using Conan"
 msgstr ""
 
 #: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:8
-msgid "This example is Bazel 6.x compatible."
+msgid ""
+"This example is Bazel 6.x compatible. The Bazel 6.x support in ``BazelDeps`` "
+"is deprecated since Conan 2.34 and will be removed in a future release. "
+"See :ref:`examples_tools_bazel_7x_toolchain_build_simple_bazel_project` for "
+"the recommended approach."
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:10
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:12
 msgid ""
 "In this example, we are going to create a Hello World program that uses one "
 "of the most popular C++ libraries: `fmt <https://fmt.dev/latest>`_."
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:15
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:17
 msgid ""
 "This example is based on the main :ref:`Build a simple CMake project using "
 "Conan<consuming_packages_build_simple_cmake_project>` tutorial. So we highly "
 "recommend reading it before trying out this one."
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:19
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:21
 msgid ""
 "We'll use Bazel as the build system and helper tool in this case, so you "
 "should get it installed before going forward with this example. See `how to "
 "install Bazel <https://bazel.build/install>`_."
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:22
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:24
 msgid ""
 "Please, first clone the sources to recreate this project. You can find them "
 "in the `examples2 repository <https://github.com/conan-io/examples2>`_ in "
 "GitHub:"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:25
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:27
 msgid ""
 "$ git clone https://github.com/conan-io/examples2.git\n"
 "$ cd examples2/examples/tools/google/bazeltoolchain/6_x/string_formatter"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:31
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:33
 msgid "We start from a very simple C++ language project with this structure:"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:33
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:35
 msgid ""
 ".\n"
 "├── WORKSPACE\n"
@@ -72,7 +76,7 @@ msgid ""
 "    └── demo.cpp"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:42
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:44
 msgid ""
 "This project contains a *WORKSPACE* file loading the Conan dependencies (in "
 "this case only ``fmt``) and a *main/BUILD* file which defines the *demo* "
@@ -80,15 +84,15 @@ msgid ""
 "World program."
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:46
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:48
 msgid "Let's have a look at each file's content:"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:48
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:50
 msgid "**main/demo.cpp**"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:48
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:50
 msgid ""
 "#include <cstdlib>\n"
 "#include <fmt/core.h>\n"
@@ -99,21 +103,21 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:59
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:61
 msgid "**WORKSPACE**"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:59
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:61
 msgid ""
 "load(\"@//conan:dependencies.bzl\", \"load_conan_dependencies\")\n"
 "load_conan_dependencies()"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:66
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:68
 msgid "**main/BUILD**"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:66
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:68
 msgid ""
 "cc_binary(\n"
 "    name = \"demo\",\n"
@@ -124,11 +128,11 @@ msgid ""
 ")"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:78
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:80
 msgid "**conanfile.txt**"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:78
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:80
 msgid ""
 "[requires]\n"
 "fmt/10.1.1\n"
@@ -141,20 +145,20 @@ msgid ""
 "bazel_layout"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:92
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:94
 msgid ""
 "Conan uses the :ref:`conan_tools_google_bazeltoolchain` to generate a "
 "``conan_bzl.rc`` file which defines the ``conan-config`` bazel-build "
 "configuration. This file and the configuration are passed as parameters to "
-"the ``bazel build`` command. Apart from that, Conan uses the :ref:"
-"`conan_tools_google_bazeldeps` generator to create all the bazel files "
-"(*[DEP]/BUILD.bazel* and *dependencies.bzl*) which define all the "
+"the ``bazel build`` command. Apart from that, Conan uses "
+"the :ref:`conan_tools_google_bazeldeps` generator to create all the bazel "
+"files (*[DEP]/BUILD.bazel* and *dependencies.bzl*) which define all the "
 "dependencies as public bazel targets. The *WORKSPACE* above is already ready "
 "to load the *dependencies.bzl* which will tell the *main/BUILD* all the "
 "information about the ``@fmt//:fmt`` bazel target."
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:99
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:101
 msgid ""
 "As the first step, we should install all the dependencies listed in the "
 "``conanfile.txt``. The command :ref:`conan "
@@ -165,7 +169,7 @@ msgid ""
 "named *conan/* (default folder defined by the ``bazel_layout``)."
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:105
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:107
 msgid ""
 "$ conan install . --build=missing\n"
 "# ...\n"
@@ -175,19 +179,19 @@ msgid ""
 "conanfile.txt: Generator 'BazelDeps' calling 'generate()'\n"
 "conanfile.txt: Generator 'BazelToolchain' calling 'generate()'\n"
 "conanfile.txt: Generating aggregated env files\n"
-"conanfile.txt: Generated aggregated env files: ['conanbuild.sh', 'conanrun."
-"sh']\n"
+"conanfile.txt: Generated aggregated env files: ['conanbuild.sh', "
+"'conanrun.sh']\n"
 "Install finished successfully"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:117
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:119
 msgid "Now we are ready to build and run our application:"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:119
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:121
 msgid ""
-"$ bazel --bazelrc=./conan/conan_bzl.rc build --config=conan-config //main:"
-"demo\n"
+"$ bazel --bazelrc=./conan/conan_bzl.rc build --config=conan-config //"
+"main:demo\n"
 "Starting local Bazel server and connecting to it...\n"
 "INFO: Analyzed target //main:demo (38 packages loaded, 272 targets "
 "configured).\n"
@@ -201,7 +205,7 @@ msgid ""
 "INFO: Build completed successfully, 6 total actions"
 msgstr ""
 
-#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:134
+#: ../../../examples/tools/google/bazeltoolchain/build_simple_bazel_project.rst:136
 msgid ""
 "$ ./bazel-bin/main/demo\n"
 "Conan - The C++ Package Manager!"

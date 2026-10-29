@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2016-2024, JFrog
+# Copyright (C) 2016-2026, JFrog
 # This file is distributed under the same license as the conan package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: conan 2\n"
+"Project-Id-Version: conan 2.25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 15:09+0000\n"
+"POT-Creation-Date: 2026-03-10 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,42 +79,12 @@ msgid ""
 msgstr ""
 
 #: ../../../knowledge/faq.rst:51
-msgid "These would be the things to check:"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:53
-msgid ""
-"Run a ``conan graph explain`` with exactly the same arguments as you did. It "
-"will give you hints about the differences between the binaries that exists "
-"in the cache and remotes and the binaries you are requesting to install."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:56
-msgid ""
-"You an also use a ``conan list <pkgname/version>:*`` command to list "
-"binaries in your cache and in your remotes and manually compare differences"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:58
-msgid ""
-"If the binaries are missing because dependencies versions diverge, maybe "
-"your current Conan cache is using older revisions or versions, try adding an "
-"``--update`` argument to the ``conan install`` command."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:61
-msgid ""
-"If finally the binary that is being requested doesn't really exists "
-"anywhere, you might want to build it from sources."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:64
 msgid ""
 "By default, Conan doesn't build packages from sources. There are several "
 "possibilities to overcome this error:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:67
+#: ../../../knowledge/faq.rst:54
 msgid ""
 "You can try to build the package for your settings from sources, indicating "
 "some build policy as argument, like :command:`--build zlib*` or :command:`--"
@@ -122,24 +92,24 @@ msgid ""
 "settings you will have your binaries built locally and ready for use."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:72
+#: ../../../knowledge/faq.rst:59
 msgid ""
 "If building from sources fails, and you are using the `conancenter` remote, "
 "you can open an issue in `the Conan Center Index repository <https://"
 "github.com/conan-io/conan-center-index>`_"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:81
+#: ../../../knowledge/faq.rst:68
 msgid "ERROR: Invalid setting"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:83
+#: ../../../knowledge/faq.rst:70
 msgid ""
 "It might happen sometimes, when you specify a setting not present in the "
 "defaults that you receive a message like this:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:86
+#: ../../../knowledge/faq.rst:73
 msgid ""
 "$ conan install . -s compiler.version=4.19 ...\n"
 "\n"
@@ -149,7 +119,7 @@ msgid ""
 "'5.3', '5.4', '6.1', '6.2']"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:94
+#: ../../../knowledge/faq.rst:81
 msgid ""
 "This doesn't mean that such compiler version is not supported by Conan, it "
 "is just that it is not present in the actual defaults settings. You can find "
@@ -159,7 +129,7 @@ msgid ""
 "can customize your settings to model your binaries at your will."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:99
+#: ../../../knowledge/faq.rst:86
 msgid ""
 "As long as your team or users have the same settings (``settings.yml`` and "
 "``settings_user.yml`` an be easily shared with the ``conan config install`` "
@@ -169,7 +139,7 @@ msgid ""
 "it as an issue or a pull request, so it is included in future releases."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:105
+#: ../../../knowledge/faq.rst:92
 msgid ""
 "It is possible that some built-in helper or integrations, like ``CMake`` or "
 "``CMakeToolchain`` will not understand the new added settings, don't use "
@@ -180,35 +150,35 @@ msgid ""
 "handle your own private settings."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:116
+#: ../../../knowledge/faq.rst:103
 msgid "ERROR: AuthenticationException:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:118
+#: ../../../knowledge/faq.rst:105
 msgid ""
 "This error can happen, if there are no or false authentication credentials "
 "in the HTTP request from conan. To get more information try enabling the "
 "debug level for HTTP connections:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:120
+#: ../../../knowledge/faq.rst:107
 msgid ""
 "import http.client\n"
 "http.client.HTTPConnection.debuglevel = 1"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:125
+#: ../../../knowledge/faq.rst:112
 msgid ""
 "One source of error can be the ``.netrc`` file, which is `honored by the "
 "requests library <https://requests.readthedocs.io/en/latest/user/quickstart/"
 "#custom-headers>`_."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:130
+#: ../../../knowledge/faq.rst:117
 msgid "ERROR: Obtaining different revisions in Linux and Windows"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:132
+#: ../../../knowledge/faq.rst:119
 msgid ""
 "Git will (by default) checkout files in Windows systems using ``CRLF`` line "
 "endings, effectively producing different files than in Linux that files will "
@@ -217,7 +187,7 @@ msgid ""
 "Linux, resulting in missing the respective binaries in the other revision."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:134
+#: ../../../knowledge/faq.rst:121
 msgid ""
 "Conan will not normalize or change in any way the source files, it is not "
 "its responsibility and there are risks of breaking things. The source "
@@ -228,11 +198,11 @@ msgid ""
 "like:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:136
+#: ../../../knowledge/faq.rst:123
 msgid "* text eol=lf"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:140
+#: ../../../knowledge/faq.rst:127
 msgid ""
 "Above will mark all files in repo with ``text`` attribute and force ``lf`` "
 "as end of line. Treating binary files as ``text`` lead to data corruption "
@@ -240,7 +210,7 @@ msgid ""
 "back:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:142
+#: ../../../knowledge/faq.rst:129
 msgid ""
 "* text eol=lf\n"
 "\n"
@@ -249,18 +219,18 @@ msgid ""
 "*.jpeg binary"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:150
+#: ../../../knowledge/faq.rst:137
 msgid ""
 "Other approach would be to change the ``.gitconfig`` to change it globally. "
 "Modern editors (even Notepad) in Windows can perfectly work with files with "
 "``LF``, it is no longer necessary to change the line endings."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:156
+#: ../../../knowledge/faq.rst:143
 msgid "Defining options for dependencies in conanfile.py recipes doesn't work"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:158
+#: ../../../knowledge/faq.rst:145
 msgid ""
 "Conan expands the dependency graph depth-first, this is important to be able "
 "to implement many of the very special C/C++ propagation logic (headers, "
@@ -268,11 +238,11 @@ msgid ""
 "conflicts, overrides, etc.)."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:161
+#: ../../../knowledge/faq.rst:148
 msgid "This means that when a ``conanfile.py`` declares something like:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:163
+#: ../../../knowledge/faq.rst:150
 msgid ""
 "class MyPkg(ConanFile):\n"
 "    name = \"mypkg\"\n"
@@ -283,18 +253,18 @@ msgid ""
 "        self.requires(\"zlib/1.3\", options={\"shared\": True})"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:174
+#: ../../../knowledge/faq.rst:161
 msgid ""
 "it cannot be always honored, and the ``zlib`` dependency might end with "
 "different ``shared=False`` option value. This in-recipe options values "
 "definition for dependencies only works if:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:177
+#: ../../../knowledge/faq.rst:164
 msgid "There are no other packages depending on ``zlib`` in the graph"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:178
+#: ../../../knowledge/faq.rst:165
 msgid ""
 "There are other packages depending on ``zlib`` in the graph, but ``mypkg/"
 "0.1`` is the first require (the first branch in the dependency graph) that "
@@ -305,7 +275,7 @@ msgid ""
 "to change ``zlib`` to be ``shared=True``."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:183
+#: ../../../knowledge/faq.rst:170
 msgid ""
 "In case there are some recipe that won't work at all with some option of the "
 "dependency, the recommendation is to define a ``validate()`` method in the "
@@ -313,13 +283,13 @@ msgid ""
 "upstream dependency doesn't have the right options values."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:187
+#: ../../../knowledge/faq.rst:174
 msgid ""
 "Conan might be able to show some (not guaranteed to be exhaustive) of these "
 "issues in the output of the Conan commands, please read it carefully."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:191
+#: ../../../knowledge/faq.rst:178
 msgid ""
 "Options conflicts\n"
 "    liba/0.1:myoption=1 (current value)\n"
@@ -327,85 +297,51 @@ msgid ""
 "    It is recommended to define options values in profiles, not in recipes"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:198
+#: ../../../knowledge/faq.rst:185
 msgid ""
 "In general, it is more recommended to define options values in profile "
 "files, not in recipes. Recipe defined options always have less precedence "
 "than options defined in profiles."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:203
-msgid ""
-"Defining options values for dependencies in recipes does not have strong "
-"guarantees:"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:205
-msgid ""
-"This applies to any recipe definition of dependencies options, via "
-"``default_options``, ``configure()``, or requirements ``options=`` trait."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:207
-msgid ""
-"It is not possible to change the options of non-visible transitive "
-"dependencies, for example ``test_requires`` or ``tool_requires`` of "
-"dependencies cannot be affected by any definition of options values in "
-"downstream recipes, because they are private."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:210
-msgid ""
-"The \"locality\" of the definition makes it a bad location for large "
-"projects with developers working on different packages in the dependency "
-"graph."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:213
-msgid ""
-"So in general, defining options values for dependencies in recipes is "
-"**discouraged**. The strongly recommended way to define options values for "
-"dependencies is in **profile files**."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:221
+#: ../../../knowledge/faq.rst:192
 msgid "Getting version conflicts even when using version ranges"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:223
+#: ../../../knowledge/faq.rst:194
 msgid ""
 "It is possible that when installing dependencies, there are version conflict "
 "error messages like:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:225
+#: ../../../knowledge/faq.rst:196
 msgid ""
 "...\n"
 "Version conflict: Conflict between math/1.0.1 and math/1.0 in the graph"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:230
+#: ../../../knowledge/faq.rst:201
 msgid ""
 "This :ref:`tutorial about version conflicts<tutorial_versioning_conflicts>` "
 "summarizes how different versions of the same package dependency can "
 "conflict in a dependency graph and how to resolve those conflicts."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:232
+#: ../../../knowledge/faq.rst:203
 msgid ""
 "However, there are some situations in which the conflict is not that "
 "evident, for example when there are some mixed version ranges and fixed "
 "dependencies, something like:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:234
+#: ../../../knowledge/faq.rst:205
 msgid ""
 "def requirements(self):\n"
 "  self.requires(\"libb/1.0\")  # requires liba/[>=1.0 <2]\n"
 "  self.requires(\"libc/1.0\")  # requires liba/1.0"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:240
+#: ../../../knowledge/faq.rst:211
 msgid ""
 "And it happens that ``libb/1.0`` has a transitive requirement to ``liba/"
 "[>=1.0 <2]``, and ``libc/1.0`` requires ``liba/1.0``, and there exist the "
@@ -413,7 +349,7 @@ msgid ""
 "\"version conflict\" error."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:242
+#: ../../../knowledge/faq.rst:213
 msgid ""
 "The root cause is that resolving the joint compatibility for all the "
 "possible constraints that version-ranges define in a graph is a known NP-"
@@ -428,7 +364,7 @@ msgid ""
 "to finish."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:244
+#: ../../../knowledge/faq.rst:215
 msgid ""
 "So instead of doing that, Conan uses a \"greedy\" algorithm that does not "
 "require backtracking, but still will try to reconcile version-ranges with "
@@ -445,18 +381,18 @@ msgid ""
 "stops there and raises the conflict."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:246
+#: ../../../knowledge/faq.rst:217
 msgid "This can be solved just by swapping the order of ``requires``:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:248
+#: ../../../knowledge/faq.rst:219
 msgid ""
 "def requirements(self):\n"
 "  self.requires(\"libc/1.0\")  # requires liba/1.0\n"
 "  self.requires(\"libb/1.0\")  # requires liba/[>=1.0 <2]"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:254
+#: ../../../knowledge/faq.rst:225
 msgid ""
 "If ``libc/1.0`` is expanded first, it resolves to ``liba/1.0``. When later "
 "``libb/1.0`` is expanded, its transitive requirement ``liba/[>=1.0 <2]`` can "
@@ -464,38 +400,38 @@ msgid ""
 "the graph successfully."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:256
+#: ../../../knowledge/faq.rst:227
 msgid "The general best practices are:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:258
+#: ../../../knowledge/faq.rst:229
 msgid ""
 "For the same dependency, try to use the same approach everywhere: use "
 "version ranges everywhere, or fixed versions everywhere for that specific "
 "dependency."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:259
+#: ../../../knowledge/faq.rst:230
 msgid ""
 "Keep the versions aligned. If using a version range try to use the same "
 "version range everywhere."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:260
+#: ../../../knowledge/faq.rst:231
 msgid "Declare first dependencies that use fixed version, not version ranges"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:261
+#: ../../../knowledge/faq.rst:232
 msgid ""
 "Use the ``conan graph info ... --format=html > graph.html`` graphical "
 "interactive output to understand and navigate conflicts."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:266
+#: ../../../knowledge/faq.rst:237
 msgid "Conan is redirecting its output to stderr"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:268
+#: ../../../knowledge/faq.rst:239
 msgid ""
 "As explained :ref:`in the commands reference<commands_output>`, by design "
 "Conan redirects its logging information to the standard error output "
@@ -503,18 +439,18 @@ msgid ""
 "output (stdout)."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:272
+#: ../../../knowledge/faq.rst:243
 msgid ""
 "This is done to allow users to easily redirect the output of Conan commands "
 "to files or other processes without having the logging information mixed "
 "with the actual results."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:275
+#: ../../../knowledge/faq.rst:246
 msgid "For example, running a command like:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:277
+#: ../../../knowledge/faq.rst:248
 msgid ""
 "$ conan graph info --requires=zlib/1.3.1 --format=json > graph.json\n"
 "\n"
@@ -534,37 +470,37 @@ msgid ""
 "- Cache"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:294
+#: ../../../knowledge/faq.rst:265
 msgid ""
 "will create a file named ``graph.json`` with the JSON output of the command, "
 "but it will not include any logging information, which will be printed to "
 "the console."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:297
+#: ../../../knowledge/faq.rst:268
 msgid ""
 "Note that this approach is common in many command-line tools such as ``git`` "
 "and ``curl``, and it is not specific to Conan."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:303
+#: ../../../knowledge/faq.rst:274
 msgid ""
 "Missing binary for a (tool) package that was just created with ``conan "
 "create``"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:305
+#: ../../../knowledge/faq.rst:276
 msgid ""
 "There is sometimes the case for a package, intended to be used as a "
 "``tool_requires`` by other packages, whose recipe contains a "
 "``test_package`` folder that requires such tool as:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:308
+#: ../../../knowledge/faq.rst:279
 msgid "test_package/conanfile.py"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:308
+#: ../../../knowledge/faq.rst:279
 msgid ""
 "from conan import ConanFile\n"
 "\n"
@@ -576,11 +512,11 @@ msgid ""
 "        self.tool_requires(self.tested_reference_str)"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:321
+#: ../../../knowledge/faq.rst:292
 msgid "Then, users doing the creation of the package with:"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:323
+#: ../../../knowledge/faq.rst:294
 msgid ""
 "$ conan create\n"
 "...\n"
@@ -593,13 +529,13 @@ msgid ""
 "ERROR: Missing binary: mytool/0.1"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:335
+#: ../../../knowledge/faq.rst:306
 msgid ""
 "will find a \"Missing binary\" error in the ``test_package`` step. How is "
 "this possible, if the package binary was created a few lines above?"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:338
+#: ../../../knowledge/faq.rst:309
 msgid ""
 "The ``conan create`` command by default creates packages for the \"host\" "
 "context, using the \"host\" profile. But if the package we are creating is "
@@ -607,7 +543,7 @@ msgid ""
 "needs to be built for the \"build\" context."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:342
+#: ../../../knowledge/faq.rst:313
 msgid ""
 "If for any reason, the \"host\" and the \"build\" context are not identical, "
 "then the binary that is built in the initial package creation will be a "
@@ -616,7 +552,7 @@ msgid ""
 "binary will be missing, as it hasn't been built."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:347
+#: ../../../knowledge/faq.rst:318
 msgid ""
 "This is evident in the case of a cross-compilation, from example, building "
 "on a Windows laptop a binary for the RaspberryPI with a cross-compiler. The "
@@ -628,137 +564,16 @@ msgid ""
 "machine, the \"build\" context."
 msgstr ""
 
-#: ../../../knowledge/faq.rst:354
+#: ../../../knowledge/faq.rst:325
 msgid ""
 "The ``--build-require`` argument specifies this. When this argument is "
 "provided, the current recipe binary will be built to run in the \"build\" "
 "context"
 msgstr ""
 
-#: ../../../knowledge/faq.rst:359
+#: ../../../knowledge/faq.rst:330
 msgid ""
 "When doing ``conan create`` for a package intended to be used as a "
 "``tool_requires``, always specify the ``conan create ... --build-require`` "
 "argument."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:366
-msgid "Using Conan with both corporate and public remotes (SSL certificates)"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:368
-msgid ""
-"In corporate environments it is common to need access to both a private "
-"Artifactory remote (secured with a self-signed or internal CA certificate) "
-"and a public remote such as ConanCenter at the same time."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:372
-msgid "The problem appears because:"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:374
-msgid ""
-"Without any custom CA configuration Conan may reject the corporate remote "
-"(``CERTIFICATE_VERIFY_FAILED``)."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:376
-msgid ""
-"Setting ``core.net.http:cacert_path`` to point **only** to the corporate CA "
-"makes ConanCenter unreachable, because the public root CAs are no longer in "
-"the trust bundle."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:379
-msgid ""
-"The solution is to build a **single combined CA bundle** that contains both "
-"the public root certificates **and** the corporate CA, and then configure "
-"Conan to use it via ``core.net.http:cacert_path`` "
-"(see :ref:`reference_config_files_global_conf_ssl_certificates`)."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:383
-msgid ""
-"The combined bundle can be created by appending the corporate CA (in PEM "
-"format) to the default public CA bundle. The ``certifi`` Python package "
-"ships the Mozilla root CA bundle that Conan uses by default:"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:387
-msgid ""
-"# 1. Copy the default public CA bundle to a working location\n"
-"cp \"$(python -m certifi)\" combined-ca-bundle.pem\n"
-"\n"
-"# 2. Append the corporate CA (PEM format) to the bundle\n"
-"cat my-corporate-ca.crt >> combined-ca-bundle.pem"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:395
-msgid ""
-"You can append as many additional CAs as needed. Then point Conan at the "
-"combined file:"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:397
-msgid "**[CONAN_HOME]/global.conf**"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:397
-msgid "core.net.http:cacert_path=/path/to/combined-ca-bundle.pem"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:404
-msgid ""
-":ref:`reference_config_files_global_conf_ssl_certificates` for the full "
-"reference on ``core.net.http:cacert_path``, ``core.net.http:client_cert``, "
-"and alternative ways to aggregate certificates (including ``update-ca-"
-"certificates`` on Debian/Ubuntu)."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:410
-msgid "Conan doesn't skip failing remotes"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:412
-msgid ""
-"This frequent question happens when users have defined some remotes, some of "
-"them are not available for any reasons, and Conan fails with an error "
-"reporting about that unresponsive or disconnected server remote."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:414
-msgid ""
-"There are different scenarios in which silently skipping a server can cause "
-"production issues, for example when trying to build a new binary of an "
-"application that had some new versions of some new dependencies in that "
-"server. If that server doesn't work properly and the pipeline continues it "
-"will result in a binary without the new versions without the bug fixes on "
-"upgrades. There could be extra checks later, validation gates, etc, to try "
-"to avoid that binary without the fixes in production, but those are often "
-"too late or just non existing."
-msgstr ""
-
-#: ../../../knowledge/faq.rst:416
-msgid ""
-"So Conan will always treat the defined and available servers as \"must be "
-"alive\", and fail immediately if they do not work. Conan already provides "
-"some mechanisms to control the remote servers that are used for package "
-"resolution:"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:418
-msgid "``conan remote enable/disable`` to temporarily enable, disable servers"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:419
-msgid ""
-"Explicit listing of the remotes you want to use conan install ``-r=remote1 "
-"-r=remote8 -r=remote3``, in the order you want the precedence"
-msgstr ""
-
-#: ../../../knowledge/faq.rst:420
-msgid ""
-"``conan config install/install-pkg`` for easy configuration of remotes for "
-"different projects or needs."
 msgstr ""

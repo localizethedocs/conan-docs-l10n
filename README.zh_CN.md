@@ -7,7 +7,7 @@
 </div>
 
 <div align="center">
-<h1 id="localization-of-the-conan-documentation">Localization of The Conan Documentation</h1>
+<h1 id="localization-of-the-conan-documentation">Conan 文档的本地化</h1>
 </div>
 
 <details><summary><strong>切换语言</strong></summary>
@@ -382,7 +382,7 @@ Alternatively, you can preview translations locally by running the following com
 # Please make sure the following prerequisites are installed:
 # CMake (3.25~), Git, Conda, Gettext
 LANGUAGE=zh_TW
-VERSION=2
+VERSION=develop
 git clone --recurse-submodule https://github.com/localizethedocs/conan-docs-l10n.git
 cd conan-docs-l10n
 cmake --preset ${LANGUAGE} -DVERSION=${VERSION}

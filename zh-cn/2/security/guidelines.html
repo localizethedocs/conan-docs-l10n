@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security guidelines &mdash; conan 2.34.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=2da93098" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/conan.css?v=7d9e9f1e" />
+
+  
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/security/guidelines.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f864cf89"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="C, C++ Compiler Sanitizers" href="sanitizers.html" />
+    <link rel="prev" title="Software Bills of Materials (SBOM)" href="sboms.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/conan-docs-logo-2.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci_tutorial/tutorial.html">CI 教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devops/devops.html">Devops guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="security.html">Security</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="audit.html">Scanning dependencies with <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">audit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sboms.html">Software Bills of Materials (SBOM)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Security guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sanitizers.html">C, C++ Compiler Sanitizers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../incubating.html">Incubating features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Conan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="security.html">Security</a></li>
+      <li class="breadcrumb-item active">Security guidelines</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/develop2/security/guidelines.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="security-guidelines">
+<span id="id1"></span><h1>Security guidelines<a class="headerlink" href="#security-guidelines" title="Link to this heading"></a></h1>
+<p>This is an incomplete and preliminary, not exhaustive security related recommendations when using Conan:</p>
+<ul class="simple">
+<li><p>Avoid using tokens and passwords in URLs, they can easily be leaked in logs. For example, if the <code class="docutils literal notranslate"><span class="pre">source()</span></code> method
+of recipes implement a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code>, do not use git credentials in the URL, but instead use ssh-keys configured in the system.
+Same for downloading tarballs with <code class="docutils literal notranslate"><span class="pre">tools.get()</span></code> and <code class="docutils literal notranslate"><span class="pre">tools.download()</span></code>.</p></li>
+<li><p>In general, developers shouldn’t have write permissions on servers, just read permissions to download and install packages.
+Only the CI should have write/upload permissions. As an exception, it might be possible to use some “playground” repository that
+developers use to share packages for debugging and testing purposes with other colleagues, but that “playground” repository should
+be isolated from the normal testing and production repositories.</p></li>
+<li><p>Use tokens with limited permissions in CI. If a job only needs read permissions, use a token with read-permissions only. Use write
+credentials exclusively in the “upload” parts of the CI pieplines.</p></li>
+<li><p>Enable dependencies vulnerability checking with <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">audit</span></code>, check <a class="reference internal" href="audit.html#security-audit"><span class="std std-ref">the conan audit docs</span></a></p></li>
+<li><p>In many production cases, it is very recommended to fully own the SW lifecycle (SWLC) of the dependencies, including the third
+party dependencies. For this reason, the <a class="reference internal" href="../devops/using_conancenter.html#devops-consuming-conan-center"><span class="std std-ref">Using ConanCenter packages in production environments</span></a> section recommends building your own binaries
+from source and storing those binaries in your own private server, without downloading packages directly from ConanCenter.
+The <a class="reference internal" href="../devops/devops_local_recipes_index.html#devops-local-recipes-index"><span class="std std-ref">local-recipes-index feature</span></a> was designed to help in this process.</p></li>
+<li><p>To avoid being disrupted by internet outages and possible tampering of tarballs downloaded from the internet, the
+<a class="reference internal" href="../devops/backup_sources/sources_backup.html#conan-backup-sources"><span class="std std-ref">Backup sources</span></a> feature can be used.</p></li>
+</ul>
+<section id="archive-extraction-and-trust-model">
+<span id="security-archive-extraction"></span><h2>Archive extraction and trust model<a class="headerlink" href="#archive-extraction-and-trust-model" title="Link to this heading"></a></h2>
+<p>Conan extracts <code class="docutils literal notranslate"><span class="pre">tar</span></code> archives (<code class="docutils literal notranslate"><span class="pre">.tar</span></code>, <code class="docutils literal notranslate"><span class="pre">.tgz</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code>, <code class="docutils literal notranslate"><span class="pre">.txz</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code>, etc.) in several places: the
+<code class="docutils literal notranslate"><span class="pre">unzip()</span></code> and <code class="docutils literal notranslate"><span class="pre">get()</span></code> tools in recipes, the package and recipe tarballs downloaded from remotes, and
+<code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">cache</span> <span class="pre">restore</span></code>. In all of them, <strong>Conan uses the Python</strong> <code class="docutils literal notranslate"><span class="pre">tarfile</span></code> <strong>extraction filter</strong> <code class="docutils literal notranslate"><span class="pre">fully_trusted</span></code> <strong>by default</strong> (see the
+<a class="reference external" href="https://docs.python.org/3/library/tarfile.html#tarfile-extraction-filter">Python tarfile extraction filters docs</a>).
+That means that the archive contents are extracted as they are, without the protections of the <code class="docutils literal notranslate"><span class="pre">data</span></code> filter:
+absolute paths, paths with <code class="docutils literal notranslate"><span class="pre">..</span></code> that escape the destination folder, links pointing outside the destination, device files, and
+special permission bits (setuid, setgid, sticky) are not rejected or sanitized. This is also the behavior of Python &lt; 3.14, but Conan
+sets it explicitly, so it doesn’t change when running Conan with Python &gt;= 3.14, where <code class="docutils literal notranslate"><span class="pre">data</span></code> became the Python default.</p>
+<p>The reasons for this default are:</p>
+<ul class="simple">
+<li><p>The <a class="reference external" href="https://docs.python.org/3/library/tarfile.html#tarfile.data_filter">data filter</a> is not backwards compatible for binary packages. For example, it strips setuid/setgid/sticky bits, removes group/other write
+permissions and rejects some links. Changing the default could silently alter or break existing packages.</p></li>
+<li><p>The content being extracted by Conan is either C/C++ source code that is going to be compiled and executed, or
+binaries that are going to be executed. Extracting such content from an untrusted archive is dangerous
+regardless of the extraction filter, so the only model that makes sense is that <strong>the archives are fully trusted</strong>.</p></li>
+</ul>
+<p>This implies that <strong>a malicious or compromised archive can write files outside of the destination folder</strong>, and
+it is the responsibility of the user to only consume archives from trusted sources:</p>
+<ul class="simple">
+<li><p>Only use Conan remotes that you trust, and limit who can upload to them (see the recommendations above).</p></li>
+<li><p>Do not run <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">cache</span> <span class="pre">restore</span></code> on archives from untrusted origins.</p></li>
+<li><p>In recipes, only use <code class="docutils literal notranslate"><span class="pre">get()</span></code> and <code class="docutils literal notranslate"><span class="pre">unzip()</span></code> with sources downloaded from trusted locations, and always
+provide a checksum (<code class="docutils literal notranslate"><span class="pre">sha256</span></code>) for downloaded tarballs. Consider the <a class="reference internal" href="../devops/backup_sources/sources_backup.html#conan-backup-sources"><span class="std std-ref">Backup sources</span></a> feature.</p></li>
+<li><p>For tarballs from less trusted origins, the <code class="docutils literal notranslate"><span class="pre">data</span></code> filter can be requested with the <code class="docutils literal notranslate"><span class="pre">extract_filter=&quot;data&quot;</span></code> argument in <code class="docutils literal notranslate"><span class="pre">unzip()</span></code> and <code class="docutils literal notranslate"><span class="pre">get()</span></code>,
+or globally with the <code class="docutils literal notranslate"><span class="pre">tools.files.unzip:filter=data</span></code> conf. Note that it applies only to these recipe helpers, and not to
+the extraction of Conan packages downloaded from remotes or to <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">cache</span> <span class="pre">restore</span></code>. It will not make it safe
+to compile or execute the extracted contents.</p></li>
+</ul>
+<p>Issues that only rely on an archive being extracted with the <code class="docutils literal notranslate"><span class="pre">fully_trusted</span></code> filter are considered as part of this trust model, not as vulnerabilities.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sboms.html" class="btn btn-neutral float-left" title="Software Bills of Materials (SBOM)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sanitizers.html" class="btn btn-neutral float-right" title="C, C++ Compiler Sanitizers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2026, JFrog.
+      <span class="lastupdated">最后更新于 10月 29, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

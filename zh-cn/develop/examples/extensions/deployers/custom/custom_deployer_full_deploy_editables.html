@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customize the full_deploy deployer: handling editable packages &mdash; conan 2.34.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=2da93098" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/conan.css?v=7d9e9f1e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/conan-favicon.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/conan-docs-l10n/examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=f864cf89"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../search.html" />
+    <link rel="next" title="Package Signing Plugin" href="../../package_signing/package_signing.html" />
+    <link rel="prev" title="Copy sources from all your dependencies" href="../sources/custom_deployer_sources.html" />
+
+
+ 
+
+
+
+</script>
+<script type="text/javascript" src="../../../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/conan-docs-logo-2.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                develop
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ci_tutorial/tutorial.html">CI 教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devops/devops.html">Devops guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../security/security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../conanfile.html">ConanFile methods examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../extensions.html">Conan extensions examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../commands/custom_commands.html">Custom commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtin_deployers.html">Builtin deployers</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../custom_deployers.html">Custom deployers</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../sources/custom_deployer_sources.html">Copy sources from all your dependencies</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Customize the full_deploy deployer: handling editable packages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../package_signing/package_signing.html">Package Signing Plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/build_backend.html">Python build backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html">Conan recipe tools examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cross_build.html">Cross-building examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../config_files.html">Configuration files examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../graph.html">Graph examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev_flow.html">Developer tools and flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../commands.html">Conan commands examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../runners.html">Conan runners examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../security.html">Conan security examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../incubating.html">Incubating features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../whatsnew.html">What’s new in Conan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">conan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../examples.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="../../../extensions.html">Conan extensions examples</a></li>
+          <li class="breadcrumb-item"><a href="../custom_deployers.html">Custom deployers</a></li>
+      <li class="breadcrumb-item active">Customize the full_deploy deployer: handling editable packages</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/conan-io/docs/blob/develop2/examples/extensions/deployers/custom/custom_deployer_full_deploy_editables.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="customize-the-full-deploy-deployer-handling-editable-packages">
+<span id="examples-extensions-deployers-full-deploy-editables"></span><h1>Customize the full_deploy deployer: handling editable packages<a class="headerlink" href="#customize-the-full-deploy-deployer-handling-editable-packages" title="Link to this heading"></a></h1>
+<p>The built-in <a class="reference internal" href="../../../../reference/extensions/deployers.html#reference-extensions-deployer-full-deploy"><span class="std std-ref">full_deploy</span></a> deployer copies the <code class="docutils literal notranslate"><span class="pre">package_folder</span></code> of every
+dependency to the deployer output folder. This is what it does with the different kinds of dependencies:</p>
+<ul class="simple">
+<li><p>Packages in the Conan cache: the package contents are copied.</p></li>
+<li><p>Dependencies with <code class="docutils literal notranslate"><span class="pre">package_folder=None</span></code>, which happens when the binary is skipped because it is not necessary: they are
+not deployed, as there is no folder to copy.</p></li>
+<li><p>Packages in <a class="reference internal" href="../../../../tutorial/developing_packages/editable_packages.html#editable-packages"><span class="std std-ref">editable mode</span></a>: the <code class="docutils literal notranslate"><span class="pre">package_folder</span></code> is the local project root folder, where
+the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> of the editable is. There is no actual “package” there, but <code class="docutils literal notranslate"><span class="pre">full_deploy</span></code> copies the whole folder, including
+sources, build artifacts and anything else in it.</p></li>
+</ul>
+<p>Deploying editables is not recommended in general. Deployers are intended
+to be customized. For real production needs, it is recommended to use your own deployer, and install it with
+<code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">config</span> <span class="pre">install</span></code> or <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">config</span> <span class="pre">install-pkg</span></code>.</p>
+<p>This is the implementation of the built-in <code class="docutils literal notranslate"><span class="pre">full_deploy</span></code>, slightly simplified, with some
+extra code to handle editables. Copy it to a <code class="docutils literal notranslate"><span class="pre">my_full_deploy.py</span></code> file:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><strong>my_full_deploy.py</strong></span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConanException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">conan.tools.files</span><span class="w"> </span><span class="kn">import</span> <span class="n">rmdir</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">deploy</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">conanfile</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">conanfile</span>
+    <span class="n">conanfile</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Custom full deployer to </span><span class="si">{</span><span class="n">output_folder</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">symlinks</span> <span class="o">=</span> <span class="n">conanfile</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tools.deployer:symlinks"</span><span class="p">,</span> <span class="n">check_type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">conanfile</span><span class="o">.</span><span class="n">dependencies</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="c1"># Skipped binaries, there is nothing to deploy</span>
+        <span class="k">if</span> <span class="n">dep</span><span class="o">.</span><span class="n">package_folder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c1"># Editable packages: the package_folder is the local project folder, not a package.</span>
+        <span class="c1"># Raise a ConanException instead of "continue" to fail when there are editables</span>
+        <span class="k">if</span> <span class="n">dep</span><span class="o">.</span><span class="n">recipe</span> <span class="o">==</span> <span class="s2">"Editable"</span><span class="p">:</span>
+            <span class="n">conanfile</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping deploy of editable package </span><span class="si">{</span><span class="n">dep</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">folder_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"full_deploy"</span><span class="p">,</span> <span class="n">dep</span><span class="o">.</span><span class="n">context</span><span class="p">,</span> <span class="n">dep</span><span class="o">.</span><span class="n">ref</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">dep</span><span class="o">.</span><span class="n">ref</span><span class="o">.</span><span class="n">version</span><span class="p">))</span>
+        <span class="n">build_type</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_safe</span><span class="p">(</span><span class="s2">"build_type"</span><span class="p">)</span>
+        <span class="n">arch</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_safe</span><span class="p">(</span><span class="s2">"arch"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">build_type</span><span class="p">:</span>
+            <span class="n">folder_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_name</span><span class="p">,</span> <span class="n">build_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">arch</span><span class="p">:</span>
+            <span class="n">folder_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_name</span><span class="p">,</span> <span class="n">arch</span><span class="p">)</span>
+
+        <span class="n">new_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="n">folder_name</span><span class="p">)</span>
+        <span class="n">rmdir</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">new_folder</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">dep</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="n">new_folder</span><span class="p">,</span> <span class="n">symlinks</span><span class="o">=</span><span class="n">symlinks</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConanException</span><span class="p">(</span><span class="sa">f</span><span class="s2">"full_deploy: The copy of '</span><span class="si">{</span><span class="n">dep</span><span class="si">}</span><span class="s2">' files failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">"</span>
+                                 <span class="sa">f</span><span class="s2">"You can use 'tools.deployer:symlinks' conf to disable symlinks"</span><span class="p">)</span>
+        <span class="c1"># Generators running after the deployer will point to the deployed folder</span>
+        <span class="n">dep</span><span class="o">.</span><span class="n">set_deploy_folder</span><span class="p">(</span><span class="n">new_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Then it can be used as any other deployer:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--deployer<span class="o">=</span>my_full_deploy
+</pre></div>
+</div>
+<p>Some notes about the code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dep.package_folder</span></code> can be <code class="docutils literal notranslate"><span class="pre">None</span></code> for skipped binaries, so any deployer needs to check it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dep.recipe</span> <span class="pre">==</span> <span class="pre">&quot;Editable&quot;</span></code> is a valid way to detect editable packages. It can also be used to
+implement other behaviors, like deploying only the artifacts defined in the <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> of the editable package
+(<code class="docutils literal notranslate"><span class="pre">dep.cpp_info.includedirs</span></code>, <code class="docutils literal notranslate"><span class="pre">dep.cpp_info.libdirs</span></code>, etc.) instead of the whole folder.</p></li>
+<li><p>Generators like <code class="docutils literal notranslate"><span class="pre">CMakeDeps</span></code> do not need conditionals for editables: the <code class="docutils literal notranslate"><span class="pre">layout()</span></code> method makes <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> work
+transparently for packages in the cache and editable packages.</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../sources/custom_deployer_sources.html" class="btn btn-neutral float-left" title="Copy sources from all your dependencies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../package_signing/package_signing.html" class="btn btn-neutral float-right" title="Package Signing Plugin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2026, JFrog.
+      <span class="lastupdated">最后更新于 10月 29, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+
+ 
+
+
+</body>
+</html>

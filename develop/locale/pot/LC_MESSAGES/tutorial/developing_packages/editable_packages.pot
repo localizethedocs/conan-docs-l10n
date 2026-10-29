@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: conan 2\n"
+"Project-Id-Version: conan develop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 08:30+0000\n"
+"POT-Creation-Date: 2026-10-29 05:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,14 +75,15 @@ msgstr ""
 
 #: ../../../tutorial/developing_packages/editable_packages.rst:44
 msgid ""
-"A \"say\" folder containing a full-fledged package, with its ``conanfile."
-"py`` and its source code."
+"A \"say\" folder containing a full-fledged package, with its "
+"``conanfile.py`` and its source code."
 msgstr ""
 
 #: ../../../tutorial/developing_packages/editable_packages.rst:46
 msgid ""
-"A \"hello\" folder containing a simple consumer project with a ``conanfile."
-"py`` and its source code, which depends on the ``say/1.0`` requirement."
+"A \"hello\" folder containing a simple consumer project with a "
+"``conanfile.py`` and its source code, which depends on the ``say/1.0`` "
+"requirement."
 msgstr ""
 
 #: ../../../tutorial/developing_packages/editable_packages.rst:49
@@ -370,4 +371,18 @@ msgid ""
 "upstreams can generate binaries and packages that are incompatible with the "
 "released version of the editable package. Avoid uploading these packages "
 "without re-creating them with the in-cache version of all libraries."
+msgstr ""
+
+#: ../../../tutorial/developing_packages/editable_packages.rst:248
+msgid ""
+"For packages in editable mode, the ``package_folder`` of the dependency, as "
+"seen from the consumers (``self.dependencies[\"say\"].package_folder``), "
+"points to the local project root folder, where there is no actual "
+"\"package\". Recipes, generators and deployers should use ``cpp_info`` to "
+"locate the artifacts, which works transparently for editable and cache "
+"packages. Note that ``package_folder`` can also be ``None`` for other "
+"dependencies, when the binary is skipped because it is not necessary. See "
+"the :ref:`dependencies reference<reference_conanfile_methods_generate>` and "
+"the :ref:`full_deploy deployer<reference_extensions_deployer_full_deploy>` "
+"for more information."
 msgstr ""

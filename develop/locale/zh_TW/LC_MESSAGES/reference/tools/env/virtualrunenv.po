@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: conan 2\n"
+"Project-Id-Version: conan develop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 15:09+0000\n"
+"POT-Creation-Date: 2026-10-29 05:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,12 +146,16 @@ msgstr ""
 msgid ""
 "To create ``.ps1`` files required for PowerShell, you need to set the "
 "``tools.env.virtualenv:powershell`` configuration with the value of the "
-"PowerShell executable (e.g., ``powershell.exe`` or ``pwsh``). Note that, "
-"setting it to ``True`` or ``False`` is deprecated as of Conan 2.11.0 and "
-"should no longer be used."
+"PowerShell executable (e.g., ``powershell.exe`` or ``pwsh``). Note that "
+"setting it to ``True`` or ``False`` is no longer supported. The ``.ps1`` "
+"files are always generated, next to the ``.bat`` or ``.sh`` ones in Windows, "
+"Linux and Mac, for the consumer (``conan install <path>``) and "
+"``test_package``, but Conan only uses them for its own subprocesses, like "
+"``self.run()``, if this configuration is defined, otherwise it uses the "
+"``.bat`` files."
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:81
+#: ../../../reference/tools/env/virtualrunenv.rst:83
 msgid ""
 "To create ``.env`` dotenv files, use the **experimental** (new in Conan "
 "2.21) ``tools.env:dotenv`` configuration. These files are not intended to be "
@@ -164,13 +168,13 @@ msgid ""
 "to report any feedback about this feature."
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:92
+#: ../../../reference/tools/env/virtualrunenv.rst:94
 msgid ""
 "For disabling the automatic generation of environment files, "
 "check :ref:`reference_tools_env_virtualbuildenv_disable`"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:94
+#: ../../../reference/tools/env/virtualrunenv.rst:96
 msgid ""
 "On Windows, ``VirtualRunEnv`` can also copy the runtime binaries of "
 "dependencies into a single folder and point ``PATH`` to that folder instead "
@@ -179,7 +183,7 @@ msgid ""
 "argument with a relative path when instantiating the generator:"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:96
+#: ../../../reference/tools/env/virtualrunenv.rst:98
 msgid ""
 "from conan import ConanFile\n"
 "from conan.tools.env import VirtualRunEnv\n"
@@ -192,7 +196,7 @@ msgid ""
 "        runenv.generate()"
 msgstr ""
 
-#: ../../../reference/tools/env/virtualrunenv.rst:110
+#: ../../../reference/tools/env/virtualrunenv.rst:112
 msgid "Reference"
 msgstr ""
 

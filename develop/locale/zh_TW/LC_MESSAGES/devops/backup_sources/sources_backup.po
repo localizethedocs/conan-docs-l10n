@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: conan 2\n"
+"Project-Id-Version: conan develop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 09:24+0000\n"
+"POT-Creation-Date: 2026-10-29 05:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -276,11 +276,58 @@ msgid ""
 "and the locally stored version of the files is used."
 msgstr ""
 
-#: ../../../devops/backup_sources/sources_backup.rst:135
+#: ../../../devops/backup_sources/sources_backup.rst:137
+msgid "Original URLs sent to the backup server"
+msgstr ""
+
+#: ../../../devops/backup_sources/sources_backup.rst:141
+msgid ""
+"Backup sources are stored and retrieved by the ``sha256`` of the file, so "
+"the backup server does not know by default where the requested file "
+"originally came from. To make this information available to the server, "
+"Conan sends the original URLs in the ``X-Conan-Origin-Urls`` HTTP header "
+"when requesting the file from a backup remote defined in "
+"``core.sources:download_urls``."
+msgstr ""
+
+#: ../../../devops/backup_sources/sources_backup.rst:146
+msgid ""
+"The value of the header is a JSON-encoded list with the URLs passed to the "
+"``get``/``download`` call (a single URL is also sent as a list with one "
+"element). For example, for the ``zlib`` call shown above, the request to the "
+"backup remote would include:"
+msgstr ""
+
+#: ../../../devops/backup_sources/sources_backup.rst:150
+msgid ""
+"GET /artifactory/backup-sources/<sha256> HTTP/1.1\n"
+"X-Conan-Origin-Urls: [\"https://zlib.net/fossils/zlib-1.3.tar.gz\", "
+"\"https://github.com/madler/zlib/releases/download/v1.3/zlib-1.3.tar.gz\"]"
+msgstr ""
+
+#: ../../../devops/backup_sources/sources_backup.rst:157
+msgid ""
+"The header is only sent in the request for the source file itself, not in "
+"the one for its ``.json`` metadata file."
+msgstr ""
+
+#: ../../../devops/backup_sources/sources_backup.rst:158
+msgid ""
+"The header is never sent to the ``origin`` URLs, only to the backup remotes."
+msgstr ""
+
+#: ../../../devops/backup_sources/sources_backup.rst:159
+msgid ""
+"The URLs are sent as they are specified in the recipe, so make sure they "
+"don't contain secrets (like tokens in the URL), as they would be visible to "
+"the backup server."
+msgstr ""
+
+#: ../../../devops/backup_sources/sources_backup.rst:164
 msgid "Upload the packages"
 msgstr "上傳軟體包"
 
-#: ../../../devops/backup_sources/sources_backup.rst:137
+#: ../../../devops/backup_sources/sources_backup.rst:166
 msgid ""
 "Once a package has been created as shown above, when a call to ``conan "
 "upload zlib/1.3 -c`` is performed to upload the resulting binary to your "
@@ -289,13 +336,13 @@ msgid ""
 "downloads of this recipe will use the newly updated contents when necessary."
 msgstr ""
 
-#: ../../../devops/backup_sources/sources_backup.rst:144
+#: ../../../devops/backup_sources/sources_backup.rst:173
 msgid ""
 "See :ref:`the packages list feature<examples_commands_pkglists>` for a way "
 "to only upload the packages that have been built"
 msgstr ""
 
-#: ../../../devops/backup_sources/sources_backup.rst:147
+#: ../../../devops/backup_sources/sources_backup.rst:176
 msgid ""
 "In case there's a need to upload backups for sources not linked to any "
 "package, or for packages that are already on the remote and would therefore "
@@ -303,11 +350,11 @@ msgid ""
 "can be used to address this scenario."
 msgstr ""
 
-#: ../../../devops/backup_sources/sources_backup.rst:152
+#: ../../../devops/backup_sources/sources_backup.rst:181
 msgid "Creating the backup repository"
 msgstr "建立備份儲存庫"
 
-#: ../../../devops/backup_sources/sources_backup.rst:154
+#: ../../../devops/backup_sources/sources_backup.rst:183
 msgid ""
 "You can also set up your own remote backup repository instead of relying on "
 "an already available one. While an Artifactory generic repository (available "
@@ -316,7 +363,7 @@ msgid ""
 "contents is sufficient."
 msgstr ""
 
-#: ../../../devops/backup_sources/sources_backup.rst:158
+#: ../../../devops/backup_sources/sources_backup.rst:187
 msgid ""
 "Read the following section for instructions on how to create a generic "
 "Artifactory backup repo and how to give it public read permissions, while "

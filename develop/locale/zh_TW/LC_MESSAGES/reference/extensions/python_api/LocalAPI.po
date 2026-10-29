@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: conan 2\n"
+"Project-Id-Version: conan develop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 15:09+0000\n"
+"POT-Creation-Date: 2026-10-29 05:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,8 +52,8 @@ msgstr ""
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
 #: conan.api.subapi.local.LocalAPI.get_conanfile_path:4
 msgid ""
-"If both ``conanfile.py`` and a ``conanfile.txt`` are present, it will raise "
-"an error."
+"If ``path`` is a folder containing both ``conanfile.py`` and "
+"``conanfile.txt``, and ``py`` is ``False``, it will raise an error."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
@@ -67,17 +67,17 @@ msgid "Parameters"
 msgstr "參數"
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
-#: conan.api.subapi.local.LocalAPI.get_conanfile_path:6
+#: conan.api.subapi.local.LocalAPI.get_conanfile_path:7
 msgid "Relative path to look for the file. Can be a folder or a file."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
-#: conan.api.subapi.local.LocalAPI.get_conanfile_path:7
+#: conan.api.subapi.local.LocalAPI.get_conanfile_path:8
 msgid "The current working directory."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
-#: conan.api.subapi.local.LocalAPI.get_conanfile_path:8
+#: conan.api.subapi.local.LocalAPI.get_conanfile_path:9
 msgid "If True, a conanfile.py must exist, a .txt is not valid in this case"
 msgstr ""
 
@@ -91,42 +91,41 @@ msgstr ""
 #: conan.api.subapi.local.LocalAPI.editable_remove:3
 msgid ""
 "Note that for automation over editables it might be recommended to use the "
-"``WorkspacesAPI`` instead of this API."
+"``WorkspaceAPI`` instead of this API."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
 #: conan.api.subapi.local.LocalAPI.editable_add:6
-#: conan.api.subapi.local.LocalAPI.editable_remove:6
 msgid "Relative path to look for it. Can be a folder or a file."
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
 #: conan.api.subapi.local.LocalAPI.editable_add:7
-#: conan.api.subapi.local.LocalAPI.source:7
+#: conan.api.subapi.local.LocalAPI.source:8
 msgid "The name of the package. If not defined, it is taken from conanfile"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
 #: conan.api.subapi.local.LocalAPI.editable_add:8
-#: conan.api.subapi.local.LocalAPI.source:8
+#: conan.api.subapi.local.LocalAPI.source:9
 msgid "The version of the package. If not defined, it is taken from conanfile"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
 #: conan.api.subapi.local.LocalAPI.editable_add:9
-#: conan.api.subapi.local.LocalAPI.source:9
+#: conan.api.subapi.local.LocalAPI.source:10
 msgid "The user of the package. If not defined, it is taken from conanfile"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
 #: conan.api.subapi.local.LocalAPI.editable_add:10
-#: conan.api.subapi.local.LocalAPI.source:10
+#: conan.api.subapi.local.LocalAPI.source:11
 msgid "The channel of the package. If not defined, it is taken from conanfile"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
 #: conan.api.subapi.local.LocalAPI.editable_add:11
-#: conan.api.subapi.local.LocalAPI.editable_remove:8
+#: conan.api.subapi.local.LocalAPI.editable_remove:9
 msgid "The current working directory"
 msgstr ""
 
@@ -137,7 +136,7 @@ msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
 #: conan.api.subapi.local.LocalAPI.editable_add:13
-#: conan.api.subapi.local.LocalAPI.source:11
+#: conan.api.subapi.local.LocalAPI.source:12
 msgid ""
 "The remotes to resolve possible ``python-requires`` for this recipe if "
 "needed."
@@ -151,18 +150,30 @@ msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
 #: conan.api.subapi.local.LocalAPI.editable_add:14
-#: conan.api.subapi.local.LocalAPI.editable_remove:9
 msgid "RecipeReference of the added package"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
 #: conan.api.subapi.local.LocalAPI.editable_remove:1
-msgid "Remove an editable package from the given path"
+msgid "Remove the editable packages matching the given path or requirements"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
-#: conan.api.subapi.local.LocalAPI.editable_remove:7
-msgid "Remove these requirements from editables (instead of by path)"
+#: conan.api.subapi.local.LocalAPI.editable_remove:6
+msgid ""
+"Relative path to the folder containing the conanfile.py of the editable "
+"package to remove"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/local.py:docstring of
+#: conan.api.subapi.local.LocalAPI.editable_remove:8
+msgid ""
+"Remove the editables matching these reference patterns (instead of by path)"
+msgstr ""
+
+#: ../../../conan_sources/conan/api/subapi/local.py:docstring of
+#: conan.api.subapi.local.LocalAPI.editable_remove:10
+msgid "A dict whose keys are the RecipeReference of the removed packages"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
@@ -181,11 +192,13 @@ msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
 #: conan.api.subapi.local.LocalAPI.source:6
-msgid "Relative path to look for the conanfile. Can be a folder or a file."
+msgid ""
+"Path to the conanfile.py file, like the one returned by "
+"``get_conanfile_path()``"
 msgstr ""
 
 #: ../../../conan_sources/conan/api/subapi/local.py:docstring of
-#: conan.api.subapi.local.LocalAPI.source:12
+#: conan.api.subapi.local.LocalAPI.source:13
 msgid "The lockfile to use for the ``python-requires`` resolution, if needed."
 msgstr ""
 

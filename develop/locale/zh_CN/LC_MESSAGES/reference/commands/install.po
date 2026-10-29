@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: conan 2\n"
+"Project-Id-Version: conan develop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 15:09+0000\n"
+"POT-Creation-Date: 2026-10-29 05:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -339,21 +339,28 @@ msgstr ""
 
 #: ../../../reference/commands/install.rst:63
 msgid ""
+"When only ``--tool-requires`` arguments are provided, the "
+"``[tool_requires]`` defined in the host profile are not installed, as they "
+"wouldn't be necessary to consume those installed tools."
+msgstr ""
+
+#: ../../../reference/commands/install.rst:67
+msgid ""
 "In the general case, it is recommended to use a ``conanfile`` instead of "
 "defining things in the command line."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:69
+#: ../../../reference/commands/install.rst:73
 msgid "Profiles, Settings, Options, Conf"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:71
+#: ../../../reference/commands/install.rst:75
 msgid ""
 "There are several arguments that are used to define the effective profiles "
 "that will be used, both for the \"build\" and \"host\" contexts."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:74
+#: ../../../reference/commands/install.rst:78
 msgid ""
 "By default the arguments refer to the \"host\" context, so ``--"
 "settings:host, -s:h`` is totally equivalent to ``--settings, -s``. Also, by "
@@ -362,25 +369,25 @@ msgid ""
 "the \"default\" name has not been created, it will error."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:78
+#: ../../../reference/commands/install.rst:82
 msgid ""
 "Multiple definitions of profiles can be passed as arguments, and they will "
 "compound from left to right (right has the highest priority)"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:81
+#: ../../../reference/commands/install.rst:85
 msgid ""
 "# The values of myprofile3 will have higher priority\n"
 "$ conan install . -pr=myprofile1 -pr=myprofile2 -pr=myprofile3"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:88
+#: ../../../reference/commands/install.rst:92
 msgid ""
 "Profiles are searched for in a variety of locations, :ref:`see here for more "
 "information <reference_config_files_profiles_using_profiles>`"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:90
+#: ../../../reference/commands/install.rst:94
 msgid ""
 "If values for any of ``settings``, ``options`` and ``conf`` are provided in "
 "the command line, they create a profile that is composed with the other "
@@ -388,7 +395,7 @@ msgid ""
 "higher priority, not matter what the order of arguments is."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:94
+#: ../../../reference/commands/install.rst:98
 msgid ""
 "# the final \"host\" profile will always be build_type=Debug, even if "
 "\"myprofile\"\n"
@@ -396,28 +403,28 @@ msgid ""
 "$ conan install . -pr=myprofile -s build_type=Debug"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:104
+#: ../../../reference/commands/install.rst:108
 msgid "Generators and deployers"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:106
+#: ../../../reference/commands/install.rst:110
 msgid ""
 "The ``-g`` argument allows to define in the command line the different built-"
 "in generators to be used:"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:108
+#: ../../../reference/commands/install.rst:112
 msgid "$ conan install --requires=zlib/1.2.13 -g CMakeDeps -g CMakeToolchain"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:112
+#: ../../../reference/commands/install.rst:116
 msgid ""
 "Note that in the general case, the recommended approach is to have the "
 "``generators`` defined in the ``conanfile``, and only for the ``--requires`` "
 "use case, it would be more necessary as command line argument."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:115
+#: ../../../reference/commands/install.rst:119
 msgid ""
 "Generators are intended to create files for the build systems to locate the "
 "dependencies, while the ``deployers`` main use case is to copy files from "
@@ -426,38 +433,38 @@ msgid ""
 "deploying binaries to the system, etc. The syntax for deployers is:"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:119
+#: ../../../reference/commands/install.rst:123
 msgid ""
 "# does a full copy of the dependencies binaries to the current user folder\n"
 "$ conan install . --deployer=full_deploy"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:125
+#: ../../../reference/commands/install.rst:129
 msgid "There are 3 built-in deployers:"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:127
+#: ../../../reference/commands/install.rst:131
 msgid ""
 ":ref:`reference_extensions_deployer_full_deploy` does a complete copy of the "
 "dependencies binaries in the local folder, with a minimal folder structure "
 "to avoid conflicts between files and artifacts of different packages"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:129
+#: ../../../reference/commands/install.rst:133
 msgid ""
 ":ref:`reference_extensions_deployer_direct_deploy` does a copy of only the "
 "immediate direct dependencies, but does not include the transitive "
 "dependencies."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:131
+#: ../../../reference/commands/install.rst:135
 msgid ""
 ":ref:`reference_extensions_deployer_runtime_deploy` deploys all the shared "
 "libraries and the executables of the dependencies into a flat directory "
 "structure, preserving subdirectories as-is."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:134
+#: ../../../reference/commands/install.rst:138
 msgid ""
 "Some generators might have the capability of redefining the target \"package "
 "folder\". That means that if some other generator like ``CMakeDeps`` is used "
@@ -466,20 +473,20 @@ msgid ""
 "example in :ref:`examples_extensions_builtin_deployers_development`."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:138
+#: ../../../reference/commands/install.rst:142
 msgid ""
 "It is also possible, and it is a powerful extension point, to write custom "
 "user deployers. Read more about custom deployers "
 "in :ref:`reference_extensions_deployers`."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:141
+#: ../../../reference/commands/install.rst:145
 msgid ""
 "It is possible to also invoke the package recipes ``deploy()`` method with "
 "the ``--deployer-package``:"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:143
+#: ../../../reference/commands/install.rst:147
 msgid ""
 "# Execute deploy() method of every recipe that defines it\n"
 "$ conan install --requires=pkg/0.1 --deployer-package=\"*\"\n"
@@ -491,7 +498,7 @@ msgid ""
 "package=\"~zlib/*\""
 msgstr ""
 
-#: ../../../reference/commands/install.rst:152
+#: ../../../reference/commands/install.rst:156
 msgid ""
 "The ``--deployer-package`` argument is a pattern and accepts multiple "
 "values, all package references matching any of the defined patterns will "
@@ -502,7 +509,7 @@ msgid ""
 "See the :ref:`deploy() method<reference_conanfile_methods_deploy>`."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:156
+#: ../../../reference/commands/install.rst:160
 msgid ""
 "If multiple deployed packages deploy to the same location, it is their "
 "responsibility to not mutually overwrite their binaries if they have the "
@@ -513,11 +520,11 @@ msgid ""
 "\"License.txt\" files."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:160
+#: ../../../reference/commands/install.rst:164
 msgid "Name, version, user, channel"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:162
+#: ../../../reference/commands/install.rst:166
 msgid ""
 "The ``conan install`` command provides optional arguments for ``--name, --"
 "version, --user, --channel``. These arguments might not be necessary in the "
@@ -525,7 +532,7 @@ msgid ""
 "in the case that they are not defined in the recipe:"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:166
+#: ../../../reference/commands/install.rst:170
 msgid ""
 "from conan import ConanFile\n"
 "from conan.tools.scm import Version\n"
@@ -538,17 +545,17 @@ msgid ""
 "            self.requires(\"...\")"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:180
+#: ../../../reference/commands/install.rst:184
 msgid ""
 "# If we don't specify ``--version``, it will be None and it will fail\n"
 "$ conan install . --version=3.24"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:187
+#: ../../../reference/commands/install.rst:191
 msgid "Lockfiles"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:189
+#: ../../../reference/commands/install.rst:193
 msgid ""
 "The ``conan install`` command has several arguments to load and produce "
 "lockfiles. By default, if a ``conan.lock`` file is located beside the recipe "
@@ -556,7 +563,7 @@ msgid ""
 "an input lockfile."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:193
+#: ../../../reference/commands/install.rst:197
 msgid ""
 "Lockfiles are strict by default, that means that if there is some "
 "``requires`` and it cannot find a matching locked reference in the lockfile, "
@@ -565,7 +572,7 @@ msgid ""
 "partial`` argument can be used."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:198
+#: ../../../reference/commands/install.rst:202
 msgid ""
 "By default, ``conan install`` will not generate an output lockfile, but if "
 "the ``--lockfile-out`` argument is provided, pointing to a filename, like "
@@ -575,7 +582,7 @@ msgid ""
 "dropped from the resulting lockfile."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:203
+#: ../../../reference/commands/install.rst:207
 msgid ""
 "Let's say that we already have a ``conan.lock`` input lockfile, but we just "
 "added a new ``requires = \"newpkg/1.0\"`` to a new dependency. We could "
@@ -584,34 +591,34 @@ msgid ""
 "lockfile, and store it in a new location, or overwrite the existing lockfile:"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:207
+#: ../../../reference/commands/install.rst:211
 msgid ""
 "# --lockfile=conan.lock is the default, not necessary\n"
 "$ conan install . --lockfile=conan.lock --lockfile-partial --lockfile-"
 "out=conan.lock"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:213
+#: ../../../reference/commands/install.rst:217
 msgid ""
 "Also, it is likely that the majority of lockfile operations are better "
 "managed by the ``conan lock`` command."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:217
+#: ../../../reference/commands/install.rst:221
 msgid ":ref:`tutorial_consuming_packages_versioning_lockfiles`."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:218
+#: ../../../reference/commands/install.rst:222
 msgid ""
 "Read the tutorial about the :ref:`local package development flow "
 "<local_package_development_flow>`."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:222
+#: ../../../reference/commands/install.rst:226
 msgid "Update"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:224
+#: ../../../reference/commands/install.rst:228
 msgid ""
 "The ``conan install`` command has an ``--update`` argument that will force "
 "the re-evaluation of the selected items of the dependency graph, allowing "
@@ -624,7 +631,7 @@ msgid ""
 "re-evaluation of the whole graph."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:230
+#: ../../../reference/commands/install.rst:234
 msgid ""
 "$ conan install . --update  # Update all packages in the graph\n"
 "$ conan install . --update=openssl  # Update only the openssl package\n"
@@ -632,18 +639,18 @@ msgid ""
 "boost packages"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:236
+#: ../../../reference/commands/install.rst:240
 msgid ""
 "Note that the ``--update`` argument will look into all the remotes specified "
 "in the command for possible newer versions, and won't stop at the first "
 "newer one found."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:243
+#: ../../../reference/commands/install.rst:247
 msgid "Build modes"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:245
+#: ../../../reference/commands/install.rst:249
 msgid ""
 "The ``conan install --build=<mode>`` argument controls the behavior "
 "regarding building packages from source. The default behavior is failing if "
@@ -652,11 +659,11 @@ msgid ""
 "this can be changed with the ``--build`` argument."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:250
+#: ../../../reference/commands/install.rst:254
 msgid "The possible values are:"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:252
+#: ../../../reference/commands/install.rst:256
 msgid ""
 "--build=never      Disallow build for all packages, use binary packages or "
 "fail if a binary\n"
@@ -694,14 +701,14 @@ msgid ""
 "                             compatibility.py)"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:276
+#: ../../../reference/commands/install.rst:280
 msgid ""
 "The ``--build=never`` policy can be used to force never building from "
 "source, even for package recipes that define the ``build_policy = "
 "\"missing\"`` policy."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:279
+#: ../../../reference/commands/install.rst:283
 msgid ""
 "The ``--build=compatible:[pattern]`` is an **experimental** new mode that "
 "allows building missing binaries with a configuration different than the "
@@ -713,14 +720,14 @@ msgid ""
 "``compiler.cppstd=17``."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:286
+#: ../../../reference/commands/install.rst:290
 msgid ""
 "The ``--build=[pattern]`` uses a pattern, so it should use something like "
 "``--build=\"zlib/*\"`` to match any version of the ``zlib`` package, as "
 "doing ``--build=zlib`` will not work."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:289
+#: ../../../reference/commands/install.rst:293
 msgid ""
 "The ``--build=missing:[pattern]`` form uses the same kind of package "
 "patterns as in :ref:`Profile patterns "
@@ -733,18 +740,18 @@ msgid ""
 "current_version`` in the case of ``conan create .``)."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:298
+#: ../../../reference/commands/install.rst:302
 msgid ""
 "The ``--build=missing:[pattern]`` also accepts negations like ``--"
 "build=missing:!dep/* --build=missing:!lib/*`` will build all packages except "
 "``dep`` and ``lib`` ones."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:303
+#: ../../../reference/commands/install.rst:307
 msgid "**Best practices**"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:305
+#: ../../../reference/commands/install.rst:309
 msgid ""
 "Forcing the rebuild of existing binaries with ``--build=\"*\"`` or any other "
 "``--build=\"pkg/*\"`` or similar pattern is not a recommended practice. If a "
@@ -753,7 +760,7 @@ msgid ""
 "build=missing`` and ``--build=missing:[pattern]`` are more recommended."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:310
+#: ../../../reference/commands/install.rst:314
 msgid ""
 "The ``--build=cascade`` mode is partly legacy, and shouldn't be used in most "
 "cases. The ``package_id`` computation should be the driver to decide what "

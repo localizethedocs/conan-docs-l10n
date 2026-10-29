@@ -33,11 +33,11 @@ set(LANGUAGE_SOURCE "en_US"
     CACHE STRING "The source language of the documentation")
     # Possible values are "en_US".
 
-set(VERSION "2"
+set(VERSION "develop"
     CACHE STRING "The current version of the documentation.")
     # Possible values are versions listed in versions.json.
 
-set(VERSION_COMPENDIUM "2"
+set(VERSION_COMPENDIUM "develop"
     CACHE STRING "The version of compendium from which the current version will merge translations.")
     # Possible values are NULL and versions listed in versions.json.
 
@@ -179,44 +179,25 @@ get_members_of_json_object(
 
 #[============================================================[
 # Validate the VERSION cache variable.
-# - For "2":
+# - For "develop":
 #   - Set VERSION_TYPE          to "branch"
 #   - Set BRANCH_NAME_OF_DOCS   to "develop2"
 #   - Set BRANCH_NAME_OF_CONAN  to "develop2"
-# - For "2.[MINOR]":
+# - For "[MAJOR]":
 #   - Set VERSION_TYPE          to "branch"
-#   - Set BRANCH_NAME_OF_DOCS   to "release/2.[MINOR]"
-#   - Set BRANCH_NAME_OF_CONAN  to "release/2.[MINOR]"
-# - For "1":
-#   - Set VERSION_TYPE          to "branch"
-#   - Set BRANCH_NAME_OF_DOCS   to "develop"
-#   - Set BRANCH_NAME_OF_CONAN  to "develop"
-# - For "1.[MINOR]":
-#   - Set VERSION_TYPE          to "branch"
-#   - Set BRANCH_PATTERN        to "^release/(1)\\.([MINOR])(\\.[0-9]+)?$"
-#   - Set BRANCH_NAME_OF_DOCS   to "release/1.[MINOR](.[PATCH])?"
-#   - Set BRANCH_NAME_OF_CONAN  to "release/1.[MINOR](.[PATCH])?"
+#   - Set BRANCH_PATTERN        to "^release/([MAJOR])\\.([0-9]+)(\\.[0-9]+)?$"
+#   - Set BRANCH_NAME_OF_DOCS   to "release/[MAJOR].[MINOR](.[PATCH])?"
+#   - Set BRANCH_NAME_OF_CONAN  to "release/[MAJOR].[MINOR](.[PATCH])?"
 #]============================================================]
 
-if     (VERSION MATCHES "^(2)$")
+if     (VERSION MATCHES "^(develop)$")
     set(VERSION_TYPE            "branch")
     set(BRANCH_NAME_OF_DOCS     "develop2")
     set(BRANCH_NAME_OF_CONAN    "develop2")
-elseif (VERSION MATCHES "^(2)\\.([0-9]+)$")
+elseif (VERSION MATCHES "^([0-9]+)$")
     set(MAJOR                   "${CMAKE_MATCH_1}")
-    set(MINOR                   "${CMAKE_MATCH_2}")
     set(VERSION_TYPE            "branch")
-    set(BRANCH_NAME_OF_DOCS     "release/${VERSION}")
-    set(BRANCH_NAME_OF_CONAN    "release/${VERSION}")
-elseif (VERSION MATCHES "^(1)$")
-    set(VERSION_TYPE            "branch")
-    set(BRANCH_NAME_OF_DOCS     "develop")
-    set(BRANCH_NAME_OF_CONAN    "develop")
-elseif (VERSION MATCHES "^(1)\\.([0-9]+)$")
-    set(MAJOR                   "${CMAKE_MATCH_1}")
-    set(MINOR                   "${CMAKE_MATCH_2}")
-    set(VERSION_TYPE            "branch")
-    set(BRANCH_PATTERN          "^release/(${MAJOR})\\.(${MINOR})(\\.[0-9]+)?$")
+    set(BRANCH_PATTERN          "^release/(${MAJOR})\\.([0-9]+)(\\.[0-9]+)?$")
     get_git_latest_branch_on_branch_pattern(
         IN_LOCAL_PATH           "${PROJ_OUT_REPO_DIR}"
         IN_SOURCE_TYPE          "remote"
@@ -301,37 +282,21 @@ endif()
 # Set VERSION_OF_XXX to $CACHE{VERSION_OF_XX} if it's not "[default]".
 #]============================================================]
 
-if     (VERSION MATCHES "^(2)$")
+if     (VERSION MATCHES "^(develop)$")
     set(VERSION_OF_PYTHON       "3.12")
     set(VERSION_OF_GRAPHVIZ     "")
     set(VERSION_OF_ENCHANT      "2.3")
-elseif (VERSION MATCHES "^(1)$")
-    set(VERSION_OF_PYTHON       "3.12")
-    set(VERSION_OF_GRAPHVIZ     "")
-    set(VERSION_OF_ENCHANT      "2.3")
-elseif (VERSION MATCHES "^([0-9]+)\\.([0-9]+)$")
-    if     (VERSION VERSION_LESS_EQUAL    "2.25" AND
-            VERSION VERSION_GREATER_EQUAL "2.0")
+elseif (VERSION MATCHES "^([0-9]+)$")
+    if     (VERSION VERSION_LESS_EQUAL    "2" AND
+            VERSION VERSION_GREATER_EQUAL "2")
         set(VERSION_OF_PYTHON       "3.12")
         set(VERSION_OF_GRAPHVIZ     "")
         set(VERSION_OF_ENCHANT      "2.3")
-    elseif (VERSION VERSION_LESS_EQUAL    "1.66" AND
-            VERSION VERSION_GREATER_EQUAL "1.63")
+    elseif (VERSION VERSION_LESS_EQUAL    "1" AND
+            VERSION VERSION_GREATER_EQUAL "1")
         set(VERSION_OF_PYTHON       "3.12")
         set(VERSION_OF_GRAPHVIZ     "")
         set(VERSION_OF_ENCHANT      "2.3")
-    elseif (VERSION VERSION_LESS_EQUAL    "1.62" AND
-            VERSION VERSION_GREATER_EQUAL "1.48")
-        set(VERSION_OF_PYTHON       "3.8")
-        set(VERSION_OF_GRAPHVIZ     "")
-        set(VERSION_OF_ENCHANT      "2.3")
-    elseif (VERSION VERSION_LESS_EQUAL    "1.47" AND
-            VERSION VERSION_GREATER_EQUAL "1.3")
-        set(VERSION_OF_PYTHON       "3.6")
-        set(VERSION_OF_GRAPHVIZ     "")
-        set(VERSION_OF_ENCHANT      "2.3")
-    else()
-        message(FATAL_ERROR "Invalid VERSION value. (${VERSION})")
     endif()
 else()
     message(FATAL_ERROR "Invalid VERSION value. (${VERSION})")

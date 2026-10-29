@@ -384,7 +384,7 @@ Alternatively, you can preview translations locally by running the following com
 # Please make sure the following prerequisites are installed:
 # CMake (3.25~), Git, Conda, Gettext
 LANGUAGE=zh_TW
-VERSION=2
+VERSION=develop
 git clone --recurse-submodule https://github.com/localizethedocs/conan-docs-l10n.git
 cd conan-docs-l10n
 cmake --preset ${LANGUAGE} -DVERSION=${VERSION}

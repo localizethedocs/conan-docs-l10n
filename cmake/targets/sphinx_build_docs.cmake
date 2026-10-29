@@ -168,7 +168,7 @@ unset(_LANGUAGE)
 
 
 set(REDIRECT_LANGTAG    "en-us")
-set(REDIRECT_VERSION    "2")
+set(REDIRECT_VERSION    "develop")
 
 
 message(STATUS "Configuring 'index.html' file to the root of the builder directory...")

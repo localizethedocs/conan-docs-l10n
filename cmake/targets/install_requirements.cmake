@@ -298,15 +298,9 @@ elseif (CMAKE_HOST_WIN32)
 else()
     message(FATAL_ERROR "Invalid OS platform. (${CMAKE_HOST_SYSTEM_NAME})")
 endif()
-if (VERSION VERSION_LESS_EQUAL    "1.62" AND
-    VERSION VERSION_GREATER_EQUAL "1.26")
-    set(PIP_INSTALL_EXTRA_PACKAGES  sphinx-sitemap==2.1.0)
-endif()
 set(REQUIREMENTS_PATH "${PROJ_OUT_REPO_DIR}/requirements.txt")
 file(READ "${REQUIREMENTS_PATH}" REQUIREMENTS_CNT)
 remove_cmake_message_indent()
-message("")
-message("PIP_INSTALL_EXTRA_PACKAGES: ${PIP_INSTALL_EXTRA_PACKAGES}")
 message("")
 message("${REQUIREMENTS_PATH}")
 message("${REQUIREMENTS_CNT}")
@@ -315,7 +309,6 @@ execute_process(
     COMMAND ${CMAKE_COMMAND} -E env
             ${ENV_VARS_OF_SYSTEM}
             ${Python_EXECUTABLE} -m pip install
-            ${PIP_INSTALL_EXTRA_PACKAGES}
             --requirement=${REQUIREMENTS_PATH}
             --progress-bar=off
             --verbose
@@ -343,8 +336,8 @@ message("")
 restore_cmake_message_indent()
 
 
-if (VERSION MATCHES "^(2)$" OR
-    VERSION MATCHES "^(2)\\.([0-9]+)$")
+if (VERSION MATCHES "^(develop)$" OR
+    VERSION MATCHES "^(2)$")
     message(STATUS "Running 'pip install' command to install the 'conan' package from sources...")
     if (CMAKE_HOST_LINUX)
         set(ENV_PATH                "${PROJ_CONDA_DIR}/bin:$ENV{PATH}")

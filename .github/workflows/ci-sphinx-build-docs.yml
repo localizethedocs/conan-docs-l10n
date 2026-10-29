@@ -6,8 +6,8 @@ name: ci-sphinx-build-docs
 on:
   # Triggers the workflow based on a schedule.
   schedule:
-    - cron: '0 8 * * 1'   # CRON_v1
-    - cron: '0 8 * * 2'   # CRON_v2
+    - cron: '0 8 * * 1'   # CRON_dev
+    - cron: '0 8 * * 2'   # CRON_rel
   # Triggers the workflow manually through the GitHub UI.
   workflow_dispatch:
     inputs:
@@ -23,15 +23,15 @@ on:
         description: 'VERSION input (for single mode)'
         required: true
         type: string
-        default: '2'
+        default: 'develop'
       VERSION_GROUP:
         description: 'VERSION_GROUP input (for group mode)'
         required: true
         type: choice
-        default: 'v2'
+        default: 'dev'
         options:
-          - 'v1'
-          - 'v2'
+          - 'dev'
+          - 'rel'
       LANGUAGE:
         description: 'LANGUAGE input'
         required: true
@@ -47,8 +47,8 @@ on:
           - 'false'
 
 env:
-  CRON_v1: '0 8 * * 1'
-  CRON_v2: '0 8 * * 2'
+  CRON_dev: '0 8 * * 1'
+  CRON_rel: '0 8 * * 2'
 
 jobs:
   precondition:

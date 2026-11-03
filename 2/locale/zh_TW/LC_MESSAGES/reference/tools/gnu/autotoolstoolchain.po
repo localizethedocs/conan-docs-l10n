@@ -80,6 +80,15 @@ msgid ""
 "        tc = AutotoolsToolchain(self)\n"
 "        tc.generate()"
 msgstr ""
+"from conan import ConanFile\n"
+"from conan.tools.gnu import AutotoolsToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = AutotoolsToolchain(self)\n"
+"        tc.generate()"
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:44
 msgid "Generated files"
@@ -98,6 +107,10 @@ msgid ""
 "# or in Windows\n"
 "$ conanautotoolstoolchain.bat"
 msgstr ""
+"$ conan install conanfile.py # 默認值為 Release\n"
+"$ source conanautotoolstoolchain.sh\n"
+"# 或者在 Windows 中\n"
+"$ conanautotoolstoolchain.bat"
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:55
 msgid ""
@@ -324,19 +337,19 @@ msgstr ""
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:139
 msgid "**defines**"
-msgstr ""
+msgstr "**defines**"
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:140
 msgid "**cxxflags**"
-msgstr ""
+msgstr "**cxxflags**"
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:141
 msgid "**cflags**"
-msgstr ""
+msgstr "**cflags**"
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:142
 msgid "**ldflags**"
-msgstr ""
+msgstr "**ldflags**"
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:145
 msgid ""
@@ -355,6 +368,20 @@ msgid ""
 "        tc.cflags\n"
 "        tc.ldflags"
 msgstr ""
+"from conan import ConanFile\n"
+"from conan.tools.gnu import AutotoolsToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    def generate(self):\n"
+"        tc = AutotoolsToolchain(self)\n"
+"        # 客製化旗標\n"
+"        tc.extra_cxxflags = [\"MyFlag\"]\n"
+"        # Read the computed flags and use them (write custom files etc)\n"
+"        tc.defines\n"
+"        tc.cxxflags\n"
+"        tc.cflags\n"
+"        tc.ldflags"
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:163
 msgid ""
@@ -384,7 +411,7 @@ msgstr ""
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:183
 msgid "Customizing the environment"
-msgstr ""
+msgstr "客製化環境"
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:185
 msgid ""
@@ -498,7 +525,7 @@ msgstr ""
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:233
 msgid "For instance:"
-msgstr ""
+msgstr "例如："
 
 #: ../../../reference/tools/gnu/autotoolstoolchain.rst:235
 msgid ""
@@ -593,7 +620,7 @@ msgstr "參數"
 #: ../../../conan_sources/conan/tools/gnu/autotoolstoolchain.py:docstring of
 #: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain:1
 msgid "The current recipe object. Always use ``self``."
-msgstr ""
+msgstr "目前的配方物件。一律使用 ``self``。"
 
 #: ../../../conan_sources/conan/tools/gnu/autotoolstoolchain.py:docstring of
 #: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain:2

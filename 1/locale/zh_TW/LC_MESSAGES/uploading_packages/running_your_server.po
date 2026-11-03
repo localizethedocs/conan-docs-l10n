@@ -19,20 +19,20 @@ msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:4
 msgid "Running conan_server"
-msgstr "執行 conan_server"
+msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:6
 msgid ""
 "The *conan_server* is a free and open source server that implements Conan "
 "remote repositories. It is a very simple application, bundled with the "
 "regular Conan client installation. In most cases, it is recommended to use "
-"the free Artifactory Community Edition for C/C++ server, check :ref:"
-"`artifactory_ce` for more information."
+"the free Artifactory Community Edition for C/C++ server, "
+"check :ref:`artifactory_ce` for more information."
 msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:10
 msgid "``conan_server`` needs Python>=3.6 for running."
-msgstr "``conan_server`` 需要 Python>=3.6 才能執行。"
+msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:12
 msgid ""
@@ -42,7 +42,7 @@ msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:15
 msgid "$ conan_server"
-msgstr "$ conan_server"
+msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:21
 msgid ""
@@ -82,11 +82,6 @@ msgid ""
 "$ pip install -r conans/requirements_server.txt\n"
 "$ pip install gunicorn"
 msgstr ""
-"$ git clone https://github.com/conan-io/conan.git\n"
-"$ cd conan\n"
-"$ pip install -r conans/requirements.txt\n"
-"$ pip install -r conans/requirements_server.txt\n"
-"$ pip install gunicorn"
 
 #: ../../../uploading_packages/running_your_server.rst:46
 msgid ""
@@ -100,7 +95,6 @@ msgstr ""
 msgid ""
 "$ gunicorn -b 0.0.0.0:9300 -w 4 -t 300 conans.server.server_launcher:app"
 msgstr ""
-"$ gunicorn -b 0.0.0.0:9300 -w 4 -t 300 conans.server.server_launcher:app"
 
 #: ../../../uploading_packages/running_your_server.rst:56
 msgid ""
@@ -112,24 +106,22 @@ msgstr ""
 #: ../../../uploading_packages/running_your_server.rst:58
 msgid ""
 "You can also bind to an IPv6 address or specify both IPv4 and IPv6 addresses:"
-msgstr "您也可以綁定至 IPv6 位址，或同時指定 IPv4 與 IPv6 位址："
+msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:60
 msgid ""
-"$ gunicorn -b 0.0.0.0:9300 -b [::1]:9300 -w 4 -t 300 conans.server."
-"server_launcher:app"
+"$ gunicorn -b 0.0.0.0:9300 -b [::1]:9300 -w 4 -t 300 "
+"conans.server.server_launcher:app"
 msgstr ""
-"$ gunicorn -b 0.0.0.0:9300 -b [::1]:9300 -w 4 -t 300 conans.server."
-"server_launcher:app"
 
 #: ../../../uploading_packages/running_your_server.rst:66
 msgid "Server Configuration"
-msgstr "伺服端組態"
+msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:67
 msgid ""
-"By default your server configuration is saved under ``~/.conan_server/server."
-"conf``, however you can modify this behaviour by either setting the "
+"By default your server configuration is saved under ``~/.conan_server/"
+"server.conf``, however you can modify this behaviour by either setting the "
 "``CONAN_SERVER_HOME`` environment variable or launching the server with ``-"
 "d`` or ``--server_dir`` command line argument followed by desired path. In "
 "case you use one of the options your configuration file will be stored under "
@@ -309,8 +301,6 @@ msgid ""
 "[server]\n"
 "port: 9300"
 msgstr ""
-"[server]\n"
-"port: 9300"
 
 #: ../../../uploading_packages/running_your_server.rst:189
 #: ../../../uploading_packages/running_your_server.rst:221
@@ -331,17 +321,6 @@ msgid ""
 "    ssl_certificate_key /etc/nginx/ssl/server.key;\n"
 "}"
 msgstr ""
-"server {\n"
-"    listen 443;\n"
-"    server_name myservername.mydomain.com;\n"
-"\n"
-"    location / {\n"
-"      proxy_pass http://0.0.0.0:9300;\n"
-"    }\n"
-"    ssl on;\n"
-"    ssl_certificate /etc/nginx/ssl/server.crt;\n"
-"    ssl_certificate_key /etc/nginx/ssl/server.key;\n"
-"}"
 
 #: ../../../uploading_packages/running_your_server.rst:205
 #: ../../../uploading_packages/running_your_server.rst:238
@@ -371,18 +350,6 @@ msgid ""
 "       }\n"
 "  }"
 msgstr ""
-"server {\n"
-"\n"
-"       listen 443;\n"
-"       ssl on;\n"
-"       ssl_certificate /usr/local/etc/nginx/ssl/server.crt;\n"
-"       ssl_certificate_key /usr/local/etc/nginx/ssl/server.key;\n"
-"       server_name myservername.mydomain.com;\n"
-"\n"
-"       location /subdir/ {\n"
-"          proxy_pass http://0.0.0.0:9300/;\n"
-"       }\n"
-"  }"
 
 #: ../../../uploading_packages/running_your_server.rst:240
 msgid "$ conan remote add myremote https://myservername.mydomain.com/subdir/"
@@ -537,8 +504,8 @@ msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:327
 msgid ""
-"**LDAP**: Use your LDAP server to authenticate users. Get it: https://github."
-"com/uilianries/conan-ldap-authentication"
+"**LDAP**: Use your LDAP server to authenticate users. Get it: https://"
+"github.com/uilianries/conan-ldap-authentication"
 msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:330
@@ -547,8 +514,8 @@ msgstr "建立您自己的自訂認證器"
 
 #: ../../../uploading_packages/running_your_server.rst:332
 msgid ""
-"If you want to create your own Authenticator, create a Python module in ``~/."
-"conan_server/plugins/authenticator/my_authenticator.py``"
+"If you want to create your own Authenticator, create a Python module in "
+"``~/.conan_server/plugins/authenticator/my_authenticator.py``"
 msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:335
@@ -625,8 +592,8 @@ msgstr "建立您自己的自訂授權器"
 
 #: ../../../uploading_packages/running_your_server.rst:367
 msgid ""
-"If you want to create your own Authorizer, create a Python module in ``~/."
-"conan_server/plugins/authorizer/my_authorizer.py``"
+"If you want to create your own Authorizer, create a Python module in "
+"``~/.conan_server/plugins/authorizer/my_authorizer.py``"
 msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:372
@@ -706,11 +673,12 @@ msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:410
 msgid ""
-"The ``check_*_conan()`` methods are called with a username and ``conans."
-"model.ref.ConanFileReference`` instance as their arguments. Meanwhile the "
-"``check_*_package()`` methods are passed a username and ``conans.model.ref."
-"PackageReference`` instance as their arguments. These methods should raise "
-"an exception, unless the user is allowed to perform the requested action."
+"The ``check_*_conan()`` methods are called with a username and "
+"``conans.model.ref.ConanFileReference`` instance as their arguments. "
+"Meanwhile the ``check_*_package()`` methods are passed a username and "
+"``conans.model.ref.PackageReference`` instance as their arguments. These "
+"methods should raise an exception, unless the user is allowed to perform the "
+"requested action."
 msgstr ""
 
 #: ../../../uploading_packages/running_your_server.rst:415

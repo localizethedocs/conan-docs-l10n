@@ -38,8 +38,8 @@ msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:19
 msgid ""
-"Available since: `1.37.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.37.0>`_"
+"Available since: `1.37.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.37.0>`_"
 msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:22
@@ -317,9 +317,9 @@ msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:205
 msgid ""
-"It enables tools like the :ref:"
-"`AutoPackager<conan_tools_files_autopackager>` to automate the **package()** "
-"method."
+"It enables tools like "
+"the :ref:`AutoPackager<conan_tools_files_autopackager>` to automate the "
+"**package()** method."
 msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:206
@@ -368,23 +368,24 @@ msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:224
 msgid ""
-"**self.folders.root**: To specify the relative path from the ``conanfile."
-"py`` to the root of the project, in case the ``conanfile.py`` is in a "
-"subfolder and not in the project root. If defined, all the other paths will "
-"be relative to the project root, not to the location of the ``conanfile.py``."
+"**self.folders.root**: To specify the relative path from the "
+"``conanfile.py`` to the root of the project, in case the ``conanfile.py`` is "
+"in a subfolder and not in the project root. If defined, all the other paths "
+"will be relative to the project root, not to the location of the "
+"``conanfile.py``."
 msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:228
 msgid ""
-"Check the :ref:`complete reference<layout_folders_reference>` of the **self."
-"folders** attribute."
+"Check the :ref:`complete reference<layout_folders_reference>` of the "
+"**self.folders** attribute."
 msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:230
 msgid ""
-"**self.cpp.source** and **self.cpp.build**: The same you set the ``self.cpp."
-"package`` to describe the package folder after calling the ``package()`` "
-"method, you can also describe the `source` and `build` folders."
+"**self.cpp.source** and **self.cpp.build**: The same you set the "
+"``self.cpp.package`` to describe the package folder after calling the "
+"``package()`` method, you can also describe the `source` and `build` folders."
 msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:233
@@ -398,11 +399,11 @@ msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:237
 msgid ""
-"**self.layouts.source**, **self.layouts.build** and **self.layouts."
-"package**, each one containing one instance of ``buildenv_info``, "
-"``runenv_info`` and ``conf_info``. If the environment or configuration needs "
-"to define values that depend on the current folders, it is necessary to "
-"define them in the ``layout()`` method."
+"**self.layouts.source**, **self.layouts.build** and "
+"**self.layouts.package**, each one containing one instance of "
+"``buildenv_info``, ``runenv_info`` and ``conf_info``. If the environment or "
+"configuration needs to define values that depend on the current folders, it "
+"is necessary to define them in the ``layout()`` method."
 msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:243
@@ -430,8 +431,8 @@ msgid ""
 "target_link_libraries(my_tool say)\n"
 "\n"
 "# The executables are generated at the \"bin\" folder\n"
-"set_target_properties(my_tool PROPERTIES RUNTIME_OUTPUT_DIRECTORY "
-"\"${CMAKE_BINARY_DIR}/bin\")"
+"set_target_properties(my_tool PROPERTIES RUNTIME_OUTPUT_DIRECTORY \"$"
+"{CMAKE_BINARY_DIR}/bin\")"
 msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:275
@@ -509,9 +510,9 @@ msgid ""
 "Please, note that the values above are for a single-configuration CMake "
 "generator. To support multi-configuration generators, such as Visual Studio, "
 "you should make some changes to this layout. For a complete layout that "
-"supports both single-config and multi-config, please check the :ref:"
-"`cmake_layout()<conan_tools_layout_predefined_layouts>` in the Conan "
-"documentation."
+"supports both single-config and multi-config, please check "
+"the :ref:`cmake_layout()<conan_tools_layout_predefined_layouts>` in the "
+"Conan documentation."
 msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:327
@@ -540,16 +541,16 @@ msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:336
 msgid ""
-"We can also describe the ``source`` and ``build`` folders with the ``cpp."
-"source`` and ``cpp.build`` objects:"
+"We can also describe the ``source`` and ``build`` folders with the "
+"``cpp.source`` and ``cpp.build`` objects:"
 msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:338
 msgid ""
-"We are setting ``self.cpp.source.includedirs = [\"include\"]``. The ``self."
-"folders.source`` information will be automatically prepended to that path "
-"for consumers so, for example, when working with an editable package, Conan "
-"will try to get the include files from the **./my_project_folder/src/"
+"We are setting ``self.cpp.source.includedirs = [\"include\"]``. The "
+"``self.folders.source`` information will be automatically prepended to that "
+"path for consumers so, for example, when working with an editable package, "
+"Conan will try to get the include files from the **./my_project_folder/src/"
 "include** folder."
 msgstr ""
 
@@ -587,11 +588,12 @@ msgid ""
 "depends on the build system. For example, when using CMake with Visual "
 "Studio, the binaries are typically built at **Release/** or **Debug/** "
 "(multiconfiguration) but on Linux or macOS, the output folder will typically "
-"be **\".\"**, so it is better to declare the layout ``self.cpp.build."
-"bindirs`` following that logic and then just access the correct path if we "
-"need to know where the resulting files of our build are. If you check the :"
-"ref:`cmake_layout()<conan_tools_layout_predefined_layouts>`, you can see "
-"that the predefined ``cmake_layout`` is doing exactly that when using a "
+"be **\".\"**, so it is better to declare the layout "
+"``self.cpp.build.bindirs`` following that logic and then just access the "
+"correct path if we need to know where the resulting files of our build are. "
+"If you check "
+"the :ref:`cmake_layout()<conan_tools_layout_predefined_layouts>`, you can "
+"see that the predefined ``cmake_layout`` is doing exactly that when using a "
 "multiconfiguration build system."
 msgstr ""
 
@@ -665,11 +667,12 @@ msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:415
 msgid ""
-"When working with editable packages, the information set in ``self.cpp."
-"source`` and ``self.cpp.build`` will be merged with the information set in "
-"``self.cpp.package`` so that we don't have to declare again something like "
-"``self.cpp.build.libs = [\"say\"]`` that is the same for the consumers, "
-"independently of whether the package is in editable mode or not."
+"When working with editable packages, the information set in "
+"``self.cpp.source`` and ``self.cpp.build`` will be merged with the "
+"information set in ``self.cpp.package`` so that we don't have to declare "
+"again something like ``self.cpp.build.libs = [\"say\"]`` that is the same "
+"for the consumers, independently of whether the package is in editable mode "
+"or not."
 msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:420
@@ -756,16 +759,16 @@ msgid ""
 "done with:\n"
 "        mypatch_path = os.path.join(self.export_sources_folder, \"patches/"
 "mypatch\")\n"
-"        cmake_path = os.path.join(self.export_sources_folder, \"CMakeLists."
-"txt\")\n"
+"        cmake_path = os.path.join(self.export_sources_folder, "
+"\"CMakeLists.txt\")\n"
 "        # patching, replacing, happens here\n"
 "\n"
 "    def build(self):\n"
 "        # If necessary, the build() method also has access to the "
 "export_sources_folder\n"
 "        # for example if patching happens in build() instead of source()\n"
-"        cmake_path = os.path.join(self.export_sources_folder, \"CMakeLists."
-"txt\")"
+"        cmake_path = os.path.join(self.export_sources_folder, "
+"\"CMakeLists.txt\")"
 msgstr ""
 
 #: ../../../developing_packages/package_layout.rst:499
@@ -931,8 +934,8 @@ msgstr ""
 #: ../../../developing_packages/package_layout.rst:625
 msgid ""
 "There are some packages that might define some environment variables in "
-"their ``package_info()`` method via ``self.buildenv_info``, ``self."
-"runenv_info``. Other packages can also use ``self.conf_info`` to pass "
+"their ``package_info()`` method via ``self.buildenv_info``, "
+"``self.runenv_info``. Other packages can also use ``self.conf_info`` to pass "
 "configuration to their consumers."
 msgstr ""
 

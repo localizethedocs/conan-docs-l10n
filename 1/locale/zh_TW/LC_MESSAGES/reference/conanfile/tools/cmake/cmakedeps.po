@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:4
 msgid "CMakeDeps"
-msgstr ""
+msgstr "CMakeDeps"
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:8
 msgid ""
@@ -31,8 +31,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:13
 msgid ""
-"Available since: `1.33.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.33.0>`_"
+"Available since: `1.33.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.33.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:15
@@ -51,6 +51,12 @@ msgid ""
 "    requires = \"hello/0.1\"\n"
 "    generators = \"CMakeDeps\""
 msgstr ""
+"from conan import ConanFile\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    requires = \"hello/0.1\"\n"
+"    generators = \"CMakeDeps\""
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:29
 msgid ""
@@ -111,8 +117,8 @@ msgstr ""
 msgid ""
 "def generate(self):\n"
 "    deps = CMakeDeps(self)\n"
-"    # By default, ``deps.configuration`` will be ``self.settings."
-"build_type``\n"
+"    # By default, ``deps.configuration`` will be "
+"``self.settings.build_type``\n"
 "    if self.options[\"hello\"].shared:\n"
 "        # Assuming the current project ``CMakeLists.txt`` defines the "
 "ReleasedShared configuration.\n"
@@ -126,8 +132,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:80
 msgid ""
-"When you have a **build-require**, by default, the config files (`xxx-config."
-"cmake`) files are not generated. But you can activate it using the "
+"When you have a **build-require**, by default, the config files (`xxx-"
+"config.cmake`) files are not generated. But you can activate it using the "
 "**build_context_activated** attribute:"
 msgstr ""
 
@@ -150,7 +156,7 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:100
 msgid "build_context_suffix"
-msgstr ""
+msgstr "build_context_suffix"
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:102
 msgid ""
@@ -200,7 +206,7 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:136
 msgid "build_context_build_modules"
-msgstr ""
+msgstr "build_context_build_modules"
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:138
 msgid ""
@@ -246,7 +252,7 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:169
 msgid "check_components_exist"
-msgstr ""
+msgstr "check_components_exist"
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:173
 msgid "This attribute is experimental and subject to breaking changes."
@@ -274,6 +280,14 @@ msgid ""
 "    deps.check_components_exist = True\n"
 "    deps.generate()"
 msgstr ""
+"requires = \"boost/1.81.0\"\n"
+"\n"
+"...\n"
+"\n"
+"def generate(self):\n"
+"    deps = CMakeDeps(self)\n"
+"    deps.check_components_exist = True\n"
+"    deps.generate()"
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:193
 msgid ""
@@ -288,6 +302,10 @@ msgid ""
 "find_package(Boost COMPONENTS random regex fakecomp REQUIRED)\n"
 "..."
 msgstr ""
+"cmake_minimum_required(VERSION 3.15)\n"
+"...\n"
+"find_package(Boost COMPONENTS random regex fakecomp REQUIRED)\n"
+"..."
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:205
 msgid "set_property()"
@@ -355,6 +373,16 @@ msgid ""
 "        self.cpp_info.set_property(\"cmake_target_name\", \"ZLIB::ZLIB\")\n"
 "        ..."
 msgstr ""
+"class ZlibConan(ConanFile):\n"
+"    name = \"zlib\"\n"
+"\n"
+"    ...\n"
+"\n"
+"    def package_info(self):\n"
+"        self.cpp_info.set_property(\"cmake_find_mode\", \"both\")\n"
+"        self.cpp_info.set_property(\"cmake_file_name\", \"ZLIB\")\n"
+"        self.cpp_info.set_property(\"cmake_target_name\", \"ZLIB::ZLIB\")\n"
+"        ..."
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:244
 msgid ""
@@ -415,7 +443,7 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:290
 msgid "Properties"
-msgstr ""
+msgstr "屬性"
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:292
 msgid "The following properties affect the CMakeDeps generator:"
@@ -500,7 +528,7 @@ msgstr ""
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:312
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:351
 msgid "Example:"
-msgstr ""
+msgstr "範例："
 
 #: ../../../reference/conanfile/tools/cmake/cmakedeps.rst:314
 msgid ""
@@ -512,21 +540,21 @@ msgid ""
 "target names automatically\n"
 "    self.cpp_info.set_property(\"cmake_target_name\", \"Foo::Foo\")\n"
 "\n"
-"    # Create a new target \"MyFooAlias\" that is an alias to the \"Foo::"
-"Foo\" target\n"
+"    # Create a new target \"MyFooAlias\" that is an alias to the "
+"\"Foo::Foo\" target\n"
 "    self.cpp_info.set_property(\"cmake_target_aliases\", [\"MyFooAlias\"])\n"
 "    # The property \"cmake_build_modules\" can't be declared in a component, "
 "do it in self.cpp_info\n"
-"    self.cpp_info.set_property(\"cmake_build_modules\", [os.path."
-"join(\"lib\", \"mypkg.cmake\")])\n"
+"    self.cpp_info.set_property(\"cmake_build_modules\", "
+"[os.path.join(\"lib\", \"mypkg.cmake\")])\n"
 "\n"
-"    self.cpp_info.components[\"mycomponent\"]."
-"set_property(\"cmake_target_name\", \"Foo::Var\")\n"
+"    self.cpp_info.components[\"mycomponent\"].set_property(\"cmake_target_name\", "
+"\"Foo::Var\")\n"
 "\n"
-"    # Create a new target \"VarComponent\" that is an alias to the \"Foo::"
-"Var\" component target\n"
-"    self.cpp_info.components[\"mycomponent\"]."
-"set_property(\"cmake_target_aliases\", [\"VarComponent\"])\n"
+"    # Create a new target \"VarComponent\" that is an alias to the "
+"\"Foo::Var\" component target\n"
+"    self.cpp_info.components[\"mycomponent\"].set_property(\"cmake_target_aliases\", "
+"[\"VarComponent\"])\n"
 "\n"
 "    # Skip this package when generating the files for the whole dependency "
 "tree in the consumer\n"

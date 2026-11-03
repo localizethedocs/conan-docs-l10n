@@ -49,16 +49,16 @@ msgstr ""
 
 #: ../../../versioning/lockfiles/evolving.rst:23
 msgid ""
-"Lets say that we have an application ``app/1.0`` that depends on "
-"``libc/1.0`` that depends on ``libb/1.0`` that finally depends on "
-"``liba/1.0``. We could capture a \"base\" lockfile from it, and then several "
-"full lockfiles, one per configuration:"
+"Lets say that we have an application ``app/1.0`` that depends on ``libc/"
+"1.0`` that depends on ``libb/1.0`` that finally depends on ``liba/1.0``. We "
+"could capture a \"base\" lockfile from it, and then several full lockfiles, "
+"one per configuration:"
 msgstr ""
 
 #: ../../../versioning/lockfiles/evolving.rst:27
 msgid ""
-"$ conan lock create --reference=app/1.0@ --base --lockfile-out=app_base."
-"lock\n"
+"$ conan lock create --reference=app/1.0@ --base --lockfile-"
+"out=app_base.lock\n"
 "$ conan lock create --reference=app/1.0@ --lockfile=app_base.lock -s "
 "build_type=Release --lockfile-out=app_release.lock\n"
 "$ conan lock create --reference=app/1.0@ --lockfile=app_base.lock -s "
@@ -93,9 +93,9 @@ msgstr ""
 
 #: ../../../versioning/lockfiles/evolving.rst:48
 msgid ""
-"But it is also possible to derive a new \"base\" profile from *app_base."
-"lock* only for libb dependencies, and then compute from it the configuration "
-"specific profiles."
+"But it is also possible to derive a new \"base\" profile from "
+"*app_base.lock* only for libb dependencies, and then compute from it the "
+"configuration specific profiles."
 msgstr ""
 
 #: ../../../versioning/lockfiles/evolving.rst:51
@@ -148,8 +148,8 @@ msgstr ""
 #: ../../../versioning/lockfiles/evolving.rst:77
 msgid ""
 "# Note the --build=libb argument\n"
-"$ conan lock create --reference=libb/1.0 --build=libb --lockfile=app_release."
-"lock --lockfile-out=libb_release.lock\n"
+"$ conan lock create --reference=libb/1.0 --build=libb --"
+"lockfile=app_release.lock --lockfile-out=libb_release.lock\n"
 "# This will work, building a new binary\n"
 "$ conan install libb/1.0@ --build=libb --lockfile=libb_release.lock --"
 "lockfile-out=libb_release2.lock"
@@ -157,8 +157,8 @@ msgstr ""
 
 #: ../../../versioning/lockfiles/evolving.rst:84
 msgid ""
-"As usual, if you are building a new binary, it is desired to provide a :"
-"command:`--lockfile-out=libb_release2.lock` to capture such a new binary "
+"As usual, if you are building a new binary, it is desired to provide "
+"a :command:`--lockfile-out=libb_release2.lock` to capture such a new binary "
 "package revision in the new lockfile."
 msgstr ""
 
@@ -168,9 +168,9 @@ msgstr ""
 
 #: ../../../versioning/lockfiles/evolving.rst:91
 msgid ""
-"This would be the opposite flow. Lets take the previous *libb_deps_release."
-"lock* and *libb_deps_debug.lock* lockfiles and create new ``libb/1.1`` "
-"packages with it, and obtaining new lockfiles:"
+"This would be the opposite flow. Lets take the previous "
+"*libb_deps_release.lock* and *libb_deps_debug.lock* lockfiles and create new "
+"``libb/1.1`` packages with it, and obtaining new lockfiles:"
 msgstr ""
 
 #: ../../../versioning/lockfiles/evolving.rst:94
@@ -178,8 +178,8 @@ msgid ""
 "# in the libb source folder\n"
 "$ conan  create . --lockfile=libb_deps_release.lock --lockfile-"
 "out=libb_release.lock\n"
-"$ conan  create . --lockfile=libb_deps_debug.lock --lockfile-out=libb_debug."
-"lock"
+"$ conan  create . --lockfile=libb_deps_debug.lock --lockfile-"
+"out=libb_debug.lock"
 msgstr ""
 
 #: ../../../versioning/lockfiles/evolving.rst:100

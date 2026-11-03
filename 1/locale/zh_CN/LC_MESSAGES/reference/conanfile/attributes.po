@@ -307,12 +307,12 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:197
 msgid ""
-"For package recipes working in the user space, with local methods like :"
-"command:`conan install .` and :command:`conan build .`, there is no current "
-"user/channel. If you are accessing to ``self.user`` or ``self.channel`` in "
-"your recipe, you need to declare the environment variables "
-"``CONAN_USERNAME`` and ``CONAN_CHANNEL`` or you can set the attributes "
-"``default_user`` and ``default_channel``. You can also use python "
+"For package recipes working in the user space, with local methods "
+"like :command:`conan install .` and :command:`conan build .`, there is no "
+"current user/channel. If you are accessing to ``self.user`` or "
+"``self.channel`` in your recipe, you need to declare the environment "
+"variables ``CONAN_USERNAME`` and ``CONAN_CHANNEL`` or you can set the "
+"attributes ``default_user`` and ``default_channel``. You can also use python "
 "``@property``:"
 msgstr ""
 
@@ -421,8 +421,8 @@ msgid ""
 "runtime (the MD and MT flags of VS) is irrelevant for us (maybe we using a "
 "universal one?). Using None as a value means, *maintain the original values* "
 "in order to avoid re-typing them. Then, \"arch\": None is totally equivalent "
-"to \"arch\": [\"x86\", \"x86_64\", \"arm\"] Check the reference or your ~/."
-"conan/settings.yml file."
+"to \"arch\": [\"x86\", \"x86_64\", \"arm\"] Check the reference or your "
+"~/.conan/settings.yml file."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:277
@@ -466,9 +466,9 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:301
 msgid ""
-"Likewise, if you try to access some setting that doesn't exist, like ``self."
-"settings.compiler.libcxx`` for the ``Visual Studio`` setting, Conan will "
-"fail telling that ``libcxx`` does not exist for that compiler."
+"Likewise, if you try to access some setting that doesn't exist, like "
+"``self.settings.compiler.libcxx`` for the ``Visual Studio`` setting, Conan "
+"will fail telling that ``libcxx`` does not exist for that compiler."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:304
@@ -525,9 +525,10 @@ msgstr ""
 #: ../../../reference/conanfile/attributes.rst:340
 msgid ""
 "All the options with their values are encoded into the package ID, as "
-"everything that affects the generated binary. See :ref:"
-"`method_configure_config_options` and :ref:`method_package_id` methods for "
-"information about removing certain options for some configurations."
+"everything that affects the generated binary. "
+"See :ref:`method_configure_config_options` and :ref:`method_package_id` "
+"methods for information about removing certain options for some "
+"configurations."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:345
@@ -580,8 +581,8 @@ msgstr ""
 #: ../../../reference/conanfile/attributes.rst:377
 msgid ""
 "Options ``\"shared\": [True, False]`` and ``\"fPIC\": [True, False]`` are "
-"automatically managed in :ref:`cmake_reference` and :ref:"
-"`autotools_reference` build helpers."
+"automatically managed in :ref:`cmake_reference` "
+"and :ref:`autotools_reference` build helpers."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:381
@@ -836,8 +837,8 @@ msgstr ""
 #: ../../../reference/conanfile/attributes.rst:529
 msgid ""
 "``self.options.option = \"False\"`` satisfies ``assert self.options.option "
-"== False``, ``assert self.options.option == \"False\"``, but ``assert self."
-"options.option != \"false\"``."
+"== False``, ``assert self.options.option == \"False\"``, but ``assert "
+"self.options.option != \"false\"``."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:532
@@ -989,9 +990,9 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:638
 msgid ""
-"This **will not introduce a new dependency**, it will just change "
-"``zlib/2.0`` to ``zlib/3.0`` if ``ab`` actually requires it. Otherwise zlib "
-"will not be a dependency of your package."
+"This **will not introduce a new dependency**, it will just change ``zlib/"
+"2.0`` to ``zlib/3.0`` if ``ab`` actually requires it. Otherwise zlib will "
+"not be a dependency of your package."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:643
@@ -1075,9 +1076,8 @@ msgstr ""
 #: ../../../reference/conanfile/attributes.rst:695
 msgid ""
 "The ``exports`` field can declare one single file or pattern, or a list of "
-"any of the previous elements. Patterns use `fnmatch <https://docs.python."
-"org/3/library/fnmatch.html>`_ formatting to declare files to include or "
-"exclude."
+"any of the previous elements. Patterns use `fnmatch <https://docs.python.org/"
+"3/library/fnmatch.html>`_ formatting to declare files to include or exclude."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:699
@@ -1118,9 +1118,9 @@ msgstr ""
 #: ../../../reference/conanfile/attributes.rst:725
 msgid ""
 "The ``exports_sources`` attribute can declare one single file or pattern, or "
-"a list of any of the previous elements. Patterns use `fnmatch <https://docs."
-"python.org/3/library/fnmatch.html>`_ formatting to declare files to include "
-"or exclude."
+"a list of any of the previous elements. Patterns use `fnmatch <https://"
+"docs.python.org/3/library/fnmatch.html>`_ formatting to declare files to "
+"include or exclude."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:729
@@ -1147,8 +1147,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:748
 msgid ""
-"Note, if the recipe defines the ``layout()`` method and specifies a ``self."
-"folders.source = \"src\"`` it won't affect where the files (from the "
+"Note, if the recipe defines the ``layout()`` method and specifies a "
+"``self.folders.source = \"src\"`` it won't affect where the files (from the "
 "``exports_sources``) are copied. They will be copied to the base source "
 "folder. So, if you want to replace some file that got into the ``source()`` "
 "method, you need to explicitly copy it from the parent folder or even "
@@ -1175,8 +1175,8 @@ msgid ""
 "replaced\")\n"
 "       # Now I fix it with one of the exported files\n"
 "       shutil.copy(\"../CMakeLists.txt\", \".\")\n"
-"       shutil.copy(os.path.join(self.export_sources_folder, \"CMakeLists."
-"txt\", \".\"))"
+"       shutil.copy(os.path.join(self.export_sources_folder, "
+"\"CMakeLists.txt\", \".\"))"
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:778
@@ -1225,8 +1225,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:809
 msgid ""
-"These variables allow you to control the build stages of a recipe during a :"
-"command:`conan build` command with the optional arguments :command:`--"
+"These variables allow you to control the build stages of a recipe during "
+"a :command:`conan build` command with the optional arguments :command:`--"
 "configure`/:command:`--build`/:command:`--install`/:command:`--test`. For "
 "example, consider this ``build()`` method:"
 msgstr ""
@@ -1258,8 +1258,8 @@ msgid ""
 "$ conan build . --test       # only run cmake.test(). Other methods will do "
 "nothing\n"
 "# They can be combined\n"
-"$ conan build . -c -b # run cmake.configure() + cmake.build(), but not cmake."
-"install() nor cmake.test()"
+"$ conan build . -c -b # run cmake.configure() + cmake.build(), but not "
+"cmake.install() nor cmake.test()"
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:832
@@ -1431,10 +1431,10 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:934
 msgid ""
-"To be able to use it, the package recipe can access the ``self."
-"source_folder`` attribute, which will point to the ``build`` folder when "
-"``no_copy_source=False`` or not defined, and will point to the ``source`` "
-"folder when ``no_copy_source=True``."
+"To be able to use it, the package recipe can access the "
+"``self.source_folder`` attribute, which will point to the ``build`` folder "
+"when ``no_copy_source=False`` or not defined, and will point to the "
+"``source`` folder when ``no_copy_source=True``."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:936
@@ -1471,9 +1471,9 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:955
 msgid ""
-"When executing Conan commands in the :ref:`package_dev_flow` like :command:"
-"`conan source`, this attribute will be pointing to the folder specified in "
-"the command line."
+"When executing Conan commands in the :ref:`package_dev_flow` "
+"like :command:`conan source`, this attribute will be pointing to the folder "
+"specified in the command line."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:961
@@ -1489,9 +1489,9 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:966
 msgid ""
-"When executing Conan commands in the :ref:`package_dev_flow` like :command:"
-"`conan install` or :command:`conan build`, this attribute will be pointing "
-"to the folder specified in the command line."
+"When executing Conan commands in the :ref:`package_dev_flow` "
+"like :command:`conan install` or :command:`conan build`, this attribute will "
+"be pointing to the folder specified in the command line."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:972
@@ -1506,9 +1506,9 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:976
 msgid ""
-"When executing Conan commands in the :ref:`package_dev_flow` like :command:"
-"`conan build`, this attribute will be pointing to the folder specified in "
-"the command line."
+"When executing Conan commands in the :ref:`package_dev_flow` "
+"like :command:`conan build`, this attribute will be pointing to the folder "
+"specified in the command line."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:982
@@ -1523,9 +1523,9 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:987
 msgid ""
-"When executing Conan commands in the :ref:`package_dev_flow` like :command:"
-"`conan package`, this attribute will be pointing to the folder specified in "
-"the command line."
+"When executing Conan commands in the :ref:`package_dev_flow` "
+"like :command:`conan package`, this attribute will be pointing to the folder "
+"specified in the command line."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:993
@@ -1536,8 +1536,8 @@ msgstr ""
 #: ../../../reference/conanfile/attributes.rst:1647
 #: ../../../reference/conanfile/attributes.rst:1694
 msgid ""
-"Available since: `1.28.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.28.0>`_"
+"Available since: `1.28.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.28.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:997
@@ -1735,8 +1735,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:0
 msgid ""
-"If set for a generator it will override the information provided by self."
-"cpp_info.name."
+"If set for a generator it will override the information provided by "
+"self.cpp_info.name."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:0
@@ -1913,8 +1913,8 @@ msgstr ""
 #: ../../../reference/conanfile/attributes.rst:1119
 msgid ""
 "Using components and global ``cpp_info`` non-default values or release/debug "
-"configurations at the same time is not allowed (except for ``self.cpp_info."
-"names``)."
+"configurations at the same time is not allowed (except for "
+"``self.cpp_info.names``)."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1122
@@ -1945,8 +1945,8 @@ msgstr ""
 #: ../../../reference/conanfile/attributes.rst:1133
 msgid ""
 "Using ``.names``, ``.filenames`` and ``.build_modules`` will not work any "
-"more for new generators, like :ref:`CMakeDeps<CMakeDeps>` and :ref:"
-"`PkgConfigDeps<PkgConfigDeps>`. They have a new way of setting this "
+"more for new generators, like :ref:`CMakeDeps<CMakeDeps>` "
+"and :ref:`PkgConfigDeps<PkgConfigDeps>`. They have a new way of setting this "
 "information using ``set_property`` and ``get_property`` methods of the "
 "``cpp_info`` object (available since Conan 1.36)."
 msgstr ""
@@ -2142,10 +2142,10 @@ msgstr ""
 #: ../../../reference/conanfile/attributes.rst:1238
 msgid ""
 "**Note:** The environment variables declared in the requirements of a recipe "
-"are automatically applied and it can be accessed with the python ``os."
-"environ`` dictionary. Nevertheless if you want to access to the variable "
-"declared by some specific requirement you can use the ``self.deps_env_info`` "
-"object."
+"are automatically applied and it can be accessed with the python "
+"``os.environ`` dictionary. Nevertheless if you want to access to the "
+"variable declared by some specific requirement you can use the "
+"``self.deps_env_info`` object."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1242
@@ -2211,9 +2211,9 @@ msgstr ""
 msgid ""
 "If using the experimental feature :ref:`with different context for host and "
 "build <build_requires_context>`, this attribute will contain only "
-"information from packages in the *host* context. Use :ref:"
-"`user_info_build_attributes_reference` to access information from packages "
-"that belong to *build* context."
+"information from packages in the *host* context. "
+"Use :ref:`user_info_build_attributes_reference` to access information from "
+"packages that belong to *build* context."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1309
@@ -2255,9 +2255,9 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1338
 msgid ""
-"Object used to control the unique ID for a package. Check the :ref:"
-"`package_id() <method_package_id>` to see the details of the ``self.info`` "
-"object."
+"Object used to control the unique ID for a package. Check "
+"the :ref:`package_id() <method_package_id>` to see the details of the "
+"``self.info`` object."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1345
@@ -2490,14 +2490,14 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1478
 msgid ""
-"SCM attributes are evaluated in the working directory where the *conanfile."
-"py* is located before exporting it to the Conan cache, so these values can "
-"be returned from arbitrary functions that depend on the local directory. "
-"Nevertheless, all the other code in the recipe must be able to run in the "
-"export folder inside the cache, where it has access only to the files "
-"exported (see attribute :ref:`exports <exports_attribute>` and :ref:"
-"`conandata_yml`) and to any other functionality from a :ref:`python_requires "
-"<python_requires>` package."
+"SCM attributes are evaluated in the working directory where the "
+"*conanfile.py* is located before exporting it to the Conan cache, so these "
+"values can be returned from arbitrary functions that depend on the local "
+"directory. Nevertheless, all the other code in the recipe must be able to "
+"run in the export folder inside the cache, where it has access only to the "
+"files exported (see attribute :ref:`exports <exports_attribute>` "
+"and :ref:`conandata_yml`) and to any other functionality from "
+"a :ref:`python_requires <python_requires>` package."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1487
@@ -2505,11 +2505,11 @@ msgid ""
 "By default, in Conan v1.x the information after evaluating the attribute "
 "``scm`` will be stored in the *conanfile.py* file (the recipe will be "
 "modified when exported to the Conan cache) and any value will be written in "
-"plain text (watch out about passwords). However, you can activate the :ref:"
-"`scm_to_conandata<conan_conf>` config option, the *conanfile.py* won't be "
-"modified (data is stored in a different file) and the fields ``username`` "
-"and ``password`` won't be stored, so these one will be computed each time "
-"the recipe is loaded."
+"plain text (watch out about passwords). However, you can activate "
+"the :ref:`scm_to_conandata<conan_conf>` config option, the *conanfile.py* "
+"won't be modified (data is stored in a different file) and the fields "
+"``username`` and ``password`` won't be stored, so these one will be computed "
+"each time the recipe is loaded."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1496
@@ -2614,8 +2614,8 @@ msgid ""
 "\n"
 "    def source(self):\n"
 "        pyreq = self.python_requires['pyreq']\n"
-"        path = os.path.join(pyreq.exports_sources_folder, \"CMakeLists."
-"txt\")\n"
+"        path = os.path.join(pyreq.exports_sources_folder, "
+"\"CMakeLists.txt\")\n"
 "        shutil.copy(src=path, dst=self.source_folder)"
 msgstr ""
 
@@ -2683,10 +2683,10 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1618
 msgid ""
-"This attribute is a dictionary with the keys and values provided in a :ref:"
-"`conandata_yml` file format placed next to the *conanfile.py*. This YAML "
-"file is automatically exported with the recipe and automatically loaded with "
-"it too."
+"This attribute is a dictionary with the keys and values provided in "
+"a :ref:`conandata_yml` file format placed next to the *conanfile.py*. This "
+"YAML file is automatically exported with the recipe and automatically loaded "
+"with it too."
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1621
@@ -2802,14 +2802,15 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1701
 msgid ""
-"`LibreSSL <https://www.libressl.org/>`__, `BoringSSL <https://boringssl."
-"googlesource.com/boringssl/>`__ and `OpenSSL <https://www.openssl.org/>`__"
+"`LibreSSL <https://www.libressl.org/>`__, `BoringSSL <https://"
+"boringssl.googlesource.com/boringssl/>`__ and `OpenSSL <https://"
+"www.openssl.org/>`__"
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1702
 msgid ""
-"`libav <https://en.wikipedia.org/wiki/Libav>`__ and `ffmpeg <https://ffmpeg."
-"org/>`__"
+"`libav <https://en.wikipedia.org/wiki/Libav>`__ and `ffmpeg <https://"
+"ffmpeg.org/>`__"
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1703
@@ -2882,8 +2883,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1749
 msgid ""
-"Available since: `1.47.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.47.0>`_"
+"Available since: `1.47.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.47.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1751
@@ -2926,10 +2927,10 @@ msgid ""
 "  tool_requires = \"my_android_ndk/1.0\"\n"
 "\n"
 "  def generate(self):\n"
-"      self.output.info(\"NDK host: %s\" % self.conf.get(\"tools.android:"
-"ndk_path\"))\n"
-"      self.output.info(\"Custom var1: %s\" % self.conf.get(\"user.custom."
-"var1\"))"
+"      self.output.info(\"NDK host: %s\" % "
+"self.conf.get(\"tools.android:ndk_path\"))\n"
+"      self.output.info(\"Custom var1: %s\" % "
+"self.conf.get(\"user.custom.var1\"))"
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1783
@@ -2981,8 +2982,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1825
 msgid ""
-"Available since: `1.39.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.39.0>`_"
+"Available since: `1.39.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.39.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1827
@@ -3009,8 +3010,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1848
 msgid ""
-"Available since: `1.54.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.54.0>`_"
+"Available since: `1.54.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.54.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1850
@@ -3037,8 +3038,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1873
 msgid ""
-"Available since: `1.44.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.44.0>`_"
+"Available since: `1.44.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.44.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/attributes.rst:1875

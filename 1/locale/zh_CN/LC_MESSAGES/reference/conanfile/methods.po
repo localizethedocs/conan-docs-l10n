@@ -62,10 +62,10 @@ msgstr ""
 msgid ""
 "The current working directory where the ``source()`` method runs is the "
 "``self.source_folder``. Note, however, that this folder can be different if "
-"the recipe defines the ``layout()`` method and specifies a ``self.folders."
-"source = \"src\"``. In that case, the ``self.source_folder`` and the current "
-"working directory will be the composition of the base folder (typically "
-"where the recipe is) and the user specified ``\"src\"`` subfolder."
+"the recipe defines the ``layout()`` method and specifies a "
+"``self.folders.source = \"src\"``. In that case, the ``self.source_folder`` "
+"and the current working directory will be the composition of the base folder "
+"(typically where the recipe is) and the user specified ``\"src\"`` subfolder."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:40
@@ -195,8 +195,8 @@ msgstr ""
 msgid ""
 "**MSBuild**: If you are using Visual Studio compiler directly to build your "
 "project you can use this helper :ref:`MSBuild() <msbuild>`. For lower level "
-"control, the **VisualStudioBuildEnvironment** can also be used: :ref:"
-"`VisualStudioBuildEnvironment <visual_studio_build>`."
+"control, the **VisualStudioBuildEnvironment** can also be "
+"used: :ref:`VisualStudioBuildEnvironment <visual_studio_build>`."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:121
@@ -352,10 +352,10 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:193
 msgid ""
-"**Build folder and source folder are the same**: Normally during :command:"
-"`conan create` source folder content is copied to the build folder. In this "
-"situation ``src`` parameter of ``self.copy()`` will be relative to the build "
-"folder in the local cache."
+"**Build folder and source folder are the same**: Normally "
+"during :command:`conan create` source folder content is copied to the build "
+"folder. In this situation ``src`` parameter of ``self.copy()`` will be "
+"relative to the build folder in the local cache."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:196
@@ -447,8 +447,8 @@ msgstr ""
 #: ../../../reference/conanfile/methods.rst:247
 msgid ""
 "**libdirs**: List of relative paths (starting from the package root) of "
-"directories in which to find library object binaries (\\*.lib, \\*.a, \\*."
-"so, \\*.dylib). By default it is initialized to ``['lib']``, and it is "
+"directories in which to find library object binaries (\\*.lib, \\*.a, "
+"\\*.so, \\*.dylib). By default it is initialized to ``['lib']``, and it is "
 "rarely changed."
 msgstr ""
 
@@ -479,12 +479,12 @@ msgid ""
 "**build_modules**: Dictionary of lists per generator containing relative "
 "paths to build system related utility module files created by the package. "
 "Used by CMake generators to include *.cmake* files with functions for "
-"consumers. e.g: ``self.cpp_info.build_modules[\"cmake_find_package\"]."
-"append(\"cmake/myfunctions.cmake\")``. Those files will be included "
-"automatically in `cmake`/`cmake_multi` generators when using "
-"`conan_basic_setup()` and will be automatically added in "
-"`cmake_find_package`/`cmake_find_package_multi` generators when "
-"`find_package()` is used."
+"consumers. e.g: "
+"``self.cpp_info.build_modules[\"cmake_find_package\"].append(\"cmake/"
+"myfunctions.cmake\")``. Those files will be included automatically in "
+"`cmake`/`cmake_multi` generators when using `conan_basic_setup()` and will "
+"be automatically added in `cmake_find_package`/`cmake_find_package_multi` "
+"generators when `find_package()` is used."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:260
@@ -540,16 +540,16 @@ msgstr ""
 msgid ""
 "**components**: **[Experimental]** Dictionary with names as keys and a "
 "component object as value to model the different components a package may "
-"have: libraries, executables... Read more about this feature at :ref:"
-"`package_information_components`."
+"have: libraries, executables... Read more about this feature "
+"at :ref:`package_information_components`."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:290
 msgid ""
 "**requires**: **[Experimental]** List of components from the requirements "
 "this package (and its consumers) should link with. It will be used by "
-"generators that add support for components features (:ref:"
-"`package_information_components`)."
+"generators that add support for components features "
+"(:ref:`package_information_components`)."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:294
@@ -577,8 +577,8 @@ msgid ""
 "information is translated to build-systems information via generators, for "
 "example for CMake, it will be a variable in ``conanbuildinfo.cmake``. If you "
 "want a package to make accessible its executables to its consumers, you have "
-"to specify it with ``self.env_info`` as described in :ref:"
-"`method_package_info_env_info`."
+"to specify it with ``self.env_info`` as described "
+"in :ref:`method_package_info_env_info`."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:317
@@ -629,14 +629,15 @@ msgstr ""
 msgid ""
 "The :ref:`virtualenv<virtual_environment_generator>` generator will use the "
 "``self.env_info`` variables to prepare a script to activate/deactivate a "
-"virtual environment. However, this could be directly done using the :ref:"
-"`virtualrunenv_generator` generator."
+"virtual environment. However, this could be directly done using "
+"the :ref:`virtualrunenv_generator` generator."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:345
 msgid ""
-"They will be automatically applied before calling the consumer *conanfile."
-"py* methods ``source()``, ``build()``, ``package()`` and ``imports()``."
+"They will be automatically applied before calling the consumer "
+"*conanfile.py* methods ``source()``, ``build()``, ``package()`` and "
+"``imports()``."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:348
@@ -762,8 +763,9 @@ msgstr ""
 msgid ""
 "The ``set_name()`` and ``set_version()`` methods should respectively set the "
 "``self.name`` and ``self.version`` attributes. These methods are only "
-"executed when the recipe is in a user folder (:command:`export`, :command:"
-"`create` and :command:`install <path>` commands)."
+"executed when the recipe is in a user folder "
+"(:command:`export`, :command:`create` and :command:`install <path>` "
+"commands)."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:441
@@ -846,9 +848,9 @@ msgstr ""
 #: ../../../reference/conanfile/methods.rst:501
 msgid ""
 "You can also restrict the settings used deleting any specific one. For "
-"example, it is quite common for C libraries to delete the ``compiler."
-"libcxx`` and ``compiler.cppstd`` as your library does not depend on any C++ "
-"standard library:"
+"example, it is quite common for C libraries to delete the "
+"``compiler.libcxx`` and ``compiler.cppstd`` as your library does not depend "
+"on any C++ standard library:"
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:505
@@ -885,9 +887,9 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:526
 msgid ""
-"These methods can also be used to assign values to options as seen in :ref:"
-"`conanfile_options`. Values assigned in the ``configure()`` method cannot be "
-"overridden, while values assigned in ``config_options()`` can."
+"These methods can also be used to assign values to options as seen "
+"in :ref:`conanfile_options`. Values assigned in the ``configure()`` method "
+"cannot be overridden, while values assigned in ``config_options()`` can."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:532
@@ -914,8 +916,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:545
 msgid ""
-"This exception will be propagated and Conan application will finish with a :"
-"ref:`special return code <invalid_configuration_return_code>`."
+"This exception will be propagated and Conan application will finish with "
+"a :ref:`special return code <invalid_configuration_return_code>`."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:549
@@ -931,8 +933,8 @@ msgstr ""
 #: ../../../reference/conanfile/methods.rst:557
 #: ../../../reference/conanfile/methods.rst:1506
 msgid ""
-"Available since: `1.32.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.32.0>`_"
+"Available since: `1.32.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.32.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:559
@@ -1066,8 +1068,8 @@ msgstr ""
 #: ../../../reference/conanfile/methods.rst:652
 #: ../../../reference/conanfile/methods.rst:1612
 msgid ""
-"Available since: `1.51.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.51.0>`_"
+"Available since: `1.51.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.51.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:654
@@ -1355,8 +1357,9 @@ msgstr ""
 #: ../../../reference/conanfile/methods.rst:826
 msgid ""
 "SystemPackageTool will disappear in Conan 2.0, there's already a new "
-"implementation of these wrappers in :ref:"
-"`conan_tools_system_package_manager` that will be the default in Conan 2.0."
+"implementation of these wrappers "
+"in :ref:`conan_tools_system_package_manager` that will be the default in "
+"Conan 2.0."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:830
@@ -1500,8 +1503,8 @@ msgid ""
 "The ``SystemPackageTool`` is adapted to support possible prefixes and "
 "suffixes, according to the instance of the package manager. It validates "
 "whether your current settings are configured for cross-building, and if so, "
-"it will update the package name to be installed according to ``self.settings."
-"arch``."
+"it will update the package name to be installed according to "
+"``self.settings.arch``."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:900
@@ -1595,8 +1598,8 @@ msgid ""
 "**src** (Optional, Defaulted to ``\"\"``): Source folder in which those "
 "files will be searched. This folder will be stripped from the dst parameter. "
 "E.g., `lib/Debug/x86`. It accepts symbolic folder names like ``@bindirs`` "
-"and ``@libdirs`` which will map to the ``self.cpp_info.bindirs`` and ``self."
-"cpp_info.libdirs`` of the source package, instead of a hardcoded name."
+"and ``@libdirs`` which will map to the ``self.cpp_info.bindirs`` and "
+"``self.cpp_info.libdirs`` of the source package, instead of a hardcoded name."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:949
@@ -1676,11 +1679,11 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:988
 msgid ""
-"This will import all files from all the dependencies ``self.cpp_info."
-"bindirs`` folders to the local \"bin\" folder, and all files from the "
-"dependencies ``self.cpp_info.libdirs`` folders to the local \"lib\" folder. "
-"This include packages that are in *editable* mode and declares ``[libdirs]`` "
-"and ``[bindirs]`` in their editable layouts."
+"This will import all files from all the dependencies "
+"``self.cpp_info.bindirs`` folders to the local \"bin\" folder, and all files "
+"from the dependencies ``self.cpp_info.libdirs`` folders to the local \"lib\" "
+"folder. This include packages that are in *editable* mode and declares "
+"``[libdirs]`` and ``[bindirs]`` in their editable layouts."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:993
@@ -1775,8 +1778,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1040
 msgid ""
-"Available since: `1.50.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.50.0>`_"
+"Available since: `1.50.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.50.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1042
@@ -1797,8 +1800,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1053
 msgid ""
-"Available since: `1.19.2 <https://github.com/conan-io/conan/releases/"
-"tag/1.19.2>`_"
+"Available since: `1.19.2 <https://github.com/conan-io/conan/releases/tag/"
+"1.19.2>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1055
@@ -1855,9 +1858,9 @@ msgstr ""
 #: ../../../reference/conanfile/methods.rst:1081
 msgid ""
 "By default (``vs_toolset_compatible()`` mode) Conan will generate the same "
-"binary package when the compiler is Visual Studio and the ``compiler."
-"toolset`` matches the specified ``compiler.version``. For example, if we "
-"install some packages specifying the following settings:"
+"binary package when the compiler is Visual Studio and the "
+"``compiler.toolset`` matches the specified ``compiler.version``. For "
+"example, if we install some packages specifying the following settings:"
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1084
@@ -1888,8 +1891,8 @@ msgstr ""
 msgid ""
 "The compiler version is different, but Conan will not install a different "
 "package, because the used ``toolchain`` in both cases are considered the "
-"same. You can deactivate this default behavior using calling ``self.info."
-"vs_toolset_incompatible()``."
+"same. You can deactivate this default behavior using calling "
+"``self.info.vs_toolset_incompatible()``."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1106
@@ -2069,8 +2072,8 @@ msgid ""
 "    settings = \"os\", \"compiler\", \"arch\", \"build_type\"\n"
 "\n"
 "    def package_id(self):\n"
-"        if self.settings.compiler == \"gcc\" and self.settings.compiler."
-"version == \"4.9\":\n"
+"        if self.settings.compiler == \"gcc\" and "
+"self.settings.compiler.version == \"4.9\":\n"
 "            compatible_pkg = self.info.clone()\n"
 "            compatible_pkg.settings.compiler.version = \"4.8\"\n"
 "            self.compatible_packages.append(compatible_pkg)"
@@ -2142,9 +2145,9 @@ msgid ""
 "release configuration. But as the ``build_id()`` will generate the same ID "
 "for any ``build_type``, then just one folder and one build will be done. "
 "Such build should build both debug and release artifacts, and then the "
-"``package()`` method should package them accordingly to the ``self.settings."
-"build_type`` value. Different builds will still be executed if using "
-"different compilers or architectures. This method is basically an "
+"``package()`` method should package them accordingly to the "
+"``self.settings.build_type`` value. Different builds will still be executed "
+"if using different compilers or architectures. This method is basically an "
 "optimization of build time, avoiding multiple re-builds."
 msgstr ""
 
@@ -2264,14 +2267,14 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1315
 msgid ""
-"``self.copy()`` is the ``self.copy()`` method executed inside :ref:"
-"`package() method <method_package>`."
+"``self.copy()`` is the ``self.copy()`` method executed "
+"inside :ref:`package() method <method_package>`."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1316
 msgid ""
-"``self.copy_deps()`` is the same as ``self.copy()`` method inside :ref:"
-"`imports() method <method_imports>`."
+"``self.copy_deps()`` is the same as ``self.copy()`` method "
+"inside :ref:`imports() method <method_imports>`."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1318
@@ -2297,9 +2300,9 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1330
 msgid ""
-"All other packages and dependencies, even transitive dependencies of "
-"``pkg/0.1@user/testing`` will not be deployed, it is the responsibility of "
-"the installed package to deploy what it needs from its dependencies."
+"All other packages and dependencies, even transitive dependencies of ``pkg/"
+"0.1@user/testing`` will not be deployed, it is the responsibility of the "
+"installed package to deploy what it needs from its dependencies."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1336
@@ -2359,10 +2362,11 @@ msgstr ""
 #: ../../../reference/conanfile/methods.rst:1376
 msgid ""
 "This method can also be useful if you need to unconditionally initialize "
-"class attributes like ``license`` or ``description`` or any other :ref:"
-"`attributes<conanfile_attributes>` from datafiles other than `conandata."
-"yml`. For example, you have a `json` file containing the information about "
-"the ``license``, ``description`` and ``author`` for the library:"
+"class attributes like ``license`` or ``description`` or any "
+"other :ref:`attributes<conanfile_attributes>` from datafiles other than "
+"`conandata.yml`. For example, you have a `json` file containing the "
+"information about the ``license``, ``description`` and ``author`` for the "
+"library:"
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1382
@@ -2442,8 +2446,8 @@ msgstr ""
 #: ../../../reference/conanfile/methods.rst:1438
 msgid ""
 "The ``self.copy`` support ``src`` and ``dst`` subfolder arguments. The "
-"``src`` is relative to the current folder (the one containing the *conanfile."
-"py*). The ``dst`` is relative to the cache ``export_folder``."
+"``src`` is relative to the current folder (the one containing the "
+"*conanfile.py*). The ``dst`` is relative to the cache ``export_folder``."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1442
@@ -2503,8 +2507,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1484
 msgid ""
-"Note, if the recipe defines the ``layout()`` method and specifies a ``self."
-"folders.source = \"src\"`` it won't change the current folder in the "
+"Note, if the recipe defines the ``layout()`` method and specifies a "
+"``self.folders.source = \"src\"`` it won't change the current folder in the "
 "``export_sources`` method. The current dir will be the base source folder "
 "(``self.export_sources_folder``)."
 msgstr ""
@@ -2512,8 +2516,9 @@ msgstr ""
 #: ../../../reference/conanfile/methods.rst:1487
 msgid ""
 "The ``self.copy`` support ``src`` and ``dst`` subfolder arguments. The "
-"``src`` is relative to the current folder (the one containing the *conanfile."
-"py*). The ``dst`` is relative to the cache ``export_sources_folder``."
+"``src`` is relative to the current folder (the one containing the "
+"*conanfile.py*). The ``dst`` is relative to the cache "
+"``export_sources_folder``."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1491
@@ -2549,8 +2554,9 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1514
 msgid ""
-"Files containing information to locate the dependencies, as ``xxxx-config."
-"cmake`` CMake config scripts, or ``xxxx.props`` Visual Studio property files."
+"Files containing information to locate the dependencies, as ``xxxx-"
+"config.cmake`` CMake config scripts, or ``xxxx.props`` Visual Studio "
+"property files."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1516
@@ -2639,8 +2645,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1573
 msgid ""
-"Available since: `1.37.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.37.0>`_"
+"Available since: `1.37.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.37.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1575
@@ -2700,8 +2706,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1608
 msgid ""
-"Available since: `1.46.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.46.0>`_"
+"Available since: `1.46.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.46.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1610
@@ -2733,9 +2739,10 @@ msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1623
 msgid ""
-"The fields of the cpp_info objects at ``self.cpp.build`` and ``self.cpp."
-"source`` are the same described :ref:`here<cpp_info_attributes_reference>`. "
-"Components are also supported."
+"The fields of the cpp_info objects at ``self.cpp.build`` and "
+"``self.cpp.source`` are the same "
+"described :ref:`here<cpp_info_attributes_reference>`. Components are also "
+"supported."
 msgstr ""
 
 #: ../../../reference/conanfile/methods.rst:1628

@@ -132,8 +132,8 @@ msgstr ""
 #: ../../../migrating_to_2.0/recipes.rst:77
 msgid ""
 "The ``self.requires()`` method allows in 1.X any ``**kwargs``, so something "
-"like ``self.requires(..., transitive_headers=True)`` is possible in Conan 1."
-"X. These ``**kwargs`` don't have any effect at all in Conan 1.X, they are "
+"like ``self.requires(..., transitive_headers=True)`` is possible in Conan "
+"1.X. These ``**kwargs`` don't have any effect at all in Conan 1.X, they are "
 "not even checked for correctness. But they are allowed to exist, so if new "
 "requirement traits are used in Conan 2.0, they will not error."
 msgstr ""
@@ -168,11 +168,11 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:105
 msgid ""
-"In Conan 2, removing a setting, for example, ``del self.settings.compiler."
-"libcxx`` in the ``configure()`` method, will raise an exception if the "
-"setting doesn't exist. It has to be protected with try/except. The ``self."
-"settings.rm_safe()`` method already implements the try/except clause "
-"internally. Use it like:"
+"In Conan 2, removing a setting, for example, ``del "
+"self.settings.compiler.libcxx`` in the ``configure()`` method, will raise an "
+"exception if the setting doesn't exist. It has to be protected with try/"
+"except. The ``self.settings.rm_safe()`` method already implements the try/"
+"except clause internally. Use it like:"
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:110
@@ -413,8 +413,8 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:306
 msgid ""
-"When declaring the layout, the variables ``self.source_folder`` and ``self."
-"build_folder`` will point to the correct folder, both in the cache or "
+"When declaring the layout, the variables ``self.source_folder`` and "
+"``self.build_folder`` will point to the correct folder, both in the cache or "
 "locally when using local methods, it is always recommended to use these when "
 "performing disk operations (read, write, copy, etc)."
 msgstr ""
@@ -427,8 +427,8 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:313
 msgid ""
-"Read more about the :ref:`layout feature<package_layout>` and the :ref:"
-"`reference of the layout() method<layout_method_reference>`."
+"Read more about the :ref:`layout feature<package_layout>` and "
+"the :ref:`reference of the layout() method<layout_method_reference>`."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:318
@@ -461,15 +461,15 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:342
 msgid ""
-"cpp_info libdir, bindir, includedir accessors when using layout() in Conan 1."
-"X"
+"cpp_info libdir, bindir, includedir accessors when using layout() in Conan "
+"1.X"
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:344
 msgid ""
-"Since `Conan 1.53.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.53.0>`_ you can access ``cpp_info.libdirs[0]``, ``cpp_info."
-"bindirs[0]`` and ``cpp_info.includedirs[0]`` using ``cpp_info.libdir``, "
+"Since `Conan 1.53.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.53.0>`_ you can access ``cpp_info.libdirs[0]``, ``cpp_info.bindirs[0]`` "
+"and ``cpp_info.includedirs[0]`` using ``cpp_info.libdir``, "
 "``cpp_info.bindir`` and ``cpp_info.includedir``"
 msgstr ""
 
@@ -550,8 +550,8 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:406
 msgid ""
-"The ``self.copy`` method has been replaced by the explicit tool :ref:"
-"`copy<conan_tools_files_copy>`. Typically you would copy from the "
+"The ``self.copy`` method has been replaced by the explicit "
+"tool :ref:`copy<conan_tools_files_copy>`. Typically you would copy from the "
 "``conanfile.recipe_folder`` to the ``conafile.export_sources_folder``:"
 msgstr ""
 
@@ -568,8 +568,8 @@ msgid ""
 "\n"
 "def export_sources(self):\n"
 "    ...\n"
-"    copy(self, \"CMakeLists.txt\", self.recipe_folder, self."
-"export_sources_folder)"
+"    copy(self, \"CMakeLists.txt\", self.recipe_folder, "
+"self.export_sources_folder)"
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:431
@@ -579,11 +579,11 @@ msgstr ""
 #: ../../../migrating_to_2.0/recipes.rst:433
 msgid ""
 "This is a key method to understand how Conan 2.0 works. This method is "
-"called during the Conan \"install\" step, before calling the :ref:"
-"`build()<conan2_migration_guide_build>` method. All the information needed "
-"to build the current package has to be calculated and written in disk (in "
-"the ``self.generators_folder``) by the ``generate()`` method. The goal of "
-"the ``generate()`` method is to **prepare the build** generating all the "
+"called during the Conan \"install\" step, before calling "
+"the :ref:`build()<conan2_migration_guide_build>` method. All the information "
+"needed to build the current package has to be calculated and written in disk "
+"(in the ``self.generators_folder``) by the ``generate()`` method. The goal "
+"of the ``generate()`` method is to **prepare the build** generating all the "
 "information that could be needed while running the build step. That means "
 "things like:"
 msgstr ""
@@ -591,20 +591,19 @@ msgstr ""
 #: ../../../migrating_to_2.0/recipes.rst:440
 msgid ""
 "Write information about the dependencies for the build system. This is done "
-"by what we call \"generators\", which are tools like :ref:"
-"`CMakeDeps<CMakeDeps>`, :ref:`PkgConfigDeps<PkgConfigDeps>`, :ref:"
-"`MSBuildDeps <conan_tools_microsoft_msbuilddeps>`, :ref:"
-"`XcodeDeps<conan_tools_apple_xcodedeps>`, etc."
+"by what we call \"generators\", which are tools "
+"like :ref:`CMakeDeps<CMakeDeps>`, :ref:`PkgConfigDeps<PkgConfigDeps>`, :ref:`MSBuildDeps "
+"<conan_tools_microsoft_msbuilddeps>`, :ref:`XcodeDeps<conan_tools_apple_xcodedeps>`, "
+"etc."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:446
 msgid ""
 "Write information about the configuration (settings, options...). This is "
-"done by what we call \"toolchains\", which are tools like :ref:"
-"`CMakeToolchain<conan-cmake-toolchain>`, :ref:"
-"`AutotoolsToolchain<conan_tools_gnu_autotools_toolchain>`, :ref:"
-"`MSBuildToolchain<conan_tools_microsoft_msbuildtoolchain>`, :ref:"
-"`XcodeToolchain<conan_tools_apple_xcodetoolchain>`, etc."
+"done by what we call \"toolchains\", which are tools "
+"like :ref:`CMakeToolchain<conan-cmake-"
+"toolchain>`, :ref:`AutotoolsToolchain<conan_tools_gnu_autotools_toolchain>`, :ref:`MSBuildToolchain<conan_tools_microsoft_msbuildtoolchain>`, :ref:`XcodeToolchain<conan_tools_apple_xcodetoolchain>`, "
+"etc."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:452
@@ -639,8 +638,8 @@ msgid ""
 "        cmake_layout(self)\n"
 "\n"
 "    def generate(self):\n"
-"        # This generates \"conan_toolchain.cmake\" in self."
-"generators_folder\n"
+"        # This generates \"conan_toolchain.cmake\" in "
+"self.generators_folder\n"
 "        tc = CMakeToolchain(self)\n"
 "        tc.variables[\"MYVAR\"] = \"1\"\n"
 "        tc.preprocessor_definitions[\"MYDEFINE\"] = \"2\"\n"
@@ -671,8 +670,8 @@ msgid ""
 "\n"
 "# Linux\n"
 "$ cd build/Release\n"
-"$ cmake ../.. -DCMAKE_TOOLCHAIN_FILE=generators/conan_toolchain.cmake -"
-"DCMAKE_BUILD_TYPE=Release\n"
+"$ cmake ../.. -DCMAKE_TOOLCHAIN_FILE=generators/conan_toolchain.cmake "
+"-DCMAKE_BUILD_TYPE=Release\n"
 "$ cmake --build ."
 msgstr ""
 
@@ -687,9 +686,9 @@ msgid ""
 "It is also very important to know that every access to the information from "
 "the ``dependencies`` must be done in the ``generate()`` method using the "
 "`self.dependencies access <https://docs.conan.io/en/latest/reference/"
-"conanfile/dependencies.html#dependencies-interface>`_. Do not use ``self."
-"deps_cpp_info``, ``self.deps_env_info`` or ``self.deps_user_info``, these "
-"have been removed in 2.0."
+"conanfile/dependencies.html#dependencies-interface>`_. Do not use "
+"``self.deps_cpp_info``, ``self.deps_env_info`` or ``self.deps_user_info``, "
+"these have been removed in 2.0."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:514
@@ -731,8 +730,8 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:543
 msgid ""
-"The ``self.copy`` has been replaced by the explicit tool :ref:"
-"`copy<conan_tools_files_copy>`."
+"The ``self.copy`` has been replaced by the explicit "
+"tool :ref:`copy<conan_tools_files_copy>`."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:545
@@ -791,9 +790,10 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:591
 msgid ""
-"Remember that it's now possible to declare ``cpp_info`` in the :ref:"
-"`layout() method<conanv2_layout_cpp_objects>` using ``self.cpp.package`` "
-"instead of using ``self.cpp_info`` in the ``package_info()`` method."
+"Remember that it's now possible to declare ``cpp_info`` in "
+"the :ref:`layout() method<conanv2_layout_cpp_objects>` using "
+"``self.cpp.package`` instead of using ``self.cpp_info`` in the "
+"``package_info()`` method."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:596
@@ -803,8 +803,8 @@ msgstr ""
 #: ../../../migrating_to_2.0/recipes.rst:598
 msgid ""
 "Replaced by the ``self.conf_info`` object, much more versatile than the "
-"previous ``self.user_info``. Check the complete usage of :ref:`self."
-"conf_info<conf_in_recipes>`."
+"previous ``self.user_info``. Check the complete usage "
+"of :ref:`self.conf_info<conf_in_recipes>`."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:601
@@ -870,8 +870,8 @@ msgid ""
 "    build_requires = \"android_ndk/1.0\"\n"
 "\n"
 "    def generate(self):\n"
-"        self.output.info(\"NDK: %s\" % self.conf.get(\"tools.android:"
-"ndk_path\"))"
+"        self.output.info(\"NDK: %s\" % "
+"self.conf.get(\"tools.android:ndk_path\"))"
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:665
@@ -914,11 +914,11 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:681
 msgid ""
-"The default value (pointing to the package root folder) from ``self.cpp_info."
-"builddirs`` has been removed. Also assigning it will be discouraged because "
-"it affects how :ref:`CMakeToolchain<conan-cmake-toolchain>` and :ref:"
-"`CMakeDeps<CMakeDeps>` locate executables, libraries, headers... from the "
-"right context (host vs build)."
+"The default value (pointing to the package root folder) from "
+"``self.cpp_info.builddirs`` has been removed. Also assigning it will be "
+"discouraged because it affects how :ref:`CMakeToolchain<conan-cmake-"
+"toolchain>` and :ref:`CMakeDeps<CMakeDeps>` locate executables, libraries, "
+"headers... from the right context (host vs build)."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:685
@@ -940,8 +940,8 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:690
 msgid ""
-"Instead of appending new values to the default list, assign it: ``self."
-"cpp_info.builddirs = [\"cmake\"]``"
+"Instead of appending new values to the default list, assign it: "
+"``self.cpp_info.builddirs = [\"cmake\"]``"
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:694
@@ -950,8 +950,8 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:696
 msgid ""
-"The ``self.info.header_only()`` method has been replaced with ``self.info."
-"clear()``"
+"The ``self.info.header_only()`` method has been replaced with "
+"``self.info.clear()``"
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:699
@@ -973,8 +973,8 @@ msgstr ""
 #: ../../../migrating_to_2.0/recipes.rst:726
 msgid ""
 "Using ``.names``, ``.filenames`` and ``.build_modules`` will not work "
-"anymore for new generators, like :ref:`CMakeDeps<CMakeDeps>` and :ref:"
-"`PkgConfigDeps<PkgConfigDeps>`. They have a new way of setting this "
+"anymore for new generators, like :ref:`CMakeDeps<CMakeDeps>` "
+"and :ref:`PkgConfigDeps<PkgConfigDeps>`. They have a new way of setting this "
 "information using ``set_property`` and ``get_property`` methods of the "
 "``cpp_info`` object (available since Conan 1.36)."
 msgstr ""
@@ -1020,8 +1020,8 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:752
 msgid ""
-"New properties defined for *CMake* generators family, used by :ref:"
-"`CMakeDeps<CMakeDeps>` generator:"
+"New properties defined for *CMake* generators family, used "
+"by :ref:`CMakeDeps<CMakeDeps>` generator:"
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:754
@@ -1063,9 +1063,9 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:764
 msgid ""
-"Properties related to *pkg_config*, supported by both legacy :ref:"
-"`pkg_config<pkg_config_generator>` and new :ref:"
-"`PkgConfigDeps<PkgConfigDeps>`:"
+"Properties related to *pkg_config*, supported by both "
+"legacy :ref:`pkg_config<pkg_config_generator>` and "
+"new :ref:`PkgConfigDeps<PkgConfigDeps>`:"
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:766
@@ -1087,8 +1087,8 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:772
 msgid ""
-"Properties related to *pkg_config*, only supported by new :ref:"
-"`PkgConfigDeps<PkgConfigDeps>`:"
+"Properties related to *pkg_config*, only supported by "
+"new :ref:`PkgConfigDeps<PkgConfigDeps>`:"
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:774
@@ -1107,10 +1107,10 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:780
 msgid ""
-"The `set/get_property` model is very useful if you are creating a :ref:"
-"`custom generator<custom_generator>`. Using ``set_property()`` you can pass "
-"the parameters of your choice and read them using the ``get_property()`` "
-"method inside the generator."
+"The `set/get_property` model is very useful if you are creating "
+"a :ref:`custom generator<custom_generator>`. Using ``set_property()`` you "
+"can pass the parameters of your choice and read them using the "
+"``get_property()`` method inside the generator."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:784
@@ -1120,8 +1120,8 @@ msgid ""
 "    # you have created a custom generator that reads the 'custom_property' "
 "property and you set here\n"
 "    # the value to 'prop_value'\n"
-"    self.cpp_info.components[\"mycomponent\"]."
-"set_property(\"custom_property\", \"prop_value\")\n"
+"    self.cpp_info.components[\"mycomponent\"].set_property(\"custom_property\", "
+"\"prop_value\")\n"
 "    ..."
 msgstr ""
 
@@ -1159,15 +1159,15 @@ msgstr ""
 #: ../../../migrating_to_2.0/recipes.rst:817
 msgid ""
 "To declare compatible packages in a valid way for both Conan 1.X and 2.0, "
-"you should migrate from using the :ref:`compatible_packages` method to the :"
-"ref:`method_compatibility` method."
+"you should migrate from using the :ref:`compatible_packages` method to "
+"the :ref:`method_compatibility` method."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:821
 msgid ""
 "     def package_id(self):\n"
-"         if self.settings.compiler == \"gcc\" and self.settings.compiler."
-"version == \"4.9\":\n"
+"         if self.settings.compiler == \"gcc\" and "
+"self.settings.compiler.version == \"4.9\":\n"
 "             for version in (\"4.8\", \"4.7\", \"4.6\"):\n"
 "                 compatible_pkg = self.info.clone()\n"
 "                 compatible_pkg.settings.compiler.version = version\n"
@@ -1177,8 +1177,8 @@ msgstr ""
 #: ../../../migrating_to_2.0/recipes.rst:832
 msgid ""
 "     def compatibility(self):\n"
-"         if self.settings.compiler == \"gcc\" and self.settings.compiler."
-"version == \"4.9\":\n"
+"         if self.settings.compiler == \"gcc\" and "
+"self.settings.compiler.version == \"4.9\":\n"
 "             return [{\"settings\": [(\"compiler.version\", v)]}\n"
 "                     for v in (\"4.8\", \"4.7\", \"4.6\")]"
 msgstr ""
@@ -1290,8 +1290,8 @@ msgid ""
 "There are two generators managing the environment, the ``VirtualBuildEnv`` "
 "and the ``VirtualRunEnv``. By default, these generators are automatically "
 "declared in Conan 2.0 but you have to explicitly declare them in Conan 1.X "
-"otherwise you can set ``tools.env.virtualenv:auto_use=True`` in the ``global."
-"conf``."
+"otherwise you can set ``tools.env.virtualenv:auto_use=True`` in the "
+"``global.conf``."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:925
@@ -1299,8 +1299,9 @@ msgid ""
 "**VirtualBuildEnv**: It will generate a *conanbuildenv* .bat or .sh script "
 "containing environment variables of the build time environment. That "
 "information is collected from the direct ``tool_requires`` in \"build\" "
-"context recipes from the ``self.buildenv_info`` definition plus the ``self."
-"runenv_info`` of the transitive dependencies of those ``tool_requires``."
+"context recipes from the ``self.buildenv_info`` definition plus the "
+"``self.runenv_info`` of the transitive dependencies of those "
+"``tool_requires``."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:929
@@ -1410,9 +1411,9 @@ msgstr ""
 #: ../../../migrating_to_2.0/recipes.rst:984
 msgid ""
 "Conan won't alter any symlink while exporting or packaging files. If any "
-"manipulation to the symlinks is required, the package :ref:`conan.tools."
-"files.symlinks<conan_tools_files_symlinks>` contains some tools to help with "
-"that."
+"manipulation to the symlinks is required, the "
+"package :ref:`conan.tools.files.symlinks<conan_tools_files_symlinks>` "
+"contains some tools to help with that."
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:990
@@ -1421,9 +1422,10 @@ msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:992
 msgid ""
-"There are some changes you should be aware of if you are migrating from :ref:"
-"`systempackagetool` to the new :ref:`conan_tools_system_package_manager` to "
-"prepare the recipe for Conan 2.0:"
+"There are some changes you should be aware of if you are migrating "
+"from :ref:`systempackagetool` to the "
+"new :ref:`conan_tools_system_package_manager` to prepare the recipe for "
+"Conan 2.0:"
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:996
@@ -1470,8 +1472,8 @@ msgstr ""
 msgid ""
 "**library**: The package is a generic library. It will try to determine the "
 "type of library (from shared-library, static-library, header-library) "
-"reading the self.options.shared (if declared) and the self.options."
-"header_only"
+"reading the self.options.shared (if declared) and the "
+"self.options.header_only"
 msgstr ""
 
 #: ../../../migrating_to_2.0/recipes.rst:1019

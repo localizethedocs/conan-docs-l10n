@@ -31,8 +31,8 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:12
 msgid ""
-"Available since: `1.35.0 <https://github.com/conan-io/conan/releases/"
-"tag/1.35.0>`_"
+"Available since: `1.35.0 <https://github.com/conan-io/conan/releases/tag/"
+"1.35.0>`_"
 msgstr ""
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:14
@@ -68,7 +68,7 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:31
 msgid "conanfile.txt"
-msgstr ""
+msgstr "conanfile.txt"
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:31
 msgid ""
@@ -95,6 +95,15 @@ msgid ""
 "        tc = AutotoolsToolchain(self)\n"
 "        tc.generate()"
 msgstr ""
+"from conan import ConanFile\n"
+"from conan.tools.gnu import AutotoolsToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = AutotoolsToolchain(self)\n"
+"        tc.generate()"
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:51
 msgid ""
@@ -109,6 +118,10 @@ msgid ""
 "# or in Windows\n"
 "$ conanautotoolstoolchain.bat"
 msgstr ""
+"$ conan install conanfile.py # 默認值為 Release\n"
+"$ source conanautotoolstoolchain.sh\n"
+"# 或者在 Windows 中\n"
+"$ conanautotoolstoolchain.bat"
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:60
 msgid ""
@@ -168,9 +181,9 @@ msgid ""
 "*conanbuild.conf* file used to pass information to the build helper will be "
 "named as: *<namespace>_conanbuild.conf*. The default value is ``None`` "
 "meaning that the name of the generated file is *conanbuild.conf*. This "
-"namespace must be also set with the same value in the constructor of the :"
-"ref:`Autotools build helper<conan_tools_gnu_build_helper>` so that it reads "
-"the information from the proper file."
+"namespace must be also set with the same value in the constructor of "
+"the :ref:`Autotools build helper<conan_tools_gnu_build_helper>` so that it "
+"reads the information from the proper file."
 msgstr ""
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:91
@@ -340,19 +353,19 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:149
 msgid "**defines**"
-msgstr ""
+msgstr "**defines**"
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:150
 msgid "**cxxflags**"
-msgstr ""
+msgstr "**cxxflags**"
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:151
 msgid "**cflags**"
-msgstr ""
+msgstr "**cflags**"
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:152
 msgid "**ldflags**"
-msgstr ""
+msgstr "**ldflags**"
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:155
 msgid ""
@@ -478,7 +491,7 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:217
 msgid "Customizing the environment"
-msgstr ""
+msgstr "客製化環境"
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:219
 msgid ""
@@ -486,8 +499,8 @@ msgid ""
 "variable rather than ``CPPFLAGS``, ``LDFLAGS``, ``CXXFLAGS`` or ``CFLAGS``, "
 "you can customize it before calling the ``generate()`` method. Call the "
 "``environment()`` method to calculate the mentioned variables and then add "
-"the variables that you need. The ``environment()`` method returns an :ref:"
-"`Environment<conan_tools_env_environment_model>` object:"
+"the variables that you need. The ``environment()`` method returns "
+"an :ref:`Environment<conan_tools_env_environment_model>` object:"
 msgstr ""
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:225
@@ -584,7 +597,7 @@ msgstr ""
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:263
 msgid "For instance:"
-msgstr ""
+msgstr "例如："
 
 #: ../../../reference/conanfile/tools/gnu/autotoolstoolchain.rst:265
 msgid ""

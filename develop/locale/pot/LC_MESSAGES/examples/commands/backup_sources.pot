@@ -1,0 +1,281 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2026, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan develop\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-16 18:20+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../examples/commands/backup_sources.rst:4
+msgid "Backing up the sources of third-party dependencies"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:6
+msgid ""
+"The :ref:`sources backup feature<conan_backup_sources>` transparently "
+"uploads the sources downloaded by recipes (from Github releases, project web "
+"pages, etc.) to a server of your own, so that future builds are reproducible "
+"even if the original URLs disappear. By default, those backups are uploaded "
+"together with the packages with :command:`conan upload`. But what if we want "
+"to back up the sources of our dependencies **without** building and "
+"uploading any package? This is the case for example for populating the "
+"backup server from a CI job, or for dependencies that are already available "
+"in a remote as binaries, and that would be skipped during the upload."
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:13
+msgid ""
+"There are two ways to do that, both ending with the :ref:`conan cache backup-"
+"upload<reference_commands_cache>` command:"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:15
+msgid ""
+"Retrieving the sources of a full dependency graph with :command:`conan graph "
+"info` and ``tools.build:download_source=True``."
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:16
+msgid "Retrieving the sources of a single recipe with :command:`conan source`."
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:18
+msgid ""
+"The ``backup-upload`` command uploads **all** the source backups that are in "
+"the cache, regardless of which package they belong to, if any."
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:23
+msgid "Configuring the backup server"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:25
+msgid ""
+"Let's define the "
+"following :ref:`global.conf<reference_config_files_global_conf>`, using the "
+"URL of a backup repository that accepts ``PUT`` and ``GET`` HTTP methods "
+"(see :ref:`how to create one in "
+"Artifactory<devops_artifactory_backup_sources_repo>`):"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:29
+msgid "global.conf"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:29
+msgid ""
+"core.sources:upload_url=https://myteam.myorg.com/artifactory/backup-"
+"sources/\n"
+"core.sources:download_urls=[\"origin\", \"https://myteam.myorg.com/"
+"artifactory/backup-sources/\"]"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:35
+msgid ""
+"If the repository requires authentication, define it in "
+"the :ref:`source_credentials.json<reference_config_files_source_credentials>` "
+"file. Check the :ref:`sources backup configuration<backup_sources_config>` "
+"for the rest of the available configuration items, like "
+"``core.sources:exclude_urls``."
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:41
+msgid "Backing up the sources of a dependency graph"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:43
+msgid ""
+"Recipes download their sources in the ``source()`` method, that is only "
+"executed when the package is built from source. The "
+"``tools.build:download_source=True`` conf forces the execution of "
+"``source()`` for all the packages in the graph, even if there are binaries "
+"available, without needing to build anything. This can be done "
+"with :command:`conan graph info` (or :command:`conan install`):"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:48
+msgid ""
+"$ conan graph info --requires=libiconv/1.17 -c "
+"tools.build:download_source=True"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:53
+msgid ""
+"Recall that the ``conan graph info`` can also work with a "
+"``conanfile.txt/.py`` instead of a ``--requires`` argument. Once the sources "
+"are downloaded to the Conan cache (to the ``core.sources:download_cache`` "
+"folder), we can upload all of them to the backup server:"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:57
+msgid ""
+"$ conan cache backup-upload\n"
+"\n"
+"-------- Uploading backup sources --------\n"
+"Uploading summary "
+"'8f74213b56238c85a50a5329f77e06198771e70dd9a739779f4c02f65d971313.json' to "
+"backup sources server\n"
+"Uploading file "
+"'8f74213b56238c85a50a5329f77e06198771e70dd9a739779f4c02f65d971313' to backup "
+"sources server\n"
+"Upload backup sources complete"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:66
+msgid ""
+"Each source is stored in the backup server with the ``sha256`` of the "
+"downloaded file as name, plus a ``.json`` file with the references and "
+"original URLs that the file belongs to:"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:69
+msgid "8f74213b56238c85a50a5329f77e06198771e70dd9a739779f4c02f65d971313.json"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:69
+msgid ""
+"{\n"
+"  \"references\": {\n"
+"    \"libiconv/1.17\": [\n"
+"      \"https://ftpmirror.gnu.org/gnu/libiconv/libiconv-1.17.tar.gz\",\n"
+"      \"https://ftp.gnu.org/gnu/libiconv/libiconv-1.17.tar.gz\"\n"
+"    ]\n"
+"  },\n"
+"  \"timestamp\": 1794226585\n"
+"}"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:84
+msgid ""
+"Only the sources downloaded with ``get()`` or ``download()`` providing a "
+"``sha256`` are backed up."
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:85
+msgid ""
+"The ``tools.build:download_source=True`` conf applies to all the packages in "
+"the graph, including the ``tool_requires``, so their sources will be backed "
+"up too. It can be restricted to some packages with the conf pattern syntax, "
+"like ``-c libiconv/*:tools.build:download_source=True``."
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:88
+msgid ""
+"Sources that were fetched from a URL in ``core.sources:exclude_urls`` are "
+"not uploaded."
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:92
+msgid ""
+"The ``source()`` method is not executed for the packages whose binaries are "
+"skipped from the graph, as they are not necessary in the current "
+"configuration (for example the dependencies of a shared library that are not "
+"needed by its consumers). The sources of those packages will not be "
+"downloaded, so they will not be backed up either. To make sure that the "
+"sources of **all** the packages in the graph are retrieved, disable the "
+"binaries skip with the ``tools.graph:skip_binaries=False`` conf:"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:98
+msgid ""
+"# This will only work for packages in the \"host\" context, not build tools\n"
+"# Use \"-c:a\" if you want to download the sources for \"tool-requires\" "
+"too\n"
+"$ conan graph info --requires=libiconv/1.17 -c "
+"tools.build:download_source=True -c tools.graph:skip_binaries=False"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:106
+msgid "Backing up the sources of a single recipe"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:108
+msgid ""
+"If we have the recipe in a folder, for example in the Conan Center Index "
+"repository or in our own recipes repository, we can run the :command:`conan "
+"source` command directly, which only executes the ``source()`` method "
+"without building anything:"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:112
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:112
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.files import get\n"
+"\n"
+"class ZlibRecipe(ConanFile):\n"
+"    name = \"zlib\"\n"
+"    version = \"1.3.1\"\n"
+"\n"
+"    def source(self):\n"
+"        get(self, **self.conan_data[\"sources\"][self.version], "
+"strip_root=True)"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:125
+msgid "conandata.yml"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:125
+msgid ""
+"sources:\n"
+"  \"1.3.1\":\n"
+"    url: \"https://github.com/madler/zlib/releases/download/v1.3.1/"
+"zlib-1.3.1.tar.gz\"\n"
+"    sha256: "
+"\"9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23\""
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:133
+msgid ""
+"$ conan source .\n"
+"Getting sources for conanfile.py (zlib/1.3.1)\n"
+"Calling source() in /home/user/zlib\n"
+"Sources correctly downloaded from https://github.com/madler/zlib/releases/"
+"download/v1.3.1/zlib-1.3.1.tar.gz\n"
+"Uncompressing zlib-1.3.1.tar.gz to .\n"
+"\n"
+"$ conan cache backup-upload\n"
+"-------- Uploading backup sources --------\n"
+"Uploading summary "
+"'9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23.json' to "
+"backup sources server\n"
+"Uploading file "
+"'9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23' to backup "
+"sources server\n"
+"Upload backup sources complete"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:147
+msgid ""
+"This approach can be automated for many recipes by simply looping over their "
+"folders, and then uploading all the backups at once with a single ``conan "
+"cache backup-upload``."
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:152
+msgid "Using the backup"
+msgstr ""
+
+#: ../../../examples/commands/backup_sources.rst:154
+msgid ""
+"Once the sources are in the backup server, any build that has the "
+"``core.sources:download_urls`` conf above will be able to fetch the sources "
+"from it when the original URL is not available (or before trying it, if the "
+"backup server is listed first in ``core.sources:download_urls``). "
+"See :ref:`how to run Conan with the backup configured<conan_backup_sources>` "
+"for more details."
+msgstr ""

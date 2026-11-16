@@ -1,0 +1,765 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, JFrog
+# This file is distributed under the same license as the conan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: conan develop\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-29 05:51+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:4
+msgid "AutotoolsToolchain"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:6
+msgid ""
+"The ``AutotoolsToolchain`` is the toolchain generator for Autotools. It will "
+"generate shell scripts containing environment variable definitions that the "
+"autotools build system can understand."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:11
+msgid ""
+"``AutotoolsToolchain`` and :ref:`GnuToolchain<conan_tools_gnu_gnutoolchain>` "
+"are mutually exclusive alternatives. Do not use both in the same recipe: "
+"choose one or the other."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:14
+msgid "This generator can be used by name in conanfiles:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:16
+msgid "conanfile.py"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:16
+msgid ""
+"class Pkg(ConanFile):\n"
+"    generators = \"AutotoolsToolchain\""
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:22
+msgid "conanfile.txt"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:22
+msgid ""
+"[generators]\n"
+"AutotoolsToolchain"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:28
+msgid ""
+"And it can also be fully instantiated in the conanfile ``generate()`` method:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:30
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.gnu import AutotoolsToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = AutotoolsToolchain(self)\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:44
+msgid "Generated files"
+msgstr "生成的文件"
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:46
+msgid ""
+"It will generate the file ``conanautotoolstoolchain.sh`` or "
+"``conanautotoolstoolchain.bat`` files:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:48
+msgid ""
+"$ conan install conanfile.py # default is Release\n"
+"$ source conanautotoolstoolchain.sh\n"
+"# or in Windows\n"
+"$ conanautotoolstoolchain.bat"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:55
+msgid ""
+"This launchers will append information to the ``CPPFLAGS``, ``LDFLAGS``, "
+"``CXXFLAGS``, ``CFLAGS`` environment variables that translate the settings "
+"and options to the corresponding build flags like ``-stdlib=libstdc++``, ``-"
+"std=gnu14``, architecture flags, etc. It will also append the folder where "
+"the Conan generators are located to the ``PKG_CONFIG_PATH`` environment "
+"variable. On Apple platforms, ``ASFLAGS`` is also set with architecture and "
+"sysroot flags to ensure the assembler uses the same cross-compilation "
+"settings as the C/C++ compilers."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:63
+msgid ""
+"Since `Conan 2.4.0 <https://github.com/conan-io/conan/releases/tag/"
+"2.4.0>`__, in  a cross-building context, the environment variables "
+"``CC_FOR_BUILD`` and ``CXX_FOR_BUILD`` are also set if the build profile "
+"defines the ``c`` and ``cpp`` values in the configuration variable "
+"``tools.build:compiler_executables``. See more info in the :ref:`conf "
+"section<conan_tools_gnu_autotoolstoolchain_conf>`."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:68
+msgid ""
+"This generator will also generate a file called ``conanbuild.conf`` "
+"containing two keys:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:70
+msgid "**configure_args**: Arguments to call the ``configure`` script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:71
+msgid "**make_args**: Arguments to call the ``make`` script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:72
+msgid "**autoreconf_args**: Arguments to call the ``autoreconf`` script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:74
+msgid ""
+"The :ref:`Autotools build helper<conan_tools_gnu_build_helper>` will use "
+"that ``conanbuild.conf`` file to seamlessly call the configure and make "
+"script using these precalculated arguments."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:79
+msgid "Customization"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:81
+msgid ""
+"You can change some attributes before calling the ``generate()`` method if "
+"you want to change some of the precalculated values:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:84
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.gnu import AutotoolsToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        tc = AutotoolsToolchain(self)\n"
+"        tc.configure_args.append(\"--my_argument\")\n"
+"        tc.generate()"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:109
+msgid ""
+"**configure_args**: Additional arguments to be passed to the configure "
+"script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:105
+msgid "By default the following arguments are passed:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:100
+msgid "``--prefix``: Takes ``/`` as default value."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:101
+msgid "``--bindir=${prefix}/bin``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:102
+msgid "``--sbindir=${prefix}/bin``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:103
+msgid "``--libdir=${prefix}/lib``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:104
+msgid "``--includedir=${prefix}/include``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:105
+msgid "``--oldincludedir=${prefix}/include``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:106
+msgid "``--datarootdir=${prefix}/res``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:109
+msgid "Also if the shared option exists it will add by default:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:108
+msgid "``--enable-shared``, ``--disable-static`` if ``shared==True``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:109
+msgid "``--disable-shared``, ``--enable-static`` if ``shared==False``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:111
+msgid ""
+"**make_args** (Defaulted to ``[]``): Additional arguments to be passed to he "
+"make script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:112
+msgid ""
+"**autoreconf_args** (Defaulted to ``[\"--force\", \"--install\"]``): "
+"Additional arguments to be passed to he make script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:113
+msgid "**extra_defines** (Defaulted to ``[]``): Additional defines."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:114
+msgid "**extra_cxxflags** (Defaulted to ``[]``): Additional cxxflags."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:115
+msgid "**extra_cflags** (Defaulted to ``[]``): Additional cflags."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:116
+msgid "**extra_ldflags** (Defaulted to ``[]``): Additional ldflags."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:117
+msgid "**ndebug**: \"NDEBUG\" if the ``settings.build_type`` != `Debug`."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:118
+msgid "**gcc_cxx11_abi**: \"_GLIBCXX_USE_CXX11_ABI\" if ``gcc/libstdc++``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:119
+msgid "**libcxx**: Flag calculated from ``settings.compiler.libcxx``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:120
+msgid "**fpic**: True/False from ``options.fpic`` if defined."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:121
+msgid "**cppstd**: Flag from ``settings.compiler.cppstd``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:122
+msgid "**arch_flag**: Flag from ``settings.arch``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:123
+msgid "**build_type_flags**: Flags from ``settings.build_type``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:124
+msgid "**sysroot_flag**: To pass the ``--sysroot`` flag to the compiler."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:125
+msgid ""
+"**apple_arch_flag**: Only when cross-building with Apple systems. Flags from "
+"``settings.arch``. For universal binaries, contains multiple ``-arch`` flags."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:126
+msgid ""
+"**apple_isysroot_flag**: Only when cross-building with Apple systems. Path "
+"to the root sdk."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:127
+msgid ""
+"**apple_min_version_flag**: Only for Apple systems, defines the ``-"
+"m{ios,macosx,watchos,tvos,...}-version-min=xxx`` flag."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:128
+msgid ""
+"**msvc_runtime_flag**: Flag from ``settings.compiler.runtime_type`` when "
+"compiler is ``msvc`` or ``settings.compiler.runtime`` when using the "
+"deprecated ``Visual Studio``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:130
+msgid ""
+"**asflags**: List of assembler flags set in the ``ASFLAGS`` environment "
+"variable. On Apple platforms, populated with ``arch_flag``, "
+"``sysroot_flag``, ``apple_isysroot_flag``, ``apple_arch_flag``, and "
+"``apple_min_version_flag``. Empty on non-Apple platforms. Applies to both "
+"``AutotoolsToolchain`` and ``GnuToolchain``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:136
+msgid ""
+"The following attributes are ready-only and will contain the calculated "
+"values for the current configuration and customized attributes. Some recipes "
+"might need to read them to generate custom build files (not strictly "
+"Autotools) with the configuration:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:139
+msgid "**defines**"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:140
+msgid "**cxxflags**"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:141
+msgid "**cflags**"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:142
+msgid "**ldflags**"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:145
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.gnu import AutotoolsToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"    def generate(self):\n"
+"        tc = AutotoolsToolchain(self)\n"
+"        # Customize the flags\n"
+"        tc.extra_cxxflags = [\"MyFlag\"]\n"
+"        # Read the computed flags and use them (write custom files etc)\n"
+"        tc.defines\n"
+"        tc.cxxflags\n"
+"        tc.cflags\n"
+"        tc.ldflags"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:163
+msgid ""
+"If you want to change the default values for ``configure_args``, adjust the "
+"``cpp.package`` object at the ``layout()`` method:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:165
+msgid ""
+"def layout(self):\n"
+"    ...\n"
+"    # For bindir and sbindir takes the first value:\n"
+"    self.cpp.package.bindirs = [\"mybin\"]\n"
+"    # For libdir takes the first value:\n"
+"    self.cpp.package.libdirs = [\"mylib\"]\n"
+"    # For includedir and oldincludedir takes the first value:\n"
+"    self.cpp.package.includedirs = [\"myinclude\"]\n"
+"    # For datarootdir takes the first value:\n"
+"    self.cpp.package.resdirs = [\"myres\"]"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:179
+msgid ""
+"It is **not valid** to change the self.cpp_info  at the ``package_info()`` "
+"method."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:183
+msgid "Customizing the environment"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:185
+msgid ""
+"If your ``Makefile`` or ``configure`` scripts need some other environment "
+"variable rather than ``CPPFLAGS``, ``LDFLAGS``, ``CXXFLAGS`` or ``CFLAGS``, "
+"you can customize it before calling the ``generate()`` method. Call the "
+"``environment()`` method to calculate the mentioned variables and then add "
+"the variables that you need. The ``environment()`` method returns "
+"an :ref:`Environment<conan_tools_env_environment_model>` object:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:191
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.gnu import AutotoolsToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        at = AutotoolsToolchain(self)\n"
+"        env = at.environment()\n"
+"        env.define(\"FOO\", \"BAR\")\n"
+"        at.generate(env)"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:206
+msgid ""
+"The ``AutotoolsToolchain`` also sets ``CXXFLAGS``, ``CFLAGS``, ``LDFLAGS`` "
+"and ``CPPFLAGS`` reading variables from the ``[conf]`` section in the "
+"profiles. :ref:`See the conf reference "
+"below<conan_tools_gnu_autotoolstoolchain_conf>`."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:211
+msgid "Managing the configure_args, make_args and autoreconf_args attributes"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:213
+msgid ""
+"``AutotoolsToolchain`` provides some help methods so users can add/update/"
+"remove values defined in ``configure_args``, ``make_args`` and "
+"``autoreconf_args`` (all of them lists of strings). Those methods are:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:216
+msgid ""
+"``update_configure_args(updated_flags)``: will change "
+"``AutotoolsToolchain.configure_args``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:217
+msgid ""
+"``update_make_args(updated_flags)``: will change "
+"``AutotoolsToolchain.make_args``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:218
+msgid ""
+"``update_autoreconf_args(updated_flags)``: will change "
+"``AutotoolsToolchain.autoreconf_args``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:220
+msgid ""
+"Where ``updated_flags`` is a dict-like Python object defining all the flags "
+"to change. It follows the next rules:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:222
+msgid ""
+"Key-value are the flags names and their values, e.g., ``{\"--enable-tools\": "
+"no}`` will be translated as ``--enable-tools=no``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:223
+msgid ""
+"If that key has no value, then it will be an empty string, e.g., ``{\"--"
+"disable-verbose\": \"\"}`` will be translated as ``--disable-verbose``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:224
+msgid ""
+"If the key value is ``None``, it means that you want to remove that flag "
+"from the ``xxxxxx_args`` (notice that it could be ``configure_args``, "
+"``make_args`` or ``autoreconf_args``), e.g., ``{\"--force\": None}`` will "
+"remove that flag from the final result."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:227
+msgid "In a nutshell, you will:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:229
+msgid ""
+"**Add arguments**: if the given flag in ``updated_flags`` does not already "
+"exist in ``xxxxxx_args``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:230
+msgid ""
+"**Update arguments**: if the given flag in ``updated_flags`` already exists "
+"in attribute ``xxxxxx_args``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:231
+msgid ""
+"**Remove arguments**: if the given flag in ``updated_flags`` already exists "
+"in ``xxxxxx_args`` and it's passed with ``None`` as value."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:233
+msgid "For instance:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:235
+msgid ""
+"from conan import ConanFile\n"
+"from conan.tools.gnu import AutotoolsToolchain\n"
+"\n"
+"class App(ConanFile):\n"
+"    settings = \"os\", \"arch\", \"compiler\", \"build_type\"\n"
+"\n"
+"    def generate(self):\n"
+"        at = AutotoolsToolchain(self)\n"
+"        at.update_configure_args({\n"
+"            \"--new-super-flag\": \"\",  # add new flag '--new-super-flag'\n"
+"            \"--host\": \"my-gnu-triplet\",  # update flag '--host=my-gnu-"
+"triplet'\n"
+"            \"--force\": None  # remove existing '--force' flag\n"
+"        })\n"
+"        at.generate()"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:252
+msgid ""
+"The ``AutotoolsToolchain`` will listen to ``tools.gnu:extra_configure_args`` "
+"from the :ref:`reference_config_files_global_conf` to extend the "
+"``configure_args`` attribute."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:257
+msgid "Support for Universal Binaries in macOS"
+msgstr ""
+
+#: ../../../common/experimental_warning.inc:3
+msgid ""
+"This feature is experimental and subject to breaking changes. See :ref:`the "
+"Conan stability<stability>` section for more information."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:261
+msgid ""
+"Starting in Conan 2.21.0, there's support for building universal binaries on "
+"macOS using AutotoolsToolchain. To specify multiple architectures for a "
+"universal binary in Conan, use the `|` separator when defining the "
+"architecture in the settings. This approach enables passing a list of "
+"architectures. For example, running:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:267
+msgid "conan create . --name=mylibrary --version=1.0 -s=\"arch=armv8|x86_64\""
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:271
+msgid ""
+"will create a universal binary for *mylibrary* containing both ``armv8`` and "
+"``x86_64`` architectures, by setting multiple ``-arch`` flags in the "
+"generated toolchain script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:276
+msgid ""
+"It is important to note that this method is not applicable to build systems "
+"other than CMake or Autotools via ``CMakeToolchain`` and "
+"``AutotoolsToolchain``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:280
+msgid ""
+"Attempting to use universal architecture settings on non-Apple platforms "
+"will result in an error."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:283
+msgid ""
+"Be aware that this feature is primarily beneficial for building final "
+"universal binaries for release purposes. The default Conan behavior of "
+"managing one binary per architecture generally provides a more reliable and "
+"trouble-free experience. Users should be cautious and not overly rely on "
+"this feature for broader use cases."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:291
+msgid "Reference"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/autotoolstoolchain.py:docstring of
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain:0
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain.update_autoreconf_args:0
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain.update_configure_args:0
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain.update_make_args:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/autotoolstoolchain.py:docstring of
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain:1
+msgid "The current recipe object. Always use ``self``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/autotoolstoolchain.py:docstring of
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain:2
+msgid ""
+"This argument avoids collisions when you have multiple toolchain calls in "
+"the same recipe. By setting this argument, the *conanbuild.conf* file used "
+"to pass information to the build helper will be named as "
+"*<namespace>_conanbuild.conf*. The default value is ``None`` meaning that "
+"the name of the generated file is *conanbuild.conf*. This namespace must be "
+"also set with the same value in the constructor of the Autotools build "
+"helper so that it reads the information from the proper file."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/autotoolstoolchain.py:docstring of
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain:8
+msgid "Folder to use for ``--prefix`` argument (\"/\" by default)."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/autotoolstoolchain.py:docstring of
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain.update_configure_args:1
+msgid "Helper to update/prune flags from ``self.configure_args``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/autotoolstoolchain.py:docstring of
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain.update_autoreconf_args:3
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain.update_configure_args:3
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain.update_make_args:3
+msgid ""
+"``dict`` with arguments as keys and their argument values. Notice that if "
+"argument value is ``None``, this one will be pruned."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/autotoolstoolchain.py:docstring of
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain.update_make_args:1
+msgid "Helper to update/prune arguments from ``self.make_args``."
+msgstr ""
+
+#: ../../../conan_sources/conan/tools/gnu/autotoolstoolchain.py:docstring of
+#: conan.tools.gnu.autotoolstoolchain.AutotoolsToolchain.update_autoreconf_args:1
+msgid "Helper to update/prune arguments from ``self.autoreconf_args``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:302
+msgid "conf"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:304
+msgid ""
+"``tools.build:cxxflags`` list of extra C++ flags that will be used by "
+"``CXXFLAGS``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:305
+msgid ""
+"``tools.build:cflags`` list of extra of pure C flags that will be used by "
+"``CFLAGS``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:306
+msgid ""
+"``tools.build:sharedlinkflags`` list of extra linker flags that will be used "
+"by ``LDFLAGS``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:307
+msgid ""
+"``tools.build:exelinkflags`` list of extra linker flags that will be used by "
+"``LDFLAGS``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:308
+msgid "``tools.build:rcflags```list of extra RC flags to define ``RCFLAGS``"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:309
+msgid ""
+"``tools.build:defines`` list of preprocessor definitions that will be used "
+"by ``CPPFLAGS``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:310
+msgid ""
+"``tools.build:linker_scripts`` list of linker scripts, each of which will be "
+"prefixed with ``-T`` and added to ``LDFLAGS``. Only use this flag with "
+"linkers that supports specifying linker scripts with the ``-T`` flag, such "
+"as ``ld``, ``gold``, and ``lld``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:312
+msgid "``tools.build:sysroot`` defines the ``--sysroot`` flag to the compiler."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:313
+msgid ""
+"``tools.android:ndk_path`` (*new since Conan 2.5.0*) argument for NDK path "
+"in case of Android cross-compilation. It is used to set some environment "
+"variables like ``CC``, ``CXX``, ``LD``, ``STRIP``, ``RANLIB``, ``AS``, "
+"``AR``, and, since *Conan 2.11.0*, ``ADDR2LINE``, ``NM``, ``OBJCOPY``, "
+"``OBJDUMP``, ``READELF``, and ``ELFEDIT`` in the *conanautotoolstoolchain.sh|"
+"bat* script, as long as they are not already defined in the ``buildenv`` "
+"environment. If they are defined in the ``buildenv`` environment, the "
+"``conanautotoolstoolchain`` file will not define them, leaving their "
+"definition to the ``VirtualBuildEnv`` generator."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:318
+msgid ""
+"``tools.build:compiler_executables`` dict-like Python object which specifies "
+"the compiler as key and the compiler executable path as value. Those keys "
+"will be mapped as follows:"
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:321
+msgid ""
+"``tools.gnu:extra_configure_args`` list of arguments to extend the "
+"``configure_args`` attribute of ``AutotoolsToolchain``."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:323
+msgid ""
+"``c``: will set ``CC`` (and ``CC_FOR_BUILD`` if cross-building) in "
+"*conanautotoolstoolchain.sh|bat* script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:324
+msgid ""
+"``cpp``: will set ``CXX`` (and ``CXX_FOR_BUILD`` if cross-building) in "
+"*conanautotoolstoolchain.sh|bat* script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:325
+msgid "``rc``: will set ``RC`` in *conanautotoolstoolchain.sh|bat* script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:326
+msgid "``cuda``: will set ``NVCC`` in *conanautotoolstoolchain.sh|bat* script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:327
+msgid ""
+"``fortran``: will set ``FC`` in *conanautotoolstoolchain.sh|bat* script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:328
+msgid ""
+"``objc`` *(since Conan 2.32)*: will set ``OBJC`` in "
+"*conanautotoolstoolchain.sh|bat* script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:329
+msgid ""
+"``objcpp`` *(since Conan 2.32)*: will set ``OBJCXX`` in "
+"*conanautotoolstoolchain.sh|bat* script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:330
+msgid ""
+"``asm`` *(since Conan 2.32)*: will set ``AS`` in *conanautotoolstoolchain.sh|"
+"bat* script."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:332
+msgid ""
+"Since Conan 2.32, keys not listed above are reported with a ``risk`` warning."
+msgstr ""
+
+#: ../../../reference/tools/gnu/autotoolstoolchain.rst:337
+msgid ""
+"**flags order of preference**: Flags specified in the `tools.build` "
+"configuration, such as `cxxflags`, `cflags`, `sharedlinkflags`, "
+"`exelinkflags`, and `defines`, will always take precedence over those set by "
+"the AutotoolsToolchain attributes."
+msgstr ""

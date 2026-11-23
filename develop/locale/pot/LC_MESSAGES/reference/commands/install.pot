@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conan develop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 05:51+0000\n"
+"POT-Creation-Date: 2026-11-23 20:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -315,7 +315,7 @@ msgstr ""
 msgid ""
 "Even if it is possible to use a custom name, in the general case, it is "
 "recommended to use the default ``conanfile.py`` name, located in the "
-"repository root, so users can do a straightforward ``git clone ... `` + "
+"repository root, so users can do a straightforward ``git clone ...`` + "
 "``conan install .``"
 msgstr ""
 
@@ -703,12 +703,23 @@ msgstr ""
 
 #: ../../../reference/commands/install.rst:280
 msgid ""
+"Note that ``--build=missing`` (and ``--build=missing:[pattern]``) will only "
+"build the missing binaries that are actually necessary. Binaries that are "
+"not needed, for example a static library that has already been linked into a "
+"shared library or application whose binary exists, are skipped, and they "
+"will not be built even if they are missing. Packages explicitly forced with "
+"``--build=[pattern]`` will always be built. See :ref:`skipped "
+"binaries<reference_binary_model_skipped_binaries>` for more information."
+msgstr ""
+
+#: ../../../reference/commands/install.rst:286
+msgid ""
 "The ``--build=never`` policy can be used to force never building from "
 "source, even for package recipes that define the ``build_policy = "
 "\"missing\"`` policy."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:283
+#: ../../../reference/commands/install.rst:289
 msgid ""
 "The ``--build=compatible:[pattern]`` is an **experimental** new mode that "
 "allows building missing binaries with a configuration different than the "
@@ -720,14 +731,14 @@ msgid ""
 "``compiler.cppstd=17``."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:290
+#: ../../../reference/commands/install.rst:296
 msgid ""
 "The ``--build=[pattern]`` uses a pattern, so it should use something like "
 "``--build=\"zlib/*\"`` to match any version of the ``zlib`` package, as "
 "doing ``--build=zlib`` will not work."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:293
+#: ../../../reference/commands/install.rst:299
 msgid ""
 "The ``--build=missing:[pattern]`` form uses the same kind of package "
 "patterns as in :ref:`Profile patterns "
@@ -740,18 +751,18 @@ msgid ""
 "current_version`` in the case of ``conan create .``)."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:302
+#: ../../../reference/commands/install.rst:308
 msgid ""
 "The ``--build=missing:[pattern]`` also accepts negations like ``--"
 "build=missing:!dep/* --build=missing:!lib/*`` will build all packages except "
 "``dep`` and ``lib`` ones."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:307
+#: ../../../reference/commands/install.rst:313
 msgid "**Best practices**"
 msgstr ""
 
-#: ../../../reference/commands/install.rst:309
+#: ../../../reference/commands/install.rst:315
 msgid ""
 "Forcing the rebuild of existing binaries with ``--build=\"*\"`` or any other "
 "``--build=\"pkg/*\"`` or similar pattern is not a recommended practice. If a "
@@ -760,7 +771,7 @@ msgid ""
 "build=missing`` and ``--build=missing:[pattern]`` are more recommended."
 msgstr ""
 
-#: ../../../reference/commands/install.rst:314
+#: ../../../reference/commands/install.rst:320
 msgid ""
 "The ``--build=cascade`` mode is partly legacy, and shouldn't be used in most "
 "cases. The ``package_id`` computation should be the driver to decide what "
